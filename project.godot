@@ -22,7 +22,8 @@ _global_script_class_icons={
 
 config/name="test_godot_game"
 run/main_scene="res://Workspace.tscn"
-config/icon="res://icon.png"
+boot_splash/show_image=false
+config/icon="res://music_note.png"
 
 [gui]
 

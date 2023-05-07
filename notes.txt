@@ -5,3 +5,6 @@ https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_doc
 
 GDScript style guide:
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#classes-and-nodes
+
+Icon changing:
+https://docs.godotengine.org/en/3.1/getting_started/workflow/export/changing_application_icon_for_windows.html
