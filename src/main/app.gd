@@ -11,9 +11,11 @@ var fps_counter = Label.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	main_gui.parent = self
 	fps_counter.name = "FPSCounter"
 	fps_counter.text = "FPS: "
+
+	main_gui.add_child(fps_counter)
+	self.add_child(main_gui)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
