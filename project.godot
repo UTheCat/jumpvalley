@@ -6,24 +6,19 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Reference",
-"class": "BoxSpinner",
-"language": "GDScript",
-"path": "res://src/main/box_spinner.gd"
-} ]
-_global_script_class_icons={
-"BoxSpinner": ""
-}
+config_version=5
 
 [application]
 
 config/name="test_godot_game"
 run/main_scene="res://Workspace.tscn"
+config/features=PackedStringArray("4.0", "C#")
 boot_splash/show_image=false
 config/icon="res://music_note.png"
+
+[dotnet]
+
+project/assembly_name="test_godot_game"
 
 [gui]
 
