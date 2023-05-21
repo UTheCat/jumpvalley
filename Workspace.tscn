@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://c7h44u0l74erl"]
 
-[ext_resource type="Script" path="res://src/main/app.gd" id="1_kfcqu"]
+[ext_resource type="Script" path="res://src/main/App.cs" id="1_y8kx5"]
 
 [node name="Workspace" type="Node3D"]
-script = ExtResource("1_kfcqu")
+script = ExtResource("1_y8kx5")
 
 [node name="Camera" type="Camera3D" parent="."]
 
