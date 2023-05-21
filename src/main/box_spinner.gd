@@ -1,10 +1,10 @@
 ## spins a box around
 class_name BoxSpinner
 
-onready var _box: CSGBox
-onready var _radiansPerSecond: float
+var _box: CSGBox3D
+var _radiansPerSecond: float
 
-func _init(box: CSGBox, radiansPerSecond: float):
+func _init(box: CSGBox3D, radiansPerSecond: float):
 	_box = box
 	_radiansPerSecond = radiansPerSecond
 

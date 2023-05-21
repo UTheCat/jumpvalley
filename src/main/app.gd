@@ -1,5 +1,4 @@
-extends Spatial
-
+extends Node3D
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -7,8 +6,10 @@ extends Spatial
 
 var main_gui = Control.new()
 var fps_counter = Label.new()
-onready var box_spinner = BoxSpinner.new(self.get_node("Map/CSGBox"), 1.0)
-onready var camera: Camera = self.get_node("Camera")
+@onready
+var box_spinner = BoxSpinner.new(self.get_node("Map/CSGBox"), 1.0)
+@onready
+var camera: Camera3D = self.get_node("Camera")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
