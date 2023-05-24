@@ -1,5 +1,8 @@
 Resources useful in the making of this project:
 
+GDScript basics:
+https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html
+
 Documentation comments:
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_documentation_comments.html
 
