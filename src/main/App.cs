@@ -13,7 +13,7 @@ public partial class App : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		spinner = new BoxSpinner((CsgBox3D) GetNode("Map/CSGBox"), 1);
+		spinner = new BoxSpinner((CsgBox3D) GetNode("Map/CSGBox3D"), 1);
 
 		fpsCounter.Name = "FPSCounter";
 		fpsCounter.Text = "FPS: ";

@@ -7,7 +7,7 @@ extends Node3D
 var main_gui = Control.new()
 var fps_counter = Label.new()
 @onready
-var box_spinner = BoxSpinner.new(self.get_node("Map/CSGBox"), 1.0)
+var box_spinner = BoxSpinner.new(self.get_node("Map/CSGBox3D"), 1.0)
 @onready
 var camera: Camera3D = self.get_node("Camera")
 
