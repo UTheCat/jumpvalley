@@ -11,3 +11,9 @@ https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_sty
 
 Icon changing:
 https://docs.godotengine.org/en/3.1/getting_started/workflow/export/changing_application_icon_for_windows.html
+
+Meshes and Textures:
+https://www.youtube.com/watch?v=K7a4hDRxYu8
+
+3D Asset Library:
+https://polyhaven.com/

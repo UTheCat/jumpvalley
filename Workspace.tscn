@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=5 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/App.cs" id="1_y8kx5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtp1y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pv50"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
 
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_y8kx5")
@@ -9,5 +16,13 @@ script = ExtResource("1_y8kx5")
 
 [node name="Map" type="Node" parent="."]
 
-[node name="Baseplate" type="CSGBox3D" parent="Map"]
-size = Vector3(128, 1, 128)
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+
+[node name="Baseplate" type="MeshInstance3D" parent="Map"]
+material_override = SubResource("StandardMaterial3D_wtp1y")
+mesh = SubResource("BoxMesh_8pv50")
+
+[node name="Player" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CapsuleMesh_d4gh2")
