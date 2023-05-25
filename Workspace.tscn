@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=12 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/app.gd" id="1_31lb0"]
 [ext_resource type="Texture2D" path="res://studs.dds" id="2_uy0gt"]
+[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://fonts/ComicNeue-Angular-Bold.ttf" id="3_bwxll"]
+[ext_resource type="Script" path="res://auto_resize.gd" id="3_rnwvv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,6 +26,15 @@ uv1_scale = Vector3(500, 50, 500)
 size = Vector3(100, 1, 100)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8khj4"]
+bg_color = Color(0.352941, 0.556863, 0.913725, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_size = 2
+anti_aliasing = false
 
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_31lb0")
@@ -51,3 +62,27 @@ mesh = SubResource("BoxMesh_8pv50")
 [node name="Player" type="MeshInstance3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 mesh = SubResource("CapsuleMesh_d4gh2")
+
+[node name="Gui" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 260.0
+offset_bottom = 128.0
+script = ExtResource("3_rnwvv")
+
+[node name="Button" type="Button" parent="Gui"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -35.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_bwxll")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_8khj4")
+text = "Music: On
+"
