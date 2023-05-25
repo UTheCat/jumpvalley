@@ -9,5 +9,5 @@ script = ExtResource("1_y8kx5")
 
 [node name="Map" type="Node" parent="."]
 
-[node name="CSGBox" type="CSGBox3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+[node name="Baseplate" type="CSGBox3D" parent="Map"]
+size = Vector3(128, 1, 128)
