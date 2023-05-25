@@ -12,7 +12,7 @@ config_version=5
 
 config/name="test_godot_game"
 run/main_scene="res://Workspace.tscn"
-config/features=PackedStringArray("4.0", "C#")
+config/features=PackedStringArray("4.0")
 boot_splash/show_image=false
 config/icon="res://music_note.png"
 
