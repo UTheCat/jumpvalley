@@ -1,10 +1,9 @@
 extends Node3D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var MusicButton = load("res://src/main/music/gui/music_button.gd")
 
-var main_gui = Control.new()
+@onready
+var main_gui = self.get_node("Gui")
 var fps_counter = Label.new()
 @onready
 var box_spinner = BoxSpinner.new(self.get_node("Map/CSGBox3D"), 1.0)
@@ -17,7 +16,9 @@ func _ready():
 	fps_counter.text = "FPS: "
 
 	main_gui.add_child(fps_counter)
-	self.add_child(main_gui)
+	main_gui.add_child(MusicButton.new())
+	
+	#self.add_child(main_gui)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

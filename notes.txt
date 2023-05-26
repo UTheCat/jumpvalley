@@ -17,3 +17,6 @@ https://www.youtube.com/watch?v=K7a4hDRxYu8
 
 3D Asset Library:
 https://polyhaven.com/
+
+GUI Design in Godot:
+https://docs.godotengine.org/en/stable/tutorials/ui/gui_skinning.html

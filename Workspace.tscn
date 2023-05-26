@@ -72,6 +72,7 @@ offset_bottom = 128.0
 script = ExtResource("3_rnwvv")
 
 [node name="Button" type="Button" parent="Gui"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
