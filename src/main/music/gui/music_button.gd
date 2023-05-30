@@ -1,6 +1,6 @@
 extends Button
 
-## The music self found in Juke's Towers of Hell
+## The music button found in Juke's Towers of Hell
 class_name MusicButton
 
 var button_font = preload("res://fonts/ComicNeue-Angular-Bold.ttf")
