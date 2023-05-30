@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=14 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/app.gd" id="1_31lb0"]
 [ext_resource type="Texture2D" path="res://addons/studs.dds" id="2_jkxsw"]
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://fonts/ComicNeue-Angular-Bold.ttf" id="3_bwxll"]
 [ext_resource type="Script" path="res://auto_resize.gd" id="3_rnwvv"]
+[ext_resource type="FontFile" uid="uid://6iiejh0b5s7y" path="res://fonts/SourceSansPro-Light.ttf" id="5_uyvq3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -36,6 +37,9 @@ corner_radius_bottom_left = 3
 shadow_size = 2
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkmyi"]
+bg_color = Color(0, 0, 0, 0.4)
+
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_31lb0")
 
@@ -67,23 +71,44 @@ mesh = SubResource("CapsuleMesh_d4gh2")
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 260.0
-offset_bottom = 128.0
+offset_right = 1151.0
+offset_bottom = 648.0
 script = ExtResource("3_rnwvv")
 
 [node name="Button" type="Button" parent="Gui"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -90.0
-offset_top = -35.0
+offset_left = -92.0
+offset_top = -37.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_bwxll")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_8khj4")
 text = "Music: On
 "
+
+[node name="Label" type="Label" parent="Gui"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_uyvq3")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_hkmyi")
+text = "OneShot OST - My Burden Is Light"
+horizontal_alignment = 2
+clip_text = true
