@@ -1,7 +1,6 @@
-extends Button
-
 ## The music button found in Juke's Towers of Hell
 class_name MusicButton
+extends Button
 
 var button_font = preload("res://fonts/ComicNeue-Angular-Bold.ttf")
 var normal_stylebox = StyleBoxFlat.new()
