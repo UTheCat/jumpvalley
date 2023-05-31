@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=15 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/app.gd" id="1_31lb0"]
 [ext_resource type="Texture2D" path="res://addons/studs.dds" id="2_jkxsw"]
@@ -40,6 +40,8 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkmyi"]
 bg_color = Color(0, 0, 0, 0.4)
 
+[sub_resource type="AudioStreamOggVorbis" id="AudioStreamOggVorbis_xi8eg"]
+
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_31lb0")
 
@@ -70,9 +72,11 @@ mesh = SubResource("CapsuleMesh_d4gh2")
 [node name="Gui" type="Control" parent="."]
 clip_contents = true
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1151.0
-offset_bottom = 648.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("3_rnwvv")
 
 [node name="Button" type="Button" parent="Gui"]
@@ -112,3 +116,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_hkmyi")
 text = "OneShot OST - My Burden Is Light"
 horizontal_alignment = 2
 clip_text = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Gui"]
+stream = SubResource("AudioStreamOggVorbis_xi8eg")
