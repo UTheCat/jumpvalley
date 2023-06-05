@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bj4fjlvitck2p"
-path="res://.godot/imported/SourceSansPro-Italic.ttf-5190f1f055f3996b11f72e2b609eb7b0.fontdata"
+uid="uid://dkahivs4du4ca"
+path="res://.godot/imported/SourceSansPro-ExtraLightItalic.ttf-19d0aa0f228fd346809bd230b5e2f2ff.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro-Italic.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-Italic.ttf-5190f1f055f3996b11f72e2b609eb7b0.fontdata"]
+source_file="res://fonts/SourceSansPro/SourceSansPro-ExtraLightItalic.ttf"
+dest_files=["res://.godot/imported/SourceSansPro-ExtraLightItalic.ttf-19d0aa0f228fd346809bd230b5e2f2ff.fontdata"]
 
 [params]
 

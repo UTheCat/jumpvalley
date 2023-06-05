@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=18 format=3 uid="uid://c7h44u0l74erl"]
 
-[ext_resource type="Script" path="res://src/main/app.gd" id="1_31lb0"]
 [ext_resource type="Texture2D" path="res://addons/studs.dds" id="2_jkxsw"]
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://fonts/ComicNeue-Angular-Bold.ttf" id="3_bwxll"]
 [ext_resource type="Script" path="res://auto_resize.gd" id="3_rnwvv"]
-[ext_resource type="FontFile" uid="uid://6iiejh0b5s7y" path="res://fonts/SourceSansPro-Light.ttf" id="5_uyvq3"]
+[ext_resource type="FontFile" uid="uid://6iiejh0b5s7y" path="res://fonts/SourceSansPro/SourceSansPro-Light.ttf" id="5_8dwpg"]
+[ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://icons/music_note_white_24dp.svg" id="6_xbr0a"]
+[ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://fonts/HWYGOTH.ttf" id="7_fvq74"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -28,6 +29,8 @@ size = Vector3(100, 1, 100)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
 
+[sub_resource type="AudioStreamOggVorbis" id="AudioStreamOggVorbis_xi8eg"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8khj4"]
 bg_color = Color(0.352941, 0.556863, 0.913725, 1)
 corner_radius_top_left = 3
@@ -40,10 +43,20 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkmyi"]
 bg_color = Color(0, 0, 0, 0.4)
 
-[sub_resource type="AudioStreamOggVorbis" id="AudioStreamOggVorbis_xi8eg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j1fhq"]
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3edq"]
+bg_color = Color(0.352941, 0.556863, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="Workspace" type="Node3D"]
-script = ExtResource("1_31lb0")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0mmb7")
@@ -79,7 +92,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_rnwvv")
 
-[node name="Button" type="Button" parent="Gui"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Gui"]
+stream = SubResource("AudioStreamOggVorbis_xi8eg")
+
+[node name="JToHOriginalMusicFrame" type="Control" parent="Gui"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Gui/JToHOriginalMusicFrame"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -99,7 +124,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_8khj4")
 text = "Music: On
 "
 
-[node name="Label" type="Label" parent="Gui"]
+[node name="Label" type="Label" parent="Gui/JToHOriginalMusicFrame"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -110,12 +135,76 @@ offset_top = -40.0
 offset_right = -100.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_uyvq3")
+theme_override_fonts/font = ExtResource("5_8dwpg")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_hkmyi")
-text = "OneShot OST - My Burden Is Light"
+text = "OneShot OST - My Burden is Light"
 horizontal_alignment = 2
 clip_text = true
+text_overrun_behavior = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Gui"]
-stream = SubResource("AudioStreamOggVorbis_xi8eg")
+[node name="BottomBarTemp" type="Control" parent="Gui"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -10.0
+offset_right = 45.0
+
+[node name="BottomBar" type="Node" parent="Gui"]
+
+[node name="Buttons" type="HBoxContainer" parent="Gui/BottomBar"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -26.0
+offset_right = 90.0
+offset_bottom = -4.0
+theme_override_constants/separation = 10
+
+[node name="Menu" type="Button" parent="Gui/BottomBar/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_j1fhq")
+
+[node name="Music" type="Button" parent="Gui/BottomBar/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_x3edq")
+icon = ExtResource("6_xbr0a")
+icon_alignment = 1
+expand_icon = true
+
+[node name="DescriptionTemp" type="RichTextLabel" parent="Gui/BottomBar"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 1.0
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_top = -28.0
+offset_bottom = -14.0
+theme_override_fonts/normal_font = ExtResource("7_fvq74")
+theme_override_font_sizes/normal_font_size = 12
+text = "Music: Bee Swarm Simulator OST - Wax"
+fit_content = true
+scroll_active = false
+
+[node name="Description" type="Label" parent="Gui/BottomBar"]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 1.0
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_top = -62.0
+offset_bottom = -34.0
+theme_override_fonts/font = ExtResource("7_fvq74")
+theme_override_font_sizes/font_size = 28
+text = "Music: OneShot OST - My Burden is Light"
+horizontal_alignment = 1
+vertical_alignment = 1

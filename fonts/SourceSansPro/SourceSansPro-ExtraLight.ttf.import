@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ykl7slnf7wx0"
-path="res://.godot/imported/SourceSansPro-Black.ttf-eb74dcadad2134ac47eecf4914ac145f.fontdata"
+uid="uid://dibvee2ewfm6x"
+path="res://.godot/imported/SourceSansPro-ExtraLight.ttf-5800b9e17f4e643fbac3b681f907e2b0.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro-Black.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-Black.ttf-eb74dcadad2134ac47eecf4914ac145f.fontdata"]
+source_file="res://fonts/SourceSansPro/SourceSansPro-ExtraLight.ttf"
+dest_files=["res://.godot/imported/SourceSansPro-ExtraLight.ttf-5800b9e17f4e643fbac3b681f907e2b0.fontdata"]
 
 [params]
 

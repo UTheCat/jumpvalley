@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://1k8ghbfkjbc3"
-path="res://.godot/imported/SourceSansPro-SemiBold.ttf-c7458afc0bcd7c257210177430ce0897.fontdata"
+uid="uid://dmuk4svle4wdx"
+path="res://.godot/imported/SourceSansPro-BoldItalic.ttf-620bbd147840342b8c1286f35a6c9408.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro-SemiBold.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-SemiBold.ttf-c7458afc0bcd7c257210177430ce0897.fontdata"]
+source_file="res://fonts/SourceSansPro/SourceSansPro-BoldItalic.ttf"
+dest_files=["res://.godot/imported/SourceSansPro-BoldItalic.ttf-620bbd147840342b8c1286f35a6c9408.fontdata"]
 
 [params]
 

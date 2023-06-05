@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://boiyarma1pepx"
-path="res://.godot/imported/SourceSansPro-Regular.ttf-73307b138c38f3f41124e34599112525.fontdata"
+uid="uid://dl67fyrqip6cg"
+path="res://.godot/imported/SourceSansPro-BlackItalic.ttf-8ab7e78368a2d04c68f0f09b04fb7c19.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro-Regular.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-Regular.ttf-73307b138c38f3f41124e34599112525.fontdata"]
+source_file="res://fonts/SourceSansPro/SourceSansPro-BlackItalic.ttf"
+dest_files=["res://.godot/imported/SourceSansPro-BlackItalic.ttf-8ab7e78368a2d04c68f0f09b04fb7c19.fontdata"]
 
 [params]
 

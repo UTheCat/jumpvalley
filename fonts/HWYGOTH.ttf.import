@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dkahivs4du4ca"
-path="res://.godot/imported/SourceSansPro-ExtraLightItalic.ttf-f6fb47c719c2b13ee02adf6f345aacd3.fontdata"
+uid="uid://d3owg5e1hhnly"
+path="res://.godot/imported/HWYGOTH.ttf-d5a1a173672004205b60d38a6f0beb29.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro-ExtraLightItalic.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-ExtraLightItalic.ttf-f6fb47c719c2b13ee02adf6f345aacd3.fontdata"]
+source_file="res://fonts/HWYGOTH.ttf"
+dest_files=["res://.godot/imported/HWYGOTH.ttf-d5a1a173672004205b60d38a6f0beb29.fontdata"]
 
 [params]
 
