@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=19 format=3 uid="uid://c7h44u0l74erl"]
 
+[ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" path="res://addons/studs.dds" id="2_jkxsw"]
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://fonts/ComicNeue-Angular-Bold.ttf" id="3_bwxll"]
 [ext_resource type="Script" path="res://auto_resize.gd" id="3_rnwvv"]
@@ -57,6 +58,7 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
 [node name="Workspace" type="Node3D"]
+script = ExtResource("1_5ymuh")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0mmb7")
@@ -145,6 +147,7 @@ text_overrun_behavior = 2
 
 [node name="BottomBarTemp" type="Control" parent="Gui"]
 layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -156,7 +159,7 @@ offset_right = 45.0
 [node name="BottomBar" type="Node" parent="Gui"]
 
 [node name="Buttons" type="HBoxContainer" parent="Gui/BottomBar"]
-anchors_preset = -1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
