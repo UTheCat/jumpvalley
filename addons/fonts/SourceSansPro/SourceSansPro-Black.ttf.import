@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://d3owg5e1hhnly"
-path="res://.godot/imported/HWYGOTH.ttf-d5a1a173672004205b60d38a6f0beb29.fontdata"
+uid="uid://ykl7slnf7wx0"
+path="res://.godot/imported/SourceSansPro-Black.ttf-2978b817f3db627e5dbd52709b63ea77.fontdata"
 
 [deps]
 
-source_file="res://fonts/HWYGOTH.ttf"
-dest_files=["res://.godot/imported/HWYGOTH.ttf-d5a1a173672004205b60d38a6f0beb29.fontdata"]
+source_file="res://addons/fonts/SourceSansPro/SourceSansPro-Black.ttf"
+dest_files=["res://.godot/imported/SourceSansPro-Black.ttf-2978b817f3db627e5dbd52709b63ea77.fontdata"]
 
 [params]
 

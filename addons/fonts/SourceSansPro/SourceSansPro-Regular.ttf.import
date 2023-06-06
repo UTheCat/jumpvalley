@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dkahivs4du4ca"
-path="res://.godot/imported/SourceSansPro-ExtraLightItalic.ttf-19d0aa0f228fd346809bd230b5e2f2ff.fontdata"
+uid="uid://boiyarma1pepx"
+path="res://.godot/imported/SourceSansPro-Regular.ttf-284819312d2937520a786f0763948ce7.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro/SourceSansPro-ExtraLightItalic.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-ExtraLightItalic.ttf-19d0aa0f228fd346809bd230b5e2f2ff.fontdata"]
+source_file="res://addons/fonts/SourceSansPro/SourceSansPro-Regular.ttf"
+dest_files=["res://.godot/imported/SourceSansPro-Regular.ttf-284819312d2937520a786f0763948ce7.fontdata"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dmc688jjr0r32"
-path="res://.godot/imported/SourceSansPro-SemiBoldItalic.ttf-0489d42f8057b73c697539353e00fce3.fontdata"
+uid="uid://d3owg5e1hhnly"
+path="res://.godot/imported/HWYGOTH.ttf-c36f134c72d6b6467a4082fccafafa09.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro/SourceSansPro-SemiBoldItalic.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-SemiBoldItalic.ttf-0489d42f8057b73c697539353e00fce3.fontdata"]
+source_file="res://addons/fonts/HWYGOTH.ttf"
+dest_files=["res://.godot/imported/HWYGOTH.ttf-c36f134c72d6b6467a4082fccafafa09.fontdata"]
 
 [params]
 

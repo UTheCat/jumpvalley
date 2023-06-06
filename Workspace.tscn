@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" path="res://addons/studs.dds" id="2_jkxsw"]
-[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://fonts/ComicNeue-Angular-Bold.ttf" id="3_bwxll"]
 [ext_resource type="Script" path="res://auto_resize.gd" id="3_rnwvv"]
-[ext_resource type="FontFile" uid="uid://6iiejh0b5s7y" path="res://fonts/SourceSansPro/SourceSansPro-Light.ttf" id="5_8dwpg"]
-[ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://icons/music_note_white_24dp.svg" id="6_xbr0a"]
-[ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://fonts/HWYGOTH.ttf" id="7_fvq74"]
+[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="4_guawk"]
+[ext_resource type="FontFile" uid="uid://6iiejh0b5s7y" path="res://addons/fonts/SourceSansPro/SourceSansPro-Light.ttf" id="5_peycv"]
+[ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://addons/icons/music_note_white_24dp.svg" id="6_a22ul"]
+[ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="7_1a78q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -120,7 +120,7 @@ offset_bottom = -2.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_bwxll")
+theme_override_fonts/font = ExtResource("4_guawk")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxFlat_8khj4")
 text = "Music: On
@@ -137,7 +137,7 @@ offset_top = -40.0
 offset_right = -100.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_8dwpg")
+theme_override_fonts/font = ExtResource("5_peycv")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_hkmyi")
 text = "OneShot OST - My Burden is Light"
@@ -155,6 +155,8 @@ anchor_bottom = 1.0
 offset_left = -45.0
 offset_top = -10.0
 offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="BottomBar" type="Node" parent="Gui"]
 
@@ -179,7 +181,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_j1fhq")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_x3edq")
-icon = ExtResource("6_xbr0a")
+icon = ExtResource("6_a22ul")
 icon_alignment = 1
 expand_icon = true
 
@@ -192,7 +194,7 @@ anchor_right = 0.8
 anchor_bottom = 1.0
 offset_top = -28.0
 offset_bottom = -14.0
-theme_override_fonts/normal_font = ExtResource("7_fvq74")
+theme_override_fonts/normal_font = ExtResource("7_1a78q")
 theme_override_font_sizes/normal_font_size = 12
 text = "Music: Bee Swarm Simulator OST - Wax"
 fit_content = true
@@ -206,7 +208,7 @@ anchor_right = 0.8
 anchor_bottom = 1.0
 offset_top = -62.0
 offset_bottom = -34.0
-theme_override_fonts/font = ExtResource("7_fvq74")
+theme_override_fonts/font = ExtResource("7_1a78q")
 theme_override_font_sizes/font_size = 28
 text = "Music: OneShot OST - My Burden is Light"
 horizontal_alignment = 1

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://6iiejh0b5s7y"
-path="res://.godot/imported/SourceSansPro-Light.ttf-d8942fe7e497c009c6311e5d78f83182.fontdata"
+uid="uid://bjmgmughcefkf"
+path="res://.godot/imported/ComicNeue-Angular-Bold.ttf-cae5b432f1b7245a6aecd85b361fc5e7.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro/SourceSansPro-Light.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-Light.ttf-d8942fe7e497c009c6311e5d78f83182.fontdata"]
+source_file="res://addons/fonts/ComicNeue-Angular-Bold.ttf"
+dest_files=["res://.godot/imported/ComicNeue-Angular-Bold.ttf-cae5b432f1b7245a6aecd85b361fc5e7.fontdata"]
 
 [params]
 

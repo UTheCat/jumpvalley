@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chtp5u0stx50c"
-path="res://.godot/imported/music_note_FILL0_wght400_GRAD0_opsz48.svg-daa450b1293a2098cbfc23fc96859c09.ctex"
+uid="uid://c8h6f15b1uggb"
+path="res://.godot/imported/music_note_white_24dp.svg-ab3d2f07c66bd763b1b8181433219a3e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/music_note_FILL0_wght400_GRAD0_opsz48.svg"
-dest_files=["res://.godot/imported/music_note_FILL0_wght400_GRAD0_opsz48.svg-daa450b1293a2098cbfc23fc96859c09.ctex"]
+source_file="res://addons/icons/music_note_white_24dp.svg"
+dest_files=["res://.godot/imported/music_note_white_24dp.svg-ab3d2f07c66bd763b1b8181433219a3e.ctex"]
 
 [params]
 

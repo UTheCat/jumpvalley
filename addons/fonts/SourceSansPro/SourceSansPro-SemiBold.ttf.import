@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://boiyarma1pepx"
-path="res://.godot/imported/SourceSansPro-Regular.ttf-89f5397b7dcaebc14b55ecc29ebfacc5.fontdata"
+uid="uid://1k8ghbfkjbc3"
+path="res://.godot/imported/SourceSansPro-SemiBold.ttf-47dfdb8c2ad9b4ab4aeb97885c42f744.fontdata"
 
 [deps]
 
-source_file="res://fonts/SourceSansPro/SourceSansPro-Regular.ttf"
-dest_files=["res://.godot/imported/SourceSansPro-Regular.ttf-89f5397b7dcaebc14b55ecc29ebfacc5.fontdata"]
+source_file="res://addons/fonts/SourceSansPro/SourceSansPro-SemiBold.ttf"
+dest_files=["res://.godot/imported/SourceSansPro-SemiBold.ttf-47dfdb8c2ad9b4ab4aeb97885c42f744.fontdata"]
 
 [params]
 
