@@ -7,4 +7,4 @@ This is my attempt at learning Godot by trying to recreate various parts of [Juk
 This project is a work in progress.
 
 ## Licensing
-This project's source code is licensed under the MIT License which can be found [here](https://github.com/UTheDev/test_godot_game/blob/main/LICENSE.md).
+This project's source code is licensed under the MIT License. Said license can be found [here](https://github.com/UTheDev/test_godot_game/blob/main/LICENSE.md).
