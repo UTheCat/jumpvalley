@@ -16,21 +16,21 @@ public partial class Song
     /// <summary>
     /// The file path to the song
     /// </summary>
-    public string FilePath = "";
+    public string FilePath = null;
 
     /// <summary>
     /// The name of the song
     /// </summary>
-    public string Name = "";
+    public string Name = null;
 
     /// <summary>
     /// The artists that made the song
     /// </summary>
-    public string Artists = "";
+    public string Artists = null;
 
     /// <summary>
     /// The album the song belongs to
     /// </summary>
-    public string Album = "";
+    public string Album = null;
 
 }
