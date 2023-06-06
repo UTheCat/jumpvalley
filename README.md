@@ -8,4 +8,5 @@ This project is a work in progress.
 
 ## Licensing
 This project's source code is licensed under the MIT License. The source code's license can be found [here](https://github.com/UTheDev/test_godot_game/blob/main/LICENSE.md).
+
 Assets under the ```addons``` folder are covered by different licenses (especially since they were made by other individuals).
