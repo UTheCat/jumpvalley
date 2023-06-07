@@ -20,3 +20,10 @@ https://polyhaven.com/
 
 GUI Design in Godot:
 https://docs.godotengine.org/en/stable/tutorials/ui/gui_skinning.html
+
+Debugging:
+GD.Print() seems to be wack at the moment.
+
+Therefore, to see console output:
+Use the standard Console.WriteLine(), and export the project to an exe with debugging symbols enabled.
+Then, run the resulting "console.exe" (preferably with a terminal)

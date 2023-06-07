@@ -16,6 +16,13 @@ public partial class Playlist : Node
     }
 
     /// <summary>
+    /// Lowest audio volume (in the linear percentage form) that Godot's editor will let you set the volume of a sound to.
+    /// <br/>
+    /// Such volume shouldn't be audible to humans.
+    /// </summary>
+    public static float NonAudiblePercent { get; private set; } = Mathf.DbToLinear(-80f);
+
+    /// <summary>
     /// The number of seconds that the volume transitioning lasts when uninterrupted
     /// </summary>
     public double TransitionTime = 0;
@@ -60,7 +67,7 @@ public partial class Playlist : Node
         if (musicPlayer == null)
         {
             musicPlayer = new AudioStreamPlayer();
-            musicPlayer.VolumeDb = VolPercentToDecibels(0);
+            musicPlayer.VolumeDb = VolPercentToDecibels(NonAudiblePercent);
             AddChild(musicPlayer);
         }
     }
@@ -133,6 +140,14 @@ public partial class Playlist : Node
         }
     }
 
+    private void disposeCurrentTween()
+    {
+        if (currentTween == null) { return; };
+
+        currentTween.Dispose();
+        currentTween = null;
+    }
+
     public void Play()
     {
         createAudioStream();
@@ -148,7 +163,7 @@ public partial class Playlist : Node
         );
         currentTween.Finished += () =>
         {
-            currentTween = null;
+            disposeCurrentTween();
         };
     }
 
@@ -159,12 +174,12 @@ public partial class Playlist : Node
         currentTween.TweenProperty(
             musicPlayer,
             "volume_db",
-            VolPercentToDecibels(0),
+            VolPercentToDecibels(NonAudiblePercent),
             TransitionTime
         );
         currentTween.Finished += () =>
         {
-            currentTween = null;
+            disposeCurrentTween();
             musicPlayer.Stop();
             musicPlayer.Stream.Dispose();
             musicPlayer.Stream = null;
