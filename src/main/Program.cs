@@ -29,7 +29,7 @@ public partial class Program : Node
         Song song = new Song(
             "res://addons/a_real_reveal/JCM_JM_0058_02401.mp3",
             "A Real Reveal",
-            "APM Music",
+            "Juice Music (published by APM)",
             "Day Lite Island"
         );
 
