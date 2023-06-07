@@ -25,6 +25,18 @@ public partial class Program : Node
 
         AddChild(framerateCounter.CountLabel);
 
+        // music system test
+        Song song = new Song(
+            "res://addons/a_real_reveal/JCM_JM_0058_02401.mp3",
+            "A Real Reveal",
+            "APM Music",
+            "Day Lite Island"
+        );
+
+        Playlist playlist = new Playlist();
+        playlist.Add(song);
+        playlist.Play();
+
         //fpsCounter.Name = "FPSCounter";
         //fpsCounter.Text = "FPS: ";
         //mainGui.AddChild(fpsCounter);
