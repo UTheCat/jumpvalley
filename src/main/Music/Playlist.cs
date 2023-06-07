@@ -68,16 +68,30 @@ public partial class Playlist : Node
     private void switchToSong(Song s)
     {
         createAudioStream();
-        //AudioStream stream;
+        Resource streamRes = GD.Load(s.FilePath); // stream resource
         string path = s.FilePath;
 
         // make the playlist loop the same song over again if only one song is present
         bool canLoop = list.Count == 1;
 
-        if (path.EndsWith(".wav"))
+        /*
+        if (streamRes.GetType() == typeof(AudioStreamWav))
         {
-            AudioStreamWav stream = new AudioStreamWav();
-            stream.ResourcePath = path;
+
+        }
+
+        */
+
+        const string ERROR_MSG = "The format of the song file is invalid. The file extension must be .wav, .ogg, or .mp3.";
+
+        if ((streamRes is AudioStream) == false) {
+            throw new System.Exception(ERROR_MSG);
+        }
+
+        if (streamRes.GetType() == typeof(AudioStreamWav))
+        {
+            AudioStreamWav stream = (AudioStreamWav) streamRes;
+            //stream.ResourcePath = path;
 
             if (canLoop)
             {
@@ -92,21 +106,21 @@ public partial class Playlist : Node
         }
         else if (path.EndsWith(".ogg"))
         {
-            AudioStreamOggVorbis stream = new AudioStreamOggVorbis();
-            stream.ResourcePath = path;
+            AudioStreamOggVorbis stream = (AudioStreamOggVorbis) streamRes;
+            //stream.ResourcePath = path;
             stream.Loop = canLoop;
             musicPlayer.Stream = stream;
         }
         else if (path.EndsWith(".mp3"))
         {
-            AudioStreamMP3 stream = new AudioStreamMP3();
-            stream.ResourcePath = path;
+            AudioStreamMP3 stream = (AudioStreamMP3) streamRes;
+            //stream.ResourcePath = path;
             stream.Loop = canLoop;
             musicPlayer.Stream = stream;
         }
         else
         {
-            throw new System.Exception("The format of the song file is invalid. The file extension must be .wav, .ogg, or .mp3.");
+            throw new System.Exception(ERROR_MSG);
         }
     }
 
