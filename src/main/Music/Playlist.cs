@@ -4,7 +4,7 @@ using Godot;
 /// <summary>
 /// Represents a musical playlist that can hold multiple Songs
 /// </summary>
-public partial class Playlist
+public partial class Playlist : Node
 {
     /// <summary>
     /// Converts a volume percentage in the range of [0, 1] to the corresponding value in decibels and returns the result
@@ -45,11 +45,23 @@ public partial class Playlist
         list.Remove(s);
     }
 
+    private void removeAudioStream()
+    {
+        if (musicPlayer != null)
+        {
+            RemoveChild(musicPlayer);
+            musicPlayer.Dispose();
+            musicPlayer = null;
+        }
+    }
+
     private void createAudioStream()
     {
         if (musicPlayer == null)
         {
             musicPlayer = new AudioStreamPlayer();
+            musicPlayer.VolumeDb = VolPercentToDecibels(0);
+            AddChild(musicPlayer);
         }
     }
 
@@ -65,6 +77,7 @@ public partial class Playlist
         if (path.EndsWith(".wav"))
         {
             AudioStreamWav stream = new AudioStreamWav();
+            stream.ResourcePath = path;
 
             if (canLoop)
             {
@@ -80,12 +93,14 @@ public partial class Playlist
         else if (path.EndsWith(".ogg"))
         {
             AudioStreamOggVorbis stream = new AudioStreamOggVorbis();
+            stream.ResourcePath = path;
             stream.Loop = canLoop;
             musicPlayer.Stream = stream;
         }
         else if (path.EndsWith(".mp3"))
         {
             AudioStreamMP3 stream = new AudioStreamMP3();
+            stream.ResourcePath = path;
             stream.Loop = canLoop;
             musicPlayer.Stream = stream;
         }
@@ -108,6 +123,7 @@ public partial class Playlist
     {
         createAudioStream();
         switchToSong(list[0]);
+        musicPlayer.Play();
         killCurrentTween();
         currentTween = musicPlayer.CreateTween();
         currentTween.TweenProperty(

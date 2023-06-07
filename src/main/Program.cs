@@ -35,6 +35,7 @@ public partial class Program : Node
 
         Playlist playlist = new Playlist();
         playlist.Add(song);
+        AddChild(playlist);
         playlist.Play();
 
         //fpsCounter.Name = "FPSCounter";
