@@ -43,16 +43,19 @@ public partial class Program : Node
         playlist.Add(song);
         AddChild(playlist);
 
-        Console.WriteLine("Connect SongChanged event handler");
-        playlist.SongChanged += (sender, args) =>
+        Console.WriteLine("test music player");
+        MusicPlayer musicPlayer = new MusicPlayer();
+        
+        Console.WriteLine("Connect SongChanged event handler to musicPlayer");
+        musicPlayer.SongChanged += (sender, args) =>
         {
             Song newSong = args.NewSong;
             if (newSong == null)
             {
-                Console.WriteLine("Playlist no longer has a song playing");
+                Console.WriteLine("musicPlayer no longer has a song playing");
             } else {
                 Console.WriteLine(
-                "The song being played by the playlist has changed:"
+                "The song being played by musicPlayer has changed:"
                 + $"\n Name: {newSong.Name}"
                 + $"\n Artist(s): {newSong.Artists}"
                 + $"\n Album: {newSong.Album}"
@@ -60,6 +63,13 @@ public partial class Program : Node
             }
         };
 
+        Console.WriteLine("Set primary playlist");
+        musicPlayer.PrimaryPlaylist = playlist;
+
+        Console.WriteLine("Try playing music");
+        musicPlayer.IsPlaying = true;
+
+        /*
         Console.WriteLine("Current linear volume", playlist.LinearVolume);
         Console.WriteLine("play song");
 
@@ -68,6 +78,7 @@ public partial class Program : Node
         Console.WriteLine("Full percent volume in decibels: " + Playlist.VolPercentToDecibels(1));
         Console.WriteLine("Zero percent volume in decibels: " + Playlist.VolPercentToDecibels(0));
         Console.WriteLine("Non-audible percent volume in decibels: " + Playlist.VolPercentToDecibels(Playlist.NonAudiblePercent));
+        */
 
         /*
         new Thread(async () => {
