@@ -1,5 +1,5 @@
 /// <summary>
-/// Event arguments for <see cref="Playlist.SongChanged"/>
+/// Event arguments for <see cref="Playlist.SongChanged"/> and <see cref="MusicPlayer.SongChanged"/>
 /// </summary>
 public class SongChangedArgs : System.EventArgs
 {
