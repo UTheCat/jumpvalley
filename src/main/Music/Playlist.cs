@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -29,6 +30,7 @@ public partial class Playlist : Node
 
     private double _localVolumeScale;
     private double _linearVolume;
+    private Song _currentSong;
 
     /// <summary>
     /// Multiplier for linear volume that's typically in the range of [0, 1]
@@ -58,6 +60,16 @@ public partial class Playlist : Node
         }
     }
 
+    public Song CurrentSong
+    {
+        get => _currentSong;
+        set
+        {
+            _currentSong = value;
+            OnSongChanged(new SongChangedArgs(value));
+        }
+    }
+
     private List<Song> list = new List<Song>();
     private AudioStreamPlayer musicPlayer;
     private Tween currentTween;
@@ -66,8 +78,8 @@ public partial class Playlist : Node
     {
         if (musicPlayer != null)
         {
-            musicPlayer.VolumeDb = (float) Mathf.LinearToDb(LinearVolume * LocalVolumeScale);
-            System.Console.WriteLine("Current volume (gain): " + musicPlayer.VolumeDb);
+            musicPlayer.VolumeDb = (float)Mathf.LinearToDb(LinearVolume * LocalVolumeScale);
+            //Console.WriteLine("Current volume (gain): " + musicPlayer.VolumeDb);
         }
     }
 
@@ -137,13 +149,14 @@ public partial class Playlist : Node
 
         const string ERROR_MSG = "The format of the song file is invalid. The file extension must be .wav, .ogg, or .mp3.";
 
-        if ((streamRes is AudioStream) == false) {
+        if ((streamRes is AudioStream) == false)
+        {
             throw new System.Exception(ERROR_MSG);
         }
 
         if (streamRes.GetType() == typeof(AudioStreamWav))
         {
-            AudioStreamWav stream = (AudioStreamWav) streamRes;
+            AudioStreamWav stream = (AudioStreamWav)streamRes;
             //stream.ResourcePath = path;
 
             if (canLoop)
@@ -159,14 +172,14 @@ public partial class Playlist : Node
         }
         else if (path.EndsWith(".ogg"))
         {
-            AudioStreamOggVorbis stream = (AudioStreamOggVorbis) streamRes;
+            AudioStreamOggVorbis stream = (AudioStreamOggVorbis)streamRes;
             //stream.ResourcePath = path;
             stream.Loop = canLoop;
             musicPlayer.Stream = stream;
         }
         else if (path.EndsWith(".mp3"))
         {
-            AudioStreamMP3 stream = (AudioStreamMP3) streamRes;
+            AudioStreamMP3 stream = (AudioStreamMP3)streamRes;
             //stream.ResourcePath = path;
             stream.Loop = canLoop;
             musicPlayer.Stream = stream;
@@ -175,6 +188,9 @@ public partial class Playlist : Node
         {
             throw new System.Exception(ERROR_MSG);
         }
+
+        // take note of the song change
+        CurrentSong = s;
     }
 
     private void killCurrentTween()
@@ -197,7 +213,7 @@ public partial class Playlist : Node
     private void setLinearVolumeViaTween(double vol)
     {
         LinearVolume = vol;
-        System.Console.WriteLine("Set linear volume to " + vol);
+        //Console.WriteLine("Set linear volume to " + vol);
     }
 
     public void Play()
@@ -215,12 +231,12 @@ public partial class Playlist : Node
             TransitionTime
         );
         */
-        
+
         currentTween.TweenMethod(
             Callable.From<double>(setLinearVolumeViaTween),
-            LinearVolume, 1, (float) TransitionTime
+            LinearVolume, 1, (float)TransitionTime
         );
-        
+
         currentTween.Finished += () =>
         {
             disposeCurrentTween();
@@ -242,7 +258,7 @@ public partial class Playlist : Node
         */
         currentTween.TweenMethod(
             Callable.From<double>(setLinearVolumeViaTween),
-            LinearVolume, NonAudiblePercent, (float) TransitionTime
+            LinearVolume, NonAudiblePercent, (float)TransitionTime
         );
         currentTween.Finished += () =>
         {
@@ -253,5 +269,23 @@ public partial class Playlist : Node
             musicPlayer.Dispose();
             musicPlayer = null;
         };
+    }
+
+    /// <summary>
+    /// Called when the currently playing song changes.
+    /// </summary>
+    public event EventHandler<SongChangedArgs> SongChanged;
+
+    // Invocation method for SongChanged
+    protected void OnSongChanged(SongChangedArgs args)
+    {
+        // just in case
+        EventHandler<SongChangedArgs> songChangedEvent = SongChanged;
+
+        // if no one is currently listening to the event, songChangedEvent will be null
+        if (songChangedEvent != null)
+        {
+            songChangedEvent(this, args);
+        }
     }
 }
