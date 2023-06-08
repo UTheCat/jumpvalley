@@ -27,9 +27,55 @@ public partial class Playlist : Node
     /// </summary>
     public double TransitionTime = 0;
 
+    private double _localVolumeScale;
+    private double _linearVolume;
+
+    /// <summary>
+    /// Multiplier for linear volume that's typically in the range of [0, 1]
+    /// <br/>
+    /// Can be used to mute or unmute the playlist without affecting the original value of <see cref="LinearVolume"/>
+    /// </summary>
+    public double LocalVolumeScale
+    {
+        get => _localVolumeScale;
+        set
+        {
+            _localVolumeScale = value;
+            updateVolumeViaLinear();
+        }
+    }
+
+    /// <summary>
+    /// Volume of the playlist's music in a linear fashion
+    /// </summary>
+    public double LinearVolume
+    {
+        get => _linearVolume;
+        set
+        {
+            _linearVolume = value;
+            updateVolumeViaLinear();
+        }
+    }
+
     private List<Song> list = new List<Song>();
     private AudioStreamPlayer musicPlayer;
     private Tween currentTween;
+
+    private void updateVolumeViaLinear()
+    {
+        if (musicPlayer != null)
+        {
+            musicPlayer.VolumeDb = (float) Mathf.LinearToDb(LinearVolume * LocalVolumeScale);
+            System.Console.WriteLine("Current volume (gain): " + musicPlayer.VolumeDb);
+        }
+    }
+
+    public Playlist()
+    {
+        LinearVolume = NonAudiblePercent;
+        LocalVolumeScale = 1;
+    }
 
     /// <summary>
     /// Adds a song to the playlist
@@ -148,6 +194,12 @@ public partial class Playlist : Node
         currentTween = null;
     }
 
+    private void setLinearVolumeViaTween(double vol)
+    {
+        LinearVolume = vol;
+        System.Console.WriteLine("Set linear volume to " + vol);
+    }
+
     public void Play()
     {
         createAudioStream();
@@ -155,12 +207,20 @@ public partial class Playlist : Node
         musicPlayer.Play();
         killCurrentTween();
         currentTween = musicPlayer.CreateTween();
+        /*
         currentTween.TweenProperty(
             musicPlayer,
             "volume_db",
             VolPercentToDecibels(1),
             TransitionTime
         );
+        */
+        
+        currentTween.TweenMethod(
+            Callable.From<double>(setLinearVolumeViaTween),
+            LinearVolume, 1, (float) TransitionTime
+        );
+        
         currentTween.Finished += () =>
         {
             disposeCurrentTween();
@@ -171,11 +231,18 @@ public partial class Playlist : Node
     {
         killCurrentTween();
         currentTween = musicPlayer.CreateTween();
+
+        /*
         currentTween.TweenProperty(
             musicPlayer,
             "volume_db",
             VolPercentToDecibels(NonAudiblePercent),
             TransitionTime
+        );
+        */
+        currentTween.TweenMethod(
+            Callable.From<double>(setLinearVolumeViaTween),
+            LinearVolume, NonAudiblePercent, (float) TransitionTime
         );
         currentTween.Finished += () =>
         {

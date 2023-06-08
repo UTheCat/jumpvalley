@@ -43,7 +43,9 @@ public partial class Program : Node
         playlist.Add(song);
         AddChild(playlist);
 
+        Console.WriteLine("Current linear volume", playlist.LinearVolume);
         Console.WriteLine("play song");
+        
         playlist.Play();
         Console.WriteLine("Song should be fading in");
         Console.WriteLine("Full percent volume in decibels: " + Playlist.VolPercentToDecibels(1));
