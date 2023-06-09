@@ -28,15 +28,22 @@ public partial class Program : Node
 
         AddChild(framerateCounter.CountLabel);
 
+        Console.WriteLine("Run MusicPlaylistTest");
+        MusicPlayerTest musicPlayerTest = new MusicPlayerTest();
+        AddChild(musicPlayerTest);
+        musicPlayerTest.startTest();
+
         // music system test
+        /*
         Song song = new Song(
             "res://addons/music/KORAII/Night_Echo/672358_Night-Echo.mp3",
             "Night Echo",
             "KORAII",
             ""
         );
+        */
 
-
+        /*
         Playlist playlist = new Playlist();
         playlist.Name = "PlaylistDemo";
         playlist.TransitionTime = 2;
@@ -45,11 +52,12 @@ public partial class Program : Node
 
         Console.WriteLine("test music player");
         MusicPlayer musicPlayer = new MusicPlayer();
+        */
 
         Label bottomBarDesc = (Label)GetNode("Gui/BottomBar/Description");
 
         Console.WriteLine("Connect SongChanged event handler to musicPlayer");
-        musicPlayer.SongChanged += (sender, args) =>
+        musicPlayerTest.CurrentMusicPlayer.SongChanged += (sender, args) =>
         {
             Song newSong = args.NewSong;
             if (newSong == null)
@@ -69,11 +77,13 @@ public partial class Program : Node
             }
         };
 
+        /*
         Console.WriteLine("Set primary playlist");
         musicPlayer.PrimaryPlaylist = playlist;
 
         Console.WriteLine("Try playing music");
         musicPlayer.IsPlaying = true;
+        */
 
         /*
         Console.WriteLine("Current linear volume", playlist.LinearVolume);

@@ -1,2 +1,2 @@
 name="Night Echo"
-artist="KORAII"
+artists="KORAII"

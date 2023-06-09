@@ -1,4 +1,5 @@
 using System;
+using Godot;
 
 /// <summary>
 /// Plays music that is split into playlists (see <see cref="Playlist"/>)
@@ -7,7 +8,7 @@ using System;
 /// <br/>
 /// Each instance of a MusicPlayer can only play one song at a time at most.
 /// </summary>
-public partial class MusicPlayer
+public partial class MusicPlayer: Node
 {
     private static void stopPlaylist(Playlist playlist)
     {
@@ -44,6 +45,7 @@ public partial class MusicPlayer
                 if (_currentPlaylist != null)
                 {
                     _currentPlaylist.SongChanged -= handlePlaylistSongChange;
+                    RemoveChild(_currentPlaylist);
                 }
                 _currentPlaylist = value;
             }
@@ -59,6 +61,8 @@ public partial class MusicPlayer
 
                 // connect to the new playlist's SongChanged event
                 value.SongChanged += handlePlaylistSongChange;
+
+                AddChild(value);
 
                 // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)
                 value.Play();
