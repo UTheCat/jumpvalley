@@ -45,6 +45,7 @@ public partial class MusicPlayer: Node
                 if (_currentPlaylist != null)
                 {
                     _currentPlaylist.SongChanged -= handlePlaylistSongChange;
+                    //_currentPlaylist.Stop();
                     RemoveChild(_currentPlaylist);
                 }
                 _currentPlaylist = value;
@@ -55,6 +56,9 @@ public partial class MusicPlayer: Node
                 if (_currentPlaylist != null)
                 {
                     _currentPlaylist.SongChanged -= handlePlaylistSongChange;
+
+                    stopPlaylist(_currentPlaylist);
+                    RemoveChild(_currentPlaylist);
                 }
 
                 _currentPlaylist = value;

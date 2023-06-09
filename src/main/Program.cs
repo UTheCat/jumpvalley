@@ -31,28 +31,6 @@ public partial class Program : Node
         Console.WriteLine("Run MusicPlaylistTest");
         MusicPlayerTest musicPlayerTest = new MusicPlayerTest();
         AddChild(musicPlayerTest);
-        musicPlayerTest.startTest();
-
-        // music system test
-        /*
-        Song song = new Song(
-            "res://addons/music/KORAII/Night_Echo/672358_Night-Echo.mp3",
-            "Night Echo",
-            "KORAII",
-            ""
-        );
-        */
-
-        /*
-        Playlist playlist = new Playlist();
-        playlist.Name = "PlaylistDemo";
-        playlist.TransitionTime = 2;
-        playlist.Add(song);
-        AddChild(playlist);
-
-        Console.WriteLine("test music player");
-        MusicPlayer musicPlayer = new MusicPlayer();
-        */
 
         Label bottomBarDesc = (Label)GetNode("Gui/BottomBar/Description");
 
@@ -76,6 +54,30 @@ public partial class Program : Node
                 bottomBarDesc.Text = $"MUSIC\n{newSong.Artists} - {newSong.Name}";
             }
         };
+
+        Console.WriteLine("Try playing music");
+        musicPlayerTest.startTest();
+
+        // music system test
+        /*
+        Song song = new Song(
+            "res://addons/music/KORAII/Night_Echo/672358_Night-Echo.mp3",
+            "Night Echo",
+            "KORAII",
+            ""
+        );
+        */
+
+        /*
+        Playlist playlist = new Playlist();
+        playlist.Name = "PlaylistDemo";
+        playlist.TransitionTime = 2;
+        playlist.Add(song);
+        AddChild(playlist);
+
+        Console.WriteLine("test music player");
+        MusicPlayer musicPlayer = new MusicPlayer();
+        */
 
         /*
         Console.WriteLine("Set primary playlist");
