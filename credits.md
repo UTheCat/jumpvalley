@@ -8,3 +8,4 @@ Thanks to the creators of the assets listed below for making these beautiful ass
 
 ## Music
 - [KORAII - Night Echo](https://www.newgrounds.com/audio/listen/672358)
+- [ParagonX9 - Red 13](https://www.newgrounds.com/audio/listen/464352)
