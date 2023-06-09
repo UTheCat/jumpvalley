@@ -30,10 +30,10 @@ public partial class Program : Node
 
         // music system test
         Song song = new Song(
-            "res://addons/a_real_reveal/JCM_JM_0058_02401.mp3",
-            "A Real Reveal",
-            "Juice Music (published by APM)",
-            "Day Lite Island"
+            "res://addons/music/KORAII/Night_Echo/672358_Night-Echo.mp3",
+            "Night Echo",
+            "KORAII",
+            ""
         );
 
 
@@ -46,7 +46,7 @@ public partial class Program : Node
         Console.WriteLine("test music player");
         MusicPlayer musicPlayer = new MusicPlayer();
 
-        Label bottomBarDesc = (Label) GetNode("Gui/BottomBar/Description");
+        Label bottomBarDesc = (Label)GetNode("Gui/BottomBar/Description");
 
         Console.WriteLine("Connect SongChanged event handler to musicPlayer");
         musicPlayer.SongChanged += (sender, args) =>
@@ -56,7 +56,9 @@ public partial class Program : Node
             {
                 Console.WriteLine("musicPlayer no longer has a song playing");
                 bottomBarDesc.Text = "No music playing";
-            } else {
+            }
+            else
+            {
                 Console.WriteLine(
                 "The song being played by musicPlayer has changed:"
                 + $"\n Name: {newSong.Name}"
