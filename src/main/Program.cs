@@ -22,7 +22,7 @@ public partial class Program : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Console.WriteLine("hi");
+        Console.WriteLine("hi :3");
         mainGui = (Control)GetNode("Gui");
         spinner = new BoxSpinner((CsgBox3D)GetNode("Map/CSGBox3D"), 1);
 
