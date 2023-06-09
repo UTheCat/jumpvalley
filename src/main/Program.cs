@@ -45,7 +45,9 @@ public partial class Program : Node
 
         Console.WriteLine("test music player");
         MusicPlayer musicPlayer = new MusicPlayer();
-        
+
+        Label bottomBarDesc = (Label) GetNode("Gui/BottomBar/Description");
+
         Console.WriteLine("Connect SongChanged event handler to musicPlayer");
         musicPlayer.SongChanged += (sender, args) =>
         {
@@ -53,6 +55,7 @@ public partial class Program : Node
             if (newSong == null)
             {
                 Console.WriteLine("musicPlayer no longer has a song playing");
+                bottomBarDesc.Text = "No music playing";
             } else {
                 Console.WriteLine(
                 "The song being played by musicPlayer has changed:"
@@ -60,6 +63,7 @@ public partial class Program : Node
                 + $"\n Artist(s): {newSong.Artists}"
                 + $"\n Album: {newSong.Album}"
                 );
+                bottomBarDesc.Text = $"MUSIC\n{newSong.Artists} - {newSong.Name}";
             }
         };
 
