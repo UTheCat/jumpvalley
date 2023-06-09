@@ -41,6 +41,7 @@ public partial class MusicPlayer
                 // tell subscribers of MusicPlayer.SongChanged that there's no song playing anymore
                 // (this is done automatically by stopping the playlist)
                 stopPlaylist(_currentPlaylist);
+                _currentPlaylist.SongChanged -= handlePlaylistSongChange;
                 _currentPlaylist = value;
             }
             else
