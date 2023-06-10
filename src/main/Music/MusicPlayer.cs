@@ -46,7 +46,7 @@ public partial class MusicPlayer: Node
                 {
                     _currentPlaylist.SongChanged -= handlePlaylistSongChange;
                     //_currentPlaylist.Stop();
-                    RemoveChild(_currentPlaylist);
+                    //RemoveChild(_currentPlaylist);
                 }
                 _currentPlaylist = value;
             }
@@ -58,7 +58,7 @@ public partial class MusicPlayer: Node
                     _currentPlaylist.SongChanged -= handlePlaylistSongChange;
 
                     stopPlaylist(_currentPlaylist);
-                    RemoveChild(_currentPlaylist);
+                    //RemoveChild(_currentPlaylist);
                 }
 
                 _currentPlaylist = value;
@@ -66,7 +66,7 @@ public partial class MusicPlayer: Node
                 // connect to the new playlist's SongChanged event
                 value.SongChanged += handlePlaylistSongChange;
 
-                AddChild(value);
+                //AddChild(value);
 
                 // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)
                 value.Play();

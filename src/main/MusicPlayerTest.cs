@@ -18,10 +18,14 @@ public partial class MusicPlayerTest : Node
         )
     };
 
+    private Playlist[] playlists;
+
     private bool isListeningToInput = false;
     private int songIndex = 0;
 
     private MusicPlayer _currentMusicPlayer = new MusicPlayer();
+
+    public double PlaylistTransitionTime = 3;
 
     public MusicPlayer CurrentMusicPlayer
     {
@@ -34,15 +38,27 @@ public partial class MusicPlayerTest : Node
 
     private void playSongIndex(int index)
     {
-        Playlist playlist = new Playlist();
-        playlist.Add(songList[index]);
-        _currentMusicPlayer.PrimaryPlaylist = playlist;
+        _currentMusicPlayer.PrimaryPlaylist = playlists[index];
+    }
+
+    private void populatePlaylistArray()
+    {
+        playlists = new Playlist[songList.Length];
+        for (int i = 0; i < songList.Length; i++)
+        {
+            Playlist p = new Playlist();
+            p.TransitionTime = PlaylistTransitionTime;
+            p.Add(songList[i]);
+            AddChild(p);
+            playlists[i] = p;
+        }
     }
 
     public void startTest()
     {
         OS.Alert("Press space to switch to the next song", "Instructions");
 
+        populatePlaylistArray();
         AddChild(_currentMusicPlayer);
         _currentMusicPlayer.IsPlaying = true;
         playSongIndex(songIndex);
