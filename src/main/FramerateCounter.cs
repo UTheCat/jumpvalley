@@ -52,7 +52,7 @@ public partial class FramerateCounter : Node
         }
         else if (fps > CriticallyLowFps)
         {
-            color = Color.Color8(0, 255, 255);
+            color = Color.Color8(255, 255, 0);
         }
         else
         {
