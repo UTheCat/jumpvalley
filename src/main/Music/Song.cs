@@ -83,6 +83,15 @@ public partial class Song
         }
     }
 
+    /// <summary>
+    /// Attempts to open up an AudioStream for the given <see cref="FilePath"/>
+    /// </summary>
+    /// <exception cref="FileNotFoundException">
+    /// Thrown when the file under the given <see cref="FilePath"/> couldn't be found or when the file path is invalid.
+    /// </exception>
+    /// <exception cref="InvalidDataException">
+    /// Thrown when the file was found, but the data format of the file is invalid.
+    /// </exception>
     public void OpenStream()
     {
         // close the previous stream if there is one
@@ -104,10 +113,13 @@ public partial class Song
         }
         else
         {
-            throw new InvalidDataException("The data format of the song file is invalid. The file extension of the file must be .wav, .ogg, or .mp3.");
+            throw new InvalidDataException("The data format of the song file is invalid. Please check that the song's file format is either WAV, OGG, or MP3.");
         }
     }
-
+    
+    /// <summary>
+    /// Closes the AudioStream associated with this Song instance
+    /// </summary>
     public void CloseStream()
     {
         if (Stream != null)
