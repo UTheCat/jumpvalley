@@ -133,11 +133,17 @@ public partial class Playlist : Node
     private void switchToSong(Song s)
     {
         createAudioStream();
+        s.IsLooping = list.Count == 1;
+        s.OpenStream();
+        musicPlayer.Stream = s.Stream;
+
+        /*
         Resource streamRes = GD.Load(s.FilePath); // stream resource
         string path = s.FilePath;
 
         // make the playlist loop the same song over again if only one song is present
         bool canLoop = list.Count == 1;
+        */
 
         /*
         if (streamRes.GetType() == typeof(AudioStreamWav))
@@ -147,6 +153,7 @@ public partial class Playlist : Node
 
         */
 
+        /*
         const string ERROR_MSG = "The format of the song file is invalid. The file extension must be .wav, .ogg, or .mp3.";
 
         if ((streamRes is AudioStream) == false)
@@ -188,6 +195,7 @@ public partial class Playlist : Node
         {
             throw new System.Exception(ERROR_MSG);
         }
+        */
 
         // take note of the song change
         CurrentSong = s;
@@ -243,6 +251,21 @@ public partial class Playlist : Node
         };
     }
 
+    private void stopImmediately()
+    {
+        musicPlayer.Stop();
+        musicPlayer.Stream = null;
+        musicPlayer.Dispose();
+        musicPlayer = null;
+
+        // free memory used by CurrentSong's stream
+        Song song = CurrentSong;
+        if (song != null)
+        {
+            song.CloseStream();
+        }
+    }
+
     public void Stop()
     {
         killCurrentTween();
@@ -263,11 +286,7 @@ public partial class Playlist : Node
         currentTween.Finished += () =>
         {
             disposeCurrentTween();
-            musicPlayer.Stop();
-            musicPlayer.Stream.Dispose();
-            musicPlayer.Stream = null;
-            musicPlayer.Dispose();
-            musicPlayer = null;
+            stopImmediately();
         };
     }
 

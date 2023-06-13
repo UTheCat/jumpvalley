@@ -67,7 +67,7 @@ public partial class MusicPlayer: Node
                 value.SongChanged += handlePlaylistSongChange;
 
                 //AddChild(value);
-
+ 
                 // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)
                 value.Play();
             }
