@@ -32,6 +32,9 @@ public partial class Playlist : Node
     private double _linearVolume;
     private Song _currentSong;
 
+    private int currentSongIndex = 0;
+    private bool handleSongFinishedConnected = false;
+
     /// <summary>
     /// Multiplier for linear volume that's typically in the range of [0, 1]
     /// <br/>
@@ -130,72 +133,52 @@ public partial class Playlist : Node
         }
     }
 
-    private void switchToSong(Song s)
+    private void disconnectHandleSongFinished()
     {
+        if (handleSongFinishedConnected)
+        {
+            musicPlayer.Finished -= handleSongFinish;
+            handleSongFinishedConnected = false;
+        }
+    }
+
+    private void handleSongFinish()
+    {
+        // to prevent stack overflow
+        if (musicPlayer != null)
+        {
+            disconnectHandleSongFinished();
+        }
+        
+        currentSongIndex++;
+        if (currentSongIndex >= list.Count)
+        {
+            currentSongIndex = 0;
+        }
+
+        switchToSong(currentSongIndex);
+    }
+
+    // switches to a song in the playlist by numerical index
+    private void switchToSong(int index)
+    {
+        // we don't need to do anything here if there aren't any songs or if this song is already playing
+        if (list.Count < 1 || (musicPlayer != null && index == currentSongIndex)) { return; }
+
+        Song s = list[index];
+
+        bool onlyOneSong = list.Count == 1;
         createAudioStream();
-        s.IsLooping = list.Count == 1;
+        s.IsLooping = onlyOneSong;
         s.OpenStream();
         musicPlayer.Stream = s.Stream;
 
-        /*
-        Resource streamRes = GD.Load(s.FilePath); // stream resource
-        string path = s.FilePath;
-
-        // make the playlist loop the same song over again if only one song is present
-        bool canLoop = list.Count == 1;
-        */
-
-        /*
-        if (streamRes.GetType() == typeof(AudioStreamWav))
+        // If there's more than one song, switch to the next song on finish
+        if (!onlyOneSong && musicPlayer != null && handleSongFinishedConnected == false)
         {
-
+            handleSongFinishedConnected = true;
+            musicPlayer.Finished += handleSongFinish;
         }
-
-        */
-
-        /*
-        const string ERROR_MSG = "The format of the song file is invalid. The file extension must be .wav, .ogg, or .mp3.";
-
-        if ((streamRes is AudioStream) == false)
-        {
-            throw new System.Exception(ERROR_MSG);
-        }
-
-        if (streamRes.GetType() == typeof(AudioStreamWav))
-        {
-            AudioStreamWav stream = (AudioStreamWav)streamRes;
-            //stream.ResourcePath = path;
-
-            if (canLoop)
-            {
-                stream.LoopMode = AudioStreamWav.LoopModeEnum.Forward;
-            }
-            else
-            {
-                stream.LoopMode = AudioStreamWav.LoopModeEnum.Disabled;
-            }
-
-            musicPlayer.Stream = stream;
-        }
-        else if (path.EndsWith(".ogg"))
-        {
-            AudioStreamOggVorbis stream = (AudioStreamOggVorbis)streamRes;
-            //stream.ResourcePath = path;
-            stream.Loop = canLoop;
-            musicPlayer.Stream = stream;
-        }
-        else if (path.EndsWith(".mp3"))
-        {
-            AudioStreamMP3 stream = (AudioStreamMP3)streamRes;
-            //stream.ResourcePath = path;
-            stream.Loop = canLoop;
-            musicPlayer.Stream = stream;
-        }
-        else
-        {
-            throw new System.Exception(ERROR_MSG);
-        }
-        */
 
         // take note of the song change
         CurrentSong = s;
@@ -226,19 +209,17 @@ public partial class Playlist : Node
 
     public void Play()
     {
-        createAudioStream();
-        switchToSong(list[0]);
+        if (musicPlayer == null)
+        {
+            //createAudioStream();
+
+            // reset song index if there's nothing playing
+            currentSongIndex = 0;
+        }
+        switchToSong(currentSongIndex);
         musicPlayer.Play();
         killCurrentTween();
         currentTween = musicPlayer.CreateTween();
-        /*
-        currentTween.TweenProperty(
-            musicPlayer,
-            "volume_db",
-            VolPercentToDecibels(1),
-            TransitionTime
-        );
-        */
 
         currentTween.TweenMethod(
             Callable.From<double>(setLinearVolumeViaTween),
@@ -255,6 +236,9 @@ public partial class Playlist : Node
     {
         musicPlayer.Stop();
         musicPlayer.Stream = null;
+
+        disconnectHandleSongFinished();
+
         musicPlayer.Dispose();
         musicPlayer = null;
 
@@ -271,14 +255,6 @@ public partial class Playlist : Node
         killCurrentTween();
         currentTween = musicPlayer.CreateTween();
 
-        /*
-        currentTween.TweenProperty(
-            musicPlayer,
-            "volume_db",
-            VolPercentToDecibels(NonAudiblePercent),
-            TransitionTime
-        );
-        */
         currentTween.TweenMethod(
             Callable.From<double>(setLinearVolumeViaTween),
             LinearVolume, NonAudiblePercent, (float)TransitionTime
