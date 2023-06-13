@@ -74,15 +74,15 @@ public partial class Playlist : Node
     }
 
     private List<Song> list = new List<Song>();
-    private AudioStreamPlayer musicPlayer;
+    private AudioStreamPlayer streamPlayer;
     private Tween currentTween;
 
     private void updateVolumeViaLinear()
     {
-        if (musicPlayer != null)
+        if (streamPlayer != null)
         {
-            musicPlayer.VolumeDb = (float)Mathf.LinearToDb(LinearVolume * LocalVolumeScale);
-            //Console.WriteLine("Current volume (gain): " + musicPlayer.VolumeDb);
+            streamPlayer.VolumeDb = (float)Mathf.LinearToDb(LinearVolume * LocalVolumeScale);
+            //Console.WriteLine("Current volume (gain): " + streamPlayer.VolumeDb);
         }
     }
 
@@ -115,21 +115,21 @@ public partial class Playlist : Node
 
     private void removeAudioStream()
     {
-        if (musicPlayer != null)
+        if (streamPlayer != null)
         {
-            RemoveChild(musicPlayer);
-            musicPlayer.Dispose();
-            musicPlayer = null;
+            RemoveChild(streamPlayer);
+            streamPlayer.Dispose();
+            streamPlayer = null;
         }
     }
 
     private void createAudioStream()
     {
-        if (musicPlayer == null)
+        if (streamPlayer == null)
         {
-            musicPlayer = new AudioStreamPlayer();
-            musicPlayer.VolumeDb = VolPercentToDecibels(NonAudiblePercent);
-            AddChild(musicPlayer);
+            streamPlayer = new AudioStreamPlayer();
+            streamPlayer.VolumeDb = VolPercentToDecibels(NonAudiblePercent);
+            AddChild(streamPlayer);
         }
     }
 
@@ -137,7 +137,7 @@ public partial class Playlist : Node
     {
         if (handleSongFinishedConnected)
         {
-            musicPlayer.Finished -= handleSongFinish;
+            streamPlayer.Finished -= handleSongFinish;
             handleSongFinishedConnected = false;
         }
     }
@@ -145,11 +145,11 @@ public partial class Playlist : Node
     private void handleSongFinish()
     {
         // to prevent stack overflow
-        if (musicPlayer != null)
+        if (streamPlayer != null)
         {
             disconnectHandleSongFinished();
         }
-        
+
         currentSongIndex++;
         if (currentSongIndex >= list.Count)
         {
@@ -163,7 +163,7 @@ public partial class Playlist : Node
     private void switchToSong(int index)
     {
         // we don't need to do anything here if there aren't any songs or if this song is already playing
-        if (list.Count < 1 || (musicPlayer != null && index == currentSongIndex)) { return; }
+        if (list.Count < 1 || (streamPlayer != null && index == currentSongIndex)) { return; }
 
         Song s = list[index];
 
@@ -171,13 +171,13 @@ public partial class Playlist : Node
         createAudioStream();
         s.IsLooping = onlyOneSong;
         s.OpenStream();
-        musicPlayer.Stream = s.Stream;
+        streamPlayer.Stream = s.Stream;
 
         // If there's more than one song, switch to the next song on finish
-        if (!onlyOneSong && musicPlayer != null && handleSongFinishedConnected == false)
+        if (!onlyOneSong && streamPlayer != null && handleSongFinishedConnected == false)
         {
             handleSongFinishedConnected = true;
-            musicPlayer.Finished += handleSongFinish;
+            streamPlayer.Finished += handleSongFinish;
         }
 
         // take note of the song change
@@ -209,7 +209,7 @@ public partial class Playlist : Node
 
     public void Play()
     {
-        if (musicPlayer == null)
+        if (streamPlayer == null)
         {
             //createAudioStream();
 
@@ -217,30 +217,34 @@ public partial class Playlist : Node
             currentSongIndex = 0;
         }
         switchToSong(currentSongIndex);
-        musicPlayer.Play();
-        killCurrentTween();
-        currentTween = musicPlayer.CreateTween();
 
-        currentTween.TweenMethod(
-            Callable.From<double>(setLinearVolumeViaTween),
-            LinearVolume, 1, (float)TransitionTime
-        );
-
-        currentTween.Finished += () =>
+        if (streamPlayer != null)
         {
-            disposeCurrentTween();
-        };
+            streamPlayer.Play();
+            killCurrentTween();
+            currentTween = streamPlayer.CreateTween();
+
+            currentTween.TweenMethod(
+                Callable.From<double>(setLinearVolumeViaTween),
+                LinearVolume, 1, (float)TransitionTime
+            );
+
+            currentTween.Finished += () =>
+            {
+                disposeCurrentTween();
+            };
+        }
     }
 
     private void stopImmediately()
     {
-        musicPlayer.Stop();
-        musicPlayer.Stream = null;
+        streamPlayer.Stop();
+        streamPlayer.Stream = null;
 
         disconnectHandleSongFinished();
 
-        musicPlayer.Dispose();
-        musicPlayer = null;
+        streamPlayer.Dispose();
+        streamPlayer = null;
 
         // free memory used by CurrentSong's stream
         Song song = CurrentSong;
@@ -253,7 +257,7 @@ public partial class Playlist : Node
     public void Stop()
     {
         killCurrentTween();
-        currentTween = musicPlayer.CreateTween();
+        currentTween = streamPlayer.CreateTween();
 
         currentTween.TweenMethod(
             Callable.From<double>(setLinearVolumeViaTween),
