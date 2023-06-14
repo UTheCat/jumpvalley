@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 /// <summary>
 /// Provides a way of tweening via Godot using method overrides.
@@ -7,7 +8,7 @@ using Godot;
 /// <br/>
 /// Syntax is inspired by JavaFX's animation package.
 /// </summary>
-public partial class MethodTween: Node
+public partial class MethodTween : Node
 {
     /// <summary>
     /// Returns a linear interpolation between an initial value and a final value for a given fraction.
@@ -120,16 +121,46 @@ public partial class MethodTween: Node
             }
             else
             {
-                CurrentFraction = (float) (value / TransitionTime);
+                //CurrentFraction = (float)(value / TransitionTime);
+                // get current fraction based on start and end values, along with easing modifiers
+                CurrentFraction = (float)Tween.InterpolateValue(0, 1, value, TransitionTime, TransitionType, EaseType);
             }
         }
     }
 
     /// <summary>
-    /// Interpolation function meant to be overriden by developers. As the tween is running, this method is called on each step until the animation pauses or finishes.
+    /// Event that gets raised on each step of the tween until the animation pauses or finishes.
+    /// <br/>
+    /// The <see cref="float"/> argument of the event is the current fraction of the tween that has been completed so far, typically in the range of [0, 1].
+    /// <br/>
+    /// <example>
+    /// Example usage:
+    /// <code>
+    /// MethodTween t = new MethodTween();
+    /// 
+    /// public void HandleTweenStep(object sender, float frac)
+    /// {
+    ///     Console.WriteLine($"The current fraction of the tween is {frac}");
+    /// }
+    /// 
+    /// public void ConnectToTweenStep()
+    /// {
+    ///     t.OnStep += HandleTweenStep;
+    /// }
+    /// </code>
+    /// </example>
     /// </summary>
-    /// <param name="frac">The current fraction of the tween that has been completed so far, typically in the range of [0, 1].</param>
-    public void Interpolate(float frac) { }
+    public event EventHandler<float> OnStep;
+
+    // Event raising function for OnStep
+    protected void RaiseOnStep(float frac)
+    {
+        EventHandler<float> onStep = OnStep;
+        if (onStep != null)
+        {
+            onStep(this, frac);
+        }
+    }
 
     /// <summary>
     /// Pauses the tween
@@ -163,7 +194,7 @@ public partial class MethodTween: Node
             ElapsedTime = Mathf.Clamp(ElapsedTime + (delta * Speed), 0.0, TransitionTime);
 
             // Indicate that a step has occurred
-            Interpolate(CurrentFraction);
+            RaiseOnStep(CurrentFraction);
 
             // If the animation hits either the start or end after being played already, pause it
             if ((ElapsedTime <= 0 && Speed < 0) || (ElapsedTime >= TransitionTime && Speed > 0))

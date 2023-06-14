@@ -58,6 +58,10 @@ public partial class Program : Node
         Console.WriteLine("Try playing music");
         musicPlayerTest.startTest();
 
+        Console.WriteLine("Run MethodTweenTest");
+        MethodTweenTest methodTweenTest = new MethodTweenTest(0.4f, 0.8f);
+        AddChild(methodTweenTest);
+
         // music system test
         /*
         Song song = new Song(
