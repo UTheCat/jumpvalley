@@ -75,7 +75,7 @@ public partial class MethodTween: Node
     public float Speed = 1;
 
     private bool _isPlaying = false;
-    private double _currentFraction = 0;
+    private float _currentFraction = 0;
     private double _elapsedTime = 0;
 
     /// <summary>
@@ -93,7 +93,7 @@ public partial class MethodTween: Node
     /// <summary>
     /// The current fraction of the tween that has been completed so far, typically in the range of [0, 1].
     /// </summary>
-    public double CurrentFraction
+    public float CurrentFraction
     {
         get => _currentFraction;
         private set
@@ -111,6 +111,17 @@ public partial class MethodTween: Node
         private set
         {
             _elapsedTime = value;
+
+            // update CurrentFraction based on ElapsedTime
+            if (TransitionTime <= 0)
+            {
+                // if the transition completes immediately, it makes sense just to set CurrentFraction to 1 immediately
+                CurrentFraction = 1f;
+            }
+            else
+            {
+                CurrentFraction = (float) (value / TransitionTime);
+            }
         }
     }
 
@@ -120,11 +131,45 @@ public partial class MethodTween: Node
     /// <param name="frac">The current fraction of the tween that has been completed so far, typically in the range of [0, 1].</param>
     public void Interpolate(float frac) { }
 
-    public override void _Process(double delta)
+    /// <summary>
+    /// Pauses the tween
+    /// </summary>
+    public void Pause()
     {
         if (IsPlaying)
         {
+            IsPlaying = false;
+            SetProcess(false);
+        }
+    }
 
+    /// <summary>
+    /// Starts or resumes the tween
+    /// </summary>
+    public void Resume()
+    {
+        if (!IsPlaying)
+        {
+            IsPlaying = true;
+            SetProcess(true);
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        if (IsPlaying && Speed != 0)
+        {
+            // CurrentFraction will also get set here
+            ElapsedTime = Mathf.Clamp(ElapsedTime + (delta * Speed), 0.0, TransitionTime);
+
+            // Indicate that a step has occurred
+            Interpolate(CurrentFraction);
+
+            // If the animation hits either the start or end after being played already, pause it
+            if ((ElapsedTime <= 0 && Speed < 0) || (ElapsedTime >= TransitionTime && Speed > 0))
+            {
+                Pause();
+            }
         }
     }
 }
