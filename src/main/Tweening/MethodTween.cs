@@ -186,21 +186,30 @@ public partial class MethodTween : Node
         }
     }
 
+    /// <summary>
+    /// Moves the current tweening position by a custom step in seconds.
+    /// </summary>
+    /// <param name="delta">The time in seconds to increment elapsed time in.</param>
+    public void Step(double delta)
+    {
+        // CurrentFraction will also get set here
+        ElapsedTime = Mathf.Clamp(ElapsedTime + (delta * Speed), 0.0, TransitionTime);
+
+        // Indicate that a step has occurred
+        RaiseOnStep(CurrentFraction);
+
+        // If the animation hits either the start or end after being played already, pause it
+        if ((ElapsedTime <= 0 && Speed < 0) || (ElapsedTime >= TransitionTime && Speed > 0))
+        {
+            Pause();
+        }
+    }
+
     public override void _Process(double delta)
     {
         if (IsPlaying && Speed != 0)
         {
-            // CurrentFraction will also get set here
-            ElapsedTime = Mathf.Clamp(ElapsedTime + (delta * Speed), 0.0, TransitionTime);
-
-            // Indicate that a step has occurred
-            RaiseOnStep(CurrentFraction);
-
-            // If the animation hits either the start or end after being played already, pause it
-            if ((ElapsedTime <= 0 && Speed < 0) || (ElapsedTime >= TransitionTime && Speed > 0))
-            {
-                Pause();
-            }
+            Step(delta);
         }
     }
 }

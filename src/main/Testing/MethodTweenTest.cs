@@ -18,20 +18,29 @@ public partial class MethodTweenTest : Button
         AddThemeFontSizeOverride("font_size", 20);
         Reset();
         UpdateText();
-        
+
         tween.OnStep += (object _o, float frac) =>
         {
             Console.WriteLine($"MethodTween updated fraction: {frac}");
-            float scale = (float)tween.GetCurrentValue();
 
-            AnchorBottom = scale;
-            AnchorTop = scale;
-            AnchorLeft = scale;
-            AnchorRight = scale;
+            float scale = (float)tween.GetCurrentValue();
+            SetAnchorsViaScale(scale);
         };
 
         // tween on button press
-        Pressed += tween.Resume;
+        Pressed += () =>
+        {
+            Console.WriteLine("start tween");
+            tween.Resume();
+        };
+    }
+
+    public void SetAnchorsViaScale(float scale)
+    {
+        AnchorBottom = 1 - scale;
+        AnchorTop = scale;
+        AnchorLeft = scale;
+        AnchorRight = 1 - scale;
     }
 
     public void UpdateText()
@@ -47,9 +56,6 @@ public partial class MethodTweenTest : Button
         tween.InitialValue = InitialScale;
         tween.FinalValue = FinalScale;
 
-        AnchorBottom = InitialScale;
-        AnchorTop = InitialScale;
-        AnchorLeft = InitialScale;
-        AnchorRight = InitialScale;
+        SetAnchorsViaScale(InitialScale);
     }
 }
