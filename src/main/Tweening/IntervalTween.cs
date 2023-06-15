@@ -44,12 +44,22 @@ public partial class IntervalTween : MethodTween, IDisposable
                 if (timer == null)
                 {
                     // play the tween
+                    timer = new Timer();
+
+                    timer.Interval = Interval * 1000;
                     timer.Elapsed += (object sender, ElapsedEventArgs e) =>
                     {
-                        double timestamp = stopwatch.Elapsed.TotalSeconds;
-                        Step(timestamp - lastTimestamp);
-                        lastTimestamp = timestamp;
+                        if (IsPlaying)
+                        {
+                            double timestamp = stopwatch.Elapsed.TotalSeconds;
+                            Step(timestamp - lastTimestamp);
+                            //Console.WriteLine($"Stepped by {timestamp - lastTimestamp} seconds");
+                            lastTimestamp = timestamp;
+                        }
                     };
+
+                    stopwatch.Start();
+                    timer.Start();
                 }
             }
             else
@@ -61,7 +71,8 @@ public partial class IntervalTween : MethodTween, IDisposable
                     timer.Dispose();
                     timer = null;
 
-                    resetStopwatch();
+                    //resetStopwatch();
+                    stopwatch.Stop();
                 }
             }
         }

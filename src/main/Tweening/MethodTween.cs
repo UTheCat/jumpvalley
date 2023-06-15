@@ -123,7 +123,16 @@ public partial class MethodTween
             {
                 //CurrentFraction = (float)(value / TransitionTime);
                 // get current fraction based on start and end values, along with easing modifiers
-                CurrentFraction = (float)Tween.InterpolateValue(0, 1, value, TransitionTime, TransitionType, EaseType);
+                CurrentFraction = (float)Tween.InterpolateValue(0f, 1f, value, TransitionTime, TransitionType, EaseType);
+
+                /*
+                Console.WriteLine();
+                Console.Write("0 1 " + value + " " + TransitionTime + " ");
+                Console.Write(TransitionType);
+                Console.Write(" ");
+                Console.Write(EaseType);
+                Console.WriteLine();
+                */
             }
         }
     }

@@ -2,11 +2,11 @@ using Godot;
 using System;
 
 /// <summary>
-/// Test class for MethodTween
+/// Test class for MethodTween using the IntervalTween subclass
 /// </summary>
 public partial class MethodTweenTest : Button
 {
-    private MethodTween tween = new MethodTween(1, Tween.TransitionType.Sine, Tween.EaseType.InOut);
+    private IntervalTween tween = new IntervalTween(1, Tween.TransitionType.Quad, Tween.EaseType.InOut);
 
     public float InitialScale;
     public float FinalScale;
@@ -25,6 +25,7 @@ public partial class MethodTweenTest : Button
 
             float scale = (float)tween.GetCurrentValue();
             SetAnchorsViaScale(scale);
+            UpdateText();
         };
 
         // tween on button press
@@ -37,10 +38,10 @@ public partial class MethodTweenTest : Button
 
     public void SetAnchorsViaScale(float scale)
     {
-        AnchorBottom = 1 - scale;
-        AnchorTop = scale;
-        AnchorLeft = scale;
-        AnchorRight = 1 - scale;
+        AnchorBottom = scale;
+        AnchorTop = 1 - scale;
+        AnchorLeft = 1 - scale;
+        AnchorRight = scale;
     }
 
     public void UpdateText()
