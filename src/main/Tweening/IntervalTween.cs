@@ -5,9 +5,11 @@ using System.Timers;
 //using Godot;
 
 /// <summary>
-/// Class that runs a tween by incrementing steps at a fixed time interval.
+/// Class that runs a tween by incrementing steps at a specified time interval.
 /// <br/>
-/// Uses Stopwatch.GetTimestamp() for timestampping functions
+/// Note that while the time interval should mostly be fixed, there will be slight differences in the actual time between each step.
+/// <br/>
+/// To account for this, the <see cref="Stopwatch"/> class is used to run the tween based on a timestamp. Therefore, the aforementioned differences shouldn't add up and cause the tween to finish noticeably later than expected for longer tweens.
 /// </summary>
 public partial class IntervalTween : MethodTween, IDisposable
 {
@@ -17,15 +19,9 @@ public partial class IntervalTween : MethodTween, IDisposable
     // in seconds
     private double lastTimestamp = 0;
 
-    public IntervalTween(double transitionTime, Godot.Tween.TransitionType transitionType, Godot.Tween.EaseType easeType) : base(transitionTime, transitionType, easeType)
-    {
+    public IntervalTween(double transitionTime, Godot.Tween.TransitionType transitionType, Godot.Tween.EaseType easeType) : base(transitionTime, transitionType, easeType) { }
 
-    }
-
-    public IntervalTween() : base()
-    {
-
-    }
+    public IntervalTween() : base() { }
 
     /// <summary>
     /// The number of seconds between each step
@@ -53,7 +49,6 @@ public partial class IntervalTween : MethodTween, IDisposable
                         {
                             double timestamp = stopwatch.Elapsed.TotalSeconds;
                             Step(timestamp - lastTimestamp);
-                            //Console.WriteLine($"Stepped by {timestamp - lastTimestamp} seconds");
                             lastTimestamp = timestamp;
                         }
                     };
@@ -71,7 +66,9 @@ public partial class IntervalTween : MethodTween, IDisposable
                     timer.Dispose();
                     timer = null;
 
+                    // commented out since this causes odd behavior with timestampping to occur
                     //resetStopwatch();
+
                     stopwatch.Stop();
                 }
             }
