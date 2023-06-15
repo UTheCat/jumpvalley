@@ -8,7 +8,7 @@ using System;
 /// <br/>
 /// Syntax is inspired by JavaFX's animation package.
 /// </summary>
-public partial class MethodTween : Node
+public partial class MethodTween
 {
     /// <summary>
     /// Returns a linear interpolation between an initial value and a final value for a given fraction.
@@ -25,7 +25,7 @@ public partial class MethodTween : Node
     public MethodTween(double transitionTime, Tween.TransitionType transitionType, Tween.EaseType easeType)
     {
         // tween shouldn't run after being instantiated unless the dev wants it to
-        SetProcess(false);
+        //SetProcess(false);
 
         TransitionTime = transitionTime;
         TransitionType = transitionType;
@@ -82,10 +82,10 @@ public partial class MethodTween : Node
     /// <summary>
     /// Whether or not the tween is current playing/running.
     /// </summary>
-    public bool IsPlaying
+    public virtual bool IsPlaying
     {
         get => _isPlaying;
-        private set
+        protected set
         {
             _isPlaying = value;
         }
@@ -165,24 +165,24 @@ public partial class MethodTween : Node
     /// <summary>
     /// Pauses the tween
     /// </summary>
-    public void Pause()
+    public virtual void Pause()
     {
         if (IsPlaying)
         {
             IsPlaying = false;
-            SetProcess(false);
+            //SetProcess(false);
         }
     }
 
     /// <summary>
     /// Starts or resumes the tween
     /// </summary>
-    public void Resume()
+    public virtual void Resume()
     {
         if (!IsPlaying)
         {
             IsPlaying = true;
-            SetProcess(true);
+            //SetProcess(true);
         }
     }
 
@@ -190,7 +190,7 @@ public partial class MethodTween : Node
     /// Moves the current tweening position by a custom step in seconds.
     /// </summary>
     /// <param name="delta">The time in seconds to increment elapsed time in.</param>
-    public void Step(double delta)
+    public virtual void Step(double delta)
     {
         // CurrentFraction will also get set here
         ElapsedTime = Mathf.Clamp(ElapsedTime + (delta * Speed), 0.0, TransitionTime);
@@ -205,6 +205,14 @@ public partial class MethodTween : Node
         }
     }
 
+    // Handles per-frame logic
+    // Note: In order to make this independent from the scene tree, usage of C# scheduling stuff may be needed
+    protected virtual void HandleProcessStep()
+    {
+
+    }
+
+    /*
     public override void _Process(double delta)
     {
         if (IsPlaying && Speed != 0)
@@ -212,4 +220,5 @@ public partial class MethodTween : Node
             Step(delta);
         }
     }
+    */
 }
