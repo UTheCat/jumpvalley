@@ -1,12 +1,15 @@
-/// <summary>
-/// Event arguments for <see cref="Playlist.SongChanged"/> and <see cref="MusicPlayer.SongChanged"/>
-/// </summary>
-public class SongChangedArgs : System.EventArgs
+namespace Jumpvalley.Music
 {
-    public Song NewSong { get; private set; }
-
-    public SongChangedArgs(Song s)
+    /// <summary>
+    /// Event arguments for <see cref="Playlist.SongChanged"/> and <see cref="MusicPlayer.SongChanged"/>
+    /// </summary>
+    public class SongChangedArgs : System.EventArgs
     {
-        NewSong = s;
+        public Song NewSong { get; private set; }
+
+        public SongChangedArgs(Song s)
+        {
+            NewSong = s;
+        }
     }
 }
