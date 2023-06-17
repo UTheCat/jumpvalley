@@ -3,6 +3,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Jumpvalley.Music;
+using Jumpvalley.Testing;
+using Jumpvalley.Tweening;
+
 // refer to this article for naming conventions:
 // https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions
 
