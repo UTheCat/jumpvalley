@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="test_godot_game"
+config/name="Jumpvalley"
 run/main_scene="res://Workspace.tscn"
-config/features=PackedStringArray("4.0", "C#")
+config/features=PackedStringArray("4.0")
 boot_splash/show_image=false
 config/icon="res://music_note.png"
 
