@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿//using System;
+using System.IO;
 
 namespace Jumpvalley.Music
 {
@@ -13,7 +14,7 @@ namespace Jumpvalley.Music
         public string AttributionData = "";
 
         /// <summary>
-        /// The song's audio file
+        /// The name of the song's audio file
         /// </summary>
         public string SongFile;
 
@@ -23,7 +24,39 @@ namespace Jumpvalley.Music
         /// <param name="path">The folder path</param>
         public SongPackage(string path)
         {
+            if (string.IsNullOrEmpty(path))
+            {
+                // Some like to end the paths with an extra "/" or "\". Account for this.
+                if (!(path.EndsWith("/") || path.EndsWith("\\")))
+                {
+                    path += "/";
+                }
 
+                // Try to read the contents of the attribution file in the package.
+                StreamReader attributionStreamReader = null;
+                try
+                {
+                    using (attributionStreamReader = new StreamReader(path + "attribution.txt"))
+                    {
+                        AttributionData = attributionStreamReader.ReadToEnd();
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    // Attribution files can be excluded from a song package although it's recommended that the user put one anyway.
+                    if ((e is FileNotFoundException))
+                    {
+                        if (attributionStreamReader != null)
+                        {
+                            attributionStreamReader.Dispose();
+                        }
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
         }
     }
 }
