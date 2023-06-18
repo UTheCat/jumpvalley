@@ -24,7 +24,7 @@ namespace Jumpvalley.Music
         public string SongFileName;
 
         /// <summary>
-        /// The directory path of this <see cref="SongPackage"/>
+        /// The directory path of this <see cref="SongPackage"/> with trailing slashes and trailing backslashes removed
         /// </summary>
         public string Path = "";
 
