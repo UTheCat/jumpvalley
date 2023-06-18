@@ -21,7 +21,7 @@ namespace Jumpvalley.Music
         /// <summary>
         /// The name of the song's audio file
         /// </summary>
-        public string SongFile;
+        public string SongFileName;
 
         /// <summary>
         /// The directory path of this <see cref="SongPackage"/>
