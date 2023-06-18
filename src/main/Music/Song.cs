@@ -1,6 +1,7 @@
 using Godot;
 using System.IO;
 using System.IO.Pipes;
+using System.Xml.Linq;
 
 namespace Jumpvalley.Music
 {
@@ -20,6 +21,8 @@ namespace Jumpvalley.Music
         }
 
         public Song() { }
+
+        public Song(SongPackage package) : this(package.Path + "/" + package.SongFileName, package.AttributionFile.Name, package.AttributionFile.Artists, package.AttributionFile.Album) { }
 
         /// <summary>
         /// The actual audio stream that contains the sound data for playback by an <see cref="AudioStreamPlayer"/>
