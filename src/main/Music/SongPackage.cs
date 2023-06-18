@@ -14,6 +14,11 @@ namespace Jumpvalley.Music
         public string AttributionData = "";
 
         /// <summary>
+        /// The data of the corresponding "attribution.txt" file
+        /// </summary>
+        public AttributionFile AttributionFile = null;
+
+        /// <summary>
         /// The name of the song's audio file
         /// </summary>
         public string SongFile;
@@ -39,12 +44,13 @@ namespace Jumpvalley.Music
                     using (attributionStreamReader = new StreamReader(path + "attribution.txt"))
                     {
                         AttributionData = attributionStreamReader.ReadToEnd();
+                        AttributionFile = new AttributionFile(AttributionData);
                     }
                 }
                 catch (System.Exception e)
                 {
                     // Attribution files can be excluded from a song package although it's recommended that the user put one anyway.
-                    if ((e is FileNotFoundException))
+                    if (e is FileNotFoundException)
                     {
                         if (attributionStreamReader != null)
                         {
