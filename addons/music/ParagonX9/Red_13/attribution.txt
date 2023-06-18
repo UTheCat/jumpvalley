@@ -1,2 +1,2 @@
-name="Red 13"
-artists="ParagonX9"
+name: Red 13
+artists: Paragon X9
