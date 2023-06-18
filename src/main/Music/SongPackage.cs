@@ -24,6 +24,11 @@ namespace Jumpvalley.Music
         public string SongFile;
 
         /// <summary>
+        /// The directory path of this <see cref="SongPackage"/>
+        /// </summary>
+        public string Path = "";
+
+        /// <summary>
         /// Creates a SongPackage instance for a given folder path
         /// </summary>
         /// <param name="path">The folder path</param>
@@ -32,10 +37,15 @@ namespace Jumpvalley.Music
             if (string.IsNullOrEmpty(path))
             {
                 // Some like to end the paths with an extra "/" or "\". Account for this.
-                if (!(path.EndsWith("/") || path.EndsWith("\\")))
+                if (path.EndsWith("/") || path.EndsWith("\\"))
                 {
-                    path += "/";
+                    path = path.Substring(0, path.Length - 1);
                 }
+
+                Path = path;
+
+                // Add the removed slash back for convenience in the next bit of code
+                path += "/";
 
                 // Try to read the contents of the attribution file in the package.
                 StreamReader attributionStreamReader = null;
