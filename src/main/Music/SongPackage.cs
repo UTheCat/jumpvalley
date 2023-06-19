@@ -4,19 +4,19 @@ using System.IO;
 namespace Jumpvalley.Music
 {
     /// <summary>
-    /// Represents a folder (such as one on the filesystem) that contains a song and its attribution metadata.
+    /// Represents a folder (such as one on the filesystem) that contains a song and its info metadata.
     /// </summary>
     public class SongPackage
     {
         /// <summary>
-        /// Data as raw text that comes from "attribution.txt" within the folder
+        /// Data as raw text that comes from "info.txt" within the folder
         /// </summary>
-        public string AttributionData = "";
+        public string InfoData = "";
 
         /// <summary>
-        /// The data of the corresponding "attribution.txt" file
+        /// The data of the corresponding "info.txt" file
         /// </summary>
-        public AttributionFile AttributionFile = null;
+        public InfoFile InfoFile = null;
 
         /// <summary>
         /// The name of the song's audio file
@@ -47,24 +47,24 @@ namespace Jumpvalley.Music
                 // Add the removed slash back for convenience in the next bit of code
                 path += "/";
 
-                // Try to read the contents of the attribution file in the package.
-                StreamReader attributionStreamReader = null;
+                // Try to read the contents of the info file in the package.
+                StreamReader infoStreamReader = null;
                 try
                 {
-                    using (attributionStreamReader = new StreamReader(path + "attribution.txt"))
+                    using (infoStreamReader = new StreamReader(path + "info.txt"))
                     {
-                        AttributionData = attributionStreamReader.ReadToEnd();
-                        AttributionFile = new AttributionFile(AttributionData);
+                        InfoData = infoStreamReader.ReadToEnd();
+                        InfoFile = new InfoFile(InfoData);
                     }
                 }
                 catch (System.Exception e)
                 {
-                    // Attribution files can be excluded from a song package although it's recommended that the user put one anyway.
+                    // Info files can be excluded from a song package although it's recommended that the user put one anyway.
                     if (e is FileNotFoundException)
                     {
-                        if (attributionStreamReader != null)
+                        if (infoStreamReader != null)
                         {
-                            attributionStreamReader.Dispose();
+                            infoStreamReader.Dispose();
                         }
                     }
                     else

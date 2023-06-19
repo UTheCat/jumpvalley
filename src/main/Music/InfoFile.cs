@@ -3,7 +3,7 @@
 namespace Jumpvalley.Music
 {
     /// <summary>
-    /// Reads the associated "attribution.txt" file for a song.
+    /// Reads the associated "info.txt" file for a song.
     /// <br/>
     /// The contents of such types of files should be formatted like this:
     /// <br/>
@@ -13,7 +13,7 @@ namespace Jumpvalley.Music
     /// <br/>
     /// where each property is specified on its own line.
     /// <br/>
-    /// Currently, the properties read for attribution.txt are:
+    /// Currently, the properties read for info.txt are:
     /// <list type="bullet">
     /// <item>name: The name of the song</item>
     /// <item>artists: The artists that made the song</item>
@@ -21,7 +21,7 @@ namespace Jumpvalley.Music
     /// </list>
     /// This text formatting is inspired by the way that the content of .osu files are formatted in Osu (the rhythm game).
     /// </summary>
-    public partial class AttributionFile
+    public partial class InfoFile
     {
         /// <summary>
         /// The name of the song
@@ -39,15 +39,15 @@ namespace Jumpvalley.Music
         public string Album = null;
 
         /// <summary>
-        /// Creates an instance of AttributionFile from raw formatted text
+        /// Creates an instance of InfoFile from raw formatted text
         /// </summary>
         /// <param name="text">The raw formatted text</param>
-        public AttributionFile(string text)
+        public InfoFile(string text)
         {
             SetVariablesFromRawText(text);
         }
 
-        public AttributionFile(FileInfo file)
+        public InfoFile(FileInfo file)
         {
             using (StreamReader stream = file.OpenText())
             {
