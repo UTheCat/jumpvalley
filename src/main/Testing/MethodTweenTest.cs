@@ -51,7 +51,14 @@ namespace Jumpvalley.Testing
             Pressed += () =>
             {
                 Console.WriteLine("start tween");
-                tween.Resume();
+                
+                if (tween.IsPlaying)
+                {
+                    tween.Pause();
+                } else
+                {
+                    tween.Resume();
+                }
             };
         }
 
