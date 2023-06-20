@@ -14,7 +14,7 @@ namespace Jumpvalley.Tweening
     /// <br/>
     /// Syntax is inspired by JavaFX's animation package.
     /// </summary>
-    public partial class MethodTween: IDisposable
+    public partial class MethodTween : IDisposable
     {
         /// <summary>
         /// Returns a linear interpolation between an initial value and a final value for a given fraction.
@@ -100,15 +100,20 @@ namespace Jumpvalley.Tweening
             get => _isPlaying;
             protected set
             {
+                if (value == _isPlaying) return;
+
                 _isPlaying = value;
 
                 if (value)
                 {
+                    // raise the event first so that the timestamp at which the tween was resumed can be more accurately retrieved
+                    RaiseOnResume();
                     stopwatch.Start();
                 }
                 else
                 {
                     stopwatch.Stop();
+                    RaiseOnPause();
                 }
             }
         }
@@ -150,40 +155,6 @@ namespace Jumpvalley.Tweening
         }
 
         /// <summary>
-        /// Event that gets raised on each step of the tween until the animation pauses or finishes.
-        /// <br/>
-        /// The <see cref="float"/> argument of the event is the current fraction of the tween that has been completed so far, typically in the range of [0, 1].
-        /// <br/>
-        /// <example>
-        /// Example usage:
-        /// <code>
-        /// MethodTween t = new MethodTween();
-        /// 
-        /// public void HandleTweenStep(object sender, float frac)
-        /// {
-        ///     Console.WriteLine($"The current fraction of the tween is {frac}");
-        /// }
-        /// 
-        /// public void ConnectToTweenStep()
-        /// {
-        ///     t.OnStep += HandleTweenStep;
-        /// }
-        /// </code>
-        /// </example>
-        /// </summary>
-        public event EventHandler<float> OnStep;
-
-        // Event raising function for OnStep
-        protected void RaiseOnStep(float frac)
-        {
-            EventHandler<float> onStep = OnStep;
-            if (onStep != null)
-            {
-                onStep(this, frac);
-            }
-        }
-
-        /// <summary>
         /// Pauses the tween
         /// </summary>
         public virtual void Pause()
@@ -218,9 +189,10 @@ namespace Jumpvalley.Tweening
             RaiseOnStep(CurrentFraction);
 
             // If the animation hits either the start or end after being played already, pause it
-            if ((ElapsedTime <= 0 && Speed < 0) || (ElapsedTime >= TransitionTime && Speed > 0))
+            if (IsPlaying && ((ElapsedTime <= 0 && Speed < 0) || (ElapsedTime >= TransitionTime && Speed > 0)))
             {
                 Pause();
+                RaiseOnFinish();
             }
         }
 
@@ -242,6 +214,72 @@ namespace Jumpvalley.Tweening
         {
             Pause();
             ResetStopwatch();
+        }
+
+        /// <summary>
+        /// Event that gets raised on each step of the tween until the animation pauses or finishes.
+        /// <br/>
+        /// The <see cref="float"/> argument of the event is the current fraction of the tween that has been completed so far, typically in the range of [0, 1].
+        /// <br/>
+        /// <example>
+        /// Example usage:
+        /// <code>
+        /// MethodTween t = new MethodTween();
+        /// 
+        /// public void HandleTweenStep(object sender, float frac)
+        /// {
+        ///     Console.WriteLine($"The current fraction of the tween is {frac}");
+        /// }
+        /// 
+        /// public void ConnectToTweenStep()
+        /// {
+        ///     t.OnStep += HandleTweenStep;
+        /// }
+        /// </code>
+        /// </example>
+        /// </summary>
+        public event EventHandler<float> OnStep;
+
+        // Event raising function for OnStep
+        protected void RaiseOnStep(float frac)
+        {
+            EventHandler<float> onStep = OnStep;
+            if (onStep != null)
+            {
+                onStep(this, frac);
+            }
+        }
+
+        /// <summary>
+        /// Event raised when the tween resumes playback
+        /// </summary>
+        public event EventHandler OnResume;
+
+        protected void RaiseOnResume()
+        {
+            OnResume?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Event raised when the tween is paused during playback
+        /// </summary>
+        public event EventHandler OnPause;
+
+        protected void RaiseOnPause()
+        {
+            OnPause?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Event raised when the tween finishes playback.
+        /// <br/>
+        /// This occurs when <see cref="CurrentFraction"/> hits 1 when <see cref="Speed"/> is greater than 0, or when <see cref="CurrentFraction"/> hits 0 when <see cref="Speed"/> is less than 0.
+        /// </summary>
+        public event EventHandler OnFinish;
+
+        protected void RaiseOnFinish()
+        {
+            OnFinish?.Invoke(this, EventArgs.Empty);
         }
 
         private void ResetStopwatch()
