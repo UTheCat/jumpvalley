@@ -13,11 +13,7 @@ namespace Jumpvalley.Tweening
     /// </summary>
     public partial class IntervalTween : MethodTween, IDisposable
     {
-        private Stopwatch stopwatch = new Stopwatch();
         private Timer timer;
-
-        // in seconds
-        private double lastTimestamp = 0;
 
         public IntervalTween(double transitionTime, Godot.Tween.TransitionType transitionType, Godot.Tween.EaseType easeType) : base(transitionTime, transitionType, easeType) { }
 
@@ -47,13 +43,10 @@ namespace Jumpvalley.Tweening
                         {
                             if (IsPlaying)
                             {
-                                double timestamp = stopwatch.Elapsed.TotalSeconds;
-                                Step(timestamp - lastTimestamp);
-                                lastTimestamp = timestamp;
+                                Step();
                             }
                         };
 
-                        stopwatch.Start();
                         timer.Start();
                     }
                 }
@@ -65,27 +58,9 @@ namespace Jumpvalley.Tweening
                         timer.Stop();
                         timer.Dispose();
                         timer = null;
-
-                        // commented out since this causes odd behavior with timestampping to occur
-                        //resetStopwatch();
-
-                        stopwatch.Stop();
                     }
                 }
             }
-        }
-
-        public void Dispose()
-        {
-            Pause();
-            resetStopwatch();
-        }
-
-        private void resetStopwatch()
-        {
-            stopwatch.Stop();
-            stopwatch.Reset();
-            lastTimestamp = 0;
         }
     }
 }

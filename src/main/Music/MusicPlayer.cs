@@ -12,6 +12,7 @@ namespace Jumpvalley.Music
     /// </summary>
     public partial class MusicPlayer : Node
     {
+        /*
         private static void StopPlaylist(Playlist playlist)
         {
             if (playlist != null)
@@ -19,10 +20,28 @@ namespace Jumpvalley.Music
                 playlist.Stop();
             }
         }
+        */
 
         private Playlist _currentPlaylist;
         private Playlist _primaryPlaylist;
         private bool _isPlaying;
+
+        /// <summary>
+        /// Stops the specified playlist and removes it from the MusicPlayer's list of children
+        /// </summary>
+        /// <param name="playlist"></param>
+        private void StopPlaylist(Playlist playlist)
+        {
+            if (playlist != null)
+            {
+                playlist.Stop();
+                
+                if (playlist.GetParent() == this)
+                {
+                    RemoveChild(playlist);
+                }
+            }
+        }
 
         // ignore the sender argument as the actual sender should be this instance of MusicPlayer
         private void HandlePlaylistSongChange(object _sender, SongChangedArgs args)

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 namespace Jumpvalley.Tweening
 {
@@ -8,9 +9,12 @@ namespace Jumpvalley.Tweening
     /// <br/>
     /// The advantage of using this over a normal Godot <see cref="Tween"/> is that the Tween doesn't have to be in the scene tree in order to operate.
     /// <br/>
+    /// Another difference is that unlike a normal Godot <see cref="Tween"/>, this tween doesn't start automatically after being instantiated.
+    /// Developers must call Resume() manually in order to get the tween running.
+    /// <br/>
     /// Syntax is inspired by JavaFX's animation package.
     /// </summary>
-    public partial class MethodTween
+    public partial class MethodTween: IDisposable
     {
         /// <summary>
         /// Returns a linear interpolation between an initial value and a final value for a given fraction.
@@ -26,9 +30,6 @@ namespace Jumpvalley.Tweening
 
         public MethodTween(double transitionTime, Tween.TransitionType transitionType, Tween.EaseType easeType)
         {
-            // tween shouldn't run after being instantiated unless the dev wants it to
-            //SetProcess(false);
-
             TransitionTime = transitionTime;
             TransitionType = transitionType;
             EaseType = easeType;
@@ -77,6 +78,16 @@ namespace Jumpvalley.Tweening
         /// </summary>
         public float Speed = 1;
 
+        /// <summary>
+        /// Stopwatch used to keep track of the tweening timestamp
+        /// </summary>
+        private Stopwatch stopwatch = new Stopwatch();
+
+        /// <summary>
+        /// The last tweening timestamp that Step() was called with no arguments.
+        /// </summary>
+        private double lastTimestamp = 0;
+
         private bool _isPlaying = false;
         private float _currentFraction = 0;
         private double _elapsedTime = 0;
@@ -90,6 +101,15 @@ namespace Jumpvalley.Tweening
             protected set
             {
                 _isPlaying = value;
+
+                if (value)
+                {
+                    stopwatch.Start();
+                }
+                else
+                {
+                    stopwatch.Stop();
+                }
             }
         }
 
@@ -123,18 +143,8 @@ namespace Jumpvalley.Tweening
                 }
                 else
                 {
-                    //CurrentFraction = (float)(value / TransitionTime);
                     // get current fraction based on start and end values, along with easing modifiers
                     CurrentFraction = (float)Tween.InterpolateValue(0f, 1f, value, TransitionTime, TransitionType, EaseType);
-
-                    /*
-                    Console.WriteLine();
-                    Console.Write("0 1 " + value + " " + TransitionTime + " ");
-                    Console.Write(TransitionType);
-                    Console.Write(" ");
-                    Console.Write(EaseType);
-                    Console.WriteLine();
-                    */
                 }
             }
         }
@@ -181,7 +191,6 @@ namespace Jumpvalley.Tweening
             if (IsPlaying)
             {
                 IsPlaying = false;
-                //SetProcess(false);
             }
         }
 
@@ -193,7 +202,6 @@ namespace Jumpvalley.Tweening
             if (!IsPlaying)
             {
                 IsPlaying = true;
-                //SetProcess(true);
             }
         }
 
@@ -201,7 +209,7 @@ namespace Jumpvalley.Tweening
         /// Moves the current tweening position by a custom step in seconds.
         /// </summary>
         /// <param name="delta">The time in seconds to increment elapsed time in.</param>
-        public virtual void Step(double delta)
+        public void Step(double delta)
         {
             // CurrentFraction will also get set here
             ElapsedTime = Mathf.Clamp(ElapsedTime + (delta * Speed), 0.0, TransitionTime);
@@ -216,21 +224,31 @@ namespace Jumpvalley.Tweening
             }
         }
 
-        // Handles per-frame logic
-        // Note: In order to make this independent from the scene tree, usage of C# scheduling stuff may be needed
-        protected virtual void HandleProcessStep()
+        /// <summary>
+        /// Calls <see cref="Step(double)"/> where the "double" argument is the number of seconds that
+        /// <see cref="Step()"/> (with no arguments) was called.
+        /// <br/>
+        /// If this is the first time that <see cref="Step()"/> (with no arguments) was called since instantiation,
+        /// the "double" argument will instead be the number of seconds since the tween started running.
+        /// </summary>
+        public void Step()
         {
-
+            double timestamp = stopwatch.Elapsed.TotalSeconds;
+            Step(timestamp - lastTimestamp);
+            lastTimestamp = timestamp;
         }
 
-        /*
-        public override void _Process(double delta)
+        public virtual void Dispose()
         {
-            if (IsPlaying && Speed != 0)
-            {
-                Step(delta);
-            }
+            Pause();
+            ResetStopwatch();
         }
-        */
+
+        private void ResetStopwatch()
+        {
+            stopwatch.Stop();
+            stopwatch.Reset();
+            lastTimestamp = 0;
+        }
     }
 }
