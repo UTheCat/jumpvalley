@@ -12,7 +12,7 @@ namespace Jumpvalley.Music
     /// </summary>
     public partial class MusicPlayer : Node
     {
-        private static void stopPlaylist(Playlist playlist)
+        private static void StopPlaylist(Playlist playlist)
         {
             if (playlist != null)
             {
@@ -25,7 +25,7 @@ namespace Jumpvalley.Music
         private bool _isPlaying;
 
         // ignore the sender argument as the actual sender should be this instance of MusicPlayer
-        private void handlePlaylistSongChange(Object _sender, SongChangedArgs args)
+        private void HandlePlaylistSongChange(object _sender, SongChangedArgs args)
         {
             OnMusicPlayerSongChanged(args);
         }
@@ -41,32 +41,35 @@ namespace Jumpvalley.Music
                 // If a different playlist is requesting to be played, make sure to stop the current one before changing it
                 if (value == null)
                 {
+                    Playlist oldPlaylist = _currentPlaylist;
+                    _currentPlaylist = null;
+
                     // tell subscribers of MusicPlayer.SongChanged that there's no song playing anymore
                     // (this is done automatically by stopping the playlist)
-                    stopPlaylist(_currentPlaylist);
-                    if (_currentPlaylist != null)
+                    StopPlaylist(oldPlaylist);
+                    if (oldPlaylist != null)
                     {
-                        _currentPlaylist.SongChanged -= handlePlaylistSongChange;
+                        oldPlaylist.SongChanged -= HandlePlaylistSongChange;
                         //_currentPlaylist.Stop();
                         //RemoveChild(_currentPlaylist);
                     }
-                    _currentPlaylist = value;
+                    oldPlaylist = value;
                 }
                 else
                 {
-                    // First, disconnect handlePlaylistSongChange() from the old playlist. This is because we don't want SongChanged to be raised twice at the same time for the same song change.
+                    // First, disconnect HandlePlaylistSongChange() from the old playlist. This is because we don't want SongChanged to be raised twice at the same time for the same song change.
                     if (_currentPlaylist != null)
                     {
-                        _currentPlaylist.SongChanged -= handlePlaylistSongChange;
+                        _currentPlaylist.SongChanged -= HandlePlaylistSongChange;
 
-                        stopPlaylist(_currentPlaylist);
+                        StopPlaylist(_currentPlaylist);
                         //RemoveChild(_currentPlaylist);
                     }
 
                     _currentPlaylist = value;
 
                     // connect to the new playlist's SongChanged event
-                    value.SongChanged += handlePlaylistSongChange;
+                    value.SongChanged += HandlePlaylistSongChange;
 
                     //AddChild(value);
 
@@ -85,7 +88,7 @@ namespace Jumpvalley.Music
             set
             {
                 _primaryPlaylist = value;
-                refreshPlayback();
+                RefreshPlayback();
             }
         }
 
@@ -100,12 +103,12 @@ namespace Jumpvalley.Music
             set
             {
                 _isPlaying = value;
-                refreshPlayback();
+                RefreshPlayback();
             }
         }
 
         // playback update function
-        private void refreshPlayback()
+        private void RefreshPlayback()
         {
             if (IsPlaying)
             {
