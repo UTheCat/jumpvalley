@@ -21,6 +21,11 @@ namespace Jumpvalley.Player
         /// </summary>
         public MusicPlayer CurrentMusicPlayer { get; private set; }
 
+        public Player()
+        {
+            CurrentMusicPlayer = new MusicPlayer();
+        }
+
         public void Dispose()
         {
             CurrentMusicPlayer.Dispose();
