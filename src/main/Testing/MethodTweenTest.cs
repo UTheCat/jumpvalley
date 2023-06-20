@@ -25,11 +25,26 @@ namespace Jumpvalley.Testing
 
             tween.OnStep += (object _o, float frac) =>
             {
-                Console.WriteLine($"MethodTween updated fraction: {frac}");
+                //Console.WriteLine($"MethodTween updated fraction: {frac}");
 
                 float scale = (float)tween.GetCurrentValue();
                 SetAnchorsViaScale(scale);
                 UpdateText();
+            };
+
+            tween.OnResume += (object _o, EventArgs _e) =>
+            {
+                Console.WriteLine("Tween resumed");
+            };
+
+            tween.OnPause += (object _o, EventArgs _e) =>
+            {
+                Console.WriteLine("Tween paused");
+            };
+
+            tween.OnFinish += (object _o, EventArgs _e) =>
+            {
+                Console.WriteLine("Tween finished");
             };
 
             // tween on button press
