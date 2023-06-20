@@ -77,7 +77,7 @@ namespace Jumpvalley.Music
         }
 
         /// <summary>
-        /// The playlist that will be played when the user isn't in a music zone
+        /// The MusicPlayer's primary playlist. If set, this playlist will be played whenever <see cref="IsPlaying"/> is set to true.
         /// </summary>
         public Playlist PrimaryPlaylist
         {
@@ -107,7 +107,6 @@ namespace Jumpvalley.Music
         // playback update function
         private void refreshPlayback()
         {
-            // to add later: support for music zones
             if (IsPlaying)
             {
                 CurrentPlaylist = PrimaryPlaylist;
