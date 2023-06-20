@@ -18,7 +18,7 @@ config/icon="res://music_note.png"
 
 [dotnet]
 
-project/assembly_name="test_godot_game"
+project/assembly_name="jumpvalley"
 
 [gui]
 
