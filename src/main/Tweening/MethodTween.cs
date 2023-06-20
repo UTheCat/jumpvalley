@@ -113,7 +113,8 @@ namespace Jumpvalley.Tweening
                 else
                 {
                     stopwatch.Stop();
-                    RaiseOnPause();
+
+                    if (!IsFinished()) RaiseOnPause();
                 }
             }
         }
@@ -155,6 +156,21 @@ namespace Jumpvalley.Tweening
         }
 
         /// <summary>
+        /// Returns if the tween is finished.
+        /// <br/>
+        /// The tween is considered to be finished if one of the following is true:
+        /// <list type="bullet">
+        /// <item><see cref="CurrentFraction"/> is 1 when <see cref="Speed"/> is greater than or equal to 0</item>
+        /// <item><see cref="CurrentFraction"/> is 0 when <see cref="Speed"/> is less than 0</item>
+        /// </list>
+        /// </summary>
+        /// <returns>If the tween is finished</returns>
+        public bool IsFinished()
+        {
+            return (ElapsedTime <= 0 && Speed < 0) || (ElapsedTime >= TransitionTime && Speed >= 0);
+        }
+
+        /// <summary>
         /// Pauses the tween
         /// </summary>
         public virtual void Pause()
@@ -189,7 +205,7 @@ namespace Jumpvalley.Tweening
             RaiseOnStep(CurrentFraction);
 
             // If the animation hits either the start or end after being played already, pause it
-            if (IsPlaying && ((ElapsedTime <= 0 && Speed < 0) || (ElapsedTime >= TransitionTime && Speed > 0)))
+            if (IsPlaying && IsFinished())
             {
                 Pause();
                 RaiseOnFinish();
@@ -273,7 +289,7 @@ namespace Jumpvalley.Tweening
         /// <summary>
         /// Event raised when the tween finishes playback.
         /// <br/>
-        /// This occurs when <see cref="CurrentFraction"/> hits 1 when <see cref="Speed"/> is greater than 0, or when <see cref="CurrentFraction"/> hits 0 when <see cref="Speed"/> is less than 0.
+        /// This occurs when <see cref="CurrentFraction"/> hits 1 when <see cref="Speed"/> is greater than or equal to 0, or when <see cref="CurrentFraction"/> hits 0 when <see cref="Speed"/> is less than 0.
         /// </summary>
         public event EventHandler OnFinish;
 
