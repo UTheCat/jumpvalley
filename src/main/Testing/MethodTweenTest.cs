@@ -57,6 +57,7 @@ namespace Jumpvalley.Testing
                     tween.Pause();
                 } else
                 {
+                    tween.Tree = GetTree();
                     tween.Resume();
                 }
             };
