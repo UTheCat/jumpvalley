@@ -10,7 +10,7 @@ namespace Jumpvalley.Testing
     /// </summary>
     public partial class MethodTweenTest : Button
     {
-        private IntervalTween tween = new IntervalTween(1, Tween.TransitionType.Quad, Tween.EaseType.InOut);
+        private SceneTreeTween tween = new SceneTreeTween(1, Tween.TransitionType.Quad, Tween.EaseType.InOut, null);
 
         public float InitialScale;
         public float FinalScale;

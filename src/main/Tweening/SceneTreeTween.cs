@@ -1,4 +1,5 @@
 ﻿using Godot;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Jumpvalley.Tweening
 {
@@ -9,12 +10,38 @@ namespace Jumpvalley.Tweening
     /// </summary>
     public partial class SceneTreeTween : MethodTween
     {
+        private bool isProcessStepConnected = false;
+        private SceneTree _tree;
+
         /// <summary>
         /// The scene tree associated with this tween.
         /// </summary>
-        public SceneTree Tree { get; private set; }
+        public SceneTree Tree
+        {
+            get => _tree;
+            set
+            {
+                if (value == null)
+                {
+                    // disconnect first, since the original SceneTree will need to be known in order to disconnect from process step
+                    DisconnectProcessStep();
+                }
 
-        public SceneTreeTween(double transitionTime, Tween.TransitionType transitionType, Tween.EaseType easeType, SceneTree sceneTree) : base(transitionTime, transitionType, easeType) { }
+                _tree = value;
+            }
+        }
+
+        /// <summary>
+        /// Constructs a new instance of SceneTree
+        /// </summary>
+        /// <param name="transitionTime">See the base constructors for description</param>
+        /// <param name="transitionType"></param>
+        /// <param name="easeType"></param>
+        /// <param name="sceneTree">The scene tree to associate the SceneTreeTween with. If the SceneTree to associate with isn't known or accessible yet, specify this parameter with null.</param>
+        public SceneTreeTween(double transitionTime, Tween.TransitionType transitionType, Tween.EaseType easeType, SceneTree sceneTree) : base(transitionTime, transitionType, easeType)
+        {
+            Tree = sceneTree;
+        }
 
         public SceneTreeTween() : base() { }
 
@@ -23,28 +50,15 @@ namespace Jumpvalley.Tweening
             get => base.IsPlaying;
             protected set
             {
-                // we'll need this original value to connect and disconnect from the SceneTree process event properly
-                bool wasPlaying = base.IsPlaying;
+                base.IsPlaying = value;
 
                 if (value)
                 {
-                    base.IsPlaying = true;
-
-                    // only connect if the tween wasn't playing in the first place to avoid duplicate invocations
-                    if (!wasPlaying)
-                    {
-                        Tree.ProcessFrame += HandleProcessStep;
-                    }
+                    ConnectProcessStep();
                 }
                 else
                 {
-                    base.IsPlaying = false;
-
-                    // only disconnect if the tween was playing in the first place to avoid possible Exception throws
-                    if (wasPlaying)
-                    {
-                        Tree.ProcessFrame -= HandleProcessStep;
-                    }
+                    DisconnectProcessStep();
                 }
             }
         }
@@ -57,9 +71,24 @@ namespace Jumpvalley.Tweening
             }
         }
 
-        public override void Dispose()
+        private void DisconnectProcessStep()
         {
-            base.Dispose();
+            if (isProcessStepConnected && _tree != null)
+            {
+                Tree.ProcessFrame -= HandleProcessStep;
+                isProcessStepConnected = false;
+            }
         }
+
+        private void ConnectProcessStep()
+        {
+            if (isProcessStepConnected == false && _tree != null)
+            {
+                isProcessStepConnected = true;
+                _tree.ProcessFrame += HandleProcessStep;
+            }
+        }
+
+        // Base destructor pauses the tween, which automatically disconnects HandleProcessStep from SceneTree.ProcessFrame if needed.
     }
 }
