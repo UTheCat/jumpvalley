@@ -29,6 +29,7 @@ namespace Jumpvalley
             spinner = new BoxSpinner((CsgBox3D)GetNode("Map/CSGBox3D"), 1);
 
             player = new Player(GetTree(), this);
+            player.Start();
 
             /*
             mainGui = (Control)GetNode("Gui");

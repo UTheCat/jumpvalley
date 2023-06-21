@@ -1,6 +1,7 @@
 ﻿using Godot;
 using Jumpvalley.Music;
 using Jumpvalley.Tweening;
+using System;
 
 namespace Jumpvalley.Players.Gui
 {
@@ -9,7 +10,7 @@ namespace Jumpvalley.Players.Gui
     /// <br/>
     /// This set of GUI is currently called the "BottomBar"
     /// </summary>
-    public partial class BottomBar
+    public partial class BottomBar: IDisposable
     {
         public static readonly string MUSIC_DESC_NO_SONG = "MUSIC\nNo song playing";
 
@@ -119,6 +120,12 @@ namespace Jumpvalley.Players.Gui
             }
 
             DescriptionOpacityTween.Resume();
+        }
+
+        public void Dispose()
+        {
+            ActualNode.Dispose();
+            DescriptionOpacityTween.Dispose();
         }
 
         /*

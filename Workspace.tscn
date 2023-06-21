@@ -88,7 +88,7 @@ mesh = SubResource("BoxMesh_8pv50")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 mesh = SubResource("CapsuleMesh_d4gh2")
 
-[node name="Gui" type="Control" parent="."]
+[node name="PrimaryGui" type="Control" parent="."]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -98,9 +98,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_rnwvv")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Gui"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PrimaryGui"]
 
-[node name="JToHOriginalMusicFrame" type="Control" parent="Gui"]
+[node name="JToHOriginalMusicFrame" type="Control" parent="PrimaryGui"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -109,7 +109,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Gui/JToHOriginalMusicFrame"]
+[node name="Button" type="Button" parent="PrimaryGui/JToHOriginalMusicFrame"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -129,7 +129,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_8khj4")
 text = "Music: On
 "
 
-[node name="Label" type="Label" parent="Gui/JToHOriginalMusicFrame"]
+[node name="Label" type="Label" parent="PrimaryGui/JToHOriginalMusicFrame"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -148,7 +148,7 @@ horizontal_alignment = 2
 clip_text = true
 text_overrun_behavior = 2
 
-[node name="BottomBarTemp" type="Control" parent="Gui"]
+[node name="BottomBarTemp" type="Control" parent="PrimaryGui"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -161,9 +161,9 @@ offset_right = 45.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="BottomBar" type="Node" parent="Gui"]
+[node name="BottomBar" type="Node" parent="PrimaryGui"]
 
-[node name="Buttons" type="HBoxContainer" parent="Gui/BottomBar"]
+[node name="Buttons" type="HBoxContainer" parent="PrimaryGui/BottomBar"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -175,7 +175,7 @@ offset_right = 90.0
 offset_bottom = -4.0
 theme_override_constants/separation = 10
 
-[node name="Menu" type="Button" parent="Gui/BottomBar/Buttons"]
+[node name="Menu" type="Button" parent="PrimaryGui/BottomBar/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("6_krikn")
@@ -184,7 +184,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_3t1g3")
 icon = ExtResource("8_1lk1l")
 icon_alignment = 1
 
-[node name="Music" type="Button" parent="Gui/BottomBar/Buttons"]
+[node name="Music" type="Button" parent="PrimaryGui/BottomBar/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("9_c6sxk")
@@ -194,7 +194,7 @@ icon = ExtResource("6_a22ul")
 icon_alignment = 1
 expand_icon = true
 
-[node name="DescriptionTemp" type="RichTextLabel" parent="Gui/BottomBar"]
+[node name="DescriptionTemp" type="RichTextLabel" parent="PrimaryGui/BottomBar"]
 visible = false
 anchors_preset = -1
 anchor_left = 0.2
@@ -209,7 +209,7 @@ text = "Music: Bee Swarm Simulator OST - Wax"
 fit_content = true
 scroll_active = false
 
-[node name="Description" type="Label" parent="Gui/BottomBar"]
+[node name="Description" type="Label" parent="PrimaryGui/BottomBar"]
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 1.0
