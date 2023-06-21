@@ -43,7 +43,10 @@ namespace Jumpvalley.Tweening
             Tree = sceneTree;
         }
 
-        public SceneTreeTween() : base() { }
+        public SceneTreeTween() : base()
+        {
+            Tree = null;
+        }
 
         public override bool IsPlaying
         {
