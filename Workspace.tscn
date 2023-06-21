@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
-[ext_resource type="Texture2D" path="res://addons/studs.dds" id="2_jkxsw"]
+[ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
 [ext_resource type="Script" path="res://auto_resize.gd" id="3_rnwvv"]
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="4_guawk"]
 [ext_resource type="FontFile" uid="uid://6iiejh0b5s7y" path="res://addons/fonts/SourceSansPro/SourceSansPro-Light.ttf" id="5_peycv"]
@@ -26,9 +26,9 @@ sky = SubResource("Sky_ucdiq")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mrjfo"]
-albedo_texture = ExtResource("2_jkxsw")
-uv1_scale = Vector3(500, 50, 500)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf58v"]
+albedo_texture = ExtResource("2_0sjcg")
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_8pv50"]
 size = Vector3(100, 1, 100)
@@ -81,7 +81,7 @@ fov = 70.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
 
 [node name="Baseplate" type="MeshInstance3D" parent="Map"]
-material_override = SubResource("StandardMaterial3D_mrjfo")
+material_override = SubResource("StandardMaterial3D_yf58v")
 mesh = SubResource("BoxMesh_8pv50")
 
 [node name="Player" type="MeshInstance3D" parent="Map"]
