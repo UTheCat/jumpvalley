@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Godot;
 using Jumpvalley.Music;
 
 namespace Jumpvalley.Player
@@ -12,23 +12,47 @@ namespace Jumpvalley.Player
     /// <item>Their music player</item>
     /// <item>The Controller instance that allows them to control their character</item>
     /// <item>The Camera instance that allows them to control their camera</item>
+    /// <item>Their primary GUI node</item>
     /// </list>
     /// </summary>
     public partial class Player: IDisposable
-    {   
+    {
+        /// <summary>
+        /// The scene tree that the player's game is under.
+        /// </summary>
+        public SceneTree Tree { get; private set; }
+
+        /// <summary>
+        /// The root node containing the nodes in the player's game.
+        /// </summary>
+        public Node RootNode { get; private set; }
+
         /// <summary>
         /// The player's current music player
         /// </summary>
         public MusicPlayer CurrentMusicPlayer { get; private set; }
 
-        public Player()
+        /// <summary>
+        /// The player's primary GUI root node
+        /// </summary>
+        public Control PrimaryGui { get; private set; }
+
+        public Player(SceneTree tree, Node rootNode)
         {
+            Tree = tree;
+            RootNode = rootNode;
+
             CurrentMusicPlayer = new MusicPlayer();
+            CurrentMusicPlayer.Name = "CurrentMusicPlayer";
+            PrimaryGui = (Control) rootNode.FindChild("PrimaryGui");
+
+            rootNode.AddChild(CurrentMusicPlayer);
         }
 
         public void Dispose()
         {
-            CurrentMusicPlayer.Dispose();
+            PrimaryGui?.Dispose();
+            CurrentMusicPlayer?.Dispose();
 
             GC.SuppressFinalize(this);
         }
