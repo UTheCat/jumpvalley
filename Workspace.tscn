@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=23 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" path="res://addons/studs.dds" id="2_jkxsw"]
@@ -6,7 +6,12 @@
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="4_guawk"]
 [ext_resource type="FontFile" uid="uid://6iiejh0b5s7y" path="res://addons/fonts/SourceSansPro/SourceSansPro-Light.ttf" id="5_peycv"]
 [ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://addons/icons/music_note_white_24dp.svg" id="6_a22ul"]
+[ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="6_krikn"]
 [ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="7_1a78q"]
+[ext_resource type="StyleBox" uid="uid://g0x41qvn7p6p" path="res://styles/bottom_bar/main_menu_btn/hover.tres" id="7_ctt56"]
+[ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="8_1lk1l"]
+[ext_resource type="StyleBox" uid="uid://cumuhpo2oli0n" path="res://styles/bottom_bar/music_btn/normal.tres" id="9_c6sxk"]
+[ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="10_hm1gh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -42,14 +47,15 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkmyi"]
 bg_color = Color(0, 0, 0, 0.4)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j1fhq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
+bg_color = Color(0.45, 0.45, 0.45, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3edq"]
-bg_color = Color(0.352941, 0.556863, 0.913725, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_564ww"]
+bg_color = Color(0.2652, 0.417293, 0.68, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -172,12 +178,18 @@ theme_override_constants/separation = 10
 [node name="Menu" type="Button" parent="Gui/BottomBar/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_j1fhq")
+theme_override_styles/normal = ExtResource("6_krikn")
+theme_override_styles/hover = ExtResource("7_ctt56")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3t1g3")
+icon = ExtResource("8_1lk1l")
+icon_alignment = 1
 
 [node name="Music" type="Button" parent="Gui/BottomBar/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_x3edq")
+theme_override_styles/normal = ExtResource("9_c6sxk")
+theme_override_styles/hover = ExtResource("10_hm1gh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_564ww")
 icon = ExtResource("6_a22ul")
 icon_alignment = 1
 expand_icon = true
