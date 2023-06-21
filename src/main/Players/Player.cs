@@ -2,7 +2,7 @@
 using Godot;
 using Jumpvalley.Music;
 
-namespace Jumpvalley.Player
+namespace Jumpvalley.Players
 {
     /// <summary>
     /// This class represents a player who is playing Jumpvalley.
@@ -54,7 +54,7 @@ namespace Jumpvalley.Player
             PrimaryGui?.Dispose();
             CurrentMusicPlayer?.Dispose();
 
-            GC.SuppressFinalize(this);
+            //GC.SuppressFinalize(this);
         }
     }
 }

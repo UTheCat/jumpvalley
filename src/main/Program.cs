@@ -1,11 +1,7 @@
 using Godot;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 
-using Jumpvalley.Music;
-using Jumpvalley.Testing;
-using Jumpvalley.Tweening;
+using Jumpvalley.Players;
 
 // refer to this article for naming conventions:
 // https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions
@@ -21,14 +17,20 @@ namespace Jumpvalley
     {
         private Control mainGui;
         //private Label fpsCounter = new Label();
-        private FramerateCounter framerateCounter = new FramerateCounter();
 
         private BoxSpinner spinner;
+
+        public Player player;
 
         // Called when the node enters the scene tree for the first time.
         public override void _Ready()
         {
             Console.WriteLine("hi :3");
+            spinner = new BoxSpinner((CsgBox3D)GetNode("Map/CSGBox3D"), 1);
+
+            player = new Player(GetTree(), this);
+
+            /*
             mainGui = (Control)GetNode("Gui");
             spinner = new BoxSpinner((CsgBox3D)GetNode("Map/CSGBox3D"), 1);
 
@@ -67,6 +69,7 @@ namespace Jumpvalley
             Console.WriteLine("Run MethodTweenTest");
             MethodTweenTest methodTweenTest = new MethodTweenTest(0.4f, 0.8f);
             AddChild(methodTweenTest);
+            */
 
             // music system test
             /*
@@ -126,11 +129,14 @@ namespace Jumpvalley
         // Called every frame. 'delta' is the elapsed time since the previous frame.
         public override void _Process(double delta)
         {
-            //fpsCounter.Text = "FPS: " + (1 / delta);
             spinner.RotateInFrame(delta);
+        }
 
-            // update frames-per-second counter
-            framerateCounter.Update(delta);
+        // This root node will be removed from the tree once the program exits
+        public override void _ExitTree()
+        {
+            player.Dispose();
+            player = null;
         }
     }
 
