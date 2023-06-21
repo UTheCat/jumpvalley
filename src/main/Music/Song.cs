@@ -132,5 +132,16 @@ namespace Jumpvalley.Music
                 Stream = null;
             }
         }
+
+        /// <summary>
+        /// Constructs an attribution string in the following format:
+        /// <br/>
+        /// [song artist(s)] - [song name]
+        /// </summary>
+        /// <returns>The attribution string</returns>
+        public string GetAttributionString()
+        {
+            return $"{Artists} - {Name}";
+        }
     }
 }

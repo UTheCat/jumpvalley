@@ -55,24 +55,26 @@ namespace Jumpvalley.Players.Gui
             RefreshDescriptionColor();
 
             // listen to music player song changes
+            Playlist currentPlaylist = musicPlayer.CurrentPlaylist;
+            if (currentPlaylist != null)
+            {
+                UpdateMusicDescription(currentPlaylist.CurrentSong);
+            }
+            else
+            {
+                UpdateMusicDescription(null);
+            }
+
             musicPlayer.SongChanged += (object o, SongChangedArgs args) =>
             {
-                Song song = args.NewSong;
-                if (song == null)
-                {
-                    MusicDescription = MUSIC_DESC_NO_SONG;
-                }
-                else
-                {
-                    MusicDescription = $"MUSIC\n{song.Artists} - {song.Name}";
-                }
+                UpdateMusicDescription(args.NewSong);
             };
 
             // connect button hovering events to description label updating
             MainMenuButton.MouseEntered += () =>
             {
                 MainMenuButtonHovering = true;
-                DescriptionLabel.Text = "Menu";
+                DescriptionLabel.Text = ActualNode.Tr("BOTTOM_BAR_MENU");
                 RefreshDescriptionOpacity();
             };
             MainMenuButton.MouseExited += () =>
@@ -107,6 +109,20 @@ namespace Jumpvalley.Players.Gui
                 DescriptionFontColor.A = opacity;
                 RefreshDescriptionColor();
             };
+        }
+
+        public void UpdateMusicDescription(Song song)
+        {
+            string musicDesc = ActualNode.Tr("BOTTOM_BAR_MUSIC") + "\n{0}";
+
+            if (song == null)
+            {
+                MusicDescription = string.Format(musicDesc, ActualNode.Tr("NO_SONG_PLAYING"));
+            }
+            else
+            {
+                MusicDescription = string.Format(musicDesc, song.GetAttributionString());
+            }
         }
 
         public void RefreshDescriptionColor()

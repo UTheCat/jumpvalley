@@ -219,6 +219,7 @@ offset_top = -62.0
 offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 0
+auto_translate = false
 theme_override_fonts/font = ExtResource("7_1a78q")
 theme_override_font_sizes/font_size = 28
 text = "MUSIC
