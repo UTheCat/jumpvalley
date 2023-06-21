@@ -226,3 +226,11 @@ text = "MUSIC
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Primary" type="Node" parent="Music"]
+
+[node name="Song" type="Node" parent="Music/Primary"]
+metadata/directory_path = ""
+metadata/song_path = ""
