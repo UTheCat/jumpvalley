@@ -28,6 +28,9 @@ namespace Jumpvalley.Players.Gui
 
         public string MusicDescription = MUSIC_DESC_NO_SONG;
 
+        public bool MainMenuButtonHovering = false;
+        public bool MusicButtonHovering = false;
+
         //private bool eventsConnected = false;
 
         /// <summary>
@@ -68,17 +71,27 @@ namespace Jumpvalley.Players.Gui
             // connect button hovering events to description label updating
             MainMenuButton.MouseEntered += () =>
             {
+                MainMenuButtonHovering = true;
                 DescriptionLabel.Text = "Menu";
                 RefreshDescriptionOpacity();
             };
-            MainMenuButton.MouseExited += RefreshDescriptionOpacity;
+            MainMenuButton.MouseExited += () =>
+            {
+                MainMenuButtonHovering = false;
+                RefreshDescriptionOpacity();
+            };
 
             MusicButton.MouseEntered += () =>
             {
+                MusicButtonHovering = true;
                 DescriptionLabel.Text = MusicDescription;
                 RefreshDescriptionOpacity();
             };
-            MusicButton.MouseExited += RefreshDescriptionOpacity;
+            MusicButton.MouseExited += () =>
+            {
+                MusicButtonHovering = false;
+                RefreshDescriptionOpacity();
+            };
 
             // connect description label opacity tween to hovering and clicking stuff
             DescriptionOpacityTween.Tree = ActualNode.GetTree();
@@ -89,7 +102,7 @@ namespace Jumpvalley.Players.Gui
                 float opacity = (float) DescriptionOpacityTween.GetCurrentValue();
 
                 // set visibility to false if description label is completely transparent
-                DescriptionLabel.Visible = opacity == 0f;
+                DescriptionLabel.Visible = opacity > 0f;
 
                 DescriptionFontColor.A = opacity;
                 RefreshDescriptionColor();
@@ -104,18 +117,23 @@ namespace Jumpvalley.Players.Gui
 
         public bool CanShowDescription()
         {
-            return (MainMenuButton.IsHovered() || MusicButton.IsHovered()
-                || MainMenuButton.ButtonPressed || MusicButton.ButtonPressed);
+            return MainMenuButtonHovering || MusicButtonHovering;
+            /*
+            return MainMenuButton.IsHovered() || MusicButton.IsHovered()
+                || MainMenuButton.ButtonPressed || MusicButton.ButtonPressed;
+            */
         }
 
         public void RefreshDescriptionOpacity()
         {
             if (CanShowDescription())
             {
+                Console.WriteLine("show");
                 DescriptionOpacityTween.Speed = 1;
             }
             else
             {
+                Console.WriteLine("hide");
                 DescriptionOpacityTween.Speed = -1;
             }
 
