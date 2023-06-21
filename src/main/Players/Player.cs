@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Godot;
+
 using Jumpvalley.Music;
+using Jumpvalley.Players.Gui;
 
 namespace Jumpvalley.Players
 {
@@ -37,6 +40,11 @@ namespace Jumpvalley.Players
         /// </summary>
         public Control PrimaryGui { get; private set; }
 
+        /// <summary>
+        /// Objects that will get disposed of once the current Player instance gets Dispose()'d.
+        /// </summary>
+        public List<IDisposable> Disposables { get; private set; } = new List<IDisposable>();
+
         public Player(SceneTree tree, Node rootNode)
         {
             Tree = tree;
@@ -49,9 +57,25 @@ namespace Jumpvalley.Players
             rootNode.AddChild(CurrentMusicPlayer);
         }
 
+        /// <summary>
+        /// Start method for the game in terms of the player
+        /// </summary>
+        public virtual void Start()
+        {
+            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
+
+            Disposables.Add((IDisposable) bottomBar);
+        }
+
         public void Dispose()
         {
             PrimaryGui?.Dispose();
+
+            for (int i = 0; i < Disposables.Count; i++)
+            {
+                Disposables[i].Dispose();
+            }
+
             CurrentMusicPlayer?.Dispose();
 
             //GC.SuppressFinalize(this);
