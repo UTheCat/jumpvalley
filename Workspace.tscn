@@ -156,5 +156,4 @@ autowrap_mode = 2
 [node name="Primary" type="Node" parent="Music"]
 
 [node name="Song" type="Node" parent="Music/Primary"]
-metadata/directory_path = ""
-metadata/song_path = ""
+metadata/directory_path = "res://addons/music/KORAII/Night_Echo"
