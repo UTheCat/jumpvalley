@@ -109,7 +109,7 @@ namespace Jumpvalley
             Console.WriteLine("Song should be fading in");
             Console.WriteLine("Full percent volume in decibels: " + Playlist.VolPercentToDecibels(1));
             Console.WriteLine("Zero percent volume in decibels: " + Playlist.VolPercentToDecibels(0));
-            Console.WriteLine("Non-audible percent volume in decibels: " + Playlist.VolPercentToDecibels(Playlist.NonAudiblePercent));
+            Console.WriteLine("Non-audible percent volume in decibels: " + Playlist.VolPercentToDecibels(Playlist.NonAudibleVolume));
             */
 
             /*
