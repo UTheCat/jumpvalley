@@ -1,10 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=19 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
 [ext_resource type="Script" path="res://auto_resize.gd" id="3_rnwvv"]
-[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="4_guawk"]
-[ext_resource type="FontFile" uid="uid://6iiejh0b5s7y" path="res://addons/fonts/SourceSansPro/SourceSansPro-Light.ttf" id="5_peycv"]
 [ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://addons/icons/music_note_white_24dp.svg" id="6_a22ul"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="6_krikn"]
 [ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="7_1a78q"]
@@ -34,18 +32,6 @@ uv1_triplanar = true
 size = Vector3(100, 1, 100)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8khj4"]
-bg_color = Color(0.352941, 0.556863, 0.913725, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-shadow_size = 2
-anti_aliasing = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkmyi"]
-bg_color = Color(0, 0, 0, 0.4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
 bg_color = Color(0.45, 0.45, 0.45, 1)
@@ -99,54 +85,6 @@ grow_vertical = 2
 script = ExtResource("3_rnwvv")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PrimaryGui"]
-
-[node name="JToHOriginalMusicFrame" type="Control" parent="PrimaryGui"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Button" type="Button" parent="PrimaryGui/JToHOriginalMusicFrame"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -92.0
-offset_top = -37.0
-offset_right = -2.0
-offset_bottom = -2.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_guawk")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("StyleBoxFlat_8khj4")
-text = "Music: On
-"
-
-[node name="Label" type="Label" parent="PrimaryGui/JToHOriginalMusicFrame"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = -100.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_peycv")
-theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = SubResource("StyleBoxFlat_hkmyi")
-text = "OneShot OST - My Burden is Light"
-horizontal_alignment = 2
-clip_text = true
-text_overrun_behavior = 2
 
 [node name="BottomBarTemp" type="Control" parent="PrimaryGui"]
 layout_mode = 1
