@@ -6,7 +6,7 @@ namespace Jumpvalley.Music
     /// <summary>
     /// Represents a single song associated with a file, along with some metadata
     /// </summary>
-    public partial class Song
+    public partial class Song: System.IDisposable
     {
         private bool _isLooping = false;
 
@@ -142,6 +142,11 @@ namespace Jumpvalley.Music
         public string GetAttributionString()
         {
             return $"{Artists} - {Name}";
+        }
+
+        public void Dispose()
+        {
+            CloseStream();
         }
     }
 }

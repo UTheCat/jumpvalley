@@ -7,7 +7,7 @@ namespace Jumpvalley.Music
     /// <summary>
     /// Represents a musical playlist that can hold multiple Songs
     /// </summary>
-    public partial class Playlist : Node
+    public partial class Playlist : Node, IDisposable
     {
         /// <summary>
         /// Converts a volume percentage in the range of [0, 1] to the corresponding value in decibels and returns the result
@@ -48,7 +48,7 @@ namespace Jumpvalley.Music
             set
             {
                 _localVolumeScale = value;
-                updateVolumeViaLinear();
+                UpdateVolumeViaLinear();
             }
         }
 
@@ -61,7 +61,7 @@ namespace Jumpvalley.Music
             set
             {
                 _linearVolume = value;
-                updateVolumeViaLinear();
+                UpdateVolumeViaLinear();
             }
         }
 
@@ -79,7 +79,7 @@ namespace Jumpvalley.Music
         private AudioStreamPlayer streamPlayer;
         private Tween currentTween;
 
-        private void updateVolumeViaLinear()
+        private void UpdateVolumeViaLinear()
         {
             if (streamPlayer != null)
             {
@@ -115,7 +115,7 @@ namespace Jumpvalley.Music
             list.Remove(s);
         }
 
-        private void removeAudioStream()
+        private void RemoveAudioStream()
         {
             if (streamPlayer != null)
             {
@@ -125,7 +125,7 @@ namespace Jumpvalley.Music
             }
         }
 
-        private void createAudioStream()
+        private void CreateAudioStream()
         {
             if (streamPlayer == null)
             {
@@ -135,21 +135,21 @@ namespace Jumpvalley.Music
             }
         }
 
-        private void disconnectHandleSongFinished()
+        private void DisconnectHandleSongFinished()
         {
             if (handleSongFinishedConnected)
             {
-                streamPlayer.Finished -= handleSongFinish;
+                streamPlayer.Finished -= HandleSongFinish;
                 handleSongFinishedConnected = false;
             }
         }
 
-        private void handleSongFinish()
+        private void HandleSongFinish()
         {
             // to prevent stack overflow
             if (streamPlayer != null)
             {
-                disconnectHandleSongFinished();
+                DisconnectHandleSongFinished();
             }
 
             currentSongIndex++;
@@ -158,11 +158,11 @@ namespace Jumpvalley.Music
                 currentSongIndex = 0;
             }
 
-            switchToSong(currentSongIndex);
+            SwitchToSong(currentSongIndex);
         }
 
         // switches to a song in the playlist by numerical index
-        private void switchToSong(int index)
+        private void SwitchToSong(int index)
         {
             // we don't need to do anything here if there aren't any songs or if this song is already playing
             if (list.Count < 1 || (streamPlayer != null && index == currentSongIndex)) { return; }
@@ -170,7 +170,7 @@ namespace Jumpvalley.Music
             Song s = list[index];
 
             bool onlyOneSong = list.Count == 1;
-            createAudioStream();
+            CreateAudioStream();
             s.IsLooping = onlyOneSong;
             s.OpenStream();
             streamPlayer.Stream = s.Stream;
@@ -179,14 +179,14 @@ namespace Jumpvalley.Music
             if (!onlyOneSong && streamPlayer != null && handleSongFinishedConnected == false)
             {
                 handleSongFinishedConnected = true;
-                streamPlayer.Finished += handleSongFinish;
+                streamPlayer.Finished += HandleSongFinish;
             }
 
             // take note of the song change
             CurrentSong = s;
         }
 
-        private void killCurrentTween()
+        private void KillCurrentTween()
         {
             if (currentTween != null)
             {
@@ -195,7 +195,7 @@ namespace Jumpvalley.Music
             }
         }
 
-        private void disposeCurrentTween()
+        private void DisposeCurrentTween()
         {
             if (currentTween == null) { return; };
 
@@ -203,7 +203,7 @@ namespace Jumpvalley.Music
             currentTween = null;
         }
 
-        private void setLinearVolumeViaTween(double vol)
+        private void SetLinearVolumeViaTween(double vol)
         {
             LinearVolume = vol;
             //Console.WriteLine("Set linear volume to " + vol);
@@ -213,37 +213,37 @@ namespace Jumpvalley.Music
         {
             if (streamPlayer == null)
             {
-                //createAudioStream();
+                //CreateAudioStream();
 
                 // reset song index if there's nothing playing
                 currentSongIndex = 0;
             }
-            switchToSong(currentSongIndex);
+            SwitchToSong(currentSongIndex);
 
             if (streamPlayer != null)
             {
                 streamPlayer.Play();
-                killCurrentTween();
+                KillCurrentTween();
                 currentTween = streamPlayer.CreateTween();
 
                 currentTween.TweenMethod(
-                    Callable.From<double>(setLinearVolumeViaTween),
+                    Callable.From<double>(SetLinearVolumeViaTween),
                     LinearVolume, 1, (float)TransitionTime
                 );
 
                 currentTween.Finished += () =>
                 {
-                    disposeCurrentTween();
+                    DisposeCurrentTween();
                 };
             }
         }
 
-        private void stopImmediately()
+        private void StopImmediately()
         {
             streamPlayer.Stop();
             streamPlayer.Stream = null;
 
-            disconnectHandleSongFinished();
+            DisconnectHandleSongFinished();
 
             streamPlayer.Dispose();
             streamPlayer = null;
@@ -254,21 +254,23 @@ namespace Jumpvalley.Music
             {
                 song.CloseStream();
             }
+
+            RaiseStoppedEvent();
         }
 
         public void Stop()
         {
-            killCurrentTween();
+            KillCurrentTween();
             currentTween = streamPlayer.CreateTween();
 
             currentTween.TweenMethod(
-                Callable.From<double>(setLinearVolumeViaTween),
+                Callable.From<double>(SetLinearVolumeViaTween),
                 LinearVolume, NonAudiblePercent, (float)TransitionTime
             );
             currentTween.Finished += () =>
             {
-                disposeCurrentTween();
-                stopImmediately();
+                DisposeCurrentTween();
+                StopImmediately();
             };
         }
 
@@ -288,6 +290,24 @@ namespace Jumpvalley.Music
             {
                 songChangedEvent(this, args);
             }
+        }
+
+        /// <summary>
+        /// Called when the playlist stops the playback of its music.
+        /// If a fade transition is applied to fade out the currently playing song, this event will get called
+        /// after the transition has completed.
+        /// </summary>
+        public event EventHandler Stopped;
+
+        protected void RaiseStoppedEvent()
+        {
+            Stopped?.Invoke(this, EventArgs.Empty);
+        }
+
+        public new void Dispose()
+        {
+            base.Dispose();
+            StopImmediately();
         }
     }
 }

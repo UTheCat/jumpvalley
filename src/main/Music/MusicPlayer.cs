@@ -10,7 +10,7 @@ namespace Jumpvalley.Music
     /// <br/>
     /// Each instance of a MusicPlayer can only play one song at a time at most.
     /// </summary>
-    public partial class MusicPlayer : Node
+    public partial class MusicPlayer : Node, IDisposable
     {
         /*
         private static void StopPlaylist(Playlist playlist)
@@ -157,6 +157,12 @@ namespace Jumpvalley.Music
             {
                 raisedEvent(this, args);
             }
+        }
+
+        public new void Dispose()
+        {
+            base.Dispose();
+            StopPlaylist(CurrentPlaylist);
         }
     }
 }
