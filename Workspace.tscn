@@ -84,9 +84,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_rnwvv")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PrimaryGui"]
-
 [node name="BottomBarTemp" type="Control" parent="PrimaryGui"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -132,22 +131,8 @@ icon = ExtResource("6_a22ul")
 icon_alignment = 1
 expand_icon = true
 
-[node name="DescriptionTemp" type="RichTextLabel" parent="PrimaryGui/BottomBar"]
-visible = false
-anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 1.0
-anchor_right = 0.8
-anchor_bottom = 1.0
-offset_top = -28.0
-offset_bottom = -14.0
-theme_override_fonts/normal_font = ExtResource("7_1a78q")
-theme_override_font_sizes/normal_font_size = 12
-text = "Music: Bee Swarm Simulator OST - Wax"
-fit_content = true
-scroll_active = false
-
 [node name="Description" type="Label" parent="PrimaryGui/BottomBar"]
+visible = false
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 1.0
