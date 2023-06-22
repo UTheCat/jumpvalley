@@ -64,8 +64,10 @@ namespace Jumpvalley.Players
         {
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
 
+            Node testSongNode = RootNode.FindChild("Music/Primary/Song");
+
             Playlist testPlaylist = new Playlist();
-            Song testSong = new Song(new SongPackage("res://addons/music/KORAII/Night_Echo"));
+            Song testSong = new Song(new SongPackage((string) testSongNode.GetMeta("directory_path")));
 
             testPlaylist.Add(testSong);
             CurrentMusicPlayer.PrimaryPlaylist = testPlaylist;
