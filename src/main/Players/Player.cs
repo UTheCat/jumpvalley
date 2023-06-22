@@ -69,6 +69,7 @@ namespace Jumpvalley.Players
 
             testPlaylist.Add(testSong);
             CurrentMusicPlayer.PrimaryPlaylist = testPlaylist;
+            CurrentMusicPlayer.IsPlaying = true;
 
             Disposables.Add(bottomBar);
             Disposables.Add(testPlaylist);

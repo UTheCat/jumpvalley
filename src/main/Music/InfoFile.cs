@@ -69,7 +69,7 @@ namespace Jumpvalley.Music
 
         private void SetVariablesFromRawText(string text)
         {
-            if (string.IsNullOrEmpty(text))
+            if (!string.IsNullOrEmpty(text))
             {
                 string[] properties = text.Split("\n");
 
@@ -78,8 +78,8 @@ namespace Jumpvalley.Music
                     string[] parts = properties[i].Split(": ");
                     if (parts.Length == 2)
                     {
-                        string pName = parts[0]; // property name
-                        string pValue = parts[1]; // property value
+                        string pName = parts[0].Trim(); // property name
+                        string pValue = parts[1].Trim(); // property value
                         if (pName.Equals("name"))
                         {
                             Name = pValue;

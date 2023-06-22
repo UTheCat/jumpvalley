@@ -90,7 +90,10 @@ namespace Jumpvalley.Music
                     // connect to the new playlist's SongChanged event
                     value.SongChanged += HandlePlaylistSongChange;
 
-                    //AddChild(value);
+                    if (!value.IsInsideTree())
+                    {
+                        AddChild(value);
+                    }
 
                     // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)
                     value.Play();
