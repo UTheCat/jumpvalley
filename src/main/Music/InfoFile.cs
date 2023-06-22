@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection.Metadata;
 
 namespace Jumpvalley.Music
 {
@@ -24,6 +25,11 @@ namespace Jumpvalley.Music
     /// </summary>
     public partial class InfoFile
     {
+        /// <summary>
+        /// The full file name of an info file stored somewhere on a filesystem.
+        /// </summary>
+        public static readonly string FILE_NAME = "info.txt";
+
         /// <summary>
         /// The name of the song
         /// </summary>

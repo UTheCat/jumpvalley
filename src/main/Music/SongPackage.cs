@@ -1,4 +1,5 @@
 ﻿//using System;
+using Godot;
 using System.IO;
 
 namespace Jumpvalley.Music
@@ -44,6 +45,32 @@ namespace Jumpvalley.Music
 
                 Path = path;
 
+                // check if the directory can be opened first
+                DirAccess dir = DirAccess.Open(path);
+                if (dir == null)
+                {
+                    throw new System.Exception($"Directory access failed. This is the message returned by DirAccess.GetOpenError(): {DirAccess.GetOpenError()}");
+                }
+
+                path += "/";
+
+                // if so, try opening the files inside
+                using Godot.FileAccess infoFile = Godot.FileAccess.Open(path + InfoFile.FILE_NAME, Godot.FileAccess.ModeFlags.Read);
+                if (infoFile == null)
+                {
+                    throw new System.Exception($"Failed to open the corresponding {InfoFile.FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {Godot.FileAccess.GetOpenError()}");
+                }
+
+                // retrieve the info from the info file
+                string infoText = infoFile.GetAsText();
+                InfoData = infoText;
+                InfoFile = new InfoFile(infoText);
+
+                SongFileName = InfoFile.FileName;
+
+                // This bit of code is commented out since it won't work with Godot-based file system access,
+                // particularly with "res://" and "user://"
+                /*
                 // Add the removed slash back for convenience in the next bit of code
                 path += "/";
 
@@ -72,6 +99,7 @@ namespace Jumpvalley.Music
                         throw;
                     }
                 }
+                */
             }
         }
     }
