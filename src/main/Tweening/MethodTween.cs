@@ -160,8 +160,8 @@ namespace Jumpvalley.Tweening
         /// <br/>
         /// The tween is considered to be finished if one of the following is true:
         /// <list type="bullet">
-        /// <item><see cref="CurrentFraction"/> is 1 when <see cref="Speed"/> is greater than or equal to 0</item>
-        /// <item><see cref="CurrentFraction"/> is 0 when <see cref="Speed"/> is less than 0</item>
+        /// <item><see cref="ElapsedTime"/> equals <see cref="TransitionTime"/> when <see cref="Speed"/> is greater than or equal to 0</item>
+        /// <item><see cref="ElapsedTime"/> equals 0 when <see cref="Speed"/> is less than 0</item>
         /// </list>
         /// </summary>
         /// <returns>If the tween is finished</returns>
@@ -289,7 +289,8 @@ namespace Jumpvalley.Tweening
         /// <summary>
         /// Event raised when the tween finishes playback.
         /// <br/>
-        /// This occurs when <see cref="CurrentFraction"/> hits 1 when <see cref="Speed"/> is greater than or equal to 0, or when <see cref="CurrentFraction"/> hits 0 when <see cref="Speed"/> is less than 0.
+        /// This event only raises when <see cref="IsFinished()"/> would return true.
+        /// See <see cref="IsFinished()"/> for more details.
         /// </summary>
         public event EventHandler OnFinish;
 

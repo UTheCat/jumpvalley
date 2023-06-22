@@ -80,13 +80,12 @@ namespace Jumpvalley.Players
         public void Dispose()
         {
             PrimaryGui?.Dispose();
+            CurrentMusicPlayer?.Dispose();
 
             for (int i = 0; i < Disposables.Count; i++)
             {
                 Disposables[i].Dispose();
             }
-
-            CurrentMusicPlayer?.Dispose();
 
             //GC.SuppressFinalize(this);
         }

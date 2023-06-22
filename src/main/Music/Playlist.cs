@@ -115,6 +115,7 @@ namespace Jumpvalley.Music
             list.Remove(s);
         }
 
+        /*
         private void RemoveAudioStream()
         {
             if (streamPlayer != null)
@@ -124,6 +125,7 @@ namespace Jumpvalley.Music
                 streamPlayer = null;
             }
         }
+        */
 
         private void CreateAudioStream()
         {
@@ -238,15 +240,25 @@ namespace Jumpvalley.Music
             }
         }
 
-        private void StopImmediately()
+        /// <summary>
+        /// Stops the playback of the playlist immediately, skipping the fade out transition
+        /// </summary>
+        public void StopImmediately()
         {
-            streamPlayer.Stop();
-            streamPlayer.Stream = null;
+            if (streamPlayer != null)
+            {
+                streamPlayer.Stop();
+                streamPlayer.Stream = null;
 
-            DisconnectHandleSongFinished();
+                DisconnectHandleSongFinished();
 
-            streamPlayer.Dispose();
-            streamPlayer = null;
+                streamPlayer.Dispose();
+                streamPlayer = null;
+            }
+            else
+            {
+                handleSongFinishedConnected = false;
+            }
 
             // free memory used by CurrentSong's stream
             Song song = CurrentSong;

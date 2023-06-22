@@ -12,16 +12,6 @@ namespace Jumpvalley.Music
     /// </summary>
     public partial class MusicPlayer : Node, IDisposable
     {
-        /*
-        private static void StopPlaylist(Playlist playlist)
-        {
-            if (playlist != null)
-            {
-                playlist.Stop();
-            }
-        }
-        */
-
         private Playlist _currentPlaylist;
         private Playlist _primaryPlaylist;
         private bool _isPlaying;
@@ -30,12 +20,19 @@ namespace Jumpvalley.Music
         /// Stops the specified playlist and removes it from the MusicPlayer's list of children
         /// </summary>
         /// <param name="playlist"></param>
-        private void StopPlaylist(Playlist playlist)
+        private void StopPlaylist(Playlist playlist, bool immediateStop = false)
         {
             if (playlist != null)
             {
-                playlist.Stop();
-                
+                if (immediateStop)
+                {
+                    playlist.StopImmediately();
+                }
+                else
+                {
+                    playlist.Stop();
+                }
+
                 if (playlist.GetParent() == this)
                 {
                     RemoveChild(playlist);
@@ -162,7 +159,7 @@ namespace Jumpvalley.Music
         public new void Dispose()
         {
             base.Dispose();
-            StopPlaylist(CurrentPlaylist);
+            StopPlaylist(CurrentPlaylist, true);
         }
     }
 }
