@@ -64,7 +64,14 @@ namespace Jumpvalley.Players
         {
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
 
-            Disposables.Add((IDisposable) bottomBar);
+            Playlist testPlaylist = new Playlist();
+            Song testSong = new Song(new SongPackage("res://addons/music/KORAII/Night_Echo"));
+
+            testPlaylist.Add(testSong);
+            CurrentMusicPlayer.PrimaryPlaylist = testPlaylist;
+
+            Disposables.Add(bottomBar);
+            Disposables.Add(testPlaylist);
         }
 
         public void Dispose()

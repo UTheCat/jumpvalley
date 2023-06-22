@@ -35,7 +35,7 @@ namespace Jumpvalley.Music
         /// <param name="path">The folder path</param>
         public SongPackage(string path)
         {
-            if (string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path))
             {
                 // Some like to end the paths with an extra "/" or "\". Account for this.
                 if (path.EndsWith("/") || path.EndsWith("\\"))
