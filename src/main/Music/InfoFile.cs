@@ -18,6 +18,7 @@ namespace Jumpvalley.Music
     /// <item>name: The name of the song</item>
     /// <item>artists: The artists that made the song</item>
     /// <item>album: The album the song belongs to</item>
+    /// <item>file_name: The full name of the file, including its file extension.</item>
     /// </list>
     /// This text formatting is inspired by the way that the content of .osu files are formatted in Osu (the rhythm game).
     /// </summary>
@@ -37,6 +38,11 @@ namespace Jumpvalley.Music
         /// The album the song belongs to
         /// </summary>
         public string Album = null;
+
+        /// <summary>
+        /// The full name of the file, including its file extension
+        /// </summary>
+        public string FileName = null;
 
         /// <summary>
         /// Creates an instance of InfoFile from raw formatted text
@@ -80,6 +86,10 @@ namespace Jumpvalley.Music
                         {
                             Album = pValue;
                         }
+                        else if (pName.Equals("file_name"))
+                        {
+                            FileName = pValue;
+                        }    
                     }
                 }
             }
