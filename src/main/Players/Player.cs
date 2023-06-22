@@ -52,7 +52,7 @@ namespace Jumpvalley.Players
 
             CurrentMusicPlayer = new MusicPlayer();
             CurrentMusicPlayer.Name = "CurrentMusicPlayer";
-            PrimaryGui = (Control) rootNode.FindChild("PrimaryGui");
+            PrimaryGui = (Control) rootNode.GetNode("PrimaryGui");
 
             rootNode.AddChild(CurrentMusicPlayer);
         }
@@ -64,7 +64,7 @@ namespace Jumpvalley.Players
         {
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
 
-            Node testSongNode = RootNode.FindChild("Music/Primary/Song");
+            Node testSongNode = RootNode.GetNode("Music/Primary/Song");
 
             Playlist testPlaylist = new Playlist();
             Song testSong = new Song(new SongPackage((string) testSongNode.GetMeta("directory_path")));
