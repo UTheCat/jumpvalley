@@ -127,6 +127,9 @@ namespace Jumpvalley.Music
                     if (fadingOutPlaylists.Contains(value))
                     {
                         DisconnectHandlePlaylistStop(value);
+
+                        // also signal to subscribers of SongChanged that the song currently in focus of the music player has changed back
+                        HandlePlaylistSongChange(value, new SongChangedArgs(value.CurrentSong));
                     }
 
                     // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)
