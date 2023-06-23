@@ -117,18 +117,6 @@ namespace Jumpvalley.Music
             list.Remove(s);
         }
 
-        /*
-        private void RemoveAudioStream()
-        {
-            if (streamPlayer != null)
-            {
-                RemoveChild(streamPlayer);
-                streamPlayer.Dispose();
-                streamPlayer = null;
-            }
-        }
-        */
-
         private void CreateAudioStream()
         {
             if (streamPlayer == null)
@@ -224,15 +212,17 @@ namespace Jumpvalley.Music
 
             if (streamPlayer != null)
             {
-                streamPlayer.Play();
+                if (!streamPlayer.Playing)
+                {
+                    streamPlayer.Play();
+                }
 
                 if (currentTween == null)
                 {
                     currentTween = new SceneTreeTween(TransitionTime, Tween.TransitionType.Linear, Tween.EaseType.Out, GetTree())
                     {
                         InitialValue = NonAudibleVolume,
-                        FinalValue = 1,
-                        Speed = 1f
+                        FinalValue = 1
                     };
 
                     currentTween.OnStep += (object o, float _frac) =>
@@ -243,6 +233,8 @@ namespace Jumpvalley.Music
                 }
 
                 // fade in the current song
+                DisconnectTweenFinish();
+                currentTween.Speed = 1f;
                 currentTween.Resume();
 
                 /*
@@ -312,15 +304,42 @@ namespace Jumpvalley.Music
 
             if (currentTween != null)
             {
-                currentTween.OnFinish += (object _o, EventArgs _e) =>
-                {
-                    DisposeCurrentTween();
-                    StopImmediately();
-                };
+                ConnectTweenFinish();
                 currentTween.Speed = -1f;
 
                 // fade out the current song
                 currentTween.Resume();
+            }
+        }
+
+        private bool tweenFinishConnected = false;
+        
+        private void ConnectTweenFinish()
+        {
+            if (!tweenFinishConnected)
+            {
+                tweenFinishConnected = true;
+                currentTween.OnFinish += HandleTweenFinish;
+            }    
+        }
+
+        private void DisconnectTweenFinish()
+        {
+            if (tweenFinishConnected)
+            {
+                currentTween.OnFinish -= HandleTweenFinish;
+                tweenFinishConnected = false;
+            }
+        }
+
+        protected void HandleTweenFinish(object _o, EventArgs _e)
+        {
+            // currentTween's speed is less than 0 only when the song is fading out
+            if (currentTween != null && currentTween.Speed < 0f)
+            {
+                DisconnectTweenFinish();
+                DisposeCurrentTween();
+                StopImmediately();
             }
         }
 

@@ -78,7 +78,7 @@ namespace Jumpvalley.Tweening
         {
             if (isProcessStepConnected && _tree != null)
             {
-                Tree.ProcessFrame -= HandleProcessStep;
+                _tree.ProcessFrame -= HandleProcessStep;
                 isProcessStepConnected = false;
             }
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace Jumpvalley.Music
@@ -17,6 +18,38 @@ namespace Jumpvalley.Music
         private bool _isPlaying;
 
         /// <summary>
+        /// A list of playlists that are currently fading out.
+        /// <br/>
+        /// In case a playlist wants to be played again while it is fading out,
+        /// this list can be useful for locating a playlist to stop it from fully fading out.
+        /// </summary>
+        private List<Playlist> fadingOutPlaylists = new List<Playlist>();
+
+        private void RemovePlaylist(Playlist playlist)
+        {
+            if (playlist.GetParent() == this)
+            {
+                RemoveChild(playlist);
+            }
+        }
+
+        private void DisconnectHandlePlaylistStop(Playlist playlist)
+        {
+            playlist.Stopped -= HandlePlaylistStop;
+            fadingOutPlaylists.Remove(playlist);
+        }
+
+        private void HandlePlaylistStop(object o, EventArgs _e)
+        {
+            Playlist playlist = (Playlist)o;
+
+            // disconnect after this event handler has been called
+            DisconnectHandlePlaylistStop(playlist);
+
+            RemovePlaylist(playlist);
+        }
+
+        /// <summary>
         /// Stops the specified playlist and removes it from the MusicPlayer's list of children
         /// </summary>
         /// <param name="playlist"></param>
@@ -27,15 +60,13 @@ namespace Jumpvalley.Music
                 if (immediateStop)
                 {
                     playlist.StopImmediately();
+                    RemovePlaylist(playlist);
                 }
                 else
                 {
+                    playlist.Stopped += HandlePlaylistStop;
+                    fadingOutPlaylists.Add(playlist);
                     playlist.Stop();
-                }
-
-                if (playlist.GetParent() == this)
-                {
-                    RemoveChild(playlist);
                 }
             }
         }
@@ -90,6 +121,12 @@ namespace Jumpvalley.Music
                     if (!value.IsInsideTree())
                     {
                         AddChild(value);
+                    }
+
+                    // in case this playlist wanting to be played is currently fading out, stop it from being removed
+                    if (fadingOutPlaylists.Contains(value))
+                    {
+                        DisconnectHandlePlaylistStop(value);
                     }
 
                     // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)

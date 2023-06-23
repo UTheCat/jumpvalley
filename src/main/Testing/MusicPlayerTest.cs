@@ -27,7 +27,7 @@ namespace Jumpvalley.Testing
         private bool isListeningToInput = false;
         private int songIndex = 0;
 
-        private MusicPlayer _currentMusicPlayer = new MusicPlayer();
+        private MusicPlayer _currentMusicPlayer;
 
         public double PlaylistTransitionTime = 3;
 
@@ -38,6 +38,11 @@ namespace Jumpvalley.Testing
             {
                 _currentMusicPlayer = value;
             }
+        }
+
+        public MusicPlayerTest(MusicPlayer musicPlayer)
+        {
+            CurrentMusicPlayer = musicPlayer;
         }
 
         private void playSongIndex(int index)
@@ -53,17 +58,17 @@ namespace Jumpvalley.Testing
                 Playlist p = new Playlist();
                 p.TransitionTime = PlaylistTransitionTime;
                 p.Add(songList[i]);
-                AddChild(p);
+                //AddChild(p);
                 playlists[i] = p;
             }
         }
 
-        public void startTest()
+        public void StartTest()
         {
             OS.Alert("Press space to switch to the next song", "Instructions");
 
             populatePlaylistArray();
-            AddChild(_currentMusicPlayer);
+            //AddChild(_currentMusicPlayer);
             _currentMusicPlayer.IsPlaying = true;
             playSongIndex(songIndex);
 
