@@ -82,7 +82,7 @@ namespace Jumpvalley.Tweening
 
         private void DisconnectProcessStep()
         {
-            if (isProcessStepConnected && _tree != null)
+            if (isProcessStepConnected == true && _tree != null)
             {
                 _tree.ProcessFrame -= HandleProcessStep;
                 isProcessStepConnected = false;
