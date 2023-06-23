@@ -39,7 +39,7 @@ namespace Jumpvalley.Music
             set
             {
                 _isLooping = value;
-                updateLoop();
+                UpdateLoop();
             }
         }
 
@@ -64,7 +64,7 @@ namespace Jumpvalley.Music
         public string Album = null;
 
         // update function for IsLooping
-        private void updateLoop()
+        private void UpdateLoop()
         {
             if (Stream is AudioStreamWav sWav)
             {
@@ -98,26 +98,26 @@ namespace Jumpvalley.Music
         /// </exception>
         public void OpenStream()
         {
-            // close the previous stream if there is one
-            CloseStream();
-
-            // try loading the file
-            Resource resource = GD.Load(FilePath);
-
-            if (resource == null)
+            if (Stream == null)
             {
-                throw new FileNotFoundException("The file path of the song is invalid. Please make sure that such file path is correct and is an absolute file path.");
-            }
+                // try loading the file
+                Resource resource = GD.Load(FilePath);
 
-            // update Stream variable
-            if (resource is AudioStreamWav || resource is AudioStreamOggVorbis || resource is AudioStreamMP3)
-            {
-                Stream = (AudioStream)resource;
-                updateLoop();
-            }
-            else
-            {
-                throw new InvalidDataException("The data format of the song file is invalid. Please check that the song's file format is either WAV, OGG, or MP3.");
+                if (resource == null)
+                {
+                    throw new FileNotFoundException("The file path of the song is invalid. Please make sure that such file path is correct and is an absolute file path.");
+                }
+
+                // update Stream variable
+                if (resource is AudioStreamWav || resource is AudioStreamOggVorbis || resource is AudioStreamMP3)
+                {
+                    Stream = (AudioStream)resource;
+                    UpdateLoop();
+                }
+                else
+                {
+                    throw new InvalidDataException("The data format of the song file is invalid. Please check that the song's file format is either WAV, OGG, or MP3.");
+                }
             }
         }
 
