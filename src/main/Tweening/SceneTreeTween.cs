@@ -21,7 +21,7 @@ namespace Jumpvalley.Tweening
             get => _tree;
             set
             {
-                if (value == null)
+                if (value != _tree)
                 {
                     // disconnect first, since the original SceneTree will need to be known in order to disconnect from process step
                     DisconnectProcessStep();
