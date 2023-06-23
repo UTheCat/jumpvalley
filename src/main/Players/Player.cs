@@ -70,12 +70,12 @@ namespace Jumpvalley.Players
             Song testSong = new Song(new SongPackage((string) testSongNode.GetMeta("directory_path")));
 
             testPlaylist.Add(testSong);
-            //CurrentMusicPlayer.PrimaryPlaylist = testPlaylist;
-            //CurrentMusicPlayer.IsPlaying = true;
+            CurrentMusicPlayer.PrimaryPlaylist = testPlaylist;
+            CurrentMusicPlayer.IsPlaying = true;
 
-            Testing.MusicPlayerTest mpTest = new Testing.MusicPlayerTest(CurrentMusicPlayer);
-            RootNode.AddChild(mpTest);
-            mpTest.StartTest();
+            //Testing.MusicPlayerTest mpTest = new Testing.MusicPlayerTest(CurrentMusicPlayer);
+            //RootNode.AddChild(mpTest);
+            //mpTest.StartTest();
 
             Disposables.Add(bottomBar);
             Disposables.Add(testPlaylist);
