@@ -30,7 +30,7 @@ namespace Jumpvalley.Tweening
                 _tree = value;
 
                 // In case the tween is still playing while the value of "Tree" has changed, bind to the process step of the newly set SceneTree instance
-                if (value != null)
+                if (IsPlaying && value != null)
                 {
                     ConnectProcessStep();
                 }
