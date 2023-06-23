@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Godot;
 
 using Jumpvalley.Music;
@@ -77,8 +78,12 @@ namespace Jumpvalley.Players
             //RootNode.AddChild(mpTest);
             //mpTest.StartTest();
 
+            BoxSpinner spinner = new BoxSpinner((CsgBox3D)RootNode.GetNode("Map/CSGBox3D"), 1);
+            RootNode.AddChild(spinner);
+
             Disposables.Add(bottomBar);
             Disposables.Add(testPlaylist);
+            Disposables.Add(spinner);
         }
 
         public void Dispose()

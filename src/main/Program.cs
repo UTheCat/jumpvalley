@@ -18,7 +18,7 @@ namespace Jumpvalley
         private Control mainGui;
         //private Label fpsCounter = new Label();
 
-        private BoxSpinner spinner;
+        //private BoxSpinner spinner;
 
         public Player player;
 
@@ -26,7 +26,6 @@ namespace Jumpvalley
         public override void _Ready()
         {
             Console.WriteLine("hi :3");
-            spinner = new BoxSpinner((CsgBox3D)GetNode("Map/CSGBox3D"), 1);
 
             player = new Player(GetTree(), this);
             player.Start();
@@ -128,10 +127,12 @@ namespace Jumpvalley
         }
 
         // Called every frame. 'delta' is the elapsed time since the previous frame.
+        /*
         public override void _Process(double delta)
         {
-            spinner.RotateInFrame(delta);
+            //spinner.RotateInFrame(delta);
         }
+        */
 
         // This root node will be removed from the tree once the program exits
         public override void _ExitTree()

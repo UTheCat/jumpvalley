@@ -11,6 +11,7 @@ namespace Jumpvalley
 
         public BoxSpinner(CsgBox3D newBox, double newRadiansPerSecond)
         {
+            Name = $"BoxSpinner@{GetHashCode()}";
             box = newBox;
             radiansPerSecond = newRadiansPerSecond;
         }
@@ -23,7 +24,7 @@ namespace Jumpvalley
         // overrides the _Process method that comes from the "Node" class
         public override void _Process(double delta)
         {
-
+            RotateInFrame(delta);
         }
     }
 }
