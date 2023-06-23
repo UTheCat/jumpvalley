@@ -123,6 +123,11 @@ namespace Jumpvalley.Players.Gui
             {
                 MusicDescription = string.Format(musicDesc, song.GetAttributionString());
             }
+
+            if (MusicButtonHovering)
+            {
+                DescriptionLabel.Text = MusicDescription;
+            }
         }
 
         public void RefreshDescriptionColor()
@@ -144,12 +149,12 @@ namespace Jumpvalley.Players.Gui
         {
             if (CanShowDescription())
             {
-                Console.WriteLine("show");
+                //Console.WriteLine("show");
                 DescriptionOpacityTween.Speed = 1;
             }
             else
             {
-                Console.WriteLine("hide");
+                //Console.WriteLine("hide");
                 DescriptionOpacityTween.Speed = -1;
             }
 

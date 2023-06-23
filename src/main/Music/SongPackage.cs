@@ -1,7 +1,6 @@
-﻿//using System;
-using Godot;
+﻿using Godot;
 using System;
-using System.IO;
+//using System.IO;
 
 namespace Jumpvalley.Music
 {
@@ -46,7 +45,7 @@ namespace Jumpvalley.Music
 
                 Path = path;
 
-                Console.WriteLine("Try opening directory: " + path);
+                //Console.WriteLine("Try opening directory: " + path);
 
                 // check if the directory can be opened first
                 DirAccess dir = DirAccess.Open(path);
@@ -57,7 +56,7 @@ namespace Jumpvalley.Music
 
                 path += "/";
 
-                Console.WriteLine("Try opening info file");
+                //Console.WriteLine("Try opening info file");
 
                 // if so, try opening the files inside
                 using Godot.FileAccess infoFile = Godot.FileAccess.Open(path + InfoFile.FILE_NAME, Godot.FileAccess.ModeFlags.Read);
@@ -66,7 +65,7 @@ namespace Jumpvalley.Music
                     throw new Exception($"Failed to open the corresponding {InfoFile.FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {Godot.FileAccess.GetOpenError()}");
                 }
 
-                Console.WriteLine("Try reading the info file");
+                //Console.WriteLine("Try reading the info file");
 
                 // retrieve the info from the info file
                 string infoText = infoFile.GetAsText();
@@ -75,7 +74,7 @@ namespace Jumpvalley.Music
 
                 SongFileName = InfoFile.FileName;
 
-                Console.WriteLine("Constructor finished, song file name is: " + SongFileName);
+                //Console.WriteLine("Constructor finished, song file name is: " + SongFileName);
 
                 // This bit of code is commented out since it won't work with Godot-based file system access,
                 // particularly with "res://" and "user://"
