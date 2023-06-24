@@ -10,6 +10,13 @@ namespace Jumpvalley.Music
     {
         private bool _isLooping = false;
 
+        /// <summary>
+        /// Resource path of the stream that's requesting to be or currently open.
+        /// <br/>
+        /// This is kept track of to ensure that OpenStream() doesn't set the value of <see cref="Stream"/> to an AudioStream with an invalid resource path.
+        /// </summary>
+        private string streamResPath = null;
+
         public Song(string filePath, string name, string artists, string album)
         {
             FilePath = filePath;
@@ -100,8 +107,12 @@ namespace Jumpvalley.Music
         {
             if (Stream == null)
             {
+                // This should be set before trying to load the corresponding stream so that once the stream is loaded, we can check if the
+                // the stream has the correct resource path
+                streamResPath = FilePath;
+
                 // try loading the file
-                Resource resource = GD.Load(FilePath);
+                Resource resource = GD.Load(streamResPath);
 
                 if (resource == null)
                 {
@@ -111,7 +122,19 @@ namespace Jumpvalley.Music
                 // update Stream variable
                 if (resource is AudioStreamWav || resource is AudioStreamOggVorbis || resource is AudioStreamMP3)
                 {
-                    Stream = (AudioStream)resource;
+                    AudioStream audioStream = (AudioStream)resource;
+
+                    // If the resource path of the loaded AudioStream doesn't match the file path, cancel the current operation.
+                    // This can happen because CloseStream() was called while the resource was loading.
+                    if (!streamResPath.Equals(audioStream.ResourcePath))
+                    {
+                        audioStream.Free();
+                        audioStream.Dispose();
+
+                        return;
+                    }
+
+                    Stream = audioStream;
                     UpdateLoop();
                 }
                 else
@@ -126,6 +149,8 @@ namespace Jumpvalley.Music
         /// </summary>
         public void CloseStream()
         {
+            streamResPath = null;
+
             if (Stream != null)
             {
                 Stream.Dispose();

@@ -349,6 +349,7 @@ namespace Jumpvalley.Music
         public new void Dispose()
         {
             StopImmediately();
+            QueueFree();
             base.Dispose();
         }
 

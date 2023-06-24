@@ -198,8 +198,9 @@ namespace Jumpvalley.Music
 
         public new void Dispose()
         {
-            base.Dispose();
             StopPlaylist(CurrentPlaylist, true);
+            QueueFree();
+            base.Dispose();
         }
     }
 }
