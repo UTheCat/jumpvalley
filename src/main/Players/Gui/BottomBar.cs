@@ -14,6 +14,11 @@ namespace Jumpvalley.Players.Gui
     {
         public static readonly string MUSIC_DESC_NO_SONG = "MUSIC\nNo song playing";
 
+        public enum LastHoveredButton
+        {
+            None, Menu, Music
+        }
+
         public HBoxContainer ButtonsContainer;
         public Label DescriptionLabel;
 
@@ -31,10 +36,12 @@ namespace Jumpvalley.Players.Gui
         public bool MainMenuButtonHovering = false;
         public bool MusicButtonHovering = false;
 
+        public LastHoveredButton LastHovered = LastHoveredButton.None;
+
         //private bool eventsConnected = false;
 
         /// <summary>
-        /// 
+        /// Constructs a new instance of the BottomBar operator
         /// </summary>
         /// <param name="bottomBarNode">The actual node that represents the BottomBar</param>
         /// <param name="musicPlayer">The music player to bind the BottomBar to</param>
@@ -74,6 +81,8 @@ namespace Jumpvalley.Players.Gui
             MainMenuButton.MouseEntered += () =>
             {
                 MainMenuButtonHovering = true;
+                LastHovered = LastHoveredButton.Menu;
+
                 DescriptionLabel.Text = ActualNode.Tr("BOTTOM_BAR_MENU");
                 RefreshDescriptionOpacity();
             };
@@ -86,6 +95,8 @@ namespace Jumpvalley.Players.Gui
             MusicButton.MouseEntered += () =>
             {
                 MusicButtonHovering = true;
+                LastHovered = LastHoveredButton.Music;
+
                 DescriptionLabel.Text = MusicDescription;
                 RefreshDescriptionOpacity();
             };
@@ -124,7 +135,7 @@ namespace Jumpvalley.Players.Gui
                 MusicDescription = string.Format(musicDesc, song.GetAttributionString());
             }
 
-            if (MusicButtonHovering)
+            if (LastHovered == LastHoveredButton.Music && DescriptionLabel.Visible)
             {
                 DescriptionLabel.Text = MusicDescription;
             }
