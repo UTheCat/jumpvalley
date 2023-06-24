@@ -126,7 +126,7 @@ namespace Jumpvalley.Music
 
                     // If the resource path of the loaded AudioStream doesn't match the file path, cancel the current operation.
                     // This can happen because CloseStream() was called while the resource was loading.
-                    if (!streamResPath.Equals(audioStream.ResourcePath))
+                    if (streamResPath == null || !streamResPath.Equals(audioStream.ResourcePath))
                     {
                         audioStream.Free();
                         audioStream.Dispose();
