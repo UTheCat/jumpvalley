@@ -15,6 +15,7 @@ Shiftlock, also known as Camera-lock or Mouse-lock, is a type of third-person ca
 In Jumpvalley, this is toggled by pressing Left-Shift on a keyboard. If Jumpvalley ends up supporting mobile, there will be a button on the user's screen for this on mobile devices too.
 
 ## First person
+
 The first person camera 
 
 ## Third person without Shiftlock
