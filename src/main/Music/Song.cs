@@ -1,4 +1,5 @@
 using Godot;
+using Jumpvalley.Audio;
 using System.IO;
 
 namespace Jumpvalley.Music
@@ -112,6 +113,21 @@ namespace Jumpvalley.Music
                 streamResPath = FilePath;
 
                 // try loading the file
+                AudioStreamReader audioStreamReader = new AudioStreamReader(streamResPath);
+                AudioStream audioStream = audioStreamReader.Stream;
+
+                if (streamResPath == null || !streamResPath.Equals(audioStream.ResourcePath))
+                {
+                    //audioStream.Free();
+                    audioStream.Dispose();
+
+                    return;
+                }
+
+                Stream = audioStream;
+                UpdateLoop();
+
+                /*
                 Resource resource = GD.Load(streamResPath);
 
                 if (resource == null)
@@ -141,6 +157,7 @@ namespace Jumpvalley.Music
                 {
                     throw new InvalidDataException("The data format of the song file is invalid. Please check that the song's file format is either WAV, OGG, or MP3.");
                 }
+                */
             }
         }
 

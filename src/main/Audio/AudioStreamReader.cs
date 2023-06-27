@@ -89,7 +89,8 @@ namespace Jumpvalley.Audio
                         throw new Exception($"Failed to open the corresponding {InfoFile.FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {Godot.FileAccess.GetOpenError()}");
                     }
                 }
-                
+
+                AudioStream stream = null;
                 if (fileExtension.Equals(".wav"))
                 {
                     AudioStreamWav sWav = new AudioStreamWav();
@@ -100,7 +101,7 @@ namespace Jumpvalley.Audio
                     // which is something that will get implemented at a later time.
                     sWav.Data = file.GetBuffer((long) file.GetLength());
 
-                    Stream = sWav;
+                    stream = sWav;
                 }
                 else if (fileExtension.Equals(".ogg"))
                 {
@@ -113,7 +114,13 @@ namespace Jumpvalley.Audio
                 {
                     AudioStreamMP3 sMp3 = new AudioStreamMP3();
                     sMp3.Data = file.GetBuffer((long)file.GetLength());
-                    Stream = sMp3;
+                    stream = sMp3;
+                }
+
+                if (stream != null)
+                {
+                    stream.ResourcePath = filePath;
+                    Stream = stream;
                 }
             }
         }
