@@ -105,7 +105,7 @@ namespace Jumpvalley.Audio
                 }
                 else if (fileExtension.Equals(".ogg"))
                 {
-                    throw new InvalidDataException("Loading OGG formatted audio currently isn't supported. Sorry :(");
+                    throw new InvalidDataException("Loading OGG formatted audio outside of the resource filesystem currently isn't supported. Sorry :(");
 
                     //AudioStreamOggVorbis sOgg = new AudioStreamOggVorbis();
                     //sOgg.Data = file.GetBuffer((long)file.GetLength());
