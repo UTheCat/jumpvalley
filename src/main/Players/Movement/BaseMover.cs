@@ -10,7 +10,7 @@ namespace Jumpvalley.Players.Movement
     /// <br/>
     /// The design of this takes lots of inspiration from Roblox's PlayerModule.
     /// </summary>
-    public partial class BaseMover: CharacterBody3D
+    public partial class BaseMover
     {
         /// <summary>
         /// Scalar in which the character wishes to go forward in the range of [-1, 1].
@@ -57,6 +57,25 @@ namespace Jumpvalley.Players.Movement
         public bool IsRotationLocked = false;
 
         /// <summary>
+        /// The <see cref="CharacterBody3D"/> that this BaseMover is binded to.
+        /// </summary>
+        public CharacterBody3D Body = null;
+
+        /// <summary>
+        /// Returns whether or not the associated <see cref="CharacterBody3D"/> is on the floor.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsOnFloor()
+        {
+            if (Body != null)
+            {
+                return Body.IsOnFloor();
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Calculates and returns the move vector that the player wants to move the character in, regardless of whether or not they're currently jumping or climbing.
         /// <br/>
         /// The calculated move vector can be rotated to a specified y-axis angle. This is useful when you want to make the character move in the direction that the camera is facing.
@@ -78,21 +97,34 @@ namespace Jumpvalley.Players.Movement
         public Vector3 GetVelocity(double delta, float yAngle)
         {
             Vector3 velocity = GetMoveVector(yAngle);
+            velocity.X *= (float)delta * Speed;
+            velocity.Z *= (float)delta * Speed;
 
             if (IsJumping)
             {
                 // Basically how jumping works in Flood Escape 2 by Crazyblox Games
                 if (IsOnFloor() || IsClimbing)
                 {
-                    velocity.Y += JumpVelocity;
+                    velocity.Y = JumpVelocity;
+                }
+                else
+                {
+                    velocity.Y = -Gravity;
                 }
             }
             else if (IsClimbing)
             {
-
+                // change these later, as this climbing logic isn't accurate
+                velocity.X = 0;
+                velocity.Y = Speed;
+                velocity.Z = 0;
+            }
+            else if (!IsOnFloor())
+            {
+                velocity.Y = -Gravity;
             }
 
-            return Vector3.Zero;
+            return velocity;
         }
     }
 }
