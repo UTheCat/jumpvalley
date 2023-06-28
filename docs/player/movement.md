@@ -12,9 +12,10 @@ Similar to how Roblox does it, there's a base class that's responsible for contr
 	- Forward (Backward if this number is negative)
 	- Right (Left if this number is negative)
 
-- Climbing logic
-- Jumping logic (making a character jump in Godot can be achieved by applying an initial upward velocity).
-- Gravity logic
+- Climbing
+- Jumping (making a character jump in Godot can be achieved by applying an initial upward velocity).
+- Gravity
+- Character speed
 
 Subclasses can then build on top of the base class to cater towards a specific type of controller hardware, (keyboard & mouse, touchscreen, controller, etc.).
 
