@@ -8,11 +8,9 @@ Thus, the character movement code in Jumpvalley is structured a lot like Roblox'
 
 Similar to how Roblox does it, there's a base class that's responsible for controlling a character. Some of its components include:
 
-- Directional magnitudes of movement, including:
-	- Forward
-	- Backward
-	- Left
-	- Right
+- Directional scalars of movement, including:
+	- Forward (Backward if this number is negative)
+	- Right (Left if this number is negative)
 
 - Climbing logic
 - Jumping logic (making a character jump in Godot can be achieved by applying an initial upward velocity).
