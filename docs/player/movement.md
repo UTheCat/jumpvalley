@@ -24,5 +24,4 @@ Subclasses can then build on top of the base class to cater towards a specific t
 
 Every physics process frame, a velocity is calculated. The velocity is then applied to the character by calling Godot's ```CharacterBody3D.MoveAndSlide()```.
 
-Here's a flow chart to describe this:
-
+Here's a flow chart to describe this: [GetVelocity() flow chart](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=movement_velocity.drawio#Uhttps%3A%2F%2Fraw.githubusercontent.com%2FUTheDev%2Fjumpvalley%2Fmain%2Fdocs%2Fplayer%2Fmovement_velocity.drawio)
