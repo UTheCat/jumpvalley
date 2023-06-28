@@ -77,7 +77,20 @@ namespace Jumpvalley.Players.Movement
         /// <returns></returns>
         public Vector3 GetVelocity(double delta, float yAngle)
         {
-            Vector3 moveVector = GetMoveVector(yAngle);
+            Vector3 velocity = GetMoveVector(yAngle);
+
+            if (IsJumping)
+            {
+                // Basically how jumping works in Flood Escape 2 by Crazyblox Games
+                if (IsOnFloor() || IsClimbing)
+                {
+                    velocity.Y += JumpVelocity;
+                }
+            }
+            else if (IsClimbing)
+            {
+
+            }
 
             return Vector3.Zero;
         }
