@@ -12,8 +12,8 @@ Similar to how Roblox does it, there's a base class that's responsible for contr
 	- Backward
 	- Left
 	- Right
-
-<small>-- Notice how there's no upward or downward directional magnitude being accounted for. This is because vertical velocity stuff (such as gravity) is already handled by Godot's engine.</small>
+	- Up
+	- Down
 
 - Climbing logic
 - Jumping logic (making a character jump in Godot can be achieved by applying an initial upward velocity).
