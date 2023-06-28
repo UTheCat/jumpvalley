@@ -33,6 +33,11 @@ namespace Jumpvalley.Players.Movement
         public float RightValue = 0;
 
         /// <summary>
+        /// The gravity that the character experiences in meters per second squared.
+        /// </summary>
+        public double Gravity = 9.8f;
+
+        /// <summary>
         /// The initial velocity of the character's jump
         /// </summary>
         public double JumpVelocity = 0;

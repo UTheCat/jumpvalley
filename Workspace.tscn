@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=21 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
@@ -22,6 +22,9 @@ background_mode = 2
 sky = SubResource("Sky_ucdiq")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ndv2j"]
+size = Vector3(100, 1, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf58v"]
 albedo_texture = ExtResource("2_0sjcg")
@@ -81,9 +84,16 @@ fov = 70.0
 [node name="CSGBox3D" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
 
-[node name="Baseplate" type="MeshInstance3D" parent="Map"]
+[node name="Baseplate" type="RigidBody3D" parent="Map"]
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Baseplate"]
+shape = SubResource("BoxShape3D_ndv2j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Baseplate"]
 material_override = SubResource("StandardMaterial3D_yf58v")
 mesh = SubResource("BoxMesh_8pv50")
+skeleton = NodePath("../..")
 
 [node name="PrimaryGui" type="Control" parent="."]
 clip_contents = true
@@ -156,6 +166,7 @@ autowrap_mode = 2
 metadata/directory_path = "res://addons/music/KORAII/Night_Echo"
 
 [node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
