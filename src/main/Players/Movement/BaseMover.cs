@@ -6,8 +6,6 @@ namespace Jumpvalley.Players.Movement
     /// This is the base class that provides a player's character the ability to move in different directions, jump, and climb.
     /// It serves mainly as a controller interface for developers to build on.
     /// <br/>
-    /// There's no need to take care of upward and downward movement here since Godot's engine takes care of that.
-    /// <br/>
     /// The design of this takes lots of inspiration from Roblox's PlayerModule.
     /// </summary>
     public partial class BaseMover

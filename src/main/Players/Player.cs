@@ -5,6 +5,7 @@ using Godot;
 
 using Jumpvalley.Music;
 using Jumpvalley.Players.Gui;
+using Jumpvalley.Players.Movement;
 
 namespace Jumpvalley.Players
 {
@@ -42,6 +43,16 @@ namespace Jumpvalley.Players
         public Control PrimaryGui { get; private set; }
 
         /// <summary>
+        /// The player's current character instance
+        /// </summary>
+        public CharacterBody3D Character { get; private set; }
+
+        /// <summary>
+        /// The primary mover instance acting on behalf of the player's character
+        /// </summary>
+        public BaseMover Mover { get; private set; }
+
+        /// <summary>
         /// Objects that will get disposed of once the current Player instance gets Dispose()'d.
         /// </summary>
         public List<IDisposable> Disposables { get; private set; } = new List<IDisposable>();
@@ -53,7 +64,8 @@ namespace Jumpvalley.Players
 
             CurrentMusicPlayer = new MusicPlayer();
             CurrentMusicPlayer.Name = "CurrentMusicPlayer";
-            PrimaryGui = (Control) rootNode.GetNode("PrimaryGui");
+            PrimaryGui = rootNode.GetNode<Control>("PrimaryGui");
+            Character = rootNode.GetNode<CharacterBody3D>("Player");
 
             rootNode.AddChild(CurrentMusicPlayer);
         }
