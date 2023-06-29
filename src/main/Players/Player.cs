@@ -68,7 +68,7 @@ namespace Jumpvalley.Players
             Node testSongNode = RootNode.GetNode("Music/Primary/Song");
 
             Playlist testPlaylist = new Playlist();
-            Song testSong = new Song(new SongPackage((string) testSongNode.GetMeta("directory_path")));
+            Song testSong = new Song(new SongPackage((string)testSongNode.GetMeta("directory_path")));
 
             testPlaylist.Add(testSong);
             CurrentMusicPlayer.PrimaryPlaylist = testPlaylist;
