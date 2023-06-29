@@ -42,6 +42,11 @@ namespace Jumpvalley.Players.Movement
         public float Speed = 5f;
 
         /// <summary>
+        /// The current y-axis angle of the camera that's currently associated with the character
+        /// </summary>
+        public float CameraYAngle = 0;
+
+        /// <summary>
         /// Whether or not the player is currently climbing
         /// </summary>
         public bool IsClimbing = false;
@@ -125,6 +130,20 @@ namespace Jumpvalley.Players.Movement
             }
 
             return velocity;
+        }
+
+        /// <summary>
+        /// Callback to associate with the physics process step in the current scene tree
+        /// </summary>
+        /// <param name="delta">The time it took and should take to complete the physics frame in seconds</param>
+        public void HandlePhysicsStep(double delta)
+        {
+            CharacterBody3D body = Body;
+            if (body != null)
+            {
+                body.Velocity = GetVelocity(delta, CameraYAngle);
+                body.MoveAndSlide();
+            }
         }
     }
 }
