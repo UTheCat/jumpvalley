@@ -26,8 +26,18 @@ In third person, the camera is still going to be focused on the camera's head. H
 
 This mode of the camera is the same as third-person without Shift-Lock, except with Shift-Lock enabled. In Juke's Towers of Hell, the camera is shifted a certain distance to the right whenever Shift-Lock is enabled, and there may be an option to toggle this positional shift in Jumpvalley.
 
-## Calculating Angular Orientation
+## Calculating Rotation and Position
 
 Player input can only change the yaw and pitch angles of the camera. The camera's roll angle is not affected by player input.
 
-## Calculating Position
+Rotation of the camera is based on what the orientation would look like at the center of the object that the camera is focusing on.
+
+In first person, the camera's position in world space is the same as the position of the object that the camera is focusing on.
+
+Third person is achieved by:
+
+1. Rotating a 3D plane based on the yaw, pitch, and roll angles of the camera.
+2. Offsetting the Z-coordinate of a point within the rotated 3D plane (in this case, the point is the camera's position)
+
+The yaw, pitch, and roll of the camera should remain unchanged after these two steps. Additionally, you would then have the position of the camera in world space.
+
