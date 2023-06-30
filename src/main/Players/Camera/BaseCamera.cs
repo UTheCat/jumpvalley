@@ -28,14 +28,51 @@ namespace Jumpvalley.Players.Camera
         public float PanningSpeed = 0;
 
         /// <summary>
-        /// The smallest pitch that the camera can rotate in.
+        /// The smallest pitch angle in radians that the camera can rotate in.
         /// </summary>
-        public float MinPitch = 0;
+        public float MinPitch = (float)(-0.5 * Math.PI);
 
         /// <summary>
-        /// The largest pitch that the camera can rotate in.
+        /// The largest pitch angle in radians that the camera can rotate in.
         /// </summary>
-        public float MaxPitch = 0;
+        public float MaxPitch = (float)(0.5 * Math.PI);
+
+        /// <summary>
+        /// The offset of the camera's position to the right from the object that the camera is focusing on
+        /// </summary>
+        public float RightOffset = 0;
+
+        /// <summary>
+        /// The actual camera node that this <see cref="BaseCamera"/> is associated with.
+        /// </summary>
+        public Camera3D Camera = null;
+
+        /// <summary>
+        /// The actual 3d node that the camera is focusing on
+        /// </summary>
+        public Node3D FocusedNode = null;
+
+        /// <summary>
+        /// Calculates the camera position based on the position of the FocusedNode and the value of <see cref="RightOffset"/>
+        /// </summary>
+        public Vector3 GetPosition()
+        {
+            if (Camera != null)
+            {
+                Vector3 camPos = Camera.Position;
+
+                if (RightOffset == 0)
+                {
+                    return camPos;
+                }
+
+                // Based on the current yaw of the camera, rotate the Vector3 corresponding to the rightward offset
+                // in order to calculate the rightward offset for different yaw values
+                return camPos += new Vector3(RightOffset, 0, 0).Rotated(Vector3.Up, camPos.Y);
+            }
+
+            return Vector3.Zero;
+        }
 
         public new void Dispose()
         {
