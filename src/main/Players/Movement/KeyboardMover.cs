@@ -1,4 +1,5 @@
 ﻿using Godot;
+using System;
 
 namespace Jumpvalley.Players.Movement
 {
@@ -17,7 +18,14 @@ namespace Jumpvalley.Players.Movement
 
         public override void _Input(InputEvent @event)
         {
-            IsJumping = @event.IsActionPressed(CHARACTER_JUMP);
+            if (Input.IsActionJustPressed(CHARACTER_JUMP))
+            {
+                IsJumping = true;
+            }
+            else if (Input.IsActionJustReleased(CHARACTER_JUMP))
+            {
+                IsJumping = false;
+            }
 
             // Get move direction from keyboard input
             Vector2 direction = Input.GetVector(CHARACTER_MOVE_LEFT, CHARACTER_MOVE_RIGHT, CHARACTER_MOVE_FORWARD, CHARACTER_MOVE_BACKWARD);
