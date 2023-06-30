@@ -32,7 +32,7 @@ namespace Jumpvalley.Players.Camera
         /// </summary>
         public float Yaw = 0;
 
-        private float _pitch = 0;
+        private float _pitch;
 
         /// <summary>
         /// The pitch angle of the camera
@@ -58,7 +58,7 @@ namespace Jumpvalley.Players.Camera
         /// </summary>
         public float RightOffset = 0;
 
-        private float _zoomOutDistance = 0;
+        private float _zoomOutDistance;
 
         /// <summary>
         /// How far zoomed out (in meters) that the camera is from the object that the camera is focusing on
@@ -90,6 +90,12 @@ namespace Jumpvalley.Players.Camera
         /// The actual 3d node that the camera is focusing on
         /// </summary>
         public Node3D FocusedNode = null;
+
+        public BaseCamera()
+        {
+            Pitch = 0;
+            ZoomOutDistance = MinZoomOutDistance;
+        }
 
         /// <summary>
         /// Calculates the camera position based on the position of the FocusedNode and the value of <see cref="RightOffset"/>
