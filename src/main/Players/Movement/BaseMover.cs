@@ -8,7 +8,7 @@ namespace Jumpvalley.Players.Movement
     /// <br/>
     /// The design of this takes lots of inspiration from Roblox's PlayerModule.
     /// </summary>
-    public partial class BaseMover
+    public partial class BaseMover: Node, System.IDisposable
     {
         /// <summary>
         /// Scalar in which the character wishes to go forward in the range of [-1, 1].
@@ -64,6 +64,11 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public CharacterBody3D Body = null;
 
+        public BaseMover()
+        {
+            SetPhysicsProcess(false);
+        }
+
         /// <summary>
         /// Returns whether or not the associated <see cref="CharacterBody3D"/> is on the floor.
         /// </summary>
@@ -97,11 +102,11 @@ namespace Jumpvalley.Players.Movement
         /// <param name="delta">The time it took to complete the physics frame in seconds</param>
         /// <param name="yAngle">The Y-axis angle to make the move vector relative to.</param>
         /// <returns></returns>
-        public Vector3 GetVelocity(double delta, float yAngle)
+        public Vector3 GetVelocity(float delta, float yAngle)
         {
             Vector3 velocity = GetMoveVector(yAngle);
-            velocity.X *= (float)delta * Speed;
-            velocity.Z *= (float)delta * Speed;
+            velocity.X *= Speed;
+            velocity.Z *= Speed;
 
             if (IsJumping)
             {
@@ -124,7 +129,7 @@ namespace Jumpvalley.Players.Movement
             }
             else if (!IsOnFloor())
             {
-                velocity.Y = -Gravity;
+                velocity.Y = -Gravity * delta;
             }
 
             return velocity;
@@ -139,9 +144,25 @@ namespace Jumpvalley.Players.Movement
             CharacterBody3D body = Body;
             if (body != null)
             {
-                body.Velocity = GetVelocity(delta, CameraYAngle);
+                body.Velocity = GetVelocity((float)delta, CameraYAngle);
                 body.MoveAndSlide();
             }
+        }
+
+        /// <summary>
+        /// Disposes of this <see cref="BaseMover"/>
+        /// </summary>
+        public new void Dispose()
+        {
+            SetPhysicsProcess(false);
+            QueueFree();
+            base.Dispose();
+        }
+
+        public override void _PhysicsProcess(double delta)
+        {
+            HandlePhysicsStep(delta);
+            base._PhysicsProcess(delta);
         }
     }
 }

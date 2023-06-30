@@ -1,0 +1,27 @@
+﻿using Godot;
+
+namespace Jumpvalley.Players.Movement
+{
+    /// <summary>
+    /// Subclass of <see cref="BaseMover"/> that handles character movement via keyboard input.
+    /// </summary>
+    public partial class KeyboardMover: BaseMover
+    {
+        private readonly string CHARACTER_MOVE_LEFT = "character_move_left";
+        private readonly string CHARACTER_MOVE_RIGHT = "character_move_right";
+        private readonly string CHARACTER_MOVE_FORWARD = "character_move_forward";
+        private readonly string CHARACTER_MOVE_BACKWARD = "character_move_backward";
+
+        public KeyboardMover() : base() { }
+
+        public override void _Input(InputEvent @event)
+        {
+            IsJumping = @event.IsActionPressed("character_jump");
+
+            // Get move direction from keyboard input
+            Vector2 direction = Input.GetVector(CHARACTER_MOVE_LEFT, CHARACTER_MOVE_RIGHT, CHARACTER_MOVE_FORWARD, CHARACTER_MOVE_BACKWARD);
+            RightValue = direction.X;
+            ForwardValue = direction.Y;
+        }
+    }
+}
