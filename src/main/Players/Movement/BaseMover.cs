@@ -10,6 +10,8 @@ namespace Jumpvalley.Players.Movement
     /// </summary>
     public partial class BaseMover: Node, System.IDisposable
     {
+        private static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
+
         /// <summary>
         /// Scalar in which the character wishes to go forward in the range of [-1, 1].
         /// <br/>
@@ -32,7 +34,7 @@ namespace Jumpvalley.Players.Movement
         /// <summary>
         /// The initial velocity of the character's jump
         /// </summary>
-        public float JumpVelocity = 50f;
+        public float JumpVelocity = 5f;
 
         /// <summary>
         /// How fast the character can move in meters per second
@@ -104,9 +106,26 @@ namespace Jumpvalley.Players.Movement
         /// <returns></returns>
         public Vector3 GetVelocity(float delta, float yAngle)
         {
-            Vector3 velocity = GetMoveVector(yAngle);
-            velocity.X *= Speed;
-            velocity.Z *= Speed;
+            float physicsTicksPerSecond = (float)ProjectSettings.GetSetting(PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND);
+
+            // This is needed because while physics steps should occur at constant time intervals,
+            // there are slight variances in between each step.
+            float timingAdjustment = delta * physicsTicksPerSecond;
+
+            Vector3 moveVector = GetMoveVector(yAngle);
+            Vector3 velocity;
+
+            if (Body == null)
+            {
+                velocity = moveVector;
+            }
+            else
+            {
+                velocity = Body.Velocity;
+            }
+
+            velocity.X = moveVector.X * Speed * timingAdjustment;
+            velocity.Z = moveVector.Z * Speed * timingAdjustment;
 
             if (IsJumping)
             {
@@ -117,7 +136,7 @@ namespace Jumpvalley.Players.Movement
                 }
                 else
                 {
-                    velocity.Y = -Gravity * delta * 60;
+                    velocity.Y -= Gravity * delta;
                 }
             }
             else if (IsClimbing)
@@ -129,7 +148,7 @@ namespace Jumpvalley.Players.Movement
             }
             else if (!IsOnFloor())
             {
-                velocity.Y = -Gravity * delta * 60;
+                velocity.Y -= Gravity * delta;
             }
 
             return velocity;
