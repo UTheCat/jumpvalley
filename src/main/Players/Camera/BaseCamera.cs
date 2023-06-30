@@ -57,9 +57,9 @@ namespace Jumpvalley.Players.Camera
         /// </summary>
         public Vector3 GetPosition()
         {
-            if (Camera != null)
+            if (FocusedNode != null)
             {
-                Vector3 camPos = Camera.Position;
+                Vector3 camPos = FocusedNode.Position;
 
                 if (RightOffset == 0)
                 {
