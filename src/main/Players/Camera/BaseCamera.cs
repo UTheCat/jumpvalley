@@ -13,15 +13,16 @@ namespace Jumpvalley.Players.Camera
     {
         /// <summary>
         /// How sensitive camera panning is to player input.
+        /// <br/>
+        /// This value multiplies <see cref="PanningSpeed"/> when camera rotations aren't done at a constant speed, such as when rotation is controlled by the mouse.
         /// </summary>
         public float PanningSensitivity = 0;
 
         /// <summary>
         /// "Default" camera panning speed in radians per second.
-        /// This assumes that the camera is being turned at constant speed on hardware such as a joystick,
-        /// or like using the left and right arrow keys to turn your camera in most Roblox games.
         /// <br/>
-        /// This value gets scaled by <see cref="PanningSensitivity"/>.
+        /// This value is used when the camera needs to be turned at a constant speed, and it serves as a factor for calculating the speed
+        /// of the camera rotation every input/process frame when the speed isn't constant.
         /// </summary>
         public float PanningSpeed = 0;
 
