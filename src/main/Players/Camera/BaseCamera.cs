@@ -43,6 +43,23 @@ namespace Jumpvalley.Players.Camera
         public float RightOffset = 0;
 
         /// <summary>
+        /// How far zoomed out (in meters) that the camera is from the object that the camera is focusing on
+        /// <br/>
+        /// A value of 0 means that the camera is in first person while a value greater than 0 means that the camera is in third person.
+        /// </summary>
+        public float ZoomOutDistance = 0;
+
+        /// <summary>
+        /// The minimum value of <see cref="ZoomOutDistance"/> in meters
+        /// </summary>
+        public float MinZoomOutDistance = 0;
+
+        /// <summary>
+        /// The maximum value of <see cref="ZoomOutDistance"/> in meters
+        /// </summary>
+        public float MaxZoomOutDistance = 0;
+
+        /// <summary>
         /// The actual camera node that this <see cref="BaseCamera"/> is associated with.
         /// </summary>
         public Camera3D Camera = null;
@@ -74,6 +91,9 @@ namespace Jumpvalley.Players.Camera
             return Vector3.Zero;
         }
 
+        /// <summary>
+        /// Disposes of this <see cref="BaseCamera"/> object
+        /// </summary>
         public new void Dispose()
         {
             QueueFree();
