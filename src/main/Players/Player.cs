@@ -94,6 +94,11 @@ namespace Jumpvalley.Players
             BoxSpinner spinner = new BoxSpinner((CsgBox3D)RootNode.GetNode("Map/CSGBox3D"), 1);
             RootNode.AddChild(spinner);
 
+            // Juke's Towers of Hell physics (or somewhere close)
+            Mover.Gravity = 196.19997f * (25 / 7) * 0.2f;
+            Mover.JumpVelocity = 50f * (25 / 7) * 0.2f;
+            Mover.Speed = 16f * (25 / 7) * 0.2f;
+
             Mover.Body = Character;
             Mover.SetPhysicsProcess(true);
             RootNode.AddChild(Mover);

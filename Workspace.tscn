@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=25 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
@@ -32,6 +32,16 @@ uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_8pv50"]
 size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u0tho"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_oxgm4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6c7jj"]
+size = Vector3(1, 6, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4giut"]
+size = Vector3(1, 6, 1)
 
 [sub_resource type="GDScript" id="GDScript_cdmc3"]
 script/source = "extends Control
@@ -94,6 +104,44 @@ shape = SubResource("BoxShape3D_ndv2j")
 material_override = SubResource("StandardMaterial3D_yf58v")
 mesh = SubResource("BoxMesh_8pv50")
 skeleton = NodePath("../..")
+
+[node name="Wrap" type="Node" parent="Map"]
+
+[node name="Part" type="RigidBody3D" parent="Map/Wrap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -10)
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wrap/Part"]
+shape = SubResource("BoxShape3D_u0tho")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Wrap/Part"]
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_oxgm4")
+skeleton = NodePath("../../..")
+
+[node name="Part3" type="RigidBody3D" parent="Map/Wrap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -10)
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wrap/Part3"]
+shape = SubResource("BoxShape3D_u0tho")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Wrap/Part3"]
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_oxgm4")
+skeleton = NodePath("../../..")
+
+[node name="Part2" type="RigidBody3D" parent="Map/Wrap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -10)
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wrap/Part2"]
+shape = SubResource("BoxShape3D_6c7jj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Wrap/Part2"]
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_4giut")
+skeleton = NodePath("../../..")
 
 [node name="PrimaryGui" type="Control" parent="."]
 clip_contents = true
@@ -166,7 +214,7 @@ autowrap_mode = 2
 metadata/directory_path = "res://addons/music/KORAII/Night_Echo"
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -10)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
