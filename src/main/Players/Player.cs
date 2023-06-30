@@ -66,6 +66,7 @@ namespace Jumpvalley.Players
             CurrentMusicPlayer.Name = "CurrentMusicPlayer";
             PrimaryGui = rootNode.GetNode<Control>("PrimaryGui");
             Character = rootNode.GetNode<CharacterBody3D>("Player");
+            Mover = new KeyboardMover();
 
             rootNode.AddChild(CurrentMusicPlayer);
         }
@@ -93,6 +94,11 @@ namespace Jumpvalley.Players
             BoxSpinner spinner = new BoxSpinner((CsgBox3D)RootNode.GetNode("Map/CSGBox3D"), 1);
             RootNode.AddChild(spinner);
 
+            Mover.Body = Character;
+            Mover.SetPhysicsProcess(true);
+            RootNode.AddChild(Mover);
+
+            Disposables.Add(Mover);
             Disposables.Add(bottomBar);
             Disposables.Add(testPlaylist);
             Disposables.Add(spinner);

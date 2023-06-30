@@ -11,12 +11,13 @@ namespace Jumpvalley.Players.Movement
         private readonly string CHARACTER_MOVE_RIGHT = "character_move_right";
         private readonly string CHARACTER_MOVE_FORWARD = "character_move_forward";
         private readonly string CHARACTER_MOVE_BACKWARD = "character_move_backward";
+        private readonly string CHARACTER_JUMP = "character_jump";
 
         public KeyboardMover() : base() { }
 
         public override void _Input(InputEvent @event)
         {
-            IsJumping = @event.IsActionPressed("character_jump");
+            IsJumping = @event.IsActionPressed(CHARACTER_JUMP);
 
             // Get move direction from keyboard input
             Vector2 direction = Input.GetVector(CHARACTER_MOVE_LEFT, CHARACTER_MOVE_RIGHT, CHARACTER_MOVE_FORWARD, CHARACTER_MOVE_BACKWARD);

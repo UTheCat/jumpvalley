@@ -32,7 +32,7 @@ namespace Jumpvalley.Players.Movement
         /// <summary>
         /// The initial velocity of the character's jump
         /// </summary>
-        public float JumpVelocity = 5f;
+        public float JumpVelocity = 50f;
 
         /// <summary>
         /// How fast the character can move in meters per second
@@ -117,7 +117,7 @@ namespace Jumpvalley.Players.Movement
                 }
                 else
                 {
-                    velocity.Y = -Gravity;
+                    velocity.Y = -Gravity * delta * 60;
                 }
             }
             else if (IsClimbing)
@@ -129,7 +129,7 @@ namespace Jumpvalley.Players.Movement
             }
             else if (!IsOnFloor())
             {
-                velocity.Y = -Gravity * delta;
+                velocity.Y = -Gravity * delta * 60;
             }
 
             return velocity;
