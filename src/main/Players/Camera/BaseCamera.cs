@@ -28,6 +28,22 @@ namespace Jumpvalley.Players.Camera
         public float PanningSpeed = 0;
 
         /// <summary>
+        /// The yaw angle of the camera
+        /// </summary>
+        public float Yaw = 0;
+
+        private float _pitch = 0;
+
+        /// <summary>
+        /// The pitch angle of the camera
+        /// </summary>
+        public float Pitch
+        {
+            get => _pitch;
+            set => _pitch = Math.Clamp(value, MinPitch, MaxPitch);
+        }
+
+        /// <summary>
         /// The smallest pitch angle in radians that the camera can rotate in.
         /// </summary>
         public float MinPitch = (float)(-0.5 * Math.PI);
@@ -42,12 +58,18 @@ namespace Jumpvalley.Players.Camera
         /// </summary>
         public float RightOffset = 0;
 
+        private float _zoomOutDistance = 0;
+
         /// <summary>
         /// How far zoomed out (in meters) that the camera is from the object that the camera is focusing on
         /// <br/>
         /// A value of 0 means that the camera is in first person while a value greater than 0 means that the camera is in third person.
         /// </summary>
-        public float ZoomOutDistance = 0;
+        public float ZoomOutDistance
+        {
+            get => _zoomOutDistance;
+            set => Math.Clamp(value, MinZoomOutDistance, MaxZoomOutDistance);
+        }
 
         /// <summary>
         /// The minimum value of <see cref="ZoomOutDistance"/> in meters
