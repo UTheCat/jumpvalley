@@ -57,7 +57,7 @@ namespace Jumpvalley.Players.Movement
         public bool IsJumping = false;
 
         /// <summary>
-        /// Whether or not the character's yaw rotation is locked to some specified yaw angle
+        /// Whether or not the character's yaw is locked to some specified yaw angle
         /// </summary>
         public bool IsRotationLocked = false;
 
@@ -90,7 +90,7 @@ namespace Jumpvalley.Players.Movement
         /// <br/>
         /// The calculated move vector can be rotated to a specified yaw angle. This is useful when you want to make the character move in the direction that the camera is facing.
         /// </summary>
-        /// <param name="yaw">The Y-axis angle that the forward and right values are relative to.</param>
+        /// <param name="yaw">The yaw angle that the forward and right values are relative to.</param>
         /// <returns>The calculated move vector</returns>
         public Vector3 GetMoveVector(float yaw)
         {
@@ -102,7 +102,7 @@ namespace Jumpvalley.Players.Movement
         /// Gets the character's velocity for some sort of physics frame.
         /// </summary>
         /// <param name="delta">The time it took to complete the physics frame in seconds</param>
-        /// <param name="yaw">The Y-axis angle to make the move vector relative to.</param>
+        /// <param name="yaw">The yaw angle to make the move vector relative to.</param>
         /// <returns></returns>
         public Vector3 GetVelocity(float delta, float yaw)
         {
