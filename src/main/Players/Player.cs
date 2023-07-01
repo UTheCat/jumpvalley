@@ -108,14 +108,17 @@ namespace Jumpvalley.Players
 
             Mover.Body = Character;
             Mover.SetPhysicsProcess(true);
-            RootNode.AddChild(Mover);
 
             Camera.FocusedNode = Character;
             Camera.Camera = RootNode.GetNode<Camera3D>("Camera");
             Camera.PanningSensitivity = 1;
-            Camera.PanningSpeed = (float)(0.2 * Math.PI);
+            Camera.PanningSpeed = (float)(0.2 * Math.PI) * 0.33f;
             Camera.MinPitch = (float)(-0.45 * Math.PI);
             Camera.MaxPitch = (float)(0.45 * Math.PI);
+
+            Mover.Camera = Camera;
+
+            RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
             Disposables.Add(Mover);

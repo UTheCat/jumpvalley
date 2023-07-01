@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Jumpvalley.Players.Camera;
 
 namespace Jumpvalley.Players.Movement
 {
@@ -65,6 +66,11 @@ namespace Jumpvalley.Players.Movement
         /// The <see cref="CharacterBody3D"/> that this BaseMover is binded to.
         /// </summary>
         public CharacterBody3D Body = null;
+
+        /// <summary>
+        /// The <see cref="BaseCamera"/> to bind <see cref="CameraYaw"/> to
+        /// </summary>
+        public BaseCamera Camera = null;
 
         public BaseMover()
         {
@@ -163,7 +169,17 @@ namespace Jumpvalley.Players.Movement
             CharacterBody3D body = Body;
             if (body != null)
             {
-                body.Velocity = GetVelocity((float)delta, CameraYaw);
+                float yaw;
+                if (Camera == null)
+                {
+                    yaw = CameraYaw;
+                }
+                else
+                {
+                    yaw = Camera.Yaw;
+                }
+
+                body.Velocity = GetVelocity((float)delta, yaw);
                 body.MoveAndSlide();
             }
         }
