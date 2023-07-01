@@ -21,8 +21,9 @@ namespace Jumpvalley.Players.Camera
             {
                 Vector2 mouseEventRelative = mouseEvent.Relative;
 
-                Pitch += mouseEventRelative.X;
-                Yaw += mouseEventRelative.Y;
+                float panningFactor = PanningSensitivity * PanningSpeed * 0.02f;
+                Pitch += -mouseEventRelative.Y * panningFactor;
+                Yaw += -mouseEventRelative.X * panningFactor;
             }
 
             base._Input(@event);

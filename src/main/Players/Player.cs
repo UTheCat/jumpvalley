@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Godot;
 
 using Jumpvalley.Music;
+using Jumpvalley.Players.Camera;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
 
@@ -53,6 +54,11 @@ namespace Jumpvalley.Players
         public BaseMover Mover { get; private set; }
 
         /// <summary>
+        /// The primary node that handles the player's camera
+        /// </summary>
+        public BaseCamera Camera { get; private set; }
+
+        /// <summary>
         /// Objects that will get disposed of once the current Player instance gets Dispose()'d.
         /// </summary>
         public List<IDisposable> Disposables { get; private set; } = new List<IDisposable>();
@@ -67,6 +73,7 @@ namespace Jumpvalley.Players
             PrimaryGui = rootNode.GetNode<Control>("PrimaryGui");
             Character = rootNode.GetNode<CharacterBody3D>("Player");
             Mover = new KeyboardMover();
+            Camera = new MouseCamera();
 
             rootNode.AddChild(CurrentMusicPlayer);
         }
@@ -103,7 +110,16 @@ namespace Jumpvalley.Players
             Mover.SetPhysicsProcess(true);
             RootNode.AddChild(Mover);
 
+            Camera.FocusedNode = Character;
+            Camera.Camera = RootNode.GetNode<Camera3D>("Camera");
+            Camera.PanningSensitivity = 1;
+            Camera.PanningSpeed = (float)(0.2 * Math.PI);
+            Camera.MinPitch = (float)(-0.45 * Math.PI);
+            Camera.MaxPitch = (float)(0.45 * Math.PI);
+            RootNode.AddChild(Camera);
+
             Disposables.Add(Mover);
+            Disposables.Add(Camera);
             Disposables.Add(bottomBar);
             Disposables.Add(testPlaylist);
             Disposables.Add(spinner);

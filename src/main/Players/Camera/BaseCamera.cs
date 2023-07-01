@@ -174,8 +174,9 @@ namespace Jumpvalley.Players.Camera
 
                 // Order matters: It has to be rotation around the Y-axis, then rotation around the X-axis
                 Vector3 camRot = GetRotation();
-                camera.RotateObjectLocal(Vector3.Up, camRot.Y);
-                camera.RotateObjectLocal(Vector3.Right, camRot.X);
+                camera.Rotation = camRot;
+                //camera.RotateObjectLocal(Vector3.Up, camRot.Y);
+                //camera.RotateObjectLocal(Vector3.Right, camRot.X);
 
                 // Then set the position of the camera
                 camera.Position = GetPosition();
