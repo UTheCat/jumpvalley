@@ -159,7 +159,10 @@ namespace Jumpvalley.Players.Camera
             return Vector3.Zero;
         }
 
-        public override void _Process(double delta)
+        /// <summary>
+        /// Updates the position and rotation of the currently associated Camera
+        /// </summary>
+        public void Update()
         {
             Camera3D camera = Camera;
             Node3D focusedNode = FocusedNode;
@@ -181,7 +184,11 @@ namespace Jumpvalley.Players.Camera
                 // Then set the position of the camera
                 camera.Position = GetPosition();
             }
+        }
 
+        public override void _Process(double delta)
+        {
+            Update();
             base._Process(delta);
         }
 
