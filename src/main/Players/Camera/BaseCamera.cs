@@ -73,7 +73,7 @@ namespace Jumpvalley.Players.Camera
         public float ZoomOutDistance
         {
             get => _zoomOutDistance;
-            set => Math.Clamp(value, MinZoomOutDistance, MaxZoomOutDistance);
+            set => _zoomOutDistance = Math.Clamp(value, MinZoomOutDistance, MaxZoomOutDistance);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Jumpvalley.Players.Camera
                 // Then, rotate them around the X-axis.
                 // Finally, apply the offsets.
                 // (Remember that +Z means forward, therefore -Z means backward)
-                camPos += new Vector3(RightOffset, 0, -ZoomOutDistance).Rotated(Vector3.Up, camRot.Y).Rotated(Vector3.Right, camRot.X);
+                camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Up, camRot.Y).Rotated(Vector3.Right, camRot.X);
 
                 return camPos;
 
@@ -171,8 +171,8 @@ namespace Jumpvalley.Players.Camera
             {
                 // use transforms for rotation for the reasons described in this article:
                 // https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html
-                Transform3D cTransform = camera.Transform;
-                cTransform.Basis = new Basis();
+                //Transform3D cTransform = camera.Transform;
+                //cTransform.Basis = new Basis();
                 //camera.Orthonormalize();
 
                 // Order matters: It has to be rotation around the Y-axis, then rotation around the X-axis
