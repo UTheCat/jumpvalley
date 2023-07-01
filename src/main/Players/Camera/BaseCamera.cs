@@ -119,19 +119,69 @@ namespace Jumpvalley.Players.Camera
         {
             if (FocusedNode != null)
             {
+                
+                //Node3D node3D = new Node3D();
+                //Transform3D transform = node3D.Transform;
+
                 Vector3 camPos = FocusedNode.Position;
 
-                if (RightOffset == 0)
+                // In first person, the position of the camera is always the same as the
+                // position of the object that the camera is focused on.
+                if (ZoomOutDistance == 0)
                 {
                     return camPos;
                 }
 
+                // However, if we're working with third person, we'll need to work in object space.
+                // Let's get the rotation.
+                Vector3 camRot = GetRotation();
+
+                // First, rotate the horizontal and camera zooming offsets around the Y-axis (order matters; see the link above)
+                // Then, rotate them around the X-axis.
+                // Finally, apply the offsets.
+                // (Remember that +Z means forward, therefore -Z means backward)
+                camPos += new Vector3(RightOffset, 0, -ZoomOutDistance).Rotated(Vector3.Up, camRot.Y).Rotated(Vector3.Right, camRot.X);
+
+                return camPos;
+
+                /*
+                if (RightOffset == 0)
+                {
+                    return camPos;
+                }
+                */
+
                 // Based on the current yaw of the camera, rotate the Vector3 corresponding to the rightward offset
                 // in order to calculate the rightward offset for different yaw values
-                return camPos += new Vector3(RightOffset, 0, 0).Rotated(Vector3.Up, camPos.Y);
+                //return camPos += new Vector3(RightOffset, 0, 0).Rotated(Vector3.Up, camPos.Y);
             }
 
             return Vector3.Zero;
+        }
+
+        public override void _Process(double delta)
+        {
+            Camera3D camera = Camera;
+            Node3D focusedNode = FocusedNode;
+
+            if (camera != null && focusedNode != null)
+            {
+                // use transforms for rotation for the reasons described in this article:
+                // https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html
+                Transform3D cTransform = camera.Transform;
+                cTransform.Basis = new Basis();
+                //camera.Orthonormalize();
+
+                // Order matters: It has to be rotation around the Y-axis, then rotation around the X-axis
+                Vector3 camRot = GetRotation();
+                camera.RotateObjectLocal(Vector3.Up, camRot.Y);
+                camera.RotateObjectLocal(Vector3.Right, camRot.X);
+
+                // Then set the position of the camera
+                camera.Position = GetPosition();
+            }
+
+            base._Process(delta);
         }
 
         /// <summary>
