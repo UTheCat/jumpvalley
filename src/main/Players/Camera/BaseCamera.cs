@@ -44,6 +44,11 @@ namespace Jumpvalley.Players.Camera
         }
 
         /// <summary>
+        /// The roll angle of the camera
+        /// </summary>
+        public float Roll = 0;
+
+        /// <summary>
         /// The smallest pitch angle in radians that the camera can rotate in.
         /// </summary>
         public float MinPitch = (float)(-0.5 * Math.PI);
@@ -98,8 +103,18 @@ namespace Jumpvalley.Players.Camera
         }
 
         /// <summary>
+        /// Creates and returns a Vector3 with "x" representing the camera's pitch, "y" representing the camera's yaw, and "z" representing the camera's roll.
+        /// </summary>
+        /// <returns>The created Vector3</returns>
+        public Vector3 GetRotation()
+        {
+            return new Vector3(Pitch, Yaw, Roll);
+        }
+
+        /// <summary>
         /// Calculates the camera position based on the position of the FocusedNode and the value of <see cref="RightOffset"/>
         /// </summary>
+        /// <returns>The calculated camera position</returns>
         public Vector3 GetPosition()
         {
             if (FocusedNode != null)
