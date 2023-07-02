@@ -148,10 +148,12 @@ namespace Jumpvalley.Players.Camera
                 Transform3D transform = new Transform3D();
                 transform.Basis = new Basis();
                 transform.Origin = camPos;
-                transform.Basis = transform.Basis.Rotated(Vector3.Up, camRot.Y);
+                //transform.Basis = transform.Basis.Rotated(Vector3.Up, camRot.Y);
                 //transform = transform.Orthonormalized();
-                transform.Basis = transform.Basis.Rotated(Vector3.Right, camRot.X);
+                //transform.Basis = transform.Basis.Rotated(Vector3.Right, camRot.X);
                 //transform = transform.Orthonormalized();
+                transform = transform.Rotated(Vector3.Up, camRot.Y);
+                transform = transform.Rotated(Vector3.Right, camRot.X);
                 transform = transform.Translated(new Vector3(RightOffset, 0, ZoomOutDistance));
 
                 /*
