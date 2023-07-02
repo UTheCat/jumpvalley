@@ -140,9 +140,12 @@ namespace Jumpvalley.Players.Camera
                 // Then, rotate them around the X-axis.
                 // Finally, apply the offsets.
                 // (Remember that +Z means forward, therefore -Z means backward)
-                camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Up, camRot.Y);//.Rotated(Vector3.Right, camRot.X);
-                camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Right, camRot.X);
+                camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Up, camRot.Y).Rotated(Vector3.Right, camRot.X);
+                //camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Right, camRot.X);
                 //camPos = camPos.Rotated(Vector3.Right, camRot.X);
+
+                // quick little patch I suppose
+                //camPos.Z -= ZoomOutDistance;
 
                 // Use transforms to achieve the above
                 // See this article for an explaination on why:
@@ -205,9 +208,10 @@ namespace Jumpvalley.Players.Camera
 
                 // Order matters: It has to be rotation around the Y-axis, then rotation around the X-axis
                 Vector3 camRot = GetRotation();
-                camera.Rotation = camRot;
-                //camera.RotateObjectLocal(Vector3.Up, camRot.Y);
-                //camera.RotateObjectLocal(Vector3.Right, camRot.X);
+                //camera.Rotation = camRot;
+                camera.Basis = new Basis();
+                camera.RotateObjectLocal(Vector3.Up, camRot.Y);
+                camera.RotateObjectLocal(Vector3.Right, camRot.X);
 
                 // Then set the position of the camera
                 camera.Position = GetPosition();
