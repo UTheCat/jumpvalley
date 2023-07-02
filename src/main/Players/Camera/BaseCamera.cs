@@ -140,21 +140,24 @@ namespace Jumpvalley.Players.Camera
                 // Then, rotate them around the X-axis.
                 // Finally, apply the offsets.
                 // (Remember that +Z means forward, therefore -Z means backward)
-                //camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Up, camRot.Y).Rotated(Vector3.Right, camRot.X);
+                camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Up, camRot.Y);//.Rotated(Vector3.Right, camRot.X);
+                camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Right, camRot.X);
+                //camPos = camPos.Rotated(Vector3.Right, camRot.X);
 
                 // Use transforms to achieve the above
                 // See this article for an explaination on why:
                 // https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html
-                Transform3D transform = new Transform3D();
-                transform.Basis = new Basis();
-                transform.Origin = camPos;
+                //Transform3D transform = new Transform3D();
+                //transform.Basis = new Basis();
+                //transform.Origin = camPos;
                 //transform.Basis = transform.Basis.Rotated(Vector3.Up, camRot.Y);
                 //transform = transform.Orthonormalized();
                 //transform.Basis = transform.Basis.Rotated(Vector3.Right, camRot.X);
                 //transform = transform.Orthonormalized();
-                transform = transform.Rotated(Vector3.Up, camRot.Y);
-                transform = transform.Rotated(Vector3.Right, camRot.X);
-                transform = transform.Translated(new Vector3(RightOffset, 0, ZoomOutDistance));
+
+                //transform = transform.Rotated(Vector3.Up, camRot.Y);
+                //transform = transform.Rotated(Vector3.Right, camRot.X);
+                //transform = transform.TranslatedLocal(new Vector3(RightOffset, 0, ZoomOutDistance));
 
                 /*
                 Node3D node3D = new Node3D();
@@ -165,7 +168,9 @@ namespace Jumpvalley.Players.Camera
                 */
 
                 // At this point, the transform's origin should have the newly translated camera position
-                return transform.Origin;
+                return camPos;
+                //return transform.Origin;
+                //return transform.Origin;
 
                 /*
                 if (RightOffset == 0)
