@@ -10,7 +10,7 @@ namespace Jumpvalley.Audio
     /// </summary>
     public partial class AudioStreamReader
     {
-        public readonly string RESOURCE_PROTOCOL = "res://";
+        public readonly string RESOURCE_PATH_ROOT = "res://";
 
         public readonly string FILE_NOT_FOUND_ERR = "No file could be found at the given file path. Please double check that the file path is correct.";
         public readonly string INVALID_DATA_ERR = "The data format of the file is invalid. Please check that the audio's file format is either WAV, OGG, or MP3.";
@@ -50,8 +50,7 @@ namespace Jumpvalley.Audio
 
             FilePath = filePath;
 
-            string protocol = filePath.Split("://")[0];
-            if (protocol.Equals(RESOURCE_PROTOCOL))
+            if (filePath.StartsWith(RESOURCE_PATH_ROOT))
             {
                 // read from resource filesystem
                 Resource res = GD.Load(filePath);
