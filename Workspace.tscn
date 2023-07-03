@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=24 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
@@ -42,20 +42,6 @@ size = Vector3(1, 6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4giut"]
 size = Vector3(1, 6, 1)
-
-[sub_resource type="GDScript" id="GDScript_cdmc3"]
-script/source = "extends Control
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	var screen_resolution = get_viewport_rect().size
-	self.set_size(screen_resolution)
-"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
 bg_color = Color(0.45, 0.45, 0.45, 1)
@@ -151,7 +137,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_cdmc3")
 
 [node name="BottomBar" type="Node" parent="PrimaryGui"]
 
