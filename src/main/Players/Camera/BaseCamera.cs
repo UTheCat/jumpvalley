@@ -181,7 +181,7 @@ namespace Jumpvalley.Players.Camera
 
                 // Refer to camera_pos_calculation.png for details
                 float zoomOutDistance = ZoomOutDistance;
-                float pitchAngle = camRot.X;
+                float pitchAngle = -camRot.X; // making this negative fixed it (though doing this may cause problems that I haven't come across yet)
                 float transformHorizontalDistance = zoomOutDistance * (float)Math.Cos((double)pitchAngle);
                 float transformHeight = zoomOutDistance * (float)Math.Sin((double)pitchAngle);
 
