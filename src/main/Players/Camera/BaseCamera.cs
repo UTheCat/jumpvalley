@@ -140,7 +140,7 @@ namespace Jumpvalley.Players.Camera
                 // Then, rotate them around the X-axis.
                 // Finally, apply the offsets.
                 // (Remember that +Z means forward, therefore -Z means backward)
-                camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Up, camRot.Y).Rotated(Vector3.Right, camRot.X);
+                //camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Up, camRot.Y).Rotated(Vector3.Right, camRot.X);
                 //camPos += new Vector3(RightOffset, 0, ZoomOutDistance).Rotated(Vector3.Right, camRot.X);
                 //camPos = camPos.Rotated(Vector3.Right, camRot.X);
 
@@ -150,17 +150,20 @@ namespace Jumpvalley.Players.Camera
                 // Use transforms to achieve the above
                 // See this article for an explaination on why:
                 // https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html
-                //Transform3D transform = new Transform3D();
-                //transform.Basis = new Basis();
+                Transform3D transform = new Transform3D();
+                transform.Basis = Basis.Identity;
                 //transform.Origin = camPos;
-                //transform.Basis = transform.Basis.Rotated(Vector3.Up, camRot.Y);
-                //transform = transform.Orthonormalized();
+                transform.Basis = transform.Basis.Rotated(Vector3.Up, camRot.Y);
+                transform = transform.Orthonormalized();
+
+                // We were rotating the transform around the x-axis, causing the yaw gyro to be tilted.
+                // Lets result to trignometry with 2d right triangles to get what we want instead.
                 //transform.Basis = transform.Basis.Rotated(Vector3.Right, camRot.X);
                 //transform = transform.Orthonormalized();
 
-                //transform = transform.Rotated(Vector3.Up, camRot.Y);
-                //transform = transform.Rotated(Vector3.Right, camRot.X);
-                //transform = transform.TranslatedLocal(new Vector3(RightOffset, 0, ZoomOutDistance));
+                transform = transform.Rotated(Vector3.Up, camRot.Y);
+                transform = transform.Rotated(Vector3.Right, camRot.X);
+                //transform = transform.Translated(new Vector3(RightOffset, 0, ZoomOutDistance));
 
                 /*
                 Node3D node3D = new Node3D();
@@ -170,7 +173,26 @@ namespace Jumpvalley.Players.Camera
                 node3D.TranslateObjectLocal(new Vector3(RightOffset, 0, ZoomOutDistance));
                 */
 
-                // At this point, the transform's origin should have the newly translated camera position
+                // Use the transform to transform the camera offset, then return the final camera position
+                Vector3 transformedRightOffset = transform.Basis.X * RightOffset;
+
+                //
+                //Vector3 transformedZoomOffset = transform.Basis.Z * ZoomOutDistance;
+
+                // Refer to camera_pos_calculation.png for details
+                float zoomOutDistance = ZoomOutDistance;
+                float pitchAngle = camRot.X;
+                float transformHorizontalDistance = zoomOutDistance * (float)Math.Cos((double)pitchAngle);
+                float transformHeight = zoomOutDistance * (float)Math.Sin((double)pitchAngle);
+
+                //Vector3 camOffset = transformedRightOffset + transformedZoomOffset;//new Vector3(RightOffset, 0, ZoomOutDistance);
+
+                // Essentially, the base of the aforementioned 2D right triangle lies on the Z-axis of the transform
+                //Vector3 camOffset = transformedRightOffset + (transformHorizontalDistance * transform.Basis.Z) + (transformHeight * transform.Basis.Y);
+                Vector3 camOffset = (new Vector3(RightOffset, transformHeight, transformHorizontalDistance)).Rotated(Vector3.Up, camRot.Y);
+                //camPos += new Vector3(RightOffset, 0, ZoomOutDistance) * transform;
+                camPos += camOffset;
+
                 return camPos;
                 //return transform.Origin;
                 //return transform.Origin;
@@ -208,10 +230,10 @@ namespace Jumpvalley.Players.Camera
 
                 // Order matters: It has to be rotation around the Y-axis, then rotation around the X-axis
                 Vector3 camRot = GetRotation();
-                //camera.Rotation = camRot;
-                camera.Basis = new Basis();
-                camera.RotateObjectLocal(Vector3.Up, camRot.Y);
-                camera.RotateObjectLocal(Vector3.Right, camRot.X);
+                camera.Rotation = camRot;
+                //camera.Basis = new Basis();
+                //camera.RotateObjectLocal(Vector3.Up, camRot.Y);
+                //camera.RotateObjectLocal(Vector3.Right, camRot.X);
 
                 // Then set the position of the camera
                 camera.Position = GetPosition();
