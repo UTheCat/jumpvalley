@@ -13,9 +13,17 @@ namespace Jumpvalley.Players.Camera
     public partial class MouseCamera: BaseCamera, IDisposable
     {
         private static readonly string INPUT_CAMERA_PAN = "camera_pan";
+        private static readonly string INPUT_CAMERA_ZOOM_IN = "camera_zoom_in";
+        private static readonly string INPUT_CAMERA_ZOOM_OUT = "camera_zoom_out";
 
         private bool isTurningCamera = false;
+        //private bool isZoomingCamera = false;
         //private Vector2 lastMousePos = Vector2.Zero;
+
+        /// <summary>
+        /// The amount of meters that the zoom out distance changes for every frame that the camera is being zoomed in or out by user input.
+        /// </summary>
+        public float CameraZoomAdjustment = 1;
 
         public MouseCamera() : base() { }
 
@@ -41,6 +49,14 @@ namespace Jumpvalley.Players.Camera
             {
                 isTurningCamera = false;
                 //Input.MouseMode = Input.MouseModeEnum.Visible;
+            }
+            else if (Input.IsActionPressed(INPUT_CAMERA_ZOOM_IN))
+            {
+                ZoomOutDistance -= CameraZoomAdjustment;
+            }
+            else if (Input.IsActionPressed(INPUT_CAMERA_ZOOM_OUT))
+            {
+                ZoomOutDistance += CameraZoomAdjustment;
             }
 
             // Right-click to turn the camera

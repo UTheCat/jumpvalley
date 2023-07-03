@@ -174,7 +174,7 @@ namespace Jumpvalley.Players.Camera
                 */
 
                 // Use the transform to transform the camera offset, then return the final camera position
-                Vector3 transformedRightOffset = transform.Basis.X * RightOffset;
+                //Vector3 transformedRightOffset = transform.Basis.X * RightOffset;
 
                 //
                 //Vector3 transformedZoomOffset = transform.Basis.Z * ZoomOutDistance;

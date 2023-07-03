@@ -117,7 +117,7 @@ namespace Jumpvalley.Players
             Camera.MaxPitch = (float)(0.45 * Math.PI);
 
             Camera.MaxZoomOutDistance = 15f;
-            Camera.ZoomOutDistance = 15f;
+            Camera.ZoomOutDistance = 5f;
 
             Mover.Camera = Camera;
                 
