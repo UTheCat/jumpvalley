@@ -72,6 +72,11 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public BaseCamera Camera = null;
 
+        /// <summary>
+        /// The <see cref="BodyRotator"/> that will be rotating <see cref="Body"/>
+        /// </summary>
+        public BodyRotator Rotator = null;
+
         public BaseMover()
         {
             SetPhysicsProcess(false);
@@ -182,6 +187,15 @@ namespace Jumpvalley.Players.Movement
                 body.Velocity = GetVelocity((float)delta, yaw);
                 body.MoveAndSlide();
             }
+        }
+
+        /// <summary>
+        /// Callback to associate with the normal process step in the current scene tree
+        /// </summary>
+        /// <param name="delta"></param>
+        public void HandleProcessStep(double delta)
+        {
+
         }
 
         /// <summary>
