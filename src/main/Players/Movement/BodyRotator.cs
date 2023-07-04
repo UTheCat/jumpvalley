@@ -7,6 +7,8 @@ namespace Jumpvalley.Players.Movement
     /// This class is responsible for turning a 3D body's yaw angle in the direction that it's moving.
     /// <br/>
     /// Such direction is approached gradually, unless it's specified that the direction should be set instantly.
+    /// <br/>
+    /// Thanks to <see href="https://github.com/vaporvee/gd-net-thirdpersoncontroller">Godot 4.0 .NET thirdperson controller</see> by vaporvee for helping me figure out how to smoothly turn a 3D body in terms of a third-person controller.
     /// </summary>
     public partial class BodyRotator
     {
@@ -21,6 +23,11 @@ namespace Jumpvalley.Players.Movement
         /// The body's yaw should eventually be the value of this variable, assuming that the yaw doesn't change by then and that this <see cref="BodyRotator"/> is still active.
         /// </summary>
         public float Yaw = 0f;
+
+        /// <summary>
+        /// How quickly the 3D body's yaw approaches <see cref="Yaw"/>. Higher values mean faster approach.
+        /// </summary>
+        public float Speed = 1f;
 
         /// <summary>
         /// Whether or not the yaw of <see cref="Body"/> is instantly set to <see cref="Yaw"/> on rotation update.
@@ -60,8 +67,10 @@ namespace Jumpvalley.Players.Movement
                     }
                     else
                     {
-                        rotation.Y = Mathf.MoveToward(rotY, yaw, (float)delta);
+                        rotation.Y = Mathf.LerpAngle(rotY, yaw, Speed * (float)delta);
+                        Console.WriteLine("Current yaw: " + rotation.Y);
                     }
+                    body.Rotation = rotation;
                 }
             }
         }

@@ -22,5 +22,5 @@ mesh = SubResource("CapsuleMesh_d4gh2")
 skeleton = NodePath("../../Map")
 
 [node name="Face" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 3, 0, 0.591883, -0.443492)
+transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 3, 0.0642553, 0.591883, -0.443492)
 mesh = SubResource("TextMesh_a5yrm")

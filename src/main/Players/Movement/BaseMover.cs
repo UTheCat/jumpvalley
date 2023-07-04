@@ -1,5 +1,7 @@
 ﻿using Godot;
 using Jumpvalley.Players.Camera;
+using System;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Jumpvalley.Players.Movement
 {
@@ -37,10 +39,24 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public float JumpVelocity = 5f;
 
+        private float _speed;
+
         /// <summary>
         /// How fast the character can move in meters per second
         /// </summary>
-        public float Speed = 5f;
+        public float Speed
+        {
+            get => _speed;
+            set
+            {
+                _speed = value;
+
+                if (Rotator != null)
+                {
+                    Rotator.Speed = value;
+                }
+            }
+        }
 
         /// <summary>
         /// The current yaw angle of the camera that's currently associated with the character
@@ -133,6 +149,8 @@ namespace Jumpvalley.Players.Movement
                 if (value != null)
                 {
                     value.TurnsInstantly = IsRotationLocked;
+                    value.Speed = Speed;
+                    value.Body = Body;
                 }
             }
         }
@@ -264,9 +282,22 @@ namespace Jumpvalley.Players.Movement
             BodyRotator rotator = Rotator;
             
             // Only rotate if the rotation is locked (such as when shift lock is enabled) or when the character is moving
-            if (rotator != null && (IsRotationLocked || ForwardValue != 0 || RightValue != 0))
+            if (rotator != null)
             {
-                rotator.Yaw = GetYaw();
+                if (IsRotationLocked)
+                {
+                    // Set the angle to the camera's yaw
+                    rotator.Yaw = GetYaw();
+                }
+                else if (ForwardValue != 0 || RightValue != 0)
+                {
+                    // Thanks to Godot 4.0 .NET thirdperson controller by vaporvee for helping me figure this one out
+                    // The extra radians are added on top of the original camera yaw, since
+                    // the direction of the character should be determined by the yaw corresponding to the move vector
+                    // relative to the camera yaw.
+                    rotator.Yaw = GetYaw() + (float)Math.Atan2(-RightValue, -ForwardValue);
+                }
+
                 rotator.Update(delta);
             }
         }
