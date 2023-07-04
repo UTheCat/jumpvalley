@@ -1,9 +1,4 @@
 ﻿using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jumpvalley.Players.Movement
 {
@@ -27,6 +22,11 @@ namespace Jumpvalley.Players.Movement
         public float Yaw = 0f;
 
         /// <summary>
+        /// Whether or not the yaw of <see cref="Body"/> is instantly set to <see cref="Yaw"/> on rotation update.
+        /// </summary>
+        public bool TurnsInstantly = false;
+
+        /// <summary>
         /// Creates a new instance of <see cref="BodyRotator"/>
         /// </summary>
         /// <param name="body">The Node3D (representing the body) to rotate</param>
@@ -36,10 +36,10 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
-        /// Callback to be called every frame process step in the scene tree in order to update body rotation.
+        /// Method to be called every frame-process step in the scene tree in order to update body rotation.
         /// </summary>
         /// <param name="delta"></param>
-        public void HandleProcessStep(double delta)
+        public void Update(double delta)
         {
             Node3D body = Body;
             if (body != null)
@@ -52,7 +52,14 @@ namespace Jumpvalley.Players.Movement
                 float rotY = rotation.Y;
                 if (yaw != rotY)
                 {
-                    rotation.Y = Mathf.MoveToward(rotY, yaw, (float)delta);
+                    if (TurnsInstantly)
+                    {
+                        rotation.Y = yaw;
+                    }
+                    else
+                    {
+                        rotation.Y = Mathf.MoveToward(rotY, yaw, (float)delta);
+                    }
                 }
             }
         }
