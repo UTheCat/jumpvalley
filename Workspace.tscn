@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=23 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="8_1lk1l"]
 [ext_resource type="StyleBox" uid="uid://cumuhpo2oli0n" path="res://styles/bottom_bar/music_btn/normal.tres" id="9_c6sxk"]
 [ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="10_hm1gh"]
+[ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player.tscn" id="10_ircyi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -34,8 +35,10 @@ uv1_triplanar = true
 size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u0tho"]
+size = Vector3(3, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_oxgm4"]
+size = Vector3(3, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6c7jj"]
 size = Vector3(1, 6, 1)
@@ -56,10 +59,6 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c0lif"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
 
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_5ymuh")
@@ -94,7 +93,7 @@ skeleton = NodePath("../..")
 [node name="Wrap" type="Node" parent="Map"]
 
 [node name="Part" type="RigidBody3D" parent="Map/Wrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
 freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wrap/Part"]
@@ -105,20 +104,8 @@ material_override = SubResource("StandardMaterial3D_yf58v")
 mesh = SubResource("BoxMesh_oxgm4")
 skeleton = NodePath("../../..")
 
-[node name="Part3" type="RigidBody3D" parent="Map/Wrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -10)
-freeze = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wrap/Part3"]
-shape = SubResource("BoxShape3D_u0tho")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Wrap/Part3"]
-material_override = SubResource("StandardMaterial3D_yf58v")
-mesh = SubResource("BoxMesh_oxgm4")
-skeleton = NodePath("../../..")
-
 [node name="Part2" type="RigidBody3D" parent="Map/Wrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
 freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wrap/Part2"]
@@ -198,12 +185,4 @@ autowrap_mode = 2
 [node name="Song" type="Node" parent="Music/Primary"]
 metadata/directory_path = "res://addons/music/KORAII/Night_Echo"
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, -10)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_c0lif")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-mesh = SubResource("CapsuleMesh_d4gh2")
-skeleton = NodePath("../../Map")
+[node name="Player" parent="." instance=ExtResource("10_ircyi")]
