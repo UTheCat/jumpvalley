@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=27 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
+[ext_resource type="Texture2D" uid="uid://dcxkj8m3ltdl8" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="3_vpi2u"]
 [ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://addons/icons/music_note_white_24dp.svg" id="6_a22ul"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="6_krikn"]
 [ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="7_1a78q"]
@@ -45,6 +46,14 @@ size = Vector3(1, 6, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4giut"]
 size = Vector3(1, 6, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb1uo"]
+albedo_texture = ExtResource("3_vpi2u")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_61saa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ot3l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
 bg_color = Color(0.45, 0.45, 0.45, 1)
@@ -115,6 +124,38 @@ shape = SubResource("BoxShape3D_6c7jj")
 material_override = SubResource("StandardMaterial3D_yf58v")
 mesh = SubResource("BoxMesh_4giut")
 skeleton = NodePath("../../..")
+
+[node name="PlatformerTest" type="Node3D" parent="Map"]
+
+[node name="Part" type="MeshInstance3D" parent="Map/PlatformerTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_xb1uo")
+mesh = SubResource("BoxMesh_61saa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/PlatformerTest/Part"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/PlatformerTest/Part/StaticBody3D"]
+shape = SubResource("BoxShape3D_8ot3l")
+
+[node name="Part2" type="MeshInstance3D" parent="Map/PlatformerTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+material_override = SubResource("StandardMaterial3D_xb1uo")
+mesh = SubResource("BoxMesh_61saa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/PlatformerTest/Part2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/PlatformerTest/Part2/StaticBody3D"]
+shape = SubResource("BoxShape3D_8ot3l")
+
+[node name="Part3" type="MeshInstance3D" parent="Map/PlatformerTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 4)
+material_override = SubResource("StandardMaterial3D_xb1uo")
+mesh = SubResource("BoxMesh_61saa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/PlatformerTest/Part3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/PlatformerTest/Part3/StaticBody3D"]
+shape = SubResource("BoxShape3D_8ot3l")
 
 [node name="PrimaryGui" type="Control" parent="."]
 clip_contents = true

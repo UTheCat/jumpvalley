@@ -102,9 +102,9 @@ namespace Jumpvalley.Players
             RootNode.AddChild(spinner);
 
             // Juke's Towers of Hell physics (or somewhere close)
-            Mover.Gravity = 196.19997f * (25 / 7) * 0.2f;
-            Mover.JumpVelocity = 50f * (25 / 7) * 0.2f;
-            Mover.Speed = 16f * (25 / 7) * 0.2f;
+            Mover.Gravity = 98.099985f; //196.19997f * (25 / 7) * 0.2f;
+            Mover.JumpVelocity = 25f;//50f * (25 / 7) * 0.2f;
+            Mover.Speed = 8f;//16f * (25 / 7) * 0.2f;
 
             Mover.Body = Character;
 
