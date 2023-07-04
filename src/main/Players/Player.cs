@@ -107,7 +107,6 @@ namespace Jumpvalley.Players
             Mover.Speed = 16f * (25 / 7) * 0.2f;
 
             Mover.Body = Character;
-            Mover.SetPhysicsProcess(true);
 
             Camera.FocusedNode = Character;
             Camera.Camera = RootNode.GetNode<Camera3D>("Camera");
@@ -120,6 +119,7 @@ namespace Jumpvalley.Players
             Camera.ZoomOutDistance = 5f;
 
             Mover.Camera = Camera;
+            Mover.IsRunning = true;
                 
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);

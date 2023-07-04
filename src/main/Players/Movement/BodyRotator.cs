@@ -1,4 +1,5 @@
 ﻿using Godot;
+using System;
 
 namespace Jumpvalley.Players.Movement
 {
@@ -12,7 +13,7 @@ namespace Jumpvalley.Players.Movement
         /// <summary>
         /// The Node3D that this instance of <see cref="BodyRotator"/> is rotating.
         /// </summary>
-        public Node3D Body { get; private set; }
+        public Node3D Body = null;
 
         /// <summary>
         /// The yaw angle of the body that's being approached.
@@ -30,7 +31,7 @@ namespace Jumpvalley.Players.Movement
         /// Creates a new instance of <see cref="BodyRotator"/>
         /// </summary>
         /// <param name="body">The Node3D (representing the body) to rotate</param>
-        public BodyRotator(Node3D body)
+        public BodyRotator(Node3D body = null)
         {
             Body = body;
         }
@@ -52,6 +53,7 @@ namespace Jumpvalley.Players.Movement
                 float rotY = rotation.Y;
                 if (yaw != rotY)
                 {
+                    Console.WriteLine("Update yaw to " + yaw + " radians");
                     if (TurnsInstantly)
                     {
                         rotation.Y = yaw;

@@ -9,7 +9,7 @@ namespace Jumpvalley.Players.Movement
     /// <br/>
     /// The design of this takes lots of inspiration from Roblox's PlayerModule.
     /// </summary>
-    public partial class BaseMover: Node, System.IDisposable
+    public partial class BaseMover : Node, System.IDisposable
     {
         private static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
 
@@ -57,29 +57,90 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public bool IsJumping = false;
 
+        private bool _isRotationLocked = false;
+
         /// <summary>
         /// Whether or not the character's yaw is locked to some specified yaw angle
         /// </summary>
-        public bool IsRotationLocked = false;
+        public bool IsRotationLocked
+        {
+            get => _isRotationLocked;
+            set
+            {
+                _isRotationLocked = value;
+
+                if (Rotator != null)
+                {
+                    Rotator.TurnsInstantly = value;
+                }
+            }
+        }
+
+        private bool _isRunning;
+
+        /// <summary>
+        /// Whether or not the <see cref="BaseMover"/> is actively updating every physics and process frame
+        /// </summary>
+        public bool IsRunning
+        {
+            get => _isRunning;
+            set
+            {
+                _isRunning = value;
+
+                SetPhysicsProcess(value);
+                SetProcess(value);
+            }
+        }
+
+        private CharacterBody3D _body = null;
 
         /// <summary>
         /// The <see cref="CharacterBody3D"/> that this BaseMover is binded to.
         /// </summary>
-        public CharacterBody3D Body = null;
+        public CharacterBody3D Body
+        {
+            get => _body;
+            set
+            {
+                _body = value;
+
+                BodyRotator rotator = Rotator;
+                if (rotator != null)
+                {
+                    rotator.Body = value;
+                }
+            }
+        }
 
         /// <summary>
         /// The <see cref="BaseCamera"/> to bind <see cref="CameraYaw"/> to
         /// </summary>
         public BaseCamera Camera = null;
 
+        private BodyRotator _rotator = null;
+
         /// <summary>
         /// The <see cref="BodyRotator"/> that will be rotating <see cref="Body"/>
         /// </summary>
-        public BodyRotator Rotator = null;
+        public BodyRotator Rotator
+        {
+            get => _rotator;
+            private set
+            {
+                _rotator = value;
+
+                if (value != null)
+                {
+                    value.TurnsInstantly = IsRotationLocked;
+                }
+            }
+        }
 
         public BaseMover()
         {
-            SetPhysicsProcess(false);
+            IsRunning = false;
+            Rotator = new BodyRotator();
         }
 
         /// <summary>
@@ -120,7 +181,7 @@ namespace Jumpvalley.Players.Movement
             float physicsTicksPerSecond = (float)ProjectSettings.GetSetting(PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND);
 
             // This is needed because while physics steps should occur at constant time intervals,
-            // there are slight variances in between each step.
+            // there are slight variances in the actual time passed between each step.
             float timingAdjustment = delta * physicsTicksPerSecond;
 
             Vector3 moveVector = GetMoveVector(yaw);
@@ -165,6 +226,21 @@ namespace Jumpvalley.Players.Movement
             return velocity;
         }
 
+        private float GetYaw()
+        {
+            float yaw;
+            if (Camera == null)
+            {
+                yaw = CameraYaw;
+            }
+            else
+            {
+                yaw = Camera.Yaw;
+            }
+
+            return yaw;
+        }
+
         /// <summary>
         /// Callback to associate with the physics process step in the current scene tree
         /// </summary>
@@ -174,17 +250,7 @@ namespace Jumpvalley.Players.Movement
             CharacterBody3D body = Body;
             if (body != null)
             {
-                float yaw;
-                if (Camera == null)
-                {
-                    yaw = CameraYaw;
-                }
-                else
-                {
-                    yaw = Camera.Yaw;
-                }
-
-                body.Velocity = GetVelocity((float)delta, yaw);
+                body.Velocity = GetVelocity((float)delta, GetYaw());
                 body.MoveAndSlide();
             }
         }
@@ -195,7 +261,14 @@ namespace Jumpvalley.Players.Movement
         /// <param name="delta"></param>
         public void HandleProcessStep(double delta)
         {
-
+            BodyRotator rotator = Rotator;
+            
+            // Only rotate if the rotation is locked (such as when shift lock is enabled) or when the character is moving
+            if (rotator != null && (IsRotationLocked || ForwardValue != 0 || RightValue != 0))
+            {
+                rotator.Yaw = GetYaw();
+                rotator.Update(delta);
+            }
         }
 
         /// <summary>
@@ -212,6 +285,12 @@ namespace Jumpvalley.Players.Movement
         {
             HandlePhysicsStep(delta);
             base._PhysicsProcess(delta);
+        }
+
+        public override void _Process(double delta)
+        {
+            HandleProcessStep(delta);
+            base._Process(delta);
         }
     }
 }
