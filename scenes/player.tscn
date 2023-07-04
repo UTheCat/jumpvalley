@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhraj4ym0cswa"]
+[gd_scene load_steps=5 format=3 uid="uid://bhraj4ym0cswa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c0lif"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5oda"]
+albedo_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_a5yrm"]
+material = SubResource("StandardMaterial3D_u5oda")
+text = ":)"
+
 [node name="Player" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_c0lif")
@@ -13,3 +20,7 @@ shape = SubResource("CapsuleShape3D_c0lif")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_d4gh2")
 skeleton = NodePath("../../Map")
+
+[node name="Face" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 3, 0, 0.591883, -0.443492)
+mesh = SubResource("TextMesh_a5yrm")
