@@ -73,7 +73,15 @@ namespace Jumpvalley.Players.Camera
         public float ZoomOutDistance
         {
             get => _zoomOutDistance;
-            set => _zoomOutDistance = Math.Clamp(value, MinZoomOutDistance, MaxZoomOutDistance);
+            set
+            {
+                value = Math.Clamp(value, MinZoomOutDistance, MaxZoomOutDistance);
+                if (_zoomOutDistance != value)
+                {
+                    _zoomOutDistance = value;
+                    RaiseZoomOutDistanceChanged(value);
+                }
+            }
         }
 
         /// <summary>
@@ -150,19 +158,19 @@ namespace Jumpvalley.Players.Camera
                 // Use transforms to achieve the above
                 // See this article for an explaination on why:
                 // https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html
-                Transform3D transform = new Transform3D();
-                transform.Basis = Basis.Identity;
+                //Transform3D transform = new Transform3D();
+                //transform.Basis = Basis.Identity;
                 //transform.Origin = camPos;
-                transform.Basis = transform.Basis.Rotated(Vector3.Up, camRot.Y);
-                transform = transform.Orthonormalized();
+                //transform.Basis = transform.Basis.Rotated(Vector3.Up, camRot.Y);
+                //transform = transform.Orthonormalized();
 
                 // We were rotating the transform around the x-axis, causing the yaw gyro to be tilted.
                 // Lets result to trignometry with 2d right triangles to get what we want instead.
                 //transform.Basis = transform.Basis.Rotated(Vector3.Right, camRot.X);
                 //transform = transform.Orthonormalized();
 
-                transform = transform.Rotated(Vector3.Up, camRot.Y);
-                transform = transform.Rotated(Vector3.Right, camRot.X);
+                //transform = transform.Rotated(Vector3.Up, camRot.Y);
+                //transform = transform.Rotated(Vector3.Right, camRot.X);
                 //transform = transform.Translated(new Vector3(RightOffset, 0, ZoomOutDistance));
 
                 /*
@@ -240,12 +248,6 @@ namespace Jumpvalley.Players.Camera
             }
         }
 
-        public override void _Process(double delta)
-        {
-            Update();
-            base._Process(delta);
-        }
-
         /// <summary>
         /// Disposes of this <see cref="BaseCamera"/> object
         /// </summary>
@@ -253,6 +255,24 @@ namespace Jumpvalley.Players.Camera
         {
             QueueFree();
             base.Dispose();
+        }
+
+        public override void _Process(double delta)
+        {
+            Update();
+            base._Process(delta);
+        }
+
+        /// <summary>
+        /// Event that's raised when the value of zoom out distance changes.
+        /// <br/>
+        /// The float argument is the new value of <see cref="ZoomOutDistance"/>
+        /// </summary>
+        public event EventHandler<float> ZoomOutDistanceChanged;
+
+        protected void RaiseZoomOutDistanceChanged(float zoomOutDistance)
+        {
+            ZoomOutDistanceChanged?.Invoke(this, zoomOutDistance);
         }
     }
 }
