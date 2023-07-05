@@ -280,7 +280,7 @@ namespace Jumpvalley.Players.Movement
         public void HandleProcessStep(double delta)
         {
             BodyRotator rotator = Rotator;
-            
+
             // Only rotate if the rotation is locked (such as when shift lock is enabled) or when the character is moving
             if (rotator != null)
             {
@@ -288,6 +288,7 @@ namespace Jumpvalley.Players.Movement
                 {
                     // Set the angle to the camera's yaw
                     rotator.Yaw = GetYaw();
+                    rotator.Update(delta);
                 }
                 else if (ForwardValue != 0 || RightValue != 0)
                 {
@@ -296,9 +297,8 @@ namespace Jumpvalley.Players.Movement
                     // the direction of the character should be determined by the yaw corresponding to the move vector
                     // relative to the camera yaw.
                     rotator.Yaw = GetYaw() + (float)Math.Atan2(-RightValue, -ForwardValue);
+                    rotator.Update(delta);
                 }
-
-                rotator.Update(delta);
             }
         }
 
