@@ -14,7 +14,7 @@ namespace Jumpvalley.Music
     /// <br/>
     /// The metadata has to list each song's folder in this format:
     /// <br/>
-    /// Entry name: <c>songN</c> where N represents the numerical index of the song package directory, starting from 1. Songs are played in numerical order.
+    /// Entry name: <c>songN</c> where N represents the numerical index of the song package directory starting from 1. Songs are played in numerical order.
     /// <br/>
     /// Entry value: The absolute path to the song's directory. (The value's type must be string.)
     /// </summary>
