@@ -119,11 +119,16 @@ namespace Jumpvalley.Players
             Camera.ZoomOutDistance = 5f;
 
             Mover.Camera = Camera;
+
+            RotationLockControl rotationLockControl = new RotationLockControl(Mover, Camera);
+            RootNode.AddChild(rotationLockControl);
+
             Mover.IsRunning = true;
                 
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
+            Disposables.Add(rotationLockControl);
             Disposables.Add(Mover);
             Disposables.Add(Camera);
             Disposables.Add(bottomBar);

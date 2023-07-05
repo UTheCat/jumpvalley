@@ -86,7 +86,7 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public void Update()
         {
-            if (Mover != null)
+            if (Mover != null && Camera != null)
             {
                 bool isRotationLocked = UserEnabledShiftLock || Camera.ZoomOutDistance <= 0;
                 Mover.IsRotationLocked = isRotationLocked;

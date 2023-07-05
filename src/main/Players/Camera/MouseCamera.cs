@@ -43,12 +43,12 @@ namespace Jumpvalley.Players.Camera
                 }
                 */
                 isTurningCamera = true;
-                //Input.MouseMode = Input.MouseModeEnum.Captured;
+                Input.MouseMode = Input.MouseModeEnum.Captured;
             }
             else if (Input.IsActionJustReleased(INPUT_CAMERA_PAN))
             {
                 isTurningCamera = false;
-                //Input.MouseMode = Input.MouseModeEnum.Visible;
+                Input.MouseMode = Input.MouseModeEnum.Visible;
             }
             else if (Input.IsActionPressed(INPUT_CAMERA_ZOOM_IN))
             {
