@@ -77,7 +77,11 @@ namespace Jumpvalley.Music
             }
         }
 
-        private List<Song> list = new List<Song>();
+        /// <summary>
+        /// The list of <see cref="Song"/>s being played by this playlist.
+        /// </summary>
+        protected List<Song> SongList = new List<Song>();
+
         private AudioStreamPlayer streamPlayer;
         private SceneTreeTween currentTween;
 
@@ -102,9 +106,9 @@ namespace Jumpvalley.Music
         /// <param name="s">The song to add</param>
         public void Add(Song s)
         {
-            if (!list.Contains(s))
+            if (!SongList.Contains(s))
             {
-                list.Add(s);
+                SongList.Add(s);
             }
         }
 
@@ -114,7 +118,7 @@ namespace Jumpvalley.Music
         /// <param name="s">The song to remove</param>
         public void Remove(Song s)
         {
-            list.Remove(s);
+            SongList.Remove(s);
         }
 
         private void CreateAudioStream()
@@ -145,7 +149,7 @@ namespace Jumpvalley.Music
             }
 
             currentSongIndex++;
-            if (currentSongIndex >= list.Count)
+            if (currentSongIndex >= SongList.Count)
             {
                 currentSongIndex = 0;
             }
@@ -157,11 +161,11 @@ namespace Jumpvalley.Music
         private void SwitchToSong(int index)
         {
             // we don't need to do anything here if there aren't any songs or if this song is already playing
-            if (list.Count < 1 || (streamPlayer != null && index == currentSongIndex)) { return; }
+            if (SongList.Count < 1 || (streamPlayer != null && index == currentSongIndex)) { return; }
 
-            Song s = list[index];
+            Song s = SongList[index];
 
-            bool onlyOneSong = list.Count == 1;
+            bool onlyOneSong = SongList.Count == 1;
             CreateAudioStream();
             s.IsLooping = onlyOneSong;
             s.OpenStream();

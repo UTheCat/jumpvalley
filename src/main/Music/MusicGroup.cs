@@ -18,7 +18,7 @@ namespace Jumpvalley.Music
     /// <br/>
     /// Entry value: The absolute path to the song's directory. (The value's type must be string.)
     /// </summary>
-    public partial class MusicGroup: Playlist
+    public partial class MusicGroup: Playlist, IDisposable
     {
         /// <summary>
         /// The prefix of the song metadata entry name within <see cref="MusicListNode"/>
@@ -78,6 +78,19 @@ namespace Jumpvalley.Music
             {
                 Add(new Song(SongPackages[i]));
             }
+        }
+
+        /// <summary>
+        /// Disposes of this <see cref="MusicGroup"/>, including all of the <see cref="Song"/> instances associated with it.
+        /// </summary>
+        public new void Dispose()
+        {
+            for (int i = 0; i < SongList.Count; i++)
+            {
+                SongList[i].Dispose();
+            }
+
+            base.Dispose();
         }
     }
 }

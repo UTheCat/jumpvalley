@@ -223,8 +223,8 @@ autowrap_mode = 2
 
 [node name="Primary" type="Node" parent="Music"]
 
-[node name="Song" type="Node" parent="Music/Primary"]
-metadata/directory_path = "res://addons/music/KORAII/Night_Echo"
+[node name="Music" type="Node" parent="Music/Primary"]
+metadata/song1 = "res://addons/music/KORAII/Night_Echo"
 
 [node name="Player" parent="." instance=ExtResource("10_ircyi")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
