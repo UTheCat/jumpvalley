@@ -26,6 +26,11 @@ namespace Jumpvalley.Music
         public static readonly string SONG_METADATA_ENTRY_PREFIX = "song";
 
         /// <summary>
+        /// The name of the node that contains the list of songs as metadata
+        /// </summary>
+        public static readonly string MUSIC_LIST_NODE_NAME = "Music";
+
+        /// <summary>
         /// The actual node that the MusicGroup is handling
         /// </summary>
         public Node ActualNode { get; private set; }
@@ -52,7 +57,7 @@ namespace Jumpvalley.Music
             }
             
             ActualNode = node;
-            MusicListNode = node.GetNode("Music");
+            MusicListNode = node.GetNode(MUSIC_LIST_NODE_NAME);
 
             Name = nameof(MusicGroup) + "Handler@" + GetHashCode();
             node.AddChild(this);
@@ -61,7 +66,14 @@ namespace Jumpvalley.Music
             int packageIndex = 1;
             while (true)
             {
-                Variant meta = GetMeta(SONG_METADATA_ENTRY_PREFIX + packageIndex);
+                string metaName = SONG_METADATA_ENTRY_PREFIX + packageIndex;
+
+                if (!MusicListNode.HasMeta(metaName))
+                {
+                    break;
+                }
+
+                Variant meta = MusicListNode.GetMeta(metaName);
                 string songDir = meta.As<string>();
 
                 if (string.IsNullOrEmpty(songDir))

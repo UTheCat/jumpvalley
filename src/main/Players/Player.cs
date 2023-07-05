@@ -85,13 +85,16 @@ namespace Jumpvalley.Players
         {
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
 
+            /*
             Node testSongNode = RootNode.GetNode("Music/Primary/Song");
 
             Playlist testPlaylist = new Playlist();
             Song testSong = new Song(new SongPackage((string)testSongNode.GetMeta("directory_path")));
 
             testPlaylist.Add(testSong);
-            CurrentMusicPlayer.PrimaryPlaylist = testPlaylist;
+            */
+            MusicGroup primaryMusic = new MusicGroup(RootNode.GetNode("Music/Primary"));
+            CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;
             CurrentMusicPlayer.IsPlaying = true;
 
             //Testing.MusicPlayerTest mpTest = new Testing.MusicPlayerTest(CurrentMusicPlayer);
@@ -132,7 +135,7 @@ namespace Jumpvalley.Players
             Disposables.Add(Mover);
             Disposables.Add(Camera);
             Disposables.Add(bottomBar);
-            Disposables.Add(testPlaylist);
+            Disposables.Add(primaryMusic);
             Disposables.Add(spinner);
         }
 
