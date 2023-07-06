@@ -36,6 +36,33 @@ namespace Jumpvalley.Music
             Name = nameof(MusicZonePlayer) + "@" + GetHashCode();
         }
 
+        /// <summary>
+        /// Deregisters a music zone from playback.
+        /// If the removed music zone is equal to <see cref="CurrentPlaylist"/> and <see cref="IsPlaying"/> is true, <see cref="CurrentPlaylist"/> will be set to <see cref="PrimaryPlaylist"/>.
+        /// </summary>
+        /// <param name="zone"></param>
+        public void Remove(MusicZone zone)
+        {
+            if (zone != null)
+            {
+                Zones.Remove(zone);
+
+                if (IsPlaying && CurrentPlaylist == zone)
+                {
+                    CurrentPlaylist = PrimaryPlaylist;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Registers a MusicZone for playback by this music player
+        /// </summary>
+        /// <param name="zone">The MusicZone</param>
+        public void Add(MusicZone zone)
+        {
+            if (!Zones.Contains(zone)) Zones.Add(zone);
+        }
+
         protected override void RefreshPlayback()
         {
             if (IsPlaying)

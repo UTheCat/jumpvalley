@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=28 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
@@ -68,6 +68,8 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+
+[sub_resource type="BoxMesh" id="BoxMesh_fd6yx"]
 
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_5ymuh")
@@ -225,6 +227,19 @@ autowrap_mode = 2
 
 [node name="Music" type="Node" parent="Music/Primary"]
 metadata/song1 = "res://addons/music/KORAII/Night_Echo"
+
+[node name="MusicZones" type="Node3D" parent="Music"]
+
+[node name="MusicZone1" type="Node3D" parent="Music/MusicZones"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="ZonePart" type="MeshInstance3D" parent="Music/MusicZones/MusicZone1"]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 3.5, 5.5)
+visible = false
+mesh = SubResource("BoxMesh_fd6yx")
+
+[node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
+metadata/song1 = "res://addons/music/ParagonX9/Red_13"
 
 [node name="Player" parent="." instance=ExtResource("10_ircyi")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)

@@ -36,7 +36,7 @@ namespace Jumpvalley.Players
         /// <summary>
         /// The player's current music player
         /// </summary>
-        public MusicPlayer CurrentMusicPlayer { get; private set; }
+        public MusicZonePlayer CurrentMusicPlayer { get; private set; }
 
         /// <summary>
         /// The player's primary GUI root node
@@ -68,7 +68,7 @@ namespace Jumpvalley.Players
             Tree = tree;
             RootNode = rootNode;
 
-            CurrentMusicPlayer = new MusicPlayer();
+            CurrentMusicPlayer = new MusicZonePlayer();
             CurrentMusicPlayer.Name = "CurrentMusicPlayer";
             PrimaryGui = rootNode.GetNode<Control>("PrimaryGui");
             Character = rootNode.GetNode<CharacterBody3D>("Player");
@@ -93,8 +93,23 @@ namespace Jumpvalley.Players
 
             testPlaylist.Add(testSong);
             */
-            MusicGroup primaryMusic = new MusicGroup(RootNode.GetNode("Music/Primary"));
+
+            Node rootNodeMusic = RootNode.GetNode("Music");
+            MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("Primary"));
+            Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
+
+            CurrentMusicPlayer.BindedNode = Character.GetNode<Node3D>("Root");
             CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;
+
+            Disposables.Add(primaryMusic);
+
+            foreach (Node zone in primaryMusicZones.GetChildren())
+            {
+                MusicZone musicZone = new MusicZone(zone);
+                CurrentMusicPlayer.Add(musicZone);
+                Disposables.Add(musicZone);
+            }
+
             CurrentMusicPlayer.IsPlaying = true;
 
             //Testing.MusicPlayerTest mpTest = new Testing.MusicPlayerTest(CurrentMusicPlayer);
