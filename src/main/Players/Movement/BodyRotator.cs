@@ -60,15 +60,15 @@ namespace Jumpvalley.Players.Movement
                 float rotY = rotation.Y;
                 if (yaw != rotY)
                 {
-                    Console.WriteLine("Update yaw to " + yaw + " radians");
-                    if (TurnsInstantly)
+                    //Console.WriteLine("Update yaw to " + yaw + " radians");
+                    if (TurnsInstantly || Math.Abs(yaw - rotY) < 0.001)
                     {
                         rotation.Y = yaw;
                     }
                     else
                     {
                         rotation.Y = Mathf.LerpAngle(rotY, yaw, Speed * (float)delta);
-                        Console.WriteLine("Current yaw: " + rotation.Y);
+                        //Console.WriteLine("Current yaw: " + rotation.Y);
                     }
                     body.Rotation = rotation;
                 }
