@@ -83,8 +83,10 @@ namespace Jumpvalley.Music
         public Playlist CurrentPlaylist
         {
             get => _currentPlaylist;
-            private set
+            protected set
             {
+                if (_currentPlaylist == value) return;
+
                 // If a different playlist is requesting to be played, make sure to stop the current one before changing it
                 if (value == null)
                 {
@@ -166,8 +168,10 @@ namespace Jumpvalley.Music
             }
         }
 
-        // playback update function
-        private void RefreshPlayback()
+        /// <summary>
+        /// Updates the playback status of the music
+        /// </summary>
+        protected virtual void RefreshPlayback()
         {
             if (IsPlaying)
             {
