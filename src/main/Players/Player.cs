@@ -99,6 +99,8 @@ namespace Jumpvalley.Players
             Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
 
             CurrentMusicPlayer.BindedNode = Character.GetNode<Node3D>("Root");
+            CurrentMusicPlayer.TransitionTime = 3;
+            CurrentMusicPlayer.OverrideTransitionTime = true;
             CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;
 
             Disposables.Add(primaryMusic);

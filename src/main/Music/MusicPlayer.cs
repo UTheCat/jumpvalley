@@ -135,10 +135,25 @@ namespace Jumpvalley.Music
                     }
 
                     // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)
+                    if (OverrideTransitionTime)
+                    {
+                        value.TransitionTime = TransitionTime;
+                    }
+
                     value.Play();
                 }
             }
         }
+
+        /// <summary>
+        /// Whether or not the a playlist's volume transition time will get set to <see cref="MusicPlayer.TransitionTime"/> whenever it gets played by this music player.
+        /// </summary>
+        public bool OverrideTransitionTime = false;
+
+        /// <summary>
+        /// Playlists played by this music player will have their volume transition time set to the value of this variable whenever <see cref="OverrideTransitionTime"/> is set to true, 
+        /// </summary>
+        public double TransitionTime = 0;
 
         /// <summary>
         /// The MusicPlayer's primary playlist. If set, this playlist will be played whenever <see cref="IsPlaying"/> is set to true.

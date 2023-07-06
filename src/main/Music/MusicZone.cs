@@ -51,7 +51,7 @@ namespace Jumpvalley.Music
 
                     // Convert the given point to object space
                     point = mesh.ToLocal(point);
-                    Console.WriteLine(point);
+                    //Console.WriteLine(point);
 
                     // Check if the point is inside the box
                     if (Math.Abs(point.X) <= boxSize.X / 2
