@@ -70,6 +70,7 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
 [sub_resource type="BoxMesh" id="BoxMesh_fd6yx"]
+size = Vector3(20, 20, 20)
 
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_5ymuh")
@@ -234,7 +235,7 @@ metadata/song1 = "res://addons/music/KORAII/Night_Echo"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="ZonePart" type="MeshInstance3D" parent="Music/MusicZones/MusicZone1"]
-transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 3.5, 5.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 5.5)
 visible = false
 mesh = SubResource("BoxMesh_fd6yx")
 

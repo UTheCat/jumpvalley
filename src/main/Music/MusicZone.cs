@@ -19,15 +19,15 @@ namespace Jumpvalley.Music
         /// <summary>
         /// The boxes that make up the geometry of the music zone.
         /// </summary>
-        public List<Node3D> boxes = new List<Node3D>();
+        public List<MeshInstance3D> boxes = new List<MeshInstance3D>();
 
         public MusicZone(Node node) : base(node)
         {
-            Godot.Collections.Array<Node> nodes = GetChildren();
+            Godot.Collections.Array<Node> nodes = node.GetChildren();
 
             for (int i = 0; i < nodes.Count; i++)
             {
-                if (nodes[i] is Node3D box && box.Name.Equals(MUSIC_ZONE_GEOMETRY_NAME))
+                if (nodes[i] is MeshInstance3D box && box.Name.Equals(MUSIC_ZONE_GEOMETRY_NAME))
                 {
                     boxes.Add(box);
                 }
@@ -44,18 +44,22 @@ namespace Jumpvalley.Music
         {
             for (int i = 0; i < boxes.Count; i++)
             {
-                Node3D box = boxes[i];
-                Vector3 boxSize = box.Scale;
-
-                // Convert the given point to object space
-                point = box.ToLocal(point);
-
-                // Check if the point is inside the box
-                if (Math.Abs(point.X) <= boxSize.X / 2
-                    && Math.Abs(point.Y) <= boxSize.Y / 2
-                    && Math.Abs(point.Z) <= boxSize.Z / 2)
+                MeshInstance3D mesh = boxes[i];
+                if (mesh.Mesh is BoxMesh box)
                 {
-                    return true;
+                    Vector3 boxSize = box.Size;
+
+                    // Convert the given point to object space
+                    point = mesh.ToLocal(point);
+                    Console.WriteLine(point);
+
+                    // Check if the point is inside the box
+                    if (Math.Abs(point.X) <= boxSize.X / 2
+                        && Math.Abs(point.Y) <= boxSize.Y / 2
+                        && Math.Abs(point.Z) <= boxSize.Z / 2)
+                    {
+                        return true;
+                    }
                 }
             }
 
