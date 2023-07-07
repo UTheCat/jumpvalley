@@ -14,8 +14,7 @@ This project's source code is licensed under the MIT License. The source code's 
 Assets under the ```addons``` folder are covered by different licenses (especially since they were made by other individuals).
 
 ## Getting Started
-This project was made using Godot v4.0.3.
-If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of Godot v4.0.3 [here]().
+This project is currently being made using the .NET-Enabled version of Godot v4.1.
+If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of .NET-Enabled Godot v4.1 [here](https://godotengine.org/download).
 
-<small>As of writing this, I've just been informed that Godot 4.1 released today. Hopefully the migration goes well.</small>
-
+Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.1 and open your copy of this repository's ```project.godot``` file.
