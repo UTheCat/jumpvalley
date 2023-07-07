@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bhraj4ym0cswa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
-size = Vector3(1, 2, 1)
+size = Vector3(1, 2, 0.5)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mx087"]
 radius = 0.1
