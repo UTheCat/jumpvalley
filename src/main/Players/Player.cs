@@ -152,7 +152,6 @@ namespace Jumpvalley.Players
             Disposables.Add(Mover);
             Disposables.Add(Camera);
             Disposables.Add(bottomBar);
-            Disposables.Add(primaryMusic);
             Disposables.Add(spinner);
         }
 
