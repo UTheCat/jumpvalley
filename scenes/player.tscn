@@ -1,6 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bhraj4ym0cswa"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c0lif"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
+size = Vector3(1, 2, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mx087"]
 radius = 0.1
@@ -27,8 +28,8 @@ height = 1.5
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Root" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_c0lif")
+[node name="TorsoCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_s2be1")
 
 [node name="LeftArm" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
