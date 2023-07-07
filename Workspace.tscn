@@ -112,6 +112,7 @@ theme_override_constants/separation = 10
 [node name="Menu" type="Button" parent="PrimaryGui/BottomBar/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 theme_override_styles/normal = ExtResource("6_krikn")
 theme_override_styles/hover = ExtResource("7_ctt56")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3t1g3")
@@ -121,6 +122,7 @@ icon_alignment = 1
 [node name="Music" type="Button" parent="PrimaryGui/BottomBar/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 theme_override_styles/normal = ExtResource("9_c6sxk")
 theme_override_styles/hover = ExtResource("10_hm1gh")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_564ww")
