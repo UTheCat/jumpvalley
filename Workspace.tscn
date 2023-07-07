@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=29 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
@@ -11,6 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://cumuhpo2oli0n" path="res://styles/bottom_bar/music_btn/normal.tres" id="9_c6sxk"]
 [ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="10_hm1gh"]
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player.tscn" id="10_ircyi"]
+[ext_resource type="PackedScene" uid="uid://bffqxb6tye2af" path="res://levels/platformer_test/platformer_test.tscn" id="10_kn8kk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,6 +25,20 @@ background_mode = 2
 sky = SubResource("Sky_ucdiq")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
+bg_color = Color(0.45, 0.45, 0.45, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_564ww"]
+bg_color = Color(0.2652, 0.417293, 0.68, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ndv2j"]
 size = Vector3(100, 1, 100)
@@ -55,22 +70,8 @@ uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ot3l"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
-bg_color = Color(0.45, 0.45, 0.45, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_564ww"]
-bg_color = Color(0.2652, 0.417293, 0.68, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
 [sub_resource type="BoxMesh" id="BoxMesh_fd6yx"]
-size = Vector3(20, 20, 20)
+size = Vector3(50, 50, 50)
 
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_5ymuh")
@@ -80,85 +81,10 @@ environment = SubResource("Environment_0mmb7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 fov = 70.0
-
-[node name="Map" type="Node" parent="."]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
-
-[node name="Baseplate" type="RigidBody3D" parent="Map"]
-freeze = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Baseplate"]
-shape = SubResource("BoxShape3D_ndv2j")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Baseplate"]
-material_override = SubResource("StandardMaterial3D_yf58v")
-mesh = SubResource("BoxMesh_8pv50")
-skeleton = NodePath("../..")
-
-[node name="Wrap" type="Node" parent="Map"]
-
-[node name="Part" type="RigidBody3D" parent="Map/Wrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
-freeze = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wrap/Part"]
-shape = SubResource("BoxShape3D_u0tho")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Wrap/Part"]
-material_override = SubResource("StandardMaterial3D_yf58v")
-mesh = SubResource("BoxMesh_oxgm4")
-skeleton = NodePath("../../..")
-
-[node name="Part2" type="RigidBody3D" parent="Map/Wrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
-freeze = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wrap/Part2"]
-shape = SubResource("BoxShape3D_6c7jj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Wrap/Part2"]
-material_override = SubResource("StandardMaterial3D_yf58v")
-mesh = SubResource("BoxMesh_4giut")
-skeleton = NodePath("../../..")
-
-[node name="PlatformerTest" type="Node3D" parent="Map"]
-
-[node name="Part" type="MeshInstance3D" parent="Map/PlatformerTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_xb1uo")
-mesh = SubResource("BoxMesh_61saa")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Map/PlatformerTest/Part"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/PlatformerTest/Part/StaticBody3D"]
-shape = SubResource("BoxShape3D_8ot3l")
-
-[node name="Part2" type="MeshInstance3D" parent="Map/PlatformerTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
-material_override = SubResource("StandardMaterial3D_xb1uo")
-mesh = SubResource("BoxMesh_61saa")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Map/PlatformerTest/Part2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/PlatformerTest/Part2/StaticBody3D"]
-shape = SubResource("BoxShape3D_8ot3l")
-
-[node name="Part3" type="MeshInstance3D" parent="Map/PlatformerTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 4)
-material_override = SubResource("StandardMaterial3D_xb1uo")
-mesh = SubResource("BoxMesh_61saa")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Map/PlatformerTest/Part3"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/PlatformerTest/Part3/StaticBody3D"]
-shape = SubResource("BoxShape3D_8ot3l")
 
 [node name="PrimaryGui" type="Control" parent="."]
 clip_contents = true
@@ -222,7 +148,89 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Music" type="Node" parent="."]
+[node name="Player" parent="." instance=ExtResource("10_ircyi")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
+
+[node name="Levels" type="Node3D" parent="."]
+
+[node name="PlatformerTest" parent="Levels" instance=ExtResource("10_kn8kk")]
+
+[node name="Lobby" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Lobby"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+
+[node name="Baseplate" type="RigidBody3D" parent="Lobby"]
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Baseplate"]
+shape = SubResource("BoxShape3D_ndv2j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lobby/Baseplate"]
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_8pv50")
+skeleton = NodePath("")
+
+[node name="Wrap" type="Node" parent="Lobby"]
+
+[node name="Part" type="RigidBody3D" parent="Lobby/Wrap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part"]
+shape = SubResource("BoxShape3D_u0tho")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lobby/Wrap/Part"]
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_oxgm4")
+skeleton = NodePath("")
+
+[node name="Part2" type="RigidBody3D" parent="Lobby/Wrap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part2"]
+shape = SubResource("BoxShape3D_6c7jj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lobby/Wrap/Part2"]
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_4giut")
+skeleton = NodePath("")
+
+[node name="OldPlatformerTest" type="Node3D" parent="Lobby"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -14)
+
+[node name="Part" type="MeshInstance3D" parent="Lobby/OldPlatformerTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_xb1uo")
+mesh = SubResource("BoxMesh_61saa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/OldPlatformerTest/Part"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/OldPlatformerTest/Part/StaticBody3D"]
+shape = SubResource("BoxShape3D_8ot3l")
+
+[node name="Part2" type="MeshInstance3D" parent="Lobby/OldPlatformerTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+material_override = SubResource("StandardMaterial3D_xb1uo")
+mesh = SubResource("BoxMesh_61saa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/OldPlatformerTest/Part2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/OldPlatformerTest/Part2/StaticBody3D"]
+shape = SubResource("BoxShape3D_8ot3l")
+
+[node name="Part3" type="MeshInstance3D" parent="Lobby/OldPlatformerTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 4)
+material_override = SubResource("StandardMaterial3D_xb1uo")
+mesh = SubResource("BoxMesh_61saa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/OldPlatformerTest/Part3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/OldPlatformerTest/Part3/StaticBody3D"]
+shape = SubResource("BoxShape3D_8ot3l")
+
+[node name="Music" type="Node3D" parent="."]
 
 [node name="Primary" type="Node" parent="Music"]
 
@@ -232,15 +240,11 @@ metadata/song1 = "res://addons/music/KORAII/Night_Echo"
 [node name="MusicZones" type="Node3D" parent="Music"]
 
 [node name="MusicZone1" type="Node3D" parent="Music/MusicZones"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="ZonePart" type="MeshInstance3D" parent="Music/MusicZones/MusicZone1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 5.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, 22.5)
 visible = false
 mesh = SubResource("BoxMesh_fd6yx")
 
 [node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
-metadata/song1 = "res://addons/music/ParagonX9/Red_13"
-
-[node name="Player" parent="." instance=ExtResource("10_ircyi")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
+metadata/song1 = "res://addons/music/ParagonX9/Blue_Marine"

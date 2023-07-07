@@ -118,7 +118,7 @@ namespace Jumpvalley.Players
             //RootNode.AddChild(mpTest);
             //mpTest.StartTest();
 
-            BoxSpinner spinner = new BoxSpinner((CsgBox3D)RootNode.GetNode("Map/CSGBox3D"), 1);
+            BoxSpinner spinner = new BoxSpinner((CsgBox3D)RootNode.GetNode("Lobby/CSGBox3D"), 1);
             RootNode.AddChild(spinner);
 
             // Juke's Towers of Hell physics (or somewhere close)
