@@ -148,6 +148,10 @@ namespace Jumpvalley.Players
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
+            // Mouse input with higher accuracy is preferred in Juke's Towers of Hell fangames,
+            // since very small differences in input can have a large impact on gameplay.
+            Input.UseAccumulatedInput = false;
+
             Disposables.Add(rotationLockControl);
             Disposables.Add(Mover);
             Disposables.Add(Camera);
