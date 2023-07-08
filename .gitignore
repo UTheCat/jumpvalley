@@ -13,6 +13,7 @@ data_*/
 
 # Build directory
 build
+bin
 
 # Visual Studio
 .vs
