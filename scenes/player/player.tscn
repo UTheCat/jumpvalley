@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhraj4ym0cswa"]
+[gd_scene load_steps=9 format=3 uid="uid://bhraj4ym0cswa"]
+
+[ext_resource type="Material" uid="uid://bmtoyp50ewt6w" path="res://scenes/player/torso_texture.tres" id="1_8fnx3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
 size = Vector3(1, 2, 0.5)
@@ -18,12 +20,11 @@ albedo_color = Color(0.152941, 0.152941, 0.152941, 1)
 material = SubResource("StandardMaterial3D_u5oda")
 text = ":)"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gucqw"]
-transparency = 1
-albedo_color = Color(0.631373, 0.631373, 0.631373, 0.396078)
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
 height = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
+size = Vector3(1, 2, 0.5)
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -57,6 +58,10 @@ mesh = SubResource("TextMesh_a5yrm")
 
 [node name="Torso" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-material_override = SubResource("StandardMaterial3D_gucqw")
+material_override = ExtResource("1_8fnx3")
 mesh = SubResource("CapsuleMesh_d4gh2")
 skeleton = NodePath("../../Map")
+
+[node name="CollisionHitboxIndicator" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_8fnx3")
+mesh = SubResource("BoxMesh_rl4hs")

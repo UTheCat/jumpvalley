@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="8_1lk1l"]
 [ext_resource type="StyleBox" uid="uid://cumuhpo2oli0n" path="res://styles/bottom_bar/music_btn/normal.tres" id="9_c6sxk"]
 [ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="10_hm1gh"]
-[ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player.tscn" id="10_ircyi"]
+[ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/player.tscn" id="10_ircyi"]
 [ext_resource type="PackedScene" uid="uid://bffqxb6tye2af" path="res://levels/platformer_test/platformer_test.tscn" id="10_kn8kk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
