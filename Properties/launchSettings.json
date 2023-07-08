@@ -5,7 +5,7 @@
     },
     "jumpvalley_executable": {
       "commandName": "Executable",
-      "executablePath": "build/jumpvalley.exe",
+      "executablePath": "bin/jumpvalley.exe",
       "workingDirectory": "."
     }
   }
