@@ -189,7 +189,12 @@ namespace Jumpvalley.Players.Camera
 
                 // Refer to camera_pos_calculation.png for details
                 float zoomOutDistance = ZoomOutDistance;
-                float pitchAngle = -camRot.X; // making this negative fixed it (though doing this may cause problems that I haven't come across yet)
+
+                // Negated pitch angle must be used to calculate the next two variables.
+                // This is because we're applying a positional offset to the first person camera when calculating the camera's position for third-person.
+                // Also keep in mind: the "Pitch" variable refers to the pitch of the camera when the camera is in first-person
+                float pitchAngle = -camRot.X;
+
                 float transformHorizontalDistance = zoomOutDistance * (float)Math.Cos((double)pitchAngle);
                 float transformHeight = zoomOutDistance * (float)Math.Sin((double)pitchAngle);
 
