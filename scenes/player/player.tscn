@@ -35,22 +35,22 @@ shape = SubResource("BoxShape3D_s2be1")
 [node name="LeftArm" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
 mesh = SubResource("CapsuleMesh_mx087")
-skeleton = NodePath("../../Map")
+skeleton = NodePath("")
 
 [node name="LeftLeg" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.625, 0)
 mesh = SubResource("CapsuleMesh_7bhqx")
-skeleton = NodePath("../../Map")
+skeleton = NodePath("")
 
 [node name="RightLeg" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.625, 0)
 mesh = SubResource("CapsuleMesh_7bhqx")
-skeleton = NodePath("../../Map")
+skeleton = NodePath("")
 
 [node name="RightArm" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
 mesh = SubResource("CapsuleMesh_mx087")
-skeleton = NodePath("../../Map")
+skeleton = NodePath("")
 
 [node name="Face" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 3, 0.0642553, 0.591883, -0.443492)
@@ -60,7 +60,7 @@ mesh = SubResource("TextMesh_a5yrm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 material_override = ExtResource("1_8fnx3")
 mesh = SubResource("CapsuleMesh_d4gh2")
-skeleton = NodePath("../../Map")
+skeleton = NodePath("")
 
 [node name="CollisionHitboxIndicator" type="MeshInstance3D" parent="."]
 material_override = ExtResource("1_8fnx3")
