@@ -250,3 +250,10 @@ mesh = SubResource("BoxMesh_fd6yx")
 
 [node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
 metadata/song1 = "res://addons/music/ParagonX9/Blue_Marine"
+
+[node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone1"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Music/MusicZones/MusicZone1/ZoneParts"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, 22.5)
+visible = false
+size = Vector3(50, 50, 50)

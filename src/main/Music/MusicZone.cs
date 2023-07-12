@@ -12,22 +12,23 @@ namespace Jumpvalley.Music
     public partial class MusicZone: MusicGroup
     {
         /// <summary>
-        /// The name of the <see cref="Node3D"/>s that make up the geometry of the music zone
+        /// The name of the <see cref="Node3D"/>s that contains the <see cref="CsgBox3D"/>s that make up the geometry of the music zone.
+        /// Such CsgBox3Ds should be direct children of the node.
         /// </summary>
-        public static readonly string MUSIC_ZONE_GEOMETRY_NAME = "ZonePart";
+        public static readonly string MUSIC_ZONE_GEOMETRY_CONTAINER_NAME = "ZoneParts";
 
         /// <summary>
         /// The boxes that make up the geometry of the music zone.
         /// </summary>
-        public List<MeshInstance3D> boxes = new List<MeshInstance3D>();
+        public List<CsgBox3D> boxes = new List<CsgBox3D>();
 
         public MusicZone(Node node) : base(node)
         {
-            Godot.Collections.Array<Node> nodes = node.GetChildren();
+            Godot.Collections.Array<Node> childNodes = node.GetNode(MUSIC_ZONE_GEOMETRY_CONTAINER_NAME).GetChildren();
 
-            for (int i = 0; i < nodes.Count; i++)
+            foreach (Node n in childNodes)
             {
-                if (nodes[i] is MeshInstance3D box && box.Name.Equals(MUSIC_ZONE_GEOMETRY_NAME))
+                if (n is CsgBox3D box)
                 {
                     boxes.Add(box);
                 }
@@ -44,22 +45,20 @@ namespace Jumpvalley.Music
         {
             for (int i = 0; i < boxes.Count; i++)
             {
-                MeshInstance3D mesh = boxes[i];
-                if (mesh.Mesh is BoxMesh box)
+                CsgBox3D box = boxes[i];
+
+                Vector3 boxSize = box.Size;
+
+                // Convert the given point to object space
+                point = box.ToLocal(point);
+                //Console.WriteLine(point);
+
+                // Check if the point is inside the box
+                if (Math.Abs(point.X) <= boxSize.X / 2
+                    && Math.Abs(point.Y) <= boxSize.Y / 2
+                    && Math.Abs(point.Z) <= boxSize.Z / 2)
                 {
-                    Vector3 boxSize = box.Size;
-
-                    // Convert the given point to object space
-                    point = mesh.ToLocal(point);
-                    //Console.WriteLine(point);
-
-                    // Check if the point is inside the box
-                    if (Math.Abs(point.X) <= boxSize.X / 2
-                        && Math.Abs(point.Y) <= boxSize.Y / 2
-                        && Math.Abs(point.Z) <= boxSize.Z / 2)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
