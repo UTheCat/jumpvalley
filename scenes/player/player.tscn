@@ -65,3 +65,6 @@ skeleton = NodePath("../../Map")
 [node name="CollisionHitboxIndicator" type="MeshInstance3D" parent="."]
 material_override = ExtResource("1_8fnx3")
 mesh = SubResource("BoxMesh_rl4hs")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

@@ -70,7 +70,7 @@ uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ot3l"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_fd6yx"]
+[sub_resource type="BoxMesh" id="BoxMesh_1dyn6"]
 size = Vector3(50, 50, 50)
 
 [node name="Workspace" type="Node3D"]
@@ -243,17 +243,12 @@ metadata/song1 = "res://addons/music/KORAII/Night_Echo"
 
 [node name="MusicZone1" type="Node3D" parent="Music/MusicZones"]
 
-[node name="ZonePart" type="MeshInstance3D" parent="Music/MusicZones/MusicZone1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, 22.5)
-visible = false
-mesh = SubResource("BoxMesh_fd6yx")
-
 [node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
 metadata/song1 = "res://addons/music/ParagonX9/Blue_Marine"
 
 [node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone1"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Music/MusicZones/MusicZone1/ZoneParts"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Music/MusicZones/MusicZone1/ZoneParts"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, 22.5)
 visible = false
-size = Vector3(50, 50, 50)
+mesh = SubResource("BoxMesh_1dyn6")

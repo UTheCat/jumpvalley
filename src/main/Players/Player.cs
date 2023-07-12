@@ -98,7 +98,7 @@ namespace Jumpvalley.Players
             MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("Primary"));
             Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
 
-            CurrentMusicPlayer.BindedNode = Character; //.GetNode<Node3D>("Root");
+            CurrentMusicPlayer.BindedNode = Character.GetNode<Node3D>("Head");
             CurrentMusicPlayer.TransitionTime = 3;
             CurrentMusicPlayer.OverrideTransitionTime = true;
             CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;

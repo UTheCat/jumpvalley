@@ -131,7 +131,7 @@ namespace Jumpvalley.Players.Camera
                 //Node3D node3D = new Node3D();
                 //Transform3D transform = node3D.Transform;
 
-                Vector3 camPos = FocusedNode.Position;
+                Vector3 camPos = FocusedNode.GlobalPosition;
 
                 // In first person, the position of the camera is always the same as the
                 // position of the object that the camera is focused on.
