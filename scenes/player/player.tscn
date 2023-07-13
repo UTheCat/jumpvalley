@@ -68,3 +68,4 @@ mesh = SubResource("BoxMesh_rl4hs")
 
 [node name="Head" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+visible = false

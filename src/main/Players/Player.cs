@@ -98,7 +98,7 @@ namespace Jumpvalley.Players
             MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("Primary"));
             Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
 
-            CurrentMusicPlayer.BindedNode = Character.GetNode<Node3D>("Head");
+            CurrentMusicPlayer.BindedNode = Character;
             CurrentMusicPlayer.TransitionTime = 3;
             CurrentMusicPlayer.OverrideTransitionTime = true;
             CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;
@@ -128,7 +128,7 @@ namespace Jumpvalley.Players
 
             Mover.Body = Character;
 
-            Camera.FocusedNode = Character;
+            Camera.FocusedNode = Character.GetNode<Node3D>("Head");
             Camera.Camera = RootNode.GetNode<Camera3D>("Camera");
             Camera.PanningSensitivity = 1;
             Camera.PanningSpeed = (float)(0.2 * Math.PI) * 0.33f;
