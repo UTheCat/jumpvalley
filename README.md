@@ -1,7 +1,7 @@
 # Jumpvalley
 This project is my attempt at learning Godot by trying to recreate various parts of [Juke's Towers of Hell](https://www.roblox.com/games/8562822414/Jukes-Towers-of-Hell) (JToH) in Godot.
 
-Currently, it's a work in progress. Though if you want to test it, it is currently in a somewhat playable state.
+Currently, it's a work in progress. Though if you want to test it, it is currently playable.
 
 ## Credits
 The ```addons``` folder contains assets made by 3rd-parties. They're super useful in this project because not only do I not have the skill, time, and/or resources to make a lot of these assets, but they also allow me to speed up development and testing using resources that the creators of these assets have allowed others to use.
