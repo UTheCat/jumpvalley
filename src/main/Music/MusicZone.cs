@@ -74,10 +74,8 @@ namespace Jumpvalley.Music
                 if (mesh.Mesh is BoxMesh box)
                 {
                     // Convert the given point to object space
-                    point = mesh.ToLocal(point);
-
-                    // Check if the point is inside the box
-                    if (IsLocalSpacePointInBox(point, box.Size))
+                    // Then check if the point is inside the box
+                    if (IsLocalSpacePointInBox(mesh.ToLocal(point), box.Size))
                     {
                         return true;
                     }
@@ -88,10 +86,8 @@ namespace Jumpvalley.Music
             foreach (CsgBox3D box in CsgBoxes)
             {
                 // Convert the given point to object space
-                point = box.ToLocal(point);
-
-                // Check if the point is inside the box
-                if (IsLocalSpacePointInBox(point, box.Size))
+                // Then check if the point is inside the box
+                if (IsLocalSpacePointInBox(box.ToLocal(point), box.Size))
                 {
                     return true;
                 }
