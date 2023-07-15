@@ -3,9 +3,9 @@
     "jumpvalley": {
       "commandName": "Project"
     },
-    "jumpvalley_executable": {
+    "jumpvalley_debug": {
       "commandName": "Executable",
-      "executablePath": "bin/jumpvalley.exe",
+      "executablePath": "Godot_v4.1-stable_mono_win64.exe",
       "workingDirectory": "."
     }
   }
