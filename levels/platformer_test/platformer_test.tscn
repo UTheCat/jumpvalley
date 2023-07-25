@@ -69,6 +69,6 @@ skeleton = NodePath("../../../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Floor1/Frame/Part4/StaticBody3D"]
 shape = SubResource("BoxShape3D_huyba")
 
-[node name="Static" type="Node3D" parent="."]
-
 [node name="Music" type="Node3D" parent="."]
+
+[node name="Static" type="Node3D" parent="."]
