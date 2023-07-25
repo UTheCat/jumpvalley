@@ -11,60 +11,64 @@ size = Vector3(1, 50, 1)
 
 [node name="PlatformerTest" type="Node3D"]
 
-[node name="Obby" type="Node3D" parent="."]
+[node name="Interactives" type="Node3D" parent="."]
 
-[node name="Section" parent="Obby" instance=ExtResource("1_02sv6")]
+[node name="Floor1" type="Node3D" parent="Interactives"]
 
-[node name="Section2" parent="Obby" instance=ExtResource("1_02sv6")]
+[node name="Section" parent="Interactives/Floor1" instance=ExtResource("1_02sv6")]
+
+[node name="Section2" parent="Interactives/Floor1" instance=ExtResource("1_02sv6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 11)
 
-[node name="Section3" parent="Obby" instance=ExtResource("1_02sv6")]
+[node name="Section3" parent="Interactives/Floor1" instance=ExtResource("1_02sv6")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 38, 22)
 
-[node name="Frame" type="Node3D" parent="."]
+[node name="Frame" type="Node3D" parent="Interactives/Floor1"]
 
-[node name="Floor1" type="Node3D" parent="Frame"]
-
-[node name="Part" type="MeshInstance3D" parent="Frame/Floor1"]
+[node name="Part" type="MeshInstance3D" parent="Interactives/Floor1/Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 25.5, -3)
 material_override = ExtResource("2_qqqv5")
 mesh = SubResource("BoxMesh_c0oi1")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Frame/Floor1/Part"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Interactives/Floor1/Frame/Part"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/Floor1/Part/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Floor1/Frame/Part/StaticBody3D"]
 shape = SubResource("BoxShape3D_huyba")
 
-[node name="Part2" type="MeshInstance3D" parent="Frame/Floor1"]
+[node name="Part2" type="MeshInstance3D" parent="Interactives/Floor1/Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 25.5, 48)
 material_override = ExtResource("2_qqqv5")
 mesh = SubResource("BoxMesh_c0oi1")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Frame/Floor1/Part2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Interactives/Floor1/Frame/Part2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/Floor1/Part2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Floor1/Frame/Part2/StaticBody3D"]
 shape = SubResource("BoxShape3D_huyba")
 
-[node name="Part3" type="MeshInstance3D" parent="Frame/Floor1"]
+[node name="Part3" type="MeshInstance3D" parent="Interactives/Floor1/Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 25.5, 48)
 material_override = ExtResource("2_qqqv5")
 mesh = SubResource("BoxMesh_c0oi1")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Frame/Floor1/Part3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Interactives/Floor1/Frame/Part3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/Floor1/Part3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Floor1/Frame/Part3/StaticBody3D"]
 shape = SubResource("BoxShape3D_huyba")
 
-[node name="Part4" type="MeshInstance3D" parent="Frame/Floor1"]
+[node name="Part4" type="MeshInstance3D" parent="Interactives/Floor1/Frame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 25.5, -3)
 material_override = ExtResource("2_qqqv5")
 mesh = SubResource("BoxMesh_c0oi1")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Frame/Floor1/Part4"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Interactives/Floor1/Frame/Part4"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/Floor1/Part4/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Floor1/Frame/Part4/StaticBody3D"]
 shape = SubResource("BoxShape3D_huyba")
+
+[node name="Static" type="Node3D" parent="."]
+
+[node name="Music" type="Node3D" parent="."]
