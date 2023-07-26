@@ -71,4 +71,4 @@ shape = SubResource("BoxShape3D_huyba")
 
 [node name="Music" type="Node3D" parent="."]
 
-[node name="Static" type="Node3D" parent="."]
+[node name="StaticObjects" type="Node3D" parent="."]
