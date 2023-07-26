@@ -13,7 +13,7 @@ namespace Jumpvalley.Levels
     /// Each level contains three primary components: the interactives, the music, and the static objects.
     /// More details can be found on Jumpvalley's wiki article on <see href="https://github.com/UTheDev/jumpvalley/wiki/Level-Layout">Level Layout</see>.
     /// </summary>
-    public partial class Level
+    public partial class Level: IDisposable
     {
         public static readonly string INTERACTIVES_NODE_NAME = "Interactives";
         public static readonly string MUSIC_NODE_NAME = "Music";
@@ -43,6 +43,43 @@ namespace Jumpvalley.Levels
             Interactives = node.GetNode(INTERACTIVES_NODE_NAME);
             Music = node.GetNode(MUSIC_NODE_NAME);
             StaticObjects = node.GetNode(STATIC_OBJECTS_NODE_NAME);
+        }
+
+        /// <summary>
+        /// Level initialization method that initializes the level after the constructor runs, in case such method is needed.
+        /// <br/>
+        /// By default, this method is only called once after the object's constructor runs.
+        /// Initialize() typically shouldn't be called more than once for the same <see cref="Level"/> instance.
+        /// </summary>
+        public virtual void Initialize()
+        {
+
+        }
+
+        /// <summary>
+        /// The level's start method. This method is called every time the user starts or restarts the level,
+        /// and it's a great place to put code that will be run after initialization, but just before the level starts.
+        /// </summary>
+        public virtual void Start()
+        {
+
+        }
+
+        /// <summary>
+        /// The level's stop method. This method is called right after the user stops or exits the level.
+        /// </summary>
+        public virtual void Stop()
+        {
+
+        }
+
+        /// <summary>
+        /// Disposes of this <see cref="Level"/> instance. This method is a great place to free up resources being used by the level instance,
+        /// especially right before the level itself gets freed from memory.
+        /// </summary>
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }
