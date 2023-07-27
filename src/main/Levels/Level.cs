@@ -94,11 +94,9 @@ namespace Jumpvalley.Levels
         /// Disposes of this <see cref="Level"/> instance. This method is a great place to free up resources being used by the level instance,
         /// especially right before the level itself gets freed from memory.
         /// </summary>
-        public new void Dispose()
+        public void Dispose()
         {
-            QueueFree();
             GC.SuppressFinalize(this);
-            base.Dispose();
         }
     }
 }
