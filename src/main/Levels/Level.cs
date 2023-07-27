@@ -20,6 +20,16 @@ namespace Jumpvalley.Levels
         public static readonly string STATIC_OBJECTS_NODE_NAME = "StaticObjects";
 
         /// <summary>
+        /// The full name of the level. This is the name of the level that will actually be displayed to the user, and it can be different from the name of the level's root node.
+        /// </summary>
+        public string FullName = "";
+
+        /// <summary>
+        /// How difficult the level is.
+        /// </summary>
+        public Difficulty LevelDifficulty;
+
+        /// <summary>
         /// The node containing the level's interactives
         /// </summary>
         public Node Interactives { get; private set; }
@@ -40,6 +50,13 @@ namespace Jumpvalley.Levels
         /// <param name="node">The root node of the level to represent</param>
         public Level(Node node)
         {
+            FullName = node.GetMeta("full_name").AsString();
+
+            // We'll need to retain the exact numerical difficulty
+            double difficultyRating = node.GetMeta("difficulty").AsDouble();
+            Difficulty difficulty = DifficultyPresets.GetPrimaryDifficultyFromRating(difficultyRating);
+            LevelDifficulty = new Difficulty(difficulty.Name, difficultyRating, difficulty.Color);
+
             Interactives = node.GetNode(INTERACTIVES_NODE_NAME);
             Music = node.GetNode(MUSIC_NODE_NAME);
             StaticObjects = node.GetNode(STATIC_OBJECTS_NODE_NAME);
@@ -77,9 +94,11 @@ namespace Jumpvalley.Levels
         /// Disposes of this <see cref="Level"/> instance. This method is a great place to free up resources being used by the level instance,
         /// especially right before the level itself gets freed from memory.
         /// </summary>
-        public void Dispose()
+        public new void Dispose()
         {
+            QueueFree();
             GC.SuppressFinalize(this);
+            base.Dispose();
         }
     }
 }

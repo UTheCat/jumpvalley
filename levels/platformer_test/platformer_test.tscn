@@ -10,6 +10,8 @@ size = Vector3(1, 50, 1)
 size = Vector3(1, 50, 1)
 
 [node name="PlatformerTest" type="Node3D"]
+metadata/full_name = "Demo Platformer"
+metadata/difficulty = 5.03
 
 [node name="Interactives" type="Node3D" parent="."]
 
