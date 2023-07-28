@@ -48,6 +48,9 @@
         /// <param name="text">The raw formatted text</param>
         public SongInfoFile(string text): base(text)
         {
+            // This works since C# calls the base constructor first
+            // See this article for more details on constructor order:
+            // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors
             Data.TryGetValue("name", out Name);
             Data.TryGetValue("artists", out Artists);
             Data.TryGetValue("album", out Album);
