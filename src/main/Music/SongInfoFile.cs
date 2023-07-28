@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Reflection.Metadata;
-
-namespace Jumpvalley.Music
+﻿namespace Jumpvalley.Music
 {
     /// <summary>
     /// Reads the associated "info.txt" file for a song.
@@ -23,7 +20,7 @@ namespace Jumpvalley.Music
     /// </list>
     /// This text formatting is inspired by the way that the content of .osu files are formatted in Osu (the rhythm game).
     /// </summary>
-    public partial class SongInfoFile
+    public partial class SongInfoFile: IO.InfoFile
     {
         /// <summary>
         /// The name of the song
@@ -49,51 +46,13 @@ namespace Jumpvalley.Music
         /// Creates an instance of SongInfoFile from raw formatted text
         /// </summary>
         /// <param name="text">The raw formatted text</param>
-        public SongInfoFile(string text)
+        public SongInfoFile(string text): base(text)
         {
-            SetVariablesFromRawText(text);
-        }
-
-        public SongInfoFile(FileInfo file)
-        {
-            using (StreamReader stream = file.OpenText())
-            {
-                SetVariablesFromRawText(stream.ReadToEnd());
-            }
-        }
-
-        private void SetVariablesFromRawText(string text)
-        {
-            if (!string.IsNullOrEmpty(text))
-            {
-                string[] properties = text.Split("\n");
-
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    string[] parts = properties[i].Split(": ");
-                    if (parts.Length == 2)
-                    {
-                        string pName = parts[0].Trim(); // property name
-                        string pValue = parts[1].Trim(); // property value
-                        if (pName.Equals("name"))
-                        {
-                            Name = pValue;
-                        }
-                        else if (pName.Equals("artists"))
-                        {
-                            Artists = pValue;
-                        }
-                        else if (pName.Equals("album"))
-                        {
-                            Album = pValue;
-                        }
-                        else if (pName.Equals("file_name"))
-                        {
-                            FileName = pValue;
-                        }    
-                    }
-                }
-            }
+            Data.TryGetValue("name", out Name);
+            Data.TryGetValue("artists", out Artists);
+            Data.TryGetValue("album", out Album);
+            Data.TryGetValue("file_name", out FileName);
         }
     }
 }
+    

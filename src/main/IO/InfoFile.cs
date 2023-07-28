@@ -50,6 +50,7 @@ namespace Jumpvalley.IO
 
                     if (!string.IsNullOrEmpty(property))
                     {
+                        property = property.Trim();
                         string[] propertyComponents = property.Split(NAME_VALUE_SEPARATOR);
 
                         if (propertyComponents.Length == 2)
