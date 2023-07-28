@@ -23,13 +23,8 @@ namespace Jumpvalley.Music
     /// </list>
     /// This text formatting is inspired by the way that the content of .osu files are formatted in Osu (the rhythm game).
     /// </summary>
-    public partial class InfoFile
+    public partial class SongInfoFile
     {
-        /// <summary>
-        /// The full file name of an info file stored somewhere on a filesystem.
-        /// </summary>
-        public static readonly string FILE_NAME = "info.txt";
-
         /// <summary>
         /// The name of the song
         /// </summary>
@@ -51,15 +46,15 @@ namespace Jumpvalley.Music
         public string FileName = null;
 
         /// <summary>
-        /// Creates an instance of InfoFile from raw formatted text
+        /// Creates an instance of SongInfoFile from raw formatted text
         /// </summary>
         /// <param name="text">The raw formatted text</param>
-        public InfoFile(string text)
+        public SongInfoFile(string text)
         {
             SetVariablesFromRawText(text);
         }
 
-        public InfoFile(FileInfo file)
+        public SongInfoFile(FileInfo file)
         {
             using (StreamReader stream = file.OpenText())
             {

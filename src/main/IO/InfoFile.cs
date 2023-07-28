@@ -24,9 +24,9 @@ namespace Jumpvalley.IO
         /// </summary>
         public static readonly string FILE_NAME = "info.txt";
 
-        public readonly string PROPERTY_SEPARATOR = "\n";
+        public static readonly string PROPERTY_SEPARATOR = "\n";
 
-        public readonly string NAME_VALUE_SEPARATOR = ": ";
+        public static readonly string NAME_VALUE_SEPARATOR = ": ";
 
         /// <summary>
         /// The content of the info file. The keys of this dictionary are property names, and each key's value is the corresponding property value.

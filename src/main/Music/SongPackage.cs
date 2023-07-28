@@ -9,6 +9,8 @@ namespace Jumpvalley.Music
     /// </summary>
     public class SongPackage
     {
+        private static readonly string INFO_FILE_NAME = IO.InfoFile.FILE_NAME;
+
         /// <summary>
         /// Data as raw text that comes from "info.txt" within the folder
         /// </summary>
@@ -17,7 +19,7 @@ namespace Jumpvalley.Music
         /// <summary>
         /// The data of the corresponding "info.txt" file
         /// </summary>
-        public InfoFile InfoFile = null;
+        public SongInfoFile InfoFile = null;
 
         /// <summary>
         /// The name of the song's audio file
@@ -59,10 +61,10 @@ namespace Jumpvalley.Music
                 //Console.WriteLine("Try opening info file");
 
                 // if so, try opening the files inside
-                using Godot.FileAccess infoFile = Godot.FileAccess.Open(path + InfoFile.FILE_NAME, Godot.FileAccess.ModeFlags.Read);
+                using Godot.FileAccess infoFile = Godot.FileAccess.Open(path + INFO_FILE_NAME, Godot.FileAccess.ModeFlags.Read);
                 if (infoFile == null)
                 {
-                    throw new Exception($"Failed to open the corresponding {InfoFile.FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {Godot.FileAccess.GetOpenError()}");
+                    throw new Exception($"Failed to open the corresponding {INFO_FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {Godot.FileAccess.GetOpenError()}");
                 }
 
                 //Console.WriteLine("Try reading the info file");
@@ -70,7 +72,7 @@ namespace Jumpvalley.Music
                 // retrieve the info from the info file
                 string infoText = infoFile.GetAsText();
                 InfoData = infoText;
-                InfoFile = new InfoFile(infoText);
+                InfoFile = new SongInfoFile(infoText);
 
                 SongFileName = InfoFile.FileName;
 
@@ -89,7 +91,7 @@ namespace Jumpvalley.Music
                     using (infoStreamReader = new StreamReader(path + "info.txt"))
                     {
                         InfoData = infoStreamReader.ReadToEnd();
-                        InfoFile = new InfoFile(InfoData);
+                        SongInfoFile = new SongInfoFile(InfoData);
                     }
                 }
                 catch (System.Exception e)
