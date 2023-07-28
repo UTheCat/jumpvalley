@@ -14,7 +14,7 @@ namespace Jumpvalley.Music
         /// <summary>
         /// Data as raw text that comes from "info.txt" within the folder
         /// </summary>
-        public string InfoData = "";
+        public string InfoText = "";
 
         /// <summary>
         /// The data of the corresponding "info.txt" file
@@ -71,7 +71,7 @@ namespace Jumpvalley.Music
 
                 // retrieve the info from the info file
                 string infoText = infoFile.GetAsText();
-                InfoData = infoText;
+                InfoText = infoText;
                 InfoFile = new SongInfoFile(infoText);
 
                 SongFileName = InfoFile.FileName;
@@ -90,8 +90,8 @@ namespace Jumpvalley.Music
                 {
                     using (infoStreamReader = new StreamReader(path + "info.txt"))
                     {
-                        InfoData = infoStreamReader.ReadToEnd();
-                        SongInfoFile = new SongInfoFile(InfoData);
+                        InfoText = infoStreamReader.ReadToEnd();
+                        SongInfoFile = new SongInfoFile(InfoText);
                     }
                 }
                 catch (System.Exception e)
