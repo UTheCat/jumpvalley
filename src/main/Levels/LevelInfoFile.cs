@@ -19,9 +19,15 @@ namespace Jumpvalley.Levels
         /// </summary>
         public Difficulty LevelDifficulty;
 
+        /// <summary>
+        /// The name of the scene file that contains the level.
+        /// </summary>
+        public string FileName = "";
+
         public LevelInfoFile(string text): base(text)
         {
             Data.TryGetValue("full_name", out FullName);
+            Data.TryGetValue("file_name", out FileName);
 
             string difficultyText;
 
