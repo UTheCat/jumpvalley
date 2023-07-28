@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=27 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_5ymuh"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="2_0sjcg"]
@@ -11,7 +11,6 @@
 [ext_resource type="StyleBox" uid="uid://cumuhpo2oli0n" path="res://styles/bottom_bar/music_btn/normal.tres" id="9_c6sxk"]
 [ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="10_hm1gh"]
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/player.tscn" id="10_ircyi"]
-[ext_resource type="PackedScene" uid="uid://bffqxb6tye2af" path="res://levels/platformer_test/platformer_test.tscn" id="10_kn8kk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -69,9 +68,6 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_61saa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ot3l"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_1dyn6"]
-size = Vector3(50, 50, 50)
 
 [node name="Workspace" type="Node3D"]
 script = ExtResource("1_5ymuh")
@@ -154,8 +150,6 @@ autowrap_mode = 2
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
 
 [node name="Levels" type="Node3D" parent="."]
-
-[node name="PlatformerTest" parent="Levels" instance=ExtResource("10_kn8kk")]
 
 [node name="Lobby" type="Node3D" parent="."]
 
@@ -240,15 +234,3 @@ shape = SubResource("BoxShape3D_8ot3l")
 metadata/song1 = "res://addons/music/KORAII/Night_Echo"
 
 [node name="MusicZones" type="Node3D" parent="Music"]
-
-[node name="MusicZone1" type="Node3D" parent="Music/MusicZones"]
-
-[node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
-metadata/song1 = "res://addons/music/ParagonX9/Blue_Marine"
-
-[node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone1"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Music/MusicZones/MusicZone1/ZoneParts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, 22.5)
-visible = false
-mesh = SubResource("BoxMesh_1dyn6")
