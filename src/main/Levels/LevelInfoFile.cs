@@ -12,12 +12,12 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The full name of the level. This is the name of the level that will actually be displayed to the user, and it can be different from the name of the level's root node.
         /// </summary>
-        public string FullName = null;
+        public string FullName;
 
         /// <summary>
         /// The creators of the level.
         /// </summary>
-        public string Creators = null;
+        public string Creators;
 
         /// <summary>
         /// How difficult the level is.
@@ -27,7 +27,7 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The name of the scene file that contains the level, including the file extension.
         /// </summary>
-        public string FileName = null;
+        public string FileName;
 
         public LevelInfoFile(string text): base(text)
         {
