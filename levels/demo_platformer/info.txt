@@ -1,0 +1,4 @@
+full_name: Demo Platformer
+creators: UTheDev
+difficulty: 5.03
+file_name: level.tscn

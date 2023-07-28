@@ -15,18 +15,24 @@ namespace Jumpvalley.Levels
         public string FullName = "";
 
         /// <summary>
+        /// The creators of the level.
+        /// </summary>
+        public string Creators = "";
+
+        /// <summary>
         /// How difficult the level is.
         /// </summary>
         public Difficulty LevelDifficulty;
 
         /// <summary>
-        /// The name of the scene file that contains the level.
+        /// The name of the scene file that contains the level, including the file extension.
         /// </summary>
         public string FileName = "";
 
         public LevelInfoFile(string text): base(text)
         {
             Data.TryGetValue("full_name", out FullName);
+            Data.TryGetValue("creators", out Creators);
             Data.TryGetValue("file_name", out FileName);
 
             string difficultyText;
