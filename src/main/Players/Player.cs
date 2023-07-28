@@ -95,7 +95,7 @@ namespace Jumpvalley.Players
             */
 
             Node rootNodeMusic = RootNode.GetNode("Music");
-            MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("Primary"));
+            MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("PrimaryMusic"));
             Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
 
             CurrentMusicPlayer.BindedNode = Character;
