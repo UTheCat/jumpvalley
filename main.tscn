@@ -39,28 +39,6 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ndv2j"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf58v"]
-albedo_texture = ExtResource("10_3umga")
-uv1_triplanar = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_8pv50"]
-size = Vector3(100, 1, 100)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_u0tho"]
-size = Vector3(3, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_oxgm4"]
-size = Vector3(3, 1, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6c7jj"]
-size = Vector3(1, 6, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4giut"]
-size = Vector3(1, 6, 1)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb1uo"]
 albedo_texture = ExtResource("11_rd65f")
 uv1_triplanar = true
@@ -70,6 +48,28 @@ uv1_triplanar = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ot3l"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rmlu0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf58v"]
+albedo_texture = ExtResource("10_3umga")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pv50"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ndv2j"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oxgm4"]
+size = Vector3(3, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u0tho"]
+size = Vector3(3, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4giut"]
+size = Vector3(1, 6, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6c7jj"]
+size = Vector3(1, 6, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_y5nob")
@@ -155,43 +155,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.
 
 [node name="Lobby" type="Node3D" parent="."]
 
-[node name="Baseplate" type="RigidBody3D" parent="Lobby"]
-freeze = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Baseplate"]
-shape = SubResource("BoxShape3D_ndv2j")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Lobby/Baseplate"]
-material_override = SubResource("StandardMaterial3D_yf58v")
-mesh = SubResource("BoxMesh_8pv50")
-skeleton = NodePath("")
-
-[node name="Wrap" type="Node" parent="Lobby"]
-
-[node name="Part" type="RigidBody3D" parent="Lobby/Wrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
-freeze = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part"]
-shape = SubResource("BoxShape3D_u0tho")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Lobby/Wrap/Part"]
-material_override = SubResource("StandardMaterial3D_yf58v")
-mesh = SubResource("BoxMesh_oxgm4")
-skeleton = NodePath("")
-
-[node name="Part2" type="RigidBody3D" parent="Lobby/Wrap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
-freeze = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part2"]
-shape = SubResource("BoxShape3D_6c7jj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Lobby/Wrap/Part2"]
-material_override = SubResource("StandardMaterial3D_yf58v")
-mesh = SubResource("BoxMesh_4giut")
-skeleton = NodePath("")
-
 [node name="OldPlatformerTest" type="Node3D" parent="Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -14)
 
@@ -228,6 +191,40 @@ shape = SubResource("BoxShape3D_8ot3l")
 [node name="SpinningMesh" type="MeshInstance3D" parent="Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
 mesh = SubResource("BoxMesh_rmlu0")
+
+[node name="Baseplate" type="MeshInstance3D" parent="Lobby"]
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_8pv50")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/Baseplate"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Baseplate/StaticBody3D"]
+shape = SubResource("BoxShape3D_ndv2j")
+
+[node name="Wrap" type="Node3D" parent="Lobby"]
+
+[node name="Part" type="MeshInstance3D" parent="Lobby/Wrap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_oxgm4")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/Wrap/Part"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part/StaticBody3D"]
+shape = SubResource("BoxShape3D_u0tho")
+
+[node name="Part2" type="MeshInstance3D" parent="Lobby/Wrap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -10)
+material_override = SubResource("StandardMaterial3D_yf58v")
+mesh = SubResource("BoxMesh_4giut")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/Wrap/Part2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part2/StaticBody3D"]
+shape = SubResource("BoxShape3D_6c7jj")
 
 [node name="Music" type="Node3D" parent="."]
 
