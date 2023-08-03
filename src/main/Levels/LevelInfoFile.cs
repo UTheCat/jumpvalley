@@ -10,6 +10,16 @@ namespace Jumpvalley.Levels
     public partial class LevelInfoFile: IO.InfoFile
     {
         /// <summary>
+        /// The level's internal identifier. For example, you can make the identifier a shortened version of the full name.
+        /// <br/>
+        /// In order for level loading to work properly, this ID must match the directory name of the level within the resource filesystem.
+        /// This is due to the current limitations of resource pack loading in Godot.
+        /// <br/>
+        /// For instance, if the level's ID is "demo", the contents of the level within the levels folder in the resource filesystem must be located at <c>res://levels/demo</c>
+        /// </summary>
+        public string Id;
+
+        /// <summary>
         /// The full name of the level. This is the name of the level that will actually be displayed to the user, and it can be different from the name of the level's root node.
         /// </summary>
         public string FullName;
@@ -27,13 +37,20 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The name of the scene file that contains the level, including the file extension.
         /// </summary>
-        public string FileName;
+        public string SceneFileName;
+
+        /// <summary>
+        /// The full name of the resource pack that contains the level
+        /// </summary>
+        public string ResourcePackName;
 
         public LevelInfoFile(string text): base(text)
         {
+            Data.TryGetValue("id", out Id);
             Data.TryGetValue("full_name", out FullName);
             Data.TryGetValue("creators", out Creators);
-            Data.TryGetValue("file_name", out FileName);
+            Data.TryGetValue("scene_file_name", out SceneFileName);
+            Data.TryGetValue("resource_pack_name", out ResourcePackName);
 
             string difficultyText;
 

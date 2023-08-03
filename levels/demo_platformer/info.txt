@@ -1,4 +1,6 @@
+id: demo_platformer
 full_name: Demo Platformer
 creators: UTheDev
 difficulty: 5.03
-file_name: level.tscn
+scene_file_name: level.tscn
+resource_pack_name: level.pck
