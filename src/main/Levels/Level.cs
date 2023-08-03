@@ -20,14 +20,15 @@ namespace Jumpvalley.Levels
         public static readonly string STATIC_OBJECTS_NODE_NAME = "StaticObjects";
 
         /// <summary>
-        /// The full name of the level. This is the name of the level that will actually be displayed to the user, and it can be different from the name of the level's root node.
+        /// Information about the level that's specified in the level's info file.
+        /// This includes things like level ID and full name.
         /// </summary>
-        public string FullName = "";
+        public LevelInfoFile Info { get; private set; }
 
         /// <summary>
-        /// How difficult the level is.
+        /// The root node of the level
         /// </summary>
-        public Difficulty LevelDifficulty;
+        public Node RootNode { get; private set; }
 
         /// <summary>
         /// The node containing the level's interactives
@@ -45,21 +46,13 @@ namespace Jumpvalley.Levels
         public Node StaticObjects { get; private set; }
 
         /// <summary>
-        /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its root node
+        /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
         /// </summary>
         /// <param name="node">The root node of the level to represent</param>
-        public Level(Node node)
+        public Level(LevelInfoFile info, Node root)
         {
-            FullName = node.GetMeta("full_name").AsString();
-
-            // We'll need to retain the exact numerical difficulty
-            double difficultyRating = node.GetMeta("difficulty").AsDouble();
-            Difficulty difficulty = DifficultyPresets.GetPrimaryDifficultyFromRating(difficultyRating);
-            LevelDifficulty = new Difficulty(difficulty.Name, difficultyRating, difficulty.Color);
-
-            Interactives = node.GetNode(INTERACTIVES_NODE_NAME);
-            Music = node.GetNode(MUSIC_NODE_NAME);
-            StaticObjects = node.GetNode(STATIC_OBJECTS_NODE_NAME);
+            Info = info;
+            RootNode = root;
         }
 
         /// <summary>

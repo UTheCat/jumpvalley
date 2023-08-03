@@ -19,6 +19,24 @@ namespace Jumpvalley.Levels
     /// </summary>
     public partial class LevelPackage
     {
+        public enum ResourcePackLoadStatus
+        {
+            /// <summary>
+            /// Indicates that the Godot package was loaded successfully.
+            /// </summary>
+            Success = 0,
+
+            /// <summary>
+            /// Indicates that the Godot package under the given file name could not be found.
+            /// </summary>
+            FileNotFound = 1,
+
+            /// <summary>
+            /// Indicates that the Godot package under the given file name was found, but loading it failed.
+            /// </summary>
+            LoadingFailed = 2
+        }
+
         /// <summary>
         /// The level's info file
         /// </summary>
@@ -28,6 +46,16 @@ namespace Jumpvalley.Levels
         /// The directory path of the level package
         /// </summary>
         public string Path { get; private set; }
+
+        /// <summary>
+        /// If the level's root node has been loaded, this will point to it.
+        /// </summary>
+        public Node RootNode { get; private set; }
+
+        /// <summary>
+        /// The level instance associated with this level
+        /// </summary>
+        public Level LevelInstance { get; private set; }
 
         /// <summary>
         /// Constructs a LevelPackage object for a given level package's directory
@@ -50,18 +78,54 @@ namespace Jumpvalley.Levels
         /// Attempts to load the resource pack specified within the level's info file if it exists
         /// </summary>
         /// <returns>
-        /// <c>true</c> if the loading of the resource pack succeeded and <c>false</c> otherwise
+        /// A status code indicating the results of the attempt to load the resource pack
         /// </returns>
-        public bool TryLoadResourcePack()
+        public ResourcePackLoadStatus TryLoadResourcePack()
         {
             string resourcePackPath = $"{Path}/{Info.ResourcePackName}";
-            if (FileAccess.FileExists(resourcePackPath))
+            if (!FileAccess.FileExists(resourcePackPath))
             {
-                // LoadResourcePack will also only return true if the loading of the resource pack succeeded
-                return ProjectSettings.LoadResourcePack(resourcePackPath, false);
+                return ResourcePackLoadStatus.FileNotFound;
             }
 
-            return false;
+            // LoadResourcePack will also only return true if the loading of the resource pack succeeded
+            if (ProjectSettings.LoadResourcePack(resourcePackPath, false))
+            {
+                return ResourcePackLoadStatus.Success;
+            }
+
+            return ResourcePackLoadStatus.LoadingFailed;
+        }
+
+        /// <summary>
+        /// Attempts to load the level's main scene. If successful, <see cref="RootNode"/> will be set to the scene's root node.
+        /// </summary>
+        public void LoadRootNode()
+        {
+            if (RootNode == null)
+            {
+                PackedScene packedScene = GD.Load<PackedScene>($"res://levels/{Info.Id}/{Info.SceneFileName}");
+
+                if (packedScene == null)
+                {
+                    // TO-DO: return status codes for errors regarding the loading of the level's scene
+                    return;
+                }
+
+                RootNode = packedScene.Instantiate();
+                packedScene.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Creates a level instance for the current <see cref="RootNode"/> and assigns it to <see cref="LevelInstance"/>
+        /// </summary>
+        public void CreateLevelInstance()
+        {
+            if (LevelInstance == null && RootNode != null)
+            {
+                LevelInstance = new Level(Info, RootNode);
+            }
         }
     }
 }
