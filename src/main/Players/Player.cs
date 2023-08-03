@@ -112,10 +112,10 @@ namespace Jumpvalley.Players
             MeshSpinner spinner = new MeshSpinner(RootNode.GetNode<MeshInstance3D>("Lobby/SpinningMesh"), 1);
             RootNode.AddChild(spinner);
 
-            // Juke's Towers of Hell physics (or somewhere close)
-            Mover.Gravity = 98.099985f; //196.19997f * (25 / 7) * 0.2f;
-            Mover.JumpVelocity = 25f;//50f * (25 / 7) * 0.2f;
-            Mover.Speed = 8f;//16f * (25 / 7) * 0.2f;
+            // Juke's Towers of Hell physics (or somewhere close) except we're working with meters
+            Mover.Gravity = 98.1f;
+            Mover.JumpVelocity = 25f;
+            Mover.Speed = 8f;
 
             Mover.Body = Character;
 
