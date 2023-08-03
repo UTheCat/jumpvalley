@@ -4,21 +4,21 @@ using Godot;
 // https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions
 namespace Jumpvalley
 {
-    public partial class BoxSpinner : Node
+    public partial class MeshSpinner : Node
     {
-        private CsgBox3D box;
+        private MeshInstance3D mesh;
         private double radiansPerSecond = 0;
 
-        public BoxSpinner(CsgBox3D newBox, double newRadiansPerSecond)
+        public MeshSpinner(MeshInstance3D newMesh, double newRadiansPerSecond)
         {
-            Name = $"BoxSpinner@{GetHashCode()}";
-            box = newBox;
+            Name = $"MeshSpinner@{GetHashCode()}";
+            mesh = newMesh;
             radiansPerSecond = newRadiansPerSecond;
         }
 
         public void RotateInFrame(double delta)
         {
-            box.RotateY((float)(radiansPerSecond * delta));
+            mesh.RotateY((float)(radiansPerSecond * delta));
         }
 
         // overrides the _Process method that comes from the "Node" class

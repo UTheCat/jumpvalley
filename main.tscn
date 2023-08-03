@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=28 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -68,6 +68,8 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_61saa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ot3l"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rmlu0"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_y5nob")
@@ -153,9 +155,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.
 
 [node name="Lobby" type="Node3D" parent="."]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Lobby"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
-
 [node name="Baseplate" type="RigidBody3D" parent="Lobby"]
 freeze = true
 
@@ -225,6 +224,10 @@ mesh = SubResource("BoxMesh_61saa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/OldPlatformerTest/Part3/StaticBody3D"]
 shape = SubResource("BoxShape3D_8ot3l")
+
+[node name="SpinningMesh" type="MeshInstance3D" parent="Lobby"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+mesh = SubResource("BoxMesh_rmlu0")
 
 [node name="Music" type="Node3D" parent="."]
 

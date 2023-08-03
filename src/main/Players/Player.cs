@@ -85,15 +85,6 @@ namespace Jumpvalley.Players
         {
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
 
-            /*
-            Node testSongNode = RootNode.GetNode("Music/Primary/Song");
-
-            Playlist testPlaylist = new Playlist();
-            Song testSong = new Song(new SongPackage((string)testSongNode.GetMeta("directory_path")));
-
-            testPlaylist.Add(testSong);
-            */
-
             Node rootNodeMusic = RootNode.GetNode("Music");
             MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("PrimaryMusic"));
             Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
@@ -118,7 +109,7 @@ namespace Jumpvalley.Players
             //RootNode.AddChild(mpTest);
             //mpTest.StartTest();
 
-            BoxSpinner spinner = new BoxSpinner((CsgBox3D)RootNode.GetNode("Lobby/CSGBox3D"), 1);
+            MeshSpinner spinner = new MeshSpinner(RootNode.GetNode<MeshInstance3D>("Lobby/SpinningMesh"), 1);
             RootNode.AddChild(spinner);
 
             // Juke's Towers of Hell physics (or somewhere close)
