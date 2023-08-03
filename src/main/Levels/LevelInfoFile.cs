@@ -40,7 +40,7 @@ namespace Jumpvalley.Levels
         public string SceneFileName;
 
         /// <summary>
-        /// The full name of the resource pack that contains the level
+        /// The file name of the Godot package (PCK file) that contains the level's contents, including the file extension.
         /// </summary>
         public string ResourcePackName;
 
