@@ -19,6 +19,9 @@ namespace Jumpvalley.Levels
     /// </summary>
     public partial class LevelPackage: IDisposable
     {
+        /// <summary>
+        /// Status codes that indicate the result of an attempt to load a level's resource pack
+        /// </summary>
         public enum ResourcePackLoadStatus
         {
             /// <summary>
