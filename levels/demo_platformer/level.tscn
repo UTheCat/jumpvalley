@@ -79,7 +79,7 @@ shape = SubResource("BoxShape3D_huyba")
 [node name="MusicZone1" type="Node3D" parent="Music/MusicZones"]
 
 [node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
-metadata/song1 = "res://addons/music/ParagonX9/Blue_Marine"
+metadata/song1 = "res://levels/demo_platformer/addons/music/ParagonX9/Blue_Marine"
 
 [node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone1"]
 
