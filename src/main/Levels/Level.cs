@@ -1,5 +1,6 @@
 ﻿using Godot;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,35 @@ namespace Jumpvalley.Levels
     /// <summary>
     /// This class represents a level that's playable in Jumpvalley.
     /// <br/>
-    /// Each level contains three primary components: the interactives, the music, and the static objects.
+    /// Each level contains four primary components: interactives, music, static objects, and start point.
     /// More details can be found on Jumpvalley's wiki article on <see href="https://github.com/UTheDev/jumpvalley/wiki/Level-Layout">Level Layout</see>.
     /// </summary>
-    public partial class Level: IDisposable
+    public partial class Level : IDisposable
     {
         public static readonly string INTERACTIVES_NODE_NAME = "Interactives";
         public static readonly string MUSIC_NODE_NAME = "Music";
         public static readonly string STATIC_OBJECTS_NODE_NAME = "StaticObjects";
+
+        /// <summary>
+        /// Indicates the current run state of the level.
+        /// </summary>
+        public enum RunState
+        {
+            /// <summary>
+            /// Indicates that the level is not running
+            /// </summary>
+            Stopped = 0,
+
+            /// <summary>
+            /// Indicates that the level is still running (in the background) but is paused
+            /// </summary>
+            Paused = 1,
+
+            /// <summary>
+            /// Indicates that the level is actively running and not paused
+            /// </summary>
+            Playing = 2
+        }
 
         /// <summary>
         /// Information about the level that's specified in the level's info file.
@@ -46,9 +68,25 @@ namespace Jumpvalley.Levels
         public Node StaticObjects { get; private set; }
 
         /// <summary>
+        /// The Node3D that defines the position and rotation that the player's character will be set to when they play the level from the very beginning
+        /// </summary>
+        public Node3D StartPoint { get; private set; }
+
+        /// <summary>
         /// Whether or not <see cref="Initialize"/> has been called once already
         /// </summary>
         public bool IsInitialized { get; private set; }
+
+        /// <summary>
+        /// The time since the user started the level.
+        /// This resets to 0 whenever the user restarts the entire level.
+        /// </summary>
+        public Stopwatch Clock { get; private set; }
+
+        /// <summary>
+        /// The level's current run state
+        /// </summary>
+        public RunState CurrentRunState { get; private set; }
 
         /// <summary>
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
@@ -58,6 +96,9 @@ namespace Jumpvalley.Levels
         {
             Info = info;
             RootNode = root;
+
+            CurrentRunState = RunState.Stopped;
+            Clock = new Stopwatch();
         }
 
         /// <summary>
@@ -79,7 +120,7 @@ namespace Jumpvalley.Levels
         /// </summary>
         public virtual void Start()
         {
-
+            Clock.Start();
         }
 
         /// <summary>
@@ -87,7 +128,7 @@ namespace Jumpvalley.Levels
         /// </summary>
         public virtual void Stop()
         {
-
+            Clock.Stop();
         }
 
         /// <summary>
