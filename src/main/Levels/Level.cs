@@ -89,6 +89,9 @@ namespace Jumpvalley.Levels
         /// </summary>
         public void Dispose()
         {
+            RootNode.QueueFree();
+            RootNode.Dispose();
+
             GC.SuppressFinalize(this);
         }
     }

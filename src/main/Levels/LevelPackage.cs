@@ -17,7 +17,7 @@ namespace Jumpvalley.Levels
     /// <item>The Godot package (PCK file) that contains the level's contents</item>
     /// </list>
     /// </summary>
-    public partial class LevelPackage
+    public partial class LevelPackage: IDisposable
     {
         public enum ResourcePackLoadStatus
         {
@@ -126,6 +126,13 @@ namespace Jumpvalley.Levels
             {
                 LevelInstance = new Level(Info, RootNode);
             }
+        }
+
+
+        public void Dispose()
+        {
+            LevelInstance?.Dispose();
+            LevelInstance = null;
         }
     }
 }

@@ -7,6 +7,7 @@ using Jumpvalley.Music;
 using Jumpvalley.Players.Camera;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
+using Jumpvalley.Testing;
 
 namespace Jumpvalley.Players
 {
@@ -143,6 +144,11 @@ namespace Jumpvalley.Players
             // since very small differences in input can have a large impact on gameplay.
             // This is why it's important to make the input refresh rate independent from display refresh rate.
             Input.UseAccumulatedInput = false;
+
+            // misc testing stuff
+            LevelLoadingTest levelLoadingTest = new LevelLoadingTest("res://levels/demo_platformer", RootNode.GetNode("Levels"));
+            Disposables.Add(levelLoadingTest);
+            levelLoadingTest.Start();
 
             Disposables.Add(rotationLockControl);
             Disposables.Add(Mover);
