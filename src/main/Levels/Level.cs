@@ -79,6 +79,11 @@ namespace Jumpvalley.Levels
         public RunState CurrentRunState { get; private set; }
 
         /// <summary>
+        /// Set externally to help the level's code access whatever object is running the level itself
+        /// </summary>
+        public LevelRunner Runner = null;
+
+        /// <summary>
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
         /// </summary>
         /// <param name="node">The root node of the level to represent</param>
