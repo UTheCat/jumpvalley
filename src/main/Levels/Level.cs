@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Jumpvalley.Levels
 {
@@ -14,7 +15,7 @@ namespace Jumpvalley.Levels
     /// Each level contains four primary components: interactives, music, static objects, and start point.
     /// More details can be found on Jumpvalley's wiki article on <see href="https://github.com/UTheDev/jumpvalley/wiki/Level-Layout">Level Layout</see>.
     /// </summary>
-    public partial class Level : IDisposable
+    public partial class Level : Interactive, IDisposable
     {
         public static readonly string INTERACTIVES_NODE_NAME = "Interactives";
         public static readonly string MUSIC_NODE_NAME = "Music";
@@ -73,17 +74,6 @@ namespace Jumpvalley.Levels
         public Node3D StartPoint { get; private set; }
 
         /// <summary>
-        /// Whether or not <see cref="Initialize"/> has been called once already
-        /// </summary>
-        public bool IsInitialized { get; private set; }
-
-        /// <summary>
-        /// The time since the user started the level.
-        /// This resets to 0 whenever the user restarts the entire level.
-        /// </summary>
-        public Stopwatch Clock { get; private set; }
-
-        /// <summary>
         /// The level's current run state
         /// </summary>
         public RunState CurrentRunState { get; private set; }
@@ -92,13 +82,12 @@ namespace Jumpvalley.Levels
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
         /// </summary>
         /// <param name="node">The root node of the level to represent</param>
-        public Level(LevelInfoFile info, Node root)
+        public Level(LevelInfoFile info, Node root): base(new Stopwatch())
         {
             Info = info;
             RootNode = root;
 
             CurrentRunState = RunState.Stopped;
-            Clock = new Stopwatch();
         }
 
         /// <summary>
@@ -107,40 +96,40 @@ namespace Jumpvalley.Levels
         /// By default, this method is only called once after the object's constructor runs.
         /// Initialize() typically shouldn't be called more than once for the same <see cref="Level"/> instance.
         /// </summary>
-        public virtual void Initialize()
+        public override void Initialize()
         {
             if (IsInitialized) return;
 
-            IsInitialized = true;
+            base.Initialize();
         }
 
         /// <summary>
         /// The level's start method. This method is called every time the user starts or restarts the level,
         /// and it's a great place to put code that will be run after initialization, but just before the level starts.
         /// </summary>
-        public virtual void Start()
+        public override void Start()
         {
-            Clock.Start();
+            base.Start();
         }
 
         /// <summary>
         /// The level's stop method. This method is called right after the user stops or exits the level.
         /// </summary>
-        public virtual void Stop()
+        public override void Stop()
         {
-            Clock.Stop();
+            base.Stop();
         }
 
         /// <summary>
         /// Disposes of this <see cref="Level"/> instance. This method is a great place to free up resources being used by the level instance,
         /// especially right before the level itself gets freed from memory.
         /// </summary>
-        public void Dispose()
+        public new void Dispose()
         {
             RootNode.QueueFree();
             RootNode.Dispose();
 
-            GC.SuppressFinalize(this);
+            base.Dispose();
         }
     }
 }
