@@ -39,8 +39,11 @@ namespace Jumpvalley.Testing
                 throw new Exception("Level loading failed");
             }
 
-            level.Start();
+            Package.StartLevel();
             RootNodeParent?.AddChild(level.RootNode);
+            LevelInfoFile levelInfo = level.Info;
+            Difficulty difficulty = levelInfo.LevelDifficulty;
+            Console.WriteLine($"Now playing: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");
         }
 
         public void Dispose()

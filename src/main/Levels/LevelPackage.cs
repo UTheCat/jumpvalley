@@ -128,11 +128,33 @@ namespace Jumpvalley.Levels
             }
         }
 
+        /// <summary>
+        /// Initializes the level (if that hasn't been done yet), and then starts it.
+        /// </summary>
+        public void StartLevel()
+        {
+            if (LevelInstance == null)
+            {
+                if (!LevelInstance.IsInitialized)
+                {
+                    LevelInstance.Initialize();
+                }
 
+                LevelInstance.Start();
+            }
+        }
+
+        /// <summary>
+        /// Disposes of this level package, including the level instance associated with it.
+        /// </summary>
         public void Dispose()
         {
-            LevelInstance?.Dispose();
-            LevelInstance = null;
+            if (LevelInstance != null)
+            {
+                LevelInstance.Stop();
+                LevelInstance.Dispose();
+                LevelInstance = null;
+            }
         }
     }
 }

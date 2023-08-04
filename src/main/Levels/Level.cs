@@ -46,6 +46,11 @@ namespace Jumpvalley.Levels
         public Node StaticObjects { get; private set; }
 
         /// <summary>
+        /// Whether or not <see cref="Initialize"/> has been called once already
+        /// </summary>
+        public bool IsInitialized { get; private set; }
+
+        /// <summary>
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
         /// </summary>
         /// <param name="node">The root node of the level to represent</param>
@@ -63,7 +68,9 @@ namespace Jumpvalley.Levels
         /// </summary>
         public virtual void Initialize()
         {
+            if (IsInitialized) return;
 
+            IsInitialized = true;
         }
 
         /// <summary>
