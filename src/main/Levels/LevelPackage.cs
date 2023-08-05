@@ -1,10 +1,6 @@
 ﻿using Godot;
 using Jumpvalley.IO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jumpvalley.Levels
 {
@@ -17,7 +13,7 @@ namespace Jumpvalley.Levels
     /// <item>The Godot package (PCK file) that contains the level's contents</item>
     /// </list>
     /// </summary>
-    public partial class LevelPackage: IDisposable
+    public partial class LevelPackage : IDisposable
     {
         /// <summary>
         /// Status codes that indicate the result of an attempt to load a level's resource pack
@@ -161,6 +157,7 @@ namespace Jumpvalley.Levels
 
             if (RootNode != null)
             {
+                RootNode.QueueFree();
                 RootNode.Dispose();
                 RootNode = null;
             }
