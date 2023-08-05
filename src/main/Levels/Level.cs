@@ -131,9 +131,6 @@ namespace Jumpvalley.Levels
         /// </summary>
         public new void Dispose()
         {
-            RootNode.QueueFree();
-            RootNode.Dispose();
-
             base.Dispose();
         }
     }

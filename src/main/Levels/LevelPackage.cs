@@ -158,6 +158,12 @@ namespace Jumpvalley.Levels
                 LevelInstance.Dispose();
                 LevelInstance = null;
             }
+
+            if (RootNode != null)
+            {
+                RootNode.Dispose();
+                RootNode = null;
+            }
         }
     }
 }
