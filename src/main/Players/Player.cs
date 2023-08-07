@@ -5,6 +5,7 @@ using Godot;
 
 using Jumpvalley.Music;
 using Jumpvalley.Players.Camera;
+using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
 using Jumpvalley.Testing;
@@ -150,6 +151,11 @@ namespace Jumpvalley.Players
             Disposables.Add(levelLoadingTest);
             levelLoadingTest.Start();
 
+            RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
+            fpsLimiter.IsRunning = true;
+            RootNode.AddChild(fpsLimiter);
+
+            Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
             Disposables.Add(Mover);
             Disposables.Add(Camera);
