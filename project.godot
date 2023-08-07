@@ -17,10 +17,6 @@ run/max_fps=60
 boot_splash/show_image=false
 config/icon="res://music_note.png"
 
-[display]
-
-window/vsync/vsync_mode=0
-
 [dotnet]
 
 project/assembly_name="jumpvalley"
