@@ -74,13 +74,7 @@ namespace Jumpvalley.Players.Controls
                 return;
             }
 
-            int maxFps = (int)Math.Floor((double)refreshRate);
-
-            // Lower max frames-per-second by 1 in case the difference isn't great enough as specified by MinFpsDifference
-            if (refreshRate - maxFps < MinFpsDifference)
-            {
-                maxFps -= 1;
-            }
+            int maxFps = (int)Math.Floor((double)refreshRate - MinFpsDifference);
 
             if (MaxFps == maxFps) return;
 
