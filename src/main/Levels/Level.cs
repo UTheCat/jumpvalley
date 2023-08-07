@@ -114,6 +114,9 @@ namespace Jumpvalley.Levels
         /// </summary>
         public override void Start()
         {
+            if (CurrentRunState == RunState.Playing) return;
+
+            CurrentRunState = RunState.Playing;
             base.Start();
         }
 
@@ -122,6 +125,9 @@ namespace Jumpvalley.Levels
         /// </summary>
         public override void Stop()
         {
+            if (CurrentRunState == RunState.Stopped) return;
+
+            CurrentRunState = RunState.Stopped;
             base.Stop();
         }
 

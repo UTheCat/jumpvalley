@@ -97,22 +97,44 @@ namespace Jumpvalley.Levels
         }
 
         /// <summary>
-        /// Attempts to load the level's main scene. If successful, <see cref="RootNode"/> will be set to the scene's root node.
+        /// Attempts to load the level's main scene.
+        /// If this operation is successful, <see cref="RootNode"/> will be set to the scene's root node, and this method will return true.
+        /// Otherwise, this method will return false.
         /// </summary>
-        public void LoadRootNode()
+        public bool LoadRootNode()
         {
-            if (RootNode == null)
+            if (RootNode != null) throw new InvalidOperationException("There's already a root node loaded. Please unload it first.");
+
+            PackedScene packedScene = GD.Load<PackedScene>($"res://levels/{Info.Id}/{Info.SceneFileName}");
+
+            if (packedScene == null)
             {
-                PackedScene packedScene = GD.Load<PackedScene>($"res://levels/{Info.Id}/{Info.SceneFileName}");
+                // TO-DO: return status codes for errors regarding the loading of the level's scene
+                return false;
+            }
 
-                if (packedScene == null)
-                {
-                    // TO-DO: return status codes for errors regarding the loading of the level's scene
-                    return;
-                }
+            RootNode = packedScene.Instantiate();
+            packedScene.Dispose();
 
-                RootNode = packedScene.Instantiate();
-                packedScene.Dispose();
+            return true;
+        }
+
+        /// <summary>
+        /// Unloads and disposes of the level's root node.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when LevelInstance isn't null.
+        /// This is to prevent errors that can occur when the root node is disposed while the level is still active.
+        /// </exception>
+        public void DisposeRootNode()
+        {
+            if (LevelInstance != null) throw new InvalidOperationException("Root node cannot be disposed while LevelInstance is not null.");
+
+            if (RootNode != null)
+            {
+                RootNode.QueueFree();
+                RootNode.Dispose();
+                RootNode = null;
             }
         }
 
@@ -128,7 +150,19 @@ namespace Jumpvalley.Levels
         }
 
         /// <summary>
-        /// Initializes the level (if that hasn't been done yet), and then starts it.
+        /// Disposes of <see cref="LevelInstance"/> if it's not null.
+        /// </summary>
+        public void DisposeLevelInstance()
+        {
+            if (LevelInstance != null)
+            {
+                LevelInstance.Dispose();
+                LevelInstance = null;
+            }
+        }
+
+        /// <summary>
+        /// Initializes the level assigned to <see cref="LevelInstance"/> (if that hasn't been done yet), and then starts it.
         /// </summary>
         public void StartLevel()
         {
@@ -144,23 +178,21 @@ namespace Jumpvalley.Levels
         }
 
         /// <summary>
+        /// Stops the level assigned to <see cref="LevelInstance"/>
+        /// </summary>
+        public void StopLevel()
+        {
+            LevelInstance?.Stop();
+        }
+
+        /// <summary>
         /// Disposes of this level package, including the level instance associated with it.
         /// </summary>
         public void Dispose()
         {
-            if (LevelInstance != null)
-            {
-                LevelInstance.Stop();
-                LevelInstance.Dispose();
-                LevelInstance = null;
-            }
-
-            if (RootNode != null)
-            {
-                RootNode.QueueFree();
-                RootNode.Dispose();
-                RootNode = null;
-            }
+            StopLevel();
+            DisposeLevelInstance();
+            DisposeRootNode();
         }
     }
 }
