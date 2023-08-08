@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://qdcjrp4ajwst"]
+[gd_scene load_steps=6 format=3 uid="uid://qdcjrp4ajwst"]
 
 [ext_resource type="PackedScene" uid="uid://bxkk8anbvpc2v" path="res://levels/mesh_test/meshes/level.gltf" id="1_n3qnh"]
+[ext_resource type="PackedScene" uid="uid://c6jub5usa0w76" path="res://levels/mesh_test/meshes/wedge.blend" id="2_k3lde"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_k1g0q"]
 left_to_right = 0.0
@@ -57,3 +58,6 @@ mesh = SubResource("PrismMesh_nmj3q")
 [node name="CSGMesh3D2" type="CSGMesh3D" parent="StaticObjects/Csg"]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 0, -1, 1, -4.37114e-08, -4.37114e-08, -1.5, 0, 4.5)
 mesh = SubResource("PrismMesh_5jy5f")
+
+[node name="wedge" parent="StaticObjects" instance=ExtResource("2_k3lde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
