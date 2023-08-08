@@ -141,6 +141,10 @@ namespace Jumpvalley.Players
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
+            FullscreenControl fullscreenControl = new FullscreenControl(false);
+            RootNode.AddChild(fullscreenControl);
+            Disposables.Add(fullscreenControl);
+
             // Input with higher accuracy and less lag is preferred in Juke's Towers of Hell fangames,
             // since very small differences in input can have a large impact on gameplay.
             // This is why it's important to make the input refresh rate independent from display refresh rate.
