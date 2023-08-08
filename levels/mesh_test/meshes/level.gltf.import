@@ -1,0 +1,62 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bxkk8anbvpc2v"
+path="res://.godot/imported/level.gltf-f422ee7c23f5d19ca8045ac4b2618a3f.scn"
+
+[deps]
+
+source_file="res://levels/mesh_test/meshes/level.gltf"
+dest_files=["res://.godot/imported/level.gltf-f422ee7c23f5d19ca8045ac4b2618a3f.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:DetailTest/StaticObjects/CSGBox3D2": {
+"generate/physics": true
+},
+"PATH:DetailTest/StaticObjects/CSGMesh3D2": {
+"generate/physics": true
+},
+"PATH:DetailTest/StaticObjects/CSGMesh3D23": {
+"generate/physics": true
+},
+"PATH:DetailTest/StaticObjects/CSGMesh3D32": {
+"generate/physics": true
+},
+"PATH:DetailTest/StaticObjects/CSGMesh3D42": {
+"generate/physics": true
+},
+"PATH:DetailTest/StaticObjects/CSGMesh3D52": {
+"generate/physics": true
+},
+"PATH:DetailTest/StaticObjects/CSGMesh3D62": {
+"generate/physics": true
+},
+"PATH:DetailTest/StaticObjects/CSGMesh3D72": {
+"generate/physics": true
+},
+"PATH:DetailTest/StaticObjects/CSGMesh3D82": {
+"generate/physics": true
+}
+}
+}
+gltf/embedded_image_handling=1
