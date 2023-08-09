@@ -19,4 +19,4 @@ Assets under the ```addons``` folder are covered by different licenses (especial
 This project is currently being made using the .NET-Enabled version of Godot v4.1.1.
 If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of .NET-Enabled Godot v4.1.1 [here](https://godotengine.org/download).
 
-Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.1 and open your copy of this repository's ```project.godot``` file.
+Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.1.1 and open your copy of this repository's ```project.godot``` file.
