@@ -19,7 +19,7 @@ GDScript style guide:
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html#classes-and-nodes
 
 Icon changing:
-https://docs.godotengine.org/en/3.1/getting_started/workflow/export/changing_application_icon_for_windows.html
+https://docs.godotengine.org/en/stable/getting_started/workflow/export/changing_application_icon_for_windows.html
 
 Meshes and Textures:
 https://www.youtube.com/watch?v=K7a4hDRxYu8
