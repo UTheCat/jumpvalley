@@ -115,7 +115,7 @@ namespace Jumpvalley.Players
             RootNode.AddChild(spinner);
 
             // Juke's Towers of Hell physics (or somewhere close) except we're working with meters
-            Mover.Gravity = 98.1f;
+            Mover.Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").As<float>(); //98.1f;
             Mover.JumpVelocity = 25f;
             Mover.Speed = 8f;
 

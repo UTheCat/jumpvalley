@@ -84,6 +84,7 @@ locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation")
 
 [physics]
 
+3d/default_gravity=98.1
 common/enable_pause_aware_picking=true
 
 [rendering]
