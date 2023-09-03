@@ -1,6 +1,4 @@
-﻿using Godot;
-using System;
-using System.IO;
+﻿using System.IO;
 
 namespace Jumpvalley.Levels
 {
@@ -35,22 +33,22 @@ namespace Jumpvalley.Levels
         public Difficulty LevelDifficulty;
 
         /// <summary>
-        /// The name of the scene file that contains the level, including the file extension.
+        /// The file path to the scene file that contains the level, including the file name and extension. This path should typically be relative to the level's root folder.
         /// </summary>
-        public string SceneFileName;
+        public string ScenePath;
 
         /// <summary>
-        /// The file name of the Godot package (PCK file) that contains the level's contents, including the file extension.
+        /// The file path to the Godot package (PCK file) that contains the level's contents, including the file name and extension. This path should typically be relative to the level's root folder.
         /// </summary>
-        public string ResourcePackName;
+        public string ResourcePackPath;
 
         public LevelInfoFile(string text): base(text)
         {
             Data.TryGetValue("id", out Id);
             Data.TryGetValue("full_name", out FullName);
             Data.TryGetValue("creators", out Creators);
-            Data.TryGetValue("scene_file_name", out SceneFileName);
-            Data.TryGetValue("resource_pack_name", out ResourcePackName);
+            Data.TryGetValue("scene_path", out ScenePath);
+            Data.TryGetValue("resource_pack_path", out ResourcePackPath);
 
             string difficultyText;
 

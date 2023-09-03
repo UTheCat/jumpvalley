@@ -2,5 +2,5 @@ id: mesh_test
 full_name: Mesh Making Test
 creators: UTheDev
 difficulty: 1.00
-scene_file_name: level.tscn
-resource_pack_name: level.pck
+scene_path: level.tscn
+resource_pack_path: level.pck

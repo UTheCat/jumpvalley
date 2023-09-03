@@ -81,7 +81,7 @@ namespace Jumpvalley.Levels
         /// </returns>
         public ResourcePackLoadStatus TryLoadResourcePack()
         {
-            string resourcePackPath = $"{Path}/{Info.ResourcePackName}";
+            string resourcePackPath = $"{Path}/{Info.ResourcePackPath}";
             if (!FileAccess.FileExists(resourcePackPath))
             {
                 return ResourcePackLoadStatus.FileNotFound;
@@ -105,7 +105,7 @@ namespace Jumpvalley.Levels
         {
             if (RootNode != null) throw new InvalidOperationException("There's already a root node loaded. Please unload it first.");
 
-            PackedScene packedScene = GD.Load<PackedScene>($"res://levels/{Info.Id}/{Info.SceneFileName}");
+            PackedScene packedScene = GD.Load<PackedScene>($"res://levels/{Info.Id}/{Info.ScenePath}");
 
             if (packedScene == null)
             {

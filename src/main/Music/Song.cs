@@ -28,7 +28,7 @@ namespace Jumpvalley.Music
 
         public Song() { }
 
-        public Song(SongPackage package) : this(package.Path + "/" + package.SongFileName, package.InfoFile.Name, package.InfoFile.Artists, package.InfoFile.Album) { }
+        public Song(SongPackage package) : this(package.Path + "/" + package.SongPath, package.InfoFile.Name, package.InfoFile.Artists, package.InfoFile.Album) { }
 
         /// <summary>
         /// The actual audio stream that contains the sound data for playback by an <see cref="AudioStreamPlayer"/>

@@ -22,9 +22,9 @@ namespace Jumpvalley.Music
         public SongInfoFile InfoFile = null;
 
         /// <summary>
-        /// The name of the song's audio file
+        /// The file path to the song's audio file
         /// </summary>
-        public string SongFileName;
+        public string SongPath;
 
         /// <summary>
         /// The directory path of this <see cref="SongPackage"/> with trailing slashes and trailing backslashes removed
@@ -74,42 +74,7 @@ namespace Jumpvalley.Music
                 InfoText = infoText;
                 InfoFile = new SongInfoFile(infoText);
 
-                SongFileName = InfoFile.FileName;
-
-                //Console.WriteLine("Constructor finished, song file name is: " + SongFileName);
-
-                // This bit of code is commented out since it won't work with Godot-based file system access,
-                // particularly with "res://" and "user://"
-                /*
-                // Add the removed slash back for convenience in the next bit of code
-                path += "/";
-
-                // Try to read the contents of the info file in the package.
-                StreamReader infoStreamReader = null;
-                try
-                {
-                    using (infoStreamReader = new StreamReader(path + "info.txt"))
-                    {
-                        InfoText = infoStreamReader.ReadToEnd();
-                        SongInfoFile = new SongInfoFile(InfoText);
-                    }
-                }
-                catch (System.Exception e)
-                {
-                    // Info files can be excluded from a song package although it's recommended that the user put one anyway.
-                    if (e is FileNotFoundException)
-                    {
-                        if (infoStreamReader != null)
-                        {
-                            infoStreamReader.Dispose();
-                        }
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                */
+                SongPath = InfoFile.AudioPath;
             }
         }
     }
