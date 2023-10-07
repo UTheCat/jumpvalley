@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=31 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -69,6 +69,16 @@ size = Vector3(3, 1, 1)
 size = Vector3(1, 6, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6c7jj"]
+size = Vector3(1, 6, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2oqhq"]
+albedo_color = Color(0.419608, 0.356863, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m1ep8"]
+material = SubResource("StandardMaterial3D_2oqhq")
+size = Vector3(1, 6, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_um7wl"]
 size = Vector3(1, 6, 1)
 
 [node name="Main" type="Node3D"]
@@ -225,6 +235,17 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part2/StaticBody3D"]
 shape = SubResource("BoxShape3D_6c7jj")
+
+[node name="ClimbablePart" type="MeshInstance3D" parent="Lobby"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.5, -14)
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../..")
+metadata/climable = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/ClimbablePart"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/ClimbablePart/StaticBody3D"]
+shape = SubResource("BoxShape3D_um7wl")
 
 [node name="Music" type="Node3D" parent="."]
 
