@@ -46,18 +46,12 @@ namespace Jumpvalley.Levels
         /// The interactive's start method. This method is called every time the user starts or restarts the interactive,
         /// and it's a great place to put code that will be run after initialization, but just before the interactive starts.
         /// </summary>
-        public virtual void Start()
-        {
-            Clock.Start();
-        }
+        public virtual void Start() { }
 
         /// <summary>
         /// The interactive's stop method. This method is called right after the user stops or exits the interactive.
         /// </summary>
-        public virtual void Stop()
-        {
-            Clock.Stop();
-        }
+        public virtual void Stop() { }
 
         /// <summary>
         /// Disposes of this <see cref="Interactive"/> instance. This method is a great place to free up resources being used by the interactive instance,
