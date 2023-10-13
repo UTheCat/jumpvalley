@@ -20,10 +20,10 @@ Assets under the ```addons``` folder are covered by different licenses (especial
 
 ## Getting started with the project itself
 
-This project is currently being made using the .NET-Enabled version of Godot v4.1.1.
+This project is currently being made using the .NET-Enabled version of Godot v4.1.2.
 
-If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of .NET-Enabled Godot v4.1.1 [here](https://godotengine.org/download).
+If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of .NET-Enabled Godot v4.1.2 [here](https://godotengine.org/download).
 
-Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.1.1 and open your copy of this repository's ```project.godot``` file.
+Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.1.2 and open your copy of this repository's ```project.godot``` file.
 
 **Important:** While it is currently possible to make an obstacle course in Jumpvalley with the Godot Editor, backwards-compatibility is subject to being broken while Jumpvalley is still in major version zero (0.x.x). This is because level behavior hasn't been set in stone yet. If you want to prevent your level from being broken between minor versions, please wait until Jumpvalley has reached major version one (1.0.0).
