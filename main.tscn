@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=32 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/player.tscn" id="9_1wvm3"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="10_3umga"]
 [ext_resource type="Texture2D" uid="uid://dcxkj8m3ltdl8" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="11_rd65f"]
+[ext_resource type="Material" uid="uid://iosg4pj8btc3" path="res://levels/demo_platformer/textures/floor1.tres" id="12_jsk43"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -238,6 +239,7 @@ shape = SubResource("BoxShape3D_6c7jj")
 
 [node name="ClimbablePart" type="MeshInstance3D" parent="Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.5, -14)
+material_override = ExtResource("12_jsk43")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../..")
 metadata/climable = true
