@@ -40,8 +40,8 @@ namespace Jumpvalley.Players.Movement
             // Start from center-height, then work our way to the bottom
             // Remember that the position of the ray-cast is already relative to the hitbox's position
             // as it is parented to the hitbox itself
-            rayCast.Position = new Vector3(0, 0, boxSize.Z / 1);
-            rayCast.TargetPosition = new Vector3(0, -boxSize.Z / 2, 1);
+            rayCast.Position = new Vector3(0, 0, boxSize.Z / 2);
+            rayCast.TargetPosition = new Vector3(0, -boxSize.Y / 2, 1);
         }
 
         /*
