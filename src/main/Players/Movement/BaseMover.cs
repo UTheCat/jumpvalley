@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Jumpvalley.Players.Camera;
 using System;
-using System.Reflection.Metadata.Ecma335;
+using System.Transactions;
 
 namespace Jumpvalley.Players.Movement
 {
@@ -11,9 +11,37 @@ namespace Jumpvalley.Players.Movement
     /// <br/>
     /// The design of this takes lots of inspiration from Roblox's PlayerModule.
     /// </summary>
-    public partial class BaseMover : Node, System.IDisposable
+    public partial class BaseMover : Node, IDisposable
     {
+        /// <summary>
+        /// The current movement state of the character associated with the mover
+        /// </summary>
+        public enum BodyState
+        {
+            /// <summary>
+            /// The character is not moving
+            /// </summary>
+            STOPPED = 0,
+
+            /// <summary>
+            /// The character is walking/running
+            /// </summary>
+            RUNNING = 1,
+
+            /// <summary>
+            /// The character is climbing something
+            /// </summary>
+            CLIMBING = 2,
+
+            /// <summary>
+            /// The character is falling down
+            /// </summary>
+            FALLING = 3
+        }
+
         private static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
+
+        public BodyState CurrentBodyState { get; private set; }
 
         /// <summary>
         /// Scalar in which the character wishes to go forward in the range of [-1, 1].
@@ -323,5 +351,7 @@ namespace Jumpvalley.Players.Movement
             HandleProcessStep(delta);
             base._Process(delta);
         }
+
+        public event EventHandler<EventArgs.Empty> BodyStateChanged;
     }
 }
