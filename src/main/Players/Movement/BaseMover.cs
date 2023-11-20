@@ -41,7 +41,23 @@ namespace Jumpvalley.Players.Movement
 
         private static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
 
-        public BodyState CurrentBodyState { get; private set; }
+        private BodyState _currentBodyState = BodyState.STOPPED;
+
+        /// <summary>
+        /// The current movement state of the character that's being moved by this <see cref="BaseMover"/>
+        /// </summary>
+        public BodyState CurrentBodyState
+        {
+            get => _currentBodyState;
+            set
+            {
+                if (_currentBodyState == value) return;
+
+                BodyState oldState = _currentBodyState;
+                _currentBodyState = value;
+                RaiseBodyStateChangedEvent(oldState, value);
+            }
+        }
 
         /// <summary>
         /// Scalar in which the character wishes to go forward in the range of [-1, 1].
@@ -352,6 +368,14 @@ namespace Jumpvalley.Players.Movement
             base._Process(delta);
         }
 
-        public event EventHandler<EventArgs.Empty> BodyStateChanged;
+        /// <summary>
+        /// Event that's raised when the character being moved by this <see cref="BaseMover"/> changes.
+        /// </summary>
+        public event EventHandler<BodyStateChangedArgs> BodyStateChanged;
+
+        protected void RaiseBodyStateChangedEvent(BodyState oldState, BodyState newState)
+        {
+            BodyStateChanged.Invoke(this, new BodyStateChangedArgs(oldState, newState));
+        }
     }
 }
