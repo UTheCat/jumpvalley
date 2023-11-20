@@ -29,6 +29,12 @@ namespace Jumpvalley.Players.Movement
             RUNNING = 1,
 
             /// <summary>
+            /// The character has just jumped.
+            /// Normally, <see cref="BaseMover.CurrentBodyState"/> is set to this value for only a very short amount of time.
+            /// </summary>
+            JUMPING = 2,
+
+            /// <summary>
             /// The character is climbing something
             /// </summary>
             CLIMBING = 2,
