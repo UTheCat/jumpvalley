@@ -341,7 +341,7 @@ namespace Jumpvalley.Players.Movement
                 {
                     CurrentBodyState = BodyState.FALLING;
                 }
-                else if ((actualVelocity.X != 0f || actualVelocity.Z != 0f) && IsOnFloor())
+                else if ((actualVelocity.X != 0 || actualVelocity.Z != 0) && IsOnFloor())
                 {
                     if (RightValue != 0 || ForwardValue != 0)
                     {
