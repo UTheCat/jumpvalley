@@ -126,6 +126,8 @@ namespace Jumpvalley.Players
             climber.OnCanClimbChanged += (object _o, bool canClimb) =>
             {
                 Mover.IsClimbing = canClimb;
+
+                Console.WriteLine("Climbing: " + canClimb);
             };
 
             Camera.FocusedNode = Character.GetNode<Node3D>("Head");
@@ -144,7 +146,8 @@ namespace Jumpvalley.Players
             RootNode.AddChild(rotationLockControl);
 
             Mover.IsRunning = true;
-                
+
+            RootNode.AddChild(climber);
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 

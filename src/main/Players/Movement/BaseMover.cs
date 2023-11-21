@@ -289,9 +289,15 @@ namespace Jumpvalley.Players.Movement
 
                 // Remember that "wanting to move forward" while climbing means we want to go up,
                 // and "wanting to move backward" while climbing means we want to go down.
-                if (moveVector.Z >= 0)
+
+                // For some reason, the reverse of the above is true (this is likely a bug), so the sign is switched from greater than to less than for now.
+                if (ForwardValue < 0)
                 {
                     climbVelocity = Speed * timingAdjustment;
+                }
+                else if (ForwardValue == 0)
+                {
+                    climbVelocity = 0;
                 }
                 else
                 {

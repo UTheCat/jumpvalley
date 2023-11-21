@@ -227,6 +227,7 @@ mesh = SubResource("BoxMesh_oxgm4")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Lobby/Wrap/Part"]
+metadata/is_climbable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part/StaticBody3D"]
 shape = SubResource("BoxShape3D_u0tho")
@@ -249,10 +250,12 @@ mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../..")
 metadata/climable = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/ClimbablePart"]
+[node name="StaticBody3DClimbablePart" type="StaticBody3D" parent="Lobby/ClimbablePart"]
+metadata/is_climbable = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/ClimbablePart/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/ClimbablePart/StaticBody3DClimbablePart"]
 shape = SubResource("BoxShape3D_um7wl")
+metadata/IsClimbable = true
 
 [node name="Music" type="Node3D" parent="."]
 
