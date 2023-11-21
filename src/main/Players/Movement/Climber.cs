@@ -55,7 +55,6 @@ namespace Jumpvalley.Players.Movement
             rayCast.Position = new Vector3(0, 0, boxSize.Z / 2);
             rayCast.TargetPosition = new Vector3(0, -boxSize.Y / 2, 0);
         }
-
         
         public override void _PhysicsProcess(double delta)
         {
