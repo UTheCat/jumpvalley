@@ -72,6 +72,9 @@ size = Vector3(1, 6, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6c7jj"]
 size = Vector3(1, 6, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_um7wl"]
+size = Vector3(1, 6.5, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pea2e"]
 albedo_color = Color(0.419608, 0.356863, 1, 1)
 albedo_texture = ExtResource("12_3v1qp")
@@ -82,10 +85,7 @@ albedo_color = Color(0.419608, 0.356863, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m1ep8"]
 material = SubResource("StandardMaterial3D_2oqhq")
-size = Vector3(1, 6, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_um7wl"]
-size = Vector3(1, 6, 1)
+size = Vector3(1, 0.5, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_y5nob")
@@ -242,17 +242,55 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part2/StaticBody3D"]
 shape = SubResource("BoxShape3D_6c7jj")
 
-[node name="ClimbablePart" type="MeshInstance3D" parent="Lobby"]
+[node name="StaticBody3DClimbablePart" type="StaticBody3D" parent="Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.5, -14)
-material_override = SubResource("StandardMaterial3D_pea2e")
-mesh = SubResource("BoxMesh_m1ep8")
-skeleton = NodePath("../..")
-
-[node name="StaticBody3DClimbablePart" type="StaticBody3D" parent="Lobby/ClimbablePart"]
 metadata/is_climbable = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/ClimbablePart/StaticBody3DClimbablePart"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/StaticBody3DClimbablePart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_um7wl")
+
+[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../..")
+
+[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../..")
+
+[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../..")
+
+[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../..")
+
+[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../..")
+
+[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../..")
+
+[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../..")
 
 [node name="Music" type="Node3D" parent="."]
 
