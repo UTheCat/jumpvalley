@@ -417,7 +417,7 @@ namespace Jumpvalley.Players.Movement
 
         protected void RaiseBodyStateChangedEvent(BodyState oldState, BodyState newState)
         {
-            BodyStateChanged.Invoke(this, new BodyStateChangedArgs(oldState, newState));
+            BodyStateChanged?.Invoke(this, new BodyStateChangedArgs(oldState, newState));
         }
     }
 }
