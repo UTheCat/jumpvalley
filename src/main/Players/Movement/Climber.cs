@@ -1,4 +1,5 @@
 ﻿using Godot;
+using System;
 
 namespace Jumpvalley.Players.Movement
 {
@@ -15,10 +16,22 @@ namespace Jumpvalley.Players.Movement
 
         private RayCast3D rayCast;
 
+        private bool _canClimb = false;
+
         /// <summary>
         /// Whether or not the character is able to climb because the raycast has hit a climbable CollisionObject3D
         /// </summary>
-        public bool CanClimb = false;
+        public bool CanClimb
+        {
+            get => _canClimb;
+            set
+            {
+                if (_canClimb == value) return;
+
+                _canClimb = value;
+                RaiseOnCanClimbChanged(value);
+            }
+        }
 
         /// <summary>
         /// The character's hitbox that this <see cref="Climber"/> is associated with.
@@ -73,6 +86,17 @@ namespace Jumpvalley.Players.Movement
             // The raycast's position should be relative to the position and rotation of the character's hitbox
             //rayCast.Position = BoxPos + new Vector3(0, 0, BoxSize.Z / 2).Rotated(Vector3.Up, BoxRotation.Y);
             //rayCast.TargetPosition = new Vector3(0, BoxSize.Y / 2, 0);
+        }
+
+        /// <summary>
+        /// Event that's raised when the value of <see cref="CanClimb"/> changes.
+        /// The 2nd argument for this event is a boolean that's set to the new value of <see cref="CanClimb"/>.
+        /// </summary>
+        public event EventHandler<bool> OnCanClimbChanged;
+
+        protected void RaiseOnCanClimbChanged(bool canClimb)
+        {
+            OnCanClimbChanged?.Invoke(this, canClimb);
         }
     }
 }
