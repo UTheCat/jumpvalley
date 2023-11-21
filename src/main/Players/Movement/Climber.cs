@@ -7,7 +7,7 @@ namespace Jumpvalley.Players.Movement
     /// Allows a character to climb objects.
     /// A MeshInstance3D can be climbed if it has a boolean metadata entry named "IsClimbable" that's set to true.
     /// </summary>
-    public partial class Climber: Node
+    public partial class Climber: Node, IDisposable
     {
         /// <summary>
         /// Name of the metadata entry that specifies whether or not a CollisionObject3D is climbable
@@ -51,6 +51,17 @@ namespace Jumpvalley.Players.Movement
             rayCast.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(rayCast)}";
             updateRayCast();
             hitbox.AddChild(rayCast);
+        }
+
+        /// <summary>
+        /// Disposes of this <see cref="Climber"/> object and the <see cref="RayCast3D"/> instance being used to power it
+        /// </summary>
+        public new void Dispose()
+        {
+            QueueFree();
+            rayCast.QueueFree();
+            rayCast.Dispose();
+            base.Dispose();
         }
 
         private void updateRayCast()
