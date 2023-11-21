@@ -121,6 +121,13 @@ namespace Jumpvalley.Players
 
             Mover.Body = Character;
 
+            // Allow the player to climb stuff
+            Climber climber = new Climber(Character.GetNode<CollisionShape3D>("TorsoCollision"));
+            climber.OnCanClimbChanged += (object _o, bool canClimb) =>
+            {
+                Mover.IsClimbing = canClimb;
+            };
+
             Camera.FocusedNode = Character.GetNode<Node3D>("Head");
             Camera.Camera = RootNode.GetNode<Camera3D>("Camera");
             Camera.PanningSensitivity = 1;
@@ -161,6 +168,7 @@ namespace Jumpvalley.Players
 
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
+            Disposables.Add(climber);
             Disposables.Add(Mover);
             Disposables.Add(Camera);
             Disposables.Add(bottomBar);
