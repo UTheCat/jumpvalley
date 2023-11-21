@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=36 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -73,7 +73,7 @@ size = Vector3(1, 6, 1)
 size = Vector3(1, 6, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_um7wl"]
-size = Vector3(1, 6.5, 1)
+size = Vector3(6, 6.5, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pea2e"]
 albedo_color = Color(0.419608, 0.356863, 1, 1)
@@ -85,7 +85,17 @@ albedo_color = Color(0.419608, 0.356863, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m1ep8"]
 material = SubResource("StandardMaterial3D_2oqhq")
-size = Vector3(1, 0.5, 1)
+size = Vector3(6, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7ufw"]
+albedo_color = Color(0.419608, 0.356863, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r5kj0"]
+material = SubResource("StandardMaterial3D_k7ufw")
+size = Vector3(6, 8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ddbb"]
+size = Vector3(6, 8, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_y5nob")
@@ -291,6 +301,69 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
+
+[node name="LadderFlickTest" type="Node3D" parent="Lobby"]
+
+[node name="StaticBody3DClimbablePart2" type="StaticBody3D" parent="Lobby/LadderFlickTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.5, -20.5)
+metadata/is_climbable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_um7wl")
+
+[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../../..")
+
+[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../../..")
+
+[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../../..")
+
+[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../../..")
+
+[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../../..")
+
+[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../../..")
+
+[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_m1ep8")
+skeleton = NodePath("../../../..")
+
+[node name="Top" type="MeshInstance3D" parent="Lobby/LadderFlickTest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 11.5, -20.5)
+material_override = SubResource("StandardMaterial3D_pea2e")
+mesh = SubResource("BoxMesh_r5kj0")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lobby/LadderFlickTest/Top"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/LadderFlickTest/Top/StaticBody3D"]
+shape = SubResource("BoxShape3D_5ddbb")
 
 [node name="Music" type="Node3D" parent="."]
 
