@@ -23,25 +23,30 @@ namespace Jumpvalley.Players.Movement
             STOPPED = 0,
 
             /// <summary>
-            /// The character is walking/running
+            /// The character is moving, but not at the user's request.
             /// </summary>
-            RUNNING = 1,
+            MOVING = 1,
 
             /// <summary>
-            /// The character has just jumped.
-            /// Normally, <see cref="BaseMover.CurrentBodyState"/> is set to this value for only a very short amount of time.
+            /// The character is walking/running at the user's request.
             /// </summary>
-            JUMPING = 2,
+            RUNNING = 2,
+
+            /// <summary>
+            /// The character is jumping.
+            /// A character is jumping only while <see cref="IsJumping"/> is set to true and the character is moving upward.
+            /// </summary>
+            JUMPING = 3,
 
             /// <summary>
             /// The character is climbing something
             /// </summary>
-            CLIMBING = 2,
+            CLIMBING = 4,
 
             /// <summary>
             /// The character is falling down
             /// </summary>
-            FALLING = 3
+            FALLING = 5
         }
 
         private static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
@@ -319,6 +324,38 @@ namespace Jumpvalley.Players.Movement
             {
                 body.Velocity = GetVelocity((float)delta, GetYaw());
                 body.MoveAndSlide();
+
+                // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
+                Vector3 actualVelocity = body.Velocity;
+
+                if (IsJumping && actualVelocity.Y > 0)
+                {
+                    // Jumping is placed first in line so that jumping can affect climbing
+                    CurrentBodyState = BodyState.JUMPING;
+                }
+                else if (IsClimbing)
+                {
+                    CurrentBodyState = BodyState.CLIMBING;
+                }
+                else if (actualVelocity.Y < 0)
+                {
+                    CurrentBodyState = BodyState.FALLING;
+                }
+                else if ((actualVelocity.X != 0f || actualVelocity.Z != 0f) && IsOnFloor())
+                {
+                    if (RightValue != 0 || ForwardValue != 0)
+                    {
+                        CurrentBodyState = BodyState.RUNNING;
+                    }
+                    else
+                    {
+                        CurrentBodyState = BodyState.MOVING;
+                    }
+                }
+                else
+                {
+                    CurrentBodyState = BodyState.STOPPED;
+                }
             }
         }
 
