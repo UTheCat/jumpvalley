@@ -256,6 +256,7 @@ namespace Jumpvalley.Players.Movement
             // there are slight variances in the actual time passed between each step.
             float timingAdjustment = delta * physicsTicksPerSecond;
 
+            bool isOnFloor = IsOnFloor();
             Vector3 moveVector = GetMoveVector(yaw);
             Vector3 velocity;
 
@@ -274,7 +275,7 @@ namespace Jumpvalley.Players.Movement
             if (IsJumping)
             {
                 // Basically how jumping works in Flood Escape 2 by Crazyblox Games
-                if (IsOnFloor() || IsClimbing)
+                if (isOnFloor || IsClimbing)
                 {
                     velocity.Y = JumpVelocity;
                 }
@@ -290,6 +291,8 @@ namespace Jumpvalley.Players.Movement
                 // Remember that "wanting to move forward" while climbing means we want to go up,
                 // and "wanting to move backward" while climbing means we want to go down.
 
+                bool shouldApplyClimbVelocity = true;
+
                 // For some reason, the reverse of the above is true (this is likely a bug), so the sign is switched from greater than to less than for now.
                 if (ForwardValue < 0)
                 {
@@ -301,14 +304,27 @@ namespace Jumpvalley.Players.Movement
                 }
                 else
                 {
-                    climbVelocity = -Speed * timingAdjustment;
+                    if (isOnFloor)
+                    {
+                        // If we're already on the floor, move like we're walking on the floor.
+                        velocity.Y = 0;
+                        climbVelocity = 0;
+                        shouldApplyClimbVelocity = false;
+                    }
+                    else
+                    {
+                        climbVelocity = -Speed * timingAdjustment;
+                    }
                 }
 
-                velocity.X = 0;
-                velocity.Y = climbVelocity;
-                velocity.Z = 0;
+                if (shouldApplyClimbVelocity)
+                {
+                    velocity.X = 0;
+                    velocity.Y = climbVelocity;
+                    velocity.Z = 0;
+                }
             }
-            else if (!IsOnFloor())
+            else if (!isOnFloor)
             {
                 velocity.Y -= Gravity * delta;
             }
