@@ -49,6 +49,8 @@ namespace Jumpvalley.Players.Movement
 
             rayCast = new RayCast3D();
             rayCast.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(rayCast)}";
+            rayCast.HitFromInside = true;
+
             updateRayCast();
             hitbox.AddChild(rayCast);
         }
@@ -93,15 +95,6 @@ namespace Jumpvalley.Players.Movement
             CanClimb = collidedObject != null
                 && collidedObject.HasMeta(IS_CLIMBABLE_METADATA_NAME)
                 && collidedObject.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
-
-            if (collidedObject != null)
-            {
-                Console.WriteLine(collidedObject.ToString() + ", CanClimb: " + CanClimb);
-            }
-            else
-            {
-                Console.WriteLine("no collision");
-            }
 
             //Vector3 boxPos = Hitbox.Position;
 
