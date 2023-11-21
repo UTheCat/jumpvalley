@@ -285,9 +285,21 @@ namespace Jumpvalley.Players.Movement
             }
             else if (IsClimbing)
             {
-                // change these later, as this climbing logic isn't accurate
+                float climbVelocity;
+
+                // Remember that "wanting to move forward" while climbing means we want to go up,
+                // and "wanting to move backward" while climbing means we want to go down.
+                if (moveVector.Z >= 0)
+                {
+                    climbVelocity = Speed * timingAdjustment;
+                }
+                else
+                {
+                    climbVelocity = -Speed * timingAdjustment;
+                }
+
                 velocity.X = 0;
-                velocity.Y = Speed;
+                velocity.Y = climbVelocity;
                 velocity.Z = 0;
             }
             else if (!IsOnFloor())
