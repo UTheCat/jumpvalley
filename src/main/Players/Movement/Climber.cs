@@ -7,7 +7,7 @@ namespace Jumpvalley.Players.Movement
     /// Allows a character to climb objects. Specifically, these objects are <see cref="PhysicsBody3D"/>s
     /// A PhysicsBody3D can be climbed if it has a boolean metadata entry named "is_climbable" that's set to true.
     /// </summary>
-    public partial class Climber: Node, IDisposable
+    public partial class Climber : Node, IDisposable
     {
         /// <summary>
         /// Name of the metadata entry that specifies whether or not a PhysicsBody3D is climbable
@@ -19,12 +19,12 @@ namespace Jumpvalley.Players.Movement
         private bool _canClimb = false;
 
         /// <summary>
-        /// Whether or not the character is able to climb because the raycast has hit a climbable PhysicsBody3D
+        /// Whether or not the character is able to climb because the raycast has hit a climbable <see cref="PhysicsBody3D"/>
         /// </summary>
         public bool CanClimb
         {
             get => _canClimb;
-            set
+            private set
             {
                 if (_canClimb == value) return;
 
@@ -34,9 +34,23 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
+        /// The most recent collison point where the <see cref="Climber"/>'s raycast hit a climbable <see cref="PhysicsBody3D"/>.
+        /// When a <see cref="Climber"/> object is first instantiated, this is set to <see cref="Vector3.Zero"/>.
+        /// <br/>
+        /// Whatever Vector3 this variable is set to should be accurate as long as <see cref="CanClimb"/> is true.
+        /// </summary>
+        public Vector3 RaycastCollisionPoint { get; private set; } = Vector3.Zero;
+
+        /// <summary>
+        /// The <see cref="PhysicsBody3D"/> that's currently being climbed.
+        /// This is set to null if we aren't climbing anything currently.
+        /// </summary>
+        public PhysicsBody3D CurrentlyClimbedObject { get; private set; } = null;
+
+        /// <summary>
         /// The character's hitbox that this <see cref="Climber"/> is associated with.
         /// </summary>
-        public CollisionShape3D Hitbox { get; private set; }
+        public CollisionShape3D Hitbox;
 
         /// <summary>
         /// Creates a new instance of <see cref="Climber"/>
@@ -81,7 +95,7 @@ namespace Jumpvalley.Players.Movement
             rayCast.Position = new Vector3(0, 0, -boxSize.Z / 2 - 0.05f);
             rayCast.TargetPosition = new Vector3(0, -boxSize.Y / 2, 0);
         }
-        
+
         public override void _PhysicsProcess(double delta)
         {
             base._PhysicsProcess(delta);
@@ -92,9 +106,21 @@ namespace Jumpvalley.Players.Movement
 
             // If the collided object is a PhysicsBody3D and it has a metadata entry
             // named "is_climbable" set to true, we can climb.
-            CanClimb = collidedObject != null
+            bool canClimb = collidedObject != null
                 && collidedObject.HasMeta(IS_CLIMBABLE_METADATA_NAME)
                 && collidedObject.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
+
+            if (canClimb)
+            {
+                CurrentlyClimbedObject = collidedObject;
+                RaycastCollisionPoint = rayCast.GetCollisionPoint();
+            }
+            else
+            {
+                CurrentlyClimbedObject = null;
+            }
+
+            CanClimb = canClimb;
 
             //Vector3 boxPos = Hitbox.Position;
 

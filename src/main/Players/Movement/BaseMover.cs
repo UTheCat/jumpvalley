@@ -59,6 +59,11 @@ namespace Jumpvalley.Players.Movement
         private BodyState _currentBodyState = BodyState.STOPPED;
 
         /// <summary>
+        /// The name of the <see cref="CollisionShape3D"/> that should be primarily in charge of handling a character's collision.
+        /// </summary>
+        public static readonly string CHARACTER_ROOT_COLLIDER_NAME = "RootCollider";
+
+        /// <summary>
         /// The current movement state of the character that's being moved by this <see cref="BaseMover"/>
         /// </summary>
         public BodyState CurrentBodyState
@@ -185,6 +190,12 @@ namespace Jumpvalley.Players.Movement
                 {
                     rotator.Body = value;
                 }
+
+                Climber climber = CurrentClimber;
+                if (climber != null)
+                {
+                    climber.Hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
+                }
             }
         }
 
@@ -214,10 +225,16 @@ namespace Jumpvalley.Players.Movement
             }
         }
 
+        /// <summary>
+        /// The <see cref="Climber"/> that's currently in charge of determining whether or not the character can climb at the current physics frame.
+        /// </summary>
+        public Climber CurrentClimber { get; private set; }
+
         public BaseMover()
         {
             IsRunning = false;
             Rotator = new BodyRotator();
+            CurrentClimber = new Climber(null);
         }
 
         /// <summary>
