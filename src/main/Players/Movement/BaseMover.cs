@@ -308,35 +308,65 @@ namespace Jumpvalley.Players.Movement
             }
             else if (IsClimbing)
             {
-                float climbVelocity;
+                float climbVelocity = 0;
 
                 // Remember that "wanting to move forward" while climbing means we want to go up,
                 // and "wanting to move backward" while climbing means we want to go down.
 
                 bool shouldApplyClimbVelocity = true;
 
-                // For some reason, the reverse of the above is true (this is likely a bug), so the sign is switched from greater than to less than for now.
-                if (ForwardValue < 0)
-                {
-                    climbVelocity = Speed * timingAdjustment;
-                }
-                else if (ForwardValue == 0)
+                if (ForwardValue == 0 && RightValue == 0)
                 {
                     climbVelocity = 0;
                 }
                 else
                 {
-                    if (isOnFloor)
+                    // The collision point of the Climber's raycast such that the raycast hit a climbable object
+                    Vector3 collisionPoint = CurrentClimber.RaycastCollisionPoint;
+
+                    Vector3 characterPos = Body.GlobalPosition;
+                    float moveVectorX = moveVector.X;
+                    float moveVectorZ = moveVector.Z;
+
+                    if (
+                        collisionPoint.X <= characterPos.X && moveVector.X <= 0
+                        || collisionPoint.X >= characterPos.X && moveVector.X >= 0
+                        || collisionPoint.Z <= characterPos.Z && moveVector.Z <= 0
+                        || collisionPoint.Z >= characterPos.Z && moveVector.Z >= 0
+                        )
                     {
-                        // If we're already on the floor, move like we're walking on the floor.
-                        velocity.Y = 0;
-                        climbVelocity = 0;
-                        shouldApplyClimbVelocity = false;
+                        climbVelocity = Speed * timingAdjustment;
                     }
                     else
                     {
                         climbVelocity = -Speed * timingAdjustment;
                     }
+
+                    /*
+                    // For some reason, the reverse of the above is true (this is likely a bug), so the sign is switched from greater than to less than for now.
+                    if (ForwardValue < 0)
+                    {
+                        climbVelocity = Speed * timingAdjustment;
+                    }
+                    else if (ForwardValue == 0)
+                    {
+                        climbVelocity = 0;
+                    }
+                    else
+                    {
+                        if (isOnFloor)
+                        {
+                            // If we're already on the floor, move like we're walking on the floor.
+                            velocity.Y = 0;
+                            climbVelocity = 0;
+                            shouldApplyClimbVelocity = false;
+                        }
+                        else
+                        {
+                            climbVelocity = -Speed * timingAdjustment;
+                        }
+                    }
+                    */
                 }
 
                 if (shouldApplyClimbVelocity)
