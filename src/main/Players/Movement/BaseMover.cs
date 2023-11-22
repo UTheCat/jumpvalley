@@ -240,6 +240,7 @@ namespace Jumpvalley.Players.Movement
             {
                 IsClimbing = canClimb;
             };
+            AddChild(CurrentClimber);
         }
 
         /// <summary>
