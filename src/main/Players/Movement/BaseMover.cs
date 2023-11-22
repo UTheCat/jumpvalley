@@ -235,6 +235,11 @@ namespace Jumpvalley.Players.Movement
             IsRunning = false;
             Rotator = new BodyRotator();
             CurrentClimber = new Climber(null);
+
+            CurrentClimber.OnCanClimbChanged += (object _o, bool canClimb) =>
+            {
+                IsClimbing = canClimb;
+            };
         }
 
         /// <summary>
@@ -495,6 +500,11 @@ namespace Jumpvalley.Players.Movement
         {
             SetPhysicsProcess(false);
             QueueFree();
+
+            // Currently, the Climber being used in this class is created during BaseMover's instantiation and from nowhere else
+            CurrentClimber.Dispose();
+            CurrentClimber = null;
+
             base.Dispose();
         }
 
