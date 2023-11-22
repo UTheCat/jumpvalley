@@ -329,10 +329,10 @@ namespace Jumpvalley.Players.Movement
                     float moveVectorZ = moveVector.Z;
 
                     if (
-                        collisionPoint.X <= characterPos.X && moveVector.X <= 0
-                        || collisionPoint.X >= characterPos.X && moveVector.X >= 0
-                        || collisionPoint.Z <= characterPos.Z && moveVector.Z <= 0
-                        || collisionPoint.Z >= characterPos.Z && moveVector.Z >= 0
+                        collisionPoint.X <= characterPos.X && moveVectorX <= 0
+                        || collisionPoint.X >= characterPos.X && moveVectorX >= 0
+                        || collisionPoint.Z <= characterPos.Z && moveVectorZ <= 0
+                        || collisionPoint.Z >= characterPos.Z && moveVectorZ >= 0
                         )
                     {
                         climbVelocity = Speed * timingAdjustment;
