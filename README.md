@@ -2,7 +2,7 @@
 
 This is a 3D-platformer made with the [Godot Engine](https://godotengine.org) based on the hardcore platformer, [Juke's Towers of Hell](https://www.roblox.com/games/8562822414/Jukes-Towers-of-Hell). Yes, this means you will not need to be connected to the internet while playing an obstacle course that runs on Jumpvalley!
 
-Currently, it's a work in progress. A lot of basic features, such as a menu, being able to load other obstacle courses, and climbing have yet to be implemented.
+Currently, it's a work in progress. A lot of basic features, such as a menu, being able to load other obstacle courses (other than the ones present when you first load the game), and various mechanics such as spinners have yet to be implemented.
 
 Though if you want to test it, it is playable. There's currently a small obstacle course you can try out. For the most part, the control scheme is the same as the one in Juke's Towers of Hell.
 
