@@ -33,20 +33,25 @@ namespace Jumpvalley.Players.Movement
             RUNNING = 2,
 
             /// <summary>
+            /// The character is moving upward, but not at the user's request (e.g. the character is moving upward while <see cref="IsJumping"/> and <see cref="IsClimbing"/> are both false)
+            /// </summary>
+            RISING = 3,
+
+            /// <summary>
             /// The character is jumping.
             /// A character is jumping only while <see cref="IsJumping"/> is set to true and the character is moving upward.
             /// </summary>
-            JUMPING = 3,
+            JUMPING = 4,
 
             /// <summary>
             /// The character is climbing something
             /// </summary>
-            CLIMBING = 4,
+            CLIMBING = 5,
 
             /// <summary>
             /// The character is falling down
             /// </summary>
-            FALLING = 5
+            FALLING = 6
         }
 
         private static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
@@ -370,6 +375,10 @@ namespace Jumpvalley.Players.Movement
                 else if (IsClimbing)
                 {
                     CurrentBodyState = BodyState.CLIMBING;
+                }
+                else if (IsJumping == false && actualVelocity.Y > 0)
+                {
+                    CurrentBodyState = BodyState.RISING;
                 }
                 else if (actualVelocity.Y < 0)
                 {
