@@ -47,10 +47,30 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public PhysicsBody3D CurrentlyClimbedObject { get; private set; } = null;
 
+        private CollisionShape3D _hitbox;
+
         /// <summary>
         /// The character's hitbox that this <see cref="Climber"/> is associated with.
         /// </summary>
-        public CollisionShape3D Hitbox;
+        public CollisionShape3D Hitbox
+        {
+            get => _hitbox;
+            set
+            {
+                CollisionShape3D oldHitbox = _hitbox;
+                if (oldHitbox != null)
+                {
+                    oldHitbox.RemoveChild(rayCast);
+                }
+
+                _hitbox = value;
+                
+                if (value != null)
+                {
+                    value.AddChild(rayCast);
+                }
+            }
+        }
 
         /// <summary>
         /// Creates a new instance of <see cref="Climber"/>
@@ -59,14 +79,13 @@ namespace Jumpvalley.Players.Movement
         {
             Name = $"{nameof(Climber)}_{GetHashCode()}";
 
-            Hitbox = hitbox;
-
             rayCast = new RayCast3D();
             rayCast.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(rayCast)}";
             rayCast.HitFromInside = true;
 
+            Hitbox = hitbox;
+
             updateRayCast();
-            hitbox.AddChild(rayCast);
         }
 
         /// <summary>
@@ -82,7 +101,10 @@ namespace Jumpvalley.Players.Movement
 
         private void updateRayCast()
         {
-            BoxShape3D collisionBox = Hitbox.Shape as BoxShape3D;
+            CollisionShape3D hitbox = Hitbox;
+            if (hitbox == null) return;
+
+            BoxShape3D collisionBox = hitbox.Shape as BoxShape3D;
 
             // For now, only box-shaped hitboxes will work.
             if (collisionBox == null) return;
