@@ -6,6 +6,8 @@ Currently, it's a work in progress. A lot of basic features, such as a menu, bei
 
 Though if you want to test it, it is playable. There's currently a small obstacle course you can try out. For the most part, the control scheme is the same as the one in Juke's Towers of Hell.
 
+**Important:** While it is currently possible to make an obstacle course in Jumpvalley with the Godot Editor, backwards-compatibility is subject to being broken while Jumpvalley is still in major version zero (0.x.x). This is because level behavior hasn't been set in stone yet. If you want to prevent your level from being broken between minor versions, please wait until Jumpvalley has reached major version one (1.0.0).
+
 ## Credits
 
 The ```addons``` folder contains assets made by 3rd-parties. They're super useful in this project because not only do I not have the skill, time, and/or resources to make a lot of these assets, but they also allow me to speed up development and testing using resources that the creators of these assets have allowed others to use.
@@ -20,10 +22,8 @@ Assets under the ```addons``` folder are covered by different licenses (especial
 
 ## Getting started with the project itself
 
-This project is currently being made using the .NET-Enabled version of Godot v4.1.2.
+This project is currently being made using the .NET-Enabled version of Godot v4.1.3.
 
 If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of .NET-Enabled Godot v4.1.2 [here](https://godotengine.org/download).
 
-Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.1.2 and open your copy of this repository's ```project.godot``` file.
-
-**Important:** While it is currently possible to make an obstacle course in Jumpvalley with the Godot Editor, backwards-compatibility is subject to being broken while Jumpvalley is still in major version zero (0.x.x). This is because level behavior hasn't been set in stone yet. If you want to prevent your level from being broken between minor versions, please wait until Jumpvalley has reached major version one (1.0.0).
+Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.1.3 and open your copy of this repository's ```project.godot``` file.
