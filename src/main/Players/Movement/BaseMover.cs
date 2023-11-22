@@ -339,7 +339,17 @@ namespace Jumpvalley.Players.Movement
                     }
                     else
                     {
-                        climbVelocity = -Speed * timingAdjustment;
+                        if (isOnFloor)
+                        {
+                            // If we're already on the floor, move like we're walking on the floor.
+                            velocity.Y = 0;
+                            climbVelocity = 0;
+                            shouldApplyClimbVelocity = false;
+                        }
+                        else
+                        {
+                            climbVelocity = -Speed * timingAdjustment;
+                        }
                     }
 
                     /*
