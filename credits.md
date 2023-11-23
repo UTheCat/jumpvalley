@@ -4,7 +4,7 @@ Thanks to the creators of the assets listed below for making these beautiful ass
 
 ## Decals
 
-- [Kenney Prototype Textures by Kenney](https://godotengine.org/asset-library/asset/780) (the artist's donation page can be found [here](https://kenney.itch.io/kenney-donation))
+- [Kenney Prototype Textures by Kenney](https://godotengine.org/asset-library/asset/780) (Kenney's donation page can be found [here](https://kenney.itch.io/kenney-donation))
 - [Music Note Icon by Google](https://fonts.google.com/icons?selected=Material%20Icons%20Round%3Amusic_note%3A)
 - [More Horizontal Icon by Google](https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Amore_horiz%3A)
 
