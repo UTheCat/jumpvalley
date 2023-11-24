@@ -2,12 +2,6 @@
   "profiles": {
     "jumpvalley": {
       "commandName": "Project"
-    },
-    "jumpvalley_debug": {
-      "commandName": "Executable",
-      "executablePath": "Godot_v4.1.1-stable_mono_win64_console.exe",
-      "workingDirectory": ".",
-      "nativeDebugging": true
     }
   }
 }
