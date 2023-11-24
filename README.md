@@ -4,7 +4,15 @@ This is a 3D-platformer made with the [Godot Engine](https://godotengine.org) ba
 
 Currently, it's a work in progress. A lot of basic features, such as a menu, being able to load other obstacle courses (other than the ones present when you first load the game), and various mechanics such as spinners have yet to be implemented.
 
-Though if you want to test it, it is playable. There's currently a small obstacle course you can try out. For the most part, the control scheme is the same as the one in Juke's Towers of Hell.
+Though if you want to test it, it is playable. There's currently a small obstacle course you can try out. For the most part, the control scheme is the same as the one in Juke's Towers of Hell (with the main exception being the ability to truss-boost as done in [Flood Escape 2](https://www.roblox.com/games/738339342/Flood-Escape-2)).
+
+**Update (Nov 23, 2023):** This project seems to have gained recognition sooner than I expected. At the moment, I expect that the current player movement scheme, specifically with climbing, will likely change.
+
+It will still function similar to Juke's Towers of Hell and Flood Escape 2. However, climbing works a little different from these two games. I plan to talk in various Discord servers about how I should make the climbing work, though this will have to come at a later time due to time constraints.
+
+I should also let people know that ```Jumpvalley v0.2.0``` in the Releases section is *outdated* and does not contain the code that allows your character to climb stuff. This is because I plan to release this as part of a later update to Jumpvalley.
+
+If you want to try out the climbing stuff for yourself, you will have to download the source code from [this commit](https://github.com/UTheDev/jumpvalley/tree/968d217c4981207cfda47e90490d3f2a38697ca8) and follow the instructions in the Getting Started section at the bottom of this README to run it.
 
 **Important:** While it is currently possible to make an obstacle course in Jumpvalley with the Godot Editor, backwards-compatibility is subject to being broken while Jumpvalley is still in major version zero (0.x.x). This is because level behavior hasn't been set in stone yet. If you want to prevent your level from being broken between minor versions, please wait until Jumpvalley has reached major version one (1.0.0).
 
@@ -27,3 +35,5 @@ This project is currently being made using the .NET-Enabled version of Godot v4.
 If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of .NET-Enabled Godot v4.1.3 [here](https://godotengine.org/download).
 
 Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.1.3 and open your copy of this repository's ```project.godot``` file.
+
+In order to run the project, there's a play button near the top-right corner of the window. Click it to run the project.
