@@ -4,7 +4,7 @@ This is a 3D-platformer made with the [Godot Engine](https://godotengine.org) ba
 
 Currently, it's a work in progress. A lot of basic features, such as a menu, being able to load other obstacle courses (other than the ones present when you first load the game), and various mechanics such as spinners have yet to be implemented.
 
-Though if you want to test it, it is playable. There's currently a small obstacle course you can try out. For the most part, the control scheme is the same as the one in Juke's Towers of Hell (with the main exception being the ability to truss-boost as done in [Flood Escape 2](https://www.roblox.com/games/738339342/Flood-Escape-2)).
+Though if you want to test it, it is playable. There's currently a small obstacle course you can try out. For the most part, the control scheme is the same as the one in Juke's Towers of Hell (with the main exception being the ability to ladder-boost as done in [Flood Escape 2](https://www.roblox.com/games/738339342/Flood-Escape-2)).
 
 **Important:** While it is currently possible to make an obstacle course in Jumpvalley with the Godot Editor, backwards-compatibility is subject to being broken while Jumpvalley is still in major version zero (0.x.x). This is because level behavior hasn't been set in stone yet. If you want to prevent your level from being broken between minor versions, please wait until Jumpvalley has reached major version one (1.0.0).
 
