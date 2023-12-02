@@ -174,6 +174,50 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="LevelTimer" type="Control" parent="PrimaryGui"]
+anchors_preset = 0
+offset_top = 76.0
+offset_right = 200.0
+offset_bottom = 112.0
+
+[node name="Background" type="Panel" parent="PrimaryGui/LevelTimer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimerText" type="Label" parent="PrimaryGui/LevelTimer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.25
+anchor_right = 0.7
+anchor_bottom = 1.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_jfe1u")
+theme_override_font_sizes/font_size = 27
+text = "0:00"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="TimerTextMs" type="Label" parent="PrimaryGui/LevelTimer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.71
+anchor_top = 0.47
+anchor_right = 1.0
+anchor_bottom = 0.92
+theme_override_colors/font_color = Color(0.901961, 0.901961, 0.901961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_jfe1u")
+theme_override_font_sizes/font_size = 10
+text = ".000
+"
+vertical_alignment = 2
+
 [node name="Player" parent="." instance=ExtResource("9_1wvm3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
 
