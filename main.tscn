@@ -41,7 +41,7 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
 [sub_resource type="Gradient" id="Gradient_dst2d"]
-offsets = PackedFloat32Array(0, 0.814103, 1)
+offsets = PackedFloat32Array(0, 0.75, 1)
 colors = PackedColorArray(0, 0, 0, 0.501961, 0, 0, 0, 0.501961, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_x5mnx"]
@@ -192,10 +192,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture1D_x5mnx")
+expand_mode = 1
 
 [node name="TimerText" type="Label" parent="PrimaryGui/LevelTimer"]
 layout_mode = 1
