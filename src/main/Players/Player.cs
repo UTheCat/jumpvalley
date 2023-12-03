@@ -8,7 +8,6 @@ using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
 using Jumpvalley.Testing;
-using Jumpvalley.Timing;
 
 namespace Jumpvalley.Players
 {
@@ -59,6 +58,11 @@ namespace Jumpvalley.Players
         /// The primary node that handles the player's camera
         /// </summary>
         public BaseCamera Camera { get; private set; }
+
+        /// <summary>
+        /// The GUI node that displays how long the player has been in a certain level
+        /// </summary>
+        //public LevelTimer LevelTimerOperator { get; private set; }
 
         /// <summary>
         /// Objects that will get disposed of once the current Player instance gets Dispose()'d.
@@ -162,8 +166,13 @@ namespace Jumpvalley.Players
             // This is why it's important to make the input refresh rate independent from display refresh rate.
             Input.UseAccumulatedInput = false;
 
-            // misc testing stuff
-            LevelLoadingTest levelLoadingTest = new LevelLoadingTest("res://levels/demo_platformer", RootNode.GetNode("Levels"));
+            // test level loading
+            LevelLoadingTest levelLoadingTest = new LevelLoadingTest(
+                "res://levels/demo_platformer",
+                RootNode.GetNode("Levels"),
+                Tree,
+                PrimaryGui.GetNode("LevelTimer")
+                );
             Disposables.Add(levelLoadingTest);
             levelLoadingTest.Start();
 
@@ -171,6 +180,7 @@ namespace Jumpvalley.Players
             fpsLimiter.IsRunning = true;
             RootNode.AddChild(fpsLimiter);
 
+            /*
             SpeedrunTimeFormatter speedrunTimeFormatter = new SpeedrunTimeFormatter();
 
             void TestSpeedrunTimeFormatter(double elapsedTime)
@@ -197,6 +207,7 @@ namespace Jumpvalley.Players
             TestSpeedrunTimeFormatter(652.999);
             TestSpeedrunTimeFormatter(6339.999);
             TestSpeedrunTimeFormatter(59163.999);
+            */
 
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
