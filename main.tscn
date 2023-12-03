@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=37 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -8,6 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="6_3wnu8"]
 [ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://addons/icons/music_note_white_24dp.svg" id="7_yvovy"]
 [ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="8_jfe1u"]
+[ext_resource type="PackedScene" uid="uid://kou88p3rb0fq" path="res://gui/level_timer.tscn" id="9_1cbro"]
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/player.tscn" id="9_1wvm3"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="10_3umga"]
 [ext_resource type="Texture2D" uid="uid://dcxkj8m3ltdl8" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="11_rd65f"]
@@ -39,13 +40,6 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
-
-[sub_resource type="Gradient" id="Gradient_dst2d"]
-offsets = PackedFloat32Array(0, 0.75, 1)
-colors = PackedColorArray(0, 0, 0, 0.501961, 0, 0, 0, 0.501961, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_x5mnx"]
-gradient = SubResource("Gradient_dst2d")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb1uo"]
 albedo_texture = ExtResource("11_rd65f")
@@ -181,51 +175,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="LevelTimer" type="Control" parent="PrimaryGui"]
-anchors_preset = 0
-offset_top = 76.0
-offset_right = 200.0
-offset_bottom = 112.0
-
-[node name="Background" type="TextureRect" parent="PrimaryGui/LevelTimer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.4
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_x5mnx")
-expand_mode = 1
-
-[node name="TimerText" type="Label" parent="PrimaryGui/LevelTimer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.7
-anchor_bottom = 1.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("8_jfe1u")
-theme_override_font_sizes/font_size = 27
-text = "0:00"
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="TimerTextMs" type="Label" parent="PrimaryGui/LevelTimer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.71
-anchor_right = 1.0
-anchor_bottom = 0.9
-theme_override_colors/font_color = Color(0.901961, 0.901961, 0.901961, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("8_jfe1u")
-theme_override_font_sizes/font_size = 12
-text = ".000
-"
-vertical_alignment = 2
+[node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
 
 [node name="Player" parent="." instance=ExtResource("9_1wvm3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
