@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=38 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -40,8 +40,12 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ge1js"]
-bg_color = Color(0, 0, 0, 0.501961)
+[sub_resource type="Gradient" id="Gradient_dst2d"]
+offsets = PackedFloat32Array(0, 0.814103, 1)
+colors = PackedColorArray(0, 0, 0, 0.501961, 0, 0, 0, 0.501961, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x5mnx"]
+gradient = SubResource("Gradient_dst2d")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb1uo"]
 albedo_texture = ExtResource("11_rd65f")
@@ -183,14 +187,15 @@ offset_top = 76.0
 offset_right = 200.0
 offset_bottom = 112.0
 
-[node name="Background" type="Panel" parent="PrimaryGui/LevelTimer"]
+[node name="Background" type="TextureRect" parent="PrimaryGui/LevelTimer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 56.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ge1js")
+texture = SubResource("GradientTexture1D_x5mnx")
 
 [node name="TimerText" type="Label" parent="PrimaryGui/LevelTimer"]
 layout_mode = 1
