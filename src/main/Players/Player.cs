@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Godot;
 
 using Jumpvalley.Music;
@@ -9,6 +8,7 @@ using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
 using Jumpvalley.Testing;
+using Jumpvalley.Timing;
 
 namespace Jumpvalley.Players
 {
@@ -170,6 +170,33 @@ namespace Jumpvalley.Players
             RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
             fpsLimiter.IsRunning = true;
             RootNode.AddChild(fpsLimiter);
+
+            SpeedrunTimeFormatter speedrunTimeFormatter = new SpeedrunTimeFormatter();
+
+            void TestSpeedrunTimeFormatter(double elapsedTime)
+            {
+                speedrunTimeFormatter.ElapsedTime = elapsedTime;
+                Console.WriteLine(speedrunTimeFormatter.GetSpeedrunFormatTime(3));
+            }
+
+            TestSpeedrunTimeFormatter(0);
+            TestSpeedrunTimeFormatter(0.0001);
+            TestSpeedrunTimeFormatter(0.001);
+            TestSpeedrunTimeFormatter(0.005);
+            TestSpeedrunTimeFormatter(0.05);
+            TestSpeedrunTimeFormatter(0.5);
+            TestSpeedrunTimeFormatter(5);
+            TestSpeedrunTimeFormatter(6.1);
+            TestSpeedrunTimeFormatter(51.5);
+            TestSpeedrunTimeFormatter(63.3);
+            TestSpeedrunTimeFormatter(63.999);
+            TestSpeedrunTimeFormatter(68.34);
+            TestSpeedrunTimeFormatter(68.345);
+            TestSpeedrunTimeFormatter(68.828);
+            TestSpeedrunTimeFormatter(351.999);
+            TestSpeedrunTimeFormatter(652.999);
+            TestSpeedrunTimeFormatter(6339.999);
+            TestSpeedrunTimeFormatter(59163.999);
 
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);

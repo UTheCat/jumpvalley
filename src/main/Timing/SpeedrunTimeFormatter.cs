@@ -3,7 +3,8 @@
 namespace Jumpvalley.Timing
 {
     /// <summary>
-    /// For a given number of seconds, this class helps to format that number into the speedrun time format (minutes:seconds.milliseconds).
+    /// For a given number of seconds, this class helps to format that number into the speedrun time format (minutes:seconds.fractional_seconds).
+    /// <c>fractional_seconds</c> is the fractional part of ElapsedTime that's to the right of the decimal point.
     /// </summary>
     public partial class SpeedrunTimeFormatter
     {
@@ -11,7 +12,7 @@ namespace Jumpvalley.Timing
 
         /// <summary>
         /// The amount of elapsed time in seconds.
-        /// Updating this value will also update the <see cref="Minutes"/>, <see cref="Seconds"/>, and <see cref="Milliseconds"/> variables to the corresponding values.
+        /// Updating this value will also update the <see cref="Minutes"/> and <see cref="Seconds"/> variables to the corresponding values.
         /// </summary>
         public double ElapsedTime
         {
@@ -20,8 +21,7 @@ namespace Jumpvalley.Timing
             {
                 _elapsedTime = value;
                 Minutes = Math.Floor(value / 60);
-                Seconds = (int)Math.Floor(value - Minutes * 60);
-                Milliseconds = (int)Math.Floor((value - Minutes * 60 - Seconds * 60) * 1000);
+                Seconds = value - Minutes * 60;
             }
         }
 
@@ -33,23 +33,31 @@ namespace Jumpvalley.Timing
 
         /// <summary>
         /// Amount of seconds in the elapsed time.
-        /// This number does not include the number of whole minutes or the number of milliseconds.
+        /// This number does not include the number of whole minutes.
+        /// In other words, it's equal to ElapsedTime - (floor(ElapsedTime / 60) * 60).
         /// </summary>
-        public int Seconds { get; private set; }
+        public double Seconds { get; private set; }
 
         /// <summary>
-        /// Amount of milliseconds in the elapsed time.
-        /// This number does not include the number of whole minutes or the whole number of seconds that have passed within the elapsed time,
-        /// and so this number cannot be greater than 999.
+        /// Formats <see cref="ElapsedTime"/> into speedrun time format (minutes:seconds.fractional_seconds).
         /// </summary>
-        public int Milliseconds { get; private set; }
-
+        /// <param name="fractionalSecondsNumDigits">The number of digits displayed in the fractional_seconds part of the speedrun time string.</param>
         /// <returns>
-        /// The elapsed time specified in <see cref="ElapsedTime"/> formatted in (minutes:seconds.milliseconds).
+        /// The elapsed time specified in <see cref="ElapsedTime"/> formatted in (minutes:seconds.fractional_seconds).
         /// </returns>
-        public string GetSpeedrunFormatTime()
+        public string GetSpeedrunFormatTime(int fractionalSecondsNumDigits)
         {
-            return $"{Minutes}:{Seconds.ToString("D2")}.{Milliseconds}";
+            // The zero that's appended to the left of the seconds count,
+            // in case it happens to be less than 10.
+            // The formatted time would otherwise be incorrect as the integer part of the seconds count
+            // should always be two digits long.
+            string appendedZero = "";
+            if (Seconds < 10)
+            {
+                appendedZero = "0";
+            }
+
+            return $"{(int)Minutes}:{appendedZero}{Seconds.ToString($"F{fractionalSecondsNumDigits}")}";
         }
 
         public SpeedrunTimeFormatter() { }
