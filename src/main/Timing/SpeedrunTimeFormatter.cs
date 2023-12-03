@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jumpvalley.Time
+namespace Jumpvalley.Timing
 {
     /// <summary>
     /// For a given number of seconds, this class helps to format that number into the speedrun time format (minutes:seconds.milliseconds).
