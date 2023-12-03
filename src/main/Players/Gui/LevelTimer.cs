@@ -42,6 +42,9 @@ namespace Jumpvalley.Players.Gui
                     // (aka, number of milliseconds is displayed to the right of the decimal point)
                     string[] tcSecondsString = tcSeconds.ToString("F3").Split(".");
 
+                    // just in case
+                    if (tcSecondsString.Length < 2) return;
+
                     timerText.Text = $"{timeCounter.Minutes}:{appendedZero}{tcSecondsString[0]}";
                     timerTextMs.Text = $".{tcSecondsString[1]}";
                 }
