@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=37 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -39,6 +39,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ge1js"]
+bg_color = Color(0, 0, 0, 0.501961)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb1uo"]
 albedo_texture = ExtResource("11_rd65f")
@@ -187,6 +190,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ge1js")
 
 [node name="TimerText" type="Label" parent="PrimaryGui/LevelTimer"]
 layout_mode = 1
@@ -197,6 +201,7 @@ anchor_right = 0.7
 anchor_bottom = 1.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("8_jfe1u")
 theme_override_font_sizes/font_size = 27
 text = "0:00"
@@ -212,6 +217,7 @@ anchor_right = 1.0
 anchor_bottom = 0.92
 theme_override_colors/font_color = Color(0.901961, 0.901961, 0.901961, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("8_jfe1u")
 theme_override_font_sizes/font_size = 10
 text = ".000
