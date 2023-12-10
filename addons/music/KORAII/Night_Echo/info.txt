@@ -1,3 +1,0 @@
-name: Night Echo
-artists: KORAII
-audio_path: 672358_Night-Echo.mp3

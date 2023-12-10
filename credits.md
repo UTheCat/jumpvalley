@@ -10,7 +10,7 @@ Thanks to the creators of the assets listed below for making these beautiful ass
 
 ## Music
 
-- [KORAII - Night Echo](https://www.newgrounds.com/audio/listen/672358)
+- [Pahgawk - Shivers](https://www.newgrounds.com/audio/listen/1215548)
 - [ParagonX9 - Blue Marine](https://www.newgrounds.com/audio/listen/406155)
 
 ## Misc

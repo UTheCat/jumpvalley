@@ -1,0 +1,4 @@
+name: Shivers
+artists: Pahgawk
+audio_path: audio.mp3
+audio_url: https://www.newgrounds.com/audio/listen/1215548

@@ -373,6 +373,6 @@ shape = SubResource("BoxShape3D_5ddbb")
 [node name="PrimaryMusic" type="Node" parent="Music"]
 
 [node name="Music" type="Node" parent="Music/PrimaryMusic"]
-metadata/song1 = "res://addons/music/KORAII/Night_Echo"
+metadata/song1 = "res://addons/music/1215548_Shivers"
 
 [node name="MusicZones" type="Node3D" parent="Music"]
