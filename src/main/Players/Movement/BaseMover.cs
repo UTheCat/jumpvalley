@@ -489,6 +489,7 @@ namespace Jumpvalley.Players.Movement
                     // the direction of the character should be determined by the yaw corresponding to the move vector
                     // relative to the camera yaw.
                     rotator.Yaw = GetYaw() + (float)Math.Atan2(-RightValue, -ForwardValue);
+                    rotator.GradualTurnEnabled = !IsClimbing;
                     rotator.Update(delta);
                 }
             }

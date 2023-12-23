@@ -35,6 +35,11 @@ namespace Jumpvalley.Players.Movement
         public bool TurnsInstantly = false;
 
         /// <summary>
+        /// Whether or not the body should gradually turn to the target yaw angle when <see cref="TurnsInstantly"/> is off.
+        /// </summary>
+        public bool GradualTurnEnabled = true;
+
+        /// <summary>
         /// Creates a new instance of <see cref="BodyRotator"/>
         /// </summary>
         /// <param name="body">The Node3D (representing the body) to rotate</param>
@@ -67,7 +72,10 @@ namespace Jumpvalley.Players.Movement
                     }
                     else
                     {
-                        rotation.Y = Mathf.LerpAngle(rotY, yaw, Speed * (float)delta);
+                        if (GradualTurnEnabled)
+                        {
+                            rotation.Y = Mathf.LerpAngle(rotY, yaw, Speed * (float)delta);
+                        }
                         //Console.WriteLine("Current yaw: " + rotation.Y);
                     }
                     body.Rotation = rotation;
