@@ -11,7 +11,7 @@ Thanks to the creators of the assets listed below for making these beautiful ass
 ## Music
 
 - [Pahgawk - Shivers](https://www.newgrounds.com/audio/listen/1215548)
-- [ParagonX9 - Blue Marine](https://www.newgrounds.com/audio/listen/406155)
+- [KORAII - The Trail](https://www.newgrounds.com/audio/listen/1139009)
 
 ## Misc
 

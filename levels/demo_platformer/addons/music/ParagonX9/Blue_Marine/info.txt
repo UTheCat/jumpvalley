@@ -1,4 +1,0 @@
-name: Blue Marine
-artists: Paragon X9
-audio_path: audio.mp3
-audio_url: https://www.newgrounds.com/audio/listen/406155

@@ -10,9 +10,9 @@ size = Vector3(1, 50, 1)
 size = Vector3(1, 50, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tgd70"]
-size = Vector3(50, 50, 50)
+size = Vector3(50, 100, 50)
 
-[node name="PlatformerTest" type="Node3D"]
+[node name="DemoPlatformer" type="Node3D"]
 
 [node name="Interactives" type="Node3D" parent="."]
 
@@ -79,12 +79,12 @@ shape = SubResource("BoxShape3D_huyba")
 [node name="MusicZone1" type="Node3D" parent="Music/MusicZones"]
 
 [node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
-metadata/song1 = "res://levels/demo_platformer/addons/music/ParagonX9/Blue_Marine"
+metadata/song1 = "res://levels/demo_platformer/addons/music/1139009_The-Trail"
 
 [node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone1"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Music/MusicZones/MusicZone1/ZoneParts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, 22.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.5, 22.5)
 visible = false
 mesh = SubResource("BoxMesh_tgd70")
 
