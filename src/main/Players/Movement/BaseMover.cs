@@ -342,7 +342,7 @@ namespace Jumpvalley.Players.Movement
                     // In this case, the x-coordinate of the collision point will always be greater than the character's position x-coordinate until the collision point moves.
                     // Because of this, if you tried to move right, you would climb up.
                     //
-                    // This bug is somewhat miniscule however.
+                    // While this should probably be fixed, this bug is somewhat miniscule.
                     // This is due to the fact that in Juke's Towers of Hell and games alike,
                     // you can't climb up or down by trying to move left or right when your camera is basically facing the climbable object.
                     if (
