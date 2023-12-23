@@ -334,11 +334,22 @@ namespace Jumpvalley.Players.Movement
                     float moveVectorX = moveVector.X;
                     float moveVectorZ = moveVector.Z;
 
+                    // Discovered a bug while testing: climbing up seems to be a little buggy.
+                    // The bug occurs in cases where the player does not hit a climbable object at a perpendicular angle (or somewhere really close).
+                    // In this case, one of the conditions that compare a collision point coordinate with the character's position coordinate could always be true.
+                    //
+                    // For example, assume your character's yaw angle is -0.05 radians when your character gets into climbing position.
+                    // In this case, the x-coordinate of the collision point will always be greater than the character's position x-coordinate until the collision point moves.
+                    // Because of this, if you tried to move right, you would climb up.
+                    //
+                    // This bug is somewhat miniscule however.
+                    // This is due to the fact that in Juke's Towers of Hell and games alike,
+                    // you can't climb up or down by trying to move left or right when your camera is basically facing the climbable object.
                     if (
-                        collisionPoint.X <= characterPos.X && moveVectorX <= 0
-                        || collisionPoint.X >= characterPos.X && moveVectorX >= 0
-                        || collisionPoint.Z <= characterPos.Z && moveVectorZ <= 0
-                        || collisionPoint.Z >= characterPos.Z && moveVectorZ >= 0
+                        (collisionPoint.X <= characterPos.X && moveVectorX <= 0)
+                        || (collisionPoint.X >= characterPos.X && moveVectorX >= 0)
+                        || (collisionPoint.Z <= characterPos.Z && moveVectorZ <= 0)
+                        || (collisionPoint.Z >= characterPos.Z && moveVectorZ >= 0)
                         )
                     {
                         climbVelocity = Speed * timingAdjustment;
