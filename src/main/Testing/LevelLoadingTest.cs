@@ -1,6 +1,7 @@
 ﻿using System;
 using Godot;
 using Jumpvalley.Levels;
+using Jumpvalley.Players;
 using Jumpvalley.Players.Gui;
 
 namespace Jumpvalley.Testing
@@ -16,13 +17,15 @@ namespace Jumpvalley.Testing
         public SceneTree RootNodeTree;
         public Level CurrentLevel;
         public LevelTimer LevelTimerOperator;
+        public Player CurrentPlayer;
 
-        public LevelLoadingTest(string levelPath, Node rootNodeParent, SceneTree rootNodeTree, Node levelTimerGui)
+        public LevelLoadingTest(string levelPath, Node rootNodeParent, SceneTree rootNodeTree, Node levelTimerGui, Player player)
         {
             LevelDirPath = levelPath;
             RootNodeParent = rootNodeParent;
             RootNodeTree = rootNodeTree;
             LevelTimerOperator = new LevelTimer(levelTimerGui);
+            CurrentPlayer = player;
         }
 
         private void UpdateLevelTimer()
@@ -77,6 +80,7 @@ namespace Jumpvalley.Testing
             }
 
             CurrentLevel = level;
+            level.Runner = new LevelRunner(CurrentPlayer);
 
             Package.StartLevel();
             RootNodeParent?.AddChild(level.RootNode);

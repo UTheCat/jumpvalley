@@ -171,7 +171,8 @@ namespace Jumpvalley.Players
                 "res://levels/demo_platformer",
                 RootNode.GetNode("Levels"),
                 Tree,
-                PrimaryGui.GetNode("LevelTimer")
+                PrimaryGui.GetNode("LevelTimer"),
+                this
                 );
             Disposables.Add(levelLoadingTest);
             levelLoadingTest.Start();
