@@ -166,7 +166,7 @@ namespace Jumpvalley.Levels
         /// </summary>
         public void StartLevel()
         {
-            if (LevelInstance == null)
+            if (LevelInstance != null)
             {
                 if (!LevelInstance.IsInitialized)
                 {

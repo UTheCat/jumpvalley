@@ -131,29 +131,25 @@ namespace Jumpvalley.Levels
 
         private void ToggleMusic(bool shouldPlay)
         {
-            Node music = Music;
-            if (music != null)
+            LevelRunner runner = Runner;
+            if (runner != null)
             {
-                LevelRunner runner = Runner;
-                if (runner != null)
-                {
-                    Player player = runner.CurrentPlayer;
+                Player player = runner.CurrentPlayer;
 
-                    if (player != null)
+                if (player != null)
+                {
+                    MusicZonePlayer musicPlayer = player.CurrentMusicPlayer;
+                    if (musicPlayer != null)
                     {
-                        MusicZonePlayer musicPlayer = player.CurrentMusicPlayer;
-                        if (musicPlayer != null)
+                        foreach (MusicZone zone in MusicZones)
                         {
-                            foreach (MusicZone zone in MusicZones)
+                            if (shouldPlay)
                             {
-                                if (shouldPlay)
-                                {
-                                    musicPlayer.Add(zone);
-                                }
-                                else
-                                {
-                                    musicPlayer.Remove(zone);
-                                }
+                                musicPlayer.Add(zone);
+                            }
+                            else
+                            {
+                                musicPlayer.Remove(zone);
                             }
                         }
                     }
