@@ -97,13 +97,13 @@ size = Vector3(6, 8, 1)
 size = Vector3(6, 8, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f5vrs"]
-height = 6.0
+height = 6.5
 radius = 1.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_h17i4"]
 top_radius = 1.0
 bottom_radius = 1.0
-height = 6.0
+height = 0.5
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_y5nob")
@@ -379,14 +379,44 @@ shape = SubResource("BoxShape3D_5ddbb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1.5, -15.5)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Lobby/CylindricalLadder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 metadata/is_climbable = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/CylindricalLadder/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("CylinderShape3D_f5vrs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lobby/CylindricalLadder"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+material_override = ExtResource("14_t3s4y")
+mesh = SubResource("CylinderMesh_h17i4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Lobby/CylindricalLadder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = ExtResource("14_t3s4y")
+mesh = SubResource("CylinderMesh_h17i4")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Lobby/CylindricalLadder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+material_override = ExtResource("14_t3s4y")
+mesh = SubResource("CylinderMesh_h17i4")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Lobby/CylindricalLadder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+material_override = ExtResource("14_t3s4y")
+mesh = SubResource("CylinderMesh_h17i4")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Lobby/CylindricalLadder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
+material_override = ExtResource("14_t3s4y")
+mesh = SubResource("CylinderMesh_h17i4")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Lobby/CylindricalLadder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25, 0)
+material_override = ExtResource("14_t3s4y")
+mesh = SubResource("CylinderMesh_h17i4")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Lobby/CylindricalLadder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
 material_override = ExtResource("14_t3s4y")
 mesh = SubResource("CylinderMesh_h17i4")
 
