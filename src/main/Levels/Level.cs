@@ -96,6 +96,23 @@ namespace Jumpvalley.Levels
             Info = info;
             RootNode = root;
 
+            Interactives = root.GetNode(INTERACTIVES_NODE_NAME);
+            Music = root.GetNode(MUSIC_NODE_NAME);
+            StaticObjects = root.GetNode(STATIC_OBJECTS_NODE_NAME);
+
+            MusicZones = new List<MusicZone>();
+            if (Music != null)
+            {
+                Node musicZonesNode = Music.GetNode("MusicZones");
+                if (musicZonesNode != null)
+                {
+                    foreach (Node zoneNode in musicZonesNode.GetChildren())
+                    {
+                        MusicZones.Add(new MusicZone(zoneNode));
+                    }
+                }
+            }
+
             CurrentRunState = RunState.Stopped;
         }
 
