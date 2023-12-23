@@ -2,10 +2,9 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
+
+using Jumpvalley.Players;
+using Jumpvalley.Music;
 
 namespace Jumpvalley.Levels
 {
@@ -64,6 +63,11 @@ namespace Jumpvalley.Levels
         public Node Music { get; private set; }
 
         /// <summary>
+        /// The level's music zones
+        /// </summary>
+        public List<MusicZone> MusicZones { get; private set; }
+
+        /// <summary>
         /// The node containing the level's static objects
         /// </summary>
         public Node StaticObjects { get; private set; }
@@ -87,7 +91,7 @@ namespace Jumpvalley.Levels
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
         /// </summary>
         /// <param name="node">The root node of the level to represent</param>
-        public Level(LevelInfoFile info, Node root): base(new Stopwatch())
+        public Level(LevelInfoFile info, Node root) : base(new Stopwatch())
         {
             Info = info;
             RootNode = root;
@@ -108,6 +112,38 @@ namespace Jumpvalley.Levels
             base.Initialize();
         }
 
+        private void ToggleMusic(bool shouldPlay)
+        {
+            Node music = Music;
+            if (music != null)
+            {
+                LevelRunner runner = Runner;
+                if (runner != null)
+                {
+                    Player player = runner.CurrentPlayer;
+
+                    if (player != null)
+                    {
+                        MusicZonePlayer musicPlayer = player.CurrentMusicPlayer;
+                        if (musicPlayer != null)
+                        {
+                            foreach (MusicZone zone in MusicZones)
+                            {
+                                if (shouldPlay)
+                                {
+                                    musicPlayer.Add(zone);
+                                }
+                                else
+                                {
+                                    musicPlayer.Remove(zone);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// The level's start method. This method is called every time the user starts or restarts the level,
         /// and it's a great place to put code that will be run after initialization, but just before the level starts.
@@ -117,6 +153,10 @@ namespace Jumpvalley.Levels
             if (CurrentRunState == RunState.Playing) return;
 
             CurrentRunState = RunState.Playing;
+
+            // prepare the level's music
+            ToggleMusic(true);
+
             base.Start();
         }
 
@@ -128,6 +168,8 @@ namespace Jumpvalley.Levels
             if (CurrentRunState == RunState.Stopped) return;
 
             CurrentRunState = RunState.Stopped;
+
+            ToggleMusic(false);
             base.Stop();
         }
 
