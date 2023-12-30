@@ -1,0 +1,24 @@
+﻿using Godot;
+
+namespace Jumpvalley.Levels.Interactives
+{
+    /// <summary>
+    /// Provides some variables and methods that may assist with the development of interactives.
+    /// </summary>
+    public partial class InteractiveToolkit
+    {
+        /// <summary>
+        /// The string identifier for the number that determines the number of physics updates per second (which is 60 by default)
+        /// </summary>
+        public static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
+
+        /// <summary>
+        /// Returns the current number of physics updates per second based on whatever was defined in project settings
+        /// </summary>
+        /// <returns>The current number of physics updates per second</returns>
+        public static int GetPhysicsTicksPerSecond()
+        {
+            return ProjectSettings.GetSettingWithOverride(PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND).As<int>();
+        }
+    }
+}
