@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Godot;
+using System;
 using System.Diagnostics;
 
 namespace Jumpvalley.Levels.Interactives
@@ -6,7 +7,7 @@ namespace Jumpvalley.Levels.Interactives
     /// <summary>
     /// The base class for all Interactive types in Jumpvalley.
     /// </summary>
-    public partial class Interactive : IDisposable
+    public partial class Interactive : Node, IDisposable
     {
         /// <summary>
         /// Whether or not <see cref="Initialize"/> has been called once already
@@ -28,6 +29,7 @@ namespace Jumpvalley.Levels.Interactives
         {
             IsInitialized = false;
             Clock = clock;
+            Name = $"{nameof(Interactive)}_{GetHashCode()}";
         }
 
         /// <summary>
@@ -59,8 +61,9 @@ namespace Jumpvalley.Levels.Interactives
         /// Disposes of this <see cref="Interactive"/> instance. This method is a great place to free up resources being used by the interactive instance,
         /// especially right before the interactive itself gets freed from memory.
         /// </summary>
-        public void Dispose()
+        public new void Dispose()
         {
+            QueueFree();
             GC.SuppressFinalize(this);
         }
     }
