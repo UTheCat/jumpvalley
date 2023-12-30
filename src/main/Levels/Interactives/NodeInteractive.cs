@@ -1,4 +1,5 @@
 ﻿using Godot;
+using System;
 using System.Diagnostics;
 
 namespace Jumpvalley.Levels.Interactives
@@ -9,9 +10,21 @@ namespace Jumpvalley.Levels.Interactives
     /// </summary>
     public partial class NodeInteractive: Interactive
     {
+        /// <summary>
+        /// The Godot node being operated on
+        /// </summary>
+        public Node CurrentNode { get; private set; }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="NodeInteractive"/> for a given <see cref="Stopwatch"/> and <see cref="Node"/>
+        /// </summary>
+        /// <param name="stopwatch">The stopwatch to bind the interactive to</param>
+        /// <param name="node">The node to operate over</param>
         public NodeInteractive(Stopwatch stopwatch, Node node) : base(stopwatch)
         {
+            if (node == null) throw new ArgumentNullException("node");
 
+            CurrentNode = node;
         }
     }
 }
