@@ -26,5 +26,10 @@ namespace Jumpvalley.Levels.Interactives
 
             CurrentNode = node;
         }
+
+        /// <summary>
+        /// Event that's raised when one of the metadata of the node changes.
+        /// </summary>
+        public event EventHandler<NodeMetadataChangedArgs> NodeMetadataChanged;
     }
 }
