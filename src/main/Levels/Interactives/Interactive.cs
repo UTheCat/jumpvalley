@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Jumpvalley.Levels
+namespace Jumpvalley.Levels.Interactives
 {
     /// <summary>
     /// The base class for all Interactive types in Jumpvalley.
     /// </summary>
-    public partial class Interactive: IDisposable
+    public partial class Interactive : IDisposable
     {
         /// <summary>
         /// Whether or not <see cref="Initialize"/> has been called once already

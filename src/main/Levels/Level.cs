@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 using Jumpvalley.Players;
 using Jumpvalley.Music;
+using Jumpvalley.Levels.Interactives;
 
 namespace Jumpvalley.Levels
 {
