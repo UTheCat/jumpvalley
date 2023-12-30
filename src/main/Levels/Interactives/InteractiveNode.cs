@@ -13,7 +13,7 @@ namespace Jumpvalley.Levels.Interactives
         /// <summary>
         /// The Godot node being operated on
         /// </summary>
-        public Node CurrentNode { get; private set; }
+        public Node ActualNode { get; private set; }
 
         /// <summary>
         /// Creates a new instance of <see cref="InteractiveNode"/> for a given <see cref="Stopwatch"/> and <see cref="Node"/>
@@ -24,7 +24,7 @@ namespace Jumpvalley.Levels.Interactives
         {
             if (node == null) throw new ArgumentNullException("node");
 
-            CurrentNode = node;
+            ActualNode = node;
         }
 
         /// <summary>
