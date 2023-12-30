@@ -14,12 +14,14 @@ namespace Jumpvalley.Levels.Interactives
         public bool IsInitialized { get; protected set; }
 
         /// <summary>
-        /// The <see cref="Stopwatch"/> that the Interactive will run on
+        /// The <see cref="Stopwatch"/> that the Interactive will run on.
+        /// This Stopwatch can be used to synchronize the Interactive's various operations to whatever the current time
+        /// on the Stopwatch is.
         /// </summary>
         public Stopwatch Clock { get; private set; }
 
         /// <summary>
-        /// Creates a new instance of <see cref="Interactive"/> that will run on the given <see cref="Stopwatch"/>
+        /// Creates a new instance of <see cref="Interactive"/> that will run on the given <see cref="Stopwatch"/>.
         /// </summary>
         /// <param name="clock">The <see cref="Stopwatch"/> that the Interactive will run on</param>
         public Interactive(Stopwatch clock)
