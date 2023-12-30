@@ -8,7 +8,7 @@ namespace Jumpvalley.Levels.Interactives
     /// A subclass of <see cref="Interactive"/> that operates over a Godot node.
     /// It makes using a Godot node's properties and metadata easier and provides events to respond to changes in a node's properties or attributes.
     /// </summary>
-    public partial class NodeInteractive: Interactive
+    public partial class InteractiveNode: Interactive
     {
         /// <summary>
         /// The Godot node being operated on
@@ -16,11 +16,11 @@ namespace Jumpvalley.Levels.Interactives
         public Node CurrentNode { get; private set; }
 
         /// <summary>
-        /// Creates a new instance of <see cref="NodeInteractive"/> for a given <see cref="Stopwatch"/> and <see cref="Node"/>
+        /// Creates a new instance of <see cref="InteractiveNode"/> for a given <see cref="Stopwatch"/> and <see cref="Node"/>
         /// </summary>
         /// <param name="stopwatch">The stopwatch to bind the interactive to</param>
         /// <param name="node">The node to operate over</param>
-        public NodeInteractive(Stopwatch stopwatch, Node node) : base(stopwatch)
+        public InteractiveNode(Stopwatch stopwatch, Node node) : base(stopwatch)
         {
             if (node == null) throw new ArgumentNullException("node");
 
