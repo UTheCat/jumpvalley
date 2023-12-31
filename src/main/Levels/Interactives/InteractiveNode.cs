@@ -6,7 +6,7 @@ namespace Jumpvalley.Levels.Interactives
 {
     /// <summary>
     /// A subclass of <see cref="Interactive"/> that operates over a Godot node.
-    /// It makes using a Godot node's properties and metadata easier and provides events to respond to changes in a node's properties or attributes.
+    /// It makes using a Godot node's properties and metadata easier.
     /// </summary>
     public partial class InteractiveNode: Interactive
     {
@@ -30,6 +30,6 @@ namespace Jumpvalley.Levels.Interactives
         /// <summary>
         /// Event that's raised when one of the metadata of the node changes.
         /// </summary>
-        public event EventHandler<NodeMetadataChangedArgs> NodeMetadataChanged;
+        //public event EventHandler<NodeMetadataChangedArgs> NodeMetadataChanged;
     }
 }
