@@ -11,10 +11,10 @@ size = Vector3(1, 50, 1)
 size = Vector3(1, 50, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c17k1"]
-size = Vector3(1, 5.5, 0.5)
+size = Vector3(1, 5.5, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hf4fk"]
-size = Vector3(1, 0.5, 0.5)
+size = Vector3(1, 0.5, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ohpch"]
 size = Vector3(4, 1, 1)
@@ -124,6 +124,44 @@ material_override = ExtResource("2_s62k5")
 mesh = SubResource("BoxMesh_hf4fk")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="Interactives/Floor1/Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+material_override = ExtResource("2_s62k5")
+mesh = SubResource("BoxMesh_hf4fk")
+
+[node name="Ladder2" type="StaticBody3D" parent="Interactives/Floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 36, 22)
+metadata/is_climbable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Floor1/Ladder2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_c17k1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Floor1/Ladder2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, 0)
+material_override = ExtResource("2_s62k5")
+mesh = SubResource("BoxMesh_hf4fk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Interactives/Floor1/Ladder2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
+material_override = ExtResource("2_s62k5")
+mesh = SubResource("BoxMesh_hf4fk")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Interactives/Floor1/Ladder2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+material_override = ExtResource("2_s62k5")
+mesh = SubResource("BoxMesh_hf4fk")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Interactives/Floor1/Ladder2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = ExtResource("2_s62k5")
+mesh = SubResource("BoxMesh_hf4fk")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Interactives/Floor1/Ladder2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+material_override = ExtResource("2_s62k5")
+mesh = SubResource("BoxMesh_hf4fk")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Interactives/Floor1/Ladder2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 material_override = ExtResource("2_s62k5")
 mesh = SubResource("BoxMesh_hf4fk")
