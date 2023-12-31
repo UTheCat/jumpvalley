@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bffqxb6tye2af"]
+[gd_scene load_steps=15 format=3 uid="uid://bffqxb6tye2af"]
 
 [ext_resource type="PackedScene" uid="uid://bkg8owsv5lau1" path="res://levels/demo_platformer/section.tscn" id="1_xnnlh"]
 [ext_resource type="Material" uid="uid://iosg4pj8btc3" path="res://levels/demo_platformer/textures/floor1.tres" id="2_s62k5"]
@@ -27,6 +27,12 @@ size = Vector3(4, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_eq5ge"]
 size = Vector3(4, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vvmt7"]
+size = Vector3(1, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hcbav"]
+size = Vector3(1, 1, 3)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tgd70"]
 size = Vector3(50, 100, 50)
@@ -174,7 +180,7 @@ mesh = SubResource("BoxMesh_eq5ge")
 [node name="Floor2" type="Node3D" parent="Interactives"]
 
 [node name="Spinner" type="StaticBody3D" parent="Interactives/Floor2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 58, 22)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 58, 22)
 constant_angular_velocity = Vector3(0, 0.523599, 0)
 metadata/interactive_type = "Spinner"
 
@@ -184,6 +190,32 @@ shape = SubResource("BoxShape3D_ohpch")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Floor2/Spinner/CollisionShape3D"]
 material_override = ExtResource("3_qkfbt")
 mesh = SubResource("BoxMesh_eq5ge")
+
+[node name="Misc" type="StaticBody3D" parent="Interactives/Floor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 58, 22)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Floor2/Misc"]
+shape = SubResource("BoxShape3D_ohpch")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Floor2/Misc/CollisionShape3D"]
+material_override = ExtResource("3_qkfbt")
+mesh = SubResource("BoxMesh_eq5ge")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Interactives/Floor2/Misc"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+shape = SubResource("BoxShape3D_ohpch")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Floor2/Misc/CollisionShape3D2"]
+material_override = ExtResource("3_qkfbt")
+mesh = SubResource("BoxMesh_eq5ge")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Interactives/Floor2/Misc"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, 2)
+shape = SubResource("BoxShape3D_vvmt7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Floor2/Misc/CollisionShape3D3"]
+material_override = ExtResource("3_qkfbt")
+mesh = SubResource("BoxMesh_hcbav")
 
 [node name="Frame" type="StaticBody3D" parent="Interactives/Floor2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
