@@ -110,18 +110,28 @@ namespace Jumpvalley.Levels
             Interactives = new List<InteractiveNode>();
             if (InteractivesNode != null)
             {
-                foreach (Node node in InteractivesNode.GetChildren())
+                void AddInteractives(Node parentNode)
                 {
-                    if (node.HasMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME))
+                    foreach (Node node in parentNode.GetChildren())
                     {
-                        string interactiveType = node.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
-
-                        if (interactiveType.Equals("Spinner"))
+                        if (node.HasMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME))
                         {
-                            Interactives.Add(new Spinner(Clock, node));
+                            string interactiveType = node.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
+
+                            if (interactiveType.Equals("Spinner"))
+                            {
+                                Interactives.Add(new Spinner(Clock, node));
+                            }
+                        }
+                        else
+                        {
+                            // Recursive search to search a child node's children within the Interactives folder
+                            AddInteractives(node);
                         }
                     }
                 }
+
+                AddInteractives(InteractivesNode);
             }
 
             MusicZones = new List<MusicZone>();
