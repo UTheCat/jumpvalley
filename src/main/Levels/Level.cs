@@ -18,7 +18,7 @@ namespace Jumpvalley.Levels
     /// </summary>
     public partial class Level : Interactive, IDisposable
     {
-        public static readonly string INTERACTIVES_NODE_NAME = "InteractivesNode";
+        public static readonly string INTERACTIVES_NODE_NAME = "Interactives";
         public static readonly string MUSIC_NODE_NAME = "Music";
         public static readonly string STATIC_OBJECTS_NODE_NAME = "StaticObjects";
 
@@ -107,15 +107,19 @@ namespace Jumpvalley.Levels
             Music = root.GetNode(MUSIC_NODE_NAME);
             StaticObjects = root.GetNode(STATIC_OBJECTS_NODE_NAME);
 
+            Interactives = new List<InteractiveNode>();
             if (InteractivesNode != null)
             {
                 foreach (Node node in InteractivesNode.GetChildren())
                 {
-                    string interactiveType = node.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
-
-                    if (interactiveType.Equals("Spinner"))
+                    if (node.HasMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME))
                     {
-                        Interactives.Add(new Spinner(Clock, node));
+                        string interactiveType = node.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
+
+                        if (interactiveType.Equals("Spinner"))
+                        {
+                            Interactives.Add(new Spinner(Clock, node));
+                        }
                     }
                 }
             }

@@ -15,7 +15,7 @@ namespace Jumpvalley.Levels.Interactives
         /// <summary>
         /// Name of the metadata entry that indicates the class that will be running the interactive.
         /// </summary>
-        public static readonly string INTERACTIVE_TYPE_METADATA_NAME = "interactve_type";
+        public static readonly string INTERACTIVE_TYPE_METADATA_NAME = "interactive_type";
 
         /// <summary>
         /// Returns the current number of physics updates per second based on whatever was defined in project settings
