@@ -146,6 +146,11 @@ namespace Jumpvalley.Levels
         {
             if (IsInitialized) return;
 
+            foreach (InteractiveNode i in Interactives)
+            {
+                i.Initialize();
+            }
+
             base.Initialize();
         }
 
@@ -187,6 +192,11 @@ namespace Jumpvalley.Levels
 
             CurrentRunState = RunState.Playing;
 
+            foreach (InteractiveNode i in Interactives)
+            {
+                i.Start();
+            }
+
             // prepare the level's music
             ToggleMusic(true);
 
@@ -202,6 +212,11 @@ namespace Jumpvalley.Levels
 
             CurrentRunState = RunState.Stopped;
 
+            foreach (InteractiveNode i in Interactives)
+            {
+                i.Stop();
+            }
+
             ToggleMusic(false);
             base.Stop();
         }
@@ -212,6 +227,11 @@ namespace Jumpvalley.Levels
         /// </summary>
         public new void Dispose()
         {
+            foreach (InteractiveNode i in Interactives)
+            {
+                i.Dispose();
+            }
+
             base.Dispose();
         }
     }
