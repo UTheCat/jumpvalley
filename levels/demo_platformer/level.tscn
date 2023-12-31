@@ -16,6 +16,11 @@ size = Vector3(50, 100, 50)
 
 [node name="Interactives" type="Node3D" parent="."]
 
+[node name="InteractiveRootNode" type="Node3D" parent="Interactives"]
+metadata/interactive_type = "TestInteractive"
+metadata/property1 = false
+metadata/property2 = 0.5
+
 [node name="Floor1" type="Node3D" parent="Interactives"]
 
 [node name="Section" parent="Interactives/Floor1" instance=ExtResource("1_xnnlh")]

@@ -13,6 +13,11 @@ namespace Jumpvalley.Levels.Interactives
         public static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
 
         /// <summary>
+        /// Name of the metadata entry that indicates the class that will be running the interactive.
+        /// </summary>
+        public static readonly string INTERACTIVE_TYPE_METADATA_NAME = "interactve_type";
+
+        /// <summary>
         /// Returns the current number of physics updates per second based on whatever was defined in project settings
         /// </summary>
         /// <returns>The current number of physics updates per second</returns>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Jumpvalley.Players;
 using Jumpvalley.Music;
 using Jumpvalley.Levels.Interactives;
+using Jumpvalley.Levels.Interactives.Mechanics;
 
 namespace Jumpvalley.Levels
 {
@@ -17,7 +18,7 @@ namespace Jumpvalley.Levels
     /// </summary>
     public partial class Level : Interactive, IDisposable
     {
-        public static readonly string INTERACTIVES_NODE_NAME = "Interactives";
+        public static readonly string INTERACTIVES_NODE_NAME = "InteractivesNode";
         public static readonly string MUSIC_NODE_NAME = "Music";
         public static readonly string STATIC_OBJECTS_NODE_NAME = "StaticObjects";
 
@@ -56,7 +57,12 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The node containing the level's interactives
         /// </summary>
-        public Node Interactives { get; private set; }
+        public Node InteractivesNode { get; private set; }
+
+        /// <summary>
+        /// The list of the level's interactives as instances of the <see cref="InteractiveNode"/> class
+        /// </summary>
+        public List<InteractiveNode> Interactives { get; private set; }
 
         /// <summary>
         /// The node containing the level's music
@@ -97,9 +103,22 @@ namespace Jumpvalley.Levels
             Info = info;
             RootNode = root;
 
-            Interactives = root.GetNode(INTERACTIVES_NODE_NAME);
+            InteractivesNode = root.GetNode(INTERACTIVES_NODE_NAME);
             Music = root.GetNode(MUSIC_NODE_NAME);
             StaticObjects = root.GetNode(STATIC_OBJECTS_NODE_NAME);
+
+            if (InteractivesNode != null)
+            {
+                foreach (Node node in InteractivesNode.GetChildren())
+                {
+                    string interactiveType = node.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
+
+                    if (interactiveType.Equals("Spinner"))
+                    {
+                        Interactives.Add(new Spinner(Clock, node));
+                    }
+                }
+            }
 
             MusicZones = new List<MusicZone>();
             if (Music != null)
