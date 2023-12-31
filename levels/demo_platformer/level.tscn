@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bffqxb6tye2af"]
+[gd_scene load_steps=8 format=3 uid="uid://bffqxb6tye2af"]
 
 [ext_resource type="PackedScene" uid="uid://bkg8owsv5lau1" path="res://levels/demo_platformer/section.tscn" id="1_xnnlh"]
 [ext_resource type="Material" uid="uid://iosg4pj8btc3" path="res://levels/demo_platformer/textures/floor1.tres" id="2_s62k5"]
@@ -8,6 +8,12 @@ size = Vector3(1, 50, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_huyba"]
 size = Vector3(1, 50, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ohpch"]
+size = Vector3(4, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eq5ge"]
+size = Vector3(4, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tgd70"]
 size = Vector3(50, 100, 50)
@@ -76,6 +82,17 @@ skeleton = NodePath("../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Floor1/Frame/Part4/StaticBody3D"]
 shape = SubResource("BoxShape3D_huyba")
+
+[node name="Spinner" type="StaticBody3D" parent="Interactives"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 6)
+constant_angular_velocity = Vector3(0, 0.261799, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Spinner"]
+shape = SubResource("BoxShape3D_ohpch")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Spinner/CollisionShape3D"]
+material_override = ExtResource("2_s62k5")
+mesh = SubResource("BoxMesh_eq5ge")
 
 [node name="Music" type="Node3D" parent="."]
 
