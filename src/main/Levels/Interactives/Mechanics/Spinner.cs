@@ -51,7 +51,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
         public new void Dispose()
         {
             SetPhysicsProcess(false);
-            body.RemoveChild(this);
+            Stop();
             QueueFree();
             base.Dispose();
         }
