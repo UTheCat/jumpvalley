@@ -178,6 +178,7 @@ namespace Jumpvalley.Players
             levelLoadingTest.Start();
 
             RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
+            fpsLimiter.MinFpsDifference = 0;
             fpsLimiter.IsRunning = true;
             RootNode.AddChild(fpsLimiter);
 
