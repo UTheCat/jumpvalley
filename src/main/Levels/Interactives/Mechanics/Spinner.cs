@@ -15,8 +15,6 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
         {
             body = node as StaticBody3D;
             if (body == null) throw new ArgumentException("The node specified in the 2nd argument must be a StaticBody3D.");
-
-            body.AddChild(this);
         }
 
         private void Update(float delta)
@@ -27,6 +25,22 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
                 angularVelocity.Y * delta,
                 angularVelocity.Z * delta
                 );
+        }
+
+        public override void Start()
+        {
+            if (IsRunning) return;
+
+            body.AddChild(this);
+            base.Start();
+        }
+
+        public override void Stop()
+        {
+            if (!IsRunning) return;
+
+            body.RemoveChild(this);
+            base.Stop();
         }
 
         public override void _PhysicsProcess(double delta)
