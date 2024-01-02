@@ -31,16 +31,16 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
         {
             if (IsRunning) return;
 
-            body.AddChild(this);
             base.Start();
+            body.AddChild(this);
         }
 
         public override void Stop()
         {
             if (!IsRunning) return;
 
-            body.RemoveChild(this);
             base.Stop();
+            body.RemoveChild(this);
         }
 
         public override void _PhysicsProcess(double delta)
