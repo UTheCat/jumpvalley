@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgfjvgik6m4a5"]
+[gd_scene load_steps=7 format=3 uid="uid://dgfjvgik6m4a5"]
 
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_q1wkf"]
 
@@ -16,6 +16,17 @@ font_size = 40
 [sub_resource type="LabelSettings" id="LabelSettings_kiqen"]
 font = ExtResource("1_q1wkf")
 font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_478ek"]
+bg_color = Color(0.678431, 0.145098, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_bslyl"]
+font = ExtResource("1_q1wkf")
+font_size = 24
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -59,7 +70,7 @@ anchor_right = 0.95
 anchor_bottom = 0.05
 offset_top = 49.0
 offset_bottom = 74.0
-text = "Whatcha wanna do?"
+text = "Where to next?"
 label_settings = SubResource("LabelSettings_kiqen")
 
 [node name="Items" type="Control" parent="."]
@@ -69,3 +80,20 @@ anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
 offset_top = 74.0
+
+[node name="Panel" type="Panel" parent="Items"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_478ek")
+
+[node name="Label" type="Label" parent="Items/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Exit Game"
+label_settings = SubResource("LabelSettings_bslyl")
+vertical_alignment = 1
