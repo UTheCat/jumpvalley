@@ -20,7 +20,7 @@ font = ExtResource("1_2ef4k")
 font_size = 24
 
 [node name="MenuButton" type="Button"]
-anchors_preset = 10
+anchors_preset = -1
 anchor_right = 1.0
 offset_bottom = 44.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
