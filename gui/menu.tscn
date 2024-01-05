@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgfjvgik6m4a5"]
+[gd_scene load_steps=10 format=3 uid="uid://dgfjvgik6m4a5"]
 
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_q1wkf"]
 [ext_resource type="Texture2D" uid="uid://xfjrsfu0kh4v" path="res://addons/icons/close_white_48dp.svg" id="2_7ppm5"]
+[ext_resource type="Texture2D" uid="uid://dnrfugihpxime" path="res://addons/icons/logout_white_48dp.svg" id="2_vrk32"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tlkk"]
 bg_color = Color(0.105882, 0.105882, 0.105882, 1)
@@ -127,7 +128,7 @@ offset_left = 8.0
 offset_top = -12.0
 offset_right = 32.0
 offset_bottom = 12.0
-texture = ExtResource("2_7ppm5")
+texture = ExtResource("2_vrk32")
 expand_mode = 1
 
 [node name="CloseButton" type="Button" parent="."]
