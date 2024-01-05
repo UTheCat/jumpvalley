@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgfjvgik6m4a5"]
+[gd_scene load_steps=5 format=3 uid="uid://dgfjvgik6m4a5"]
+
+[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_q1wkf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tlkk"]
 bg_color = Color(0.105882, 0.105882, 0.105882, 1)
@@ -6,6 +8,14 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_r8bgc"]
+font = ExtResource("1_q1wkf")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_kiqen"]
+font = ExtResource("1_q1wkf")
+font_size = 20
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -20,7 +30,7 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,3 +38,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2tlkk")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.05
+offset_bottom = 40.0
+text = "Menu"
+label_settings = SubResource("LabelSettings_r8bgc")
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.05
+offset_top = 40.0
+offset_bottom = 60.0
+text = "Whatcha wanna do?"
+label_settings = SubResource("LabelSettings_kiqen")
