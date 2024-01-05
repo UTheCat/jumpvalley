@@ -18,6 +18,22 @@ font_size = 40
 font = ExtResource("1_q1wkf")
 font_size = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjwbe"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_wo5hc"]
+font = ExtResource("1_q1wkf")
+font_size = 24
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_478ek"]
 bg_color = Color(0.890196, 0.258824, 0.364706, 1)
 corner_radius_top_left = 10
@@ -33,22 +49,6 @@ corner_radius_bottom_right = 9
 corner_radius_bottom_left = 9
 
 [sub_resource type="LabelSettings" id="LabelSettings_bslyl"]
-font = ExtResource("1_q1wkf")
-font_size = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjwbe"]
-bg_color = Color(0.8, 0.8, 0.8, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="LabelSettings" id="LabelSettings_wo5hc"]
 font = ExtResource("1_q1wkf")
 font_size = 24
 
@@ -112,39 +112,8 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 offset_top = 74.0
 
-[node name="Panel" type="Panel" parent="Items"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_top = 10.0
-offset_bottom = 54.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_478ek")
-
-[node name="Button" type="Button" parent="Items/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"FlatButton"
-
-[node name="Label" type="Label" parent="Items/Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = -2.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_c1k4n")
-text = "Exit Game"
-label_settings = SubResource("LabelSettings_bslyl")
-vertical_alignment = 1
-
 [node name="Button" type="Button" parent="Items"]
+self_modulate = Color(0.890196, 0.258824, 0.364706, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -178,6 +147,38 @@ offset_right = 32.0
 offset_bottom = 13.0
 texture = ExtResource("2_7ppm5")
 expand_mode = 1
+
+[node name="Panel" type="Panel" parent="Items"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 54.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_478ek")
+
+[node name="Button" type="Button" parent="Items/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"FlatButton"
+
+[node name="Label" type="Label" parent="Items/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_c1k4n")
+text = "Exit Game"
+label_settings = SubResource("LabelSettings_bslyl")
+vertical_alignment = 1
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 1

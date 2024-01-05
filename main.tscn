@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=39 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -10,7 +10,6 @@
 [ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="8_jfe1u"]
 [ext_resource type="PackedScene" uid="uid://kou88p3rb0fq" path="res://gui/level_timer.tscn" id="9_1cbro"]
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/player.tscn" id="9_1wvm3"]
-[ext_resource type="PackedScene" uid="uid://dgfjvgik6m4a5" path="res://gui/menu.tscn" id="10_1hhn6"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="10_3umga"]
 [ext_resource type="Texture2D" uid="uid://dcxkj8m3ltdl8" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="11_rd65f"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="12_3v1qp"]
@@ -184,10 +183,6 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
-
-[node name="Menu" parent="PrimaryGui" instance=ExtResource("10_1hhn6")]
-layout_mode = 1
-anchors_preset = 8
 
 [node name="Player" parent="." instance=ExtResource("9_1wvm3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
