@@ -46,18 +46,18 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.05
-offset_bottom = 40.0
+offset_bottom = 43.0
 text = "Menu"
 label_settings = SubResource("LabelSettings_r8bgc")
 
-[node name="Description" type="Label" parent="."]
+[node name="Subtitle" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.05
-offset_top = 40.0
-offset_bottom = 60.0
+offset_top = 43.0
+offset_bottom = 66.0
 text = "Whatcha wanna do?"
 label_settings = SubResource("LabelSettings_kiqen")
