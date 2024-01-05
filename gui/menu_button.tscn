@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://du6etgmkelt2n"]
+
+[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_2ef4k"]
+[ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="2_np5cu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjwbe"]
+bg_color = Color(0.501961, 0.501961, 0.501961, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_wo5hc"]
+font = ExtResource("1_2ef4k")
+font_size = 24
+
+[node name="MenuButton" type="Button"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_2ef4k")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_jjwbe")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Button"
+label_settings = SubResource("LabelSettings_wo5hc")
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -12.0
+offset_right = 32.0
+offset_bottom = 12.0
+texture = ExtResource("2_np5cu")
+expand_mode = 1

@@ -95,7 +95,7 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 offset_top = 74.0
 
-[node name="Button" type="Button" parent="Items"]
+[node name="ExitGameButton" type="Button" parent="Items"]
 self_modulate = Color(0.890196, 0.258824, 0.364706, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -107,7 +107,7 @@ theme_override_fonts/font = ExtResource("1_q1wkf")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_jjwbe")
 
-[node name="Label" type="Label" parent="Items/Button"]
+[node name="Label" type="Label" parent="Items/ExitGameButton"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -119,7 +119,7 @@ text = "Exit Game"
 label_settings = SubResource("LabelSettings_wo5hc")
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="Items/Button"]
+[node name="Icon" type="TextureRect" parent="Items/ExitGameButton"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
