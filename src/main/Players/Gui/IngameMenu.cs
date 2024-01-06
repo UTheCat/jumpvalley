@@ -9,7 +9,7 @@ namespace Jumpvalley.Players.Gui
     /// Code for the in-game menu,
     /// the menu displayed when clicking the three-dots at the bottom of the user's screen when the user is currently in a level.
     /// </summary>
-    public partial class InGameMenu
+    public partial class InGameMenu: IDisposable
     {
         /// <summary>
         /// The root node of the in-game menu
@@ -120,6 +120,12 @@ namespace Jumpvalley.Players.Gui
             }
 
             IsShowing = false;
+        }
+
+        public void Dispose()
+        {
+            transparencyTween.Dispose();
+            backgroundSizeTween.Dispose();
         }
     }
 }
