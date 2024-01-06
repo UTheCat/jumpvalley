@@ -84,7 +84,7 @@ fullscreen_toggle={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation")
+locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation", "res://strings/ingame_menu.csv")
 
 [physics]
 
