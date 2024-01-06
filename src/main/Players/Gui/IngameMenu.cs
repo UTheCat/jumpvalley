@@ -19,14 +19,16 @@ namespace Jumpvalley.Players.Gui
         /// <summary>
         /// Tween handling the transparency of the menu's items, including its background panel
         /// </summary>
-        private MethodTween transparencyTween;
+        private SceneTreeTween transparencyTween;
 
         /// <summary>
         /// Tween handling the appearance of the menu's background panel
         /// </summary>
-        private MethodTween backgroundSizeTween;
+        private SceneTreeTween backgroundSizeTween;
 
         private Control backgroundNode;
+        private Label titleLabel;
+        private Label subtitleLabel;
 
         private bool _isShowing;
 
@@ -72,15 +74,18 @@ namespace Jumpvalley.Players.Gui
         /// Constructs a new instance of the in-game menu handler.
         /// </summary>
         /// <param name="actualNode">The root node of the in-game menu</param>
+        /// <param name="tree">The scene tree that the in-game menu is in</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public InGameMenu(Control actualNode)
+        public InGameMenu(Control actualNode, SceneTree tree)
         {
             if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
 
             ActualNode = actualNode;
             backgroundNode = actualNode.GetNode<Control>("Background");
+            titleLabel = actualNode.GetNode<Label>("Title");
+            subtitleLabel = actualNode.GetNode<Label>("Subtitle");
 
-            transparencyTween = new MethodTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out);
+            transparencyTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
             transparencyTween.InitialValue = 0;
             transparencyTween.FinalValue = 1;
             transparencyTween.OnStep += (object o, float frac) =>
@@ -93,7 +98,7 @@ namespace Jumpvalley.Players.Gui
 
             if (backgroundNode != null)
             {
-                backgroundSizeTween = new MethodTween(0.5, Tween.TransitionType.Quint, Tween.EaseType.Out);
+                backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quint, Tween.EaseType.Out, tree);
                 backgroundSizeTween.InitialValue = -20;
                 backgroundSizeTween.FinalValue = 0;
                 backgroundSizeTween.OnStep += (object o, float frac) =>
@@ -107,6 +112,13 @@ namespace Jumpvalley.Players.Gui
             }
 
             actualNode.Visible = false;
+            
+            if (titleLabel != null)
+            {
+                titleLabel.Text = actualNode.Tr("MENU_TITLE");
+                subtitleLabel.Text = actualNode.Tr("MENU_SUBTITLE");
+            }
+
             IsShowing = false;
         }
     }
