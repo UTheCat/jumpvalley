@@ -6,13 +6,13 @@ using Jumpvalley.Tweening;
 namespace Jumpvalley.Players.Gui
 {
     /// <summary>
-    /// Code for the ingame menu,
+    /// Code for the in-game menu,
     /// the menu displayed when clicking the three-dots at the bottom of the user's screen when the user is currently in a level.
     /// </summary>
-    public partial class IngameMenu
+    public partial class InGameMenu
     {
         /// <summary>
-        /// The root node of the ingame menu
+        /// The root node of the in-game menu
         /// </summary>
         public Control ActualNode { get; private set; }
 
@@ -69,11 +69,11 @@ namespace Jumpvalley.Players.Gui
         }
 
         /// <summary>
-        /// Constructs a new instance of the ingame menu handler.
+        /// Constructs a new instance of the in-game menu handler.
         /// </summary>
-        /// <param name="actualNode">The root node of the ingame menu</param>
+        /// <param name="actualNode">The root node of the in-game menu</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IngameMenu(Control actualNode)
+        public InGameMenu(Control actualNode)
         {
             if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
 
