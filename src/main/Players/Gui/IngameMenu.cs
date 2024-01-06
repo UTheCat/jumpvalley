@@ -26,6 +26,8 @@ namespace Jumpvalley.Players.Gui
         /// </summary>
         private MethodTween backgroundSizeTween;
 
+        private Control backgroundNode;
+
         private bool _isShowing;
 
         /// <summary>
@@ -41,7 +43,27 @@ namespace Jumpvalley.Players.Gui
 
                 if (value)
                 {
-                    
+                    transparencyTween.Speed = 1;
+
+                    if (backgroundSizeTween != null)
+                    {
+                        backgroundSizeTween.Speed = 1;
+                    }
+                }
+                else
+                {
+                    transparencyTween.Speed = -1;
+
+                    if (backgroundSizeTween != null)
+                    {
+                        backgroundSizeTween.Speed = -1;
+                    }
+                }
+
+                transparencyTween.Resume();
+                if (backgroundSizeTween != null)
+                {
+                    backgroundSizeTween.Resume();
                 }
             }
         }
@@ -56,13 +78,35 @@ namespace Jumpvalley.Players.Gui
             if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
 
             ActualNode = actualNode;
+            backgroundNode = actualNode.GetNode<Control>("Background");
 
-            transparencyTween = new MethodTween();
+            transparencyTween = new MethodTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out);
+            transparencyTween.InitialValue = 0;
+            transparencyTween.FinalValue = 1;
             transparencyTween.OnStep += (object o, float frac) =>
             {
-
+                ActualNode.Visible = frac > 0;
+                Color modulate = ActualNode.Modulate;
+                modulate.A = frac;
+                ActualNode.Modulate = modulate;
             };
 
+            if (backgroundNode != null)
+            {
+                backgroundSizeTween = new MethodTween(0.5, Tween.TransitionType.Quint, Tween.EaseType.Out);
+                backgroundSizeTween.InitialValue = -20;
+                backgroundSizeTween.FinalValue = 0;
+                backgroundSizeTween.OnStep += (object o, float frac) =>
+                {
+                    float sizeOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
+                    backgroundNode.OffsetLeft = sizeOffset;
+                    backgroundNode.OffsetRight = sizeOffset;
+                    backgroundNode.OffsetTop = sizeOffset;
+                    backgroundNode.OffsetBottom = sizeOffset;
+                };
+            }
+
+            actualNode.Visible = false;
             IsShowing = false;
         }
     }
