@@ -28,7 +28,7 @@ namespace Jumpvalley.Players.Gui
         /// <summary>
         /// The Godot control displaying the menu's background
         /// </summary>
-        public Control BackgroundNode { get; private set; }
+        public Control BackgroundControl { get; private set; }
 
         /// <summary>
         /// The text label displaying the menu's title
@@ -39,6 +39,11 @@ namespace Jumpvalley.Players.Gui
         /// The text label displaying the menu's subtitle
         /// </summary>
         public Label SubtitleLabel { get; private set; }
+
+        /// <summary>
+        /// The Godot control displaying the menu's items
+        /// </summary>
+        public Control ItemsControl { get; private set; }
 
         private bool _isShowing;
 
@@ -91,7 +96,7 @@ namespace Jumpvalley.Players.Gui
             if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
 
             ActualNode = actualNode;
-            BackgroundNode = actualNode.GetNode<Control>("Background");
+            BackgroundControl = actualNode.GetNode<Control>("Background");
             TitleLabel = actualNode.GetNode<Label>("Title");
             SubtitleLabel = actualNode.GetNode<Label>("Subtitle");
 
@@ -106,7 +111,7 @@ namespace Jumpvalley.Players.Gui
                 ActualNode.Modulate = modulate;
             };
 
-            if (BackgroundNode != null)
+            if (BackgroundControl != null)
             {
                 backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quint, Tween.EaseType.Out, tree);
                 backgroundSizeTween.InitialValue = -20;
@@ -114,10 +119,10 @@ namespace Jumpvalley.Players.Gui
                 backgroundSizeTween.OnStep += (object o, float frac) =>
                 {
                     float sizeOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
-                    BackgroundNode.OffsetLeft = sizeOffset;
-                    BackgroundNode.OffsetRight = sizeOffset;
-                    BackgroundNode.OffsetTop = sizeOffset;
-                    BackgroundNode.OffsetBottom = sizeOffset;
+                    BackgroundControl.OffsetLeft = sizeOffset;
+                    BackgroundControl.OffsetRight = sizeOffset;
+                    BackgroundControl.OffsetTop = sizeOffset;
+                    BackgroundControl.OffsetBottom = sizeOffset;
                 };
             }
 
