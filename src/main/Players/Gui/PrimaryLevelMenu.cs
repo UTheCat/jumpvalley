@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 namespace Jumpvalley.Players.Gui
 {
@@ -21,8 +22,8 @@ namespace Jumpvalley.Players.Gui
 			}
 
 			// Add the Exit Game button
-			LevelMenuButton exitGameButtonInstance = new LevelMenuButton();
-			Button exitGameButton = exitGameButtonInstance.ActualButton;
+			LevelMenuButton exitGameButtonHandler = new LevelMenuButton();
+			Button exitGameButton = exitGameButtonHandler.ActualButton;
 			exitGameButton.Pressed += () =>
 			{
 				// Quit the game in the method specified in the Godot documentation:
@@ -31,6 +32,9 @@ namespace Jumpvalley.Players.Gui
 				tree.Quit();
 			};
 			exitGameButton.SelfModulate = Color.Color8(255, 100, 89, 255);
+			exitGameButtonHandler.LabelNode.Text = exitGameButton.Tr("EXIT_GAME");
+			exitGameButtonHandler.IconNode.Texture = GD.Load<CompressedTexture2D>("res://addons/icons/logout_white_48dp.svg");
+
 			ItemsControl.AddChild(exitGameButton);
 		}
 	}

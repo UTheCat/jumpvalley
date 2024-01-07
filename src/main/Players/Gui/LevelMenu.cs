@@ -115,15 +115,15 @@ namespace Jumpvalley.Players.Gui
             if (BackgroundControl != null)
             {
                 backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quint, Tween.EaseType.Out, tree);
-                backgroundSizeTween.InitialValue = -20;
+                backgroundSizeTween.InitialValue = 20;
                 backgroundSizeTween.FinalValue = 0;
                 backgroundSizeTween.OnStep += (object o, float frac) =>
                 {
                     float sizeOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
                     BackgroundControl.OffsetLeft = sizeOffset;
-                    BackgroundControl.OffsetRight = sizeOffset;
+                    BackgroundControl.OffsetRight = -sizeOffset;
                     BackgroundControl.OffsetTop = sizeOffset;
-                    BackgroundControl.OffsetBottom = sizeOffset;
+                    BackgroundControl.OffsetBottom = -sizeOffset;
                 };
             }
 

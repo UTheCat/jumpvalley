@@ -1,4 +1,7 @@
 ﻿using Godot;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Jumpvalley.Players.Gui
 {
@@ -19,9 +22,26 @@ namespace Jumpvalley.Players.Gui
         /// </summary>
         public Button ActualButton { get; private set; }
 
+        /// <summary>
+        /// The text label displaying the button's text
+        /// </summary>
+        public Label LabelNode { get; private set; }
+
+        /// <summary>
+        /// The texture rectangle displaying the button's icon
+        /// </summary>
+        public TextureRect IconNode { get; private set; }
+
+        private void UpdateNodeVariables()
+        {
+            LabelNode = ActualButton.GetNode<Label>("Label");
+            IconNode = ActualButton.GetNode<TextureRect>("Icon");
+        }
+
         public LevelMenuButton(Button actualButton)
         {
             ActualButton = actualButton;
+            UpdateNodeVariables();
         }
 
         public LevelMenuButton()
@@ -34,6 +54,7 @@ namespace Jumpvalley.Players.Gui
                 if (node is Button)
                 {
                     ActualButton = (Button)node;
+                    UpdateNodeVariables();
                 }
             }
         }
