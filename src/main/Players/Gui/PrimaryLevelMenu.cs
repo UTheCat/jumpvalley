@@ -19,6 +19,19 @@ namespace Jumpvalley.Players.Gui
             {
                 SubtitleLabel.Text = actualNode.Tr("MENU_SUBTITLE");
             }
+
+            // Add the Exit Game button
+            LevelMenuButton exitGameButtonInstance = new LevelMenuButton();
+            Button exitGameButton = exitGameButtonInstance.ActualButton;
+            exitGameButton.Pressed += () =>
+            {
+                // Quit the game in the method specified in the Godot documentation:
+                // https://docs.godotengine.org/en/stable/tutorials/inputs/handling_quit_requests.html
+                tree.Root.PropagateNotification((int)Node.NotificationWMCloseRequest);
+                tree.Quit();
+            };
+            exitGameButton.SelfModulate = Color.Color8(255, 100, 89, 255);
+            ItemsControl.AddChild(exitGameButton);
         }
     }
 }
