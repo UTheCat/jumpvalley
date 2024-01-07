@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://du6etgmkelt2n"]
 
-[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_2ef4k"]
-[ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="2_np5cu"]
+[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_fg12u"]
+[ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="2_ubqv8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjwbe"]
 bg_color = Color(0.501961, 0.501961, 0.501961, 1)
@@ -16,15 +16,15 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_wo5hc"]
-font = ExtResource("1_2ef4k")
+font = ExtResource("1_fg12u")
 font_size = 24
 
-[node name="MenuButton" type="Button"]
+[node name="LevelMenuButton" type="Button"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 44.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_2ef4k")
+theme_override_fonts/font = ExtResource("1_fg12u")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_jjwbe")
 
@@ -49,5 +49,5 @@ offset_left = 8.0
 offset_top = -12.0
 offset_right = 32.0
 offset_bottom = 12.0
-texture = ExtResource("2_np5cu")
+texture = ExtResource("2_ubqv8")
 expand_mode = 1
