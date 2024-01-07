@@ -47,7 +47,7 @@ namespace Jumpvalley.Players.Gui
             if (buttonScene != null) return;
 
             Resource res = ResourceLoader.Load(DEFAULT_LEVEL_MENU_BUTTON_SCENE);
-            if (res is PackedScene && buttonScene != null)
+            if (res is PackedScene && buttonScene == null)
             {
                 buttonScene = (PackedScene)res;
             }

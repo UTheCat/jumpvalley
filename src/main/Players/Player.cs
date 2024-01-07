@@ -186,7 +186,13 @@ namespace Jumpvalley.Players
             PackedScene primaryLevelMenuScene = ResourceLoader.Load<PackedScene>("res://gui/level_menu.tscn");
             if (primaryLevelMenuScene != null)
             {
-                bottomBar.PrimaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuScene.Instantiate<Control>(), Tree);
+                Control primaryLevelMenuNode = primaryLevelMenuScene.Instantiate<Control>();
+                PrimaryLevelMenu primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
+                bottomBar.PrimaryLevelMenu = primaryLevelMenu;
+                primaryLevelMenuScene.Dispose();
+
+                PrimaryGui.AddChild(primaryLevelMenuNode);
+                Disposables.Add(primaryLevelMenu);
             }
 
             /*

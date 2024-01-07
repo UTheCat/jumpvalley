@@ -99,6 +99,7 @@ namespace Jumpvalley.Players.Gui
             BackgroundControl = actualNode.GetNode<Control>("Background");
             TitleLabel = actualNode.GetNode<Label>("Title");
             SubtitleLabel = actualNode.GetNode<Label>("Subtitle");
+            ItemsControl = actualNode.GetNode<Control>("Items");
 
             transparencyTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
             transparencyTween.InitialValue = 0;
