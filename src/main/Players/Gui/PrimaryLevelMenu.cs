@@ -10,7 +10,11 @@ namespace Jumpvalley.Players.Gui
     {
         public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
         {
-
+            if (TitleLabel != null)
+            {
+                TitleLabel.Text = actualNode.Tr("MENU_TITLE");
+                SubtitleLabel.Text = actualNode.Tr("MENU_SUBTITLE");
+            }
         }
     }
 }

@@ -122,12 +122,6 @@ namespace Jumpvalley.Players.Gui
             }
 
             actualNode.Visible = false;
-            
-            if (TitleLabel != null)
-            {
-                TitleLabel.Text = actualNode.Tr("MENU_TITLE");
-                SubtitleLabel.Text = actualNode.Tr("MENU_SUBTITLE");
-            }
 
             IsShowing = false;
         }
