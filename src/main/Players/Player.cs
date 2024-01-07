@@ -89,8 +89,6 @@ namespace Jumpvalley.Players
         /// </summary>
         public virtual void Start()
         {
-            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
-
             Node rootNodeMusic = RootNode.GetNode("Music");
             MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("PrimaryMusic"));
             Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
@@ -181,6 +179,15 @@ namespace Jumpvalley.Players
             fpsLimiter.MinFpsDifference = 0;
             fpsLimiter.IsRunning = true;
             RootNode.AddChild(fpsLimiter);
+
+            // initialize gui stuff
+            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
+
+            PackedScene primaryLevelMenuScene = ResourceLoader.Load<PackedScene>("res://gui/level_menu.tscn");
+            if (primaryLevelMenuScene != null)
+            {
+                bottomBar.PrimaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuScene.Instantiate<Control>(), Tree);
+            }
 
             /*
             SpeedrunTimeFormatter speedrunTimeFormatter = new SpeedrunTimeFormatter();

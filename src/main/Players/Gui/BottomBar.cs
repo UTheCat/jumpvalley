@@ -38,6 +38,11 @@ namespace Jumpvalley.Players.Gui
 
         public LastHoveredButton LastHovered = LastHoveredButton.None;
 
+        /// <summary>
+        /// The primary level menu that will have its visibility toggled by the bottom bar's menu button.
+        /// </summary>
+        public LevelMenu PrimaryLevelMenu = null;
+
         //private bool eventsConnected = false;
 
         /// <summary>
@@ -75,6 +80,15 @@ namespace Jumpvalley.Players.Gui
             musicPlayer.SongChanged += (object o, SongChangedArgs args) =>
             {
                 UpdateMusicDescription(args.NewSong);
+            };
+
+            // allow the bottom bar's menu button to toggle the primary level menu
+            MainMenuButton.Pressed += () =>
+            {
+                if (PrimaryLevelMenu != null)
+                {
+                    PrimaryLevelMenu.IsShowing = !PrimaryLevelMenu.IsShowing;
+                }
             };
 
             // connect button hovering events to description label updating
