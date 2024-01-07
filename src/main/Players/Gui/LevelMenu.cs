@@ -25,9 +25,20 @@ namespace Jumpvalley.Players.Gui
         /// </summary>
         private SceneTreeTween backgroundSizeTween;
 
-        private Control backgroundNode;
-        private Label titleLabel;
-        private Label subtitleLabel;
+        /// <summary>
+        /// The Godot control displaying the menu's background
+        /// </summary>
+        public Control BackgroundNode { get; private set; }
+
+        /// <summary>
+        /// The text label displaying the menu's title
+        /// </summary>
+        public Label TitleLabel { get; private set; }
+
+        /// <summary>
+        /// The text label displaying the menu's subtitle
+        /// </summary>
+        public Label SubtitleLabel { get; private set; }
 
         private bool _isShowing;
 
@@ -80,9 +91,9 @@ namespace Jumpvalley.Players.Gui
             if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
 
             ActualNode = actualNode;
-            backgroundNode = actualNode.GetNode<Control>("Background");
-            titleLabel = actualNode.GetNode<Label>("Title");
-            subtitleLabel = actualNode.GetNode<Label>("Subtitle");
+            BackgroundNode = actualNode.GetNode<Control>("Background");
+            TitleLabel = actualNode.GetNode<Label>("Title");
+            SubtitleLabel = actualNode.GetNode<Label>("Subtitle");
 
             transparencyTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
             transparencyTween.InitialValue = 0;
@@ -95,7 +106,7 @@ namespace Jumpvalley.Players.Gui
                 ActualNode.Modulate = modulate;
             };
 
-            if (backgroundNode != null)
+            if (BackgroundNode != null)
             {
                 backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quint, Tween.EaseType.Out, tree);
                 backgroundSizeTween.InitialValue = -20;
@@ -103,19 +114,19 @@ namespace Jumpvalley.Players.Gui
                 backgroundSizeTween.OnStep += (object o, float frac) =>
                 {
                     float sizeOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
-                    backgroundNode.OffsetLeft = sizeOffset;
-                    backgroundNode.OffsetRight = sizeOffset;
-                    backgroundNode.OffsetTop = sizeOffset;
-                    backgroundNode.OffsetBottom = sizeOffset;
+                    BackgroundNode.OffsetLeft = sizeOffset;
+                    BackgroundNode.OffsetRight = sizeOffset;
+                    BackgroundNode.OffsetTop = sizeOffset;
+                    BackgroundNode.OffsetBottom = sizeOffset;
                 };
             }
 
             actualNode.Visible = false;
             
-            if (titleLabel != null)
+            if (TitleLabel != null)
             {
-                titleLabel.Text = actualNode.Tr("MENU_TITLE");
-                subtitleLabel.Text = actualNode.Tr("MENU_SUBTITLE");
+                TitleLabel.Text = actualNode.Tr("MENU_TITLE");
+                SubtitleLabel.Text = actualNode.Tr("MENU_SUBTITLE");
             }
 
             IsShowing = false;
