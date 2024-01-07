@@ -13,6 +13,10 @@ namespace Jumpvalley.Players.Gui
             if (TitleLabel != null)
             {
                 TitleLabel.Text = actualNode.Tr("MENU_TITLE");
+            }
+
+            if (SubtitleLabel != null)
+            {
                 SubtitleLabel.Text = actualNode.Tr("MENU_SUBTITLE");
             }
         }
