@@ -6,13 +6,12 @@ using Jumpvalley.Tweening;
 namespace Jumpvalley.Players.Gui
 {
     /// <summary>
-    /// Code for the in-game menu,
-    /// the menu displayed when clicking the three-dots at the bottom of the user's screen when the user is currently in a level.
+    /// Code for the level menu, a type of menu that's typically displayed only when the player is playing a level.
     /// </summary>
-    public partial class InGameMenu: IDisposable
+    public partial class LevelMenu: IDisposable
     {
         /// <summary>
-        /// The root node of the in-game menu
+        /// The root node of the level menu
         /// </summary>
         public Control ActualNode { get; private set; }
 
@@ -33,7 +32,7 @@ namespace Jumpvalley.Players.Gui
         private bool _isShowing;
 
         /// <summary>
-        /// Whether or not the in-game menu should be visible.
+        /// Whether or not the level menu should be visible.
         /// Toggling this property will run the animation for showing/hiding the menu.
         /// </summary>
         public bool IsShowing
@@ -71,12 +70,12 @@ namespace Jumpvalley.Players.Gui
         }
 
         /// <summary>
-        /// Constructs a new instance of the in-game menu handler.
+        /// Constructs a new instance of the level menu handler.
         /// </summary>
-        /// <param name="actualNode">The root node of the in-game menu</param>
-        /// <param name="tree">The scene tree that the in-game menu is in</param>
+        /// <param name="actualNode">The root node of the level menu</param>
+        /// <param name="tree">The scene tree that the level menu is in</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public InGameMenu(Control actualNode, SceneTree tree)
+        public LevelMenu(Control actualNode, SceneTree tree)
         {
             if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
 

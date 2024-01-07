@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dgfjvgik6m4a5"]
 
-[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_y1j7u"]
-[ext_resource type="Texture2D" uid="uid://xfjrsfu0kh4v" path="res://addons/icons/close_white_48dp.svg" id="2_i272w"]
+[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_thenv"]
+[ext_resource type="Texture2D" uid="uid://xfjrsfu0kh4v" path="res://addons/icons/close_white_48dp.svg" id="2_83y4n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tlkk"]
 bg_color = Color(0.105882, 0.105882, 0.105882, 1)
@@ -11,11 +11,11 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_r8bgc"]
-font = ExtResource("1_y1j7u")
+font = ExtResource("1_thenv")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_kiqen"]
-font = ExtResource("1_y1j7u")
+font = ExtResource("1_thenv")
 font_size = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5r5d"]
@@ -25,7 +25,7 @@ corner_radius_top_right = 500
 corner_radius_bottom_right = 500
 corner_radius_bottom_left = 500
 
-[node name="InGameMenu" type="Control"]
+[node name="LevelMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -108,5 +108,5 @@ anchor_right = 0.9
 anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_i272w")
+texture = ExtResource("2_83y4n")
 expand_mode = 1
