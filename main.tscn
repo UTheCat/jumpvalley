@@ -130,8 +130,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BottomBarOld" type="Node" parent="PrimaryGui"]
-
 [node name="BottomBar" type="Control" parent="PrimaryGui"]
 layout_mode = 1
 anchors_preset = 15
@@ -192,9 +190,7 @@ anchor_left = 0.2
 anchor_top = 1.0
 anchor_right = 0.8
 anchor_bottom = 1.0
-offset_left = -0.400009
 offset_top = -109.0
-offset_right = -0.600037
 offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 0
