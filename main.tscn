@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=40 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -27,6 +27,9 @@ background_mode = 2
 sky = SubResource("Sky_ucdiq")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egbti"]
+bg_color = Color(0, 0, 0, 0.25098)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
 bg_color = Color(0.45, 0.45, 0.45, 1)
@@ -129,8 +132,6 @@ grow_vertical = 2
 
 [node name="BottomBarOld" type="Node" parent="PrimaryGui"]
 
-[node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
-
 [node name="BottomBar" type="Control" parent="PrimaryGui"]
 layout_mode = 1
 anchors_preset = 15
@@ -138,6 +139,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="BackPanel" type="Panel" parent="PrimaryGui/BottomBar"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_egbti")
 
 [node name="Buttons" type="HBoxContainer" parent="PrimaryGui/BottomBar"]
 layout_mode = 1
@@ -195,6 +206,8 @@ text = "MUSIC
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
+
+[node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
 
 [node name="Player" parent="." instance=ExtResource("9_1wvm3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
