@@ -127,18 +127,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BottomBar" type="Node" parent="PrimaryGui"]
+[node name="BottomBarOld" type="Node" parent="PrimaryGui"]
+
+[node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
+
+[node name="BottomBar" type="Control" parent="PrimaryGui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Buttons" type="HBoxContainer" parent="PrimaryGui/BottomBar"]
-anchors_preset = 7
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -92.0
-offset_top = -26.0
+offset_left = -90.0
+offset_top = -32.0
 offset_right = 90.0
-offset_bottom = -4.0
+offset_bottom = -8.0
 theme_override_constants/separation = 10
 
 [node name="Menu" type="Button" parent="PrimaryGui/BottomBar/Buttons"]
@@ -164,13 +175,16 @@ expand_icon = true
 
 [node name="Description" type="Label" parent="PrimaryGui/BottomBar"]
 visible = false
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 1.0
 anchor_right = 0.8
 anchor_bottom = 1.0
-offset_top = -62.0
-offset_bottom = -34.0
+offset_left = -0.400009
+offset_top = -109.0
+offset_right = -0.600037
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 0
 auto_translate = false
@@ -179,10 +193,8 @@ theme_override_font_sizes/font_size = 28
 text = "MUSIC
 [getting song info]"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
 autowrap_mode = 2
-
-[node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
 
 [node name="Player" parent="." instance=ExtResource("9_1wvm3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)

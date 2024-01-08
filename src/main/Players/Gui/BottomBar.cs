@@ -43,6 +43,11 @@ namespace Jumpvalley.Players.Gui
         /// </summary>
         public LevelMenu PrimaryLevelMenu = null;
 
+        /// <summary>
+        /// The background panel shown behind a bottom bar menu that covers the full screen when a menu is being shown
+        /// </summary>
+        public Panel MenuBackPanel = null;
+
         //private bool eventsConnected = false;
 
         /// <summary>
