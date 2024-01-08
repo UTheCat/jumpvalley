@@ -137,7 +137,6 @@ namespace Jumpvalley.Players.Gui
             {
                 CloseButton.Pressed += () =>
                 {
-                    Console.WriteLine("close button pressed");
                     if (IsShowing)
                     {
                         IsShowing = false;
