@@ -18,7 +18,7 @@ font_size = 40
 font = ExtResource("1_thenv")
 font_size = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5r5d"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8psry"]
 bg_color = Color(0.678431, 0.145098, 0.25098, 1)
 corner_radius_top_left = 500
 corner_radius_top_right = 500
@@ -88,18 +88,9 @@ anchor_right = 0.95
 anchor_bottom = 0.05
 offset_left = -30.0
 offset_bottom = 30.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxFlat_8psry")
 
-[node name="Panel" type="Panel" parent="CloseButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_s5r5d")
-
-[node name="TextureRect" type="TextureRect" parent="CloseButton/Panel"]
+[node name="TextureRect" type="TextureRect" parent="CloseButton"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1

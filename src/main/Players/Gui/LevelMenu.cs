@@ -45,6 +45,11 @@ namespace Jumpvalley.Players.Gui
         /// </summary>
         public Control ItemsControl { get; private set; }
 
+        /// <summary>
+        /// The button that closes the menu when pressed
+        /// </summary>
+        public Button CloseButton { get; private set; }
+
         private bool _isShowing;
 
         /// <summary>
@@ -100,6 +105,7 @@ namespace Jumpvalley.Players.Gui
             TitleLabel = actualNode.GetNode<Label>("Title");
             SubtitleLabel = actualNode.GetNode<Label>("Subtitle");
             ItemsControl = actualNode.GetNode<Control>("Items");
+            CloseButton = actualNode.GetNode<Button>("CloseButton");
 
             transparencyTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
             transparencyTween.InitialValue = 0;
@@ -124,6 +130,18 @@ namespace Jumpvalley.Players.Gui
                     BackgroundControl.OffsetRight = -sizeOffset;
                     BackgroundControl.OffsetTop = sizeOffset;
                     BackgroundControl.OffsetBottom = -sizeOffset;
+                };
+            }
+
+            if (CloseButton != null)
+            {
+                CloseButton.Pressed += () =>
+                {
+                    Console.WriteLine("close button pressed");
+                    if (IsShowing)
+                    {
+                        IsShowing = false;
+                    }
                 };
             }
 
