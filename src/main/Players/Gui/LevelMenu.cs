@@ -114,8 +114,8 @@ namespace Jumpvalley.Players.Gui
 
             if (BackgroundControl != null)
             {
-                backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quint, Tween.EaseType.Out, tree);
-                backgroundSizeTween.InitialValue = 20;
+                backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
+                backgroundSizeTween.InitialValue = 40;
                 backgroundSizeTween.FinalValue = 0;
                 backgroundSizeTween.OnStep += (object o, float frac) =>
                 {

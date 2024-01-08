@@ -77,7 +77,7 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
-offset_top = 74.0
+offset_top = 80.0
 
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 1
