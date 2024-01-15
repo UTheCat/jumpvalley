@@ -37,6 +37,11 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
 
         private StaticBody3D body;
 
+        /// <summary>
+        /// Whatever the original value of <see cref="body.ConstantAngularVelocity"/> was, before the instance of this class changed it.
+        /// </summary>
+        private Vector3 originalConstantAngularVelocity;
+
         private Vector3 _constantAngularVelocity;
 
         /// <summary>
@@ -68,6 +73,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             // but does not actually rotate itself.
             // I wouldn't recommend making such an object a Spinner interactive though.
             //body.ConstantAngularVelocity = Vector3.Zero;
+            originalConstantAngularVelocity = body.ConstantAngularVelocity;
 
             if (body.HasMeta(CONSTANT_ANGULAR_VELOCITY_DEGREES_METADATA_NAME))
             {
@@ -127,6 +133,8 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             SetPhysicsProcess(false);
             Stop();
             QueueFree();
+
+            body.ConstantAngularVelocity = originalConstantAngularVelocity;
             base.Dispose();
         }
     }
