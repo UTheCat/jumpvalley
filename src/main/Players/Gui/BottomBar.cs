@@ -10,7 +10,7 @@ namespace Jumpvalley.Players.Gui
     /// <br/>
     /// This set of GUI is currently called the "BottomBar"
     /// </summary>
-    public partial class BottomBar: IDisposable
+    public partial class BottomBar : IDisposable
     {
         public static readonly string MUSIC_DESC_NO_SONG = "MUSIC\nNo song playing";
 
@@ -38,15 +38,35 @@ namespace Jumpvalley.Players.Gui
 
         public LastHoveredButton LastHovered = LastHoveredButton.None;
 
+        private SceneTreeTween backPanelOpacityTween;
+
+        private LevelMenu _primaryLevelMenu;
+
         /// <summary>
         /// The primary level menu that will have its visibility toggled by the bottom bar's menu button.
         /// </summary>
-        public LevelMenu PrimaryLevelMenu = null;
+        public LevelMenu PrimaryLevelMenu
+        {
+            get => _primaryLevelMenu;
+            set
+            {
+                if (_primaryLevelMenu != null)
+                {
+                    _primaryLevelMenu.VisibilityChanged -= OnPrimaryLevelMenuVisibilityChanged;
+                }
+
+                _primaryLevelMenu = value;
+                if (value != null)
+                {
+                    value.VisibilityChanged += OnPrimaryLevelMenuVisibilityChanged;
+                }
+            }
+        }
 
         /// <summary>
         /// The background panel shown behind a bottom bar menu that covers the full screen when a menu is being shown
         /// </summary>
-        public Panel MenuBackPanel = null;
+        public Panel MenuBackPanel { get; private set; }
 
         //private bool eventsConnected = false;
 
@@ -65,6 +85,7 @@ namespace Jumpvalley.Players.Gui
 
             MainMenuButton = (Button)ButtonsContainer.GetNode("Menu");
             MusicButton = (Button)ButtonsContainer.GetNode("Music");
+            MenuBackPanel = ActualNode.GetNode<Panel>("BackPanel");
 
             DescriptionLabel.Visible = false;
             DescriptionFontColor = DescriptionLabel.GetThemeColor("font_color");
@@ -125,8 +146,10 @@ namespace Jumpvalley.Players.Gui
                 RefreshDescriptionOpacity();
             };
 
+            SceneTree actualNodeTree = ActualNode.GetTree();
+
             // connect description label opacity tween to hovering and clicking stuff
-            DescriptionOpacityTween.Tree = ActualNode.GetTree();
+            DescriptionOpacityTween.Tree = actualNodeTree;
             DescriptionOpacityTween.InitialValue = 0;
             DescriptionOpacityTween.FinalValue = 1;
             DescriptionOpacityTween.OnStep += (object o, float frac) =>
@@ -139,6 +162,21 @@ namespace Jumpvalley.Players.Gui
                 DescriptionFontColor.A = opacity;
                 RefreshDescriptionColor();
             };
+
+            if (MenuBackPanel != null)
+            {
+                backPanelOpacityTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, actualNodeTree);
+                backPanelOpacityTween.InitialValue = 0;
+                backPanelOpacityTween.FinalValue = 0.25;
+                backPanelOpacityTween.OnStep += (object o, float frac) =>
+                {
+                    float opacity = (float)backPanelOpacityTween.GetCurrentValue();
+                    MenuBackPanel.Visible = opacity > 0;
+                    Color modulate = MenuBackPanel.SelfModulate;
+                    modulate.A = opacity;
+                    MenuBackPanel.SelfModulate = modulate;
+                };
+            }
         }
 
         public void UpdateMusicDescription(Song song)
@@ -191,10 +229,34 @@ namespace Jumpvalley.Players.Gui
             DescriptionOpacityTween.Resume();
         }
 
+        private void OnPrimaryLevelMenuVisibilityChanged(object o, bool isVisible)
+        {
+            if (backPanelOpacityTween != null)
+            {
+                if (PrimaryLevelMenu != null && PrimaryLevelMenu.IsVisible)
+                {
+                    backPanelOpacityTween.Speed = 1;
+                }
+                else
+                {
+                    backPanelOpacityTween.Speed = -1;
+                }
+
+                backPanelOpacityTween.Resume();
+            }
+        }
+
         public void Dispose()
         {
-            ActualNode.Dispose();
+            //ActualNode.Dispose();
             DescriptionOpacityTween.Dispose();
+
+            if (backPanelOpacityTween != null)
+            {
+                backPanelOpacityTween.Dispose();
+            }
+
+            MenuBackPanel = null;
         }
 
         /*

@@ -29,7 +29,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egbti"]
-bg_color = Color(0, 0, 0, 0.25098)
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
 bg_color = Color(0.45, 0.45, 0.45, 1)
