@@ -35,6 +35,8 @@ namespace Jumpvalley.Players.Gui
         /// <param name="actualNode">The root node of the Godot control to be animated</param>
         public AnimatedControl(Control actualNode)
         {
+            if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
+
             ActualNode = actualNode;
         }
 

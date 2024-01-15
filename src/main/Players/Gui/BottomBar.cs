@@ -92,7 +92,7 @@ namespace Jumpvalley.Players.Gui
             {
                 if (PrimaryLevelMenu != null)
                 {
-                    PrimaryLevelMenu.IsShowing = !PrimaryLevelMenu.IsShowing;
+                    PrimaryLevelMenu.IsVisible = !PrimaryLevelMenu.IsVisible;
                 }
             };
 

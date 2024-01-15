@@ -8,13 +8,8 @@ namespace Jumpvalley.Players.Gui
     /// <summary>
     /// Code for the level menu, a type of menu that's typically displayed only when the player is playing a level.
     /// </summary>
-    public partial class LevelMenu: IDisposable
+    public partial class LevelMenu: AnimatedControl, IDisposable
     {
-        /// <summary>
-        /// The root node of the level menu
-        /// </summary>
-        public Control ActualNode { get; private set; }
-
         /// <summary>
         /// Tween handling the transparency of the menu's items, including its background panel
         /// </summary>
@@ -50,18 +45,16 @@ namespace Jumpvalley.Players.Gui
         /// </summary>
         public Button CloseButton { get; private set; }
 
-        private bool _isShowing;
-
         /// <summary>
         /// Whether or not the level menu should be visible.
         /// Toggling this property will run the animation for showing/hiding the menu.
         /// </summary>
-        public bool IsShowing
+        public override bool IsVisible
         {
-            get => _isShowing;
+            get => base.IsVisible;
             set
             {
-                _isShowing = value;
+                base.IsVisible = value;
 
                 if (value)
                 {
@@ -96,11 +89,8 @@ namespace Jumpvalley.Players.Gui
         /// <param name="actualNode">The root node of the level menu</param>
         /// <param name="tree">The scene tree that the level menu is in</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public LevelMenu(Control actualNode, SceneTree tree)
+        public LevelMenu(Control actualNode, SceneTree tree): base(actualNode)
         {
-            if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
-
-            ActualNode = actualNode;
             BackgroundControl = actualNode.GetNode<Control>("Background");
             TitleLabel = actualNode.GetNode<Label>("Title");
             SubtitleLabel = actualNode.GetNode<Label>("Subtitle");
@@ -137,16 +127,16 @@ namespace Jumpvalley.Players.Gui
             {
                 CloseButton.Pressed += () =>
                 {
-                    if (IsShowing)
+                    if (IsVisible)
                     {
-                        IsShowing = false;
+                        IsVisible = false;
                     }
                 };
             }
 
             actualNode.Visible = false;
 
-            IsShowing = false;
+            IsVisible = false;
         }
 
         public void Dispose()
