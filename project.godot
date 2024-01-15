@@ -15,7 +15,7 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "C#")
 run/max_fps=60
 boot_splash/show_image=false
-config/icon="res://music_note.png"
+config/icon="res://icons/music_note_icon_256dp.png"
 
 [display]
 

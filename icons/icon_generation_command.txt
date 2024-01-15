@@ -1,0 +1,9 @@
+Using ImageMagick, the command to generate the icon (.ico) file with Windows Power Shell is:
+
+magick convert music_note_icon_16dp.png music_note_icon_32dp.png music_note_icon_48dp.png music_note_icon_64dp.png music_note_icon_128dp.png music_note_icon_256dp.png -colors 256 music_note_icon.ico
+
+This might also work:
+magick convert music_note_icon.ico -define icon:auto-resize
+
+Or this (from testing, this gives the best result):
+magick convert music_note_icon_16dp.png music_note_icon_32dp.png music_note_icon_48dp.png music_note_icon_64dp.png music_note_icon_128dp.png music_note_icon_256dp.png music_note_icon.ico
