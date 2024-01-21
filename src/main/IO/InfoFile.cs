@@ -1,10 +1,10 @@
-﻿using Godot;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Jumpvalley.IO
 {
     /// <summary>
-    /// Reads an Info file, a plain text file named "info.txt" that's primarily for defining metadata for a specific object, such as an audio file or a level.
+    /// Reads an Info file, a blob of text that's primarily for defining metadata for a specific object, such as an audio file or a level.
+    /// The blob of text typically comes from a plain-text file named "info.txt".
     /// <br/><br/>
     /// The contents of such types of files should be formatted like this:
     /// <br/>
@@ -21,12 +21,18 @@ namespace Jumpvalley.IO
     public partial class InfoFile
     {
         /// <summary>
-        /// The full file name of an info file stored somewhere on a filesystem.
+        /// The full file name of an info file stored somewhere on a filesystem, including the file extension.
         /// </summary>
         public static readonly string FILE_NAME = "info.txt";
 
+        /// <summary>
+        /// The string that separates two properties with the info file's text.
+        /// </summary>
         public static readonly string PROPERTY_SEPARATOR = "\n";
 
+        /// <summary>
+        /// The string that separates a property's name from its value.
+        /// </summary>
         public static readonly string NAME_VALUE_SEPARATOR = ": ";
 
         /// <summary>
@@ -53,15 +59,20 @@ namespace Jumpvalley.IO
                     {
                         property = property.Trim();
 
-                        int nameValueSeparatorIndex = property.Find(NAME_VALUE_SEPARATOR);
-                        int propertyValueCharIndex = nameValueSeparatorIndex + NAME_VALUE_SEPARATOR.Length;
+                        int nameValueSeparatorIndex = property.IndexOf(NAME_VALUE_SEPARATOR);
 
-                        // Make sure there's content that comes before and after NAME_VALUE_SEPARATOR
-                        if (nameValueSeparatorIndex > 0 && propertyValueCharIndex < property.Length)
+                        // Make sure NAME_VALUE_SEPARATOR is actually in the property string
+                        if (nameValueSeparatorIndex != -1)
                         {
-                            // The part before NAME_VALUE_SEPARATOR should be the property name
-                            // and the part after NAME_VALUE_SEPARATOR should be the property value
-                            Data[property.Substring(0, nameValueSeparatorIndex)] = property.Substring(propertyValueCharIndex);
+                            int propertyValueCharIndex = nameValueSeparatorIndex + NAME_VALUE_SEPARATOR.Length;
+
+                            // Make sure there's content that comes before and after NAME_VALUE_SEPARATOR
+                            if (nameValueSeparatorIndex > 0 && propertyValueCharIndex < property.Length)
+                            {
+                                // The part before NAME_VALUE_SEPARATOR should be the property name
+                                // and the part after NAME_VALUE_SEPARATOR should be the property value
+                                Data[property.Substring(0, nameValueSeparatorIndex)] = property.Substring(propertyValueCharIndex);
+                            }
                         }
                     }
                 }
