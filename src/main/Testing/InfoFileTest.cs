@@ -27,7 +27,7 @@ namespace Jumpvalley.Testing
                 printedInfoFileData += $"- The '{property.Key}' property has the value '{property.Value}'\n";
             }
 
-            Console.WriteLine($"Test info file named '{name}' has these contents:\n{printedInfoFileData}");
+            Console.WriteLine($"Test info file named '{name}' has this data:\n{printedInfoFileData}");
         }
     }
 }
