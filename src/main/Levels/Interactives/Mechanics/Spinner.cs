@@ -38,7 +38,8 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
         private StaticBody3D body;
 
         /// <summary>
-        /// Whatever the original value of <see cref="body.ConstantAngularVelocity"/> was, before the instance of this class changed it.
+        /// Whatever the original value of <see cref="body.ConstantAngularVelocity"/> was, before the instance of this class changed it
+        /// when the spinner was started via <see cref="Start"/>
         /// </summary>
         private Vector3 originalConstantAngularVelocity;
 
@@ -73,7 +74,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             // but does not actually rotate itself.
             // I wouldn't recommend making such an object a Spinner interactive though.
             //body.ConstantAngularVelocity = Vector3.Zero;
-            originalConstantAngularVelocity = body.ConstantAngularVelocity;
+            //originalConstantAngularVelocity = body.ConstantAngularVelocity;
 
             if (body.HasMeta(CONSTANT_ANGULAR_VELOCITY_DEGREES_METADATA_NAME))
             {
@@ -110,6 +111,12 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             if (IsRunning) return;
 
             base.Start();
+
+            // Store the original constant angular velocity of the spinner's StaticBody3D
+            // as well need to set it back to this velocity when the spinner is "stopped"
+            // (or not running due to a call to Stop())
+            originalConstantAngularVelocity = body.ConstantAngularVelocity;
+
             body.ConstantAngularVelocity = ConstantAngularVelocity;
             body.AddChild(this);
         }
@@ -120,7 +127,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
 
             base.Stop();
             body.RemoveChild(this);
-            body.ConstantAngularVelocity = Vector3.Zero;
+            body.ConstantAngularVelocity = originalConstantAngularVelocity;
         }
 
         public override void _PhysicsProcess(double delta)
@@ -134,7 +141,6 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             Stop();
             QueueFree();
 
-            body.ConstantAngularVelocity = originalConstantAngularVelocity;
             base.Dispose();
         }
     }
