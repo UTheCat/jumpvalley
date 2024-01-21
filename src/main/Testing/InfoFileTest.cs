@@ -29,5 +29,17 @@ namespace Jumpvalley.Testing
 
             Console.WriteLine($"Test info file named '{name}' has this data:\n{printedInfoFileData}");
         }
+
+        public static void TestDemoAudioInfoFileV1()
+        {
+            InfoFileTest testInfoFile = new InfoFileTest("""
+				name: Info File OST: The sequel that hopefully doesn't break
+				artists: no one in particular
+				audio_path: audio.ogg
+				audio_url: https://www.example.com
+				""", "test audio file");
+
+            testInfoFile.PrintInfoFileData();
+        }
     }
 }
