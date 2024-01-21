@@ -37,7 +37,7 @@ namespace Jumpvalley.Testing
 				artists: no one in particular
 				audio_path: audio.ogg
 				audio_url: https://www.example.com
-				""", "test audio file");
+				""", "test audio info file");
 
             testInfoFile.PrintInfoFileData();
         }
