@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Godot;
+using System.Collections.Generic;
 
 namespace Jumpvalley.IO
 {
@@ -51,11 +52,16 @@ namespace Jumpvalley.IO
                     if (!string.IsNullOrEmpty(property))
                     {
                         property = property.Trim();
-                        string[] propertyComponents = property.Split(NAME_VALUE_SEPARATOR);
 
-                        if (propertyComponents.Length == 2)
+                        int nameValueSeparatorIndex = property.Find(NAME_VALUE_SEPARATOR);
+                        int propertyValueCharIndex = nameValueSeparatorIndex + NAME_VALUE_SEPARATOR.Length;
+
+                        // Make sure there's content that comes before and after NAME_VALUE_SEPARATOR
+                        if (nameValueSeparatorIndex > 0 && propertyValueCharIndex < property.Length)
                         {
-                            Data[propertyComponents[0]] = propertyComponents[1];
+                            // The part before NAME_VALUE_SEPARATOR should be the property name
+                            // and the part after NAME_VALUE_SEPARATOR should be the property value
+                            Data[property.Substring(0, nameValueSeparatorIndex)] = property.Substring(propertyValueCharIndex);
                         }
                     }
                 }
