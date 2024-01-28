@@ -67,6 +67,9 @@ namespace Jumpvalley.Music
             }
         }
 
+        /// <summary>
+        /// The song that's currently being played in this playlist
+        /// </summary>
         public Song CurrentSong
         {
             get => _currentSong;
@@ -113,7 +116,12 @@ namespace Jumpvalley.Music
         }
 
         /// <summary>
-        /// Removes a song from the playlist
+        /// Removes a song from the playlist.
+        /// <br/>
+        /// <br/>
+        /// If the song that gets removed is being played,
+        /// the playlist will move onto the next song if there are still songs in the playlist after removal,
+        /// or the playlist will stop immediately.
         /// </summary>
         /// <param name="s">The song to remove</param>
         public void Remove(Song s)
@@ -220,6 +228,12 @@ namespace Jumpvalley.Music
             //Console.WriteLine("Set linear volume to " + vol);
         }
 
+        /// <summary>
+        /// This method plays the first song in the playlist (the song in index 0) if no song in the playlist
+        /// is currently being played.
+        /// Otherwise, the playback of the current song is resumed and the linear volume of this playlist
+        /// transitions back to (<see cref="LinearVolume"/> * <see cref="LocalVolumeScale"/>).
+        /// </summary>
         public void Play()
         {
             if (streamPlayer == null)
@@ -274,7 +288,8 @@ namespace Jumpvalley.Music
         }
 
         /// <summary>
-        /// Stops the playback of the playlist immediately, skipping the fade out transition
+        /// Stops the playback of the playlist immediately,
+        /// skipping the fade out transition that gradually makes the playlist inaudible.
         /// </summary>
         public void StopImmediately()
         {
@@ -309,6 +324,10 @@ namespace Jumpvalley.Music
             RaiseStoppedEvent();
         }
 
+        /// <summary>
+        /// This method gradually transitions the playlist's volume to be inaudible,
+        /// and then stops the playlist once that transition is done.
+        /// </summary>
         public void Stop()
         {
             /*
