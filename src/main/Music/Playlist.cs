@@ -70,7 +70,7 @@ namespace Jumpvalley.Music
         public Song CurrentSong
         {
             get => _currentSong;
-            set
+            private set
             {
                 _currentSong = value;
                 OnSongChanged(new SongChangedArgs(value));
@@ -119,6 +119,21 @@ namespace Jumpvalley.Music
         public void Remove(Song s)
         {
             SongList.Remove(s);
+
+            // It makes sense to stop the song if the song being removed
+            // is the one being played.
+            if (s == CurrentSong)
+            {
+                if (SongList.Count > 0)
+                {
+                    // This will still work if there's now only one song in the playlist
+                    PlayNextSong();
+                }
+                else
+                {
+                    StopImmediately();
+                }
+            }
         }
 
         private void CreateAudioStream()
@@ -135,12 +150,12 @@ namespace Jumpvalley.Music
         {
             if (handleSongFinishedConnected)
             {
-                streamPlayer.Finished -= HandleSongFinish;
+                streamPlayer.Finished -= PlayNextSong;
                 handleSongFinishedConnected = false;
             }
         }
 
-        private void HandleSongFinish()
+        private void PlayNextSong()
         {
             // to prevent stack overflow
             if (streamPlayer != null)
@@ -175,7 +190,7 @@ namespace Jumpvalley.Music
             if (!onlyOneSong && streamPlayer != null && handleSongFinishedConnected == false)
             {
                 handleSongFinishedConnected = true;
-                streamPlayer.Finished += HandleSongFinish;
+                streamPlayer.Finished += PlayNextSong;
             }
 
             // take note of the song change
