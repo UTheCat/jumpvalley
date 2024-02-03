@@ -41,5 +41,6 @@ Use the standard ```Console.WriteLine()```, and export the project to an exe wit
 
 ### Physics
 
-- Player's (their character's) gravity seems to be the same as a box with a mass of 0.01kg as of Jumpvalley v0.3.0
-    - Changing physics refresh rate from 60 hz to 120 hz and vice versa does not seem to make a difference
+- Player's (their character's) gravity (as in gravitational acceleration) seems to be the same as a box with a mass of 0.01kg as of Jumpvalley v0.3.0
+    - Changing physics refresh rate from 60 hz to 120 hz and vice versa does not seem to make a difference in the gravitational acceleration of the box or the player's character
+    - However, increasing the physics refresh rate from 60 hz to 120 hz has made the box easier to push
