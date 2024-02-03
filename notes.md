@@ -42,3 +42,4 @@ Use the standard ```Console.WriteLine()```, and export the project to an exe wit
 ### Physics
 
 - Player's (their character's) gravity seems to be the same as a box with a mass of 0.01kg as of Jumpvalley v0.3.0
+    - Changing physics refresh rate from 60 hz to 120 hz and vice versa does not seem to make a difference
