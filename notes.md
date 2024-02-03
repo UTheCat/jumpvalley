@@ -38,3 +38,7 @@ https://docs.godotengine.org/en/stable/tutorials/ui/gui_skinning.html
 
 Therefore, to see console output:
 Use the standard ```Console.WriteLine()```, and export the project to an exe with debugging symbols enabled. Then, run the resulting "console.exe" (preferably with a terminal)
+
+### Physics
+
+- Player's (their character's) gravity seems to be the same as a box with a mass of 0.01kg as of Jumpvalley v0.3.0
