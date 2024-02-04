@@ -278,7 +278,7 @@ namespace Jumpvalley.Players.Movement
         /// <returns></returns>
         public Vector3 GetVelocity(float delta, float yaw)
         {
-            float physicsTicksPerSecond = (float)ProjectSettings.GetSetting(PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND);
+            int physicsTicksPerSecond = Engine.PhysicsTicksPerSecond;
 
             // This is needed because while physics steps should occur at constant time intervals,
             // there are slight variances in the actual time passed between each step.

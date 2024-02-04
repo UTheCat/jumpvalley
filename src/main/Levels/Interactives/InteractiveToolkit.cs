@@ -18,12 +18,12 @@ namespace Jumpvalley.Levels.Interactives
         public static readonly string INTERACTIVE_TYPE_METADATA_NAME = "interactive_type";
 
         /// <summary>
-        /// Returns the current number of physics updates per second based on whatever was defined in project settings
+        /// Returns the current number of physics updates per second
         /// </summary>
         /// <returns>The current number of physics updates per second</returns>
         public static int GetPhysicsTicksPerSecond()
         {
-            return ProjectSettings.GetSettingWithOverride(PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND).As<int>();
+            return Engine.MaxFps;
         }
     }
 }
