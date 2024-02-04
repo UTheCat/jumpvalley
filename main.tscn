@@ -290,51 +290,51 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part2/StaticBody3D"]
 shape = SubResource("BoxShape3D_6c7jj")
 
-[node name="StaticBody3DClimbablePart" type="StaticBody3D" parent="Lobby"]
+[node name="Ladder" type="StaticBody3D" parent="Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.5, -14)
 metadata/is_climbable = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_um7wl")
 
-[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
@@ -342,51 +342,51 @@ skeleton = NodePath("../../..")
 
 [node name="LadderFlickTest" type="Node3D" parent="Lobby"]
 
-[node name="StaticBody3DClimbablePart2" type="StaticBody3D" parent="Lobby/LadderFlickTest"]
+[node name="Ladder" type="StaticBody3D" parent="Lobby/LadderFlickTest"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.5, -20.5)
 metadata/is_climbable = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_um7wl")
 
-[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
@@ -452,7 +452,6 @@ mesh = SubResource("CylinderMesh_h17i4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 7.5, -15.5)
 mass = 0.01
 physics_material_override = SubResource("PhysicsMaterial_yudit")
-can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/RigidBody3D"]
 shape = SubResource("BoxShape3D_e5b6p")
