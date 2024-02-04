@@ -88,6 +88,8 @@ locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation",
 
 [physics]
 
+common/physics_ticks_per_second=240
+common/max_physics_steps_per_frame=32
 3d/default_gravity=98.1
 common/enable_pause_aware_picking=true
 

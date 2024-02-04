@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=44 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dcxkj8m3ltdl8" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="11_rd65f"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="12_3v1qp"]
 [ext_resource type="Material" uid="uid://bm0ukyda3pfcc" path="res://textures/ladder_indicator.tres" id="14_t3s4y"]
+[ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="15_2umsb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -107,6 +108,12 @@ radius = 1.0
 top_radius = 1.0
 bottom_radius = 1.0
 height = 0.5
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yudit"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e5b6p"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qiukw"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_y5nob")
@@ -440,6 +447,20 @@ mesh = SubResource("CylinderMesh_h17i4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
 material_override = ExtResource("14_t3s4y")
 mesh = SubResource("CylinderMesh_h17i4")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Lobby"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 7.5, -15.5)
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_yudit")
+can_sleep = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/RigidBody3D"]
+shape = SubResource("BoxShape3D_e5b6p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lobby/RigidBody3D/CollisionShape3D"]
+material_override = ExtResource("15_2umsb")
+mesh = SubResource("BoxMesh_qiukw")
+skeleton = NodePath("../..")
 
 [node name="Music" type="Node3D" parent="."]
 
