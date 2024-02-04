@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://xn35xb7fekfl"]
+
+[ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="1_h3ito"]
+[ext_resource type="StyleBox" uid="uid://g0x41qvn7p6p" path="res://styles/bottom_bar/main_menu_btn/hover.tres" id="2_h3ka7"]
+[ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="3_ud5tf"]
+[ext_resource type="StyleBox" uid="uid://cumuhpo2oli0n" path="res://styles/bottom_bar/music_btn/normal.tres" id="4_jcyjp"]
+[ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="5_sy6f8"]
+[ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://addons/icons/music_note_white_24dp.svg" id="6_t8du5"]
+[ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="7_w3sun"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egbti"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
+bg_color = Color(0.45, 0.45, 0.45, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_564ww"]
+bg_color = Color(0.2652, 0.417293, 0.68, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="BottomBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_egbti")
+
+[node name="Buttons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -32.0
+offset_right = 90.0
+offset_bottom = -8.0
+theme_override_constants/separation = 10
+
+[node name="Menu" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/normal = ExtResource("1_h3ito")
+theme_override_styles/hover = ExtResource("2_h3ka7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3t1g3")
+icon = ExtResource("3_ud5tf")
+icon_alignment = 1
+
+[node name="Music" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/normal = ExtResource("4_jcyjp")
+theme_override_styles/hover = ExtResource("5_sy6f8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_564ww")
+icon = ExtResource("6_t8du5")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Description" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 1.0
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_top = -109.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+auto_translate = false
+theme_override_fonts/font = ExtResource("7_w3sun")
+theme_override_font_sizes/font_size = 28
+text = "MUSIC
+[getting song info]"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 2

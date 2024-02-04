@@ -1,13 +1,7 @@
-[gd_scene load_steps=44 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=35 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/main/Program.cs" id="1_y5nob"]
-[ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="2_shqk7"]
-[ext_resource type="StyleBox" uid="uid://g0x41qvn7p6p" path="res://styles/bottom_bar/main_menu_btn/hover.tres" id="3_iyhds"]
-[ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="4_x08lq"]
-[ext_resource type="StyleBox" uid="uid://cumuhpo2oli0n" path="res://styles/bottom_bar/music_btn/normal.tres" id="5_rqm46"]
-[ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="6_3wnu8"]
-[ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://addons/icons/music_note_white_24dp.svg" id="7_yvovy"]
-[ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="8_jfe1u"]
+[ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
 [ext_resource type="PackedScene" uid="uid://kou88p3rb0fq" path="res://gui/level_timer.tscn" id="9_1cbro"]
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/player.tscn" id="9_1wvm3"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="10_3umga"]
@@ -28,23 +22,6 @@ background_mode = 2
 sky = SubResource("Sky_ucdiq")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egbti"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
-bg_color = Color(0.45, 0.45, 0.45, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_564ww"]
-bg_color = Color(0.2652, 0.417293, 0.68, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xb1uo"]
 albedo_texture = ExtResource("11_rd65f")
@@ -137,78 +114,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BottomBar" type="Control" parent="PrimaryGui"]
+[node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BackPanel" type="Panel" parent="PrimaryGui/BottomBar"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_egbti")
-
-[node name="Buttons" type="HBoxContainer" parent="PrimaryGui/BottomBar"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -90.0
-offset_top = -32.0
-offset_right = 90.0
-offset_bottom = -8.0
-theme_override_constants/separation = 10
-
-[node name="Menu" type="Button" parent="PrimaryGui/BottomBar/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-theme_override_styles/normal = ExtResource("2_shqk7")
-theme_override_styles/hover = ExtResource("3_iyhds")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_3t1g3")
-icon = ExtResource("4_x08lq")
-icon_alignment = 1
-
-[node name="Music" type="Button" parent="PrimaryGui/BottomBar/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-theme_override_styles/normal = ExtResource("5_rqm46")
-theme_override_styles/hover = ExtResource("6_3wnu8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_564ww")
-icon = ExtResource("7_yvovy")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Description" type="Label" parent="PrimaryGui/BottomBar"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 1.0
-anchor_right = 0.8
-anchor_bottom = 1.0
-offset_top = -109.0
-offset_bottom = -42.0
-grow_horizontal = 2
-grow_vertical = 0
-auto_translate = false
-theme_override_fonts/font = ExtResource("8_jfe1u")
-theme_override_font_sizes/font_size = 28
-text = "MUSIC
-[getting song info]"
-horizontal_alignment = 1
-vertical_alignment = 2
-autowrap_mode = 2
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
 
@@ -290,51 +197,51 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Wrap/Part2/StaticBody3D"]
 shape = SubResource("BoxShape3D_6c7jj")
 
-[node name="StaticBody3DClimbablePart" type="StaticBody3D" parent="Lobby"]
+[node name="Ladder" type="StaticBody3D" parent="Lobby"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3.5, -14)
 metadata/is_climbable = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_um7wl")
 
-[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../..")
 
-[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/StaticBody3DClimbablePart"]
+[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
@@ -342,51 +249,51 @@ skeleton = NodePath("../../..")
 
 [node name="LadderFlickTest" type="Node3D" parent="Lobby"]
 
-[node name="StaticBody3DClimbablePart2" type="StaticBody3D" parent="Lobby/LadderFlickTest"]
+[node name="Ladder" type="StaticBody3D" parent="Lobby/LadderFlickTest"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.5, -20.5)
 metadata/is_climbable = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_um7wl")
 
-[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/LadderFlickTest/StaticBody3DClimbablePart2"]
+[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="Lobby/LadderFlickTest/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
@@ -452,7 +359,6 @@ mesh = SubResource("CylinderMesh_h17i4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 7.5, -15.5)
 mass = 0.01
 physics_material_override = SubResource("PhysicsMaterial_yudit")
-can_sleep = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lobby/RigidBody3D"]
 shape = SubResource("BoxShape3D_e5b6p")
