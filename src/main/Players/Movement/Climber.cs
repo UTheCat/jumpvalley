@@ -19,6 +19,11 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private Area3D area;
 
+        /// <summary>
+        /// The box that defines <see cref="area"/>'s region
+        /// </summary>
+        private BoxShape3D areaBox;
+
         private bool _canClimb = false;
 
         /// <summary>
@@ -85,6 +90,12 @@ namespace Jumpvalley.Players.Movement
             area = new Area3D();
             area.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(area)}";
 
+            areaBox = new BoxShape3D();
+
+            CollisionShape3D areaShape = new CollisionShape3D();
+            areaShape.Shape = areaBox;
+            area.AddChild(areaShape);
+
             Hitbox = hitbox;
 
             updateRayCast();
@@ -96,8 +107,8 @@ namespace Jumpvalley.Players.Movement
         public new void Dispose()
         {
             QueueFree();
-            rayCast.QueueFree();
-            rayCast.Dispose();
+            area.QueueFree();
+            area.Dispose();
             base.Dispose();
         }
 
@@ -118,6 +129,23 @@ namespace Jumpvalley.Players.Movement
             // as it is parented to the hitbox itself
             rayCast.Position = new Vector3(0, 0, -boxSize.Z / 2 - 0.05f);
             rayCast.TargetPosition = new Vector3(0, -boxSize.Y / 2, 0);
+        }
+
+        private void updateArea()
+        {
+            CollisionShape3D hitbox = Hitbox;
+            if (hitbox == null) return;
+
+            BoxShape3D collisionBox = hitbox.Shape as BoxShape3D;
+
+            // For now, only box-shaped hitboxes will work.
+            if (collisionBox == null) return;
+
+            Vector3 hitboxSize = collisionBox.Size;
+            areaBox.Size = new Vector3(0.2f, hitboxSize.Y / 2, 0.1f);
+
+            // Remember, position of the area is relative to the position of the hitbox.
+            area.Position = new Vector3(0, -hitboxSize.Y / 4, -hitboxSize.Z / 2 - areaBox.Size.Z / 2);
         }
 
         public override void _PhysicsProcess(double delta)
