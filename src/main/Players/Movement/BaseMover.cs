@@ -20,43 +20,43 @@ namespace Jumpvalley.Players.Movement
             /// <summary>
             /// The character is not moving
             /// </summary>
-            STOPPED = 0,
+            Stopped = 0,
 
             /// <summary>
             /// The character is moving, but not at the user's request.
             /// </summary>
-            MOVING = 1,
+            Moving = 1,
 
             /// <summary>
             /// The character is walking/running at the user's request.
             /// </summary>
-            RUNNING = 2,
+            Running = 2,
 
             /// <summary>
             /// The character is moving upward, but not at the user's request (e.g. the character is moving upward while <see cref="IsJumping"/> and <see cref="IsClimbing"/> are both false)
             /// </summary>
-            RISING = 3,
+            Rising = 3,
 
             /// <summary>
             /// The character is jumping.
             /// A character is jumping only while <see cref="IsJumping"/> is set to true and the character is moving upward.
             /// </summary>
-            JUMPING = 4,
+            Jumping = 4,
 
             /// <summary>
             /// The character is climbing something
             /// </summary>
-            CLIMBING = 5,
+            Climbing = 5,
 
             /// <summary>
             /// The character is falling down
             /// </summary>
-            FALLING = 6
+            Falling = 6
         }
 
         private static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
 
-        private BodyState _currentBodyState = BodyState.STOPPED;
+        private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
         /// The name of the <see cref="CollisionShape3D"/> that should be primarily in charge of handling a character's collision.
@@ -444,34 +444,34 @@ namespace Jumpvalley.Players.Movement
                 if (IsJumping && actualVelocity.Y > 0)
                 {
                     // Jumping is placed first in line so that jumping can affect climbing
-                    CurrentBodyState = BodyState.JUMPING;
+                    CurrentBodyState = BodyState.Jumping;
                 }
                 else if (IsClimbing)
                 {
-                    CurrentBodyState = BodyState.CLIMBING;
+                    CurrentBodyState = BodyState.Climbing;
                 }
                 else if (IsJumping == false && actualVelocity.Y > 0)
                 {
-                    CurrentBodyState = BodyState.RISING;
+                    CurrentBodyState = BodyState.Rising;
                 }
                 else if (actualVelocity.Y < 0)
                 {
-                    CurrentBodyState = BodyState.FALLING;
+                    CurrentBodyState = BodyState.Falling;
                 }
                 else if ((actualVelocity.X != 0 || actualVelocity.Z != 0) && IsOnFloor())
                 {
                     if (RightValue != 0 || ForwardValue != 0)
                     {
-                        CurrentBodyState = BodyState.RUNNING;
+                        CurrentBodyState = BodyState.Running;
                     }
                     else
                     {
-                        CurrentBodyState = BodyState.MOVING;
+                        CurrentBodyState = BodyState.Moving;
                     }
                 }
                 else
                 {
-                    CurrentBodyState = BodyState.STOPPED;
+                    CurrentBodyState = BodyState.Stopped;
                 }
             }
         }
