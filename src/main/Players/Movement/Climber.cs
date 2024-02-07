@@ -10,11 +10,14 @@ namespace Jumpvalley.Players.Movement
     public partial class Climber : Node, IDisposable
     {
         /// <summary>
-        /// Name of the metadata entry that specifies whether or not a PhysicsBody3D is climbable
+        /// Name of the metadata entry that specifies whether or not a <see cref="PhysicsBody3D"/> is climbable
         /// </summary>
         public readonly string IS_CLIMBABLE_METADATA_NAME = "is_climbable";
 
-        private RayCast3D rayCast;
+        /// <summary>
+        /// The <see cref="Area3D"/> that allows the character to climb when a climbable PhysicsBody3D is intersecting with it
+        /// </summary>
+        private Area3D area;
 
         private bool _canClimb = false;
 
@@ -60,14 +63,14 @@ namespace Jumpvalley.Players.Movement
                 CollisionShape3D oldHitbox = _hitbox;
                 if (oldHitbox != null)
                 {
-                    oldHitbox.RemoveChild(rayCast);
+                    oldHitbox.RemoveChild(area);
                 }
 
                 _hitbox = value;
                 
                 if (value != null)
                 {
-                    value.AddChild(rayCast);
+                    value.AddChild(area);
                 }
             }
         }
@@ -79,9 +82,8 @@ namespace Jumpvalley.Players.Movement
         {
             Name = $"{nameof(Climber)}_{GetHashCode()}";
 
-            rayCast = new RayCast3D();
-            rayCast.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(rayCast)}";
-            rayCast.HitFromInside = true;
+            area = new Area3D();
+            area.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(area)}";
 
             Hitbox = hitbox;
 
