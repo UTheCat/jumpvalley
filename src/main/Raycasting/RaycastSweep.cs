@@ -1,9 +1,4 @@
 ﻿using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jumpvalley.Raycasting
 {
@@ -27,9 +22,17 @@ namespace Jumpvalley.Raycasting
         /// </summary>
         public Vector3 EndPosition { get; private set; }
 
-        public RaycastSweep()
+        /// <summary>
+        /// Creates a new <see cref="RaycastSweep"/> with the given raycast count, starting position, and ending position
+        /// </summary>
+        /// <param name="numRaycasts"></param>
+        /// <param name="startPosition"></param>
+        /// <param name="endPosition"></param>
+        public RaycastSweep(int numRaycasts, Vector3 startPosition, Vector3 endPosition)
         {
-
+            NumRaycasts = numRaycasts;
+            StartPosition = startPosition;
+            EndPosition = endPosition;
         }
     }
 }
