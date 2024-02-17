@@ -66,6 +66,7 @@ namespace Jumpvalley.Raycasting
                 // Create raycast for the current index
                 RayCast3D r = new RayCast3D();
                 r.Name = $"Raycast{i}";
+                r.Enabled = false;
                 r.Position = currentStartPos;
                 r.TargetPosition = new Vector3(currentStartPos.X, currentStartPos.Y, currentStartPos.Z + RaycastLength);
 
