@@ -7,7 +7,7 @@ namespace Jumpvalley.Raycasting
     /// <summary>
     /// Sweeps over a region of 3D space using a series of equally-spaced-out raycasts.
     /// </summary>
-    public partial class RaycastSweep: Node3D
+    public partial class RaycastSweep: Node3D, IDisposable
     {
         /// <summary>
         /// The total number of raycasts that the raycast sweep will perform from the start position to the end position.
@@ -59,15 +59,39 @@ namespace Jumpvalley.Raycasting
             // We want to cover the entire raycasting range as defined by startPosition and endPosition,
             // so we'll need to set the position increment in a way that allows for the full raycasting range
             // to be covered and allows for the raycasts to be equally spaced from each other.
-            float posIncrement = posDifferenceLength / (numRaycasts - 1);
+            Vector3 posIncrement = positionDifference / (numRaycasts - 1);
             Vector3 currentStartPos = startPosition;
             for (int i = 0; i < numRaycasts; i++)
             {
+                // Create raycast for the current index
                 RayCast3D r = new RayCast3D();
-                r.Name = $"";
+                r.Name = $"Raycast{i}";
                 r.Position = currentStartPos;
-                
+                r.TargetPosition = new Vector3(currentStartPos.X, currentStartPos.Y, currentStartPos.Z + RaycastLength);
+
+                AddChild(r);
+                Raycasts.Add(r);
+
+                // Move onto the next raycast with an updated start position
+                currentStartPos += posIncrement;
             }
+        }
+
+        /// <summary>
+        /// Disposes of this <see cref="RaycastSweep"/>, including its raycasts.
+        /// </summary>
+        public new void Dispose()
+        {
+            QueueFree();
+
+            foreach (RayCast3D r in Raycasts)
+            {
+                r.QueueFree();
+                r.Dispose();
+            }
+            Raycasts.Clear();
+
+            base.Dispose();
         }
     }
 }
