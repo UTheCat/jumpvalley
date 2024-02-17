@@ -123,7 +123,7 @@ namespace Jumpvalley.Players.Movement
             if (collisionBox == null) return;
 
             Vector3 hitboxSize = collisionBox.Size;
-            areaBox.Size = new Vector3(0.2f, hitboxSize.Y / 2, 0.1f);
+            areaBox.Size = new Vector3(0.25f, hitboxSize.Y / 2, 0.1f);
 
             // Remember, position of the area is relative to the position of the hitbox.
             area.Position = new Vector3(0, -hitboxSize.Y / 4, -hitboxSize.Z / 2 - areaBox.Size.Z / 2);
