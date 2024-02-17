@@ -6,7 +6,7 @@ namespace Jumpvalley.Raycasting
     /// Class that contains data about the result of a raycast sweep operation
     /// (where collisions with a <see cref="RaycastSweep"/>'s raycasts are checked).
     /// </summary>
-    public partial class RaycastSweepResults
+    public partial class RaycastSweepResult
     {
         /// <summary>
         /// The raycast that got collided with.
@@ -23,7 +23,7 @@ namespace Jumpvalley.Raycasting
         /// </summary>
         public Node3D CollidedObject;
 
-        public RaycastSweepResults(RayCast3D raycast, Vector3 collisionPoint, Node3D collidedObject)
+        public RaycastSweepResult(RayCast3D raycast, Vector3 collisionPoint, Node3D collidedObject)
         {
             Raycast = raycast;
             CollisionPoint = collisionPoint;
