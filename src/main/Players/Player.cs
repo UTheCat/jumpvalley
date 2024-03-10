@@ -7,6 +7,7 @@ using Jumpvalley.Players.Camera;
 using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
+using Jumpvalley.Raycasting;
 using Jumpvalley.Testing;
 
 namespace Jumpvalley.Players
@@ -177,6 +178,10 @@ namespace Jumpvalley.Players
                 );
             Disposables.Add(levelLoadingTest);
             levelLoadingTest.Start();
+
+            // test RaycastSweep
+            RaycastSweep raycastSweep = new RaycastSweep(3, new Vector3(-0.5f, 0f, 0.25f), new Vector3(0.5f, 0f, 0.25f));
+            Character.AddChild(raycastSweep);
 
             RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
             fpsLimiter.MinFpsDifference = 0;
