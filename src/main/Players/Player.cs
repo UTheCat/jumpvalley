@@ -181,7 +181,8 @@ namespace Jumpvalley.Players
 
             // test RaycastSweep
             RaycastSweep raycastSweep = new RaycastSweep(3, new Vector3(-0.5f, 0f, 0.25f), new Vector3(0.5f, 0f, 0.25f));
-            Character.AddChild(raycastSweep);
+            RaycastSweepTest raycastSweepTest = new RaycastSweepTest(raycastSweep, Character);
+            PrimaryGui.AddChild(raycastSweepTest.RaycastResultLabel);
 
             RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
             fpsLimiter.MinFpsDifference = 0;

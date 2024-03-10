@@ -20,12 +20,10 @@ namespace Jumpvalley.Testing
         /// <param name="node">The Node3D to use the raycast sweep for</param>
         public RaycastSweepTest(RaycastSweep raycastSweep, Node3D node)
         {
-            if (node == null) throw new ArgumentNullException("node");
-
             RaycastResultLabel = new Label();
 
             TestRaycastSweep = raycastSweep;
-            node.AddChild(raycastSweep);
+            node?.AddChild(raycastSweep);
         }
 
         public override void _PhysicsProcess(double delta)
