@@ -84,6 +84,8 @@ namespace Jumpvalley.Raycasting
 
         /// <summary>
         /// Runs through the raycasts in <see cref="Raycasts"/> from left-to-right.
+        /// <br/>
+        /// <br/>
         /// This returns raycast collision information about the first raycast in <see cref="Raycasts"/>
         /// that got collided with. If no raycast in <see cref="Raycasts"/> was hit,
         /// this function returns null.
