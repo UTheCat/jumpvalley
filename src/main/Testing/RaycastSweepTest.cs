@@ -20,7 +20,10 @@ namespace Jumpvalley.Testing
         /// <param name="node">The Node3D to use the raycast sweep for</param>
         public RaycastSweepTest(RaycastSweep raycastSweep, Node3D node)
         {
+            Name = $"{nameof(RaycastSweepTest)}_{GetHashCode()}";
+
             RaycastResultLabel = new Label();
+            RaycastResultLabel.Name = $"RaycastSweepResultLabel_{GetHashCode()}";
 
             TestRaycastSweep = raycastSweep;
             node?.AddChild(raycastSweep);
@@ -32,7 +35,7 @@ namespace Jumpvalley.Testing
 
             RaycastSweepResult results = TestRaycastSweep.PerformRaycast();
 
-            string resultText = $"RaycastSweep results for {RaycastResultLabel.Name}\n";
+            string resultText = $"RaycastSweep results for {TestRaycastSweep.Name}\n";
             
             if (results == null)
             {

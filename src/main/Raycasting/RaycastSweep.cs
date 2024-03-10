@@ -42,7 +42,7 @@ namespace Jumpvalley.Raycasting
         /// <param name="numRaycasts"></param>
         /// <param name="startPosition"></param>
         /// <param name="endPosition"></param>
-        public RaycastSweep(int numRaycasts, Vector3 startPosition, Vector3 endPosition)
+        public RaycastSweep(int numRaycasts, Vector3 startPosition, Vector3 endPosition, float raycastLength)
         {
             if (numRaycasts < 2) throw new ArgumentOutOfRangeException("numRaycasts", "RaycastSweep requires that there are at least 2 raycasts to work with.");
 
@@ -51,6 +51,8 @@ namespace Jumpvalley.Raycasting
             NumRaycasts = numRaycasts;
             StartPosition = startPosition;
             EndPosition = endPosition;
+            RaycastLength = raycastLength;
+            Raycasts = new List<RayCast3D>();
 
             Vector3 positionDifference = endPosition - startPosition;
             float posDifferenceLength = positionDifference.Length();
@@ -69,7 +71,10 @@ namespace Jumpvalley.Raycasting
 
                 // For performance reasons, we don't want to update every physics frame by default.
                 // This is because we really only need to update when PerformRaycast() is called.
-                r.Enabled = false;
+                //r.Enabled = false;
+
+                // Using ForceRaycastUpdate() seems to be buggy, so we need to keep this for now.
+                r.Enabled = true;
 
                 r.Position = currentStartPos;
                 r.TargetPosition = new Vector3(currentStartPos.X, currentStartPos.Y, currentStartPos.Z + RaycastLength);
@@ -88,7 +93,7 @@ namespace Jumpvalley.Raycasting
         /// <br/>
         /// This returns raycast collision information about the first raycast in <see cref="Raycasts"/>
         /// that got collided with. If no raycast in <see cref="Raycasts"/> was hit,
-        /// this function returns null.
+        /// this method returns null.
         /// </summary>
         /// <returns>The results of this raycast operation</returns>
         public RaycastSweepResult PerformRaycast()
@@ -99,7 +104,8 @@ namespace Jumpvalley.Raycasting
 
                 // Needed since the raycast collision information doesn't update every frame by default
                 // (which is for performance reasons)
-                r.ForceRaycastUpdate();
+                // Currently not using this method since this seems to be buggy.
+                //r.ForceRaycastUpdate();
 
                 if (r.IsColliding())
                 {
