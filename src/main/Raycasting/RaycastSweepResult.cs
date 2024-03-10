@@ -23,11 +23,18 @@ namespace Jumpvalley.Raycasting
         /// </summary>
         public Node3D CollidedObject;
 
-        public RaycastSweepResult(RayCast3D raycast, Vector3 collisionPoint, Node3D collidedObject)
+        /// <summary>
+        /// The numeric index of the raycast that got collided with.
+        /// This index should be equal to the index in <see cref="RaycastSweep.Raycasts"/> where this raycast is stored.
+        /// </summary>
+        public int RaycastIndex;
+
+        public RaycastSweepResult(RayCast3D raycast, Vector3 collisionPoint, Node3D collidedObject, int raycastIndex)
         {
             Raycast = raycast;
             CollisionPoint = collisionPoint;
             CollidedObject = collidedObject;
+            RaycastIndex = raycastIndex;
         }
     }
 }
