@@ -66,7 +66,11 @@ namespace Jumpvalley.Raycasting
                 // Create raycast for the current index
                 RayCast3D r = new RayCast3D();
                 r.Name = $"Raycast{i}";
+
+                // For performance reasons, we don't want to update every physics frame by default.
+                // This is because we really only need to update when PerformRaycast() is called.
                 r.Enabled = false;
+
                 r.Position = currentStartPos;
                 r.TargetPosition = new Vector3(currentStartPos.X, currentStartPos.Y, currentStartPos.Z + RaycastLength);
 
@@ -76,6 +80,31 @@ namespace Jumpvalley.Raycasting
                 // Move onto the next raycast with an updated start position
                 currentStartPos += posIncrement;
             }
+        }
+
+        /// <summary>
+        /// Runs through the raycasts in <see cref="Raycasts"/> from left-to-right.
+        /// This returns raycast collision information about the first raycast in <see cref="Raycasts"/>
+        /// that got collided with. If no raycast in <see cref="Raycasts"/> was hit,
+        /// this function returns null.
+        /// </summary>
+        /// <returns>The results of this raycast operation</returns>
+        public RaycastSweepResult PerformRaycast()
+        {
+            for (int i = 0; i < Raycasts.Count; i++)
+            {
+                RayCast3D r = Raycasts[i];
+                // Needed since the raycast collision information doesn't update every frame by default
+                // (which is for performance reasons)
+                r.ForceRaycastUpdate();
+
+                if (r.IsColliding())
+                {
+                    return new RaycastSweepResult(r, r.GetCollisionPoint(), r.GetCollider(), i);
+                }
+            }
+
+            return null;
         }
 
         /// <summary>

@@ -19,9 +19,9 @@ namespace Jumpvalley.Raycasting
         public Vector3 CollisionPoint;
 
         /// <summary>
-        /// The <see cref="Node3D"/> that the raycast hit.
+        /// The <see cref="GodotObject"/> that the raycast hit.
         /// </summary>
-        public Node3D CollidedObject;
+        public GodotObject CollidedObject;
 
         /// <summary>
         /// The numeric index of the raycast that got collided with.
@@ -29,7 +29,7 @@ namespace Jumpvalley.Raycasting
         /// </summary>
         public int RaycastIndex;
 
-        public RaycastSweepResult(RayCast3D raycast, Vector3 collisionPoint, Node3D collidedObject, int raycastIndex)
+        public RaycastSweepResult(RayCast3D raycast, Vector3 collisionPoint, GodotObject collidedObject, int raycastIndex)
         {
             Raycast = raycast;
             CollisionPoint = collisionPoint;
