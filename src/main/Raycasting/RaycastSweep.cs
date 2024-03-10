@@ -96,6 +96,7 @@ namespace Jumpvalley.Raycasting
             for (int i = 0; i < Raycasts.Count; i++)
             {
                 RayCast3D r = Raycasts[i];
+
                 // Needed since the raycast collision information doesn't update every frame by default
                 // (which is for performance reasons)
                 r.ForceRaycastUpdate();
