@@ -149,7 +149,9 @@ namespace Jumpvalley.Raycasting
             foreach (RayCast3D r in Raycasts)
             {
                 r.Position = currentStartPos;
-                r.TargetPosition = new Vector3(currentStartPos.X, currentStartPos.Y, currentStartPos.Z + raycastLength);
+
+                // Remember that target position is relative to the position of the *raycast itself*.
+                r.TargetPosition = new Vector3(0, 0, raycastLength);
 
                 AddChild(r);
 
