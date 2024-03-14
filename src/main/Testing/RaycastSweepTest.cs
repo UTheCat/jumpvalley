@@ -12,13 +12,14 @@ namespace Jumpvalley.Testing
     {
         public RaycastSweep TestRaycastSweep;
         public Label RaycastResultLabel;
+        public RaycastSweep.SweepOrder SweepOrder;
 
         /// <summary>
         /// Creates a new instance of <see cref="RaycastSweepTest"/>
         /// </summary>
         /// <param name="raycastSweep">The raycast sweep to apply</param>
         /// <param name="node">The Node3D to use the raycast sweep for</param>
-        public RaycastSweepTest(RaycastSweep raycastSweep, Node3D node)
+        public RaycastSweepTest(RaycastSweep raycastSweep, Node3D node, RaycastSweep.SweepOrder sweepOrder)
         {
             Name = $"{nameof(RaycastSweepTest)}_{GetHashCode()}";
 
@@ -26,6 +27,7 @@ namespace Jumpvalley.Testing
             RaycastResultLabel.Name = $"RaycastSweepResultLabel_{GetHashCode()}";
 
             TestRaycastSweep = raycastSweep;
+            SweepOrder = sweepOrder;
             node?.AddChild(raycastSweep);
         }
 
@@ -33,7 +35,7 @@ namespace Jumpvalley.Testing
         {
             base._PhysicsProcess(delta);
 
-            RaycastSweepResult results = TestRaycastSweep.PerformRaycast();
+            RaycastSweepResult results = TestRaycastSweep.PerformRaycast(SweepOrder);
 
             string resultText = $"RaycastSweep results for {TestRaycastSweep.Name}\n";
             

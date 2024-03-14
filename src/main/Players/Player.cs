@@ -181,7 +181,7 @@ namespace Jumpvalley.Players
 
             // test RaycastSweep
             RaycastSweep raycastSweep = new RaycastSweep(3, new Vector3(-0.5f, 0f, -0.251f), new Vector3(0.5f, 0f, -0.251f), -1f);
-            RaycastSweepTest raycastSweepTest = new RaycastSweepTest(raycastSweep, Character);
+            RaycastSweepTest raycastSweepTest = new RaycastSweepTest(raycastSweep, Character, RaycastSweep.SweepOrder.LeftToRight);
             PrimaryGui.AddChild(raycastSweepTest.RaycastResultLabel);
             RootNode.AddChild(raycastSweepTest);
 
