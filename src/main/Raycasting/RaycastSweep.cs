@@ -72,8 +72,6 @@ namespace Jumpvalley.Raycasting
         /// <param name="endPosition"></param>
         public RaycastSweep(int numRaycasts, Vector3 startPosition, Vector3 endPosition, float raycastLength)
         {
-            if (numRaycasts < 2) throw new ArgumentOutOfRangeException("numRaycasts", "RaycastSweep requires that there are at least 2 raycasts to work with.");
-
             Name = $"{nameof(RaycastSweep)}_{GetHashCode()}";
 
             NumRaycasts = numRaycasts;
@@ -92,6 +90,9 @@ namespace Jumpvalley.Raycasting
         public void UpdateRaycastLayout()
         {
             int numRaycasts = NumRaycasts;
+
+            if (numRaycasts < 2) throw new ArgumentOutOfRangeException("numRaycasts", "RaycastSweep requires that there are at least 2 raycasts to work with.");
+
             float raycastLength = RaycastLength;
             Vector3 startPosition = StartPosition;
             Vector3 endPosition = EndPosition;
@@ -161,7 +162,7 @@ namespace Jumpvalley.Raycasting
         /// Gets the current collision info for the specified raycast.
         /// </summary>
         /// <param name="r">The raycast to use</param>
-        /// <param name="raycastIndex">The numeric index of the raycast in the <see cref="RaycastSweep.Raycasts"/> list it belongs to</param>
+        /// <param name="raycastIndex">The numeric index of the raycast in the <see cref="Raycasts"/> list it belongs to</param>
         /// <returns></returns>
         private static RaycastSweepResult GetCurrentRaycastCollisionInfo(RayCast3D r, int raycastIndex)
         {
