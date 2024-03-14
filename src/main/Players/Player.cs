@@ -187,15 +187,23 @@ namespace Jumpvalley.Players
             RootNode.AddChild(raycastSweepTest);
             Disposables.Add(raycastSweep);
 
+            async void IncrementNumRaycasts()
+            {
+                Console.WriteLine("Adding a raycast");
+                raycastSweep.NumRaycasts += 1;
+                raycastSweep.UpdateRaycastLayout();
+            }
+
             Task.Run(() => {
                 Console.WriteLine("Starting with 3 raycasts. Increasing to 12 raycasts in 5 seconds.");
-                Task.Delay(5000);
+                System.Threading.Thread.Sleep(5000);
                 for (int i = 0; i < 9; i++)
                 {
-                    Console.WriteLine("Adding a raycast");
-                    raycastSweep.NumRaycasts += 1;
-                    raycastSweep.UpdateRaycastLayout();
-                    Task.Delay(500);
+                    // Workaround due to Godot not letting you add nodes to scene tree in a background thread at the moment:
+                    // https://docs.godotengine.org/en/stable/classes/class_callable.html#class-callable-method-call-deferred
+                    // https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_differences.html#doc-c-sharp-differences
+                    Callable.From(IncrementNumRaycasts).CallDeferred();
+                    System.Threading.Thread.Sleep(500);
                 }
             });
 
