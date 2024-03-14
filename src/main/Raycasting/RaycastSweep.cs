@@ -170,9 +170,9 @@ namespace Jumpvalley.Raycasting
                         }
                     }
                 }
-                else
+                else if (order == SweepOrder.CenterRightLeft)
                 {
-                    for (int i = numRaycasts - 1; i > -1; i++)
+                    for (int i = numRaycasts - 1; i > -1; i--)
                     {
                         if (i != centerIndex)
                         {
@@ -194,7 +194,7 @@ namespace Jumpvalley.Raycasting
                 }
                 else if (order == SweepOrder.RightToLeft)
                 {
-                    for (int i = numRaycasts - 1; i > -1; i++)
+                    for (int i = numRaycasts - 1; i > -1; i--)
                     {
                         RaycastSweepResult result = GetCurrentRaycastCollisionInfo(Raycasts[i], i);
                         if (result != null) return result;
