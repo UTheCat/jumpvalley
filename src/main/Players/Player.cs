@@ -187,7 +187,7 @@ namespace Jumpvalley.Players
             RootNode.AddChild(raycastSweepTest);
             Disposables.Add(raycastSweep);
 
-            async void IncrementNumRaycasts()
+            void IncrementNumRaycasts()
             {
                 Console.WriteLine("Adding a raycast");
                 raycastSweep.NumRaycasts += 1;
