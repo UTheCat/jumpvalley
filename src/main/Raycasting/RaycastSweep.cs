@@ -40,24 +40,24 @@ namespace Jumpvalley.Raycasting
         /// <summary>
         /// The total number of raycasts that the raycast sweep will perform from the start position to the end position.
         /// </summary>
-        public int NumRaycasts { get; private set; }
+        public int NumRaycasts;
 
         /// <summary>
         /// The length in meters that each raycast in the <see cref="RaycastSweep"/> should extend in the relative Z-axis of this <see cref="Node3D"/>
         /// </summary>
-        public float RaycastLength { get; private set; }
+        public float RaycastLength;
 
         /// <summary>
         /// The starting position of the raycast sweep.
         /// This position is relative to the position of this <see cref="Node3D"/> and is where the first raycast will begin.
         /// </summary>
-        public Vector3 StartPosition { get; private set; }
+        public Vector3 StartPosition;
 
         /// <summary>
         /// The ending position of the raycast sweep.
         /// This position is relative to the position of this <see cref="Node3D"/> and is where the last raycast will begin.
         /// </summary>
-        public Vector3 EndPosition { get; private set; }
+        public Vector3 EndPosition;
 
         /// <summary>
         /// The raycasts being used by the <see cref="RaycastSweep"/>.
@@ -82,8 +82,21 @@ namespace Jumpvalley.Raycasting
             RaycastLength = raycastLength;
             Raycasts = new List<RayCast3D>();
 
+            UpdateRaycastLayout();
+        }
+
+        /// <summary>
+        /// Updates the number of raycasts, the positioning of the raycasts, and the length of the raycasts based on the current values of
+        /// <see cref="NumRaycasts"/>, <see cref="RaycastLength"/>, <see cref="StartPosition"/>, and <see cref="EndPosition"/>.
+        /// </summary>
+        public void UpdateRaycastLayout()
+        {
+            int numRaycasts = NumRaycasts;
+            float raycastLength = RaycastLength;
+            Vector3 startPosition = StartPosition;
+            Vector3 endPosition = EndPosition;
+
             Vector3 positionDifference = endPosition - startPosition;
-            float posDifferenceLength = positionDifference.Length();
 
             // posIncrement is the position difference between each raycast. 
             // We want to cover the entire raycasting range as defined by startPosition and endPosition,
@@ -91,24 +104,53 @@ namespace Jumpvalley.Raycasting
             // to be covered and allows for the raycasts to be equally spaced from each other.
             Vector3 posIncrement = positionDifference / (numRaycasts - 1);
             Vector3 currentStartPos = startPosition;
-            for (int i = 0; i < numRaycasts; i++)
+
+            int oldNumRaycasts = Raycasts.Count;
+            int numRaycastsDiff = Math.Abs(numRaycasts - oldNumRaycasts);
+
+            // Remove from SceneTree while performing layout update, just to be safe
+            foreach (RayCast3D r in Raycasts)
             {
-                // Create raycast for the current index
-                RayCast3D r = new RayCast3D();
-                r.Name = $"Raycast{i}";
+                if (r.GetParent() == this)
+                {
+                    RemoveChild(r);
+                }
+            }
 
-                // For performance reasons, we don't want to update every physics frame by default.
-                // This is because we really only need to update when PerformRaycast() is called.
-                //r.Enabled = false;
+            // Account for difference in number of raycasts
+            if (numRaycasts > oldNumRaycasts)
+            {
+                for (int i = 0; i < numRaycastsDiff; i++)
+                {
+                    // Create raycast for the current index
+                    RayCast3D r = new RayCast3D();
+                    r.Name = $"Raycast{i}";
 
-                // Using ForceRaycastUpdate() seems to be buggy, so we need to keep this for now.
-                r.Enabled = true;
+                    // For performance reasons, we don't want to update every physics frame by default.
+                    // This is because we really only need to update when PerformRaycast() is called.
+                    //r.Enabled = false;
 
+                    // Using ForceRaycastUpdate() seems to be buggy, so we need to keep this for now.
+                    r.Enabled = true;
+
+                    Raycasts.Add(r);
+                }
+            }
+            else if (numRaycasts < oldNumRaycasts)
+            {
+                for (int i = 0; i < numRaycastsDiff; i++)
+                {
+                    Raycasts.RemoveAt(Raycasts.Count - 1);
+                }
+            }
+
+            // Reposition raycasts, and add them back as a child of this RaycastSweep
+            foreach (RayCast3D r in Raycasts)
+            {
                 r.Position = currentStartPos;
-                r.TargetPosition = new Vector3(currentStartPos.X, currentStartPos.Y, currentStartPos.Z + RaycastLength);
+                r.TargetPosition = new Vector3(currentStartPos.X, currentStartPos.Y, currentStartPos.Z + raycastLength);
 
                 AddChild(r);
-                Raycasts.Add(r);
 
                 // Move onto the next raycast with an updated start position
                 currentStartPos += posIncrement;
