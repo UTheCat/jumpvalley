@@ -8,11 +8,8 @@ namespace Jumpvalley.Raycasting
     /// Sweeps over a region of 3D space using a series of equally-spaced-out raycasts.
     /// <br/>
     /// <br/>
-    /// The center raycast, being located in the middle, is the one assigned to the median index (index in the middle) (for example: 0, 1, 2, 3, ..., n - 1; where n is the number of raycasts).
-    /// <br/>
-    /// <br/>
-    /// If the number of raycasts is an even number, meaning that there's two indexes in the middle, the lower index will be the center index and the one corresponding to the center raycast.
-    /// For this reason, it's recommended that you use an odd number of raycasts if you really want the raycast sweep to start from the center (since there'll only be one index in the middle).
+    /// The center raycast, being located in the middle (or close to it), is assigned to the greatest integer that's less than or equal to the median index.
+    /// "index" here refers to the numerical index that a raycast is located in within a raycast sweep from left to right.
     /// </summary>
     public partial class RaycastSweep : Node3D, IDisposable
     {
