@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 using Jumpvalley.Music;
@@ -180,12 +181,23 @@ namespace Jumpvalley.Players
             levelLoadingTest.Start();
 
             // test RaycastSweep
-            /*
             RaycastSweep raycastSweep = new RaycastSweep(3, new Vector3(-0.5f, 0f, -0.251f), new Vector3(0.5f, 0f, -0.251f), -1f);
-            RaycastSweepTest raycastSweepTest = new RaycastSweepTest(raycastSweep, Character, RaycastSweep.SweepOrder.LeftToRight);
+            RaycastSweepTest raycastSweepTest = new RaycastSweepTest(raycastSweep, Character, RaycastSweep.SweepOrder.CenterLeftRight);
             PrimaryGui.AddChild(raycastSweepTest.RaycastResultLabel);
             RootNode.AddChild(raycastSweepTest);
-            */
+            Disposables.Add(raycastSweep);
+
+            Task.Run(() => {
+                Console.WriteLine("Starting with 3 raycasts. Increasing to 12 raycasts in 5 seconds.");
+                Task.Delay(5000);
+                for (int i = 0; i < 9; i++)
+                {
+                    Console.WriteLine("Adding a raycast");
+                    raycastSweep.NumRaycasts += 1;
+                    raycastSweep.UpdateRaycastLayout();
+                    Task.Delay(500);
+                }
+            });
 
             RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
             fpsLimiter.MinFpsDifference = 0;
