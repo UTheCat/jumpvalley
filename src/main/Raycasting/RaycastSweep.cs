@@ -7,8 +7,36 @@ namespace Jumpvalley.Raycasting
     /// <summary>
     /// Sweeps over a region of 3D space using a series of equally-spaced-out raycasts.
     /// </summary>
-    public partial class RaycastSweep: Node3D, IDisposable
+    public partial class RaycastSweep : Node3D, IDisposable
     {
+        /// <summary>
+        /// List of possible orders in which RaycastSweep can iterate over its raycasts when <see cref="PerformRaycast"/> is called
+        /// </summary>
+        public enum SweepOrder
+        {
+            /// <summary>
+            /// Sweep from left to right
+            /// </summary>
+            LeftToRight,
+
+            /// <summary>
+            /// Sweep from right to left
+            /// </summary>
+            RightToLeft,
+
+            /// <summary>
+            /// Sweep starting from the center.
+            /// Then go from left to right (excluding the center raycast)
+            /// </summary>
+            CenterLeftRight,
+
+            /// <summary>
+            /// Sweep starting from the center.
+            /// Then go from right to left (excluding the center raycast)
+            /// </summary>
+            CenterRightLeft
+        }
+
         /// <summary>
         /// The total number of raycasts that the raycast sweep will perform from the start position to the end position.
         /// </summary>
@@ -88,28 +116,89 @@ namespace Jumpvalley.Raycasting
         }
 
         /// <summary>
-        /// Runs through the raycasts in <see cref="Raycasts"/> from left-to-right.
+        /// Gets the current collision info for the specified raycast.
+        /// </summary>
+        /// <param name="r">The raycast to use</param>
+        /// <param name="raycastIndex">The numeric index of the raycast in the <see cref="RaycastSweep.Raycasts"/> list it belongs to</param>
+        /// <returns></returns>
+        private static RaycastSweepResult GetCurrentRaycastCollisionInfo(RayCast3D r, int raycastIndex)
+        {
+            // Needed since the raycast collision information doesn't update every frame by default
+            // (which is for performance reasons)
+            // Currently not using this method since this seems to be buggy.
+            //r.ForceRaycastUpdate();
+
+            if (r.IsColliding())
+            {
+                return new RaycastSweepResult(r, r.GetCollisionPoint(), r.GetCollider(), raycastIndex);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Runs through the raycasts in <see cref="Raycasts"/> in the order specified.
         /// <br/>
         /// <br/>
         /// This returns raycast collision information about the first raycast in <see cref="Raycasts"/>
         /// that got collided with. If no raycast in <see cref="Raycasts"/> was hit,
         /// this method returns null.
         /// </summary>
+        /// <param name="order">The order in which to run through the raycasts</param>
         /// <returns>The results of this raycast operation</returns>
-        public RaycastSweepResult PerformRaycast()
+        public RaycastSweepResult PerformRaycast(SweepOrder order)
         {
-            for (int i = 0; i < Raycasts.Count; i++)
+            int numRaycasts = Raycasts.Count;
+
+            if (order == SweepOrder.CenterLeftRight || order == SweepOrder.CenterRightLeft)
             {
-                RayCast3D r = Raycasts[i];
+                // Remember, we're working with indexes
+                int centerIndex = (numRaycasts - 1) / 2;
+                RaycastSweepResult centerResult = GetCurrentRaycastCollisionInfo(Raycasts[centerIndex], centerIndex);
 
-                // Needed since the raycast collision information doesn't update every frame by default
-                // (which is for performance reasons)
-                // Currently not using this method since this seems to be buggy.
-                //r.ForceRaycastUpdate();
+                // If the center raycast hit something, we won't need to check the rest.
+                if (centerResult != null) return centerResult;
 
-                if (r.IsColliding())
+                if (order == SweepOrder.CenterLeftRight)
                 {
-                    return new RaycastSweepResult(r, r.GetCollisionPoint(), r.GetCollider(), i);
+                    for (int i = 0; i < numRaycasts; i++)
+                    {
+                        if (i != centerIndex)
+                        {
+                            RaycastSweepResult result = GetCurrentRaycastCollisionInfo(Raycasts[i], i);
+                            if (result != null) return result;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = numRaycasts - 1; i > -1; i++)
+                    {
+                        if (i != centerIndex)
+                        {
+                            RaycastSweepResult result = GetCurrentRaycastCollisionInfo(Raycasts[i], i);
+                            if (result != null) return result;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (order == SweepOrder.LeftToRight)
+                {
+                    for (int i = 0; i < numRaycasts; i++)
+                    {
+                        RaycastSweepResult result = GetCurrentRaycastCollisionInfo(Raycasts[i], i);
+                        if (result != null) return result;
+                    }
+                }
+                else if (order == SweepOrder.RightToLeft)
+                {
+                    for (int i = numRaycasts - 1; i > -1; i++)
+                    {
+                        RaycastSweepResult result = GetCurrentRaycastCollisionInfo(Raycasts[i], i);
+                        if (result != null) return result;
+                    }
                 }
             }
 
