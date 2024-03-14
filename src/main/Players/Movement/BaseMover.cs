@@ -1,5 +1,6 @@
 ﻿using Godot;
 using Jumpvalley.Players.Camera;
+using Jumpvalley.Raycasting;
 using System;
 
 namespace Jumpvalley.Players.Movement
@@ -186,12 +187,26 @@ namespace Jumpvalley.Players.Movement
                 _body = value;
 
                 BodyRotator rotator = Rotator;
+                Climber climber = CurrentClimber;
+
+                if (climbingRaycastSweep != null)
+                {
+                    climbingRaycastSweep.Dispose();
+                    climbingRaycastSweep = null;
+                }
+
+                if (value == null)
+                {
+                    rotator.Body = null;
+                    climber.Hitbox = null;
+                    return;
+                }
+
                 if (rotator != null)
                 {
                     rotator.Body = value;
                 }
-
-                Climber climber = CurrentClimber;
+                
                 if (climber != null)
                 {
                     climber.Hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
@@ -229,6 +244,11 @@ namespace Jumpvalley.Players.Movement
         /// The <see cref="Climber"/> that's currently in charge of determining whether or not the character can climb at the current physics frame.
         /// </summary>
         public Climber CurrentClimber { get; private set; }
+
+        /// <summary>
+        /// Raycast sweep used to grab the normal of an object that the player is climbing on
+        /// </summary>
+        private RaycastSweep climbingRaycastSweep;
 
         public BaseMover()
         {
