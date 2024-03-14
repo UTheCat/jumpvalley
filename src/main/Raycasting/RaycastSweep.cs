@@ -125,7 +125,7 @@ namespace Jumpvalley.Raycasting
                 {
                     // Create raycast for the current index
                     RayCast3D r = new RayCast3D();
-                    r.Name = $"Raycast{i}";
+                    r.Name = $"Raycast{Raycasts.Count}";
 
                     // For performance reasons, we don't want to update every physics frame by default.
                     // This is because we really only need to update when PerformRaycast() is called.
