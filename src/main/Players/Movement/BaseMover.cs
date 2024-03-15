@@ -207,7 +207,26 @@ namespace Jumpvalley.Players.Movement
                 
                 if (climber != null)
                 {
-                    climber.Hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
+                    CollisionShape3D hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
+                    climber.Hitbox = hitbox;
+
+                    BoxShape3D boxShape = hitbox.Shape as BoxShape3D;
+
+                    if (boxShape != null)
+                    {
+                        float climberHitboxWidth = climber.HitboxWidth;
+                        float climberHitboxDepth = climber.HitboxDepth;
+
+                        // For simplification
+                        float xPos = climberHitboxWidth / 2;
+
+                        // Offset by 0.005 meters away from the character hitbox to make sure we don't end up detecting the character hitbox itself
+                        float zPos = -(boxShape.Size.Z / 2) - 0.005f;
+
+                        climbingRaycastSweep.StartPosition = new Vector3(-xPos, 0, zPos);
+                        climbingRaycastSweep.EndPosition = new Vector3(xPos, 0, zPos);
+
+                    }
                 }
 
                 // The position of the climbing raycast sweep should be based on the position of the character
@@ -265,8 +284,7 @@ namespace Jumpvalley.Players.Movement
                 IsClimbing = canClimb;
             };
 
-            // Offset by 0.005 meters away from the climbing hitbox to make sure we don't end up detecting the climbing hitbox itself
-            climbingRaycastSweep = new RaycastSweep(4, Vector3.Zero, Vector3.Zero, -0.105f);
+            climbingRaycastSweep = new RaycastSweep(4, Vector3.Zero, Vector3.Zero, -1f);
 
             AddChild(CurrentClimber);
         }
@@ -361,6 +379,9 @@ namespace Jumpvalley.Players.Movement
                     Vector3 characterPos = Body.GlobalPosition;
                     float moveVectorX = moveVector.X;
                     float moveVectorZ = moveVector.Z;
+
+                    // Determine the normal of an object we're climbing on
+                    RaycastSweepResult raycastSweepResult = climbingRaycastSweep.PerformSweep(RaycastSweep.SweepOrder.CenterLeftRight);
 
                     // Discovered a bug while testing: climbing up seems to be a little buggy.
                     // The bug occurs in cases where the player does not hit a climbable object at a perpendicular angle (or somewhere really close).
