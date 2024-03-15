@@ -81,6 +81,18 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
+        /// The width of the climbing hitbox.
+        /// This length is parallel to the x-axis that's relative to the position and rotation of the character's hitbox.
+        /// </summary>
+        public float HitboxWidth = 0.25f;
+
+        /// <summary>
+        /// The depth of the climbing hitbox.
+        /// This length is parallel to the z-axis that's relative to the position and rotation of the character's hitbox.
+        /// </summary>
+        public float HitboxDepth = 0.1f;
+
+        /// <summary>
         /// Creates a new instance of <see cref="Climber"/>
         /// </summary>
         public Climber(CollisionShape3D hitbox)
@@ -123,7 +135,7 @@ namespace Jumpvalley.Players.Movement
             if (collisionBox == null) return;
 
             Vector3 hitboxSize = collisionBox.Size;
-            areaBox.Size = new Vector3(0.25f, hitboxSize.Y / 2, 0.1f);
+            areaBox.Size = new Vector3(HitboxWidth, hitboxSize.Y / 2, HitboxDepth);
 
             // Remember, position of the area is relative to the position of the hitbox.
             area.Position = new Vector3(0, -hitboxSize.Y / 4, -hitboxSize.Z / 2 - areaBox.Size.Z / 2);
