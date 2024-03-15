@@ -174,6 +174,8 @@ namespace Jumpvalley.Players.Movement
             }
         }
 
+        // For climbing stuff
+
         private CharacterBody3D _body = null;
 
         /// <summary>
@@ -223,6 +225,7 @@ namespace Jumpvalley.Players.Movement
                         // Offset by 0.005 meters away from the character hitbox to make sure we don't end up detecting the character hitbox itself
                         float zPos = -(boxShape.Size.Z / 2) - 0.005f;
 
+                        // Remember that the climbing raycast sweep is a child node of the character
                         climbingRaycastSweep.StartPosition = new Vector3(-xPos, 0, zPos);
                         climbingRaycastSweep.EndPosition = new Vector3(xPos, 0, zPos);
                         climbingRaycastSweep.RaycastLength = climberHitboxDepth;
@@ -379,6 +382,15 @@ namespace Jumpvalley.Players.Movement
                     Vector3 characterPos = Body.GlobalPosition;
                     float moveVectorX = moveVector.X;
                     float moveVectorZ = moveVector.Z;
+
+                    // Move raycast sweep's raycasts to have a y-position equal to the y-position of the object currently being climbed,
+                    // to make sure at least one of the raycasts hit the object being climbed.
+                    // We'll also need to change their x and z positions too.
+                    Vector3 climbedObjectPos = CurrentClimber.CurrentlyClimbedObject.GlobalPosition;
+
+                    Vector3 climbingRaycastSweepPos = climbingRaycastSweep.GlobalPosition;
+
+                    climbingRaycastSweep.GlobalPosition = new Vector3(climbingRaycastSweepPos.X, climbedObjectPos.Y, climbingRaycastSweepPos.Z);
 
                     // Determine the normal of an object we're climbing on
                     RaycastSweepResult raycastSweepResult = climbingRaycastSweep.PerformSweep(RaycastSweep.SweepOrder.CenterLeftRight);
