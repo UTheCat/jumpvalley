@@ -189,16 +189,14 @@ namespace Jumpvalley.Players.Movement
                 BodyRotator rotator = Rotator;
                 Climber climber = CurrentClimber;
 
-                if (climbingRaycastSweep != null)
-                {
-                    climbingRaycastSweep.Dispose();
-                    climbingRaycastSweep = null;
-                }
+                // Remove climbing raycast sweep from the scene tree it's in (if it's in one), just in case.
+                climbingRaycastSweep.GetParent()?.RemoveChild(climbingRaycastSweep);
 
                 if (value == null)
                 {
                     rotator.Body = null;
                     climber.Hitbox = null;
+
                     return;
                 }
 
@@ -211,6 +209,9 @@ namespace Jumpvalley.Players.Movement
                 {
                     climber.Hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
                 }
+
+                // The position of the climbing raycast sweep should be based on the position of the character
+                value.AddChild(climbingRaycastSweep);
             }
         }
 
@@ -250,16 +251,23 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private RaycastSweep climbingRaycastSweep;
 
+        /// <summary>
+        /// Constructs a new instance of BaseMover that can be used to handle character movement
+        /// </summary>
         public BaseMover()
         {
             IsRunning = false;
             Rotator = new BodyRotator();
-            CurrentClimber = new Climber(null);
 
+            CurrentClimber = new Climber(null);
             CurrentClimber.OnCanClimbChanged += (object _o, bool canClimb) =>
             {
                 IsClimbing = canClimb;
             };
+
+            // Offset by 0.005 meters away from the climbing hitbox to make sure we don't end up detecting the climbing hitbox itself
+            climbingRaycastSweep = new RaycastSweep(4, Vector3.Zero, Vector3.Zero, -0.105f);
+
             AddChild(CurrentClimber);
         }
 
@@ -537,6 +545,9 @@ namespace Jumpvalley.Players.Movement
             // Currently, the Climber being used in this class is created during BaseMover's instantiation and from nowhere else
             CurrentClimber.Dispose();
             CurrentClimber = null;
+
+            climbingRaycastSweep.Dispose();
+            climbingRaycastSweep = null;
 
             base.Dispose();
         }
