@@ -14,7 +14,7 @@ namespace Jumpvalley.Raycasting
     public partial class RaycastSweep : Node3D, IDisposable
     {
         /// <summary>
-        /// List of possible orders in which RaycastSweep can iterate over its raycasts when <see cref="PerformRaycast"/> is called
+        /// List of possible orders in which RaycastSweep can iterate over its raycasts when <see cref="PerformSweep"/> is called
         /// </summary>
         public enum SweepOrder
         {
@@ -132,7 +132,7 @@ namespace Jumpvalley.Raycasting
                     r.Name = $"Raycast{Raycasts.Count}";
 
                     // For performance reasons, we don't want to update every physics frame by default.
-                    // This is because we really only need to update when PerformRaycast() is called.
+                    // This is because we really only need to update when PerformSweep() is called.
                     //r.Enabled = false;
 
                     // Using ForceRaycastUpdate() seems to be buggy, so we need to keep this for now.
@@ -190,12 +190,18 @@ namespace Jumpvalley.Raycasting
         /// <br/>
         /// <br/>
         /// This returns raycast collision information about the first raycast in <see cref="Raycasts"/>
-        /// that got collided with. If no raycast in <see cref="Raycasts"/> was hit,
-        /// this method returns null.
+        /// that got collided with.
+        /// <br/>
+        /// <br/>
+        /// Because multiple raycasts in the raycast sweep could be colliding with something at the same time,
+        /// whichever counts as the "first" raycast to hit something depends on the SweepOrder specified in <paramref name="order"/>.
+        /// <br/>
+        /// <br/>
+        /// If no raycast in <see cref="Raycasts"/> is currently hitting something, this method returns null.
         /// </summary>
         /// <param name="order">The order in which to run through the raycasts</param>
         /// <returns>The results of this raycast operation</returns>
-        public RaycastSweepResult PerformRaycast(SweepOrder order)
+        public RaycastSweepResult PerformSweep(SweepOrder order)
         {
             int numRaycasts = Raycasts.Count;
 

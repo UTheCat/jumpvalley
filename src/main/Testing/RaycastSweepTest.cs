@@ -35,7 +35,7 @@ namespace Jumpvalley.Testing
         {
             base._PhysicsProcess(delta);
 
-            RaycastSweepResult results = TestRaycastSweep.PerformRaycast(SweepOrder);
+            RaycastSweepResult results = TestRaycastSweep.PerformSweep(SweepOrder);
 
             string resultText = $"RaycastSweep results for {TestRaycastSweep.Name}\n";
             
