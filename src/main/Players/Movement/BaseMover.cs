@@ -229,6 +229,7 @@ namespace Jumpvalley.Players.Movement
                         climbingRaycastSweep.StartPosition = new Vector3(-xPos, 0, zPos);
                         climbingRaycastSweep.EndPosition = new Vector3(xPos, 0, zPos);
                         climbingRaycastSweep.RaycastLength = climberHitboxDepth;
+                        climbingRaycastSweep.UpdateRaycastLayout();
                     }
                 }
 
@@ -287,7 +288,7 @@ namespace Jumpvalley.Players.Movement
                 IsClimbing = canClimb;
             };
 
-            climbingRaycastSweep = new RaycastSweep(4, Vector3.Zero, Vector3.Zero, -1f);
+            climbingRaycastSweep = new RaycastSweep(5, Vector3.Zero, Vector3.Zero, -1f);
 
             AddChild(CurrentClimber);
         }
