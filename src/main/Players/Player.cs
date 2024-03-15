@@ -181,11 +181,13 @@ namespace Jumpvalley.Players
             levelLoadingTest.Start();
 
             // test RaycastSweep
+            /*
             RaycastSweep raycastSweep = new RaycastSweep(8, new Vector3(-0.5f, 0f, -0.251f), new Vector3(0.5f, 0f, -0.251f), -1f);
             RaycastSweepTest raycastSweepTest = new RaycastSweepTest(raycastSweep, Character, RaycastSweep.SweepOrder.CenterLeftRight);
             PrimaryGui.AddChild(raycastSweepTest.RaycastResultLabel);
             RootNode.AddChild(raycastSweepTest);
             Disposables.Add(raycastSweep);
+            */
 
             /*
             void IncrementNumRaycasts()

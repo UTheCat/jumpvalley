@@ -228,7 +228,7 @@ namespace Jumpvalley.Players.Movement
                         // Remember that the climbing raycast sweep is a child node of the character
                         climbingRaycastSweep.StartPosition = new Vector3(-xPos, 0, zPos);
                         climbingRaycastSweep.EndPosition = new Vector3(xPos, 0, zPos);
-                        climbingRaycastSweep.RaycastLength = climberHitboxDepth;
+                        climbingRaycastSweep.RaycastLength = -climberHitboxDepth;
                         climbingRaycastSweep.UpdateRaycastLayout();
                     }
                 }
