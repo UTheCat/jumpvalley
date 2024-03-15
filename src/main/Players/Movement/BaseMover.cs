@@ -393,8 +393,17 @@ namespace Jumpvalley.Players.Movement
 
                     climbingRaycastSweep.GlobalPosition = new Vector3(climbingRaycastSweepPos.X, climbedObjectPos.Y, climbingRaycastSweepPos.Z);
 
-                    // Determine the normal of an object we're climbing on
+                    // Determine the 3d object's normal that we're climbing on
                     RaycastSweepResult raycastSweepResult = climbingRaycastSweep.PerformSweep(RaycastSweep.SweepOrder.CenterLeftRight);
+                    Vector3 climbingNormal = raycastSweepResult.Raycast.GetCollisionNormal();
+
+                    // Get the angles we need to compare normal with move direction,
+                    // and do the math as needed according to what was put in the Jumpvalley wiki
+                    // for determining whether or not to climb up in the current frame.
+                    double ladderCollisionAngle = Math.Atan(climbingNormal.Z / climbingNormal.X);
+                    double moveAngle = Math.Atan(moveVector.Z / moveVector.X);
+                    double angleDiff = moveAngle - ladderCollisionAngle;
+                    bool shouldClimbUp = -(Math.PI / 2) < angleDiff && angleDiff < (Math.PI / 2);
 
                     // Discovered a bug while testing: climbing up seems to be a little buggy.
                     // The bug occurs in cases where the player does not hit a climbable object at a perpendicular angle (or somewhere really close).
@@ -407,12 +416,7 @@ namespace Jumpvalley.Players.Movement
                     // While this should probably be fixed, this bug is somewhat miniscule.
                     // This is due to the fact that in Juke's Towers of Hell and games alike,
                     // you can't climb up or down by trying to move left or right when your camera is basically facing the climbable object.
-                    if (
-                        (collisionPoint.X <= characterPos.X && moveVectorX <= 0)
-                        || (collisionPoint.X >= characterPos.X && moveVectorX >= 0)
-                        || (collisionPoint.Z <= characterPos.Z && moveVectorZ <= 0)
-                        || (collisionPoint.Z >= characterPos.Z && moveVectorZ >= 0)
-                        )
+                    if (shouldClimbUp)
                     {
                         climbVelocity = Speed * timingAdjustment;
                     }
