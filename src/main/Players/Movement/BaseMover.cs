@@ -228,7 +228,7 @@ namespace Jumpvalley.Players.Movement
                         // Remember that the climbing raycast sweep is a child node of the character
                         climbingRaycastSweep.StartPosition = new Vector3(-xPos, 0, zPos);
                         climbingRaycastSweep.EndPosition = new Vector3(xPos, 0, zPos);
-                        climbingRaycastSweep.RaycastLength = -climberHitboxDepth;
+                        climbingRaycastSweep.RaycastLength = -climberHitboxDepth * 10;
                         climbingRaycastSweep.UpdateRaycastLayout();
                     }
                 }
@@ -336,6 +336,9 @@ namespace Jumpvalley.Players.Movement
 
             bool isOnFloor = IsOnFloor();
             Vector3 moveVector = GetMoveVector(yaw);
+
+            Console.WriteLine($"Move angle at the start: {Math.Atan(moveVector.Z / moveVector.X) / Math.PI}pi");
+
             Vector3 velocity;
 
             if (Body == null)
@@ -395,43 +398,48 @@ namespace Jumpvalley.Players.Movement
 
                     // Determine the 3d object's normal that we're climbing on
                     RaycastSweepResult raycastSweepResult = climbingRaycastSweep.PerformSweep(RaycastSweep.SweepOrder.CenterLeftRight);
-                    Vector3 climbingNormal = raycastSweepResult.Raycast.GetCollisionNormal();
-
-                    // Get the angles we need to compare normal with move direction,
-                    // and do the math as needed according to what was put in the Jumpvalley wiki
-                    // for determining whether or not to climb up in the current frame.
-                    double ladderCollisionAngle = Math.Atan(climbingNormal.Z / climbingNormal.X);
-                    double moveAngle = Math.Atan(moveVector.Z / moveVector.X);
-                    double angleDiff = moveAngle - ladderCollisionAngle;
-                    bool shouldClimbUp = -(Math.PI / 2) < angleDiff && angleDiff < (Math.PI / 2);
-
-                    // Discovered a bug while testing: climbing up seems to be a little buggy.
-                    // The bug occurs in cases where the player does not hit a climbable object at a perpendicular angle (or somewhere really close).
-                    // In this case, one of the conditions that compare a collision point coordinate with the character's position coordinate could always be true.
-                    //
-                    // For example, assume your character's yaw angle is -0.05 radians when your character gets into climbing position.
-                    // In this case, the x-coordinate of the collision point will always be greater than the character's position x-coordinate until the collision point moves.
-                    // Because of this, if you tried to move right, you would climb up.
-                    //
-                    // While this should probably be fixed, this bug is somewhat miniscule.
-                    // This is due to the fact that in Juke's Towers of Hell and games alike,
-                    // you can't climb up or down by trying to move left or right when your camera is basically facing the climbable object.
-                    if (shouldClimbUp)
+                    if (raycastSweepResult != null)
                     {
-                        climbVelocity = Speed * timingAdjustment;
-                    }
-                    else
-                    {
-                        if (isOnFloor)
+                        Vector3 climbingNormal = raycastSweepResult.Raycast.GetCollisionNormal();
+
+                        // Get the angles we need to compare normal with move direction,
+                        // and do the math as needed according to what was put in the Jumpvalley wiki
+                        // for determining whether or not to climb up in the current frame.
+                        double ladderCollisionAngle = -Math.Atan(climbingNormal.Z / climbingNormal.X);
+                        double moveAngle = Math.Atan(moveVector.Z / moveVector.X);
+                        double angleDiff = Math.Abs(moveAngle - ladderCollisionAngle);
+                        bool shouldClimbUp = angleDiff <= (Math.PI / 2);
+                        Console.WriteLine($"Climbing normal z-coordinate: {climbingNormal.Z}\nClimbing normal x-coordinate: {climbingNormal.X}\nLadder collision angle (after being negated): {ladderCollisionAngle / Math.PI}pi");
+                        Console.WriteLine($"Move angle: {moveAngle/Math.PI}pi\nAngle difference: {angleDiff/Math.PI}pi\nShould climb up: {shouldClimbUp.ToString()}");
+
+                        // Discovered a bug while testing: climbing up seems to be a little buggy.
+                        // The bug occurs in cases where the player does not hit a climbable object at a perpendicular angle (or somewhere really close).
+                        // In this case, one of the conditions that compare a collision point coordinate with the character's position coordinate could always be true.
+                        //
+                        // For example, assume your character's yaw angle is -0.05 radians when your character gets into climbing position.
+                        // In this case, the x-coordinate of the collision point will always be greater than the character's position x-coordinate until the collision point moves.
+                        // Because of this, if you tried to move right, you would climb up.
+                        //
+                        // While this should probably be fixed, this bug is somewhat miniscule.
+                        // This is due to the fact that in Juke's Towers of Hell and games alike,
+                        // you can't climb up or down by trying to move left or right when your camera is basically facing the climbable object.
+                        if (shouldClimbUp)
                         {
-                            // If we're already on the floor, move like we're walking on the floor.
-                            velocity.Y = 0;
-                            climbVelocity = 0;
-                            shouldApplyClimbVelocity = false;
+                            climbVelocity = Speed * timingAdjustment;
                         }
                         else
                         {
-                            climbVelocity = -Speed * timingAdjustment;
+                            if (isOnFloor)
+                            {
+                                // If we're already on the floor, move like we're walking on the floor.
+                                velocity.Y = 0;
+                                climbVelocity = 0;
+                                shouldApplyClimbVelocity = false;
+                            }
+                            else
+                            {
+                                climbVelocity = -Speed * timingAdjustment;
+                            }
                         }
                     }
 
