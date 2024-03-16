@@ -337,8 +337,6 @@ namespace Jumpvalley.Players.Movement
             bool isOnFloor = IsOnFloor();
             Vector3 moveVector = GetMoveVector(yaw);
 
-            Console.WriteLine($"Move angle at the start: {Math.Atan(moveVector.Z / moveVector.X) / Math.PI}pi");
-
             Vector3 velocity;
 
             if (Body == null)
@@ -371,7 +369,6 @@ namespace Jumpvalley.Players.Movement
 
                 // Remember that "wanting to move forward" while climbing means we want to go up,
                 // and "wanting to move backward" while climbing means we want to go down.
-
                 bool shouldApplyClimbVelocity = true;
 
                 if (ForwardValue == 0 && RightValue == 0)
@@ -380,13 +377,6 @@ namespace Jumpvalley.Players.Movement
                 }
                 else
                 {
-                    // The collision point of the Climber's raycast such that the raycast hit a climbable object
-                    Vector3 collisionPoint = CurrentClimber.RaycastCollisionPoint;
-
-                    Vector3 characterPos = Body.GlobalPosition;
-                    float moveVectorX = moveVector.X;
-                    float moveVectorZ = moveVector.Z;
-
                     // Move raycast sweep's raycasts to have a y-position equal to the y-position of the object currently being climbed,
                     // to make sure at least one of the raycasts hit the object being climbed.
                     // We'll also need to change their x and z positions too.
@@ -405,24 +395,23 @@ namespace Jumpvalley.Players.Movement
                         // Get the angles we need to compare normal with move direction,
                         // and do the math as needed according to what was put in the Jumpvalley wiki
                         // for determining whether or not to climb up in the current frame.
+
+                        // This method for calculating angleDiff doesn't work out too well if
+                        // one angle is in the 1st or 4th quadrant and the other angle is in the 2nd or 3rd quadrant.
+                        /*
                         double ladderCollisionAngle = -Math.Atan(climbingNormal.Z / climbingNormal.X);
                         double moveAngle = Math.Atan(moveVector.Z / moveVector.X);
                         double angleDiff = Math.Abs(moveAngle - ladderCollisionAngle);
                         bool shouldClimbUp = angleDiff <= (Math.PI / 2);
                         Console.WriteLine($"Climbing normal z-coordinate: {climbingNormal.Z}\nClimbing normal x-coordinate: {climbingNormal.X}\nLadder collision angle (after being negated): {ladderCollisionAngle / Math.PI}pi");
                         Console.WriteLine($"Move angle: {moveAngle/Math.PI}pi\nAngle difference: {angleDiff/Math.PI}pi\nShould climb up: {shouldClimbUp.ToString()}");
+                        */
 
-                        // Discovered a bug while testing: climbing up seems to be a little buggy.
-                        // The bug occurs in cases where the player does not hit a climbable object at a perpendicular angle (or somewhere really close).
-                        // In this case, one of the conditions that compare a collision point coordinate with the character's position coordinate could always be true.
-                        //
-                        // For example, assume your character's yaw angle is -0.05 radians when your character gets into climbing position.
-                        // In this case, the x-coordinate of the collision point will always be greater than the character's position x-coordinate until the collision point moves.
-                        // Because of this, if you tried to move right, you would climb up.
-                        //
-                        // While this should probably be fixed, this bug is somewhat miniscule.
-                        // This is due to the fact that in Juke's Towers of Hell and games alike,
-                        // you can't climb up or down by trying to move left or right when your camera is basically facing the climbable object.
+                        // Apparently, Godot's Vector3.SignedAngleTo method exists, making this much easier to implement.
+                        float angleDiff = climbingNormal.Rotated(Vector3.Up, (float)Math.PI).SignedAngleTo(moveVector, Vector3.Up);
+                        //Console.WriteLine($"Angle difference: {angleDiff/Math.PI}pi");
+                        bool shouldClimbUp = Math.Abs(angleDiff) <= (Math.PI / 2);
+
                         if (shouldClimbUp)
                         {
                             climbVelocity = Speed * timingAdjustment;
@@ -442,32 +431,6 @@ namespace Jumpvalley.Players.Movement
                             }
                         }
                     }
-
-                    /*
-                    // For some reason, the reverse of the above is true (this is likely a bug), so the sign is switched from greater than to less than for now.
-                    if (ForwardValue < 0)
-                    {
-                        climbVelocity = Speed * timingAdjustment;
-                    }
-                    else if (ForwardValue == 0)
-                    {
-                        climbVelocity = 0;
-                    }
-                    else
-                    {
-                        if (isOnFloor)
-                        {
-                            // If we're already on the floor, move like we're walking on the floor.
-                            velocity.Y = 0;
-                            climbVelocity = 0;
-                            shouldApplyClimbVelocity = false;
-                        }
-                        else
-                        {
-                            climbVelocity = -Speed * timingAdjustment;
-                        }
-                    }
-                    */
                 }
 
                 if (shouldApplyClimbVelocity)
