@@ -90,7 +90,7 @@ namespace Jumpvalley.Players.Movement
         /// The depth of the climbing hitbox.
         /// This length is parallel to the z-axis that's relative to the position and rotation of the character's hitbox.
         /// </summary>
-        public float HitboxDepth = 0.1f;
+        public float HitboxDepth = 0.2f;
 
         /// <summary>
         /// Creates a new instance of <see cref="Climber"/>
