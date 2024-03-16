@@ -10,11 +10,19 @@ namespace Jumpvalley.Players.Movement
     public partial class Climber : Node, IDisposable
     {
         /// <summary>
-        /// Name of the metadata entry that specifies whether or not a PhysicsBody3D is climbable
+        /// Name of the metadata entry that specifies whether or not a <see cref="PhysicsBody3D"/> is climbable
         /// </summary>
         public readonly string IS_CLIMBABLE_METADATA_NAME = "is_climbable";
 
-        private RayCast3D rayCast;
+        /// <summary>
+        /// The <see cref="Area3D"/> that allows the character to climb when a climbable PhysicsBody3D is intersecting with it
+        /// </summary>
+        private Area3D area;
+
+        /// <summary>
+        /// The box that defines <see cref="area"/>'s region
+        /// </summary>
+        private BoxShape3D areaBox;
 
         private bool _canClimb = false;
 
@@ -60,17 +68,29 @@ namespace Jumpvalley.Players.Movement
                 CollisionShape3D oldHitbox = _hitbox;
                 if (oldHitbox != null)
                 {
-                    oldHitbox.RemoveChild(rayCast);
+                    oldHitbox.RemoveChild(area);
                 }
 
                 _hitbox = value;
                 
                 if (value != null)
                 {
-                    value.AddChild(rayCast);
+                    value.AddChild(area);
                 }
             }
         }
+
+        /// <summary>
+        /// The width of the climbing hitbox.
+        /// This length is parallel to the x-axis that's relative to the position and rotation of the character's hitbox.
+        /// </summary>
+        public float HitboxWidth = 0.25f;
+
+        /// <summary>
+        /// The depth of the climbing hitbox.
+        /// This length is parallel to the z-axis that's relative to the position and rotation of the character's hitbox.
+        /// </summary>
+        public float HitboxDepth = 0.2f;
 
         /// <summary>
         /// Creates a new instance of <see cref="Climber"/>
@@ -79,13 +99,18 @@ namespace Jumpvalley.Players.Movement
         {
             Name = $"{nameof(Climber)}_{GetHashCode()}";
 
-            rayCast = new RayCast3D();
-            rayCast.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(rayCast)}";
-            rayCast.HitFromInside = true;
+            area = new Area3D();
+            area.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(area)}";
+
+            areaBox = new BoxShape3D();
+
+            CollisionShape3D areaShape = new CollisionShape3D();
+            areaShape.Shape = areaBox;
+            area.AddChild(areaShape);
 
             Hitbox = hitbox;
 
-            updateRayCast();
+            updateArea();
         }
 
         /// <summary>
@@ -94,12 +119,12 @@ namespace Jumpvalley.Players.Movement
         public new void Dispose()
         {
             QueueFree();
-            rayCast.QueueFree();
-            rayCast.Dispose();
+            area.QueueFree();
+            area.Dispose();
             base.Dispose();
         }
 
-        private void updateRayCast()
+        private void updateArea()
         {
             CollisionShape3D hitbox = Hitbox;
             if (hitbox == null) return;
@@ -109,46 +134,51 @@ namespace Jumpvalley.Players.Movement
             // For now, only box-shaped hitboxes will work.
             if (collisionBox == null) return;
 
-            Vector3 boxSize = collisionBox.Size;
+            Vector3 hitboxSize = collisionBox.Size;
+            areaBox.Size = new Vector3(HitboxWidth, hitboxSize.Y / 2, HitboxDepth);
 
-            // Start from center-height, then work our way to the bottom.
-            // Remember that the position of the ray-cast is already relative to the hitbox's position
-            // as it is parented to the hitbox itself
-            rayCast.Position = new Vector3(0, 0, -boxSize.Z / 2 - 0.05f);
-            rayCast.TargetPosition = new Vector3(0, -boxSize.Y / 2, 0);
+            // Remember, position of the area is relative to the position of the hitbox.
+            area.Position = new Vector3(0, -hitboxSize.Y / 4, -hitboxSize.Z / 2 - areaBox.Size.Z / 2);
         }
 
         public override void _PhysicsProcess(double delta)
         {
             base._PhysicsProcess(delta);
 
-            updateRayCast();
+            updateArea();
 
-            PhysicsBody3D collidedObject = rayCast.GetCollider() as PhysicsBody3D;
-
-            // If the collided object is a PhysicsBody3D and it has a metadata entry
-            // named "is_climbable" set to true, we can climb.
-            bool canClimb = collidedObject != null
-                && collidedObject.HasMeta(IS_CLIMBABLE_METADATA_NAME)
-                && collidedObject.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
-
-            if (canClimb)
+            bool canClimb = false;
+            foreach (Node3D n in area.GetOverlappingBodies())
             {
-                CurrentlyClimbedObject = collidedObject;
-                RaycastCollisionPoint = rayCast.GetCollisionPoint();
-            }
-            else
-            {
-                CurrentlyClimbedObject = null;
+                PhysicsBody3D collidedObject = n as PhysicsBody3D;
+
+                if (collidedObject != null)
+                {
+                    // If the collided object is a PhysicsBody3D and it has a metadata entry
+                    // named "is_climbable" set to true, we can climb.
+                    canClimb = collidedObject != null
+                        && collidedObject.HasMeta(IS_CLIMBABLE_METADATA_NAME)
+                        && collidedObject.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
+
+                    if (canClimb)
+                    {
+                        CurrentlyClimbedObject = collidedObject;
+                    }
+                    else
+                    {
+                        CurrentlyClimbedObject = null;
+                    }
+
+                    // We don't need to look through the rest of the list
+                    // if we know we're already on a climbable object
+                    if (canClimb)
+                    {
+                        break;
+                    }
+                }
             }
 
             CanClimb = canClimb;
-
-            //Vector3 boxPos = Hitbox.Position;
-
-            // The raycast's position should be relative to the position and rotation of the character's hitbox
-            //rayCast.Position = BoxPos + new Vector3(0, 0, BoxSize.Z / 2).Rotated(Vector3.Up, BoxRotation.Y);
-            //rayCast.TargetPosition = new Vector3(0, BoxSize.Y / 2, 0);
         }
 
         /// <summary>

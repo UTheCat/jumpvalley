@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 using Jumpvalley.Music;
@@ -7,6 +8,7 @@ using Jumpvalley.Players.Camera;
 using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
+using Jumpvalley.Raycasting;
 using Jumpvalley.Testing;
 
 namespace Jumpvalley.Players
@@ -177,6 +179,37 @@ namespace Jumpvalley.Players
                 );
             Disposables.Add(levelLoadingTest);
             levelLoadingTest.Start();
+
+            // test RaycastSweep
+            /*
+            RaycastSweep raycastSweep = new RaycastSweep(8, new Vector3(-0.5f, 0f, -0.251f), new Vector3(0.5f, 0f, -0.251f), -1f);
+            RaycastSweepTest raycastSweepTest = new RaycastSweepTest(raycastSweep, Character, RaycastSweep.SweepOrder.CenterLeftRight);
+            PrimaryGui.AddChild(raycastSweepTest.RaycastResultLabel);
+            RootNode.AddChild(raycastSweepTest);
+            Disposables.Add(raycastSweep);
+            */
+
+            /*
+            void IncrementNumRaycasts()
+            {
+                Console.WriteLine("Adding a raycast");
+                raycastSweep.NumRaycasts += 1;
+                raycastSweep.UpdateRaycastLayout();
+            }
+
+            Task.Run(() => {
+                Console.WriteLine("Starting with 3 raycasts. Increasing to 12 raycasts in 5 seconds.");
+                System.Threading.Thread.Sleep(5000);
+                for (int i = 0; i < 9; i++)
+                {
+                    // Workaround due to Godot not letting you add nodes to scene tree in a background thread at the moment:
+                    // https://docs.godotengine.org/en/stable/classes/class_callable.html#class-callable-method-call-deferred
+                    // https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_differences.html#doc-c-sharp-differences
+                    Callable.From(IncrementNumRaycasts).CallDeferred();
+                    System.Threading.Thread.Sleep(500);
+                }
+            });
+            */
 
             RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
             fpsLimiter.MinFpsDifference = 0;
