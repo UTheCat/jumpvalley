@@ -55,8 +55,6 @@ namespace Jumpvalley.Players.Movement
             Falling = 6
         }
 
-        private static string PROJECT_SETTINGS_PHYSICS_TICKS_PER_SECOND = "physics/common/physics_ticks_per_second";
-
         private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
@@ -186,7 +184,16 @@ namespace Jumpvalley.Players.Movement
             get => _body;
             set
             {
+                CharacterBody3D oldBody = _body;
                 _body = value;
+
+                if (oldBody != null)
+                {
+                    foreach (RayCast3D r in climbingRaycastSweep.Raycasts)
+                    {
+                        r.RemoveException(oldBody);
+                    }
+                }
 
                 BodyRotator rotator = Rotator;
                 Climber climber = CurrentClimber;
@@ -222,19 +229,26 @@ namespace Jumpvalley.Players.Movement
                         // For simplification
                         float xPos = climberHitboxWidth / 2;
 
-                        // Offset by 0.005 meters away from the character hitbox to make sure we don't end up detecting the character hitbox itself
-                        float zPos = -(boxShape.Size.Z / 2) - 0.005f;
+                        // Offset by 0.005 meters into the character hitbox to prevent cases where being too close to a climbable object
+                        // will cause the raycast sweep's raycasts to not be able to hit the outer surface of the climbable object.
+                        float zPos = -(boxShape.Size.Z / 2) + 0.005f;
 
                         // Remember that the climbing raycast sweep is a child node of the character
                         climbingRaycastSweep.StartPosition = new Vector3(-xPos, 0, zPos);
                         climbingRaycastSweep.EndPosition = new Vector3(xPos, 0, zPos);
                         climbingRaycastSweep.RaycastLength = -climberHitboxDepth * 10;
                         climbingRaycastSweep.UpdateRaycastLayout();
+
+                        // Make sure the climbing raycast sweep doesn't detect the character node itself
+                        foreach (RayCast3D r in climbingRaycastSweep.Raycasts)
+                        {
+                            r.AddException(value);
+                        }
+
+                        // The position of the climbing raycast sweep should be based on the position of the character
+                        value.AddChild(climbingRaycastSweep);
                     }
                 }
-
-                // The position of the climbing raycast sweep should be based on the position of the character
-                value.AddChild(climbingRaycastSweep);
             }
         }
 
