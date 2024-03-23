@@ -424,7 +424,8 @@ namespace Jumpvalley.Players.Movement
                         // Apparently, Godot's Vector3.SignedAngleTo method exists, making this much easier to implement.
                         float angleDiff = climbingNormal.Rotated(Vector3.Up, (float)Math.PI).SignedAngleTo(moveVector, Vector3.Up);
                         //Console.WriteLine($"Angle difference: {angleDiff/Math.PI}pi");
-                        bool shouldClimbUp = Math.Abs(angleDiff) <= (Math.PI / 2);
+
+                        bool shouldClimbUp = Math.Abs(angleDiff) <= (0.45 * Math.PI);
 
                         if (shouldClimbUp)
                         {
@@ -432,16 +433,21 @@ namespace Jumpvalley.Players.Movement
                         }
                         else
                         {
-                            if (isOnFloor)
+                            bool shouldClimbDown = Math.Abs(angleDiff) >= (0.55 * Math.PI);
+
+                            if (shouldClimbDown)
                             {
-                                // If we're already on the floor, move like we're walking on the floor.
-                                velocity.Y = 0;
-                                climbVelocity = 0;
-                                shouldApplyClimbVelocity = false;
-                            }
-                            else
-                            {
-                                climbVelocity = -Speed * timingAdjustment;
+                                if (isOnFloor)
+                                {
+                                    // If we're already on the floor, move like we're walking on the floor.
+                                    velocity.Y = 0;
+                                    climbVelocity = 0;
+                                    shouldApplyClimbVelocity = false;
+                                }
+                                else
+                                {
+                                    climbVelocity = -Speed * timingAdjustment;
+                                }
                             }
                         }
                     }
