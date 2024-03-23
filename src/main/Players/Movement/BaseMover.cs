@@ -401,9 +401,33 @@ namespace Jumpvalley.Players.Movement
                     climbingRaycastSweep.GlobalPosition = new Vector3(climbingRaycastSweepPos.X, climbedObjectPos.Y, climbingRaycastSweepPos.Z);
 
                     // Determine the 3d object's normal that we're climbing on
-                    RaycastSweepResult raycastSweepResult = climbingRaycastSweep.PerformSweep(RaycastSweep.SweepOrder.CenterLeftRight);
-                    if (raycastSweepResult != null)
+                    // Because the object can have curvy surfaces,
+                    // and because the RaycastSweep can hit multiple objects at once,
+                    // we want to use the raycast that "travelled" the smallest distance
+                    // as the raycast we're working with.
+                    RayCast3D selectedRaycast = null;
+                    float raycastDistance = -1;
+                    foreach (RayCast3D r in climbingRaycastSweep.Raycasts)
                     {
+                        if (r.IsColliding())
+                        {
+                            float distance = distance = (r.GetCollisionPoint() - r.GlobalPosition).Length();
+                            if (raycastDistance < 0 || distance < raycastDistance)
+                            {
+                                raycastDistance = distance;
+                                selectedRaycast = r;
+                            }
+                        }
+                    }
+
+                    if (selectedRaycast != null)
+                    {
+                        RaycastSweepResult raycastSweepResult = new RaycastSweepResult(
+                            selectedRaycast,
+                            selectedRaycast.GetCollisionPoint(),
+                            selectedRaycast.GetCollider(),
+                            0);
+
                         Vector3 climbingNormal = raycastSweepResult.Raycast.GetCollisionNormal();
 
                         // Get the angles we need to compare normal with move direction,
@@ -424,7 +448,8 @@ namespace Jumpvalley.Players.Movement
                         // Apparently, Godot's Vector3.SignedAngleTo method exists, making this much easier to implement.
                         float angleDiff = climbingNormal.Rotated(Vector3.Up, (float)Math.PI).SignedAngleTo(moveVector, Vector3.Up);
                         //Console.WriteLine($"Angle difference: {angleDiff/Math.PI}pi");
-                        bool shouldClimbUp = Math.Abs(angleDiff) <= (Math.PI / 2);
+
+                        bool shouldClimbUp = Math.Abs(angleDiff) <= (0.45 * Math.PI);
 
                         if (shouldClimbUp)
                         {
@@ -432,16 +457,21 @@ namespace Jumpvalley.Players.Movement
                         }
                         else
                         {
-                            if (isOnFloor)
+                            bool shouldClimbDown = Math.Abs(angleDiff) >= (0.55 * Math.PI);
+
+                            if (shouldClimbDown)
                             {
-                                // If we're already on the floor, move like we're walking on the floor.
-                                velocity.Y = 0;
-                                climbVelocity = 0;
-                                shouldApplyClimbVelocity = false;
-                            }
-                            else
-                            {
-                                climbVelocity = -Speed * timingAdjustment;
+                                if (isOnFloor)
+                                {
+                                    // If we're already on the floor, move like we're walking on the floor.
+                                    velocity.Y = 0;
+                                    climbVelocity = 0;
+                                    shouldApplyClimbVelocity = false;
+                                }
+                                else
+                                {
+                                    climbVelocity = -Speed * timingAdjustment;
+                                }
                             }
                         }
                     }
