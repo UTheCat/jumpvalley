@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Jumpvalley"
+config/version="0.4.0"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "C#")
 run/max_fps=60
@@ -95,4 +96,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 environment/default_environment="res://default_env.tres"
