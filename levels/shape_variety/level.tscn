@@ -327,58 +327,6 @@ visible = false
 mesh = SubResource("BoxMesh_bi26x")
 skeleton = NodePath("../..")
 
-[node name="MusicZone2" type="Node3D" parent="Music/MusicZones"]
-
-[node name="Music" type="Node" parent="Music/MusicZones/MusicZone2"]
-metadata/song1 = ""
-
-[node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone2"]
-
-[node name="ZonePart" type="MeshInstance3D" parent="Music/MusicZones/MusicZone2/ZoneParts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150.5, 22.5)
-visible = false
-mesh = SubResource("BoxMesh_bi26x")
-skeleton = NodePath("../..")
-
-[node name="MusicZone3" type="Node3D" parent="Music/MusicZones"]
-
-[node name="Music" type="Node" parent="Music/MusicZones/MusicZone3"]
-metadata/song1 = ""
-
-[node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone3"]
-
-[node name="ZonePart" type="MeshInstance3D" parent="Music/MusicZones/MusicZone3/ZoneParts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 250.5, 22.5)
-visible = false
-mesh = SubResource("BoxMesh_bi26x")
-skeleton = NodePath("../..")
-
-[node name="MusicZone4" type="Node3D" parent="Music/MusicZones"]
-
-[node name="Music" type="Node" parent="Music/MusicZones/MusicZone4"]
-metadata/song1 = ""
-
-[node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone4"]
-
-[node name="ZonePart" type="MeshInstance3D" parent="Music/MusicZones/MusicZone4/ZoneParts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 350.5, 22.5)
-visible = false
-mesh = SubResource("BoxMesh_bi26x")
-skeleton = NodePath("../..")
-
-[node name="MusicZone5" type="Node3D" parent="Music/MusicZones"]
-
-[node name="Music" type="Node" parent="Music/MusicZones/MusicZone5"]
-metadata/song1 = ""
-
-[node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone5"]
-
-[node name="ZonePart" type="MeshInstance3D" parent="Music/MusicZones/MusicZone5/ZoneParts"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 450.5, 22.5)
-visible = false
-mesh = SubResource("BoxMesh_bi26x")
-skeleton = NodePath("../..")
-
 [node name="PrimaryMusic" type="Node" parent="Music"]
 
 [node name="Music" type="Node" parent="Music/PrimaryMusic"]
@@ -387,6 +335,7 @@ metadata/song1 = ""
 [node name="StaticObjects" type="Node3D" parent="."]
 
 [node name="Base" type="StaticBody3D" parent="StaticObjects"]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Base"]
 shape = SubResource("BoxShape3D_l1tti")
@@ -398,7 +347,7 @@ mesh = SubResource("BoxMesh_2eao1")
 [node name="ShapeKit" type="Node3D" parent="StaticObjects"]
 
 [node name="Box" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Box"]
 shape = SubResource("BoxShape3D_b766v")
@@ -408,7 +357,7 @@ material_override = ExtResource("2_tx8br")
 mesh = SubResource("BoxMesh_63nxk")
 
 [node name="Sphere" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Sphere"]
 shape = SubResource("SphereShape3D_rx5vn")
@@ -418,7 +367,7 @@ material_override = ExtResource("2_tx8br")
 mesh = SubResource("SphereMesh_764mm")
 
 [node name="Cylinder" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Cylinder"]
 shape = SubResource("CylinderShape3D_tqehc")
@@ -428,7 +377,7 @@ material_override = ExtResource("2_tx8br")
 mesh = SubResource("CylinderMesh_qw13b")
 
 [node name="Wedge" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -5)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Wedge"]
 material_override = ExtResource("2_tx8br")
