@@ -347,7 +347,7 @@ mesh = SubResource("BoxMesh_2eao1")
 [node name="ShapeKit" type="Node3D" parent="StaticObjects"]
 
 [node name="Box" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Box"]
 shape = SubResource("BoxShape3D_b766v")
@@ -357,7 +357,7 @@ material_override = ExtResource("2_tx8br")
 mesh = SubResource("BoxMesh_63nxk")
 
 [node name="Sphere" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -4)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Sphere"]
 shape = SubResource("SphereShape3D_rx5vn")
@@ -367,7 +367,7 @@ material_override = ExtResource("2_tx8br")
 mesh = SubResource("SphereMesh_764mm")
 
 [node name="Cylinder" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -4)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Cylinder"]
 shape = SubResource("CylinderShape3D_tqehc")
@@ -377,7 +377,7 @@ material_override = ExtResource("2_tx8br")
 mesh = SubResource("CylinderMesh_qw13b")
 
 [node name="Wedge" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -4)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Wedge"]
 material_override = ExtResource("2_tx8br")
