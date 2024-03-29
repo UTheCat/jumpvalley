@@ -12,8 +12,11 @@ Thanks to the creators of the assets listed below for making these beautiful ass
 
 ## Music
 
+Songs listed here are listed in the format `artist - song name`. These are the songs made by 3rd-parties that are used in this project:
+
 - [Pahgawk - Shivers](https://www.newgrounds.com/audio/listen/1215548)
 - [KORAII - The Trail](https://www.newgrounds.com/audio/listen/1139009)
+- [korewakosu - keygen w/ South](https://www.newgrounds.com/audio/listen/1187165)
 
 ## Misc
 
