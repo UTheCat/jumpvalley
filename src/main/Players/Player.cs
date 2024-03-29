@@ -171,7 +171,7 @@ namespace Jumpvalley.Players
 
             // test level loading
             LevelLoadingTest levelLoadingTest = new LevelLoadingTest(
-                "res://levels/demo_platformer",
+                "res://levels/shape_variety",
                 RootNode.GetNode("Levels"),
                 Tree,
                 PrimaryGui.GetNode("LevelTimer"),
