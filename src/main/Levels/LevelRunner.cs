@@ -15,7 +15,7 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The level that the player is currently playing.
         /// </summary>
-        public Level CurrentLevel { get; private set; }
+        public Level CurrentLevel;
 
         /// <summary>
         /// The level that's acting as the game's lobby.
@@ -24,7 +24,7 @@ namespace Jumpvalley.Levels
         /// This is separate from <see cref="CurrentLevel"/> so
         /// both the lobby and the level that the player is currently playing can run at the same time.
         /// </summary>
-        public Level Lobby { get; private set; }
+        public Level Lobby;
 
         /// <summary>
         /// Creates a new instance of the game's level runner
