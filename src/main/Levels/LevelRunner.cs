@@ -37,8 +37,8 @@ namespace Jumpvalley.Levels
 
         /// <summary>
         /// Loads a level from the directory at the given path
-        /// <param name="path">Where the directory is located</param>
         /// </summary>
+        /// <param name="path">Where the directory is located</param>
         public void LoadLevelFromDirectory(string path)
         {
 
