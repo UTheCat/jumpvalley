@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Godot;
 
 using Jumpvalley.Music;
@@ -8,9 +7,7 @@ using Jumpvalley.Players.Camera;
 using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
-using Jumpvalley.Raycasting;
 using Jumpvalley.Testing;
-using Jumpvalley.Timing;
 
 namespace Jumpvalley.Players
 {
@@ -182,6 +179,7 @@ namespace Jumpvalley.Players
             levelLoadingTest.Start();
 
             // test OffsetStopwatch
+            /*
             Task.Run(() =>
             {
                 TimeSpan offset = TimeSpan.FromSeconds(51.324);
@@ -197,6 +195,7 @@ namespace Jumpvalley.Players
                 }
                 testStopwatch.Stop();
             });
+            */
 
             // test RaycastSweep
             /*
