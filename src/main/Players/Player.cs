@@ -10,6 +10,7 @@ using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
 using Jumpvalley.Raycasting;
 using Jumpvalley.Testing;
+using Jumpvalley.Timing;
 
 namespace Jumpvalley.Players
 {
@@ -179,6 +180,23 @@ namespace Jumpvalley.Players
                 );
             Disposables.Add(levelLoadingTest);
             levelLoadingTest.Start();
+
+            // test OffsetStopwatch
+            Task.Run(() =>
+            {
+                TimeSpan offset = TimeSpan.FromSeconds(51.324);
+                OffsetStopwatch testStopwatch = new OffsetStopwatch(offset);
+                Console.WriteLine($"testing OffsetStopwatch with an offset of {offset.TotalSeconds} seconds");
+
+                Console.WriteLine($"current time: {testStopwatch.OffsetElapsedTime.TotalSeconds} seconds");
+                testStopwatch.Start();
+                for (int i = 0; i < 100; i++)
+                {
+                    Console.WriteLine($"current time: {testStopwatch.OffsetElapsedTime.TotalSeconds} seconds");
+                    System.Threading.Thread.Sleep(50);
+                }
+                testStopwatch.Stop();
+            });
 
             // test RaycastSweep
             /*
