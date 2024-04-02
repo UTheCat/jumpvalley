@@ -1,6 +1,4 @@
-﻿using Godot;
-
-using Jumpvalley.Players;
+﻿using Jumpvalley.Players;
 
 namespace Jumpvalley.Levels
 {

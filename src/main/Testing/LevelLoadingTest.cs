@@ -85,9 +85,6 @@ namespace Jumpvalley.Testing
             Package.StartLevel();
             RootNodeParent?.AddChild(level.RootNode);
 
-            // This is needed since at the moment, the Level class does not do this by default
-            level.Clock.Start();
-
             LevelInfoFile levelInfo = level.Info;
             Difficulty difficulty = levelInfo.LevelDifficulty;
             Console.WriteLine($"Now playing: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");

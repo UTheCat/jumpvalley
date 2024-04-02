@@ -234,6 +234,9 @@ namespace Jumpvalley.Levels
         {
             if (CurrentRunState == RunState.Stopped) return;
 
+            // So the level's timing stuff stays accurate, it might be best to stop the level's clock first.
+            Clock.Stop();
+
             CurrentRunState = RunState.Stopped;
 
             foreach (InteractiveNode i in Interactives)
@@ -242,6 +245,7 @@ namespace Jumpvalley.Levels
             }
 
             ToggleMusic(false);
+
             base.Stop();
         }
 
