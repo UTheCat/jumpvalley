@@ -17,7 +17,7 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The level package containing the level that the player is currently playing.
         /// </summary>
-        public LevelPackage CurrentLevel;
+        public LevelPackage CurrentLevelPackage;
 
         /// <summary>
         /// The level package containing the level that's acting as the game's lobby.
