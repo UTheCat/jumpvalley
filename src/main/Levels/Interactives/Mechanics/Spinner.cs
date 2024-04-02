@@ -1,6 +1,7 @@
 ﻿using Godot;
 using System;
-using System.Diagnostics;
+
+using Jumpvalley.Timing;
 
 namespace Jumpvalley.Levels.Interactives.Mechanics
 {
@@ -59,7 +60,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             }
         }
 
-        public Spinner(Stopwatch stopwatch, Node node) : base(stopwatch, node)
+        public Spinner(OffsetStopwatch stopwatch, Node node) : base(stopwatch, node)
         {
             body = node as StaticBody3D;
             if (body == null) throw new ArgumentException("The node specified in the 2nd argument must be a StaticBody3D.");

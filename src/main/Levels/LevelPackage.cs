@@ -145,7 +145,7 @@ namespace Jumpvalley.Levels
         {
             if (LevelInstance == null && RootNode != null)
             {
-                LevelInstance = new Level(Info, RootNode);
+                LevelInstance = new Level(Info, RootNode, TimeSpan.Zero);
             }
         }
 
