@@ -10,7 +10,7 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The Player instance that this <see cref="LevelRunner"/> is running under.
         /// </summary>
-        public Player CurrentPlayer { get; private set; }
+        public Player CurrentPlayer;
 
         /// <summary>
         /// The level that the player is currently playing.
@@ -33,6 +33,15 @@ namespace Jumpvalley.Levels
         public LevelRunner(Player player)
         {
             CurrentPlayer = player;
+        }
+
+        /// <summary>
+        /// Loads a level from the directory at the given path
+        /// <param name="path">Where the directory is located</param>
+        /// </summary>
+        public void LoadLevelFromDirectory(string path)
+        {
+
         }
     }
 }
