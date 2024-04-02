@@ -1,4 +1,6 @@
-﻿using Jumpvalley.Players;
+﻿using Godot;
+
+using Jumpvalley.Players;
 
 namespace Jumpvalley.Levels
 {
@@ -13,18 +15,18 @@ namespace Jumpvalley.Levels
         public Player CurrentPlayer;
 
         /// <summary>
-        /// The level that the player is currently playing.
+        /// The level package containing the level that the player is currently playing.
         /// </summary>
-        public Level CurrentLevel;
+        public LevelPackage CurrentLevel;
 
         /// <summary>
-        /// The level that's acting as the game's lobby.
+        /// The level package containing the level that's acting as the game's lobby.
         /// <br/>
         /// <br/>
         /// This is separate from <see cref="CurrentLevel"/> so
         /// both the lobby and the level that the player is currently playing can run at the same time.
         /// </summary>
-        public Level Lobby;
+        public LevelPackage Lobby;
 
         /// <summary>
         /// Creates a new instance of the game's level runner
@@ -33,15 +35,6 @@ namespace Jumpvalley.Levels
         public LevelRunner(Player player)
         {
             CurrentPlayer = player;
-        }
-
-        /// <summary>
-        /// Loads a level from the directory at the given path
-        /// </summary>
-        /// <param name="path">Where the directory is located</param>
-        public void LoadLevelFromDirectory(string path)
-        {
-
         }
     }
 }
