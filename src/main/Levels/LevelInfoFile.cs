@@ -5,7 +5,7 @@ namespace Jumpvalley.Levels
     /// <summary>
     /// Reads an info file for a Jumpvalley level
     /// </summary>
-    public partial class LevelInfoFile: IO.InfoFile
+    public partial class LevelInfoFile : IO.InfoFile
     {
         /// <summary>
         /// The level's internal identifier. For example, you can make the identifier a shortened version of the full name.
@@ -37,18 +37,12 @@ namespace Jumpvalley.Levels
         /// </summary>
         public string ScenePath;
 
-        /// <summary>
-        /// The file path to the Godot package (PCK file) that contains the level's contents, including the file name and extension. This path should typically be relative to the level's root folder.
-        /// </summary>
-        public string ResourcePackPath;
-
-        public LevelInfoFile(string text): base(text)
+        public LevelInfoFile(string text) : base(text)
         {
             Data.TryGetValue("id", out Id);
             Data.TryGetValue("full_name", out FullName);
             Data.TryGetValue("creators", out Creators);
             Data.TryGetValue("scene_path", out ScenePath);
-            Data.TryGetValue("resource_pack_path", out ResourcePackPath);
 
             string difficultyText;
 

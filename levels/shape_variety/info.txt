@@ -3,4 +3,3 @@ full_name: Shape Variety Demo
 creators: UTheDev
 difficulty: 6.54
 scene_path: level.tscn
-resource_pack_path: level.pck
