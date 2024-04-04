@@ -1,12 +1,12 @@
 ﻿using Godot;
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
 
 using Jumpvalley.Players;
 using Jumpvalley.Music;
 using Jumpvalley.Levels.Interactives;
 using Jumpvalley.Levels.Interactives.Mechanics;
+using Jumpvalley.Timing;
 
 namespace Jumpvalley.Levels
 {
@@ -90,6 +90,11 @@ namespace Jumpvalley.Levels
         public RunState CurrentRunState { get; private set; }
 
         /// <summary>
+        /// The <see cref="LevelPackage"/> that this <see cref="Level"/> instance belongs to
+        /// </summary>
+        public LevelPackage Package = null;
+
+        /// <summary>
         /// Set externally to help the level's code access whatever object is running the level itself
         /// </summary>
         public LevelRunner Runner = null;
@@ -97,8 +102,10 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
         /// </summary>
+        /// <param name="info">Info about the level</param>
         /// <param name="node">The root node of the level to represent</param>
-        public Level(LevelInfoFile info, Node root) : base(new Stopwatch())
+        /// <param name="lastElapsedTime">The most recent amount of elapsed running time that the level left off of</param>
+        public Level(LevelInfoFile info, Node root, TimeSpan lastElapsedTime) : base(new OffsetStopwatch(lastElapsedTime))
         {
             Info = info;
             RootNode = root;
@@ -214,6 +221,9 @@ namespace Jumpvalley.Levels
             // prepare the level's music
             ToggleMusic(true);
 
+            // resume the level's main clock
+            Clock.Start();
+
             base.Start();
         }
 
@@ -224,6 +234,9 @@ namespace Jumpvalley.Levels
         {
             if (CurrentRunState == RunState.Stopped) return;
 
+            // So the level's timing stuff stays accurate, it might be best to stop the level's clock first.
+            Clock.Stop();
+
             CurrentRunState = RunState.Stopped;
 
             foreach (InteractiveNode i in Interactives)
@@ -232,6 +245,7 @@ namespace Jumpvalley.Levels
             }
 
             ToggleMusic(false);
+
             base.Stop();
         }
 

@@ -67,7 +67,8 @@ namespace Jumpvalley.Testing
         {
             base.Start();
 
-            Package = new LevelPackage(LevelDirPath);
+            LevelRunner levelRunner = new LevelRunner(CurrentPlayer);
+            Package = new LevelPackage(LevelDirPath, levelRunner);
             Package.TryLoadResourcePack();
             Package.LoadRootNode();
             Package.CreateLevelInstance();
@@ -80,13 +81,9 @@ namespace Jumpvalley.Testing
             }
 
             CurrentLevel = level;
-            level.Runner = new LevelRunner(CurrentPlayer);
 
             Package.StartLevel();
             RootNodeParent?.AddChild(level.RootNode);
-
-            // This is needed since at the moment, the Level class does not do this by default
-            level.Clock.Start();
 
             LevelInfoFile levelInfo = level.Info;
             Difficulty difficulty = levelInfo.LevelDifficulty;

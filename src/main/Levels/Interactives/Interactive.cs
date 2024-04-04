@@ -1,6 +1,7 @@
 ﻿using Godot;
 using System;
-using System.Diagnostics;
+
+using Jumpvalley.Timing;
 
 namespace Jumpvalley.Levels.Interactives
 {
@@ -20,17 +21,17 @@ namespace Jumpvalley.Levels.Interactives
         public bool IsRunning { get; protected set; }
 
         /// <summary>
-        /// The <see cref="Stopwatch"/> that the Interactive will run on.
-        /// This Stopwatch can be used to synchronize the Interactive's various operations to whatever the current time
-        /// on the Stopwatch is.
+        /// The <see cref="OffsetStopwatch"/> that the Interactive will run on.
+        /// This stopwatch can be used to synchronize the Interactive's various operations to whatever the current time
+        /// on this stopwatch is.
         /// </summary>
-        public Stopwatch Clock { get; private set; }
+        public OffsetStopwatch Clock { get; private set; }
 
         /// <summary>
-        /// Creates a new instance of <see cref="Interactive"/> that will run on the given <see cref="Stopwatch"/>.
+        /// Creates a new instance of <see cref="Interactive"/> that will run on the given <see cref="OffsetStopwatch"/>.
         /// </summary>
         /// <param name="clock">The <see cref="Stopwatch"/> that the Interactive will run on</param>
-        public Interactive(Stopwatch clock)
+        public Interactive(OffsetStopwatch clock)
         {
             IsInitialized = false;
             Clock = clock;

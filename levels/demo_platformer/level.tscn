@@ -265,7 +265,7 @@ skeleton = NodePath("../../../../..")
 [node name="MusicZone1" type="Node3D" parent="Music/MusicZones"]
 
 [node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
-metadata/song1 = "res://levels/demo_platformer/addons/music/1139009_The-Trail"
+metadata/song1 = "res://addons/music/1139009_The-Trail"
 
 [node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone1"]
 

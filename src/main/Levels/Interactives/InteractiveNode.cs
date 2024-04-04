@@ -1,6 +1,7 @@
 ﻿using Godot;
 using System;
-using System.Diagnostics;
+
+using Jumpvalley.Timing;
 
 namespace Jumpvalley.Levels.Interactives
 {
@@ -20,7 +21,7 @@ namespace Jumpvalley.Levels.Interactives
         /// </summary>
         /// <param name="stopwatch">The stopwatch to bind the interactive to</param>
         /// <param name="node">The node to operate over</param>
-        public InteractiveNode(Stopwatch stopwatch, Node node) : base(stopwatch)
+        public InteractiveNode(OffsetStopwatch stopwatch, Node node) : base(stopwatch)
         {
             if (node == null) throw new ArgumentNullException("node");
 

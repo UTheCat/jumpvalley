@@ -18,7 +18,7 @@ namespace Jumpvalley.Players.Gui
         private Label timerTextMs;
 
         /// <summary>
-        /// The amount of elapsed time that will be shown by the level timer
+        /// The amount of elapsed time (in seconds) that will be shown by the level timer
         /// </summary>
         public double ElapsedTime
         {

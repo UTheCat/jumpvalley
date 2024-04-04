@@ -57,10 +57,16 @@ namespace Jumpvalley.Levels
         public Level LevelInstance { get; private set; }
 
         /// <summary>
+        /// The level runner that's running this level package.
+        /// </summary>
+        public LevelRunner Runner;
+
+        /// <summary>
         /// Constructs a LevelPackage object for a given level package's directory
         /// </summary>
         /// <param name="path">The directory path of the level package</param>
-        public LevelPackage(string path)
+        /// <param name="runner">The level runner that's running this level package</param>
+        public LevelPackage(string path, LevelRunner runner)
         {
             Path = path;
 
@@ -71,6 +77,7 @@ namespace Jumpvalley.Levels
             }
 
             Info = new LevelInfoFile(infoFile.GetAsText());
+            Runner = runner;
         }
 
         /// <summary>
@@ -105,7 +112,7 @@ namespace Jumpvalley.Levels
         {
             if (RootNode != null) throw new InvalidOperationException("There's already a root node loaded. Please unload it first.");
 
-            PackedScene packedScene = GD.Load<PackedScene>($"res://levels/{Info.Id}/{Info.ScenePath}");
+            PackedScene packedScene = GD.Load<PackedScene>($"{Path}/{Info.ScenePath}");
 
             if (packedScene == null)
             {
@@ -145,7 +152,11 @@ namespace Jumpvalley.Levels
         {
             if (LevelInstance == null && RootNode != null)
             {
-                LevelInstance = new Level(Info, RootNode);
+                Level level = new Level(Info, RootNode, TimeSpan.Zero);
+                level.Package = this;
+                level.Runner = Runner;
+
+                LevelInstance = level;
             }
         }
 
