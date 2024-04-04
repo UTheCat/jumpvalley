@@ -135,9 +135,6 @@ namespace Jumpvalley.Players
             RotationLockControl rotationLockControl = new RotationLockControl(Mover, Camera);
             RootNode.AddChild(rotationLockControl);
 
-            // Allow the player's character to move
-            Mover.IsRunning = true;
-
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
@@ -219,6 +216,10 @@ namespace Jumpvalley.Players
             // Start playing music.
             // This is done after we load the lobby and the initialization level just to keep things smooth.
             CurrentMusicPlayer.IsPlaying = true;
+
+            // Allow the player's character to move.
+            // This is done after we load the lobby and the initialization level so the player's character doesn't fall through the map.
+            Mover.IsRunning = true;
 
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);

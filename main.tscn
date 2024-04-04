@@ -49,3 +49,12 @@ layout_mode = 1
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
 
 [node name="Levels" type="Node3D" parent="."]
+
+[node name="Music" type="Node3D" parent="."]
+
+[node name="PrimaryMusic" type="Node" parent="Music"]
+
+[node name="Music" type="Node" parent="Music/PrimaryMusic"]
+metadata/song1 = "res://addons/music/1215548_Shivers"
+
+[node name="MusicZones" type="Node3D" parent="Music"]

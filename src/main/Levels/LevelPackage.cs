@@ -112,7 +112,7 @@ namespace Jumpvalley.Levels
         {
             if (RootNode != null) throw new InvalidOperationException("There's already a root node loaded. Please unload it first.");
 
-            PackedScene packedScene = GD.Load<PackedScene>($"res://levels/{Info.Id}/{Info.ScenePath}");
+            PackedScene packedScene = GD.Load<PackedScene>($"{Path}/{Info.ScenePath}");
 
             if (packedScene == null)
             {
