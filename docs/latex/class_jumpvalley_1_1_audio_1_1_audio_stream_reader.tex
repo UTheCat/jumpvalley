@@ -1,0 +1,63 @@
+\doxysection{Jumpvalley.\+Audio.\+Audio\+Stream\+Reader Class Reference}
+\hypertarget{class_jumpvalley_1_1_audio_1_1_audio_stream_reader}{}\label{class_jumpvalley_1_1_audio_1_1_audio_stream_reader}\index{Jumpvalley.Audio.AudioStreamReader@{Jumpvalley.Audio.AudioStreamReader}}
+
+
+Loads a file that\textquotesingle{}s either imported as a resource (at one point or another) or somewhere on the filesystem.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a8b4c18a189631ea90bbea71621a3cee6}{Audio\+Stream\+Reader}} (string file\+Path)
+\begin{DoxyCompactList}\small\item\em Creates a new Audio\+Stream\+Reader for the specified file path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a2f1aee5f371e5a0102bb1450911aa6c7}\label{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a2f1aee5f371e5a0102bb1450911aa6c7} 
+readonly string {\bfseries RESOURCE\+\_\+\+PATH\+\_\+\+ROOT} = "{}res\+://"{}
+\item 
+\Hypertarget{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a8c2351bcc281bd70baef5eb0dcb81eea}\label{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a8c2351bcc281bd70baef5eb0dcb81eea} 
+readonly string {\bfseries FILE\+\_\+\+NOT\+\_\+\+FOUND\+\_\+\+ERR} = "{}No file could be found at the given file path. Please double check that the file path is correct."{}
+\item 
+\Hypertarget{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_ada2bc379385e0cb85634e4c70be4e6b3}\label{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_ada2bc379385e0cb85634e4c70be4e6b3} 
+readonly string {\bfseries INVALID\+\_\+\+DATA\+\_\+\+ERR} = "{}The data format of the file is invalid. Please check that the audio\textquotesingle{}s file format is either WAV, OGG, or MP3."{}
+\item 
+\Hypertarget{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_ac74dfed0b9a4d0ba25e0a4ce7a8d9e9e}\label{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_ac74dfed0b9a4d0ba25e0a4ce7a8d9e9e} 
+Audio\+Stream {\bfseries Stream}
+\begin{DoxyCompactList}\small\item\em The result from reading the stream. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a0e4844b666ee641d81d0a62078d64b70}\label{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a0e4844b666ee641d81d0a62078d64b70} 
+string {\bfseries File\+Path}
+\begin{DoxyCompactList}\small\item\em The file path of the file that the data comes from. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Loads a file that\textquotesingle{}s either imported as a resource (at one point or another) or somewhere on the filesystem. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a8b4c18a189631ea90bbea71621a3cee6}\label{class_jumpvalley_1_1_audio_1_1_audio_stream_reader_a8b4c18a189631ea90bbea71621a3cee6} 
+\index{Jumpvalley.Audio.AudioStreamReader@{Jumpvalley.Audio.AudioStreamReader}!AudioStreamReader@{AudioStreamReader}}
+\index{AudioStreamReader@{AudioStreamReader}!Jumpvalley.Audio.AudioStreamReader@{Jumpvalley.Audio.AudioStreamReader}}
+\doxysubsubsection{\texorpdfstring{AudioStreamReader()}{AudioStreamReader()}}
+{\footnotesize\ttfamily Jumpvalley.\+Audio.\+Audio\+Stream\+Reader.\+Audio\+Stream\+Reader (\begin{DoxyParamCaption}\item[{string}]{file\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new Audio\+Stream\+Reader for the specified file path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The file path to the audio file\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em File\+Not\+Found\+Exception} & Thrown when the file path is invalid, or when no file could be found for the given file path. \\
+\hline
+{\em Invalid\+Data\+Exception} & Thrown when the file was found for the given file path, but the file format is invalid. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Audio/Audio\+Stream\+Reader.\+cs\end{DoxyCompactItemize}

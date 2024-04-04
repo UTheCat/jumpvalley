@@ -1,0 +1,154 @@
+\doxysection{Jumpvalley.\+Raycasting.\+Raycast\+Sweep Class Reference}
+\hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep}{}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep}\index{Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}}
+
+
+Sweeps over a region of 3D space using a series of equally-\/spaced-\/out raycasts. ~\newline
+ ~\newline
+ The center raycast, being located in the middle (or close to it), is assigned to the greatest integer that\textquotesingle{}s less than or equal to the median index. "{}index"{} here refers to the numerical index that a raycast is located in within a raycast sweep from left to right.  
+
+
+Inheritance diagram for Jumpvalley.\+Raycasting.\+Raycast\+Sweep\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5e}{Sweep\+Order}} \{ \mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ead1e80c506f4c89e3c4fb1c1b4867a03c}{Left\+To\+Right}}
+, \mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5eab7b0ea3028791689ea070674776855e2}{Right\+To\+Left}}
+, \mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ea87b4c2e0ebabd570d8570fee0186d371}{Center\+Left\+Right}}
+, \mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ea32bc78e05f6a145f325070782e81cdd8}{Center\+Right\+Left}}
+ \}
+\begin{DoxyCompactList}\small\item\em List of possible orders in which Raycast\+Sweep can iterate over its raycasts when Perform\+Sweep is called. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a1dbd426f7c922c891e3b1cca3cd49e31}{Raycast\+Sweep}} (int num\+Raycasts, Vector3 start\+Position, Vector3 end\+Position, float raycast\+Length)
+\begin{DoxyCompactList}\small\item\em Creates a new Raycast\+Sweep with the given raycast count, starting position, and ending position. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_afc12825d0a6da904ae7b3c3641dfee77}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_afc12825d0a6da904ae7b3c3641dfee77} 
+void {\bfseries Update\+Raycast\+Layout} ()
+\begin{DoxyCompactList}\small\item\em Updates the number of raycasts, the positioning of the raycasts, and the length of the raycasts based on the current values of Num\+Raycasts, Raycast\+Length, Start\+Position, and End\+Position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_result}{Raycast\+Sweep\+Result}} \mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a53b558ca65cf16b8e5526f98d4e68f69}{Perform\+Sweep}} (\mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5e}{Sweep\+Order}} order)
+\begin{DoxyCompactList}\small\item\em Runs through the raycasts in Raycasts in the order specified. ~\newline
+ ~\newline
+ This returns raycast collision information about the first raycast in Raycasts that got collided with. ~\newline
+ ~\newline
+ Because multiple raycasts in the raycast sweep could be colliding with something at the same time, whichever counts as the "{}first"{} raycast to hit something depends on the Sweep\+Order specified in {\itshape order} . ~\newline
+ ~\newline
+ If no raycast in Raycasts is currently hitting something, this method returns null. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ad042449061c0e847457756d63cd0d8a5}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ad042449061c0e847457756d63cd0d8a5} 
+new void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disposes of this Raycast\+Sweep, including its raycasts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a0aedd5f69db62dcf6ff2193b48942c42}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a0aedd5f69db62dcf6ff2193b48942c42} 
+int {\bfseries Num\+Raycasts}
+\begin{DoxyCompactList}\small\item\em The total number of raycasts that the raycast sweep will perform from the start position to the end position. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ac2cd5cd90d19a65ee9777629e01d0768}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ac2cd5cd90d19a65ee9777629e01d0768} 
+float {\bfseries Raycast\+Length}
+\begin{DoxyCompactList}\small\item\em The length in meters that each raycast in the Raycast\+Sweep should extend in the relative Z-\/axis of this Node3D \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a53144bbab75d0fa82957b9d8277ba0b4}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a53144bbab75d0fa82957b9d8277ba0b4} 
+Vector3 {\bfseries Start\+Position}
+\begin{DoxyCompactList}\small\item\em The starting position of the raycast sweep. This position is relative to the position of this Node3D and is where the first raycast will begin. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a8142af75b63fb216898a2fec3e6b24a9}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a8142af75b63fb216898a2fec3e6b24a9} 
+Vector3 {\bfseries End\+Position}
+\begin{DoxyCompactList}\small\item\em The ending position of the raycast sweep. This position is relative to the position of this Node3D and is where the last raycast will begin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_acb39aca4a97f71df975b2498741eb3f1}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_acb39aca4a97f71df975b2498741eb3f1} 
+List$<$ Ray\+Cast3D $>$ {\bfseries Raycasts}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The raycasts being used by the Raycast\+Sweep. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Sweeps over a region of 3D space using a series of equally-\/spaced-\/out raycasts. ~\newline
+ ~\newline
+ The center raycast, being located in the middle (or close to it), is assigned to the greatest integer that\textquotesingle{}s less than or equal to the median index. "{}index"{} here refers to the numerical index that a raycast is located in within a raycast sweep from left to right. 
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5e}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5e} 
+\index{Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}!SweepOrder@{SweepOrder}}
+\index{SweepOrder@{SweepOrder}!Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}}
+\doxysubsubsection{\texorpdfstring{SweepOrder}{SweepOrder}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5e}{Jumpvalley.\+Raycasting.\+Raycast\+Sweep.\+Sweep\+Order}}}
+
+
+
+List of possible orders in which Raycast\+Sweep can iterate over its raycasts when Perform\+Sweep is called. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LeftToRight@{LeftToRight}!Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}}\index{Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}!LeftToRight@{LeftToRight}}}\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ead1e80c506f4c89e3c4fb1c1b4867a03c}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ead1e80c506f4c89e3c4fb1c1b4867a03c} 
+Left\+To\+Right&Sweep from left to right. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RightToLeft@{RightToLeft}!Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}}\index{Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}!RightToLeft@{RightToLeft}}}\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5eab7b0ea3028791689ea070674776855e2}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5eab7b0ea3028791689ea070674776855e2} 
+Right\+To\+Left&Sweep from right to left. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CenterLeftRight@{CenterLeftRight}!Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}}\index{Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}!CenterLeftRight@{CenterLeftRight}}}\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ea87b4c2e0ebabd570d8570fee0186d371}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ea87b4c2e0ebabd570d8570fee0186d371} 
+Center\+Left\+Right&Sweep starting from the center. Then go from left to right (excluding the center raycast) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CenterRightLeft@{CenterRightLeft}!Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}}\index{Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}!CenterRightLeft@{CenterRightLeft}}}\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ea32bc78e05f6a145f325070782e81cdd8}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5ea32bc78e05f6a145f325070782e81cdd8} 
+Center\+Right\+Left&Sweep starting from the center. Then go from right to left (excluding the center raycast) \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a1dbd426f7c922c891e3b1cca3cd49e31}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a1dbd426f7c922c891e3b1cca3cd49e31} 
+\index{Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}!RaycastSweep@{RaycastSweep}}
+\index{RaycastSweep@{RaycastSweep}!Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}}
+\doxysubsubsection{\texorpdfstring{RaycastSweep()}{RaycastSweep()}}
+{\footnotesize\ttfamily Jumpvalley.\+Raycasting.\+Raycast\+Sweep.\+Raycast\+Sweep (\begin{DoxyParamCaption}\item[{int}]{num\+Raycasts,  }\item[{Vector3}]{start\+Position,  }\item[{Vector3}]{end\+Position,  }\item[{float}]{raycast\+Length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new Raycast\+Sweep with the given raycast count, starting position, and ending position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+Raycasts} & \\
+\hline
+{\em start\+Position} & \\
+\hline
+{\em end\+Position} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a53b558ca65cf16b8e5526f98d4e68f69}\label{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_a53b558ca65cf16b8e5526f98d4e68f69} 
+\index{Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}!PerformSweep@{PerformSweep}}
+\index{PerformSweep@{PerformSweep}!Jumpvalley.Raycasting.RaycastSweep@{Jumpvalley.Raycasting.RaycastSweep}}
+\doxysubsubsection{\texorpdfstring{PerformSweep()}{PerformSweep()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_result}{Raycast\+Sweep\+Result}} Jumpvalley.\+Raycasting.\+Raycast\+Sweep.\+Perform\+Sweep (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jumpvalley_1_1_raycasting_1_1_raycast_sweep_ab10cb561cdedf5ed31ec2e0a8fb91d5e}{Sweep\+Order}}}]{order }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Runs through the raycasts in Raycasts in the order specified. ~\newline
+ ~\newline
+ This returns raycast collision information about the first raycast in Raycasts that got collided with. ~\newline
+ ~\newline
+ Because multiple raycasts in the raycast sweep could be colliding with something at the same time, whichever counts as the "{}first"{} raycast to hit something depends on the Sweep\+Order specified in {\itshape order} . ~\newline
+ ~\newline
+ If no raycast in Raycasts is currently hitting something, this method returns null. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em order} & The order in which to run through the raycasts\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The results of this raycast operation
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Raycasting/Raycast\+Sweep.\+cs\end{DoxyCompactItemize}

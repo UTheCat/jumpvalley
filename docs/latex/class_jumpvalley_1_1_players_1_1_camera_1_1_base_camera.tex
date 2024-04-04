@@ -1,0 +1,127 @@
+\doxysection{Jumpvalley.\+Players.\+Camera.\+Base\+Camera Class Reference}
+\hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera}{}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera}\index{Jumpvalley.Players.Camera.BaseCamera@{Jumpvalley.Players.Camera.BaseCamera}}
+
+
+The base class that handles a 3d camera focusing on a 3d object. It includes support for camera panning and zoom controls.  
+
+
+Inheritance diagram for Jumpvalley.\+Players.\+Camera.\+Base\+Camera\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector3 \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_af96f93d8523ebb4174a64ac473c99d63}{Get\+Rotation}} ()
+\begin{DoxyCompactList}\small\item\em Creates and returns a Vector3 with "{}x"{} representing the camera\textquotesingle{}s pitch, "{}y"{} representing the camera\textquotesingle{}s yaw, and "{}z"{} representing the camera\textquotesingle{}s roll. \end{DoxyCompactList}\item 
+Vector3 \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a580bbaf358d058e68485f3bca42e07f9}{Get\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the camera position based on the position of the Focused\+Node and the value of Right\+Offset \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a610c4143ee03c67454ef6fcfc96d75e6}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a610c4143ee03c67454ef6fcfc96d75e6} 
+void {\bfseries Update} ()
+\begin{DoxyCompactList}\small\item\em Updates the position and rotation of the currently associated Camera. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_affde042f4cff4e45076675d7f8e42e13}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_affde042f4cff4e45076675d7f8e42e13} 
+new void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disposes of this Base\+Camera object. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a4edefb782209015742496ba685a1616b}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a4edefb782209015742496ba685a1616b} 
+override void {\bfseries \+\_\+\+Process} (double delta)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a2a7bbc1587fddb6bd67343cb6afe3f97}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a2a7bbc1587fddb6bd67343cb6afe3f97} 
+float {\bfseries Panning\+Sensitivity} = 0
+\begin{DoxyCompactList}\small\item\em How sensitive camera panning is to player input. ~\newline
+ This value multiplies Panning\+Speed when camera rotations are done through user input, such as when rotation is controlled by the mouse. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a851dde9e5a80ea4418a61204972ee4b1}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a851dde9e5a80ea4418a61204972ee4b1} 
+float {\bfseries Panning\+Speed} = 0
+\begin{DoxyCompactList}\small\item\em "{}\+Default"{} camera panning speed in radians per second. ~\newline
+ This value is used when the camera needs to be turned at a constant speed. It also serves as a factor for calculating the speed of the camera rotation every input/process frame when the camera rotation is done in response to user input. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a039d10492bd8de60ecd3c7e5e89df983}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a039d10492bd8de60ecd3c7e5e89df983} 
+float {\bfseries Yaw} = 0
+\begin{DoxyCompactList}\small\item\em The yaw angle of the camera. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a1c58b80f0a5384008421808bf9281640}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a1c58b80f0a5384008421808bf9281640} 
+float {\bfseries Roll} = 0
+\begin{DoxyCompactList}\small\item\em The roll angle of the camera. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a2a2cdd23ded974b06820ddcd2bd5584b}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a2a2cdd23ded974b06820ddcd2bd5584b} 
+float {\bfseries Min\+Pitch} = (float)(-\/0.\+5 \texorpdfstring{$\ast$}{*} Math.\+PI)
+\begin{DoxyCompactList}\small\item\em The smallest pitch angle in radians that the camera can rotate in. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a67a16e5b29cccc63fc60f8faffc78a3c}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a67a16e5b29cccc63fc60f8faffc78a3c} 
+float {\bfseries Max\+Pitch} = (float)(0.\+5 \texorpdfstring{$\ast$}{*} Math.\+PI)
+\begin{DoxyCompactList}\small\item\em The largest pitch angle in radians that the camera can rotate in. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_af1dd423437ed9c80c7091a1815c9a446}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_af1dd423437ed9c80c7091a1815c9a446} 
+float {\bfseries Right\+Offset} = 0
+\begin{DoxyCompactList}\small\item\em The offset of the camera\textquotesingle{}s position to the right from the object that the camera is focusing on. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a1ce8746345d242a03b9fb41688b71657}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a1ce8746345d242a03b9fb41688b71657} 
+float {\bfseries Min\+Zoom\+Out\+Distance} = 0
+\begin{DoxyCompactList}\small\item\em The minimum value of Zoom\+Out\+Distance in meters. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a774aa5b63fa74e71494250b08ea55374}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a774aa5b63fa74e71494250b08ea55374} 
+float {\bfseries Max\+Zoom\+Out\+Distance} = 0
+\begin{DoxyCompactList}\small\item\em The maximum value of Zoom\+Out\+Distance in meters. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a0884a54bc9484d71d963b63388819bd7}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a0884a54bc9484d71d963b63388819bd7} 
+Camera3D {\bfseries Camera} = null
+\begin{DoxyCompactList}\small\item\em The actual camera node that this Base\+Camera is associated with. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_abbe2e1a41132d6421550f4cb16c9ee9d}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_abbe2e1a41132d6421550f4cb16c9ee9d} 
+Node3D {\bfseries Focused\+Node} = null
+\begin{DoxyCompactList}\small\item\em The actual 3d node that the camera is focusing on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a6dee8ad44ed6944daef53e80abefc79b}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a6dee8ad44ed6944daef53e80abefc79b} 
+void {\bfseries Raise\+Zoom\+Out\+Distance\+Changed} (float zoom\+Out\+Distance)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a10a5b22b8178046da2ebc1b3f200af9a}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a10a5b22b8178046da2ebc1b3f200af9a} 
+float {\bfseries Pitch}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The pitch angle of the camera. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_acca1924da3e9a4a193361117f8adcd4c}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_acca1924da3e9a4a193361117f8adcd4c} 
+float {\bfseries Zoom\+Out\+Distance}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em How far zoomed out (in meters) that the camera is from the object that the camera is focusing on ~\newline
+ A value of 0 means that the camera is in first person while a value greater than 0 means that the camera is in third person. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a3b7b80960595eb7a0f34a631c6cf6795}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a3b7b80960595eb7a0f34a631c6cf6795} 
+Event\+Handler$<$ float $>$ {\bfseries Zoom\+Out\+Distance\+Changed}
+\begin{DoxyCompactList}\small\item\em Event that\textquotesingle{}s raised when the value of zoom out distance changes. ~\newline
+ The float argument is the new value of Zoom\+Out\+Distance \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The base class that handles a 3d camera focusing on a 3d object. It includes support for camera panning and zoom controls. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a580bbaf358d058e68485f3bca42e07f9}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_a580bbaf358d058e68485f3bca42e07f9} 
+\index{Jumpvalley.Players.Camera.BaseCamera@{Jumpvalley.Players.Camera.BaseCamera}!GetPosition@{GetPosition}}
+\index{GetPosition@{GetPosition}!Jumpvalley.Players.Camera.BaseCamera@{Jumpvalley.Players.Camera.BaseCamera}}
+\doxysubsubsection{\texorpdfstring{GetPosition()}{GetPosition()}}
+{\footnotesize\ttfamily Vector3 Jumpvalley.\+Players.\+Camera.\+Base\+Camera.\+Get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates the camera position based on the position of the Focused\+Node and the value of Right\+Offset 
+
+\begin{DoxyReturn}{Returns}
+The calculated camera position
+\end{DoxyReturn}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_af96f93d8523ebb4174a64ac473c99d63}\label{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera_af96f93d8523ebb4174a64ac473c99d63} 
+\index{Jumpvalley.Players.Camera.BaseCamera@{Jumpvalley.Players.Camera.BaseCamera}!GetRotation@{GetRotation}}
+\index{GetRotation@{GetRotation}!Jumpvalley.Players.Camera.BaseCamera@{Jumpvalley.Players.Camera.BaseCamera}}
+\doxysubsubsection{\texorpdfstring{GetRotation()}{GetRotation()}}
+{\footnotesize\ttfamily Vector3 Jumpvalley.\+Players.\+Camera.\+Base\+Camera.\+Get\+Rotation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates and returns a Vector3 with "{}x"{} representing the camera\textquotesingle{}s pitch, "{}y"{} representing the camera\textquotesingle{}s yaw, and "{}z"{} representing the camera\textquotesingle{}s roll. 
+
+\begin{DoxyReturn}{Returns}
+The created Vector3
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Players/\+Camera/Base\+Camera.\+cs\end{DoxyCompactItemize}

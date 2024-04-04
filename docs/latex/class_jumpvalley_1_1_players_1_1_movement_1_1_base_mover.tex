@@ -1,0 +1,262 @@
+\doxysection{Jumpvalley.\+Players.\+Movement.\+Base\+Mover Class Reference}
+\hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover}{}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover}\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}
+
+
+This is the base class that provides a player\textquotesingle{}s character the ability to move in different directions, jump, and climb. It serves mainly as a controller interface for developers to build on. ~\newline
+ The design of this takes lots of inspiration from Roblox\textquotesingle{}s Player\+Module.  
+
+
+Inheritance diagram for Jumpvalley.\+Players.\+Movement.\+Base\+Mover\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.906574cm]{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348}{Body\+State}} \{ \newline
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348ac23e2b09ebe6bf4cb5e2a9abe85c0be2}{Stopped}} = 0
+, \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348adefe967ad0373b2274fc298f19125ca7}{Moving}} = 1
+, \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a5bda814c4aedb126839228f1a3d92f09}{Running}} = 2
+, \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a4475404a8e17049853e83d014a833ca1}{Rising}} = 3
+, \newline
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a5f51eb9396f286226cf2385d0e1947ee}{Jumping}} = 4
+, \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348aaebc7dfafde486758efb13d78f7219fd}{Climbing}} = 5
+, \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a0f57d5b441651c57eac9f91efaa5a75a}{Falling}} = 6
+ \}
+\begin{DoxyCompactList}\small\item\em The current movement state of the character associated with the mover. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_abe044cfe7980454fd92f7ab8952db3e3}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_abe044cfe7980454fd92f7ab8952db3e3} 
+{\bfseries Base\+Mover} ()
+\begin{DoxyCompactList}\small\item\em Constructs a new instance of Base\+Mover that can be used to handle character movement. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a254ae54aaf855d79a2a4aedc6394387d}{Is\+On\+Floor}} ()
+\begin{DoxyCompactList}\small\item\em Returns whether or not the associated Character\+Body3D is on the floor. \end{DoxyCompactList}\item 
+Vector3 \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a3bc9639190fc2d696e1e839588cbe14d}{Get\+Move\+Vector}} (float yaw)
+\begin{DoxyCompactList}\small\item\em Calculates and returns the move vector that the player wants to move the character in, regardless of whether or not they\textquotesingle{}re currently jumping or climbing. ~\newline
+ The calculated move vector can be rotated to a specified yaw angle. This is useful when you want to make the character move in the direction that the camera is facing. \end{DoxyCompactList}\item 
+Vector3 \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a7cc04f32681a52acaa7cb05c7d0a74b9}{Get\+Velocity}} (float delta, float yaw)
+\begin{DoxyCompactList}\small\item\em Gets the character\textquotesingle{}s velocity for some sort of physics frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a171fec039f2e13c03be5dfdbb0ed2f4a}{Handle\+Physics\+Step}} (double delta)
+\begin{DoxyCompactList}\small\item\em Callback to associate with the physics process step in the current scene tree. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_aea89e4623579368f15fad2924d34835c}{Handle\+Process\+Step}} (double delta)
+\begin{DoxyCompactList}\small\item\em Callback to associate with the normal process step in the current scene tree. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a04c5e46ea3640c5b4cc6024ffe128703}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a04c5e46ea3640c5b4cc6024ffe128703} 
+new void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disposes of this Base\+Mover \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a629b46fe954b7df892b60e51890e892d}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a629b46fe954b7df892b60e51890e892d} 
+override void {\bfseries \+\_\+\+Physics\+Process} (double delta)
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a3cdfc7fd9aa05f2ded3426b1a76dc65d}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a3cdfc7fd9aa05f2ded3426b1a76dc65d} 
+override void {\bfseries \+\_\+\+Process} (double delta)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a0b04fac86b9222e84f46188d9ec4b420}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a0b04fac86b9222e84f46188d9ec4b420} 
+float {\bfseries Forward\+Value} = 0
+\begin{DoxyCompactList}\small\item\em Scalar in which the character wishes to go forward in the range of \mbox{[}-\/1, 1\mbox{]}. ~\newline
+ A value less than 0 indicates that the character wants to go backwards while a value greater than 0 indicates that the character wants to go forwards. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a9a8f12b8abbc4fd4f3f59b11e454792e}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a9a8f12b8abbc4fd4f3f59b11e454792e} 
+float {\bfseries Right\+Value} = 0
+\begin{DoxyCompactList}\small\item\em Scalar in which the character wishes to go right in the range of \mbox{[}-\/1, 1\mbox{]}. ~\newline
+ A value less than 0 indicates that the character wants to go left while a value greater than 0 indicates that the character wants to go right. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a50f3dd56234bf2bb38e62c72e96c0dc4}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a50f3dd56234bf2bb38e62c72e96c0dc4} 
+float {\bfseries Gravity} = 9.\+8f
+\begin{DoxyCompactList}\small\item\em The gravity that the character experiences in meters per second squared. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a1e05785c177e801547a54ec9243536e0}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a1e05785c177e801547a54ec9243536e0} 
+float {\bfseries Jump\+Velocity} = 5f
+\begin{DoxyCompactList}\small\item\em The initial velocity of the character\textquotesingle{}s jump. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_ad6c0791e3c829fec5d5270a52e2fba4e}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_ad6c0791e3c829fec5d5270a52e2fba4e} 
+float {\bfseries Camera\+Yaw} = 0
+\begin{DoxyCompactList}\small\item\em The current yaw angle of the camera that\textquotesingle{}s currently associated with the character. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_abfe6361c564002598e794f73d69b76fc}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_abfe6361c564002598e794f73d69b76fc} 
+bool {\bfseries Is\+Climbing} = false
+\begin{DoxyCompactList}\small\item\em Whether or not the player is currently climbing. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a9f161f83b90a5bb9511d5ee2d712c6eb}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a9f161f83b90a5bb9511d5ee2d712c6eb} 
+bool {\bfseries Is\+Jumping} = false
+\begin{DoxyCompactList}\small\item\em Whether or not the player is currently jumping. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_ae3bbe8db5498b6ca59b3d085364422dc}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_ae3bbe8db5498b6ca59b3d085364422dc} 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera}{Base\+Camera}} {\bfseries Camera} = null
+\begin{DoxyCompactList}\small\item\em The Base\+Camera to bind Camera\+Yaw to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_abe429f2719c4768d2a268e2b2242ffb2}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_abe429f2719c4768d2a268e2b2242ffb2} 
+static readonly string {\bfseries CHARACTER\+\_\+\+ROOT\+\_\+\+COLLIDER\+\_\+\+NAME} = "{}Root\+Collider"{}
+\begin{DoxyCompactList}\small\item\em The name of the Collision\+Shape3D that should be primarily in charge of handling a character\textquotesingle{}s collision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a97d536ba9b31422dc21c39f3a2e227dd}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a97d536ba9b31422dc21c39f3a2e227dd} 
+void {\bfseries Raise\+Body\+State\+Changed\+Event} (\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348}{Body\+State}} old\+State, \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348}{Body\+State}} new\+State)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_ac13f1021cde34329b7f98e43c0b577bc}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_ac13f1021cde34329b7f98e43c0b577bc} 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348}{Body\+State}} {\bfseries Current\+Body\+State}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current movement state of the character that\textquotesingle{}s being moved by this Base\+Mover \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a731f08699495fec93b227f0973319337}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a731f08699495fec93b227f0973319337} 
+float {\bfseries Speed}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em How fast the character can move in meters per second. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a6a44b73d3cc9fd6ec9ecbf8b3d948149}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a6a44b73d3cc9fd6ec9ecbf8b3d948149} 
+bool {\bfseries Is\+Rotation\+Locked}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the character\textquotesingle{}s yaw is locked to some specified yaw angle. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a5c6d6e19854e58309bd0d0cbe71a4a3b}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a5c6d6e19854e58309bd0d0cbe71a4a3b} 
+bool {\bfseries Is\+Running}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the Base\+Mover is actively updating every physics and process frame. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a975d610c16496c496bdf94aeacccdcdf}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a975d610c16496c496bdf94aeacccdcdf} 
+Character\+Body3D {\bfseries Body}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Character\+Body3D that this Base\+Mover is binded to. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a48be96d6b9466f77589149f929d50d2a}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a48be96d6b9466f77589149f929d50d2a} 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_body_rotator}{Body\+Rotator}} {\bfseries Rotator}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Body\+Rotator that will be rotating Body \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a33f9095ceff173c36ea067f54e6c4e53}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a33f9095ceff173c36ea067f54e6c4e53} 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_climber}{Climber}} {\bfseries Current\+Climber}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Climber that\textquotesingle{}s currently in charge of determining whether or not the character can climb at the current physics frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_ad06765423e06e2029aea778abe6d1893}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_ad06765423e06e2029aea778abe6d1893} 
+Event\+Handler$<$ \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_body_state_changed_args}{Body\+State\+Changed\+Args}} $>$ {\bfseries Body\+State\+Changed}
+\begin{DoxyCompactList}\small\item\em Event that\textquotesingle{}s raised when the character being moved by this Base\+Mover changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the base class that provides a player\textquotesingle{}s character the ability to move in different directions, jump, and climb. It serves mainly as a controller interface for developers to build on. ~\newline
+ The design of this takes lots of inspiration from Roblox\textquotesingle{}s Player\+Module. 
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348} 
+\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!BodyState@{BodyState}}
+\index{BodyState@{BodyState}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}
+\doxysubsubsection{\texorpdfstring{BodyState}{BodyState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348}{Jumpvalley.\+Players.\+Movement.\+Base\+Mover.\+Body\+State}}}
+
+
+
+The current movement state of the character associated with the mover. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Stopped@{Stopped}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!Stopped@{Stopped}}}\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348ac23e2b09ebe6bf4cb5e2a9abe85c0be2}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348ac23e2b09ebe6bf4cb5e2a9abe85c0be2} 
+Stopped&The character is not moving. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Moving@{Moving}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!Moving@{Moving}}}\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348adefe967ad0373b2274fc298f19125ca7}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348adefe967ad0373b2274fc298f19125ca7} 
+Moving&The character is moving, but not at the user\textquotesingle{}s request. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Running@{Running}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!Running@{Running}}}\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a5bda814c4aedb126839228f1a3d92f09}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a5bda814c4aedb126839228f1a3d92f09} 
+Running&The character is walking/running at the user\textquotesingle{}s request. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Rising@{Rising}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!Rising@{Rising}}}\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a4475404a8e17049853e83d014a833ca1}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a4475404a8e17049853e83d014a833ca1} 
+Rising&The character is moving upward, but not at the user\textquotesingle{}s request (e.\+g. the character is moving upward while Is\+Jumping and Is\+Climbing are both false) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Jumping@{Jumping}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!Jumping@{Jumping}}}\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a5f51eb9396f286226cf2385d0e1947ee}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a5f51eb9396f286226cf2385d0e1947ee} 
+Jumping&The character is jumping. A character is jumping only while Is\+Jumping is set to true and the character is moving upward. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Climbing@{Climbing}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!Climbing@{Climbing}}}\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348aaebc7dfafde486758efb13d78f7219fd}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348aaebc7dfafde486758efb13d78f7219fd} 
+Climbing&The character is climbing something. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Falling@{Falling}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!Falling@{Falling}}}\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a0f57d5b441651c57eac9f91efaa5a75a}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a2032b9a3569a4eaa6100ca63fc029348a0f57d5b441651c57eac9f91efaa5a75a} 
+Falling&The character is falling down. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a3bc9639190fc2d696e1e839588cbe14d}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a3bc9639190fc2d696e1e839588cbe14d} 
+\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!GetMoveVector@{GetMoveVector}}
+\index{GetMoveVector@{GetMoveVector}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}
+\doxysubsubsection{\texorpdfstring{GetMoveVector()}{GetMoveVector()}}
+{\footnotesize\ttfamily Vector3 Jumpvalley.\+Players.\+Movement.\+Base\+Mover.\+Get\+Move\+Vector (\begin{DoxyParamCaption}\item[{float}]{yaw }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates and returns the move vector that the player wants to move the character in, regardless of whether or not they\textquotesingle{}re currently jumping or climbing. ~\newline
+ The calculated move vector can be rotated to a specified yaw angle. This is useful when you want to make the character move in the direction that the camera is facing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em yaw} & The yaw angle that the forward and right values are relative to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The calculated move vector
+\end{DoxyReturn}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a7cc04f32681a52acaa7cb05c7d0a74b9}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a7cc04f32681a52acaa7cb05c7d0a74b9} 
+\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!GetVelocity@{GetVelocity}}
+\index{GetVelocity@{GetVelocity}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}
+\doxysubsubsection{\texorpdfstring{GetVelocity()}{GetVelocity()}}
+{\footnotesize\ttfamily Vector3 Jumpvalley.\+Players.\+Movement.\+Base\+Mover.\+Get\+Velocity (\begin{DoxyParamCaption}\item[{float}]{delta,  }\item[{float}]{yaw }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the character\textquotesingle{}s velocity for some sort of physics frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & The time it took to complete the physics frame in seconds\\
+\hline
+{\em yaw} & The yaw angle to make the move vector relative to.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a171fec039f2e13c03be5dfdbb0ed2f4a}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a171fec039f2e13c03be5dfdbb0ed2f4a} 
+\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!HandlePhysicsStep@{HandlePhysicsStep}}
+\index{HandlePhysicsStep@{HandlePhysicsStep}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}
+\doxysubsubsection{\texorpdfstring{HandlePhysicsStep()}{HandlePhysicsStep()}}
+{\footnotesize\ttfamily void Jumpvalley.\+Players.\+Movement.\+Base\+Mover.\+Handle\+Physics\+Step (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Callback to associate with the physics process step in the current scene tree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & The time it took and should take to complete the physics frame in seconds\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_aea89e4623579368f15fad2924d34835c}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_aea89e4623579368f15fad2924d34835c} 
+\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!HandleProcessStep@{HandleProcessStep}}
+\index{HandleProcessStep@{HandleProcessStep}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}
+\doxysubsubsection{\texorpdfstring{HandleProcessStep()}{HandleProcessStep()}}
+{\footnotesize\ttfamily void Jumpvalley.\+Players.\+Movement.\+Base\+Mover.\+Handle\+Process\+Step (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Callback to associate with the normal process step in the current scene tree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a254ae54aaf855d79a2a4aedc6394387d}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover_a254ae54aaf855d79a2a4aedc6394387d} 
+\index{Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}!IsOnFloor@{IsOnFloor}}
+\index{IsOnFloor@{IsOnFloor}!Jumpvalley.Players.Movement.BaseMover@{Jumpvalley.Players.Movement.BaseMover}}
+\doxysubsubsection{\texorpdfstring{IsOnFloor()}{IsOnFloor()}}
+{\footnotesize\ttfamily bool Jumpvalley.\+Players.\+Movement.\+Base\+Mover.\+Is\+On\+Floor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether or not the associated Character\+Body3D is on the floor. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Players/\+Movement/Base\+Mover.\+cs\end{DoxyCompactItemize}

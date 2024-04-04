@@ -1,0 +1,22 @@
+\doxysection{Jumpvalley.\+Players.\+Movement Namespace Reference}
+\hypertarget{namespace_jumpvalley_1_1_players_1_1_movement}{}\label{namespace_jumpvalley_1_1_players_1_1_movement}\index{Jumpvalley.Players.Movement@{Jumpvalley.Players.Movement}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover}{Base\+Mover}}
+\begin{DoxyCompactList}\small\item\em This is the base class that provides a player\textquotesingle{}s character the ability to move in different directions, jump, and climb. It serves mainly as a controller interface for developers to build on. ~\newline
+ The design of this takes lots of inspiration from Roblox\textquotesingle{}s Player\+Module. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_body_rotator}{Body\+Rotator}}
+\begin{DoxyCompactList}\small\item\em This class is responsible for turning a 3D body\textquotesingle{}s yaw angle in the direction that it\textquotesingle{}s moving. ~\newline
+ Such direction is approached gradually, unless it\textquotesingle{}s specified that the direction should be set instantly. ~\newline
+ Thanks to Godot 4.\+0 .NET thirdperson controller
+
+by vaporvee for helping me figure out how to smoothly turn a 3D body in terms of a third-\/person controller. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_body_state_changed_args}{Body\+State\+Changed\+Args}}
+\begin{DoxyCompactList}\small\item\em Event arguments for Base\+Mover.\+Body\+State\+Changed. In this class\textquotesingle{}s documentation, "{}character"{} refers to the Character\+Body3D whose movement is being handled by its Base\+Mover \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_climber}{Climber}}
+\begin{DoxyCompactList}\small\item\em Allows a character to climb objects. Specifically, these objects are Physics\+Body3Ds A Physics\+Body3D can be climbed if it has a boolean metadata entry named "{}is\+\_\+climbable"{} that\textquotesingle{}s set to true. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_keyboard_mover}{Keyboard\+Mover}}
+\begin{DoxyCompactList}\small\item\em Subclass of Base\+Mover that handles character movement via keyboard input. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control}{Rotation\+Lock\+Control}}
+\begin{DoxyCompactList}\small\item\em For an instance of Base\+Mover, this sets Base\+Mover.\+Is\+Rotation\+Locked to true whenever a camera is in first person or when Shift-\/\+Lock has been toggled on by the user. The Base\+Mover\textquotesingle{}s Base\+Mover.\+Is\+Rotation\+Locked is otherwise set to false. \end{DoxyCompactList}\end{DoxyCompactItemize}

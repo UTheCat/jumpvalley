@@ -1,0 +1,22 @@
+\doxysection{Jumpvalley.\+Tweening Namespace Reference}
+\hypertarget{namespace_jumpvalley_1_1_tweening}{}\label{namespace_jumpvalley_1_1_tweening}\index{Jumpvalley.Tweening@{Jumpvalley.Tweening}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_interval_tween}{Interval\+Tween}}
+\begin{DoxyCompactList}\small\item\em Class that runs a tween by incrementing steps at a specified time interval. ~\newline
+ Note that while the time interval should mostly be fixed, there will be slight differences in the actual time between each step. ~\newline
+ To account for this, the Stopwatch class is used to run the tween based on a timestamp. Therefore, the aforementioned differences shouldn\textquotesingle{}t add up and cause the tween to finish noticeably later than expected for longer tweens. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_method_tween}{Method\+Tween}}
+\begin{DoxyCompactList}\small\item\em Provides a way of tweening via Godot using method overrides. ~\newline
+ The advantage of using this over a normal Godot Tween is that the Tween doesn\textquotesingle{}t have to be in the scene tree in order to operate. ~\newline
+ Another difference is that unlike a normal Godot Tween, this tween doesn\textquotesingle{}t start automatically after being instantiated. Developers must call Resume() manually in order to get the tween running. ~\newline
+ Syntax is inspired by Java\+FX\textquotesingle{}s animation package. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_scene_tree_tween}{Scene\+Tree\+Tween}}
+\begin{DoxyCompactList}\small\item\em Method\+Tween that can bind to the Process step of a Godot scene tree. ~\newline
+ Every process step, the tween will also get stepped until the playback of the tween is finished or stopped. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_tween_group}{Tween\+Group}}
+\begin{DoxyCompactList}\small\item\em A class capable of overseeing multiple tweens as a "{}group"{}. ~\newline
+ It offers support for storing tweens in a key-\/value map (also called a Dictionary$<$\+TKey, TValue$>$) and doing various operations with all of the tweens in the map at once. ~\newline
+ In addition, it can be used to make Godot tweens work with objects that aren\textquotesingle{}t in the scene tree, particularly, through the use of Tween.\+Tween\+Method ~\newline
+ Please note\+: In order for this to work, an instance of Tween\+Group$<$\+TKey$>$ must be parented to a Godot node of some sort (preferably one that will be in the scene tree until the application exits). This is due to the Godot limitation that Tweens must be in the scene tree in order to be processed. \end{DoxyCompactList}\end{DoxyCompactItemize}

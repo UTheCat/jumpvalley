@@ -1,0 +1,73 @@
+\doxysection{Jumpvalley.\+Players.\+Movement.\+Rotation\+Lock\+Control Class Reference}
+\hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control}{}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control}\index{Jumpvalley.Players.Movement.RotationLockControl@{Jumpvalley.Players.Movement.RotationLockControl}}
+
+
+For an instance of Base\+Mover, this sets Base\+Mover.\+Is\+Rotation\+Locked to true whenever a camera is in first person or when Shift-\/\+Lock has been toggled on by the user. The Base\+Mover\textquotesingle{}s Base\+Mover.\+Is\+Rotation\+Locked is otherwise set to false.  
+
+
+Inheritance diagram for Jumpvalley.\+Players.\+Movement.\+Rotation\+Lock\+Control\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.806452cm]{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a37eaf2f28ba0e343417834b2141d6912}{Rotation\+Lock\+Control}} (\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover}{Base\+Mover}} mover, \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera}{Base\+Camera}} camera)
+\begin{DoxyCompactList}\small\item\em Creates an instance of Rotation\+Lock\+Control \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a4ec2b9f061362a0e5ea1d564bf5a259b}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a4ec2b9f061362a0e5ea1d564bf5a259b} 
+void {\bfseries Update} ()
+\begin{DoxyCompactList}\small\item\em Updates/refreshes the Rotation\+Locked property of Mover \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_aec4986a73c943bacaa3e9cd037f8e6fc}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_aec4986a73c943bacaa3e9cd037f8e6fc} 
+new void {\bfseries Dispose} ()
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a9ca5971398ed59d2fa95d326c7c7bce4}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a9ca5971398ed59d2fa95d326c7c7bce4} 
+override void {\bfseries \+\_\+\+Unhandled\+Input} (Input\+Event @event)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a5db32101753aa19c58e0bab716f9c58f}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a5db32101753aa19c58e0bab716f9c58f} 
+float {\bfseries Camera\+Rotation\+Lock\+Offset} = 1f
+\begin{DoxyCompactList}\small\item\em The number of meters to shift the camera to the right by whenever rotation lock is enabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a8ab9bc297bd61e2513b7c166db766bf4}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a8ab9bc297bd61e2513b7c166db766bf4} 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover}{Base\+Mover}} {\bfseries Mover}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Base\+Mover associated with this instance of Base\+Mover \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a232fddba2e085ed5ee09524a89e94238}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a232fddba2e085ed5ee09524a89e94238} 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera}{Base\+Camera}} {\bfseries Camera}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Base\+Camera asssociated with this instance of Base\+Mover. If the camera\textquotesingle{}s Zoom\+Out\+Distance property is set to 0, Rotation\+Lock is turned on for Mover. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a947ea5c9e3b57a6bc25dc089124e2582}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a947ea5c9e3b57a6bc25dc089124e2582} 
+bool {\bfseries User\+Enabled\+Shift\+Lock}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the user has enabled shift lock themselves. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+For an instance of Base\+Mover, this sets Base\+Mover.\+Is\+Rotation\+Locked to true whenever a camera is in first person or when Shift-\/\+Lock has been toggled on by the user. The Base\+Mover\textquotesingle{}s Base\+Mover.\+Is\+Rotation\+Locked is otherwise set to false. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a37eaf2f28ba0e343417834b2141d6912}\label{class_jumpvalley_1_1_players_1_1_movement_1_1_rotation_lock_control_a37eaf2f28ba0e343417834b2141d6912} 
+\index{Jumpvalley.Players.Movement.RotationLockControl@{Jumpvalley.Players.Movement.RotationLockControl}!RotationLockControl@{RotationLockControl}}
+\index{RotationLockControl@{RotationLockControl}!Jumpvalley.Players.Movement.RotationLockControl@{Jumpvalley.Players.Movement.RotationLockControl}}
+\doxysubsubsection{\texorpdfstring{RotationLockControl()}{RotationLockControl()}}
+{\footnotesize\ttfamily Jumpvalley.\+Players.\+Movement.\+Rotation\+Lock\+Control.\+Rotation\+Lock\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_movement_1_1_base_mover}{Base\+Mover}}}]{mover,  }\item[{\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_camera_1_1_base_camera}{Base\+Camera}}}]{camera }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an instance of Rotation\+Lock\+Control 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mover} & The mover to associate with\\
+\hline
+{\em camera} & The camera to associate with\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Players/\+Movement/Rotation\+Lock\+Control.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,222 @@
+\doxysection{Jumpvalley.\+Tweening.\+Method\+Tween Class Reference}
+\hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween}{}\label{class_jumpvalley_1_1_tweening_1_1_method_tween}\index{Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}}
+
+
+Provides a way of tweening via Godot using method overrides. ~\newline
+ The advantage of using this over a normal Godot Tween is that the Tween doesn\textquotesingle{}t have to be in the scene tree in order to operate. ~\newline
+ Another difference is that unlike a normal Godot Tween, this tween doesn\textquotesingle{}t start automatically after being instantiated. Developers must call Resume() manually in order to get the tween running. ~\newline
+ Syntax is inspired by Java\+FX\textquotesingle{}s animation package.  
+
+
+Inheritance diagram for Jumpvalley.\+Tweening.\+Method\+Tween\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_jumpvalley_1_1_tweening_1_1_method_tween}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_acdce2d4795aa1b139a9dfe289d162427}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_acdce2d4795aa1b139a9dfe289d162427} 
+{\bfseries Method\+Tween} (double transition\+Time, Tween.\+Transition\+Type transition\+Type, Tween.\+Ease\+Type ease\+Type)
+\item 
+double \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_method_tween_a3ed47afdf542d90cb13d636e67ac1d85}{Get\+Current\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current value of the tween. This value is calculated by performing linear interpolation between Initial\+Value and Ending\+Value with the fraction between the value being Current\+Fraction \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_method_tween_abb832c097d12f27fb89c93018376a8ec}{Is\+Finished}} ()
+\begin{DoxyCompactList}\small\item\em Returns if the tween is finished. ~\newline
+ The tween is considered to be finished if one of the following is true\+: 
+\begin{DoxyItemize}
+\item Elapsed\+Time equals Transition\+Time when Speed is greater than or equal to 0 
+\item Elapsed\+Time equals 0 when Speed is less than 0 
+\end{DoxyItemize}\end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_adace2fa068447cfbf1ca8c76c7730fff}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_adace2fa068447cfbf1ca8c76c7730fff} 
+virtual void {\bfseries Pause} ()
+\begin{DoxyCompactList}\small\item\em Pauses the tween. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a58d582d06987876941b604638c30af69}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a58d582d06987876941b604638c30af69} 
+virtual void {\bfseries Resume} ()
+\begin{DoxyCompactList}\small\item\em Starts or resumes the tween. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_method_tween_a2ed247bf59939372495559f0cda8a382}{Step}} (double delta)
+\begin{DoxyCompactList}\small\item\em Moves the current tweening position by a custom step in seconds. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_afbd09fbc135f8e1add29446dd31c6c04}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_afbd09fbc135f8e1add29446dd31c6c04} 
+void {\bfseries Step} ()
+\begin{DoxyCompactList}\small\item\em Calls Step(double) where the "{}double"{} argument is the number of seconds that Step() (with no arguments) was called. ~\newline
+ If this is the first time that Step() (with no arguments) was called since instantiation, the "{}double"{} argument will instead be the number of seconds since the tween started running. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a11d5dcb3b44ea3aa8619fa2c5ca45688}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a11d5dcb3b44ea3aa8619fa2c5ca45688} 
+virtual void {\bfseries Dispose} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_method_tween_a1292910dd1c00b498141312bb4ba50f7}{Lerp}} (double init\+Val, double final\+Val, double frac)
+\begin{DoxyCompactList}\small\item\em Returns a linear interpolation between an initial value and a final value for a given fraction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_afd2d15856e5b2c046ed6b4bf7e2443d2}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_afd2d15856e5b2c046ed6b4bf7e2443d2} 
+double {\bfseries Transition\+Time}
+\begin{DoxyCompactList}\small\item\em The duration of the entire tween in seconds. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_ac1bdce3855f968bf20b6abf7e966b844}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_ac1bdce3855f968bf20b6abf7e966b844} 
+Tween.\+Transition\+Type {\bfseries Transition\+Type}
+\begin{DoxyCompactList}\small\item\em The transition type (parent function that will be doing the easing) as defined in Godot\textquotesingle{}s Tween.\+Transition\+Type \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a1cd464ea6cf5d2ae5fc06cd7a635b99e}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a1cd464ea6cf5d2ae5fc06cd7a635b99e} 
+Tween.\+Ease\+Type {\bfseries Ease\+Type}
+\begin{DoxyCompactList}\small\item\em The easing type ~\newline
+ This controls how the tween speeds up and slows down over time. See Godot\textquotesingle{}s documentation for Tween.\+Ease\+Type for more details. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a6c4b1164e21f14b382a85222b3bdbc4b}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a6c4b1164e21f14b382a85222b3bdbc4b} 
+double {\bfseries Initial\+Value} = 0
+\begin{DoxyCompactList}\small\item\em The initial value of the tween. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a227dad1d3ffc3ed1b9453a53416de16d}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a227dad1d3ffc3ed1b9453a53416de16d} 
+double {\bfseries Final\+Value} = 0
+\begin{DoxyCompactList}\small\item\em The final value of the tween. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a60e8cf1eeb2d9ed736a2186450bfaa45}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a60e8cf1eeb2d9ed736a2186450bfaa45} 
+float {\bfseries Speed} = 1
+\begin{DoxyCompactList}\small\item\em The speed of the tweening where 1 represents normal speed, 0 represents freezing, and -\/1 represents backwards at normal speed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a009b4541c60ed35356367b9ed77887cc}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a009b4541c60ed35356367b9ed77887cc} 
+void {\bfseries Raise\+On\+Step} (float frac)
+\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a77bc1b6f4c508973480cc9c535571340}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a77bc1b6f4c508973480cc9c535571340} 
+void {\bfseries Raise\+On\+Resume} ()
+\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a45731df3529fe5993f52fa18498b5695}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a45731df3529fe5993f52fa18498b5695} 
+void {\bfseries Raise\+On\+Pause} ()
+\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a3848f91aa8dd9f1273c61ee291d190cd}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a3848f91aa8dd9f1273c61ee291d190cd} 
+void {\bfseries Raise\+On\+Finish} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_ae2d8d68c571630a9a328356a6046f62f}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_ae2d8d68c571630a9a328356a6046f62f} 
+virtual bool {\bfseries Is\+Playing}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the tween is current playing/running. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_ae86fdffdbfb1dc056682de71b87baf04}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_ae86fdffdbfb1dc056682de71b87baf04} 
+float {\bfseries Current\+Fraction}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current fraction of the tween that has been completed so far, typically in the range of \mbox{[}0, 1\mbox{]}. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_aa59524f3f53526f92219f97bd1efa10f}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_aa59524f3f53526f92219f97bd1efa10f} 
+double {\bfseries Elapsed\+Time}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The elapsed time that the tween has been running in seconds. This speed at which this value changes is affected by Speed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+Event\+Handler$<$ float $>$ \mbox{\hyperlink{class_jumpvalley_1_1_tweening_1_1_method_tween_accff3904391b3df4bd01e99cb03dc309}{On\+Step}}
+\begin{DoxyCompactList}\small\item\em Event that gets raised on each step of the tween until the animation pauses or finishes. ~\newline
+ The float argument of the event is the current fraction of the tween that has been completed so far, typically in the range of \mbox{[}0, 1\mbox{]}. ~\newline
+ 
+
+Example usage\+: \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_ac4f0c63ef7b98feb245f4025f9b13df1}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_ac4f0c63ef7b98feb245f4025f9b13df1} 
+Event\+Handler {\bfseries On\+Resume}
+\begin{DoxyCompactList}\small\item\em Event raised when the tween resumes playback. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_ac93d93b40c751b6622374e0ad48517db}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_ac93d93b40c751b6622374e0ad48517db} 
+Event\+Handler {\bfseries On\+Pause}
+\begin{DoxyCompactList}\small\item\em Event raised when the tween is paused during playback. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a31e6e044201fb8d438252066ae63afa5}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a31e6e044201fb8d438252066ae63afa5} 
+Event\+Handler {\bfseries On\+Finish}
+\begin{DoxyCompactList}\small\item\em Event raised when the tween finishes playback. ~\newline
+ This event only raises when Is\+Finished() would return true. See Is\+Finished() for more details. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides a way of tweening via Godot using method overrides. ~\newline
+ The advantage of using this over a normal Godot Tween is that the Tween doesn\textquotesingle{}t have to be in the scene tree in order to operate. ~\newline
+ Another difference is that unlike a normal Godot Tween, this tween doesn\textquotesingle{}t start automatically after being instantiated. Developers must call Resume() manually in order to get the tween running. ~\newline
+ Syntax is inspired by Java\+FX\textquotesingle{}s animation package. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a3ed47afdf542d90cb13d636e67ac1d85}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a3ed47afdf542d90cb13d636e67ac1d85} 
+\index{Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}!GetCurrentValue@{GetCurrentValue}}
+\index{GetCurrentValue@{GetCurrentValue}!Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}}
+\doxysubsubsection{\texorpdfstring{GetCurrentValue()}{GetCurrentValue()}}
+{\footnotesize\ttfamily double Jumpvalley.\+Tweening.\+Method\+Tween.\+Get\+Current\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the current value of the tween. This value is calculated by performing linear interpolation between Initial\+Value and Ending\+Value with the fraction between the value being Current\+Fraction 
+
+\begin{DoxyReturn}{Returns}
+said result
+\end{DoxyReturn}
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_abb832c097d12f27fb89c93018376a8ec}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_abb832c097d12f27fb89c93018376a8ec} 
+\index{Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}!IsFinished@{IsFinished}}
+\index{IsFinished@{IsFinished}!Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}}
+\doxysubsubsection{\texorpdfstring{IsFinished()}{IsFinished()}}
+{\footnotesize\ttfamily bool Jumpvalley.\+Tweening.\+Method\+Tween.\+Is\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns if the tween is finished. ~\newline
+ The tween is considered to be finished if one of the following is true\+: 
+\begin{DoxyItemize}
+\item Elapsed\+Time equals Transition\+Time when Speed is greater than or equal to 0 
+\item Elapsed\+Time equals 0 when Speed is less than 0 
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+If the tween is finished
+\end{DoxyReturn}
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a1292910dd1c00b498141312bb4ba50f7}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a1292910dd1c00b498141312bb4ba50f7} 
+\index{Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}!Lerp@{Lerp}}
+\index{Lerp@{Lerp}!Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}}
+\doxysubsubsection{\texorpdfstring{Lerp()}{Lerp()}}
+{\footnotesize\ttfamily static double Jumpvalley.\+Tweening.\+Method\+Tween.\+Lerp (\begin{DoxyParamCaption}\item[{double}]{init\+Val,  }\item[{double}]{final\+Val,  }\item[{double}]{frac }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Returns a linear interpolation between an initial value and a final value for a given fraction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em init\+Val} & The initial value\\
+\hline
+{\em final\+Val} & The final value\\
+\hline
+{\em frac} & The fraction of the interpolation, typically in the range of \mbox{[}0, 1\mbox{]}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_a2ed247bf59939372495559f0cda8a382}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_a2ed247bf59939372495559f0cda8a382} 
+\index{Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}!Step@{Step}}
+\index{Step@{Step}!Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}}
+\doxysubsubsection{\texorpdfstring{Step()}{Step()}}
+{\footnotesize\ttfamily void Jumpvalley.\+Tweening.\+Method\+Tween.\+Step (\begin{DoxyParamCaption}\item[{double}]{delta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Moves the current tweening position by a custom step in seconds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta} & The time in seconds to increment elapsed time in.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Event Documentation}
+\Hypertarget{class_jumpvalley_1_1_tweening_1_1_method_tween_accff3904391b3df4bd01e99cb03dc309}\label{class_jumpvalley_1_1_tweening_1_1_method_tween_accff3904391b3df4bd01e99cb03dc309} 
+\index{Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}!OnStep@{OnStep}}
+\index{OnStep@{OnStep}!Jumpvalley.Tweening.MethodTween@{Jumpvalley.Tweening.MethodTween}}
+\doxysubsubsection{\texorpdfstring{OnStep}{OnStep}}
+{\footnotesize\ttfamily Event\+Handler$<$float$>$ Jumpvalley.\+Tweening.\+Method\+Tween.\+On\+Step}
+
+
+
+Event that gets raised on each step of the tween until the animation pauses or finishes. ~\newline
+ The float argument of the event is the current fraction of the tween that has been completed so far, typically in the range of \mbox{[}0, 1\mbox{]}. ~\newline
+ 
+
+Example usage\+: 
+
+{\ttfamily  Method\+Tween t = new Method\+Tween();}
+
+{\ttfamily public void Handle\+Tween\+Step(object sender, float frac) \{ Console.\+Write\+Line(\$"{}\+The current fraction of the tween is \{frac\}"{}); \}}
+
+{\ttfamily public void Connect\+To\+Tween\+Step() \{ t.\+On\+Step += Handle\+Tween\+Step; \} } 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Tweening/Method\+Tween.\+cs\end{DoxyCompactItemize}

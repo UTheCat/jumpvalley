@@ -1,0 +1,115 @@
+\doxysection{Jumpvalley.\+Levels.\+Level\+Package Class Reference}
+\hypertarget{class_jumpvalley_1_1_levels_1_1_level_package}{}\label{class_jumpvalley_1_1_levels_1_1_level_package}\index{Jumpvalley.Levels.LevelPackage@{Jumpvalley.Levels.LevelPackage}}
+
+
+This class represents a level package, a filesystem folder that contains the components of a level. ~\newline
+ Each level package includes\+: 
+\begin{DoxyItemize}
+\item The level\textquotesingle{}s info file 
+\item The Godot package (PCK file) that contains the level\textquotesingle{}s contents 
+\end{DoxyItemize} 
+
+
+Inheritance diagram for Jumpvalley.\+Levels.\+Level\+Package\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_jumpvalley_1_1_levels_1_1_level_package}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_package_a042744712d11f183dff816895ce44ab2}{Level\+Package}} (string path, \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_runner}{Level\+Runner}} runner)
+\begin{DoxyCompactList}\small\item\em Constructs a Level\+Package object for a given level package\textquotesingle{}s directory. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a3d5d7d35b5b6727ce6ea83bc3b9152e0}\label{class_jumpvalley_1_1_levels_1_1_level_package_a3d5d7d35b5b6727ce6ea83bc3b9152e0} 
+bool {\bfseries Load\+Root\+Node} ()
+\begin{DoxyCompactList}\small\item\em Attempts to load the level\textquotesingle{}s main scene. If this operation is successful, Root\+Node will be set to the scene\textquotesingle{}s root node, and this method will return true. Otherwise, this method will return false. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_package_a16a4875f32175d3a0bf82724215f8922}{Dispose\+Root\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Unloads and disposes of the level\textquotesingle{}s root node. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a46d357c0c89422986152b8c7dd960a30}\label{class_jumpvalley_1_1_levels_1_1_level_package_a46d357c0c89422986152b8c7dd960a30} 
+void {\bfseries Create\+Level\+Instance} ()
+\begin{DoxyCompactList}\small\item\em Creates a level instance for the current Root\+Node and assigns it to Level\+Instance \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a9e79156f946d0a46b11cca9268c78b22}\label{class_jumpvalley_1_1_levels_1_1_level_package_a9e79156f946d0a46b11cca9268c78b22} 
+void {\bfseries Dispose\+Level\+Instance} ()
+\begin{DoxyCompactList}\small\item\em Disposes of Level\+Instance if it\textquotesingle{}s not null. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_adf2423364dff5b7971b0801569075cad}\label{class_jumpvalley_1_1_levels_1_1_level_package_adf2423364dff5b7971b0801569075cad} 
+void {\bfseries Start\+Level} ()
+\begin{DoxyCompactList}\small\item\em Initializes the level assigned to Level\+Instance (if that hasn\textquotesingle{}t been done yet), and then starts it. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a0090a2f2628d06a37f49166df69df46d}\label{class_jumpvalley_1_1_levels_1_1_level_package_a0090a2f2628d06a37f49166df69df46d} 
+void {\bfseries Stop\+Level} ()
+\begin{DoxyCompactList}\small\item\em Stops the level assigned to Level\+Instance \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a29b6ec93dcc2997a29e3a22d1cef8b18}\label{class_jumpvalley_1_1_levels_1_1_level_package_a29b6ec93dcc2997a29e3a22d1cef8b18} 
+void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disposes of this level package, including the level instance associated with it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a55583a351c49ba81d6f7c6791933e307}\label{class_jumpvalley_1_1_levels_1_1_level_package_a55583a351c49ba81d6f7c6791933e307} 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_runner}{Level\+Runner}} {\bfseries Runner}
+\begin{DoxyCompactList}\small\item\em The level runner that\textquotesingle{}s running this level package. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_af945ad7115bfb54805eb6044720ebbf3}\label{class_jumpvalley_1_1_levels_1_1_level_package_af945ad7115bfb54805eb6044720ebbf3} 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_info_file}{Level\+Info\+File}} {\bfseries Info}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The level\textquotesingle{}s info file. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_aa92e74302a9471a3dc432d8ff82de81c}\label{class_jumpvalley_1_1_levels_1_1_level_package_aa92e74302a9471a3dc432d8ff82de81c} 
+string {\bfseries Path}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The directory path of the level package. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a940ab6300f2e814971c9faf3299d9659}\label{class_jumpvalley_1_1_levels_1_1_level_package_a940ab6300f2e814971c9faf3299d9659} 
+Node {\bfseries Root\+Node}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em If the level\textquotesingle{}s root node has been loaded, this will point to it. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_ad4bf5524093eac22af09d22aff9b7a54}\label{class_jumpvalley_1_1_levels_1_1_level_package_ad4bf5524093eac22af09d22aff9b7a54} 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level}{Level}} {\bfseries Level\+Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The level instance associated with this level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents a level package, a filesystem folder that contains the components of a level. ~\newline
+ Each level package includes\+: 
+\begin{DoxyItemize}
+\item The level\textquotesingle{}s info file 
+\item The Godot package (PCK file) that contains the level\textquotesingle{}s contents 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a042744712d11f183dff816895ce44ab2}\label{class_jumpvalley_1_1_levels_1_1_level_package_a042744712d11f183dff816895ce44ab2} 
+\index{Jumpvalley.Levels.LevelPackage@{Jumpvalley.Levels.LevelPackage}!LevelPackage@{LevelPackage}}
+\index{LevelPackage@{LevelPackage}!Jumpvalley.Levels.LevelPackage@{Jumpvalley.Levels.LevelPackage}}
+\doxysubsubsection{\texorpdfstring{LevelPackage()}{LevelPackage()}}
+{\footnotesize\ttfamily Jumpvalley.\+Levels.\+Level\+Package.\+Level\+Package (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_runner}{Level\+Runner}}}]{runner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a Level\+Package object for a given level package\textquotesingle{}s directory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The directory path of the level package\\
+\hline
+{\em runner} & The level runner that\textquotesingle{}s running this level package\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_package_a16a4875f32175d3a0bf82724215f8922}\label{class_jumpvalley_1_1_levels_1_1_level_package_a16a4875f32175d3a0bf82724215f8922} 
+\index{Jumpvalley.Levels.LevelPackage@{Jumpvalley.Levels.LevelPackage}!DisposeRootNode@{DisposeRootNode}}
+\index{DisposeRootNode@{DisposeRootNode}!Jumpvalley.Levels.LevelPackage@{Jumpvalley.Levels.LevelPackage}}
+\doxysubsubsection{\texorpdfstring{DisposeRootNode()}{DisposeRootNode()}}
+{\footnotesize\ttfamily void Jumpvalley.\+Levels.\+Level\+Package.\+Dispose\+Root\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unloads and disposes of the level\textquotesingle{}s root node. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Invalid\+Operation\+Exception} & Thrown when Level\+Instance isn\textquotesingle{}t null. This is to prevent errors that can occur when the root node is disposed while the level is still active. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Levels/Level\+Package.\+cs\end{DoxyCompactItemize}

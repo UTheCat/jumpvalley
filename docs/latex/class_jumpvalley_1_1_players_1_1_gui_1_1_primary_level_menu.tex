@@ -1,0 +1,72 @@
+\doxysection{Jumpvalley.\+Players.\+Gui.\+Primary\+Level\+Menu Class Reference}
+\hypertarget{class_jumpvalley_1_1_players_1_1_gui_1_1_primary_level_menu}{}\label{class_jumpvalley_1_1_players_1_1_gui_1_1_primary_level_menu}\index{Jumpvalley.Players.Gui.PrimaryLevelMenu@{Jumpvalley.Players.Gui.PrimaryLevelMenu}}
+
+
+The primary level menu, the menu that\textquotesingle{}s accessed by pressing the three-\/dots at the bottom of the user\textquotesingle{}s screen. This menu contains options like accessing game settings and exiting the game.  
+
+
+Inheritance diagram for Jumpvalley.\+Players.\+Gui.\+Primary\+Level\+Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_jumpvalley_1_1_players_1_1_gui_1_1_primary_level_menu}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_gui_1_1_primary_level_menu_ac52f186148898a1e246009ca51002375}\label{class_jumpvalley_1_1_players_1_1_gui_1_1_primary_level_menu_ac52f186148898a1e246009ca51002375} 
+{\bfseries Primary\+Level\+Menu} (Control actual\+Node, Scene\+Tree tree)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_gui_1_1_level_menu}{Jumpvalley.\+Players.\+Gui.\+Level\+Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_gui_1_1_level_menu_aaa5470786ded190893e82e079c208263}{Level\+Menu}} (Control actual\+Node, Scene\+Tree tree)
+\begin{DoxyCompactList}\small\item\em Constructs a new instance of the level menu handler. \end{DoxyCompactList}\item 
+void {\bfseries Dispose} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_gui_1_1_animated_control}{Jumpvalley.\+Players.\+Gui.\+Animated\+Control}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_gui_1_1_animated_control_a583af4cb0c2d02bcee68b24c8be9b293}{Animated\+Control}} (Control actual\+Node)
+\begin{DoxyCompactList}\small\item\em Creates a new instance of Animated\+Control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_gui_1_1_animated_control}{Jumpvalley.\+Players.\+Gui.\+Animated\+Control}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Raise\+Visibility\+Changed} (bool is\+Visible)
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_gui_1_1_level_menu}{Jumpvalley.\+Players.\+Gui.\+Level\+Menu}}}
+\begin{DoxyCompactItemize}
+\item 
+Control {\bfseries Background\+Control}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Godot control displaying the menu\textquotesingle{}s background. \end{DoxyCompactList}\item 
+Label {\bfseries Title\+Label}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The text label displaying the menu\textquotesingle{}s title. \end{DoxyCompactList}\item 
+Label {\bfseries Subtitle\+Label}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The text label displaying the menu\textquotesingle{}s subtitle. \end{DoxyCompactList}\item 
+Control {\bfseries Items\+Control}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Godot control displaying the menu\textquotesingle{}s items. \end{DoxyCompactList}\item 
+Button {\bfseries Close\+Button}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The button that closes the menu when pressed. \end{DoxyCompactList}\item 
+override bool {\bfseries Is\+Visible}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the level menu should be visible. Toggling this property will run the animation for showing/hiding the menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_gui_1_1_animated_control}{Jumpvalley.\+Players.\+Gui.\+Animated\+Control}}}
+\begin{DoxyCompactItemize}
+\item 
+Control {\bfseries Actual\+Node}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The root node of the Godot control to be animated. \end{DoxyCompactList}\item 
+virtual bool {\bfseries Is\+Visible}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the level menu should be visible. Toggling this property will run the animation for showing/hiding the menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Events inherited from \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_gui_1_1_animated_control}{Jumpvalley.\+Players.\+Gui.\+Animated\+Control}}}
+\begin{DoxyCompactItemize}
+\item 
+Event\+Handler$<$ bool $>$ {\bfseries Visibility\+Changed}
+\begin{DoxyCompactList}\small\item\em Event that\textquotesingle{}s raised when Is\+Visible gets toggled. The boolean argument of this event is the new value of Is\+Visible \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The primary level menu, the menu that\textquotesingle{}s accessed by pressing the three-\/dots at the bottom of the user\textquotesingle{}s screen. This menu contains options like accessing game settings and exiting the game. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Players/\+Gui/Primary\+Level\+Menu.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,27 @@
+\doxysection{Jumpvalley.\+Levels Namespace Reference}
+\hypertarget{namespace_jumpvalley_1_1_levels}{}\label{namespace_jumpvalley_1_1_levels}\index{Jumpvalley.Levels@{Jumpvalley.Levels}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_difficulty}{Difficulty}}
+\begin{DoxyCompactList}\small\item\em Represents a difficulty, a set of values that judge how difficult a level is. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_difficulty_presets}{Difficulty\+Presets}}
+\begin{DoxyCompactList}\small\item\em Difficulty presets taken from difficulty-\/rating systems already established by various communities. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_directory_level_runner}{Directory\+Level\+Runner}}
+\begin{DoxyCompactList}\small\item\em Subclass of Level\+Runner that handles running levels located within a directory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level}{Level}}
+\begin{DoxyCompactList}\small\item\em This class represents a level that\textquotesingle{}s playable in \doxylink{namespace_jumpvalley}{Jumpvalley}. ~\newline
+ Each level contains four primary components\+: interactives, music, static objects, and start point. More details can be found on \doxylink{namespace_jumpvalley}{Jumpvalley}\textquotesingle{}s wiki article on Level Layout
+
+. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_info_file}{Level\+Info\+File}}
+\begin{DoxyCompactList}\small\item\em Reads an info file for a \doxylink{namespace_jumpvalley}{Jumpvalley} level. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_package}{Level\+Package}}
+\begin{DoxyCompactList}\small\item\em This class represents a level package, a filesystem folder that contains the components of a level. ~\newline
+ Each level package includes\+: 
+\begin{DoxyItemize}
+\item The level\textquotesingle{}s info file 
+\item The Godot package (PCK file) that contains the level\textquotesingle{}s contents 
+\end{DoxyItemize}\end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_runner}{Level\+Runner}}
+\begin{DoxyCompactList}\small\item\em Class responsible for running and stopping levels. This is intended to be a base class where subclasses handle running levels in their own way. \end{DoxyCompactList}\end{DoxyCompactItemize}

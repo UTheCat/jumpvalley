@@ -1,0 +1,85 @@
+\doxysection{Jumpvalley.\+Music.\+Music\+Player Class Reference}
+\hypertarget{class_jumpvalley_1_1_music_1_1_music_player}{}\label{class_jumpvalley_1_1_music_1_1_music_player}\index{Jumpvalley.Music.MusicPlayer@{Jumpvalley.Music.MusicPlayer}}
+
+
+Plays music that is split into playlists (see Playlist) ~\newline
+ This class applies a fade transition when the user wants to switch between playlists. ~\newline
+ Each instance of a Music\+Player can only play one song at a time at most.  
+
+
+Inheritance diagram for Jumpvalley.\+Music.\+Music\+Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_jumpvalley_1_1_music_1_1_music_player}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_a6e48d52be9263712723134c373db0dc5}\label{class_jumpvalley_1_1_music_1_1_music_player_a6e48d52be9263712723134c373db0dc5} 
+new void {\bfseries Dispose} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_a845901c233af6c05b18e8088b41a9a98}\label{class_jumpvalley_1_1_music_1_1_music_player_a845901c233af6c05b18e8088b41a9a98} 
+bool {\bfseries Override\+Transition\+Time} = false
+\begin{DoxyCompactList}\small\item\em Whether or not the a playlist\textquotesingle{}s volume transition time will get set to Music\+Player.\+Transition\+Time whenever it gets played by this music player. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_ab66b65a4940d0c9ef02ea3e744ef0dd9}\label{class_jumpvalley_1_1_music_1_1_music_player_ab66b65a4940d0c9ef02ea3e744ef0dd9} 
+double {\bfseries Transition\+Time} = 0
+\begin{DoxyCompactList}\small\item\em Playlists played by this music player will have their volume transition time set to the value of this variable whenever Override\+Transition\+Time is set to true,. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_music_player_a9293373e67ab8a66f0066a6dd7e252c0}{Refresh\+Playback}} ()
+\begin{DoxyCompactList}\small\item\em Updates the playback status of the music. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_ac6da4d803c89e22ea2a2d02b68c117dc}\label{class_jumpvalley_1_1_music_1_1_music_player_ac6da4d803c89e22ea2a2d02b68c117dc} 
+void {\bfseries On\+Music\+Player\+Song\+Changed} (\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song_changed_args}{Song\+Changed\+Args}} args)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_a07c76d088c5ddad2f762fc61c3d1acbe}\label{class_jumpvalley_1_1_music_1_1_music_player_a07c76d088c5ddad2f762fc61c3d1acbe} 
+\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_playlist}{Playlist}} {\bfseries Current\+Playlist}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The playlist that\textquotesingle{}s currently being played by the Music\+Player. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_aaf4daa1993840f8e527e0980f7e5ee1a}\label{class_jumpvalley_1_1_music_1_1_music_player_aaf4daa1993840f8e527e0980f7e5ee1a} 
+\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_playlist}{Playlist}} {\bfseries Primary\+Playlist}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Music\+Player\textquotesingle{}s primary playlist. If set, this playlist will be played whenever Is\+Playing is set to true. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_a40f4e8b85ddd90437bb387b384f71e8d}\label{class_jumpvalley_1_1_music_1_1_music_player_a40f4e8b85ddd90437bb387b384f71e8d} 
+bool {\bfseries Is\+Playing}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the playlist is currently playing any music ~\newline
+ Setting this value to false will stop the music (with the fade transition). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_a00976d1da90bfdd4a977154761dcce5e}\label{class_jumpvalley_1_1_music_1_1_music_player_a00976d1da90bfdd4a977154761dcce5e} 
+Event\+Handler$<$ \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song_changed_args}{Song\+Changed\+Args}} $>$ {\bfseries Song\+Changed}
+\begin{DoxyCompactList}\small\item\em Event that\textquotesingle{}s raised when the song currently being played by this instance of Music\+Player changes. ~\newline
+ This event is meant to wrap individual raisings of Playlist\textquotesingle{}s Song\+Changed event in order to make it easier for developers to adapt to song changes regardless of what Playlist is being played. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Plays music that is split into playlists (see Playlist) ~\newline
+ This class applies a fade transition when the user wants to switch between playlists. ~\newline
+ Each instance of a Music\+Player can only play one song at a time at most. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_music_1_1_music_player_a9293373e67ab8a66f0066a6dd7e252c0}\label{class_jumpvalley_1_1_music_1_1_music_player_a9293373e67ab8a66f0066a6dd7e252c0} 
+\index{Jumpvalley.Music.MusicPlayer@{Jumpvalley.Music.MusicPlayer}!RefreshPlayback@{RefreshPlayback}}
+\index{RefreshPlayback@{RefreshPlayback}!Jumpvalley.Music.MusicPlayer@{Jumpvalley.Music.MusicPlayer}}
+\doxysubsubsection{\texorpdfstring{RefreshPlayback()}{RefreshPlayback()}}
+{\footnotesize\ttfamily virtual void Jumpvalley.\+Music.\+Music\+Player.\+Refresh\+Playback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Updates the playback status of the music. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_music_zone_player_a74844c9a8ef0710658d3ae3304f641f3}{Jumpvalley.\+Music.\+Music\+Zone\+Player}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Music/Music\+Player.\+cs\end{DoxyCompactItemize}
