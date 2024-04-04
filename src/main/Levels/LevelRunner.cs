@@ -1,11 +1,14 @@
-﻿using Jumpvalley.Players;
+﻿using Godot;
+
+using Jumpvalley.Players;
 
 namespace Jumpvalley.Levels
 {
     /// <summary>
     /// Class responsible for running and stopping levels.
+    /// This is intended to be a base class where subclasses handle running levels in their own way.
     /// </summary>
-    public partial class LevelRunner
+    public partial class LevelRunner : Node
     {
         /// <summary>
         /// The Player instance that this <see cref="LevelRunner"/> is running under.
@@ -32,6 +35,8 @@ namespace Jumpvalley.Levels
         /// <param name="player">The player instance to run this level runner under</param>
         public LevelRunner(Player player)
         {
+            Name = $"{nameof(LevelRunner)}_{GetHashCode()}";
+
             CurrentPlayer = player;
         }
     }
