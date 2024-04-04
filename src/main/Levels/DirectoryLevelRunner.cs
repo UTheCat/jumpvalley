@@ -19,7 +19,16 @@ namespace Jumpvalley.Levels
         /// <param name="directoryPath">Path to the directory containing the levels</param>
         public DirectoryLevelRunner(Player player, string directoryPath) : base(player)
         {
-            
+            DirectoryPath = directoryPath;
+        }
+
+        /// <summary>
+        /// Finds a level package in the directory by it's user-defined ID.
+        /// </summary>
+        /// <returns></returns>
+        public LevelPackage FindLevelById(string levelId)
+        {
+            return null;
         }
     }
 }
