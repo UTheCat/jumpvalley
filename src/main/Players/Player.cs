@@ -8,7 +8,6 @@ using Jumpvalley.Players.Camera;
 using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
-using Jumpvalley.Testing;
 
 namespace Jumpvalley.Players
 {
@@ -236,9 +235,12 @@ namespace Jumpvalley.Players
 
             for (int i = 0; i < Disposables.Count; i++)
             {
-                Disposables[i].Dispose();
+                IDisposable obj = Disposables[i];
+                Console.WriteLine($"[{nameof(Player)}] Now disposing an instance of {obj.GetType()}");
+                obj.Dispose();
             }
-
+            
+            Console.WriteLine($"[{nameof(Player)}] Finished disposing objects");
             //GC.SuppressFinalize(this);
         }
     }
