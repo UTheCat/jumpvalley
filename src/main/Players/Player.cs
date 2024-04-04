@@ -109,10 +109,6 @@ namespace Jumpvalley.Players
 
             CurrentMusicPlayer.IsPlaying = true;
 
-            //Testing.MusicPlayerTest mpTest = new Testing.MusicPlayerTest(CurrentMusicPlayer);
-            //RootNode.AddChild(mpTest);
-            //mpTest.StartTest();
-
             MeshSpinner spinner = new MeshSpinner(RootNode.GetNode<MeshInstance3D>("Lobby/SpinningMesh"), 1);
             RootNode.AddChild(spinner);
 
@@ -125,17 +121,6 @@ namespace Jumpvalley.Players
             Mover.Speed = 8f;
 
             Mover.Body = Character;
-
-            // Allow the player to climb stuff
-            /*
-            Climber climber = new Climber(Character.GetNode<CollisionShape3D>("TorsoCollision"));
-            climber.OnCanClimbChanged += (object _o, bool canClimb) =>
-            {
-                Mover.IsClimbing = canClimb;
-
-                Console.WriteLine("Climbing: " + canClimb);
-            };
-            */
 
             Camera.FocusedNode = Character.GetNode<Node3D>("Head");
             Camera.Camera = RootNode.GetNode<Camera3D>("Camera");
@@ -153,8 +138,7 @@ namespace Jumpvalley.Players
             RootNode.AddChild(rotationLockControl);
 
             Mover.IsRunning = true;
-
-            //RootNode.AddChild(climber);
+            
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
@@ -178,56 +162,6 @@ namespace Jumpvalley.Players
             Disposables.Add(levelLoadingTest);
             levelLoadingTest.Start();
 
-            // test OffsetStopwatch
-            /*
-            Task.Run(() =>
-            {
-                TimeSpan offset = TimeSpan.FromSeconds(51.324);
-                OffsetStopwatch testStopwatch = new OffsetStopwatch(offset);
-                Console.WriteLine($"testing OffsetStopwatch with an offset of {offset.TotalSeconds} seconds");
-
-                Console.WriteLine($"current time: {testStopwatch.OffsetElapsedTime.TotalSeconds} seconds");
-                testStopwatch.Start();
-                for (int i = 0; i < 100; i++)
-                {
-                    Console.WriteLine($"current time: {testStopwatch.OffsetElapsedTime.TotalSeconds} seconds");
-                    System.Threading.Thread.Sleep(50);
-                }
-                testStopwatch.Stop();
-            });
-            */
-
-            // test RaycastSweep
-            /*
-            RaycastSweep raycastSweep = new RaycastSweep(8, new Vector3(-0.5f, 0f, -0.251f), new Vector3(0.5f, 0f, -0.251f), -1f);
-            RaycastSweepTest raycastSweepTest = new RaycastSweepTest(raycastSweep, Character, RaycastSweep.SweepOrder.CenterLeftRight);
-            PrimaryGui.AddChild(raycastSweepTest.RaycastResultLabel);
-            RootNode.AddChild(raycastSweepTest);
-            Disposables.Add(raycastSweep);
-            */
-
-            /*
-            void IncrementNumRaycasts()
-            {
-                Console.WriteLine("Adding a raycast");
-                raycastSweep.NumRaycasts += 1;
-                raycastSweep.UpdateRaycastLayout();
-            }
-
-            Task.Run(() => {
-                Console.WriteLine("Starting with 3 raycasts. Increasing to 12 raycasts in 5 seconds.");
-                System.Threading.Thread.Sleep(5000);
-                for (int i = 0; i < 9; i++)
-                {
-                    // Workaround due to Godot not letting you add nodes to scene tree in a background thread at the moment:
-                    // https://docs.godotengine.org/en/stable/classes/class_callable.html#class-callable-method-call-deferred
-                    // https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_differences.html#doc-c-sharp-differences
-                    Callable.From(IncrementNumRaycasts).CallDeferred();
-                    System.Threading.Thread.Sleep(500);
-                }
-            });
-            */
-
             RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
             fpsLimiter.MinFpsDifference = 0;
             fpsLimiter.IsRunning = true;
@@ -248,38 +182,8 @@ namespace Jumpvalley.Players
                 Disposables.Add(primaryLevelMenu);
             }
 
-            /*
-            SpeedrunTimeFormatter speedrunTimeFormatter = new SpeedrunTimeFormatter();
-
-            void TestSpeedrunTimeFormatter(double elapsedTime)
-            {
-                speedrunTimeFormatter.ElapsedTime = elapsedTime;
-                Console.WriteLine(speedrunTimeFormatter.GetSpeedrunFormatTime(3));
-            }
-
-            TestSpeedrunTimeFormatter(0);
-            TestSpeedrunTimeFormatter(0.0001);
-            TestSpeedrunTimeFormatter(0.001);
-            TestSpeedrunTimeFormatter(0.005);
-            TestSpeedrunTimeFormatter(0.05);
-            TestSpeedrunTimeFormatter(0.5);
-            TestSpeedrunTimeFormatter(5);
-            TestSpeedrunTimeFormatter(6.1);
-            TestSpeedrunTimeFormatter(51.5);
-            TestSpeedrunTimeFormatter(63.3);
-            TestSpeedrunTimeFormatter(63.999);
-            TestSpeedrunTimeFormatter(68.34);
-            TestSpeedrunTimeFormatter(68.345);
-            TestSpeedrunTimeFormatter(68.828);
-            TestSpeedrunTimeFormatter(351.999);
-            TestSpeedrunTimeFormatter(652.999);
-            TestSpeedrunTimeFormatter(6339.999);
-            TestSpeedrunTimeFormatter(59163.999);
-            */
-
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
-            //Disposables.Add(climber);
             Disposables.Add(Mover);
             Disposables.Add(Camera);
             Disposables.Add(bottomBar);
