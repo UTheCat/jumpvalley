@@ -21,6 +21,7 @@ namespace Jumpvalley.Players
             Name = $"{nameof(UserLevelRunner)}_{GetHashCode()}";
 
             LevelTimerOperator = levelTimerOperator;
+            SetProcess(true);
         }
 
         public new void Dispose()

@@ -172,6 +172,7 @@ namespace Jumpvalley.Players
 
             // Set up level-running stuff
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
+            RootNode.AddChild(levelRunner);
 
             // Load the lobby
             LevelPackage lobby = new LevelPackage("res://scenes/lobby", levelRunner);

@@ -34,6 +34,8 @@ namespace Jumpvalley
 		// This root node will be removed from the tree once the program exits
 		public override void _ExitTree()
 		{
+			Console.WriteLine("Now exiting...");
+
 			player.Dispose();
 			player = null;
 
