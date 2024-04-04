@@ -1,0 +1,112 @@
+\doxysection{Jumpvalley.\+Levels.\+Interactives.\+Interactive Class Reference}
+\hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive}{}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive}\index{Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}}
+
+
+The base class for all Interactive types in \doxylink{namespace_jumpvalley}{Jumpvalley}.  
+
+
+Inheritance diagram for Jumpvalley.\+Levels.\+Interactives.\+Interactive\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.636364cm]{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a80e6287c6733c4cc617843cfe6d6c731}{Interactive}} (\mbox{\hyperlink{class_jumpvalley_1_1_timing_1_1_offset_stopwatch}{Offset\+Stopwatch}} clock)
+\begin{DoxyCompactList}\small\item\em Creates a new instance of Interactive that will run on the given Offset\+Stopwatch. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a5474acb853f7f7decc6ea09d67d2eb26}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Interactive initialization method that initializes the interactive after the constructor runs, in case such method is needed. ~\newline
+ By default, this method is only called once after the object\textquotesingle{}s constructor runs. Initialize() typically shouldn\textquotesingle{}t be called more than once for the same Interactive instance. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a770b35a0840df461a526f05d89e48e2b}{Start}} ()
+\begin{DoxyCompactList}\small\item\em The interactive\textquotesingle{}s start method. This method is called every time the user starts or restarts the interactive, and it\textquotesingle{}s a great place to put code that will be run after initialization, but just before the interactive starts. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_ad57e3916cf971bdb2438dabcb05fa1f7}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em The interactive\textquotesingle{}s stop method. This method is called right after the user stops or exits the interactive. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a1c9a84f5d6b3b8ee9d58adfd15801680}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a1c9a84f5d6b3b8ee9d58adfd15801680} 
+new void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disposes of this Interactive instance. This method is a great place to free up resources being used by the interactive instance, especially right before the interactive itself gets freed from memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_ac0dd326ecebb7c758621473b16f10d10}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_ac0dd326ecebb7c758621473b16f10d10} 
+bool {\bfseries Is\+Initialized}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not Initialize has been called once already. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_ae5880db9d79413c894e149456df2b7b5}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_ae5880db9d79413c894e149456df2b7b5} 
+bool {\bfseries Is\+Running}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the interactive is running (e.\+g. after Start has been called). \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a1572d151283878c7a5756584bc9dd439}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a1572d151283878c7a5756584bc9dd439} 
+\mbox{\hyperlink{class_jumpvalley_1_1_timing_1_1_offset_stopwatch}{Offset\+Stopwatch}} {\bfseries Clock}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Offset\+Stopwatch that the Interactive will run on. This stopwatch can be used to synchronize the Interactive\textquotesingle{}s various operations to whatever the current time on this stopwatch is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The base class for all Interactive types in \doxylink{namespace_jumpvalley}{Jumpvalley}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a80e6287c6733c4cc617843cfe6d6c731}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a80e6287c6733c4cc617843cfe6d6c731} 
+\index{Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}!Interactive@{Interactive}}
+\index{Interactive@{Interactive}!Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}}
+\doxysubsubsection{\texorpdfstring{Interactive()}{Interactive()}}
+{\footnotesize\ttfamily Jumpvalley.\+Levels.\+Interactives.\+Interactive.\+Interactive (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jumpvalley_1_1_timing_1_1_offset_stopwatch}{Offset\+Stopwatch}}}]{clock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new instance of Interactive that will run on the given Offset\+Stopwatch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em clock} & The Stopwatch that the Interactive will run on\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a5474acb853f7f7decc6ea09d67d2eb26}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a5474acb853f7f7decc6ea09d67d2eb26} 
+\index{Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily virtual void Jumpvalley.\+Levels.\+Interactives.\+Interactive.\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Interactive initialization method that initializes the interactive after the constructor runs, in case such method is needed. ~\newline
+ By default, this method is only called once after the object\textquotesingle{}s constructor runs. Initialize() typically shouldn\textquotesingle{}t be called more than once for the same Interactive instance. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_aeb508b09aeb7395cd00923ebc5cfd205}{Jumpvalley.\+Levels.\+Level}}.
+
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a770b35a0840df461a526f05d89e48e2b}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a770b35a0840df461a526f05d89e48e2b} 
+\index{Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}!Start@{Start}}
+\index{Start@{Start}!Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily virtual void Jumpvalley.\+Levels.\+Interactives.\+Interactive.\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The interactive\textquotesingle{}s start method. This method is called every time the user starts or restarts the interactive, and it\textquotesingle{}s a great place to put code that will be run after initialization, but just before the interactive starts. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_mechanics_1_1_spinner_a6ba4392c19c413303a541fc853170afa}{Jumpvalley.\+Levels.\+Interactives.\+Mechanics.\+Spinner}}, and \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_a8398fdd7cc8243468c51ce466c46aea3}{Jumpvalley.\+Levels.\+Level}}.
+
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_ad57e3916cf971bdb2438dabcb05fa1f7}\label{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_ad57e3916cf971bdb2438dabcb05fa1f7} 
+\index{Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}!Stop@{Stop}}
+\index{Stop@{Stop}!Jumpvalley.Levels.Interactives.Interactive@{Jumpvalley.Levels.Interactives.Interactive}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily virtual void Jumpvalley.\+Levels.\+Interactives.\+Interactive.\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The interactive\textquotesingle{}s stop method. This method is called right after the user stops or exits the interactive. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_mechanics_1_1_spinner_aaa005b0c855d276d382d26928becf7e5}{Jumpvalley.\+Levels.\+Interactives.\+Mechanics.\+Spinner}}, and \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_a5cf3c11ceb5ec6ae9e58812fee2ee178}{Jumpvalley.\+Levels.\+Level}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Levels/\+Interactives/Interactive.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,212 @@
+\doxysection{Jumpvalley.\+Levels.\+Level Class Reference}
+\hypertarget{class_jumpvalley_1_1_levels_1_1_level}{}\label{class_jumpvalley_1_1_levels_1_1_level}\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}
+
+
+This class represents a level that\textquotesingle{}s playable in \doxylink{namespace_jumpvalley}{Jumpvalley}. ~\newline
+ Each level contains four primary components\+: interactives, music, static objects, and start point. More details can be found on \doxylink{namespace_jumpvalley}{Jumpvalley}\textquotesingle{}s wiki article on Level Layout
+
+.  
+
+
+Inheritance diagram for Jumpvalley.\+Levels.\+Level\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.178988cm]{class_jumpvalley_1_1_levels_1_1_level}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377e}{Run\+State}} \{ \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eac23e2b09ebe6bf4cb5e2a9abe85c0be2}{Stopped}} = 0
+, \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eae99180abf47a8b3a856e0bcb2656990a}{Paused}} = 1
+, \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eac9dbb2b7c84159b632d71e512eba8428}{Playing}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Indicates the current run state of the level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_ab0cf1e847e11b56424ed4cea555d28ed}{Level}} (\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_info_file}{Level\+Info\+File}} info, Node root, Time\+Span last\+Elapsed\+Time)
+\begin{DoxyCompactList}\small\item\em Constructs an instance of Level to represent a level corresponding to its info file. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_aeb508b09aeb7395cd00923ebc5cfd205}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Level initialization method that initializes the level after the constructor runs, in case such method is needed. ~\newline
+ By default, this method is only called once after the object\textquotesingle{}s constructor runs. Initialize() typically shouldn\textquotesingle{}t be called more than once for the same Level instance. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_a8398fdd7cc8243468c51ce466c46aea3}{Start}} ()
+\begin{DoxyCompactList}\small\item\em The level\textquotesingle{}s start method. This method is called every time the user starts or restarts the level, and it\textquotesingle{}s a great place to put code that will be run after initialization, but just before the level starts. \end{DoxyCompactList}\item 
+override void \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_a5cf3c11ceb5ec6ae9e58812fee2ee178}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em The level\textquotesingle{}s stop method. This method is called right after the user stops or exits the level. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a62b87309e06ed5c6e939dfdb3df82413}\label{class_jumpvalley_1_1_levels_1_1_level_a62b87309e06ed5c6e939dfdb3df82413} 
+new void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disposes of this Level instance. This method is a great place to free up resources being used by the level instance, especially right before the level itself gets freed from memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive}{Jumpvalley.\+Levels.\+Interactives.\+Interactive}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a80e6287c6733c4cc617843cfe6d6c731}{Interactive}} (\mbox{\hyperlink{class_jumpvalley_1_1_timing_1_1_offset_stopwatch}{Offset\+Stopwatch}} clock)
+\begin{DoxyCompactList}\small\item\em Creates a new instance of Interactive that will run on the given Offset\+Stopwatch. \end{DoxyCompactList}\item 
+new void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disposes of this Interactive instance. This method is a great place to free up resources being used by the interactive instance, especially right before the interactive itself gets freed from memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a9946e13ae53be1d8922fe834ed106dce}\label{class_jumpvalley_1_1_levels_1_1_level_a9946e13ae53be1d8922fe834ed106dce} 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_package}{Level\+Package}} {\bfseries Package} = null
+\begin{DoxyCompactList}\small\item\em The Level\+Package that this Level instance belongs to. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_aeb59d8dcfecd3ea882243b85a8caa4a3}\label{class_jumpvalley_1_1_levels_1_1_level_aeb59d8dcfecd3ea882243b85a8caa4a3} 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_runner}{Level\+Runner}} {\bfseries Runner} = null
+\begin{DoxyCompactList}\small\item\em Set externally to help the level\textquotesingle{}s code access whatever object is running the level itself. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_ae621856d6effd86ee3dfb6b71ffa2bc5}\label{class_jumpvalley_1_1_levels_1_1_level_ae621856d6effd86ee3dfb6b71ffa2bc5} 
+static readonly string {\bfseries INTERACTIVES\+\_\+\+NODE\+\_\+\+NAME} = "{}Interactives"{}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a64677264b89055ae8c151cb7ad41d244}\label{class_jumpvalley_1_1_levels_1_1_level_a64677264b89055ae8c151cb7ad41d244} 
+static readonly string {\bfseries MUSIC\+\_\+\+NODE\+\_\+\+NAME} = "{}Music"{}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a9cb96df8e299c1768dc384f4fc9d4226}\label{class_jumpvalley_1_1_levels_1_1_level_a9cb96df8e299c1768dc384f4fc9d4226} 
+static readonly string {\bfseries STATIC\+\_\+\+OBJECTS\+\_\+\+NODE\+\_\+\+NAME} = "{}Static\+Objects"{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_afde70b84ba0a1725d0a6f7acbe72e1f1}\label{class_jumpvalley_1_1_levels_1_1_level_afde70b84ba0a1725d0a6f7acbe72e1f1} 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_info_file}{Level\+Info\+File}} {\bfseries Info}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Information about the level that\textquotesingle{}s specified in the level\textquotesingle{}s info file. This includes things like level ID and full name. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_aad7ee181cd4f12a896f24d6cf91126fd}\label{class_jumpvalley_1_1_levels_1_1_level_aad7ee181cd4f12a896f24d6cf91126fd} 
+Node {\bfseries Root\+Node}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The root node of the level. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_af1fa70fc7e6fe4fc96bd5ae8ec9f8a62}\label{class_jumpvalley_1_1_levels_1_1_level_af1fa70fc7e6fe4fc96bd5ae8ec9f8a62} 
+Node {\bfseries Interactives\+Node}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The node containing the level\textquotesingle{}s interactives. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_ac0a3882221fb5adfa079914adc6fe2b0}\label{class_jumpvalley_1_1_levels_1_1_level_ac0a3882221fb5adfa079914adc6fe2b0} 
+List$<$ \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_node}{Interactive\+Node}} $>$ {\bfseries Interactives}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The list of the level\textquotesingle{}s interactives as instances of the Interactive\+Node class. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_ab9e01b9804977aa3642e2f66c3d9c584}\label{class_jumpvalley_1_1_levels_1_1_level_ab9e01b9804977aa3642e2f66c3d9c584} 
+Node {\bfseries Music}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The node containing the level\textquotesingle{}s music. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a97707cf5592f5d1caa8be90c26f49123}\label{class_jumpvalley_1_1_levels_1_1_level_a97707cf5592f5d1caa8be90c26f49123} 
+List$<$ \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_music_zone}{Music\+Zone}} $>$ {\bfseries Music\+Zones}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The level\textquotesingle{}s music zones. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a9f0ca851ae43d185b35afd250bdc8e1a}\label{class_jumpvalley_1_1_levels_1_1_level_a9f0ca851ae43d185b35afd250bdc8e1a} 
+Node {\bfseries Static\+Objects}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The node containing the level\textquotesingle{}s static objects. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a944caf987a7950049ffa462901783da2}\label{class_jumpvalley_1_1_levels_1_1_level_a944caf987a7950049ffa462901783da2} 
+Node3D {\bfseries Start\+Point}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Node3D that defines the position and rotation that the player\textquotesingle{}s character will be set to when they play the level from the very beginning. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a0d13f41d82a27f7db99cb0eb828f3633}\label{class_jumpvalley_1_1_levels_1_1_level_a0d13f41d82a27f7db99cb0eb828f3633} 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377e}{Run\+State}} {\bfseries Current\+Run\+State}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The level\textquotesingle{}s current run state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties inherited from \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive}{Jumpvalley.\+Levels.\+Interactives.\+Interactive}}}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries Is\+Initialized}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not Initialize has been called once already. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Running}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the interactive is running (e.\+g. after Start has been called). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_timing_1_1_offset_stopwatch}{Offset\+Stopwatch}} {\bfseries Clock}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The Offset\+Stopwatch that the Interactive will run on. This stopwatch can be used to synchronize the Interactive\textquotesingle{}s various operations to whatever the current time on this stopwatch is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents a level that\textquotesingle{}s playable in \doxylink{namespace_jumpvalley}{Jumpvalley}. ~\newline
+ Each level contains four primary components\+: interactives, music, static objects, and start point. More details can be found on \doxylink{namespace_jumpvalley}{Jumpvalley}\textquotesingle{}s wiki article on Level Layout
+
+. 
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377e}\label{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377e} 
+\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}!RunState@{RunState}}
+\index{RunState@{RunState}!Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}
+\doxysubsubsection{\texorpdfstring{RunState}{RunState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377e}{Jumpvalley.\+Levels.\+Level.\+Run\+State}}}
+
+
+
+Indicates the current run state of the level. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Stopped@{Stopped}!Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}!Stopped@{Stopped}}}\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eac23e2b09ebe6bf4cb5e2a9abe85c0be2}\label{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eac23e2b09ebe6bf4cb5e2a9abe85c0be2} 
+Stopped&Indicates that the level is not running. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Paused@{Paused}!Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}!Paused@{Paused}}}\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eae99180abf47a8b3a856e0bcb2656990a}\label{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eae99180abf47a8b3a856e0bcb2656990a} 
+Paused&Indicates that the level is still running (in the background) but is paused. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Playing@{Playing}!Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}!Playing@{Playing}}}\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eac9dbb2b7c84159b632d71e512eba8428}\label{class_jumpvalley_1_1_levels_1_1_level_abe6102ca754c8caa2f012d8c4ee0377eac9dbb2b7c84159b632d71e512eba8428} 
+Playing&Indicates that the level is actively running and not paused. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_ab0cf1e847e11b56424ed4cea555d28ed}\label{class_jumpvalley_1_1_levels_1_1_level_ab0cf1e847e11b56424ed4cea555d28ed} 
+\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}!Level@{Level}}
+\index{Level@{Level}!Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}
+\doxysubsubsection{\texorpdfstring{Level()}{Level()}}
+{\footnotesize\ttfamily Jumpvalley.\+Levels.\+Level.\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_info_file}{Level\+Info\+File}}}]{info,  }\item[{Node}]{root,  }\item[{Time\+Span}]{last\+Elapsed\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an instance of Level to represent a level corresponding to its info file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & Info about the level\\
+\hline
+{\em node} & The root node of the level to represent\\
+\hline
+{\em last\+Elapsed\+Time} & The most recent amount of elapsed running time that the level left off of\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_aeb508b09aeb7395cd00923ebc5cfd205}\label{class_jumpvalley_1_1_levels_1_1_level_aeb508b09aeb7395cd00923ebc5cfd205} 
+\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily override void Jumpvalley.\+Levels.\+Level.\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Level initialization method that initializes the level after the constructor runs, in case such method is needed. ~\newline
+ By default, this method is only called once after the object\textquotesingle{}s constructor runs. Initialize() typically shouldn\textquotesingle{}t be called more than once for the same Level instance. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a5474acb853f7f7decc6ea09d67d2eb26}{Jumpvalley.\+Levels.\+Interactives.\+Interactive}}.
+
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a8398fdd7cc8243468c51ce466c46aea3}\label{class_jumpvalley_1_1_levels_1_1_level_a8398fdd7cc8243468c51ce466c46aea3} 
+\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}!Start@{Start}}
+\index{Start@{Start}!Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily override void Jumpvalley.\+Levels.\+Level.\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The level\textquotesingle{}s start method. This method is called every time the user starts or restarts the level, and it\textquotesingle{}s a great place to put code that will be run after initialization, but just before the level starts. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_a770b35a0840df461a526f05d89e48e2b}{Jumpvalley.\+Levels.\+Interactives.\+Interactive}}.
+
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_level_a5cf3c11ceb5ec6ae9e58812fee2ee178}\label{class_jumpvalley_1_1_levels_1_1_level_a5cf3c11ceb5ec6ae9e58812fee2ee178} 
+\index{Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}!Stop@{Stop}}
+\index{Stop@{Stop}!Jumpvalley.Levels.Level@{Jumpvalley.Levels.Level}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily override void Jumpvalley.\+Levels.\+Level.\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+The level\textquotesingle{}s stop method. This method is called right after the user stops or exits the level. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_interactives_1_1_interactive_ad57e3916cf971bdb2438dabcb05fa1f7}{Jumpvalley.\+Levels.\+Interactives.\+Interactive}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Levels/Level.\+cs\end{DoxyCompactItemize}

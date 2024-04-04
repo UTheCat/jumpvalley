@@ -1,0 +1,65 @@
+\doxysection{Jumpvalley.\+Players.\+Controls.\+Render\+Framerate\+Limiter Class Reference}
+\hypertarget{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter}{}\label{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter}\index{Jumpvalley.Players.Controls.RenderFramerateLimiter@{Jumpvalley.Players.Controls.RenderFramerateLimiter}}
+
+
+Limits how many times the game screen is rendered within a given time interval ~\newline
+ Currently, the only option is to cap rendering framerate slightly below the rendering refresh rate. This is to test lowering input delay while maintaining smooth rendering with V-\/sync and Free-\/\+Sync enabled.  
+
+
+Inheritance diagram for Jumpvalley.\+Players.\+Controls.\+Render\+Framerate\+Limiter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.739130cm]{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_acd8e66b2d24d589de7a30400f7ef8089}\label{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_acd8e66b2d24d589de7a30400f7ef8089} 
+{\bfseries Render\+Framerate\+Limiter} ()
+\begin{DoxyCompactList}\small\item\em Creates and enables a new Render\+Framerate\+Limiter \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_af64ab734a003da04e11c19a1695afa91}\label{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_af64ab734a003da04e11c19a1695afa91} 
+new void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Disables and disposes of this Render\+Framerate\+Limiter \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_a3b88debd703cf548147764c4d64ba3ba}\label{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_a3b88debd703cf548147764c4d64ba3ba} 
+override void {\bfseries \+\_\+\+Process} (double delta)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_acdedf68fab929d1bba4424837fd0490d}\label{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_acdedf68fab929d1bba4424837fd0490d} 
+float {\bfseries Min\+Fps\+Difference} = 0.\+5f
+\begin{DoxyCompactList}\small\item\em The minimum difference between the maximum rendering frames-\/per-\/second and the monitor\textquotesingle{}s refresh rate. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_ad7eea2177f0882a3ff14e67e7befbc98}\label{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_ad7eea2177f0882a3ff14e67e7befbc98} 
+bool {\bfseries \+\_\+is\+Running} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_ab4d4ca1cf1011abb5251387f568a47f6}{Max\+Fps}} = 60\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The maximum difference between the maximum rendering frames-\/per-\/second and the monitor\textquotesingle{}s refresh rate. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_a8de5c3fc5a4eacb546ef320363146ec4}\label{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_a8de5c3fc5a4eacb546ef320363146ec4} 
+bool {\bfseries Is\+Running}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not this Render\+Framerate\+Limiter should be updating the maximum rendering frames-\/per-\/second at the moment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Limits how many times the game screen is rendered within a given time interval ~\newline
+ Currently, the only option is to cap rendering framerate slightly below the rendering refresh rate. This is to test lowering input delay while maintaining smooth rendering with V-\/sync and Free-\/\+Sync enabled. 
+
+\doxysubsection{Property Documentation}
+\Hypertarget{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_ab4d4ca1cf1011abb5251387f568a47f6}\label{class_jumpvalley_1_1_players_1_1_controls_1_1_render_framerate_limiter_ab4d4ca1cf1011abb5251387f568a47f6} 
+\index{Jumpvalley.Players.Controls.RenderFramerateLimiter@{Jumpvalley.Players.Controls.RenderFramerateLimiter}!MaxFps@{MaxFps}}
+\index{MaxFps@{MaxFps}!Jumpvalley.Players.Controls.RenderFramerateLimiter@{Jumpvalley.Players.Controls.RenderFramerateLimiter}}
+\doxysubsubsection{\texorpdfstring{MaxFps}{MaxFps}}
+{\footnotesize\ttfamily int Jumpvalley.\+Players.\+Controls.\+Render\+Framerate\+Limiter.\+Max\+Fps = 60\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The maximum difference between the maximum rendering frames-\/per-\/second and the monitor\textquotesingle{}s refresh rate. 
+
+The current maximum framerate enforced by this Render\+Framerate\+Limiter 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Players/\+Controls/Render\+Framerate\+Limiter.\+cs\end{DoxyCompactItemize}

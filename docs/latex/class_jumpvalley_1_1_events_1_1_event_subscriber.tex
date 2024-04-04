@@ -1,0 +1,71 @@
+\doxysection{Jumpvalley.\+Events.\+Event\+Subscriber\texorpdfstring{$<$}{<} TEvent\+Args \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_jumpvalley_1_1_events_1_1_event_subscriber}{}\label{class_jumpvalley_1_1_events_1_1_event_subscriber}\index{Jumpvalley.Events.EventSubscriber$<$ TEventArgs $>$@{Jumpvalley.Events.EventSubscriber$<$ TEventArgs $>$}}
+
+
+Utility class for safely connecting and disconnecting functions from events. ~\newline
+ It helps to prevent duplicate event connections, and it checks if the event connection is active before disconnecting. ~\newline
+ The implementation of this class is currently unfinished.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_events_1_1_event_subscriber_a6cc9917094a79038104fa97e5a693330}\label{class_jumpvalley_1_1_events_1_1_event_subscriber_a6cc9917094a79038104fa97e5a693330} 
+{\bfseries Event\+Subscriber} (Event\+Handler$<$ TEvent\+Args $>$ callback)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Event\+Handler$<$ TEvent\+Args $>$ \mbox{\hyperlink{class_jumpvalley_1_1_events_1_1_event_subscriber_abfe5ba410313530348404ea02bddcab8}{Callback}}
+\begin{DoxyCompactList}\small\item\em The callback that will get connected to the event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_events_1_1_event_subscriber_a6ec5c57e36e814ed92b4f10d336fb23a}\label{class_jumpvalley_1_1_events_1_1_event_subscriber_a6ec5c57e36e814ed92b4f10d336fb23a} 
+bool {\bfseries Is\+Connected}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not Callback is connected to Event. ~\newline
+ Setting this to true will connect the currently specified callback to the currently specified event. ~\newline
+ Setting this to false will disconnect the currently specified callback from the currently specified event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_events_1_1_event_subscriber_ad1bff89a278d138756643db303b0ec7e}\label{class_jumpvalley_1_1_events_1_1_event_subscriber_ad1bff89a278d138756643db303b0ec7e} 
+Event\+Handler$<$ TEvent\+Args $>$ {\bfseries Event}
+\begin{DoxyCompactList}\small\item\em The event that the event subscriber is connected to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility class for safely connecting and disconnecting functions from events. ~\newline
+ It helps to prevent duplicate event connections, and it checks if the event connection is active before disconnecting. ~\newline
+ The implementation of this class is currently unfinished. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TEvent\+Args} & The type of the event arguments\\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_jumpvalley_1_1_events_1_1_event_subscriber_abfe5ba410313530348404ea02bddcab8}\label{class_jumpvalley_1_1_events_1_1_event_subscriber_abfe5ba410313530348404ea02bddcab8} 
+\index{Jumpvalley.Events.EventSubscriber$<$ TEventArgs $>$@{Jumpvalley.Events.EventSubscriber$<$ TEventArgs $>$}!Callback@{Callback}}
+\index{Callback@{Callback}!Jumpvalley.Events.EventSubscriber$<$ TEventArgs $>$@{Jumpvalley.Events.EventSubscriber$<$ TEventArgs $>$}}
+\doxysubsubsection{\texorpdfstring{Callback}{Callback}}
+{\footnotesize\ttfamily Event\+Handler$<$TEvent\+Args$>$ \mbox{\hyperlink{class_jumpvalley_1_1_events_1_1_event_subscriber}{Jumpvalley.\+Events.\+Event\+Subscriber}}$<$ TEvent\+Args $>$.Callback}
+
+
+
+The callback that will get connected to the event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em o} & The object that the event call comes from\\
+\hline
+{\em e} & The event data\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Events/Event\+Subscriber.\+cs\end{DoxyCompactItemize}

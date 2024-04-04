@@ -1,0 +1,87 @@
+\doxysection{Jumpvalley.\+Levels.\+Directory\+Level\+Runner Class Reference}
+\hypertarget{class_jumpvalley_1_1_levels_1_1_directory_level_runner}{}\label{class_jumpvalley_1_1_levels_1_1_directory_level_runner}\index{Jumpvalley.Levels.DirectoryLevelRunner@{Jumpvalley.Levels.DirectoryLevelRunner}}
+
+
+Subclass of Level\+Runner that handles running levels located within a directory.  
+
+
+Inheritance diagram for Jumpvalley.\+Levels.\+Directory\+Level\+Runner\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_jumpvalley_1_1_levels_1_1_directory_level_runner}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_directory_level_runner_a9a0eb95be64fe4758b784d81b54e839f}{Directory\+Level\+Runner}} (\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_player}{Player}} player, string directory\+Path)
+\begin{DoxyCompactList}\small\item\em Creates a new Directory\+Level\+Runner \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_package}{Level\+Package}} \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_directory_level_runner_a9abd82d3590ace294429606a32bfb748}{Find\+Level\+By\+Id}} (string level\+Id)
+\begin{DoxyCompactList}\small\item\em Finds a level package in the directory by it\textquotesingle{}s user-\/defined ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_runner}{Jumpvalley.\+Levels.\+Level\+Runner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_runner_aaf29e577b34a5a4e056dfd87629a76ee}{Level\+Runner}} (\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_player}{Player}} player)
+\begin{DoxyCompactList}\small\item\em Creates a new instance of the game\textquotesingle{}s level runner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_directory_level_runner_a0847b22d6d7a811ffe834b62cb6b9767}\label{class_jumpvalley_1_1_levels_1_1_directory_level_runner_a0847b22d6d7a811ffe834b62cb6b9767} 
+string {\bfseries Directory\+Path}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em File path to the directory containing the levels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_runner}{Jumpvalley.\+Levels.\+Level\+Runner}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_player}{Player}} {\bfseries Current\+Player}
+\begin{DoxyCompactList}\small\item\em The Player instance that this Level\+Runner is running under. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_package}{Level\+Package}} {\bfseries Current\+Level\+Package}
+\begin{DoxyCompactList}\small\item\em The level package containing the level that the player is currently playing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_package}{Level\+Package}} {\bfseries Lobby}
+\begin{DoxyCompactList}\small\item\em The level package containing the level that\textquotesingle{}s acting as the game\textquotesingle{}s lobby. ~\newline
+ ~\newline
+ This is separate from Current\+Level so both the lobby and the level that the player is currently playing can run at the same time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Subclass of Level\+Runner that handles running levels located within a directory. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_directory_level_runner_a9a0eb95be64fe4758b784d81b54e839f}\label{class_jumpvalley_1_1_levels_1_1_directory_level_runner_a9a0eb95be64fe4758b784d81b54e839f} 
+\index{Jumpvalley.Levels.DirectoryLevelRunner@{Jumpvalley.Levels.DirectoryLevelRunner}!DirectoryLevelRunner@{DirectoryLevelRunner}}
+\index{DirectoryLevelRunner@{DirectoryLevelRunner}!Jumpvalley.Levels.DirectoryLevelRunner@{Jumpvalley.Levels.DirectoryLevelRunner}}
+\doxysubsubsection{\texorpdfstring{DirectoryLevelRunner()}{DirectoryLevelRunner()}}
+{\footnotesize\ttfamily Jumpvalley.\+Levels.\+Directory\+Level\+Runner.\+Directory\+Level\+Runner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jumpvalley_1_1_players_1_1_player}{Player}}}]{player,  }\item[{string}]{directory\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new Directory\+Level\+Runner 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & The player instance to run this level runner under\\
+\hline
+{\em directory\+Path} & Path to the directory containing the levels\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_levels_1_1_directory_level_runner_a9abd82d3590ace294429606a32bfb748}\label{class_jumpvalley_1_1_levels_1_1_directory_level_runner_a9abd82d3590ace294429606a32bfb748} 
+\index{Jumpvalley.Levels.DirectoryLevelRunner@{Jumpvalley.Levels.DirectoryLevelRunner}!FindLevelById@{FindLevelById}}
+\index{FindLevelById@{FindLevelById}!Jumpvalley.Levels.DirectoryLevelRunner@{Jumpvalley.Levels.DirectoryLevelRunner}}
+\doxysubsubsection{\texorpdfstring{FindLevelById()}{FindLevelById()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_jumpvalley_1_1_levels_1_1_level_package}{Level\+Package}} Jumpvalley.\+Levels.\+Directory\+Level\+Runner.\+Find\+Level\+By\+Id (\begin{DoxyParamCaption}\item[{string}]{level\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Finds a level package in the directory by it\textquotesingle{}s user-\/defined ID. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Levels/Directory\+Level\+Runner.\+cs\end{DoxyCompactItemize}

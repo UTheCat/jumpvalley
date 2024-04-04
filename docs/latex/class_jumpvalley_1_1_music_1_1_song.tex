@@ -1,0 +1,99 @@
+\doxysection{Jumpvalley.\+Music.\+Song Class Reference}
+\hypertarget{class_jumpvalley_1_1_music_1_1_song}{}\label{class_jumpvalley_1_1_music_1_1_song}\index{Jumpvalley.Music.Song@{Jumpvalley.Music.Song}}
+
+
+Represents a single song associated with a file, along with some metadata.  
+
+
+Inheritance diagram for Jumpvalley.\+Music.\+Song\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_jumpvalley_1_1_music_1_1_song}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_ad76c376e3484efd71a78b8497b7a3a57}\label{class_jumpvalley_1_1_music_1_1_song_ad76c376e3484efd71a78b8497b7a3a57} 
+{\bfseries Song} (string file\+Path, string name, string artists, string album)
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_afd072d2eeba7f710279a5cd0a2ce516d}\label{class_jumpvalley_1_1_music_1_1_song_afd072d2eeba7f710279a5cd0a2ce516d} 
+{\bfseries Song} (\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song_package}{Song\+Package}} package)
+\item 
+void \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song_a19e0452d71c416e17a6339920d3ef124}{Open\+Stream}} ()
+\begin{DoxyCompactList}\small\item\em Attempts to open up an Audio\+Stream for the given File\+Path \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_aa4e508d1d3eba70584cb1aa83ddfa2b1}\label{class_jumpvalley_1_1_music_1_1_song_aa4e508d1d3eba70584cb1aa83ddfa2b1} 
+void {\bfseries Close\+Stream} ()
+\begin{DoxyCompactList}\small\item\em Closes the Audio\+Stream associated with this Song instance. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song_a700690c40fe6b05bebb1eb7e47e6d560}{Get\+Attribution\+String}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an attribution string in the following format\+: ~\newline
+ \mbox{[}song artist(s)\mbox{]} -\/ \mbox{[}song name\mbox{]}. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_afcb703bcecacbe152d431eb5b574e230}\label{class_jumpvalley_1_1_music_1_1_song_afcb703bcecacbe152d431eb5b574e230} 
+void {\bfseries Dispose} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_a14a4d67f8b776f47dc85325f2f01c31b}\label{class_jumpvalley_1_1_music_1_1_song_a14a4d67f8b776f47dc85325f2f01c31b} 
+string {\bfseries File\+Path} = null
+\begin{DoxyCompactList}\small\item\em The file path to the song. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_a17780559ad93cb6bee5251a35a6967c5}\label{class_jumpvalley_1_1_music_1_1_song_a17780559ad93cb6bee5251a35a6967c5} 
+string {\bfseries Name} = null
+\begin{DoxyCompactList}\small\item\em The name of the song. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_ad8eaa43edc621b988abfcf4d42ccbc8f}\label{class_jumpvalley_1_1_music_1_1_song_ad8eaa43edc621b988abfcf4d42ccbc8f} 
+string {\bfseries Artists} = null
+\begin{DoxyCompactList}\small\item\em The artists that made the song. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_a219575420578875a1e7e0d8398de13e7}\label{class_jumpvalley_1_1_music_1_1_song_a219575420578875a1e7e0d8398de13e7} 
+string {\bfseries Album} = null
+\begin{DoxyCompactList}\small\item\em The album the song belongs to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_aa8b919c78e401f13ba6fe1c14d5cd392}\label{class_jumpvalley_1_1_music_1_1_song_aa8b919c78e401f13ba6fe1c14d5cd392} 
+Audio\+Stream {\bfseries Stream}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The actual audio stream that contains the sound data for playback by an Audio\+Stream\+Player \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_a1722cd1b5aaf46a03581aa908178edcd}\label{class_jumpvalley_1_1_music_1_1_song_a1722cd1b5aaf46a03581aa908178edcd} 
+bool {\bfseries Is\+Looping}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether or not the song is looping. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a single song associated with a file, along with some metadata. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_a700690c40fe6b05bebb1eb7e47e6d560}\label{class_jumpvalley_1_1_music_1_1_song_a700690c40fe6b05bebb1eb7e47e6d560} 
+\index{Jumpvalley.Music.Song@{Jumpvalley.Music.Song}!GetAttributionString@{GetAttributionString}}
+\index{GetAttributionString@{GetAttributionString}!Jumpvalley.Music.Song@{Jumpvalley.Music.Song}}
+\doxysubsubsection{\texorpdfstring{GetAttributionString()}{GetAttributionString()}}
+{\footnotesize\ttfamily string Jumpvalley.\+Music.\+Song.\+Get\+Attribution\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an attribution string in the following format\+: ~\newline
+ \mbox{[}song artist(s)\mbox{]} -\/ \mbox{[}song name\mbox{]}. 
+
+\begin{DoxyReturn}{Returns}
+The attribution string
+\end{DoxyReturn}
+\Hypertarget{class_jumpvalley_1_1_music_1_1_song_a19e0452d71c416e17a6339920d3ef124}\label{class_jumpvalley_1_1_music_1_1_song_a19e0452d71c416e17a6339920d3ef124} 
+\index{Jumpvalley.Music.Song@{Jumpvalley.Music.Song}!OpenStream@{OpenStream}}
+\index{OpenStream@{OpenStream}!Jumpvalley.Music.Song@{Jumpvalley.Music.Song}}
+\doxysubsubsection{\texorpdfstring{OpenStream()}{OpenStream()}}
+{\footnotesize\ttfamily void Jumpvalley.\+Music.\+Song.\+Open\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Attempts to open up an Audio\+Stream for the given File\+Path 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em File\+Not\+Found\+Exception} & Thrown when the file under the given File\+Path couldn\textquotesingle{}t be found or when the file path is invalid. \\
+\hline
+{\em Invalid\+Data\+Exception} & Thrown when the file was found, but the data format of the file is invalid. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Music/Song.\+cs\end{DoxyCompactItemize}

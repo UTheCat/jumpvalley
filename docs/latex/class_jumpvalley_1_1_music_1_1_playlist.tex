@@ -1,0 +1,145 @@
+\doxysection{Jumpvalley.\+Music.\+Playlist Class Reference}
+\hypertarget{class_jumpvalley_1_1_music_1_1_playlist}{}\label{class_jumpvalley_1_1_music_1_1_playlist}\index{Jumpvalley.Music.Playlist@{Jumpvalley.Music.Playlist}}
+
+
+Represents a musical playlist that can hold multiple Songs.  
+
+
+Inheritance diagram for Jumpvalley.\+Music.\+Playlist\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_jumpvalley_1_1_music_1_1_playlist}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_playlist_a855ff4f32fb3c9ae8d91f7f5f41de87f}{Add}} (\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song}{Song}} s)
+\begin{DoxyCompactList}\small\item\em Adds a song to the playlist. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_playlist_a36364e47657e549acac0682c927122c3}{Remove}} (\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song}{Song}} s)
+\begin{DoxyCompactList}\small\item\em Removes a song from the playlist. ~\newline
+ ~\newline
+ If the song that gets removed is being played, the playlist will move onto the next song if there are still songs in the playlist after removal, or the playlist will stop immediately. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a6b20542e4e9b5859c813a0251581e9b0}\label{class_jumpvalley_1_1_music_1_1_playlist_a6b20542e4e9b5859c813a0251581e9b0} 
+void {\bfseries Play} ()
+\begin{DoxyCompactList}\small\item\em This method plays the first song in the playlist (the song in index 0) if no song in the playlist is currently being played. Otherwise, the playback of the current song is resumed and the linear volume of this playlist transitions back to (Linear\+Volume \texorpdfstring{$\ast$}{*} Local\+Volume\+Scale). \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_aa6d7c54cadf3df7c183120ae152af031}\label{class_jumpvalley_1_1_music_1_1_playlist_aa6d7c54cadf3df7c183120ae152af031} 
+void {\bfseries Stop\+Immediately} ()
+\begin{DoxyCompactList}\small\item\em Stops the playback of the playlist immediately, skipping the fade out transition that gradually makes the playlist inaudible. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a496bf43698b68412329970579dac4fb6}\label{class_jumpvalley_1_1_music_1_1_playlist_a496bf43698b68412329970579dac4fb6} 
+void {\bfseries Stop} ()
+\begin{DoxyCompactList}\small\item\em This method gradually transitions the playlist\textquotesingle{}s volume to be inaudible, and then stops the playlist once that transition is done. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_af8d6ec53d38e60838aecdb4e70ee818c}\label{class_jumpvalley_1_1_music_1_1_playlist_af8d6ec53d38e60838aecdb4e70ee818c} 
+new void {\bfseries Dispose} ()
+\begin{DoxyCompactList}\small\item\em Stops and disposes of this Playlist. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_playlist_a4c8dcd097a5639b8bb83f8729c724c6c}{Vol\+Percent\+To\+Decibels}} (float percent)
+\begin{DoxyCompactList}\small\item\em Converts a volume percentage in the range of \mbox{[}0, 1\mbox{]} to the corresponding value in decibels and returns the result. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a54716897180c1698685581dfe087c6dd}\label{class_jumpvalley_1_1_music_1_1_playlist_a54716897180c1698685581dfe087c6dd} 
+double {\bfseries Transition\+Time} = 0
+\begin{DoxyCompactList}\small\item\em The number of seconds that the volume transitioning lasts when uninterrupted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a64d2bc662a873a88626b3473641f008d}\label{class_jumpvalley_1_1_music_1_1_playlist_a64d2bc662a873a88626b3473641f008d} 
+void {\bfseries Handle\+Tween\+Finish} (object \+\_\+o, Event\+Args \+\_\+e)
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a44b65683a722d1809bd163e0405866f8}\label{class_jumpvalley_1_1_music_1_1_playlist_a44b65683a722d1809bd163e0405866f8} 
+void {\bfseries On\+Song\+Changed} (\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song_changed_args}{Song\+Changed\+Args}} args)
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a7c72d30786ff8e95a754335969475241}\label{class_jumpvalley_1_1_music_1_1_playlist_a7c72d30786ff8e95a754335969475241} 
+void {\bfseries Raise\+Stopped\+Event} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a5e11a09ad46ff93e9a708a35594088ec}\label{class_jumpvalley_1_1_music_1_1_playlist_a5e11a09ad46ff93e9a708a35594088ec} 
+List$<$ \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song}{Song}} $>$ {\bfseries Song\+List} = new List$<$\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song}{Song}}$>$()
+\begin{DoxyCompactList}\small\item\em The list of Songs being played by this playlist. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a2a9f4757247a22e5b46215172edcfb2b}\label{class_jumpvalley_1_1_music_1_1_playlist_a2a9f4757247a22e5b46215172edcfb2b} 
+static float {\bfseries Non\+Audible\+Volume} = Mathf.\+Db\+To\+Linear(-\/80f)\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Lowest audio volume (in the linear form) that Godot\textquotesingle{}s editor will let you set the volume of a sound to. ~\newline
+ Such volume shouldn\textquotesingle{}t be audible to humans. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a8b0971a7f3b672e507cc126e31298722}\label{class_jumpvalley_1_1_music_1_1_playlist_a8b0971a7f3b672e507cc126e31298722} 
+double {\bfseries Local\+Volume\+Scale}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Multiplier for linear volume that\textquotesingle{}s typically in the range of \mbox{[}0, 1\mbox{]} ~\newline
+ Can be used to mute or unmute the playlist without affecting the original value of Linear\+Volume \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a881aac298ea5a755920074f4cd891417}\label{class_jumpvalley_1_1_music_1_1_playlist_a881aac298ea5a755920074f4cd891417} 
+double {\bfseries Linear\+Volume}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Volume of the playlist\textquotesingle{}s music in a linear fashion. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a9a383d9b9af0856720c2fe0ef72bbb57}\label{class_jumpvalley_1_1_music_1_1_playlist_a9a383d9b9af0856720c2fe0ef72bbb57} 
+\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song}{Song}} {\bfseries Current\+Song}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The song that\textquotesingle{}s currently being played in this playlist. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Events}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a979530d749c74df9e6208f3822863227}\label{class_jumpvalley_1_1_music_1_1_playlist_a979530d749c74df9e6208f3822863227} 
+Event\+Handler$<$ \mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song_changed_args}{Song\+Changed\+Args}} $>$ {\bfseries Song\+Changed}
+\begin{DoxyCompactList}\small\item\em Called when the currently playing song changes. \end{DoxyCompactList}\item 
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a57b85f033969a79c7c4d85c0f6b10d2f}\label{class_jumpvalley_1_1_music_1_1_playlist_a57b85f033969a79c7c4d85c0f6b10d2f} 
+Event\+Handler {\bfseries Stopped}
+\begin{DoxyCompactList}\small\item\em Called when the playlist stops the playback of its music. If a fade transition is applied to fade out the currently playing song, this event will get called after the transition has completed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a musical playlist that can hold multiple Songs. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a855ff4f32fb3c9ae8d91f7f5f41de87f}\label{class_jumpvalley_1_1_music_1_1_playlist_a855ff4f32fb3c9ae8d91f7f5f41de87f} 
+\index{Jumpvalley.Music.Playlist@{Jumpvalley.Music.Playlist}!Add@{Add}}
+\index{Add@{Add}!Jumpvalley.Music.Playlist@{Jumpvalley.Music.Playlist}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily void Jumpvalley.\+Music.\+Playlist.\+Add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song}{Song}}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a song to the playlist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The song to add\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a36364e47657e549acac0682c927122c3}\label{class_jumpvalley_1_1_music_1_1_playlist_a36364e47657e549acac0682c927122c3} 
+\index{Jumpvalley.Music.Playlist@{Jumpvalley.Music.Playlist}!Remove@{Remove}}
+\index{Remove@{Remove}!Jumpvalley.Music.Playlist@{Jumpvalley.Music.Playlist}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily void Jumpvalley.\+Music.\+Playlist.\+Remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_jumpvalley_1_1_music_1_1_song}{Song}}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a song from the playlist. ~\newline
+ ~\newline
+ If the song that gets removed is being played, the playlist will move onto the next song if there are still songs in the playlist after removal, or the playlist will stop immediately. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The song to remove\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_jumpvalley_1_1_music_1_1_playlist_a4c8dcd097a5639b8bb83f8729c724c6c}\label{class_jumpvalley_1_1_music_1_1_playlist_a4c8dcd097a5639b8bb83f8729c724c6c} 
+\index{Jumpvalley.Music.Playlist@{Jumpvalley.Music.Playlist}!VolPercentToDecibels@{VolPercentToDecibels}}
+\index{VolPercentToDecibels@{VolPercentToDecibels}!Jumpvalley.Music.Playlist@{Jumpvalley.Music.Playlist}}
+\doxysubsubsection{\texorpdfstring{VolPercentToDecibels()}{VolPercentToDecibels()}}
+{\footnotesize\ttfamily static float Jumpvalley.\+Music.\+Playlist.\+Vol\+Percent\+To\+Decibels (\begin{DoxyParamCaption}\item[{float}]{percent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Converts a volume percentage in the range of \mbox{[}0, 1\mbox{]} to the corresponding value in decibels and returns the result. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/\+Music/Playlist.\+cs\end{DoxyCompactItemize}
