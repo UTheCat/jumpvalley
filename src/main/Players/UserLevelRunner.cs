@@ -23,6 +23,12 @@ namespace Jumpvalley.Players
             LevelTimerOperator = levelTimerOperator;
         }
 
+        public new void Dispose()
+        {
+            SetProcess(false);
+            base.Dispose();
+        }
+
         public override void _Process(double delta)
         {
             LevelPackage levelPackage = CurrentLevelPackage;

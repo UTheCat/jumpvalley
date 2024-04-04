@@ -22,7 +22,7 @@ namespace Jumpvalley.Players
     /// <item>Their primary GUI node</item>
     /// </list>
     /// </summary>
-    public partial class Player: IDisposable
+    public partial class Player : IDisposable
     {
         /// <summary>
         /// The scene tree that the player's game is under.
@@ -183,18 +183,26 @@ namespace Jumpvalley.Players
                 primaryLevelMenuScene.Dispose();
             }
 
-            PackedScene levelTimerPackedScene = ResourceLoader.Load<PackedScene>("res://gui/level_timer.tscn");
-            if (levelTimerPackedScene != null)
+            // Initialize level stuff
+            string levelsNodeName = "Levels";
+            string initializationLevelMetadataName = "initialization_level";
+            Node levelsNode = RootNode.GetNode(levelsNodeName);
+            if (levelsNode != null)
             {
-                Control levelTimerNode = levelTimerPackedScene.Instantiate<Control>();
+                if (levelsNode.HasMeta(initializationLevelMetadataName))
+                {
+                    string levelPath = levelsNode.GetMeta(initializationLevelMetadataName).As<string>();
+                    UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
 
-                // Initialize level stuff
-                UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(levelTimerNode));
-
-                LevelPackage levelPackage = new LevelPackage("res://levels/shape_variety.tscn", levelRunner);
-                levelPackage.LoadRootNode();
-                levelPackage.CreateLevelInstance();
-                Disposables.Add(levelPackage);
+                    LevelPackage levelPackage = new LevelPackage(levelPath, levelRunner);
+                    levelPackage.LoadRootNode();
+                    levelPackage.CreateLevelInstance();
+                    levelPackage.StartLevel();
+                }
+            }
+            else
+            {
+                Console.WriteLine($"[{nameof(Player)}] Failed to load a level at game initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
             }
 
             Disposables.Add(fpsLimiter);
