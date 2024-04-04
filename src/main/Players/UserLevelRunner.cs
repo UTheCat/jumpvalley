@@ -1,15 +1,40 @@
+using System;
+
 using Jumpvalley.Levels;
+using Jumpvalley.Players.Gui;
 
 namespace Jumpvalley.Players
 {
     /// <summary>
     /// Jumpvalley's primary level runner that's intended to be running on behalf of the user who's playing the game.
     /// </summary>
-    public partial class UserLevelRunner : LevelRunner
+    public partial class UserLevelRunner : LevelRunner, IDisposable
     {
-        public UserLevelRunner(Player player) : base(player)
+        /// <summary>
+        /// Level timer operator in charge of displaying how long the user's run has currently lasted
+        /// </summary>
+        public LevelTimer LevelTimerOperator { get; private set; }
+
+        public UserLevelRunner(Player player, LevelTimer levelTimerOperator) : base(player)
         {
-            
+            Name = $"{nameof(UserLevelRunner)}_{GetHashCode()}";
+
+            LevelTimerOperator = levelTimerOperator;
+        }
+
+        public override void _Process(double delta)
+        {
+            LevelPackage levelPackage = CurrentLevelPackage;
+            if (levelPackage != null)
+            {
+                Level level = levelPackage.LevelInstance;
+                if (level != null)
+                {
+                    LevelTimerOperator.ElapsedTime = level.Clock.OffsetElapsedTime.TotalSeconds;
+                }
+            }
+
+            base._Process(delta);
         }
     }
 }
