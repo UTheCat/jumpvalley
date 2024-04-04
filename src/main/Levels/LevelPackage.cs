@@ -16,27 +16,6 @@ namespace Jumpvalley.Levels
     public partial class LevelPackage : IDisposable
     {
         /// <summary>
-        /// Status codes that indicate the result of an attempt to load a level's resource pack
-        /// </summary>
-        public enum ResourcePackLoadStatus
-        {
-            /// <summary>
-            /// Indicates that the Godot package was loaded successfully.
-            /// </summary>
-            Success = 0,
-
-            /// <summary>
-            /// Indicates that the Godot package under the given file name could not be found.
-            /// </summary>
-            FileNotFound = 1,
-
-            /// <summary>
-            /// Indicates that the Godot package under the given file name was found, but loading it failed.
-            /// </summary>
-            LoadingFailed = 2
-        }
-
-        /// <summary>
         /// The level's info file
         /// </summary>
         public LevelInfoFile Info { get; private set; }
@@ -78,29 +57,6 @@ namespace Jumpvalley.Levels
 
             Info = new LevelInfoFile(infoFile.GetAsText());
             Runner = runner;
-        }
-
-        /// <summary>
-        /// Attempts to load the resource pack specified within the level's info file if it exists
-        /// </summary>
-        /// <returns>
-        /// A status code indicating the results of the attempt to load the resource pack
-        /// </returns>
-        public ResourcePackLoadStatus TryLoadResourcePack()
-        {
-            string resourcePackPath = $"{Path}/{Info.ResourcePackPath}";
-            if (!FileAccess.FileExists(resourcePackPath))
-            {
-                return ResourcePackLoadStatus.FileNotFound;
-            }
-
-            // LoadResourcePack will also only return true if the loading of the resource pack succeeded
-            if (ProjectSettings.LoadResourcePack(resourcePackPath, false))
-            {
-                return ResourcePackLoadStatus.Success;
-            }
-
-            return ResourcePackLoadStatus.LoadingFailed;
         }
 
         /// <summary>
