@@ -9,7 +9,7 @@ namespace Jumpvalley.Testing
     /// <summary>
     /// Testing of the level loading prototype
     /// </summary>
-    public partial class LevelLoadingTest: BaseTest, IDisposable
+    public partial class LevelLoadingTest : BaseTest, IDisposable
     {
         public string LevelDirPath;
         public LevelPackage Package;
@@ -69,7 +69,6 @@ namespace Jumpvalley.Testing
 
             LevelRunner levelRunner = new LevelRunner(CurrentPlayer);
             Package = new LevelPackage(LevelDirPath, levelRunner);
-            Package.TryLoadResourcePack();
             Package.LoadRootNode();
             Package.CreateLevelInstance();
 
