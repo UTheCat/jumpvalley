@@ -2,6 +2,9 @@ using System;
 
 namespace Jumpvalley
 {
+    /// <summary>
+    /// hi
+    /// </summary>
     public partial class HiThere
     {
         public HiThere()

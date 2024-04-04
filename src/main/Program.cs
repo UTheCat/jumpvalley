@@ -6,13 +6,11 @@ using Jumpvalley.Players;
 // refer to this article for naming conventions:
 // https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions
 
-/**
-<summary>
-The game's code entry point
-</summary>
-*/
 namespace Jumpvalley
 {
+	/// <summary>
+	/// The game's code entry point
+	/// </summary>
 	public partial class Program : Node
 	{
 		private Control mainGui;
@@ -20,7 +18,7 @@ namespace Jumpvalley
 
 		//private MeshSpinner spinner;
 
-		public Player player;
+		private Player player;
 
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
