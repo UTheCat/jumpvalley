@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Godot;
+using System;
 using System.Collections.Generic;
-using Godot;
+
 using Jumpvalley.Levels;
 using Jumpvalley.Music;
 using Jumpvalley.Players.Camera;
@@ -150,17 +151,6 @@ namespace Jumpvalley.Players
             // This is why it's important to make the input refresh rate independent from display refresh rate.
             Input.UseAccumulatedInput = false;
 
-            // test level loading
-            LevelLoadingTest levelLoadingTest = new LevelLoadingTest(
-                "res://levels/shape_variety",
-                RootNode.GetNode("Levels"),
-                Tree,
-                PrimaryGui.GetNode("LevelTimer"),
-                this
-                );
-            Disposables.Add(levelLoadingTest);
-            levelLoadingTest.Start();
-
             RenderFramerateLimiter fpsLimiter = new RenderFramerateLimiter();
             fpsLimiter.MinFpsDifference = 0;
             fpsLimiter.IsRunning = true;
@@ -183,7 +173,19 @@ namespace Jumpvalley.Players
                 primaryLevelMenuScene.Dispose();
             }
 
-            // Initialize level stuff
+            // Set up level-running stuff
+            UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
+
+            // Load the lobby
+            LevelPackage lobby = new LevelPackage("res://scenes/lobby", levelRunner);
+            levelRunner.Lobby = lobby;
+            Disposables.Add(lobby);
+            lobby.LoadRootNode();
+            lobby.CreateLevelInstance();
+            lobby.StartLevel();
+            RootNode.AddChild(lobby.RootNode);
+
+            // Load the initialization level (the level we want to load in when the game starts)
             string levelsNodeName = "Levels";
             string initializationLevelMetadataName = "initialization_level";
             Node levelsNode = RootNode.GetNode(levelsNodeName);
@@ -192,18 +194,27 @@ namespace Jumpvalley.Players
                 if (levelsNode.HasMeta(initializationLevelMetadataName))
                 {
                     string levelPath = levelsNode.GetMeta(initializationLevelMetadataName).As<string>();
-                    UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
 
-                    LevelPackage levelPackage = new LevelPackage(levelPath, levelRunner);
-                    levelPackage.LoadRootNode();
-                    levelPackage.CreateLevelInstance();
-                    levelPackage.StartLevel();
+                    if (!string.IsNullOrEmpty(levelPath))
+                    {
+                        LevelPackage levelPackage = new LevelPackage(levelPath, levelRunner);
+                        levelRunner.CurrentLevelPackage = levelPackage;
+                        Disposables.Add(levelPackage);
+                        levelPackage.LoadRootNode();
+                        levelPackage.CreateLevelInstance();
+                        levelPackage.StartLevel();
+                        levelsNode.AddChild(levelPackage.RootNode);
+                    }
                 }
             }
             else
             {
                 Console.WriteLine($"[{nameof(Player)}] Failed to load a level at game initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
             }
+
+            // Start playing music.
+            // This is done after we load the lobby and the initialization level just to keep things smooth.
+            CurrentMusicPlayer.IsPlaying = true;
 
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
