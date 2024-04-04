@@ -11,7 +11,8 @@ namespace Jumpvalley.Players
     public partial class UserLevelRunner : LevelRunner, IDisposable
     {
         /// <summary>
-        /// Level timer operator in charge of displaying how long the user's run has currently lasted
+        /// Level timer GUI operator in charge of displaying how long the user's current run has lasted.
+        /// The run mentioned here is for the level that the user is currently playing.
         /// </summary>
         public LevelTimer LevelTimerOperator { get; private set; }
 
