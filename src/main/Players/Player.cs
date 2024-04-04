@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Godot;
-
+using Jumpvalley.Levels;
 using Jumpvalley.Music;
 using Jumpvalley.Players.Camera;
 using Jumpvalley.Players.Controls;
@@ -60,11 +60,6 @@ namespace Jumpvalley.Players
         public BaseCamera Camera { get; private set; }
 
         /// <summary>
-        /// The GUI node that displays how long the player has been in a certain level
-        /// </summary>
-        //public LevelTimer LevelTimerOperator { get; private set; }
-
-        /// <summary>
         /// Objects that will get disposed of once the current Player instance gets Dispose()'d.
         /// </summary>
         public List<IDisposable> Disposables { get; private set; } = new List<IDisposable>();
@@ -89,6 +84,7 @@ namespace Jumpvalley.Players
         /// </summary>
         public virtual void Start()
         {
+            // Handle music that's played in the main scene file
             Node rootNodeMusic = RootNode.GetNode("Music");
             MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("PrimaryMusic"));
             Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
@@ -107,12 +103,10 @@ namespace Jumpvalley.Players
                 Disposables.Add(musicZone);
             }
 
-            CurrentMusicPlayer.IsPlaying = true;
+            //CurrentMusicPlayer.IsPlaying = true;
 
-            MeshSpinner spinner = new MeshSpinner(RootNode.GetNode<MeshInstance3D>("Lobby/SpinningMesh"), 1);
-            RootNode.AddChild(spinner);
-
-            // Juke's Towers of Hell physics (or somewhere close) except we're working with meters
+            // Set up character movement
+            // Some values here are based on Juke's Towers of Hell physics (or somewhere close), except we're working with meters.
             // In-game gravity can be changed at runtime, so we need to account for that. See:
             // https://docs.godotengine.org/en/stable/classes/class_projectsettings.html#class-projectsettings-property-physics-3d-default-gravity
             // for more details.
@@ -122,6 +116,8 @@ namespace Jumpvalley.Players
 
             Mover.Body = Character;
 
+            // Set up the player's camera. This is done in between movement setup steps because
+            // some of the movement stuff depends on the state of the player's camera.
             Camera.FocusedNode = Character.GetNode<Node3D>("Head");
             Camera.Camera = RootNode.GetNode<Camera3D>("Camera");
             Camera.PanningSensitivity = 1;
@@ -134,14 +130,17 @@ namespace Jumpvalley.Players
 
             Mover.Camera = Camera;
 
+            // Set up shift-lock
             RotationLockControl rotationLockControl = new RotationLockControl(Mover, Camera);
             RootNode.AddChild(rotationLockControl);
 
+            // Allow the player's character to move
             Mover.IsRunning = true;
-            
+
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
+            // Set up fullscreen toggling
             FullscreenControl fullscreenControl = new FullscreenControl(false);
             RootNode.AddChild(fullscreenControl);
             Disposables.Add(fullscreenControl);
@@ -167,7 +166,7 @@ namespace Jumpvalley.Players
             fpsLimiter.IsRunning = true;
             RootNode.AddChild(fpsLimiter);
 
-            // initialize gui stuff
+            // Initialize GUI stuff
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
 
             PackedScene primaryLevelMenuScene = ResourceLoader.Load<PackedScene>("res://gui/level_menu.tscn");
@@ -180,6 +179,22 @@ namespace Jumpvalley.Players
 
                 PrimaryGui.AddChild(primaryLevelMenuNode);
                 Disposables.Add(primaryLevelMenu);
+
+                primaryLevelMenuScene.Dispose();
+            }
+
+            PackedScene levelTimerPackedScene = ResourceLoader.Load<PackedScene>("res://gui/level_timer.tscn");
+            if (levelTimerPackedScene != null)
+            {
+                Control levelTimerNode = levelTimerPackedScene.Instantiate<Control>();
+
+                // Initialize level stuff
+                UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(levelTimerNode));
+
+                LevelPackage levelPackage = new LevelPackage("res://levels/shape_variety.tscn", levelRunner);
+                levelPackage.LoadRootNode();
+                levelPackage.CreateLevelInstance();
+                Disposables.Add(levelPackage);
             }
 
             Disposables.Add(fpsLimiter);
@@ -187,7 +202,6 @@ namespace Jumpvalley.Players
             Disposables.Add(Mover);
             Disposables.Add(Camera);
             Disposables.Add(bottomBar);
-            Disposables.Add(spinner);
         }
 
         public void Dispose()
