@@ -36,6 +36,8 @@ namespace Jumpvalley
 		{
 			player.Dispose();
 			player = null;
+
+			Console.WriteLine("Goodbye!");
 		}
 	}
 

@@ -204,6 +204,10 @@ namespace Jumpvalley.Players
                         levelPackage.CreateLevelInstance();
                         levelPackage.StartLevel();
                         levelsNode.AddChild(levelPackage.RootNode);
+
+                        LevelInfoFile levelInfo = levelPackage.Info;
+                        Difficulty difficulty = levelInfo.LevelDifficulty;
+                        Console.WriteLine($"[{nameof(Player)}] Now playing a level: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");
                     }
                 }
             }
