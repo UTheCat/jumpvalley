@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=35 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -17,6 +17,21 @@ size = Vector3(4, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4aon4"]
 size = Vector3(4, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_315x0"]
+size = Vector3(36, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b0w2m"]
+size = Vector3(36, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cml3x"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 20.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0o4nm"]
+height = 20.0
+radius = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_rmlu0"]
 
@@ -128,6 +143,31 @@ shape = SubResource("BoxShape3D_imb5h")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Spinner/CollisionShape3D"]
 material_override = ExtResource("5_efv4u")
 mesh = SubResource("BoxMesh_4aon4")
+
+[node name="RaisedPlatformThing" type="Node3D" parent="Interactives"]
+
+[node name="Spinner2" type="StaticBody3D" parent="Interactives/RaisedPlatformThing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, -38)
+metadata/interactive_type = "Spinner"
+metadata/constant_angular_velocity = Vector3(0, 0, 0)
+metadata/constant_angular_velocity_degrees = Vector3(0, 0, 15)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RaisedPlatformThing/Spinner2"]
+shape = SubResource("BoxShape3D_315x0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/RaisedPlatformThing/Spinner2/CollisionShape3D"]
+material_override = ExtResource("1_x3ong")
+mesh = SubResource("BoxMesh_b0w2m")
+
+[node name="Cylinder" type="StaticBody3D" parent="Interactives/RaisedPlatformThing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 10.5, -38)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/RaisedPlatformThing/Cylinder"]
+material_override = ExtResource("5_efv4u")
+mesh = SubResource("CylinderMesh_cml3x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RaisedPlatformThing/Cylinder"]
+shape = SubResource("CylinderShape3D_0o4nm")
 
 [node name="SpinningMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
