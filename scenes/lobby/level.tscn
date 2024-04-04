@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=31 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -11,6 +11,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_e5b6p"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qiukw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_imb5h"]
+size = Vector3(4, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4aon4"]
+size = Vector3(4, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rmlu0"]
 
@@ -96,6 +102,32 @@ shape = SubResource("BoxShape3D_e5b6p")
 material_override = ExtResource("1_x3ong")
 mesh = SubResource("BoxMesh_qiukw")
 skeleton = NodePath("../..")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="Interactives"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, -22.5)
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_yudit")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RigidBody3D2"]
+shape = SubResource("BoxShape3D_e5b6p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/RigidBody3D2/CollisionShape3D"]
+material_override = ExtResource("1_x3ong")
+mesh = SubResource("BoxMesh_qiukw")
+skeleton = NodePath("../..")
+
+[node name="Spinner" type="StaticBody3D" parent="Interactives"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, -22.5)
+metadata/interactive_type = "Spinner"
+metadata/constant_angular_velocity = Vector3(0, 0, 0)
+metadata/constant_angular_velocity_degrees = Vector3(0, 45, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Spinner"]
+shape = SubResource("BoxShape3D_imb5h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Spinner/CollisionShape3D"]
+material_override = ExtResource("5_efv4u")
+mesh = SubResource("BoxMesh_4aon4")
 
 [node name="SpinningMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
