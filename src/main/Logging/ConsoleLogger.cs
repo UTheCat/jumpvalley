@@ -55,15 +55,15 @@ namespace Jumpvalley.Logging
 
             // Time displayed here is formatted based on the information in this article:
             // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings
-            string actualMessage = $"[{string.Format("{0:G}", currentTime)}][{Source}]: {message}";
+            string actualMessage = $"[{Source}][{string.Format("{0:G}", currentTime)}]: {message}";
 
             switch (api)
             {
                 case PrintingApi.Standard:
-                    Console.WriteLine("");
+                    Console.WriteLine(actualMessage);
                     break;
                 case PrintingApi.Godot:
-                    GD.Print("");
+                    GD.Print(actualMessage);
                     break;
             }
         }
