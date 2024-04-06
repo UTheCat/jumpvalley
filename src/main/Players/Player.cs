@@ -241,11 +241,11 @@ namespace Jumpvalley.Players
             for (int i = 0; i < Disposables.Count; i++)
             {
                 IDisposable obj = Disposables[i];
-                Console.WriteLine($"[{nameof(Player)}] Now disposing an instance of {obj.GetType()}");
+                logger.Print($"Now disposing an instance of {obj.GetType()}");
                 obj.Dispose();
             }
-            
-            Console.WriteLine($"[{nameof(Player)}] Finished disposing objects");
+
+            logger.Print("Finished disposing objects");
             //GC.SuppressFinalize(this);
         }
     }
