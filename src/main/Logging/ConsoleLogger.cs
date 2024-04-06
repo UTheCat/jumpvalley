@@ -51,11 +51,11 @@ namespace Jumpvalley.Logging
         public void Print(string message)
         {
             PrintingApi api = Api;
-            TimeSpan currentTime = TimeSpan.FromMilliseconds(Time.GetTicksMsec());
+            TimeSpan currentTime = TimeSpan.FromMicroseconds(Time.GetTicksUsec());
 
             // Time displayed here is formatted based on the information in this article:
             // https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-timespan-format-strings
-            string actualMessage = $"[{Source}][{string.Format("{0:G}", currentTime)}]: {message}";
+            string actualMessage = $"[{Source}][{string.Format("{0:g}", currentTime)}]: {message}";
 
             switch (api)
             {
