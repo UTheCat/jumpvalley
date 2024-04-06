@@ -8,6 +8,7 @@ using Jumpvalley.Players.Camera;
 using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
+using Jumpvalley.Logging;
 
 namespace Jumpvalley.Players
 {
@@ -64,6 +65,8 @@ namespace Jumpvalley.Players
         /// </summary>
         public List<IDisposable> Disposables { get; private set; } = new List<IDisposable>();
 
+        private ConsoleLogger logger;
+
         public Player(SceneTree tree, Node rootNode)
         {
             Tree = tree;
@@ -77,6 +80,8 @@ namespace Jumpvalley.Players
             Camera = new MouseCamera();
 
             rootNode.AddChild(CurrentMusicPlayer);
+
+            logger = new ConsoleLogger(nameof(Player));
         }
 
         /// <summary>
@@ -204,7 +209,7 @@ namespace Jumpvalley.Players
 
                         LevelInfoFile levelInfo = levelPackage.Info;
                         Difficulty difficulty = levelInfo.LevelDifficulty;
-                        Console.WriteLine($"[{nameof(Player)}] Now playing a level: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");
+                        logger.Print($"Now playing a level: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");
                     }
                 }
             }
@@ -236,11 +241,11 @@ namespace Jumpvalley.Players
             for (int i = 0; i < Disposables.Count; i++)
             {
                 IDisposable obj = Disposables[i];
-                Console.WriteLine($"[{nameof(Player)}] Now disposing an instance of {obj.GetType()}");
+                logger.Print($"Now disposing an instance of {obj.GetType()}");
                 obj.Dispose();
             }
-            
-            Console.WriteLine($"[{nameof(Player)}] Finished disposing objects");
+
+            logger.Print("Finished disposing objects");
             //GC.SuppressFinalize(this);
         }
     }
