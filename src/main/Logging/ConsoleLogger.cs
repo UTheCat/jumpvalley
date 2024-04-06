@@ -19,11 +19,17 @@ namespace Jumpvalley.Logging
         }
 
         /// <summary>
+        /// The source of the output. Use this field to specify where the output is coming from.
+        /// </summary>
+        public string Source;
+
+        /// <summary>
         /// Creates a new instance of <see cref="ConsoleLogger"/> for a given printing "source".
         /// </summary>
-        public ConsoleLogger()
+        /// <param name="source">Where the output is coming from</param>
+        public ConsoleLogger(string source)
         {
-
+            Source = source;
         }
     }
 }
