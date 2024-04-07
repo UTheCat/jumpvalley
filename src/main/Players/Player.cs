@@ -72,16 +72,22 @@ namespace Jumpvalley.Players
             Tree = tree;
             RootNode = rootNode;
 
-            CurrentMusicPlayer = new MusicZonePlayer();
-            CurrentMusicPlayer.Name = "CurrentMusicPlayer";
             PrimaryGui = rootNode.GetNode<Control>("PrimaryGui");
             Character = rootNode.GetNode<CharacterBody3D>("Player");
-            Mover = new KeyboardMover();
-            Camera = new MouseCamera();
-
-            rootNode.AddChild(CurrentMusicPlayer);
 
             logger = new ConsoleLogger(nameof(Player));
+
+            CurrentMusicPlayer = new MusicZonePlayer();
+            CurrentMusicPlayer.Name = "CurrentMusicPlayer";
+            Disposables.Add(CurrentMusicPlayer);
+
+            Mover = new KeyboardMover();
+            Disposables.Add(Mover);
+
+            Camera = new MouseCamera();
+            Disposables.Add(Camera);
+
+            rootNode.AddChild(CurrentMusicPlayer);
         }
 
         /// <summary>
@@ -228,16 +234,11 @@ namespace Jumpvalley.Players
 
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
-            Disposables.Add(Mover);
-            Disposables.Add(Camera);
             Disposables.Add(bottomBar);
         }
 
         public void Dispose()
         {
-            PrimaryGui?.Dispose();
-            CurrentMusicPlayer?.Dispose();
-
             for (int i = 0; i < Disposables.Count; i++)
             {
                 IDisposable obj = Disposables[i];
