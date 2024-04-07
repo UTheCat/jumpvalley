@@ -22,6 +22,8 @@ Assets under the ```addons``` folder are covered by different licenses (especial
 
 ## Getting started with the project itself
 
+### Running Godot and this repository's project file
+
 This project is currently being made using the .NET-Enabled version of Godot v4.2.1.
 
 If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of .NET-Enabled Godot v4.2.1 [here](https://godotengine.org/download).
@@ -29,3 +31,11 @@ If you'd like to open the Godot project file (```project.godot```), make sure to
 Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.2.1 and open your copy of this repository's ```project.godot``` file.
 
 In order to run the project, there's a play button near the top-right corner of the window. Click it to run the project.
+
+### Debugging
+
+If you'd like to use the Visual Studio Code terminal for debugging, you should debug Jumpvalley using this command with this repository's root folder as the working directory:
+
+`<path to Godot executable> --verbose`
+
+This should allow you to see console output (including any errors that may come up).
