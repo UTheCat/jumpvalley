@@ -47,7 +47,7 @@ namespace Jumpvalley.Music
             {
                 Zones.Remove(zone);
 
-                if (IsPlaying && CurrentPlaylist == zone)
+                if (IsPlaying && CurrentPlaylist != zone)
                 {
                     CurrentPlaylist = PrimaryPlaylist;
                 }
