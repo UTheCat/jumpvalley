@@ -592,7 +592,7 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public new void Dispose()
         {
-            SetPhysicsProcess(false);
+            IsRunning = false;
             QueueFree();
 
             // Currently, the Climber being used in this class is created during BaseMover's instantiation and from nowhere else
