@@ -12,6 +12,10 @@ namespace Jumpvalley.Music
     /// <br/>
     /// In order for music to play when the player is outside a music zone, a primary playlist must be set.
     /// This playlist will get played when outside of the music zones.
+    /// <br/>
+    /// <br/>
+    /// It's important to note that MusicZonePlayer will only update <see cref="CurrentPlaylist"/> once per process frame for stability reasons
+    /// (as long as the calling of MusicZonePlayer's _Process() function hasn't been disabled).
     /// </summary>
     public partial class MusicZonePlayer : MusicPlayer, IDisposable
     {
@@ -38,7 +42,6 @@ namespace Jumpvalley.Music
 
         /// <summary>
         /// Deregisters a music zone from playback.
-        /// If the removed music zone is equal to <see cref="CurrentPlaylist"/> and <see cref="IsPlaying"/> is true, <see cref="CurrentPlaylist"/> will be set to <see cref="PrimaryPlaylist"/>.
         /// </summary>
         /// <param name="zone"></param>
         public void Remove(MusicZone zone)
@@ -46,11 +49,6 @@ namespace Jumpvalley.Music
             if (zone != null)
             {
                 Zones.Remove(zone);
-
-                if (IsPlaying && CurrentPlaylist != zone)
-                {
-                    CurrentPlaylist = PrimaryPlaylist;
-                }
             }
         }
 
