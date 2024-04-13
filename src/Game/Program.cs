@@ -3,7 +3,7 @@ using System;
 
 using Jumpvalley.Players;
 
-namespace Jumpvalley
+namespace Jumpvalley.Game
 {
 	/// <summary>
 	/// Entry point for the game's code
