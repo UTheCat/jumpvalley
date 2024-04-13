@@ -12,8 +12,12 @@ namespace Jumpvalley.Players
 {
     /// <summary>
     /// This class represents a player who is playing Jumpvalley or some other game that derives from it.
+    /// This class inherits from the <see cref="Interactive"/> class since it contains some functionality that
+    /// assists with initializing, starting, stopping, and disposing the game components functioning
+    /// on behalf of the player.
     /// <br/>
-    /// The class contains some of the basic components that allow the game to function for the player, such as:
+    /// <br/>
+    /// This class contains some of the basic components that allow the game to function for the player, such as:
     /// <list type="bullet">
     /// <item>Their music player</item>
     /// <item>The Controller instance that allows them to control their character</item>
