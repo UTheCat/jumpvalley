@@ -4,7 +4,7 @@ using Jumpvalley.Levels;
 using Jumpvalley.Players;
 using Jumpvalley.Players.Gui;
 
-namespace Jumpvalley.Testing
+namespace Jumpvalley.Game.Testing
 {
     /// <summary>
     /// Testing of the level loading prototype

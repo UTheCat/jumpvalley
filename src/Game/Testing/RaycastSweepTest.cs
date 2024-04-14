@@ -3,7 +3,7 @@ using System;
 
 using Jumpvalley.Raycasting;
 
-namespace Jumpvalley.Testing
+namespace Jumpvalley.Game.Testing
 {
     /// <summary>
     /// Test class for making sure the <see cref="RaycastSweep"/> class works properly
