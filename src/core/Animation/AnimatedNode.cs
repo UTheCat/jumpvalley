@@ -5,12 +5,12 @@ namespace Jumpvalley.Animation
 {
     /// <summary>
     /// This class provides some components to bind to a Godot node,
-    /// mainly to assist with writing animating code for the node.
+    /// mainly to assist with writing animation code for the node.
     /// </summary>
     public partial class AnimatedNode
     {
         /// <summary>
-        /// The root node of the Godot control to be animated
+        /// The node to be animated
         /// </summary>
         public Node ActualNode { get; private set; }
 
