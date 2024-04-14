@@ -9,6 +9,9 @@ using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
 
+using Jumpvalley.Game.Gui;
+using Jumpvalley.Game.Levels;
+
 namespace Jumpvalley.Game
 {
     /// <summary>
