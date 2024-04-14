@@ -1,6 +1,7 @@
 ﻿using Godot;
 using System;
 
+using Jumpvalley.Animation;
 using Jumpvalley.Tweening;
 
 namespace Jumpvalley.Players.Gui
