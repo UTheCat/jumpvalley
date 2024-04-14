@@ -1,100 +1,35 @@
-﻿using Godot;
+using Godot;
 using System;
-using System.Collections.Generic;
 
 using Jumpvalley.Levels;
+using Jumpvalley.Logging;
 using Jumpvalley.Music;
-using Jumpvalley.Players.Camera;
+using Jumpvalley.Players;
 using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
-using Jumpvalley.Logging;
 
-namespace Jumpvalley.Players
+using Jumpvalley.Game.Gui;
+using Jumpvalley.Game.Levels;
+
+namespace Jumpvalley.Game
 {
     /// <summary>
-    /// This class represents a player who is playing Jumpvalley.
-    /// <br/>
-    /// The class contains some of the basic components that allow Jumpvalley to function for the player, such as:
-    /// <list type="bullet">
-    /// <item>Their music player</item>
-    /// <item>The Controller instance that allows them to control their character</item>
-    /// <item>The Camera instance that allows them to control their camera</item>
-    /// <item>Their primary GUI node</item>
-    /// </list>
+    /// Full implementation of the Player class specific to Jumpvalley itself
     /// </summary>
-    public partial class Player : IDisposable
+    public partial class JumpvalleyPlayer : Player
     {
-        /// <summary>
-        /// The scene tree that the player's game is under.
-        /// </summary>
-        public SceneTree Tree { get; private set; }
-
-        /// <summary>
-        /// The root node containing the nodes in the player's game.
-        /// </summary>
-        public Node RootNode { get; private set; }
-
-        /// <summary>
-        /// The player's current music player
-        /// </summary>
-        public MusicZonePlayer CurrentMusicPlayer { get; private set; }
-
-        /// <summary>
-        /// The player's primary GUI root node
-        /// </summary>
-        public Control PrimaryGui { get; private set; }
-
-        /// <summary>
-        /// The player's current character instance
-        /// </summary>
-        public CharacterBody3D Character { get; private set; }
-
-        /// <summary>
-        /// The primary mover instance acting on behalf of the player's character
-        /// </summary>
-        public BaseMover Mover { get; private set; }
-
-        /// <summary>
-        /// The primary node that handles the player's camera
-        /// </summary>
-        public BaseCamera Camera { get; private set; }
-
-        /// <summary>
-        /// Objects that will get disposed of once the current Player instance gets Dispose()'d.
-        /// </summary>
-        public List<IDisposable> Disposables { get; private set; } = new List<IDisposable>();
-
         private ConsoleLogger logger;
 
-        public Player(SceneTree tree, Node rootNode)
+        public JumpvalleyPlayer(SceneTree tree, Node rootNode) : base(tree, rootNode)
         {
-            Tree = tree;
-            RootNode = rootNode;
-
-            PrimaryGui = rootNode.GetNode<Control>("PrimaryGui");
-            Character = rootNode.GetNode<CharacterBody3D>("Player");
-
-            logger = new ConsoleLogger(nameof(Player));
-
-            CurrentMusicPlayer = new MusicZonePlayer();
-            CurrentMusicPlayer.Name = "CurrentMusicPlayer";
-            Disposables.Add(CurrentMusicPlayer);
-
-            Mover = new KeyboardMover();
-            Disposables.Add(Mover);
-
-            Camera = new MouseCamera();
-            Disposables.Add(Camera);
-
-            rootNode.AddChild(CurrentMusicPlayer);
+            logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
         }
 
-        /// <summary>
-        /// Start method for the game in terms of the player
-        /// </summary>
-        public virtual void Start()
+        public override void Start()
         {
+            base.Start();
+
             // Handle music that's played in the main scene file
             Node rootNodeMusic = RootNode.GetNode("Music");
             MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("PrimaryMusic"));
@@ -221,7 +156,7 @@ namespace Jumpvalley.Players
             }
             else
             {
-                Console.WriteLine($"[{nameof(Player)}] Failed to load a level at game initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
+                logger.Print($"Failed to load a level at game initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
             }
 
             // Start playing music.
@@ -235,19 +170,6 @@ namespace Jumpvalley.Players
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
             Disposables.Add(bottomBar);
-        }
-
-        public void Dispose()
-        {
-            for (int i = 0; i < Disposables.Count; i++)
-            {
-                IDisposable obj = Disposables[i];
-                logger.Print($"Now disposing an instance of {obj.GetType()}");
-                obj.Dispose();
-            }
-
-            logger.Print("Finished disposing objects");
-            //GC.SuppressFinalize(this);
         }
     }
 }

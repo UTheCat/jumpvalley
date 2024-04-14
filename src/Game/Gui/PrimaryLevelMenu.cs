@@ -1,12 +1,14 @@
 using Godot;
 
-namespace Jumpvalley.Players.Gui
+using Jumpvalley.Players.Gui;
+
+namespace Jumpvalley.Game.Gui
 {
 	/// <summary>
 	/// The primary level menu, the menu that's accessed by pressing the three-dots at the bottom of the user's screen.
 	/// This menu contains options like accessing game settings and exiting the game.
 	/// </summary>
-	public partial class PrimaryLevelMenu: LevelMenu
+	public partial class PrimaryLevelMenu : LevelMenu
 	{
 		public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
 		{
@@ -22,9 +24,9 @@ namespace Jumpvalley.Players.Gui
 
 			PackedScene menuButtonResource = ResourceLoader.Load<PackedScene>("res://gui/level_menu_button.tscn");
 
-            // Add the Exit Game button
-            Button exitGameButton = menuButtonResource.Instantiate<Button>();
-            LevelMenuButton exitGameButtonHandler = new LevelMenuButton(exitGameButton);
+			// Add the Exit Game button
+			Button exitGameButton = menuButtonResource.Instantiate<Button>();
+			LevelMenuButton exitGameButtonHandler = new LevelMenuButton(exitGameButton);
 			exitGameButton.Pressed += () =>
 			{
 				// Quit the game in the method specified in the Godot documentation:
