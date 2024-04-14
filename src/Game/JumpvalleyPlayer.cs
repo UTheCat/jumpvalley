@@ -153,7 +153,7 @@ namespace Jumpvalley.Game
             }
             else
             {
-                Console.WriteLine($"[{nameof(Player)}] Failed to load a level at game initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
+                logger.Print($"Failed to load a level at game initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
             }
 
             // Start playing music.
