@@ -4,14 +4,15 @@ using System;
 namespace Jumpvalley.Players.Gui
 {
     /// <summary>
-    /// This class provides some components to bind to a Godot control node and make adding animations to it easier.
+    /// This class provides some components to bind to a Godot node,
+    /// mainly to assist with writing animating code for the node.
     /// </summary>
-    public partial class AnimatedControl
+    public partial class AnimatedNode
     {
         /// <summary>
         /// The root node of the Godot control to be animated
         /// </summary>
-        public Control ActualNode { get; private set; }
+        public Node ActualNode { get; private set; }
 
         private bool _isVisible;
 
@@ -33,7 +34,7 @@ namespace Jumpvalley.Players.Gui
         /// Creates a new instance of AnimatedControl
         /// </summary>
         /// <param name="actualNode">The root node of the Godot control to be animated</param>
-        public AnimatedControl(Control actualNode)
+        public AnimatedNode(Node actualNode)
         {
             if (actualNode == null) throw new ArgumentNullException("actualNode", "The actualNode argument (argument #1) cannot be null.");
 
