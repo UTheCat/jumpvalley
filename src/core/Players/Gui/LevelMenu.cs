@@ -1,6 +1,7 @@
 ﻿using Godot;
 using System;
 
+using Jumpvalley.Animation;
 using Jumpvalley.Tweening;
 
 namespace Jumpvalley.Players.Gui
@@ -8,7 +9,7 @@ namespace Jumpvalley.Players.Gui
     /// <summary>
     /// Code for the level menu, a type of menu that's typically displayed only when the player is playing a level.
     /// </summary>
-    public partial class LevelMenu: AnimatedControl, IDisposable
+    public partial class LevelMenu: AnimatedNode, IDisposable
     {
         /// <summary>
         /// Tween handling the transparency of the menu's items, including its background panel
@@ -102,10 +103,10 @@ namespace Jumpvalley.Players.Gui
             transparencyTween.FinalValue = 1;
             transparencyTween.OnStep += (object o, float frac) =>
             {
-                ActualNode.Visible = frac > 0;
-                Color modulate = ActualNode.Modulate;
+                actualNode.Visible = frac > 0;
+                Color modulate = actualNode.Modulate;
                 modulate.A = frac;
-                ActualNode.Modulate = modulate;
+                actualNode.Modulate = modulate;
             };
 
             if (BackgroundControl != null)
