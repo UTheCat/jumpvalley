@@ -2,7 +2,8 @@
 using Godot;
 using Jumpvalley.Levels;
 using Jumpvalley.Players;
-using Jumpvalley.Players.Gui;
+
+using Jumpvalley.Game.Gui;
 
 namespace Jumpvalley.Game.Testing
 {

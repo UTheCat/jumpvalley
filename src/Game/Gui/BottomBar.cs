@@ -3,7 +3,7 @@ using Jumpvalley.Music;
 using Jumpvalley.Tweening;
 using System;
 
-namespace Jumpvalley.Players.Gui
+namespace Jumpvalley.Game.Gui
 {
     /// <summary>
     /// Class that operates the GUI bar located at the bottom of the user's screen.

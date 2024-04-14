@@ -4,7 +4,7 @@ using System;
 using Jumpvalley.Animation;
 using Jumpvalley.Tweening;
 
-namespace Jumpvalley.Players.Gui
+namespace Jumpvalley.Game.Gui
 {
     /// <summary>
     /// Code for the level menu, a type of menu that's typically displayed only when the player is playing a level.
