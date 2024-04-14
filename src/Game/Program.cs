@@ -1,8 +1,6 @@
 using Godot;
 using System;
 
-using Jumpvalley.Players;
-
 namespace Jumpvalley.Game
 {
 	/// <summary>
@@ -10,14 +8,14 @@ namespace Jumpvalley.Game
 	/// </summary>
 	public partial class Program : Node
 	{
-		private Player player;
+		private JumpvalleyPlayer player;
 
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
 		{
 			Console.WriteLine("hi :3");
 
-			player = new Player(GetTree(), this);
+			player = new JumpvalleyPlayer(GetTree(), this);
 			player.Start();
 
 			Console.WriteLine("Game has started successfully.");
