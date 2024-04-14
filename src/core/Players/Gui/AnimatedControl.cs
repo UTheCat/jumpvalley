@@ -4,7 +4,7 @@ using System;
 namespace Jumpvalley.Players.Gui
 {
     /// <summary>
-    /// This class provides some components bind to a Godot control node and make adding animations to it easier.
+    /// This class provides some components to bind to a Godot control node and make adding animations to it easier.
     /// </summary>
     public partial class AnimatedControl
     {
@@ -16,8 +16,8 @@ namespace Jumpvalley.Players.Gui
         private bool _isVisible;
 
         /// <summary>
-        /// Whether or not the level menu should be visible.
-        /// Toggling this property will run the animation for showing/hiding the menu.
+        /// Whether or not <see cref="ActualNode"/> should be visible.
+        /// Toggling this property will run the animation for showing/hiding <see cref="ActualNode"/>.
         /// </summary>
         public virtual bool IsVisible
         {
