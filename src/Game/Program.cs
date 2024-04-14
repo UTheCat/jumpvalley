@@ -26,6 +26,7 @@ namespace Jumpvalley.Game
 		{
 			Console.WriteLine("Now exiting...");
 
+			player.Stop();
 			player.Dispose();
 			player = null;
 

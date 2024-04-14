@@ -1,6 +1,6 @@
 using Godot;
 
-using Jumpvalley.Players.Gui;
+using Jumpvalley.Game.Gui;
 
 namespace Jumpvalley.Game.Gui
 {

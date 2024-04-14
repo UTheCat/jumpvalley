@@ -3,7 +3,7 @@ using System;
 
 using Jumpvalley.Music;
 
-namespace Jumpvalley.Testing
+namespace Jumpvalley.Game.Testing
 {
     /// <summary>
     /// Tests for loading a song via song package

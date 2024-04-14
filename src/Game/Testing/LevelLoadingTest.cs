@@ -2,9 +2,10 @@
 using Godot;
 using Jumpvalley.Levels;
 using Jumpvalley.Players;
-using Jumpvalley.Players.Gui;
 
-namespace Jumpvalley.Testing
+using Jumpvalley.Game.Gui;
+
+namespace Jumpvalley.Game.Testing
 {
     /// <summary>
     /// Testing of the level loading prototype

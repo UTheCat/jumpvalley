@@ -6,7 +6,6 @@ using Jumpvalley.Logging;
 using Jumpvalley.Music;
 using Jumpvalley.Players;
 using Jumpvalley.Players.Controls;
-using Jumpvalley.Players.Gui;
 using Jumpvalley.Players.Movement;
 
 using Jumpvalley.Game.Gui;
