@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-namespace Jumpvalley.Players.Gui
+namespace Jumpvalley.Animation
 {
     /// <summary>
     /// This class provides some components to bind to a Godot node,
