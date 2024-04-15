@@ -357,6 +357,45 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
+        /// Calculates velocity for an axis based on the acceleration as specified in
+        /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>  
+        /// </summary>
+        private float CalculateVelocity(float velocity, bool isSpeedingUp)
+        {
+            float acceleration;
+            float newVelocity = 0f;
+            if (isSpeedingUp)
+            {
+                acceleration = SpeedUpAcceleration;
+                if (velocity > 0)
+                {
+                    newVelocity = velocity + acceleration;
+                }
+                else if (velocity < 0)
+                {
+                    newVelocity = velocity - acceleration;
+                }
+            }
+            else
+            {
+                // If we're already stopped, you can't slow down any further.
+                if (velocity == 0f) return 0f;
+
+                acceleration = SlowDownAcceleration;
+                if (velocity > 0)
+                {
+                    newVelocity = velocity - acceleration;
+                }
+                else if (velocity > 0)
+                {
+                    newVelocity = velocity + acceleration;
+                }
+            }
+
+            return newVelocity;
+        }
+
+        /// <summary>
         /// Gets the character's velocity for some sort of physics frame.
         /// </summary>
         /// <param name="delta">The time it took to complete the physics frame in seconds</param>
