@@ -589,16 +589,26 @@ namespace Jumpvalley.Players.Movement
             CharacterBody3D body = Body;
             if (body != null)
             {
-                Vector3 moveVelocity = GetMoveVelocity((float)delta, GetYaw());
+                float fDelta = (float)delta;
+                Vector3 moveVelocity = GetMoveVelocity(fDelta, GetYaw());
 
                 // Apply acceleration
                 Vector3 lastVelocity = LastVelocity;
                 lastVelocity.X = CalculateVelocity(
                     lastVelocity.X,
                     ForwardValue != 0f,
-                    delta,
+                    fDelta,
                     SpeedUpAcceleration,
-                    SlowDownAcceleration)
+                    SlowDownAcceleration
+                    );
+                lastVelocity.Z = CalculateVelocity(
+                    lastVelocity.Z,
+                    RightValue != 0f,
+                    fDelta,
+                    SpeedUpAcceleration,
+                    SlowDownAcceleration
+                );
+                
 
                 body.Velocity = moveVelocity;
                 body.MoveAndSlide();
