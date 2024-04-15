@@ -60,9 +60,9 @@ namespace Jumpvalley.Levels
         public Node InteractivesNode { get; private set; }
 
         /// <summary>
-        /// The list of the level's interactives as instances of the <see cref="InteractiveNode"/> class
+        /// The list of the level's interactives as instances of the <see cref="Interactive"/> class
         /// </summary>
-        public List<InteractiveNode> Interactives { get; private set; }
+        public List<Interactive> Interactives { get; private set; }
 
         /// <summary>
         /// The node containing the level's music
@@ -95,11 +95,6 @@ namespace Jumpvalley.Levels
         public LevelPackage Package = null;
 
         /// <summary>
-        /// Set externally to help the level's code access whatever object is running the level itself
-        /// </summary>
-        public LevelRunner Runner = null;
-
-        /// <summary>
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
         /// </summary>
         /// <param name="info">Info about the level</param>
@@ -114,7 +109,7 @@ namespace Jumpvalley.Levels
             Music = root.GetNode(MUSIC_NODE_NAME);
             StaticObjects = root.GetNode(STATIC_OBJECTS_NODE_NAME);
 
-            Interactives = new List<InteractiveNode>();
+            Interactives = new List<Interactive>();
             if (InteractivesNode != null)
             {
                 void AddInteractives(Node parentNode)
@@ -125,9 +120,21 @@ namespace Jumpvalley.Levels
                         {
                             string interactiveType = node.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
 
+                            Interactive interactive = null;
+
                             if (interactiveType.Equals("Spinner"))
                             {
-                                Interactives.Add(new Spinner(Clock, node));
+                                Spinner spinner = new Spinner(Clock, node);
+                                interactive = spinner;
+                            }
+
+                            // If the interactive's type is recognized,
+                            // let it know that this level is running it,
+                            // and then add the interactive to the Interactives list
+                            if (interactive != null)
+                            {
+                                interactive.Runner = this;
+                                Interactives.Add(interactive);
                             }
                         }
                         else
@@ -177,7 +184,7 @@ namespace Jumpvalley.Levels
 
         private void ToggleMusic(bool shouldPlay)
         {
-            LevelRunner runner = Runner;
+            LevelRunner runner = Runner as LevelRunner;
             if (runner != null)
             {
                 Player player = runner.CurrentPlayer;
