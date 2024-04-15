@@ -414,11 +414,8 @@ namespace Jumpvalley.Players.Movement
             float timingAdjustment = delta * physicsTicksPerSecond;
 
             bool isOnFloor = IsOnFloor();
-
-            Vector3 lastVelocity = LastVelocity;
-
+            
             Vector3 moveVector = GetMoveVector(yaw);
-
             Vector3 velocity;
 
             if (Body == null)
