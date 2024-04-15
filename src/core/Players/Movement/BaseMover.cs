@@ -284,6 +284,14 @@ namespace Jumpvalley.Players.Movement
         public Climber CurrentClimber { get; private set; }
 
         /// <summary>
+        /// The most recent character velocity.
+        /// In BaseMover's PhysicsProcess updater, this is read by <see cref="GetVelocity"/>
+        /// to determine what the velocity in the previous physics frame was before
+        /// this value gets updated again.
+        /// </summary>
+        public Vector3 LastVelocity { get; private set; }
+
+        /// <summary>
         /// Raycast sweep used to grab the normal of an object that the player is climbing on
         /// </summary>
         private RaycastSweep climbingRaycastSweep;
@@ -519,8 +527,13 @@ namespace Jumpvalley.Players.Movement
                 body.Velocity = GetVelocity((float)delta, GetYaw());
                 body.MoveAndSlide();
 
+
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
                 Vector3 actualVelocity = body.Velocity;
+
+                // To keep things smooth, we want to store the character velocity for this physics frame
+                // after MoveAndSlide() has modified the velocity
+                LastVelocity = actualVelocity;
 
                 if (IsJumping && actualVelocity.Y > 0)
                 {
