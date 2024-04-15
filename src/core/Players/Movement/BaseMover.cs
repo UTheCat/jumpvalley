@@ -629,7 +629,7 @@ namespace Jumpvalley.Players.Movement
                 {
                     lastVelocity.Z = Math.Max(lastVelocity.Z, moveVelocity.Z);
                 }
-                else if (moveVelocity.X > 0)
+                else if (moveVelocity.Z > 0)
                 {
                     lastVelocity.Z = Math.Min(lastVelocity.Z, moveVelocity.Z);
                 }
@@ -638,7 +638,7 @@ namespace Jumpvalley.Players.Movement
                     lastVelocity.Z = 0f;
                 }
 
-                body.Velocity = moveVelocity;
+                body.Velocity = lastVelocity;
                 body.MoveAndSlide();
 
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
