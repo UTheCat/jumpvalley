@@ -95,11 +95,6 @@ namespace Jumpvalley.Levels
         public LevelPackage Package = null;
 
         /// <summary>
-        /// Set externally to help the level's code access whatever object is running the level itself
-        /// </summary>
-        public LevelRunner Runner = null;
-
-        /// <summary>
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
         /// </summary>
         /// <param name="info">Info about the level</param>
@@ -177,7 +172,7 @@ namespace Jumpvalley.Levels
 
         private void ToggleMusic(bool shouldPlay)
         {
-            LevelRunner runner = Runner;
+            LevelRunner runner = Runner as LevelRunner;
             if (runner != null)
             {
                 Player player = runner.CurrentPlayer;
