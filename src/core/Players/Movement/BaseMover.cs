@@ -357,49 +357,6 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
-        /// Calculates velocity for an axis based on the acceleration as specified in
-        /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>.
-        /// </summary>
-        /// <param name="velocity"></param>
-        /// <param name="isSpeedingUp"></param>
-        /// <param name="timeDelta">Number of seconds since the last physics frame</param>
-        /// <returns></returns>
-        private float CalculateVelocity(float velocity, bool isSpeedingUp, float timeDelta)
-        {
-            float acceleration;
-            float newVelocity = 0f;
-            if (isSpeedingUp)
-            {
-                acceleration = SpeedUpAcceleration;
-                if (velocity > 0)
-                {
-                    newVelocity = velocity + (acceleration * timeDelta);
-                }
-                else if (velocity < 0)
-                {
-                    newVelocity = velocity - (acceleration * timeDelta);
-                }
-            }
-            else
-            {
-                // If we're already stopped, you can't slow down any further.
-                if (velocity == 0f) return 0f;
-
-                acceleration = SlowDownAcceleration;
-                if (velocity > 0)
-                {
-                    newVelocity = velocity - (acceleration * timeDelta);
-                }
-                else if (velocity > 0)
-                {
-                    newVelocity = velocity + (acceleration * timeDelta);
-                }
-            }
-
-            return newVelocity;
-        }
-
-        /// <summary>
         /// Gets the velocity that the character wants to move at for the current physics frame
         /// </summary>
         /// <param name="delta">The time it took to complete the physics frame in seconds</param>
@@ -573,6 +530,57 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
+        /// Calculates velocity for an axis based on the acceleration as specified in
+        /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>.
+        /// </summary>
+        /// <param name="velocity"></param>
+        /// <param name="isSpeedingUp"></param>
+        /// <param name="timeDelta">Number of seconds since the last physics frame</param>
+        /// <param name="speedUpAcceleration"></param>
+        /// <param name="slowDownAcceleration"></param>
+        /// <returns></returns>
+        private static float CalculateVelocity(
+            float velocity,
+            bool isSpeedingUp,
+            float timeDelta,
+            float speedUpAcceleration,
+            float slowDownAcceleration
+            )
+        {
+            float acceleration;
+            float newVelocity = 0f;
+            if (isSpeedingUp)
+            {
+                acceleration = speedUpAcceleration;
+                if (velocity > 0)
+                {
+                    newVelocity = velocity + (acceleration * timeDelta);
+                }
+                else if (velocity < 0)
+                {
+                    newVelocity = velocity - (acceleration * timeDelta);
+                }
+            }
+            else
+            {
+                // If we're already stopped, you can't slow down any further.
+                if (velocity == 0f) return 0f;
+
+                acceleration = slowDownAcceleration;
+                if (velocity > 0)
+                {
+                    newVelocity = velocity - (acceleration * timeDelta);
+                }
+                else if (velocity > 0)
+                {
+                    newVelocity = velocity + (acceleration * timeDelta);
+                }
+            }
+
+            return newVelocity;
+        }
+
+        /// <summary>
         /// Callback to associate with the physics process step in the current scene tree
         /// </summary>
         /// <param name="delta">The time it took and should take to complete the physics frame in seconds</param>
@@ -581,7 +589,18 @@ namespace Jumpvalley.Players.Movement
             CharacterBody3D body = Body;
             if (body != null)
             {
-                body.Velocity = GetMoveVelocity((float)delta, GetYaw());
+                Vector3 moveVelocity = GetMoveVelocity((float)delta, GetYaw());
+
+                // Apply acceleration
+                Vector3 lastVelocity = LastVelocity;
+                lastVelocity.X = CalculateVelocity(
+                    lastVelocity.X,
+                    ForwardValue != 0f,
+                    delta,
+                    SpeedUpAcceleration,
+                    SlowDownAcceleration)
+
+                body.Velocity = moveVelocity;
                 body.MoveAndSlide();
 
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
