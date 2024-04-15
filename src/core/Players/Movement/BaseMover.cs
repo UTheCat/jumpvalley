@@ -297,7 +297,7 @@ namespace Jumpvalley.Players.Movement
 
         /// <summary>
         /// The most recent character velocity.
-        /// In BaseMover's PhysicsProcess updater, this is read by <see cref="GetVelocity"/>
+        /// In BaseMover's PhysicsProcess updater, this is read by <see cref="GetMoveVelocity"/>
         /// to determine what the velocity in the previous physics frame was before
         /// this value gets updated again.
         /// </summary>
@@ -400,12 +400,12 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
-        /// Gets the character's velocity for some sort of physics frame.
+        /// Gets the velocity that the character wants to move at for the current physics frame
         /// </summary>
         /// <param name="delta">The time it took to complete the physics frame in seconds</param>
         /// <param name="yaw">The yaw angle to make the move vector relative to.</param>
         /// <returns></returns>
-        public Vector3 GetVelocity(float delta, float yaw)
+        public Vector3 GetMoveVelocity(float delta, float yaw)
         {
             int physicsTicksPerSecond = Engine.PhysicsTicksPerSecond;
 
@@ -581,7 +581,7 @@ namespace Jumpvalley.Players.Movement
             CharacterBody3D body = Body;
             if (body != null)
             {
-                body.Velocity = GetVelocity((float)delta, GetYaw());
+                body.Velocity = GetMoveVelocity((float)delta, GetYaw());
                 body.MoveAndSlide();
 
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
