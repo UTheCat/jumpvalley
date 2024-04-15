@@ -101,6 +101,18 @@ namespace Jumpvalley.Players.Movement
         /// The initial velocity of the character's jump
         /// </summary>
         public float JumpVelocity = 5f;
+        
+        /// <summary>
+        /// The acceleration that the character speeds up at
+        /// </summary>
+        public float SpeedUpAcceleration = 16f;
+
+        /// <summary>
+        /// The acceleration that the character slows down at.
+        /// In order for the character to actually be able to slow down,
+        /// this value must be negative.
+        /// </summary>
+        public float SlowDownAcceleration = -16f;
 
         private float _speed;
 
