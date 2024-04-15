@@ -310,6 +310,8 @@ namespace Jumpvalley.Players.Movement
                 IsClimbing = canClimb;
             };
 
+            LastVelocity = Vector3.Zero;
+
             climbingRaycastSweep = new RaycastSweep(5, Vector3.Zero, Vector3.Zero, -1f);
 
             AddChild(CurrentClimber);
@@ -357,6 +359,9 @@ namespace Jumpvalley.Players.Movement
             float timingAdjustment = delta * physicsTicksPerSecond;
 
             bool isOnFloor = IsOnFloor();
+
+            Vector3 lastVelocity = LastVelocity;
+
             Vector3 moveVector = GetMoveVector(yaw);
 
             Vector3 velocity;
@@ -526,7 +531,6 @@ namespace Jumpvalley.Players.Movement
             {
                 body.Velocity = GetVelocity((float)delta, GetYaw());
                 body.MoveAndSlide();
-
 
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
                 Vector3 actualVelocity = body.Velocity;
