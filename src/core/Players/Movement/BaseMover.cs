@@ -601,6 +601,21 @@ namespace Jumpvalley.Players.Movement
                     SpeedUpAcceleration,
                     SlowDownAcceleration
                     );
+
+                // Make sure we don't exceed max speed
+                if (moveVelocity.X < 0)
+                {
+                    lastVelocity.X = Math.Max(lastVelocity.X, moveVelocity.X);
+                }
+                else if (moveVelocity.X > 0)
+                {
+                    lastVelocity.X = Math.Min(lastVelocity.X, moveVelocity.X);
+                }
+                else
+                {
+                    lastVelocity.X = 0f;
+                }
+
                 lastVelocity.Z = CalculateVelocity(
                     lastVelocity.Z,
                     RightValue != 0f,
@@ -608,7 +623,20 @@ namespace Jumpvalley.Players.Movement
                     SpeedUpAcceleration,
                     SlowDownAcceleration
                 );
-                
+
+                // Make sure we don't exceed max speed
+                if (moveVelocity.Z < 0)
+                {
+                    lastVelocity.Z = Math.Max(lastVelocity.Z, moveVelocity.Z);
+                }
+                else if (moveVelocity.X > 0)
+                {
+                    lastVelocity.Z = Math.Min(lastVelocity.Z, moveVelocity.Z);
+                }
+                else
+                {
+                    lastVelocity.Z = 0f;
+                }
 
                 body.Velocity = moveVelocity;
                 body.MoveAndSlide();
