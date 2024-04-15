@@ -358,9 +358,13 @@ namespace Jumpvalley.Players.Movement
 
         /// <summary>
         /// Calculates velocity for an axis based on the acceleration as specified in
-        /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>  
+        /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>.
         /// </summary>
-        private float CalculateVelocity(float velocity, bool isSpeedingUp)
+        /// <param name="velocity"></param>
+        /// <param name="isSpeedingUp"></param>
+        /// <param name="timeDelta">Number of seconds since the last physics frame</param>
+        /// <returns></returns>
+        private float CalculateVelocity(float velocity, bool isSpeedingUp, float timeDelta)
         {
             float acceleration;
             float newVelocity = 0f;
@@ -369,11 +373,11 @@ namespace Jumpvalley.Players.Movement
                 acceleration = SpeedUpAcceleration;
                 if (velocity > 0)
                 {
-                    newVelocity = velocity + acceleration;
+                    newVelocity = velocity + (acceleration * timeDelta);
                 }
                 else if (velocity < 0)
                 {
-                    newVelocity = velocity - acceleration;
+                    newVelocity = velocity - (acceleration * timeDelta);
                 }
             }
             else
@@ -384,11 +388,11 @@ namespace Jumpvalley.Players.Movement
                 acceleration = SlowDownAcceleration;
                 if (velocity > 0)
                 {
-                    newVelocity = velocity - acceleration;
+                    newVelocity = velocity - (acceleration * timeDelta);
                 }
                 else if (velocity > 0)
                 {
-                    newVelocity = velocity + acceleration;
+                    newVelocity = velocity + (acceleration * timeDelta);
                 }
             }
 
