@@ -611,6 +611,11 @@ namespace Jumpvalley.Players.Movement
                 // when travelling in an angle that isn't a multiple of (pi/4).
                 // Maybe consider lerping both lastVelocity.X and lastVelocity.Z to have them change
                 // in the same amount of time (instead of having them take different amounts of time like right now).
+                //
+                // How Celeste 64 does acceleration is pretty much what we're trying to replicate here.
+                // (This is the goal, we haven't actually managed to achieve this yet)
+                // Please check the game out though, it's really good for something made in less than 2 weeks.
+                // It can be found here: https://github.com/ExOK/Celeste64
                 Vector3 lastVelocity = LastVelocity;
                 lastVelocity.X = CalculateVelocity(
                     lastVelocity.X,
