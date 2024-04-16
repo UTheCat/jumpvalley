@@ -55,9 +55,9 @@ namespace Jumpvalley.Game
             // In-game gravity can be changed at runtime, so we need to account for that. See:
             // https://docs.godotengine.org/en/stable/classes/class_projectsettings.html#class-projectsettings-property-physics-3d-default-gravity
             // for more details.
-            Mover.Gravity = PhysicsServer3D.AreaGetParam(RootNode.GetViewport().FindWorld3D().Space, PhysicsServer3D.AreaParameter.Gravity).As<float>();
-            Mover.JumpVelocity = 25f;
-            Mover.Speed = 8f;
+            //Mover.Gravity = PhysicsServer3D.AreaGetParam(RootNode.GetViewport().FindWorld3D().Space, PhysicsServer3D.AreaParameter.Gravity).As<float>();
+            Mover.JumpVelocity = 2.5f;//25f;
+            Mover.Speed = 2.5f;//8f;
 
             Mover.Body = Character;
 
