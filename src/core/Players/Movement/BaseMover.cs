@@ -309,7 +309,7 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private RaycastSweep climbingRaycastSweep;
 
-        private ConsoleLogger logger;
+        //private ConsoleLogger logger;
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -331,7 +331,7 @@ namespace Jumpvalley.Players.Movement
 
             AddChild(CurrentClimber);
 
-            logger = new ConsoleLogger(nameof(ConsoleLogger));
+            //logger = new ConsoleLogger(nameof(ConsoleLogger));
         }
 
         /// <summary>
@@ -556,7 +556,6 @@ namespace Jumpvalley.Players.Movement
             float acceleration;
             float newVelocity = 0f;
 
-            Console.WriteLine(timeDelta);
             if (isSpeedingUp)
             {
                 acceleration = speedUpAcceleration;
@@ -632,7 +631,7 @@ namespace Jumpvalley.Players.Movement
                 body.Velocity = lastVelocity;
                 body.MoveAndSlide();
 
-                logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
+                //logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
 
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
                 Vector3 actualVelocity = body.Velocity;
