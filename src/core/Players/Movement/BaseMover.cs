@@ -624,6 +624,8 @@ namespace Jumpvalley.Players.Movement
 
                 logger.Print($"lastVelocity.X is {lastVelocity.X}");
 
+                lastVelocity.Y = moveVelocity.Y;
+
                 lastVelocity.Z = CalculateVelocity(
                     lastVelocity.Z,
                     moveVelocity.Z,
