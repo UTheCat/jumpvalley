@@ -619,7 +619,7 @@ namespace Jumpvalley.Players.Movement
                     fDelta,
                     speedUpAcceleration,
                     slowDownAcceleration,
-                    RightValue != 0f
+                    moveVelocity.X != 0f
                     );
 
                 logger.Print($"lastVelocity.X is {lastVelocity.X}");
@@ -632,7 +632,7 @@ namespace Jumpvalley.Players.Movement
                     fDelta,
                     speedUpAcceleration,
                     slowDownAcceleration,
-                    ForwardValue != 0f
+                    moveVelocity.Z != 0f
                     );
 
                 body.Velocity = lastVelocity;
