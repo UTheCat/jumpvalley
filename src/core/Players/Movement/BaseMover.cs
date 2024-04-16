@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Jumpvalley.Logging;
 using Jumpvalley.Players.Camera;
 using Jumpvalley.Raycasting;
 using System;
@@ -308,6 +309,8 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private RaycastSweep climbingRaycastSweep;
 
+        private ConsoleLogger logger;
+
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
         /// </summary>
@@ -327,6 +330,8 @@ namespace Jumpvalley.Players.Movement
             climbingRaycastSweep = new RaycastSweep(5, Vector3.Zero, Vector3.Zero, -1f);
 
             AddChild(CurrentClimber);
+
+            logger = new ConsoleLogger(nameof(ConsoleLogger));
         }
 
         /// <summary>
@@ -640,6 +645,8 @@ namespace Jumpvalley.Players.Movement
 
                 body.Velocity = lastVelocity;
                 body.MoveAndSlide();
+
+                logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
 
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
                 Vector3 actualVelocity = body.Velocity;
