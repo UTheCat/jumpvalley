@@ -607,6 +607,10 @@ namespace Jumpvalley.Players.Movement
                 Vector3 moveVelocity = GetMoveVelocity(fDelta, GetYaw());
 
                 // Apply acceleration
+                // Note to self: This current implementation using CalculateVelocity doesn't work too well
+                // when travelling in an angle that isn't a multiple of (pi/4).
+                // Maybe consider lerping both lastVelocity.X and lastVelocity.Z to have them change
+                // in the same amount of time (instead of having them take different amounts of time like right now).
                 Vector3 lastVelocity = LastVelocity;
                 lastVelocity.X = CalculateVelocity(
                     lastVelocity.X,
