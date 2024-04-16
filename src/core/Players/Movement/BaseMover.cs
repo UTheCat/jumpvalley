@@ -585,11 +585,11 @@ namespace Jumpvalley.Players.Movement
                 acceleration = slowDownAcceleration;
                 if (currentVelocity > 0)
                 {
-                    newVelocity = currentVelocity - (acceleration * timeDelta);
+                    newVelocity = Math.Max(0f, currentVelocity - (acceleration * timeDelta));
                 }
                 else if (currentVelocity < 0)
                 {
-                    newVelocity = currentVelocity + (acceleration * timeDelta);
+                    newVelocity = Math.Min(0f, currentVelocity + (acceleration * timeDelta));
                 }
             }
 
