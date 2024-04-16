@@ -606,55 +606,32 @@ namespace Jumpvalley.Players.Movement
             if (body != null)
             {
                 float fDelta = (float)delta;
+                float speedUpAcceleration = SpeedUpAcceleration;
+                float slowDownAcceleration = SlowDownAcceleration;
+
                 Vector3 moveVelocity = GetMoveVelocity(fDelta, GetYaw());
 
                 // Apply acceleration
                 Vector3 lastVelocity = LastVelocity;
                 lastVelocity.X = CalculateVelocity(
                     lastVelocity.X,
-                    RightValue != 0f,
+                    moveVelocity.X,
                     fDelta,
-                    SpeedUpAcceleration,
-                    SlowDownAcceleration
+                    speedUpAcceleration,
+                    slowDownAcceleration,
+                    RightValue != 0f
                     );
 
                 logger.Print($"lastVelocity.X is {lastVelocity.X}");
 
-                // Make sure we don't exceed max speed
-                if (moveVelocity.X < 0)
-                {
-                    lastVelocity.X = Math.Max(lastVelocity.X, moveVelocity.X);
-                }
-                else if (moveVelocity.X > 0)
-                {
-                    lastVelocity.X = Math.Min(lastVelocity.X, moveVelocity.X);
-                }
-                else
-                {
-                    lastVelocity.X = 0f;
-                }
-
                 lastVelocity.Z = CalculateVelocity(
                     lastVelocity.Z,
-                    ForwardValue != 0f,
+                    moveVelocity.Z,
                     fDelta,
-                    SpeedUpAcceleration,
-                    SlowDownAcceleration
-                );
-
-                // Make sure we don't exceed max speed
-                if (moveVelocity.Z < 0)
-                {
-                    lastVelocity.Z = Math.Max(lastVelocity.Z, moveVelocity.Z);
-                }
-                else if (moveVelocity.Z > 0)
-                {
-                    lastVelocity.Z = Math.Min(lastVelocity.Z, moveVelocity.Z);
-                }
-                else
-                {
-                    lastVelocity.Z = 0f;
-                }
+                    speedUpAcceleration,
+                    slowDownAcceleration,
+                    ForwardValue != 0f
+                    );
 
                 body.Velocity = lastVelocity;
                 body.MoveAndSlide();
