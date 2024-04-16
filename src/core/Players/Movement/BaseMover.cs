@@ -542,7 +542,7 @@ namespace Jumpvalley.Players.Movement
         /// <param name="goalVelocity">The velocity to eventually achieve</param>
         /// <param name="timeDelta">Number of seconds since the last physics frame</param>
         /// <param name="speedUpAcceleration"></param>
-        /// <param name="slowDownAcceleration"></param>
+        /// <param name="slowDownAcceleration">This value must be negative in order for slowing down to work properly</param>
         /// <returns></returns>
         private static float CalculateVelocity(
             float currentVelocity,
@@ -559,8 +559,6 @@ namespace Jumpvalley.Players.Movement
             Console.WriteLine(timeDelta);
             if (isSpeedingUp)
             {
-                
-                Console.WriteLine("speeding up");
                 acceleration = speedUpAcceleration;
                 if (goalVelocity > currentVelocity)
                 {
@@ -574,11 +572,9 @@ namespace Jumpvalley.Players.Movement
                 {
                     newVelocity = goalVelocity;
                 }
-                Console.WriteLine($"newVelocity is {newVelocity}");
             }
             else
             {
-                Console.WriteLine("slowing down");
                 // If we're already stopped, you can't slow down any further.
                 if (currentVelocity == 0f) return 0f;
 
@@ -621,8 +617,6 @@ namespace Jumpvalley.Players.Movement
                     slowDownAcceleration,
                     moveVelocity.X != 0f
                     );
-
-                logger.Print($"lastVelocity.X is {lastVelocity.X}");
 
                 lastVelocity.Y = moveVelocity.Y;
 
