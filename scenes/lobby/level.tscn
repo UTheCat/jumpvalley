@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=37 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -32,6 +32,12 @@ height = 20.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0o4nm"]
 height = 20.0
 radius = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6rwll"]
+size = Vector3(1, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jpkqu"]
+size = Vector3(1, 1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rmlu0"]
 
@@ -168,6 +174,21 @@ mesh = SubResource("CylinderMesh_cml3x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RaisedPlatformThing/Cylinder"]
 shape = SubResource("CylinderShape3D_0o4nm")
+
+[node name="Conveyor" type="StaticBody3D" parent="Interactives"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, -18)
+constant_linear_velocity = Vector3(0, 0, 50)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Conveyor"]
+material_override = ExtResource("5_efv4u")
+mesh = SubResource("BoxMesh_6rwll")
+
+[node name="Label3D" type="Label3D" parent="Interactives/Conveyor/MeshInstance3D"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 0.505, 0)
+text = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Conveyor"]
+shape = SubResource("BoxShape3D_jpkqu")
 
 [node name="SpinningMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
