@@ -538,47 +538,58 @@ namespace Jumpvalley.Players.Movement
         /// Calculates velocity for an axis based on the acceleration as specified in
         /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>.
         /// </summary>
-        /// <param name="velocity"></param>
-        /// <param name="isSpeedingUp"></param>
+        /// <param name="currentVelocity"></param>
+        /// <param name="goalVelocity">The velocity to eventually achieve</param>
         /// <param name="timeDelta">Number of seconds since the last physics frame</param>
         /// <param name="speedUpAcceleration"></param>
         /// <param name="slowDownAcceleration"></param>
         /// <returns></returns>
         private static float CalculateVelocity(
-            float velocity,
-            bool isSpeedingUp,
+            float currentVelocity,
+            float goalVelocity,
             float timeDelta,
             float speedUpAcceleration,
-            float slowDownAcceleration
+            float slowDownAcceleration,
+            bool isSpeedingUp
             )
         {
             float acceleration;
             float newVelocity = 0f;
+
+            Console.WriteLine(timeDelta);
             if (isSpeedingUp)
             {
+                
+                Console.WriteLine("speeding up");
                 acceleration = speedUpAcceleration;
-                if (velocity > 0)
+                if (goalVelocity > currentVelocity)
                 {
-                    newVelocity = velocity + (acceleration * timeDelta);
+                    newVelocity = Math.Min(goalVelocity, currentVelocity + (acceleration * timeDelta));
                 }
-                else if (velocity < 0)
+                else if (goalVelocity < currentVelocity)
                 {
-                    newVelocity = velocity - (acceleration * timeDelta);
+                    newVelocity = Math.Max(goalVelocity, currentVelocity - (acceleration * timeDelta));
                 }
+                else
+                {
+                    newVelocity = goalVelocity;
+                }
+                Console.WriteLine($"newVelocity is {newVelocity}");
             }
             else
             {
+                Console.WriteLine("slowing down");
                 // If we're already stopped, you can't slow down any further.
-                if (velocity == 0f) return 0f;
+                if (currentVelocity == 0f) return 0f;
 
                 acceleration = slowDownAcceleration;
-                if (velocity > 0)
+                if (currentVelocity > 0)
                 {
-                    newVelocity = velocity - (acceleration * timeDelta);
+                    newVelocity = currentVelocity - (acceleration * timeDelta);
                 }
-                else if (velocity > 0)
+                else if (currentVelocity < 0)
                 {
-                    newVelocity = velocity + (acceleration * timeDelta);
+                    newVelocity = currentVelocity + (acceleration * timeDelta);
                 }
             }
 
@@ -601,11 +612,13 @@ namespace Jumpvalley.Players.Movement
                 Vector3 lastVelocity = LastVelocity;
                 lastVelocity.X = CalculateVelocity(
                     lastVelocity.X,
-                    ForwardValue != 0f,
+                    RightValue != 0f,
                     fDelta,
                     SpeedUpAcceleration,
                     SlowDownAcceleration
                     );
+
+                logger.Print($"lastVelocity.X is {lastVelocity.X}");
 
                 // Make sure we don't exceed max speed
                 if (moveVelocity.X < 0)
@@ -623,7 +636,7 @@ namespace Jumpvalley.Players.Movement
 
                 lastVelocity.Z = CalculateVelocity(
                     lastVelocity.Z,
-                    RightValue != 0f,
+                    ForwardValue != 0f,
                     fDelta,
                     SpeedUpAcceleration,
                     SlowDownAcceleration
