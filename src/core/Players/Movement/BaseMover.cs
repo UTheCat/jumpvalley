@@ -612,7 +612,7 @@ namespace Jumpvalley.Players.Movement
                 // Acceleration should be relative to the change in direction based
                 // on how the currently requested velocity differs from the previous velocity.
                 Vector3 lastVelocity = LastVelocity;
-                
+
                 // The direction that velocity is changing in.
                 // We only calculate this based on X and Z movement, since
                 // we don't want the value of the Acceleration variable
@@ -631,7 +631,9 @@ namespace Jumpvalley.Players.Movement
                 // changed as a result of applying acceleration for this frame.
                 Vector2 newXZVelocityDiff = new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(finalVelocity.X, finalVelocity.Z);
                 logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
-                if (!Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle()))
+                if (!Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle())
+                || newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
+                )
                 {
                     finalVelocity = moveVelocity;
                     logger.Print("Snapped velocity");
