@@ -670,7 +670,7 @@ namespace Jumpvalley.Players.Movement
                 logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
 
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
-                Vector3 actualVelocity = body.GetRealVelocity();
+                Vector3 actualVelocity = body.Velocity; //body.GetRealVelocity();
 
                 // To keep things smooth, we want to store the character velocity for this physics frame
                 // after MoveAndSlide() has modified the velocity
