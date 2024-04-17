@@ -620,7 +620,7 @@ namespace Jumpvalley.Players.Movement
                 // We only calculate this based on X and Z movement, since
                 // we don't want the value of the Acceleration variable
                 // to affect upward and downward movement.
-                // We are therefore using a Vector2 instead of a Vector3 here
+                // We are therefore using a Vector2 instead of a Vector3 here to calculate direction change for the X and Z movement
                 // (for optimization purposes) (the Vector2's Y-value would be the Z component of our 3d velocity).
                 Vector2 direction = (new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(lastVelocity.X, lastVelocity.Z)).Normalized();
                 
