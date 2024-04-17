@@ -597,8 +597,7 @@ namespace Jumpvalley.Players.Movement
             if (body != null)
             {
                 float fDelta = (float)delta;
-                float speedUpAcceleration = SpeedUpAcceleration;
-                float slowDownAcceleration = SlowDownAcceleration;
+                float acceleration = Acceleration;
 
                 Vector3 moveVelocity = GetMoveVelocity(fDelta, GetYaw());
 
@@ -616,6 +615,16 @@ namespace Jumpvalley.Players.Movement
                 // Please check the game out though, it's really good for something made in less than 2 weeks.
                 // It can be found here: https://github.com/ExOK/Celeste64
                 Vector3 lastVelocity = LastVelocity;
+
+                // The direction that velocity is changing in.
+                // We only calculate this based on X and Z movement, since
+                // we don't want the value of the Acceleration variable
+                // to affect upward and downward movement.
+                // We are therefore using a Vector2 instead of a Vector3 here
+                // (for optimization purposes) (the Vector2's Y-value would be the Z component of our 3d velocity).
+                Vector2 direction = (new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(lastVelocity.X, lastVelocity.Z)).Normalized();
+                
+
                 lastVelocity.X = CalculateVelocity(
                     lastVelocity.X,
                     moveVelocity.X,
