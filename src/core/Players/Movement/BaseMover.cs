@@ -607,6 +607,9 @@ namespace Jumpvalley.Players.Movement
                 Vector3 moveVelocity = GetMoveVelocity(fDelta, GetYaw());
 
                 // Apply acceleration
+                // Acceleration should be relative to the change in direction based
+                // on how the currently requested velocity differs from the previous velocity.
+                //
                 // Note to self: This current implementation using CalculateVelocity doesn't work too well
                 // when travelling in an angle that isn't a multiple of (pi/4).
                 // Maybe consider lerping both lastVelocity.X and lastVelocity.Z to have them change
