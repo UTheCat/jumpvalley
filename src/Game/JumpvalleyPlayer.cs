@@ -58,8 +58,7 @@ namespace Jumpvalley.Game
             Mover.Gravity = PhysicsServer3D.AreaGetParam(RootNode.GetViewport().FindWorld3D().Space, PhysicsServer3D.AreaParameter.Gravity).As<float>();
             Mover.JumpVelocity = 25f;
             Mover.Speed = 8f;
-            Mover.SpeedUpAcceleration = 208f;
-            Mover.SlowDownAcceleration = -208f;
+            Mover.Acceleration = 16f;
 
             Mover.Body = Character;
 
