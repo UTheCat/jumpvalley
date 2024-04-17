@@ -623,29 +623,11 @@ namespace Jumpvalley.Players.Movement
                 // We are therefore using a Vector2 instead of a Vector3 here to calculate direction change for the X and Z movement
                 // (for optimization purposes) (the Vector2's Y-value would be the Z component of our 3d velocity).
                 Vector2 direction = (new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(lastVelocity.X, lastVelocity.Z)).Normalized();
-                
+                Vector2 xzVelocityDelta = direction * acceleration * fDelta;
 
-                lastVelocity.X = CalculateVelocity(
-                    lastVelocity.X,
-                    moveVelocity.X,
-                    fDelta,
-                    speedUpAcceleration,
-                    slowDownAcceleration,
-                    moveVelocity.X != 0f
-                    );
+                Vector3 finalVelocity = lastVelocity - new Vector3(xzVelocityDelta.X, 0, xzVelocityDelta.Y);
 
-                lastVelocity.Y = moveVelocity.Y;
-
-                lastVelocity.Z = CalculateVelocity(
-                    lastVelocity.Z,
-                    moveVelocity.Z,
-                    fDelta,
-                    speedUpAcceleration,
-                    slowDownAcceleration,
-                    moveVelocity.Z != 0f
-                    );
-
-                body.Velocity = lastVelocity;
+                body.Velocity = finalVelocity;
                 body.MoveAndSlide();
 
                 //logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
