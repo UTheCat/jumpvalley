@@ -184,11 +184,9 @@ namespace Jumpvalley.Players.Movement
                 _isRunning = value;
 
                 SetPhysicsProcess(value);
-                SetProcess(value);
+                //SetProcess(value);
             }
         }
-
-        // For climbing stuff
 
         private CharacterBody3D _body = null;
 
@@ -229,7 +227,7 @@ namespace Jumpvalley.Players.Movement
                 {
                     rotator.Body = value;
                 }
-                
+
                 if (climber != null)
                 {
                     CollisionShape3D hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
@@ -320,6 +318,7 @@ namespace Jumpvalley.Players.Movement
         public BaseMover()
         {
             IsRunning = false;
+            SetProcess(false);
             Rotator = new BodyRotator();
 
             CurrentClimber = new Climber(null);
@@ -379,7 +378,7 @@ namespace Jumpvalley.Players.Movement
             float timingAdjustment = delta * physicsTicksPerSecond;
 
             bool isOnFloor = IsOnFloor();
-            
+
             Vector3 moveVector = GetMoveVector(yaw);
             Vector3 velocity;
 
@@ -605,8 +604,34 @@ namespace Jumpvalley.Players.Movement
             {
                 float fDelta = (float)delta;
                 float acceleration = Acceleration;
+                float yaw = GetYaw();
 
-                Vector3 moveVelocity = GetMoveVelocity(fDelta, GetYaw());
+                // Make sure this physics frame picks up the latest character rotation
+                //Rotator.Update(yaw);
+                BodyRotator rotator = Rotator;
+
+                // Only rotate if the rotation is locked (such as when shift lock is enabled) or when the character is moving
+                if (rotator != null)
+                {
+                    if (IsRotationLocked)
+                    {
+                        // Set the angle to the camera's yaw
+                        rotator.Yaw = yaw;
+                        rotator.Update(delta);
+                    }
+                    else if (ForwardValue != 0 || RightValue != 0)
+                    {
+                        // Thanks to Godot 4.0 .NET thirdperson controller by vaporvee for helping me figure this one out
+                        // The extra radians are added on top of the original camera yaw, since
+                        // the direction of the character should be determined by the yaw corresponding to the move vector
+                        // relative to the camera yaw.
+                        rotator.Yaw = yaw + (float)Math.Atan2(-RightValue, -ForwardValue);
+                        rotator.GradualTurnEnabled = IsJumping || (!IsClimbing);
+                        rotator.Update(delta);
+                    }
+                }
+
+                Vector3 moveVelocity = GetMoveVelocity(fDelta, yaw);
 
                 // Apply acceleration
                 // Acceleration should be relative to the change in direction based
@@ -690,6 +715,7 @@ namespace Jumpvalley.Players.Movement
         /// Callback to associate with the normal process step in the current scene tree
         /// </summary>
         /// <param name="delta"></param>
+        /*
         public void HandleProcessStep(double delta)
         {
             BodyRotator rotator = Rotator;
@@ -715,6 +741,7 @@ namespace Jumpvalley.Players.Movement
                 }
             }
         }
+        */
 
         /// <summary>
         /// Disposes of this <see cref="BaseMover"/>
@@ -740,11 +767,13 @@ namespace Jumpvalley.Players.Movement
             base._PhysicsProcess(delta);
         }
 
+        /*
         public override void _Process(double delta)
         {
             HandleProcessStep(delta);
             base._Process(delta);
         }
+        */
 
         /// <summary>
         /// Event that's raised when the character being moved by this <see cref="BaseMover"/> changes.
