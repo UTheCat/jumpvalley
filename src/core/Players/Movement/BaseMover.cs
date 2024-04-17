@@ -56,12 +56,19 @@ namespace Jumpvalley.Players.Movement
             Falling = 6
         }
 
-        private BodyState _currentBodyState = BodyState.Stopped;
-
         /// <summary>
         /// The name of the <see cref="CollisionShape3D"/> that should be primarily in charge of handling a character's collision.
         /// </summary>
         public static readonly string CHARACTER_ROOT_COLLIDER_NAME = "RootCollider";
+
+        /// <summary>
+        /// "Length/magnitude" between requested character move velocity and real velocity after acceleration changes.
+        /// This is to prevent floating point errors from causing gradual velocity changes to "overshoot" past the goal velocity.
+        /// Snapping will occur if the length/magnitude is at or below this value.
+        /// </summary>
+        private static readonly float VELOCITY_DIFF_SNAP_THRESHOLD = 0.1f;
+
+        private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
         /// The current movement state of the character that's being moved by this <see cref="BaseMover"/>
@@ -604,18 +611,8 @@ namespace Jumpvalley.Players.Movement
                 // Apply acceleration
                 // Acceleration should be relative to the change in direction based
                 // on how the currently requested velocity differs from the previous velocity.
-                //
-                // Note to self: This current implementation using CalculateVelocity doesn't work too well
-                // when travelling in an angle that isn't a multiple of (pi/4).
-                // Maybe consider lerping both lastVelocity.X and lastVelocity.Z to have them change
-                // in the same amount of time (instead of having them take different amounts of time like right now).
-                //
-                // How Celeste 64 does acceleration is pretty much what we're trying to replicate here.
-                // (This is the goal, we haven't actually managed to achieve this yet)
-                // Please check the game out though, it's really good for something made in less than 2 weeks.
-                // It can be found here: https://github.com/ExOK/Celeste64
                 Vector3 lastVelocity = LastVelocity;
-
+                
                 // The direction that velocity is changing in.
                 // We only calculate this based on X and Z movement, since
                 // we don't want the value of the Acceleration variable
@@ -627,6 +624,14 @@ namespace Jumpvalley.Players.Movement
 
                 Vector3 finalVelocity = lastVelocity + new Vector3(xzVelocityDelta.X, 0, xzVelocityDelta.Y);
                 finalVelocity.Y = moveVelocity.Y;
+
+                // We don't want velocity changes to "overshoot" past the destination velocity.
+                // Therefore, we'll have to snap the velocity to the goal velocity once it's time to do so.
+                if ((new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(lastVelocity.X, lastVelocity.Z)).Length() <= VELOCITY_DIFF_SNAP_THRESHOLD)
+                {
+                    finalVelocity = moveVelocity;
+                    logger.Print("Snapped velocity");
+                }
 
                 body.Velocity = finalVelocity;
                 body.MoveAndSlide();
