@@ -629,7 +629,8 @@ namespace Jumpvalley.Players.Movement
                 // Therefore, we'll have to snap the velocity to the goal velocity once it's time to do so.
                 // We know we've shot past the goal velocity if the direction from the current velocity to the goal velocity
                 // changed as a result of applying acceleration for this frame.
-                Vector2 newXZVelocityDiff = new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(lastVelocity.X, lastVelocity.Z);
+                Vector2 newXZVelocityDiff = new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(finalVelocity.X, finalVelocity.Z);
+                logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
                 if (!Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle()))
                 {
                     finalVelocity = moveVelocity;
