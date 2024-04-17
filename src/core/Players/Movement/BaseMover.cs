@@ -310,7 +310,7 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private RaycastSweep climbingRaycastSweep;
 
-        private ConsoleLogger logger;
+        //private ConsoleLogger logger;
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -333,7 +333,7 @@ namespace Jumpvalley.Players.Movement
 
             AddChild(CurrentClimber);
 
-            logger = new ConsoleLogger(nameof(ConsoleLogger));
+            //logger = new ConsoleLogger(nameof(ConsoleLogger));
         }
 
         /// <summary>
@@ -655,19 +655,19 @@ namespace Jumpvalley.Players.Movement
                 // We know we've shot past the goal velocity if the direction from the current velocity to the goal velocity
                 // changed as a result of applying acceleration for this frame.
                 Vector2 newXZVelocityDiff = new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(finalVelocity.X, finalVelocity.Z);
-                logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
+                //logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
                 if (!Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle())
                 || newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
                 )
                 {
                     finalVelocity = moveVelocity;
-                    logger.Print("Snapped velocity");
+                    //logger.Print("Snapped velocity");
                 }
 
                 body.Velocity = finalVelocity;
                 body.MoveAndSlide();
 
-                logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
+                //logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
 
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
                 Vector3 actualVelocity = body.Velocity; //body.GetRealVelocity();
