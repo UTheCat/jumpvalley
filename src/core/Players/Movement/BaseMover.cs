@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Jumpvalley.Logging;
 using Jumpvalley.Players.Camera;
 using Jumpvalley.Raycasting;
 using System;
@@ -55,12 +56,19 @@ namespace Jumpvalley.Players.Movement
             Falling = 6
         }
 
-        private BodyState _currentBodyState = BodyState.Stopped;
-
         /// <summary>
         /// The name of the <see cref="CollisionShape3D"/> that should be primarily in charge of handling a character's collision.
         /// </summary>
         public static readonly string CHARACTER_ROOT_COLLIDER_NAME = "RootCollider";
+
+        /// <summary>
+        /// "Length/magnitude" between requested character move velocity and real velocity after acceleration changes.
+        /// This is to prevent floating point errors from causing gradual velocity changes to "overshoot" past the goal velocity.
+        /// Snapping will occur if the length/magnitude is at or below this value.
+        /// </summary>
+        private static readonly float VELOCITY_DIFF_SNAP_THRESHOLD = 0.1f;
+
+        private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
         /// The current movement state of the character that's being moved by this <see cref="BaseMover"/>
@@ -101,6 +109,14 @@ namespace Jumpvalley.Players.Movement
         /// The initial velocity of the character's jump
         /// </summary>
         public float JumpVelocity = 5f;
+
+        /// <summary>
+        /// The acceleration that the character's velocity changes at.
+        /// <br/>
+        /// This doesn't affect upward and downward movement,
+        /// and therefore, this only affects X and Z movement.
+        /// </summary>
+        public float Acceleration = 16f;
 
         private float _speed;
 
@@ -168,11 +184,9 @@ namespace Jumpvalley.Players.Movement
                 _isRunning = value;
 
                 SetPhysicsProcess(value);
-                SetProcess(value);
+                //SetProcess(value);
             }
         }
-
-        // For climbing stuff
 
         private CharacterBody3D _body = null;
 
@@ -213,7 +227,7 @@ namespace Jumpvalley.Players.Movement
                 {
                     rotator.Body = value;
                 }
-                
+
                 if (climber != null)
                 {
                     CollisionShape3D hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
@@ -284,9 +298,19 @@ namespace Jumpvalley.Players.Movement
         public Climber CurrentClimber { get; private set; }
 
         /// <summary>
+        /// The most recent character velocity.
+        /// In BaseMover's PhysicsProcess updater, this is read by <see cref="GetMoveVelocity"/>
+        /// to determine what the velocity in the previous physics frame was before
+        /// this value gets updated again.
+        /// </summary>
+        public Vector3 LastVelocity { get; private set; }
+
+        /// <summary>
         /// Raycast sweep used to grab the normal of an object that the player is climbing on
         /// </summary>
         private RaycastSweep climbingRaycastSweep;
+
+        //private ConsoleLogger logger;
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -294,6 +318,7 @@ namespace Jumpvalley.Players.Movement
         public BaseMover()
         {
             IsRunning = false;
+            SetProcess(false);
             Rotator = new BodyRotator();
 
             CurrentClimber = new Climber(null);
@@ -302,9 +327,13 @@ namespace Jumpvalley.Players.Movement
                 IsClimbing = canClimb;
             };
 
+            LastVelocity = Vector3.Zero;
+
             climbingRaycastSweep = new RaycastSweep(5, Vector3.Zero, Vector3.Zero, -1f);
 
             AddChild(CurrentClimber);
+
+            //logger = new ConsoleLogger(nameof(ConsoleLogger));
         }
 
         /// <summary>
@@ -335,12 +364,12 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
-        /// Gets the character's velocity for some sort of physics frame.
+        /// Gets the velocity that the character wants to move at for the current physics frame
         /// </summary>
         /// <param name="delta">The time it took to complete the physics frame in seconds</param>
         /// <param name="yaw">The yaw angle to make the move vector relative to.</param>
         /// <returns></returns>
-        public Vector3 GetVelocity(float delta, float yaw)
+        public Vector3 GetMoveVelocity(float delta, float yaw)
         {
             int physicsTicksPerSecond = Engine.PhysicsTicksPerSecond;
 
@@ -349,8 +378,8 @@ namespace Jumpvalley.Players.Movement
             float timingAdjustment = delta * physicsTicksPerSecond;
 
             bool isOnFloor = IsOnFloor();
-            Vector3 moveVector = GetMoveVector(yaw);
 
+            Vector3 moveVector = GetMoveVector(yaw);
             Vector3 velocity;
 
             if (Body == null)
@@ -508,6 +537,63 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
+        /// Calculates velocity for an axis based on the acceleration as specified in
+        /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>.
+        /// </summary>
+        /// <param name="currentVelocity"></param>
+        /// <param name="goalVelocity">The velocity to eventually achieve</param>
+        /// <param name="timeDelta">Number of seconds since the last physics frame</param>
+        /// <param name="speedUpAcceleration"></param>
+        /// <param name="slowDownAcceleration">This value must be negative in order for slowing down to work properly</param>
+        /// <returns></returns>
+        private static float CalculateVelocity(
+            float currentVelocity,
+            float goalVelocity,
+            float timeDelta,
+            float speedUpAcceleration,
+            float slowDownAcceleration,
+            bool isSpeedingUp
+            )
+        {
+            float acceleration;
+            float newVelocity = 0f;
+
+            if (isSpeedingUp)
+            {
+                acceleration = speedUpAcceleration;
+                if (goalVelocity > currentVelocity)
+                {
+                    newVelocity = Math.Min(goalVelocity, currentVelocity + (acceleration * timeDelta));
+                }
+                else if (goalVelocity < currentVelocity)
+                {
+                    newVelocity = Math.Max(goalVelocity, currentVelocity - (acceleration * timeDelta));
+                }
+                else
+                {
+                    newVelocity = goalVelocity;
+                }
+            }
+            else
+            {
+                // If we're already stopped, you can't slow down any further.
+                if (currentVelocity == 0f) return 0f;
+
+                acceleration = slowDownAcceleration;
+                if (currentVelocity > 0)
+                {
+                    newVelocity = Math.Max(0f, currentVelocity + (acceleration * timeDelta));
+                }
+                else if (currentVelocity < 0)
+                {
+                    newVelocity = Math.Min(0f, currentVelocity - (acceleration * timeDelta));
+                }
+            }
+
+            return newVelocity;
+        }
+
+        /// <summary>
         /// Callback to associate with the physics process step in the current scene tree
         /// </summary>
         /// <param name="delta">The time it took and should take to complete the physics frame in seconds</param>
@@ -516,11 +602,79 @@ namespace Jumpvalley.Players.Movement
             CharacterBody3D body = Body;
             if (body != null)
             {
-                body.Velocity = GetVelocity((float)delta, GetYaw());
+                float fDelta = (float)delta;
+                float acceleration = Acceleration;
+                float yaw = GetYaw();
+
+                // Make sure this physics frame picks up the latest character rotation
+                //Rotator.Update(yaw);
+                BodyRotator rotator = Rotator;
+
+                // Only rotate if the rotation is locked (such as when shift lock is enabled) or when the character is moving
+                if (rotator != null)
+                {
+                    if (IsRotationLocked)
+                    {
+                        // Set the angle to the camera's yaw
+                        rotator.Yaw = yaw;
+                        rotator.Update(delta);
+                    }
+                    else if (ForwardValue != 0 || RightValue != 0)
+                    {
+                        // Thanks to Godot 4.0 .NET thirdperson controller by vaporvee for helping me figure this one out
+                        // The extra radians are added on top of the original camera yaw, since
+                        // the direction of the character should be determined by the yaw corresponding to the move vector
+                        // relative to the camera yaw.
+                        rotator.Yaw = yaw + (float)Math.Atan2(-RightValue, -ForwardValue);
+                        rotator.GradualTurnEnabled = IsJumping || (!IsClimbing);
+                        rotator.Update(delta);
+                    }
+                }
+
+                Vector3 moveVelocity = GetMoveVelocity(fDelta, yaw);
+
+                // Apply acceleration
+                // Acceleration should be relative to the change in direction based
+                // on how the currently requested velocity differs from the previous velocity.
+                Vector3 lastVelocity = LastVelocity;
+
+                // The direction that velocity is changing in.
+                // We only calculate this based on X and Z movement, since
+                // we don't want the value of the Acceleration variable
+                // to affect upward and downward movement.
+                // We are therefore using a Vector2 instead of a Vector3 here to calculate direction change for the X and Z movement
+                // (for optimization purposes) (the Vector2's Y-value would be the Z component of our 3d velocity).
+                Vector2 direction = (new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(lastVelocity.X, lastVelocity.Z)).Normalized();
+                Vector2 xzVelocityDelta = direction * acceleration * fDelta;
+
+                Vector3 finalVelocity = lastVelocity + new Vector3(xzVelocityDelta.X, 0, xzVelocityDelta.Y);
+                finalVelocity.Y = moveVelocity.Y;
+
+                // We don't want velocity changes to "overshoot" past the destination velocity.
+                // Therefore, we'll have to snap the velocity to the goal velocity once it's time to do so.
+                // We know we've shot past the goal velocity if the direction from the current velocity to the goal velocity
+                // changed as a result of applying acceleration for this frame.
+                Vector2 newXZVelocityDiff = new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(finalVelocity.X, finalVelocity.Z);
+                //logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
+                if (!Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle())
+                || newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
+                )
+                {
+                    finalVelocity = moveVelocity;
+                    //logger.Print("Snapped velocity");
+                }
+
+                body.Velocity = finalVelocity;
                 body.MoveAndSlide();
 
+                //logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
+
                 // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
-                Vector3 actualVelocity = body.Velocity;
+                Vector3 actualVelocity = body.Velocity; //body.GetRealVelocity();
+
+                // To keep things smooth, we want to store the character velocity for this physics frame
+                // after MoveAndSlide() has modified the velocity
+                LastVelocity = actualVelocity;
 
                 if (IsJumping && actualVelocity.Y > 0)
                 {
@@ -561,6 +715,7 @@ namespace Jumpvalley.Players.Movement
         /// Callback to associate with the normal process step in the current scene tree
         /// </summary>
         /// <param name="delta"></param>
+        /*
         public void HandleProcessStep(double delta)
         {
             BodyRotator rotator = Rotator;
@@ -586,6 +741,7 @@ namespace Jumpvalley.Players.Movement
                 }
             }
         }
+        */
 
         /// <summary>
         /// Disposes of this <see cref="BaseMover"/>
@@ -611,11 +767,13 @@ namespace Jumpvalley.Players.Movement
             base._PhysicsProcess(delta);
         }
 
+        /*
         public override void _Process(double delta)
         {
             HandleProcessStep(delta);
             base._Process(delta);
         }
+        */
 
         /// <summary>
         /// Event that's raised when the character being moved by this <see cref="BaseMover"/> changes.
