@@ -27,7 +27,7 @@ namespace Jumpvalley.Game.Testing
             }
             else
             {
-                label.Text = $"Testing acceleration handled by {mover.Name}\nVelocity: {body}\nReal velocity: {body.GetRealVelocity()}";
+                label.Text = $"Testing acceleration handled by {mover.Name}\nAcceleration: {mover.Acceleration} m/s^2\nVelocity: {body}\nReal velocity: {body.GetRealVelocity()}";
             }
 
             base._Process(delta);
