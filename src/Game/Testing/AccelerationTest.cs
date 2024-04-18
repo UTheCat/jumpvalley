@@ -16,6 +16,7 @@ namespace Jumpvalley.Game.Testing
             mover = moverToTest;
 
             label = new Label();
+            AddChild(label);
         }
 
         public override void _Process(double delta)
