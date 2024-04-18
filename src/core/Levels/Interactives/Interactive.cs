@@ -40,7 +40,6 @@ namespace Jumpvalley.Levels.Interactives
         {
             IsInitialized = false;
             Clock = clock;
-            Name = nameof(Interactive);
         }
 
         /// <summary>

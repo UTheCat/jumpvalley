@@ -35,10 +35,7 @@ namespace Jumpvalley.Music
         /// </summary>
         public Node3D BindedNode = null;
 
-        public MusicZonePlayer() : base()
-        {
-            Name = nameof(MusicZonePlayer);
-        }
+        public MusicZonePlayer() : base() { }
 
         /// <summary>
         /// Deregisters a music zone from playback.

@@ -35,8 +35,6 @@ namespace Jumpvalley.Levels
         /// <param name="player">The player instance to run this level runner under</param>
         public LevelRunner(Player player)
         {
-            Name = nameof(LevelRunner);
-
             CurrentPlayer = player;
         }
     }

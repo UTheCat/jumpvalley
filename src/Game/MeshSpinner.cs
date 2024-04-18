@@ -11,7 +11,6 @@ namespace Jumpvalley.Game
 
         public MeshSpinner(MeshInstance3D newMesh, double newRadiansPerSecond)
         {
-            Name = nameof(MeshSpinner);
             mesh = newMesh;
             radiansPerSecond = newRadiansPerSecond;
         }

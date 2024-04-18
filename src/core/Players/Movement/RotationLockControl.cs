@@ -75,7 +75,6 @@ namespace Jumpvalley.Players.Movement
         /// <param name="camera">The camera to associate with</param>
         public RotationLockControl(BaseMover mover, BaseCamera camera)
         {
-            Name = nameof(RotationLockControl);
             UserEnabledShiftLock = false;
             Mover = mover;
             Camera = camera;
