@@ -76,7 +76,7 @@ namespace Jumpvalley.Raycasting
         /// <param name="endPosition"></param>
         public RaycastSweep(int numRaycasts, Vector3 startPosition, Vector3 endPosition, float raycastLength)
         {
-            Name = $"{nameof(RaycastSweep)}_{GetHashCode()}";
+            Name = nameof(RaycastSweep);
 
             NumRaycasts = numRaycasts;
             StartPosition = startPosition;

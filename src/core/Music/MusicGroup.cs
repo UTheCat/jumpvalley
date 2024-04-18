@@ -59,7 +59,7 @@ namespace Jumpvalley.Music
             ActualNode = node;
             MusicListNode = node.GetNode(MUSIC_LIST_NODE_NAME);
 
-            Name = nameof(MusicGroup) + "Handler@" + GetHashCode();
+            Name = $"{nameof(MusicGroup)}_Handler";
             node.AddChild(this);
 
             // Add the song packages

@@ -97,10 +97,9 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public Climber(CollisionShape3D hitbox)
         {
-            Name = $"{nameof(Climber)}_{GetHashCode()}";
+            Name = nameof(Climber);
 
             area = new Area3D();
-            area.Name = $"{nameof(Climber)}_{GetHashCode()}_{nameof(area)}";
 
             areaBox = new BoxShape3D();
 

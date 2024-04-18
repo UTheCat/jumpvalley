@@ -19,7 +19,7 @@ namespace Jumpvalley.Game.Levels
 
         public UserLevelRunner(Player player, LevelTimer levelTimerOperator) : base(player)
         {
-            Name = $"{nameof(UserLevelRunner)}_{GetHashCode()}";
+            Name = nameof(UserLevelRunner);
 
             LevelTimerOperator = levelTimerOperator;
             SetProcess(true);

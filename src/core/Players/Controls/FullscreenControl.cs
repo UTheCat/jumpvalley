@@ -44,7 +44,7 @@ namespace Jumpvalley.Players.Controls
         /// <param name="enabled">Whether or not fullscreen is initially enabled</param>
         public FullscreenControl(bool enabled)
         {
-            Name = $"{nameof(FullscreenControl)}@{GetHashCode()}";
+            Name = nameof(FullscreenControl);
             FullscreenEnabled = enabled;
         }
 

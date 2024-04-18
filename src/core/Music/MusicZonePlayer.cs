@@ -37,7 +37,7 @@ namespace Jumpvalley.Music
 
         public MusicZonePlayer() : base()
         {
-            Name = nameof(MusicZonePlayer) + "@" + GetHashCode();
+            Name = nameof(MusicZonePlayer);
         }
 
         /// <summary>
