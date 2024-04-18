@@ -20,7 +20,15 @@ namespace Jumpvalley.Game.Testing
 
         public override void _Process(double delta)
         {
-            label.Text = $"";
+            CharacterBody3D body = mover.Body;
+            if (body == null)
+            {
+                label.Text = "BaseMover we're currently testing has no CharacterBody3D assigned to it";
+            }
+            else
+            {
+                label.Text = $"Testing acceleration handled by {mover.Name}\nVelocity: {body}\nReal velocity: {body.GetRealVelocity()}";
+            }
 
             base._Process(delta);
         }
