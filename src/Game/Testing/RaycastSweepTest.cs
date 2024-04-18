@@ -21,10 +21,8 @@ namespace Jumpvalley.Game.Testing
         /// <param name="node">The Node3D to use the raycast sweep for</param>
         public RaycastSweepTest(RaycastSweep raycastSweep, Node3D node, RaycastSweep.SweepOrder sweepOrder)
         {
-            Name = $"{nameof(RaycastSweepTest)}_{GetHashCode()}";
-
             RaycastResultLabel = new Label();
-            RaycastResultLabel.Name = $"RaycastSweepResultLabel_{GetHashCode()}";
+            RaycastResultLabel.Name = "RaycastSweepResultLabel";
 
             TestRaycastSweep = raycastSweep;
             SweepOrder = sweepOrder;

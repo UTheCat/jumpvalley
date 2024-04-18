@@ -319,6 +319,7 @@ namespace Jumpvalley.Players.Movement
         {
             IsRunning = false;
             SetProcess(false);
+
             Rotator = new BodyRotator();
 
             CurrentClimber = new Climber(null);

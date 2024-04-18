@@ -76,7 +76,6 @@ namespace Jumpvalley.Players
             Character = rootNode.GetNode<CharacterBody3D>("Player");
 
             CurrentMusicPlayer = new MusicZonePlayer();
-            CurrentMusicPlayer.Name = "CurrentMusicPlayer";
             Disposables.Add(CurrentMusicPlayer);
 
             Mover = new KeyboardMover();

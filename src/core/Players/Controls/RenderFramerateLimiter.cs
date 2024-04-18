@@ -51,7 +51,6 @@ namespace Jumpvalley.Players.Controls
         public RenderFramerateLimiter()
         {
             SetProcess(false);
-            Name = $"{nameof(RenderFramerateLimiter)}@{GetHashCode()}";
         }
 
         /// <summary>
