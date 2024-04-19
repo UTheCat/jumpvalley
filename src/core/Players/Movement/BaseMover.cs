@@ -768,6 +768,10 @@ namespace Jumpvalley.Players.Movement
             climbingRaycastSweep.Dispose();
             climbingRaycastSweep = null;
 
+            climbingShapeCast.QueueFree();
+            climbingShapeCast.Dispose();
+            climbingShapeCast = null;
+
             base.Dispose();
         }
 
