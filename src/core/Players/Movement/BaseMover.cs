@@ -315,7 +315,7 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private ShapeCast3D climbingShapeCast;
 
-        //private ConsoleLogger logger;
+        private ConsoleLogger logger;
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -341,7 +341,7 @@ namespace Jumpvalley.Players.Movement
 
             AddChild(CurrentClimber);
 
-            //logger = new ConsoleLogger(nameof(ConsoleLogger));
+            logger = new ConsoleLogger(nameof(BaseMover));
         }
 
         /// <summary>
@@ -671,7 +671,7 @@ namespace Jumpvalley.Players.Movement
                 )
                 {
                     finalVelocity = moveVelocity;
-                    //logger.Print("Snapped velocity");
+                    logger.Print("Snapped velocity");
                 }
 
                 body.Velocity = finalVelocity;
