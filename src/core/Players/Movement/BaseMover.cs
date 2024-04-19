@@ -310,6 +310,11 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private RaycastSweep climbingRaycastSweep;
 
+        /// <summary>
+        /// Shape-cast used to grab the normal of an object that the player is climbing on
+        /// </summary>
+        private ShapeCast3D climbingShapeCast;
+
         //private ConsoleLogger logger;
 
         /// <summary>
@@ -331,6 +336,8 @@ namespace Jumpvalley.Players.Movement
             LastVelocity = Vector3.Zero;
 
             climbingRaycastSweep = new RaycastSweep(5, Vector3.Zero, Vector3.Zero, -1f);
+            climbingShapeCast = new ShapeCast3D();
+            climbingShapeCast.Shape = new BoxShape3D();
 
             AddChild(CurrentClimber);
 
@@ -449,6 +456,8 @@ namespace Jumpvalley.Players.Movement
                             }
                         }
                     }
+
+                    
 
                     if (selectedRaycast != null)
                     {
