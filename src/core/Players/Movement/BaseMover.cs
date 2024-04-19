@@ -666,8 +666,8 @@ namespace Jumpvalley.Players.Movement
                 // changed as a result of applying acceleration for this frame.
                 Vector2 newXZVelocityDiff = new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(finalVelocity.X, finalVelocity.Z);
                 //logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
-                if (!Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle())
-                || newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
+                if (newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
+                || Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle()) == false
                 )
                 {
                     finalVelocity = moveVelocity;
