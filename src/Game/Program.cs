@@ -14,6 +14,7 @@ namespace Jumpvalley.Game
 		public override void _Ready()
 		{
 			Console.WriteLine("hi :3");
+			Console.WriteLine($"Now running: {ProjectSettings.GetSettingWithOverride("application/config/name").As<string>()} v{ProjectSettings.GetSettingWithOverride("application/config/version").As<string>()}");
 
 			player = new JumpvalleyPlayer(GetTree(), this);
 			player.Start();
@@ -33,5 +34,4 @@ namespace Jumpvalley.Game
 			Console.WriteLine("Goodbye!");
 		}
 	}
-
 }
