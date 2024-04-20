@@ -653,7 +653,7 @@ namespace Jumpvalley.Players.Movement
                 )
                 {
                     finalVelocity = moveVelocity;
-                    logger.Print("Snapped velocity");
+                    //logger.Print("Snapped velocity");
                 }
 
                 body.Velocity = finalVelocity;
