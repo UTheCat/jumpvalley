@@ -428,22 +428,28 @@ namespace Jumpvalley.Players.Movement
                     // we want to use the raycast that "travelled" the smallest distance
                     // as the raycast we're working with.
                     int collisionCount = climbingShapeCast.GetCollisionCount();
-                    float shortestDistance = -1;
-                    RayCast3D selectedRaycast = null;
+                    float shortestDistance = -1f;
+                    Vector3 climbingNormal = Vector3.Zero; // Ladder collision normal
                     for (int i = 0; i < collisionCount; i++)
                     {
-                        
+                        if (Climber.IsClimbable(climbingShapeCast.GetCollider(i)))
+                        {
+                            // climbing shape-cast's "raycasts" can only travel in the Z axis
+                            float distance = climbingShapeCast.ToLocal(climbingShapeCast.GetCollisionPoint(i)).Z;
+
+                            if (shortestDistance < 0f
+                                || climbingShapeCast.ToLocal(climbingShapeCast.GetCollisionPoint(i)).Z < shortestDistance)
+                            {
+                                climbingNormal = climbingShapeCast.GetCollisionNormal(i);
+                                shortestDistance = distance;
+                            }
+                        }
                     }
 
-                    if (selectedRaycast != null)
+                    // shortestDistance is only less than zero if we haven't
+                    // found a ladder collision normal
+                    if (shortestDistance >= 0f)
                     {
-                        RaycastSweepResult raycastSweepResult = new RaycastSweepResult(
-                            selectedRaycast,
-                            selectedRaycast.GetCollisionPoint(),
-                            selectedRaycast.GetCollider(),
-                            0);
-
-                        Vector3 climbingNormal = raycastSweepResult.Raycast.GetCollisionNormal();
 
                         // Get the angles we need to compare normal with move direction,
                         // and do the math as needed according to what was put in the Jumpvalley wiki
