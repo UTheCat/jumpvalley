@@ -111,16 +111,16 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
-        /// Returns whether or not the given <see cref="Node"/>
+        /// Returns whether or not the given <see cref="GodotObject"/>
         /// can be climbed.
         /// </summary>
-        /// <param name="node">The node to check</param>
+        /// <param name="obj">The node to check</param>
         /// <returns></returns>
-        public static bool IsClimbable(Node node)
+        public static bool IsClimbable(GodotObject obj)
         {
-            return node is PhysicsBody3D
-                    && node.HasMeta(IS_CLIMBABLE_METADATA_NAME)
-                    && node.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
+            return obj != null
+                    && obj.HasMeta(IS_CLIMBABLE_METADATA_NAME)
+                    && obj.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
         }
 
         /// <summary>
