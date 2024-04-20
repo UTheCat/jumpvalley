@@ -29,6 +29,7 @@ Here are some instructions for working with the project's source/repository.
 Software you'll need:
 - .NET-Enabled Godot v4.2.2 or later. The latest version of .NET-Enabled Godot 4 is preferred, and can be downloaded from [Godot's official download page](https://godotengine.org/download).
 - An installation of the [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- Visual Studio Code with the [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (if you want to work with the project's source code)
 
 ### Running Godot and this repository's project file
 
@@ -36,10 +37,8 @@ Open your copy of this repository's ```project.godot``` file in the version of G
 
 In order to run the project, there's a play button near the top-right corner of the window. Click it to run the project.
 
-### Debugging
+### Debugging with Visual Studio Code
 
-If you'd like to use the Visual Studio Code terminal for debugging, you should debug Jumpvalley using this command with this repository's root folder as the working directory:
+If you're working in Visual Studio Code, Jumpvalley has a launch configuration named `Debug` that you can use to debug Jumpvalley. This will allow you to see the game's console output.
 
-`<path to Godot executable> --verbose`
-
-This should allow you to see console output (including any errors that may come up).
+Just make sure you have an environment variable named `JUMPVALLEY_GODOT_EXECUTABLE` set to the path to the Godot executable as mentioned in the prerequisites, and you should be able to run the launch configuration.
