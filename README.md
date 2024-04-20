@@ -27,16 +27,12 @@ Here are some instructions for working with the project's source/repository.
 ### Prerequisites
 
 Software you'll need:
-- .NET-Enabled Godot v4.2.1 or later. The latest version of .NET-Enabled Godot 4 is preferred, and can be downloaded on [Godot's official download page](https://godotengine.org/download).
+- .NET-Enabled Godot v4.2.2 or later. The latest version of .NET-Enabled Godot 4 is preferred, and can be downloaded from [Godot's official download page](https://godotengine.org/download).
 - An installation of the [.NET 8 SDK](https://dotnet.microsoft.com/download)
 
 ### Running Godot and this repository's project file
 
-This project is currently being made using the .NET-Enabled version of Godot v4.2.1.
-
-If you'd like to open the Godot project file (```project.godot```), make sure to download a copy of .NET-Enabled Godot v4.2.1 [here](https://godotengine.org/download).
-
-Once finished (or if you already downloaded it), run .NET-Enabled Godot v4.2.1 and open your copy of this repository's ```project.godot``` file.
+Open your copy of this repository's ```project.godot``` file in the version of Godot specified in the prerequisites.
 
 In order to run the project, there's a play button near the top-right corner of the window. Click it to run the project.
 
