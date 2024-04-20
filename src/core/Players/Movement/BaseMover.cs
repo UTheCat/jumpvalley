@@ -240,15 +240,17 @@ namespace Jumpvalley.Players.Movement
 
                         // For simplification
                         //float xPos = climberHitboxWidth / 2;
-                        
+
                         float zPos = -(boxShape.Size.Z / 2) + CLIMBING_SHAPE_CAST_Z_OFFSET;
 
                         BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
                         if (shapeCastBox != null)
                         {
-                            // Height of the climbing shape-cast should be half the height of the character
+                            // Height of the climbing shape-cast should be half the height of the character.
+                            // 1 additional meter is added to the shape-cast's height to prevent the character from
+                            // getting stuck while climbing when at the very top or bottom of a ladder
                             Vector3 size = shapeCastBox.Size;
-                            size.Y = boxShape.Size.Y * 0.5f;
+                            size.Y = (boxShape.Size.Y * 0.5f) + 1f;
                             shapeCastBox.Size = size;
 
                             climbingShapeCast.Position = new Vector3(0, -boxShape.Size.Y * 0.25f, zPos);
