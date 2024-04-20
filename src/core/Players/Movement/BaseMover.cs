@@ -68,6 +68,12 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private static readonly float VELOCITY_DIFF_SNAP_THRESHOLD = 0.1f;
 
+        /// <summary>
+        /// For preventing cases where being too close to a climbable object
+        /// will cause the climbing shape-cast to not be able to hit the outer surface of the climbable object.
+        /// </summary>
+        private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
+
         private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
@@ -234,10 +240,8 @@ namespace Jumpvalley.Players.Movement
 
                         // For simplification
                         //float xPos = climberHitboxWidth / 2;
-
-                        // Offset by 0.005 meters into the character hitbox to prevent cases where being too close to a climbable object
-                        // will cause the raycast sweep's raycasts to not be able to hit the outer surface of the climbable object.
-                        float zPos = -(boxShape.Size.Z / 2) + 0.005f;
+                        
+                        float zPos = -(boxShape.Size.Z / 2) + CLIMBING_SHAPE_CAST_Z_OFFSET;
 
                         BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
                         if (shapeCastBox != null)
@@ -247,7 +251,7 @@ namespace Jumpvalley.Players.Movement
                             size.Y = boxShape.Size.Y * 0.5f;
                             shapeCastBox.Size = size;
 
-                            climbingShapeCast.Position = new Vector3(0, 0, zPos);
+                            climbingShapeCast.Position = new Vector3(0, -boxShape.Size.Y * 0.25f, zPos);
 
                             value.AddChild(climbingShapeCast);
                         }
@@ -326,10 +330,10 @@ namespace Jumpvalley.Players.Movement
             climbingShapeCast.Enabled = false;
 
             float hitboxDepth = CurrentClimber.HitboxDepth;
-            climbingShapeCast.TargetPosition = new Vector3(0f, 0f, -hitboxDepth);
+            climbingShapeCast.TargetPosition = new Vector3(0f, 0f, -hitboxDepth - CLIMBING_SHAPE_CAST_Z_OFFSET);
 
             BoxShape3D shapeCastBox = new BoxShape3D();
-            shapeCastBox.Size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth);
+            shapeCastBox.Size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth + CLIMBING_SHAPE_CAST_Z_OFFSET);
             climbingShapeCast.Shape = shapeCastBox;
 
             AddChild(CurrentClimber);
