@@ -306,7 +306,7 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private ShapeCast3D climbingShapeCast;
 
-        private ConsoleLogger logger;
+        //private ConsoleLogger logger;
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -340,7 +340,7 @@ namespace Jumpvalley.Players.Movement
 
             AddChild(CurrentClimber);
 
-            logger = new ConsoleLogger(nameof(BaseMover));
+            //logger = new ConsoleLogger(nameof(BaseMover));
         }
 
         /// <summary>
@@ -438,7 +438,7 @@ namespace Jumpvalley.Players.Movement
                     int collisionCount = climbingShapeCast.GetCollisionCount();
                     float shortestDistance = -1f;
                     Vector3 climbingNormal = Vector3.Zero; // Ladder collision normal
-                    logger.Print($"climbingShapeCast reported {collisionCount} collisions");
+                    //logger.Print($"climbingShapeCast reported {collisionCount} collisions");
                     for (int i = 0; i < collisionCount; i++)
                     {
                         if (Climber.IsClimbable(climbingShapeCast.GetCollider(i)))
