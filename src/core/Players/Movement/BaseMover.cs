@@ -261,6 +261,16 @@ namespace Jumpvalley.Players.Movement
 
                         // The position of the climbing raycast sweep should be based on the position of the character
                         value.AddChild(climbingRaycastSweep);
+
+                        BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
+                        if (shapeCastBox != null)
+                        {
+                            // Height of the climbing shape cast should be half the height of the character
+                            Vector3 size = shapeCastBox.Size;
+                            size.Y = boxShape.Size.Y * 0.5f;
+                            shapeCastBox.Size = size;
+                            value.AddChild(climbingShapeCast);
+                        }
                     }
                 }
             }
@@ -336,8 +346,14 @@ namespace Jumpvalley.Players.Movement
             LastVelocity = Vector3.Zero;
 
             climbingRaycastSweep = new RaycastSweep(5, Vector3.Zero, Vector3.Zero, -1f);
+
             climbingShapeCast = new ShapeCast3D();
-            climbingShapeCast.Shape = new BoxShape3D();
+            float hitboxDepth = CurrentClimber.HitboxDepth;
+            climbingShapeCast.TargetPosition = new Vector3(0f, 0f, hitboxDepth);
+
+            BoxShape3D shapeCastBox = new BoxShape3D();
+            shapeCastBox.Size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth);
+            climbingShapeCast.Shape = shapeCastBox;
 
             AddChild(CurrentClimber);
 
@@ -456,7 +472,6 @@ namespace Jumpvalley.Players.Movement
                             }
                         }
                     }
-
                     
 
                     if (selectedRaycast != null)
