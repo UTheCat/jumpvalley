@@ -229,11 +229,11 @@ namespace Jumpvalley.Players.Movement
 
                     if (boxShape != null)
                     {
-                        float climberHitboxWidth = climber.HitboxWidth;
-                        float climberHitboxDepth = climber.HitboxDepth;
+                        //float climberHitboxWidth = climber.HitboxWidth;
+                        //float climberHitboxDepth = climber.HitboxDepth;
 
                         // For simplification
-                        float xPos = climberHitboxWidth / 2;
+                        //float xPos = climberHitboxWidth / 2;
 
                         // Offset by 0.005 meters into the character hitbox to prevent cases where being too close to a climbable object
                         // will cause the raycast sweep's raycasts to not be able to hit the outer surface of the climbable object.
@@ -246,6 +246,8 @@ namespace Jumpvalley.Players.Movement
                             Vector3 size = shapeCastBox.Size;
                             size.Y = boxShape.Size.Y * 0.5f;
                             shapeCastBox.Size = size;
+
+                            climbingShapeCast.Position = new Vector3(0, 0, zPos);
 
                             value.AddChild(climbingShapeCast);
                         }
@@ -324,7 +326,7 @@ namespace Jumpvalley.Players.Movement
             climbingShapeCast.Enabled = false;
 
             float hitboxDepth = CurrentClimber.HitboxDepth;
-            climbingShapeCast.TargetPosition = new Vector3(0f, 0f, hitboxDepth);
+            climbingShapeCast.TargetPosition = new Vector3(0f, 0f, -hitboxDepth);
 
             BoxShape3D shapeCastBox = new BoxShape3D();
             shapeCastBox.Size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth);
@@ -430,12 +432,13 @@ namespace Jumpvalley.Players.Movement
                     int collisionCount = climbingShapeCast.GetCollisionCount();
                     float shortestDistance = -1f;
                     Vector3 climbingNormal = Vector3.Zero; // Ladder collision normal
+                    logger.Print($"climbingShapeCast reported {collisionCount} collisions");
                     for (int i = 0; i < collisionCount; i++)
                     {
                         if (Climber.IsClimbable(climbingShapeCast.GetCollider(i)))
                         {
                             // climbing shape-cast's "raycasts" can only travel in the Z axis
-                            float distance = climbingShapeCast.ToLocal(climbingShapeCast.GetCollisionPoint(i)).Z;
+                            float distance = Math.Abs(climbingShapeCast.ToLocal(climbingShapeCast.GetCollisionPoint(i)).Z);
 
                             if (shortestDistance < 0f
                                 || climbingShapeCast.ToLocal(climbingShapeCast.GetCollisionPoint(i)).Z < shortestDistance)
