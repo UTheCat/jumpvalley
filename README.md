@@ -22,6 +22,14 @@ Assets under the ```addons``` folder are covered by different licenses (especial
 
 ## Getting started with the project itself
 
+Here are some instructions for working with the project's source/repository.
+
+### Prerequisites
+
+Software you'll need:
+- .NET-Enabled Godot v4.2.1 or later. The latest version of .NET-Enabled Godot 4 is preferred, and can be downloaded on [Godot's official download page](https://godotengine.org/download).
+- An installation of the [.NET 8 SDK](https://dotnet.microsoft.com/download)
+
 ### Running Godot and this repository's project file
 
 This project is currently being made using the .NET-Enabled version of Godot v4.2.1.
