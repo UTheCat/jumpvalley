@@ -246,7 +246,7 @@ namespace Jumpvalley.Players.Movement
                             Vector3 size = shapeCastBox.Size;
                             size.Y = boxShape.Size.Y * 0.5f;
                             shapeCastBox.Size = size;
-                            
+
                             value.AddChild(climbingShapeCast);
                         }
                     }
@@ -319,6 +319,10 @@ namespace Jumpvalley.Players.Movement
             LastVelocity = Vector3.Zero;
 
             climbingShapeCast = new ShapeCast3D();
+
+            // For performance reasons
+            climbingShapeCast.Enabled = false;
+            
             float hitboxDepth = CurrentClimber.HitboxDepth;
             climbingShapeCast.TargetPosition = new Vector3(0f, 0f, hitboxDepth);
 
@@ -415,10 +419,9 @@ namespace Jumpvalley.Players.Movement
                 }
                 else
                 {
-                    // Move raycast sweep's raycasts to have a y-position equal to the y-position of the object currently being climbed,
-                    // to make sure at least one of the raycasts hit the object being climbed.
-                    // We'll also need to change their x and z positions too.
-                    Vector3 climbedObjectPos = CurrentClimber.CurrentlyClimbedObject.GlobalPosition;
+                    // Update climbing shape-cast's state
+                    climbingShapeCast.ForceShapecastUpdate();
+
 
                     // Determine the 3d object's normal that we're climbing on
                     // Because the object can have curvy surfaces,
