@@ -72,7 +72,7 @@ namespace Jumpvalley.Players.Movement
                 }
 
                 _hitbox = value;
-                
+
                 if (value != null)
                 {
                     value.AddChild(area);
