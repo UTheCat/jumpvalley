@@ -271,43 +271,43 @@ metadata/is_climbable = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_um7wl")
 
-[node name="ClimbablePartDisplay" type="MeshInstance3D" parent="StaticObjects/Ladder"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay2" type="MeshInstance3D" parent="StaticObjects/Ladder"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticObjects/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay3" type="MeshInstance3D" parent="StaticObjects/Ladder"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticObjects/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay4" type="MeshInstance3D" parent="StaticObjects/Ladder"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="StaticObjects/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay5" type="MeshInstance3D" parent="StaticObjects/Ladder"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="StaticObjects/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay6" type="MeshInstance3D" parent="StaticObjects/Ladder"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="StaticObjects/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
 skeleton = NodePath("../../../..")
 
-[node name="ClimbablePartDisplay7" type="MeshInstance3D" parent="StaticObjects/Ladder"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="StaticObjects/Ladder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
 material_override = SubResource("StandardMaterial3D_pea2e")
 mesh = SubResource("BoxMesh_m1ep8")
