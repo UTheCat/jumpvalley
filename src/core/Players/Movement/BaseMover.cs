@@ -322,7 +322,7 @@ namespace Jumpvalley.Players.Movement
 
             // For performance reasons
             climbingShapeCast.Enabled = false;
-            
+
             float hitboxDepth = CurrentClimber.HitboxDepth;
             climbingShapeCast.TargetPosition = new Vector3(0f, 0f, hitboxDepth);
 
@@ -422,14 +422,18 @@ namespace Jumpvalley.Players.Movement
                     // Update climbing shape-cast's state
                     climbingShapeCast.ForceShapecastUpdate();
 
-
                     // Determine the 3d object's normal that we're climbing on
                     // Because the object can have curvy surfaces,
                     // and because the RaycastSweep can hit multiple objects at once,
                     // we want to use the raycast that "travelled" the smallest distance
                     // as the raycast we're working with.
+                    int collisionCount = climbingShapeCast.GetCollisionCount();
+                    float shortestDistance = -1;
                     RayCast3D selectedRaycast = null;
-                    
+                    for (int i = 0; i < collisionCount; i++)
+                    {
+                        
+                    }
 
                     if (selectedRaycast != null)
                     {
