@@ -92,8 +92,6 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public float HitboxDepth = 0.2f;
 
-        public float HitboxZOffset = 0.005f;
-
         /// <summary>
         /// Creates a new instance of <see cref="Climber"/>
         /// </summary>
