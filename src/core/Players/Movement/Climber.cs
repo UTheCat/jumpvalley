@@ -12,7 +12,7 @@ namespace Jumpvalley.Players.Movement
         /// <summary>
         /// Name of the metadata entry that specifies whether or not a <see cref="PhysicsBody3D"/> is climbable
         /// </summary>
-        public readonly string IS_CLIMBABLE_METADATA_NAME = "is_climbable";
+        public static readonly string IS_CLIMBABLE_METADATA_NAME = "is_climbable";
 
         /// <summary>
         /// The <see cref="Area3D"/> that allows the character to climb when a climbable PhysicsBody3D is intersecting with it
@@ -111,6 +111,19 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
+        /// Returns whether or not the given <see cref="PhysicsBody3D"/>
+        /// can be climbed.
+        /// </summary>
+        /// <param name="body">The physics body to check</param>
+        /// <returns></returns>
+        public static bool IsClimbable(PhysicsBody3D body)
+        {
+            return body != null
+                    && body.HasMeta(IS_CLIMBABLE_METADATA_NAME)
+                    && body.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
+        }
+
+        /// <summary>
         /// Disposes of this <see cref="Climber"/> object and the <see cref="RayCast3D"/> instance being used to power it
         /// </summary>
         public new void Dispose()
@@ -153,9 +166,7 @@ namespace Jumpvalley.Players.Movement
                 {
                     // If the collided object is a PhysicsBody3D and it has a metadata entry
                     // named "is_climbable" set to true, we can climb.
-                    canClimb = collidedObject != null
-                        && collidedObject.HasMeta(IS_CLIMBABLE_METADATA_NAME)
-                        && collidedObject.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
+                    canClimb = IsClimbable(collidedObject);
 
                     if (canClimb)
                     {
