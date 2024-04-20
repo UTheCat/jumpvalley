@@ -68,6 +68,12 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         private static readonly float VELOCITY_DIFF_SNAP_THRESHOLD = 0.1f;
 
+        /// <summary>
+        /// For preventing cases where being too close to a climbable object
+        /// will cause the climbing shape-cast to not be able to hit the outer surface of the climbable object.
+        /// </summary>
+        private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
+
         private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
@@ -201,19 +207,11 @@ namespace Jumpvalley.Players.Movement
                 CharacterBody3D oldBody = _body;
                 _body = value;
 
-                if (oldBody != null)
-                {
-                    foreach (RayCast3D r in climbingRaycastSweep.Raycasts)
-                    {
-                        r.RemoveException(oldBody);
-                    }
-                }
-
                 BodyRotator rotator = Rotator;
                 Climber climber = CurrentClimber;
 
-                // Remove climbing raycast sweep from the scene tree it's in (if it's in one), just in case.
-                climbingRaycastSweep.GetParent()?.RemoveChild(climbingRaycastSweep);
+                // Make sure climbing shape-cast isn't in a scene tree before continuing
+                climbingShapeCast.GetParent()?.RemoveChild(climbingShapeCast);
 
                 if (value == null)
                 {
@@ -237,30 +235,28 @@ namespace Jumpvalley.Players.Movement
 
                     if (boxShape != null)
                     {
-                        float climberHitboxWidth = climber.HitboxWidth;
-                        float climberHitboxDepth = climber.HitboxDepth;
+                        //float climberHitboxWidth = climber.HitboxWidth;
+                        //float climberHitboxDepth = climber.HitboxDepth;
 
                         // For simplification
-                        float xPos = climberHitboxWidth / 2;
+                        //float xPos = climberHitboxWidth / 2;
 
-                        // Offset by 0.005 meters into the character hitbox to prevent cases where being too close to a climbable object
-                        // will cause the raycast sweep's raycasts to not be able to hit the outer surface of the climbable object.
-                        float zPos = -(boxShape.Size.Z / 2) + 0.005f;
+                        float zPos = -(boxShape.Size.Z / 2) + CLIMBING_SHAPE_CAST_Z_OFFSET;
 
-                        // Remember that the climbing raycast sweep is a child node of the character
-                        climbingRaycastSweep.StartPosition = new Vector3(-xPos, 0, zPos);
-                        climbingRaycastSweep.EndPosition = new Vector3(xPos, 0, zPos);
-                        climbingRaycastSweep.RaycastLength = -climberHitboxDepth * 10;
-                        climbingRaycastSweep.UpdateRaycastLayout();
-
-                        // Make sure the climbing raycast sweep doesn't detect the character node itself
-                        foreach (RayCast3D r in climbingRaycastSweep.Raycasts)
+                        BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
+                        if (shapeCastBox != null)
                         {
-                            r.AddException(value);
-                        }
+                            // Height of the climbing shape-cast should be half the height of the character.
+                            // 1 additional meter is added to the shape-cast's height to prevent the character from
+                            // getting stuck while climbing when at the very top or bottom of a ladder
+                            Vector3 size = shapeCastBox.Size;
+                            size.Y = (boxShape.Size.Y * 0.5f) + 1f;
+                            shapeCastBox.Size = size;
 
-                        // The position of the climbing raycast sweep should be based on the position of the character
-                        value.AddChild(climbingRaycastSweep);
+                            climbingShapeCast.Position = new Vector3(0, -boxShape.Size.Y * 0.25f, zPos);
+
+                            value.AddChild(climbingShapeCast);
+                        }
                     }
                 }
             }
@@ -306,9 +302,9 @@ namespace Jumpvalley.Players.Movement
         public Vector3 LastVelocity { get; private set; }
 
         /// <summary>
-        /// Raycast sweep used to grab the normal of an object that the player is climbing on
+        /// Shape-cast used to grab the normal of an object that the player is climbing on
         /// </summary>
-        private RaycastSweep climbingRaycastSweep;
+        private ShapeCast3D climbingShapeCast;
 
         //private ConsoleLogger logger;
 
@@ -330,11 +326,21 @@ namespace Jumpvalley.Players.Movement
 
             LastVelocity = Vector3.Zero;
 
-            climbingRaycastSweep = new RaycastSweep(5, Vector3.Zero, Vector3.Zero, -1f);
+            climbingShapeCast = new ShapeCast3D();
+
+            // For performance reasons
+            climbingShapeCast.Enabled = false;
+
+            float hitboxDepth = CurrentClimber.HitboxDepth;
+            climbingShapeCast.TargetPosition = new Vector3(0f, 0f, -hitboxDepth - CLIMBING_SHAPE_CAST_Z_OFFSET);
+
+            BoxShape3D shapeCastBox = new BoxShape3D();
+            shapeCastBox.Size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth + CLIMBING_SHAPE_CAST_Z_OFFSET);
+            climbingShapeCast.Shape = shapeCastBox;
 
             AddChild(CurrentClimber);
 
-            //logger = new ConsoleLogger(nameof(ConsoleLogger));
+            //logger = new ConsoleLogger(nameof(BaseMover));
         }
 
         /// <summary>
@@ -421,44 +427,38 @@ namespace Jumpvalley.Players.Movement
                 }
                 else
                 {
-                    // Move raycast sweep's raycasts to have a y-position equal to the y-position of the object currently being climbed,
-                    // to make sure at least one of the raycasts hit the object being climbed.
-                    // We'll also need to change their x and z positions too.
-                    Vector3 climbedObjectPos = CurrentClimber.CurrentlyClimbedObject.GlobalPosition;
-
-                    Vector3 climbingRaycastSweepPos = climbingRaycastSweep.GlobalPosition;
-
-                    climbingRaycastSweep.GlobalPosition = new Vector3(climbingRaycastSweepPos.X, climbedObjectPos.Y, climbingRaycastSweepPos.Z);
+                    // Update climbing shape-cast's state
+                    climbingShapeCast.ForceShapecastUpdate();
 
                     // Determine the 3d object's normal that we're climbing on
                     // Because the object can have curvy surfaces,
-                    // and because the RaycastSweep can hit multiple objects at once,
+                    // and because the shape-cast can hit multiple objects at once,
                     // we want to use the raycast that "travelled" the smallest distance
                     // as the raycast we're working with.
-                    RayCast3D selectedRaycast = null;
-                    float raycastDistance = -1;
-                    foreach (RayCast3D r in climbingRaycastSweep.Raycasts)
+                    int collisionCount = climbingShapeCast.GetCollisionCount();
+                    float shortestDistance = -1f;
+                    Vector3 climbingNormal = Vector3.Zero; // Ladder collision normal
+                    //logger.Print($"climbingShapeCast reported {collisionCount} collisions");
+                    for (int i = 0; i < collisionCount; i++)
                     {
-                        if (r.IsColliding())
+                        if (Climber.IsClimbable(climbingShapeCast.GetCollider(i)))
                         {
-                            float distance = distance = (r.GetCollisionPoint() - r.GlobalPosition).Length();
-                            if (raycastDistance < 0 || distance < raycastDistance)
+                            // climbing shape-cast's "raycasts" can only travel in the Z axis
+                            float distance = Math.Abs(climbingShapeCast.ToLocal(climbingShapeCast.GetCollisionPoint(i)).Z);
+
+                            if (shortestDistance < 0f
+                                || climbingShapeCast.ToLocal(climbingShapeCast.GetCollisionPoint(i)).Z < shortestDistance)
                             {
-                                raycastDistance = distance;
-                                selectedRaycast = r;
+                                climbingNormal = climbingShapeCast.GetCollisionNormal(i);
+                                shortestDistance = distance;
                             }
                         }
                     }
 
-                    if (selectedRaycast != null)
+                    // shortestDistance is only less than zero if we haven't
+                    // found a ladder collision normal
+                    if (shortestDistance >= 0f)
                     {
-                        RaycastSweepResult raycastSweepResult = new RaycastSweepResult(
-                            selectedRaycast,
-                            selectedRaycast.GetCollisionPoint(),
-                            selectedRaycast.GetCollider(),
-                            0);
-
-                        Vector3 climbingNormal = raycastSweepResult.Raycast.GetCollisionNormal();
 
                         // Get the angles we need to compare normal with move direction,
                         // and do the math as needed according to what was put in the Jumpvalley wiki
@@ -657,8 +657,8 @@ namespace Jumpvalley.Players.Movement
                 // changed as a result of applying acceleration for this frame.
                 Vector2 newXZVelocityDiff = new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(finalVelocity.X, finalVelocity.Z);
                 //logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
-                if (!Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle())
-                || newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
+                if (newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
+                || Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle()) == false
                 )
                 {
                     finalVelocity = moveVelocity;
@@ -756,8 +756,9 @@ namespace Jumpvalley.Players.Movement
             CurrentClimber.Dispose();
             CurrentClimber = null;
 
-            climbingRaycastSweep.Dispose();
-            climbingRaycastSweep = null;
+            climbingShapeCast.QueueFree();
+            climbingShapeCast.Dispose();
+            climbingShapeCast = null;
 
             base.Dispose();
         }

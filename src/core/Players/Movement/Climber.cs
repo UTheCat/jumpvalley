@@ -12,15 +12,15 @@ namespace Jumpvalley.Players.Movement
         /// <summary>
         /// Name of the metadata entry that specifies whether or not a <see cref="PhysicsBody3D"/> is climbable
         /// </summary>
-        public readonly string IS_CLIMBABLE_METADATA_NAME = "is_climbable";
+        public static readonly string IS_CLIMBABLE_METADATA_NAME = "is_climbable";
 
         /// <summary>
         /// The <see cref="Area3D"/> that allows the character to climb when a climbable PhysicsBody3D is intersecting with it
         /// </summary>
-        private Area3D area;
+        public Area3D Area { get; private set; }
 
         /// <summary>
-        /// The box that defines <see cref="area"/>'s region
+        /// The box that defines <see cref="Area"/>'s region
         /// </summary>
         private BoxShape3D areaBox;
 
@@ -68,14 +68,14 @@ namespace Jumpvalley.Players.Movement
                 CollisionShape3D oldHitbox = _hitbox;
                 if (oldHitbox != null)
                 {
-                    oldHitbox.RemoveChild(area);
+                    oldHitbox.RemoveChild(Area);
                 }
 
                 _hitbox = value;
-                
+
                 if (value != null)
                 {
-                    value.AddChild(area);
+                    value.AddChild(Area);
                 }
             }
         }
@@ -97,17 +97,30 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public Climber(CollisionShape3D hitbox)
         {
-            area = new Area3D();
+            Area = new Area3D();
 
             areaBox = new BoxShape3D();
 
             CollisionShape3D areaShape = new CollisionShape3D();
             areaShape.Shape = areaBox;
-            area.AddChild(areaShape);
+            Area.AddChild(areaShape);
 
             Hitbox = hitbox;
 
             updateArea();
+        }
+
+        /// <summary>
+        /// Returns whether or not the given <see cref="GodotObject"/>
+        /// can be climbed.
+        /// </summary>
+        /// <param name="obj">The node to check</param>
+        /// <returns></returns>
+        public static bool IsClimbable(GodotObject obj)
+        {
+            return obj != null
+                    && obj.HasMeta(IS_CLIMBABLE_METADATA_NAME)
+                    && obj.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
         }
 
         /// <summary>
@@ -116,8 +129,8 @@ namespace Jumpvalley.Players.Movement
         public new void Dispose()
         {
             QueueFree();
-            area.QueueFree();
-            area.Dispose();
+            Area.QueueFree();
+            Area.Dispose();
             base.Dispose();
         }
 
@@ -135,7 +148,7 @@ namespace Jumpvalley.Players.Movement
             areaBox.Size = new Vector3(HitboxWidth, hitboxSize.Y / 2, HitboxDepth);
 
             // Remember, position of the area is relative to the position of the hitbox.
-            area.Position = new Vector3(0, -hitboxSize.Y / 4, -hitboxSize.Z / 2 - areaBox.Size.Z / 2);
+            Area.Position = new Vector3(0, -hitboxSize.Y / 4, -hitboxSize.Z / 2 - areaBox.Size.Z / 2);
         }
 
         public override void _PhysicsProcess(double delta)
@@ -145,7 +158,7 @@ namespace Jumpvalley.Players.Movement
             updateArea();
 
             bool canClimb = false;
-            foreach (Node3D n in area.GetOverlappingBodies())
+            foreach (Node3D n in Area.GetOverlappingBodies())
             {
                 PhysicsBody3D collidedObject = n as PhysicsBody3D;
 
@@ -153,9 +166,7 @@ namespace Jumpvalley.Players.Movement
                 {
                     // If the collided object is a PhysicsBody3D and it has a metadata entry
                     // named "is_climbable" set to true, we can climb.
-                    canClimb = collidedObject != null
-                        && collidedObject.HasMeta(IS_CLIMBABLE_METADATA_NAME)
-                        && collidedObject.GetMeta(IS_CLIMBABLE_METADATA_NAME).AsBool() == true;
+                    canClimb = IsClimbable(collidedObject);
 
                     if (canClimb)
                     {
