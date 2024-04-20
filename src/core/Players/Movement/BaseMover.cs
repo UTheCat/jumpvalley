@@ -432,7 +432,7 @@ namespace Jumpvalley.Players.Movement
 
                     // Determine the 3d object's normal that we're climbing on
                     // Because the object can have curvy surfaces,
-                    // and because the RaycastSweep can hit multiple objects at once,
+                    // and because the shape-cast can hit multiple objects at once,
                     // we want to use the raycast that "travelled" the smallest distance
                     // as the raycast we're working with.
                     int collisionCount = climbingShapeCast.GetCollisionCount();
