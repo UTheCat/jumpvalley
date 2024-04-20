@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "coreclr",
+            "name": "Debug",
+            "request": "launch",
+            "program": "${env:JUMPVALLEY_GODOT_EXECUTABLE}",
+            "args": "--verbose"
+        }
+    ]
+}
