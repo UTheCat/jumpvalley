@@ -30,7 +30,7 @@ Jumpvalley currently doesn't have an installer executable. Therefore, downloadin
 
 While there are precompiled versions of Jumpvalley for Android, Android support is *experimental* for these reasons:
 - Currently, exporting your game to an Android APK on Godot is itself an experimental feature
-- You'll need to connect a keyboard and mouse to your Android device in order to move your character and camera.
+- Currently, you'll need to connect a keyboard and mouse to your Android device in order to move your character and camera.
 
 ### For Linux users
 
