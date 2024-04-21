@@ -20,6 +20,28 @@ This project's source code is licensed under the MIT License. The source code's 
 
 Assets under the ```addons``` folder are covered by different licenses (especially since they were made by other individuals).
 
+## Running the game
+
+If you're looking to simply run Jumpvalley, you can find the game precompiled in the [releases](https://github.com/UTheDev/jumpvalley/releases) tab.
+
+Jumpvalley currently doesn't have an installer executable. Therefore, downloading the compressed folder corresponding to your device's operating system, and then extracting it, should give you the files needed to run precompiled Jumpvalley.
+
+### For Linux users
+
+The Jumpvalley executable for the Linux version of Jumpvalley is named `jumpvalley` (with no file extension).
+
+On Linux, the operating system itself controls whether or not a file can be executed, regardless of the file's file extension. Therefore, your copy of the  Jumpvalley executable for Linux might not be marked as executable.
+
+In order to fix this, open up a terminal session, change the working directory to the directory containing the Jumpvalley executable like this:
+
+`cd [path to the directory with the Jumpvalley executable]`
+
+and type this command:
+
+`chmod a+x jumpvalley`
+
+This tells the operating system to let itself execute the file (in this case, the file is the Jumpvalley executable). You should then be able to run the Jumpvalley executable.
+
 ## Working with this repository
 
 Here are some instructions for working with this project's repository. This assumes that you actually want to do things with Jumpvalley's Git repository.
