@@ -20,9 +20,9 @@ This project's source code is licensed under the MIT License. The source code's 
 
 Assets under the ```addons``` folder are covered by different licenses (especially since they were made by other individuals).
 
-## Getting started with the project itself
+## Working with this repository
 
-Here are some instructions for working with the project's source/repository.
+Here are some instructions for working with this project's repository. This assumes that you actually want to do things with Jumpvalley's Git repository.
 
 ### Prerequisites
 
