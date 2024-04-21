@@ -26,6 +26,12 @@ If you're looking to simply run Jumpvalley, you can find the game precompiled in
 
 Jumpvalley currently doesn't have an installer executable. Therefore, downloading the compressed folder corresponding to your device's operating system, and then extracting it, should give you the files needed to run precompiled Jumpvalley.
 
+### For Android users
+
+While there are precompiled versions of Jumpvalley for Android, Android support is *experimental* for these reasons:
+- Currently, exporting your game to an Android APK on Godot is itself an experimental feature
+- You'll need to connect a keyboard and mouse to your Android device in order to move your character and camera.
+
 ### For Linux users
 
 The Jumpvalley executable for the Linux version of Jumpvalley is named `jumpvalley` (with no file extension).
