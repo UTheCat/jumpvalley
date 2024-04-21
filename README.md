@@ -42,6 +42,10 @@ and type this command:
 
 This tells the operating system to let itself execute the file (in this case, the file is the Jumpvalley executable). You should then be able to run the Jumpvalley executable.
 
+## Documentation
+
+Jumpvalley's documentation can be found on its [website](https://uthedev.github.io/jumpvalley_docs/index.html) hosted on GitHub.
+
 ## Working with this repository
 
 Here are some instructions for working with this project's repository. This assumes that you actually want to do things with Jumpvalley's Git repository.
