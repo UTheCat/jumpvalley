@@ -29,7 +29,7 @@ Jumpvalley currently doesn't have an installer executable. Therefore, downloadin
 ### For Android users
 
 While there are precompiled versions of Jumpvalley for Android, Android support is *experimental* for these reasons:
-- Currently, exporting your game to an Android APK on Godot is itself an experimental feature
+- Currently, exporting an app with C# code to an Android APK on Godot 4 is itself an experimental feature
 - Currently, you'll need to connect a keyboard and mouse to your Android device in order to move your character and camera.
 
 ### For Linux users
@@ -61,7 +61,7 @@ Here are some instructions for working with this project's repository. This assu
 Software you'll need:
 - .NET-Enabled Godot v4.2.2 or later. The latest version of .NET-Enabled Godot 4 is preferred, and can be downloaded from [Godot's official download page](https://godotengine.org/download).
 - An installation of the [.NET 8 SDK](https://dotnet.microsoft.com/download)
-- Visual Studio Code with the [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (if you want to work with the project's source code)
+- [Visual Studio Code](https://code.visualstudio.com/) with the [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (if you want to work with the project's source code)
 
 ### Running Godot and this repository's project file
 
