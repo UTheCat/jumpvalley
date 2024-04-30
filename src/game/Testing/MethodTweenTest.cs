@@ -3,7 +3,7 @@ using System;
 
 using Jumpvalley.Tweening;
 
-namespace Jumpvalley.Game.Testing
+namespace JumpvalleyGame.Testing
 {
     /// <summary>
     /// Test class for MethodTween using the IntervalTween subclass

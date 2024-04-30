@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Jumpvalley.Game.Gui
+namespace JumpvalleyGame.Gui
 {
     /// <summary>
     /// Handler for the level menu buttons, the styled button that appears on a Jumpvalley level menu.
