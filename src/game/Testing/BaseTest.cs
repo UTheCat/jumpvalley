@@ -1,4 +1,4 @@
-﻿namespace Jumpvalley.Game.Testing
+﻿namespace JumpvalleyGame.Testing
 {
     /// <summary>
     /// Base class for testing Jumpvalley's code

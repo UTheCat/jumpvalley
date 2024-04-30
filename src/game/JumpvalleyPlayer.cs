@@ -8,10 +8,10 @@ using Jumpvalley.Players;
 using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Movement;
 
-using Jumpvalley.Game.Gui;
-using Jumpvalley.Game.Levels;
+using JumpvalleyGame.Gui;
+using JumpvalleyGame.Levels;
 
-namespace Jumpvalley.Game
+namespace JumpvalleyGame
 {
     /// <summary>
     /// Full implementation of the Player class specific to Jumpvalley itself

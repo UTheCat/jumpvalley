@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Jumpvalley.Timing;
 
-namespace Jumpvalley.Game.Gui
+namespace JumpvalleyGame.Gui
 {
     /// <summary>
     /// Class that handles the LevelTimer GUI which displays how long a player has been playing a level.

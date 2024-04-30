@@ -3,7 +3,7 @@ using Godot;
 
 using Jumpvalley.Music;
 
-namespace Jumpvalley.Game.Testing
+namespace JumpvalleyGame.Testing
 {
     public partial class MusicPlayerTest : Node
     {

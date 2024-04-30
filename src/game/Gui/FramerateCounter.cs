@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Jumpvalley.Game.Gui
+namespace JumpvalleyGame.Gui
 {
     /// <summary>
     /// Displays refresh rate to the user (commonly called frames-per-seconds or FPS for short)

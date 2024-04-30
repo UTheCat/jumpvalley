@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Jumpvalley.IO;
 
-namespace Jumpvalley.Game.Testing
+namespace JumpvalleyGame.Testing
 {
     /// <summary>
     /// Test class for making sure the <see cref="InfoFile"/> class works properly
