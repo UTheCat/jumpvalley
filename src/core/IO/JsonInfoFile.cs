@@ -20,6 +20,11 @@ namespace Jumpvalley.IO
         public string RawJson;
 
         /// <summary>
+        /// Zero-parameter constructor for cases where extracting data from JSON text isn't needed.
+        /// </summary>
+        public JsonInfoFile() { }
+
+        /// <summary>
         /// Reads a JSON info file from its raw text and stores such data in the <see cref="RawData"/> field.
         /// </summary>
         /// <param name="json"></param>
