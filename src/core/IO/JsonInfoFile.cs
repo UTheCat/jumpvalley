@@ -1,4 +1,4 @@
-using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace Jumpvalley.IO
 {
@@ -15,9 +15,10 @@ namespace Jumpvalley.IO
         public static readonly string FILE_NAME = "info.json";
 
         /// <summary>
-        /// The raw JSON text from the JSON info file
+        /// The JSON node containing the info file's data.
+        /// This is the root node of the info file's JSON content.
         /// </summary>
-        public string RawJson;
+        public JsonNode ActualJsonNode;
 
         /// <summary>
         /// Zero-parameter constructor for cases where extracting data from JSON text isn't needed.
@@ -27,10 +28,10 @@ namespace Jumpvalley.IO
         /// <summary>
         /// Reads a JSON info file from its raw text and stores such data in the <see cref="RawData"/> field.
         /// </summary>
-        /// <param name="json"></param>
-        public JsonInfoFile(string json)
+        /// <param name="jsonNode">The root node of the info file's JSON content</param>
+        public JsonInfoFile(JsonNode jsonNode)
         {
-            RawJson = json;
+            ActualJsonNode = jsonNode;
         }
     }
 }
