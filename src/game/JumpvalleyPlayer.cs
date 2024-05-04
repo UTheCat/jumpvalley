@@ -148,7 +148,7 @@ namespace JumpvalleyGame
                         levelPackage.StartLevel();
                         levelsNode.AddChild(levelPackage.RootNode);
 
-                        LevelInfoFile levelInfo = levelPackage.Info;
+                        LevelInfo levelInfo = levelPackage.Info;
                         Difficulty difficulty = levelInfo.LevelDifficulty;
                         logger.Print($"Now playing a level: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");
                     }
