@@ -23,17 +23,10 @@ namespace Jumpvalley.Music
         /// </summary>
         public SongInfo Info { get; private set; }
 
-        public Song(string filePath, string name, string artists, string album)
+        public Song(SongInfo info)
         {
-            FilePath = filePath;
-            Name = name;
-            Artists = artists;
-            Album = album;
+            Info = info;
         }
-
-        public Song() { }
-
-        public Song(SongPackage package) : this(package.Path + "/" + package.SongPath, package.InfoFile.Name, package.InfoFile.Artists, package.InfoFile.Album) { }
 
         /// <summary>
         /// The actual audio stream that contains the sound data for playback by an <see cref="AudioStreamPlayer"/>
