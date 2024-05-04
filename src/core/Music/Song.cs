@@ -18,6 +18,11 @@ namespace Jumpvalley.Music
         /// </summary>
         private string streamResPath = null;
 
+        /// <summary>
+        /// Info about the song
+        /// </summary>
+        public SongInfo Info { get; private set; }
+
         public Song(string filePath, string name, string artists, string album)
         {
             FilePath = filePath;
