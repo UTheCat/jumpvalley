@@ -1,13 +1,14 @@
 using Godot;
-using Jumpvalley.Audio;
 using System.IO;
+
+using Jumpvalley.Audio;
 
 namespace Jumpvalley.Music
 {
     /// <summary>
     /// Represents a single song associated with a file, along with some metadata
     /// </summary>
-    public partial class Song: System.IDisposable
+    public partial class Song : System.IDisposable
     {
         private bool _isLooping = false;
 
