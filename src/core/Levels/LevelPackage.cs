@@ -1,6 +1,8 @@
 ﻿using Godot;
-using Jumpvalley.IO;
 using System;
+using System.Text.Json.Nodes;
+
+using Jumpvalley.IO;
 
 namespace Jumpvalley.Levels
 {
@@ -55,7 +57,7 @@ namespace Jumpvalley.Levels
                 throw new Exception($"Failed to open the corresponding {JsonInfoFile.FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {FileAccess.GetOpenError()}");
             }
 
-            Info = new LevelInfo(infoFile.GetAsText());
+            Info = new LevelInfo(JsonNode.Parse(infoFile.GetAsText()));
             Runner = runner;
         }
 
