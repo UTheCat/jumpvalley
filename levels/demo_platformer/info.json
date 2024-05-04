@@ -1,0 +1,7 @@
+{
+    "id": "demo_platformer",
+    "fullName": "Demo Platformer",
+    "creators": "UTheDev",
+    "difficulty": 5.03,
+    "scenePath": "level.tscn"
+}
