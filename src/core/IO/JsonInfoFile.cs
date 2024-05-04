@@ -18,7 +18,7 @@ namespace Jumpvalley.IO
         /// The JSON node containing the info file's data.
         /// This is the root node of the info file's JSON content.
         /// </summary>
-        public JsonNode ActualJsonNode;
+        public JsonNode Data;
 
         /// <summary>
         /// Zero-parameter constructor for cases where extracting data from JSON text isn't needed.
@@ -28,10 +28,10 @@ namespace Jumpvalley.IO
         /// <summary>
         /// Reads a JSON info file from its raw text and stores such data in the <see cref="RawData"/> field.
         /// </summary>
-        /// <param name="jsonNode">The root node of the info file's JSON content</param>
-        public JsonInfoFile(JsonNode jsonNode)
+        /// <param name="data">The root node of the info file's JSON content</param>
+        public JsonInfoFile(JsonNode data)
         {
-            ActualJsonNode = jsonNode;
+            Data = data;
         }
     }
 }
