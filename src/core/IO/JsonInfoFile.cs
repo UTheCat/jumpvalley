@@ -6,6 +6,8 @@ namespace Jumpvalley.IO
     /// Class intended to help with using the data from info files written in JavaScript Object Notation (JSON).
     /// <br/><br/>
     /// Info files are files that contain metadata about an object (e.g. one that's on a filesystem).
+    /// <br/><br/>
+    /// The conventional file name for JSON info files is <c>info.json</c>.
     /// </summary>
     public partial class JsonInfoFile
     {
