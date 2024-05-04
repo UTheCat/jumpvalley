@@ -41,10 +41,8 @@ namespace Jumpvalley.Levels
 
         public LevelInfo() { }
 
-        public LevelInfo(string json) : base(json)
+        public LevelInfo(JsonNode data) : base(data)
         {
-            JsonNode data = JsonNode.Parse(json);
-
             Id = data["id"]?.GetValue<string>();
             FullName = data["fullName"]?.GetValue<string>();
             Creators = data["creators"]?.GetValue<string>();
