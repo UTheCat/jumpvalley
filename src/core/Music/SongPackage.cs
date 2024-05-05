@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using System.Text.Json.Nodes;
 
+using Jumpvalley.IO;
+
 namespace Jumpvalley.Music
 {
     /// <summary>
@@ -72,7 +74,7 @@ namespace Jumpvalley.Music
         /// <returns></returns>
         public Song CreateSongInstance()
         {
-            return new Song(new Uri(new Uri(DirPath), AudioPath).ToString(), Info);
+            return new Song(PathUtil.GodotCombine(DirPath, AudioPath), Info);
         }
     }
 }
