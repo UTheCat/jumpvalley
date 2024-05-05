@@ -1,5 +1,0 @@
-id: demo_platformer
-full_name: Demo Platformer
-creators: UTheDev
-difficulty: 5.03
-scene_path: level.tscn

@@ -1,5 +1,0 @@
-id: lobby
-full_name: Lobby
-creators: UTheDev
-difficulty: 0.00
-scene_path: level.tscn

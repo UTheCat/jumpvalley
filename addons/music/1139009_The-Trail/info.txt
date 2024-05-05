@@ -1,4 +1,0 @@
-name: The Trail
-artists: KORAII
-audio_path: audio.mp3
-audio_url: https://www.newgrounds.com/audio/listen/1139009

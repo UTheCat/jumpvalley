@@ -1,4 +1,0 @@
-name: keygen w/ South
-artists: korewakosu
-audio_path: audio.mp3
-audio_url: https://www.newgrounds.com/audio/listen/1187165
