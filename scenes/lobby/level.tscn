@@ -490,6 +490,6 @@ mesh = SubResource("CylinderMesh_h17i4")
 [node name="PrimaryMusic" type="Node" parent="Music"]
 
 [node name="Music" type="Node" parent="Music/PrimaryMusic"]
-metadata/song1 = "res://addons/music/1215548_Shivers"
+metadata/song1 = "res://addons/music/1215548_Shivers/"
 
 [node name="MusicZones" type="Node3D" parent="Music"]

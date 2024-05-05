@@ -2,8 +2,6 @@
 using System;
 using System.IO;
 
-using Jumpvalley.IO;
-
 namespace Jumpvalley.Audio
 {
     /// <summary>
@@ -86,7 +84,7 @@ namespace Jumpvalley.Audio
                     }
                     else
                     {
-                        throw new Exception($"Failed to open the corresponding {InfoFile.FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {Godot.FileAccess.GetOpenError()}");
+                        throw new Exception($"Failed to open '{filePath}'. This is the message returned by FileAccess.GetOpenError(): {Godot.FileAccess.GetOpenError()}");
                     }
                 }
 

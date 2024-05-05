@@ -1,6 +1,8 @@
 ﻿using Godot;
-using Jumpvalley.IO;
 using System;
+using System.Text.Json.Nodes;
+
+using Jumpvalley.IO;
 
 namespace Jumpvalley.Levels
 {
@@ -18,7 +20,7 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The level's info file
         /// </summary>
-        public LevelInfoFile Info { get; private set; }
+        public LevelInfo Info { get; private set; }
 
         /// <summary>
         /// The directory path of the level package
@@ -49,13 +51,13 @@ namespace Jumpvalley.Levels
         {
             Path = path;
 
-            using FileAccess infoFile = FileAccess.Open($"{path}/{InfoFile.FILE_NAME}", FileAccess.ModeFlags.Read);
+            using FileAccess infoFile = FileAccess.Open(PathUtil.GodotCombine(path, JsonInfoFile.FILE_NAME), FileAccess.ModeFlags.Read);
             if (infoFile == null)
             {
-                throw new Exception($"Failed to open the corresponding {InfoFile.FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {FileAccess.GetOpenError()}");
+                throw new Exception($"Failed to open the corresponding {JsonInfoFile.FILE_NAME} file. This is the message returned by FileAccess.GetOpenError(): {FileAccess.GetOpenError()}");
             }
 
-            Info = new LevelInfoFile(infoFile.GetAsText());
+            Info = new LevelInfo(JsonNode.Parse(infoFile.GetAsText()));
             Runner = runner;
         }
 
@@ -68,7 +70,7 @@ namespace Jumpvalley.Levels
         {
             if (RootNode != null) throw new InvalidOperationException("There's already a root node loaded. Please unload it first.");
 
-            PackedScene packedScene = GD.Load<PackedScene>($"{Path}/{Info.ScenePath}");
+            PackedScene packedScene = GD.Load<PackedScene>(PathUtil.GodotCombine(Path, Info.ScenePath));
 
             if (packedScene == null)
             {

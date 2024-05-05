@@ -1,13 +1,14 @@
 using Godot;
-using Jumpvalley.Audio;
 using System.IO;
+
+using Jumpvalley.Audio;
 
 namespace Jumpvalley.Music
 {
     /// <summary>
     /// Represents a single song associated with a file, along with some metadata
     /// </summary>
-    public partial class Song: System.IDisposable
+    public partial class Song : System.IDisposable
     {
         private bool _isLooping = false;
 
@@ -18,25 +19,20 @@ namespace Jumpvalley.Music
         /// </summary>
         private string streamResPath = null;
 
-        public Song(string filePath, string name, string artists, string album)
-        {
-            FilePath = filePath;
-            Name = name;
-            Artists = artists;
-            Album = album;
-        }
+        /// <summary>
+        /// The absolute file path to the audio file
+        /// </summary>
+        public string FilePath { get; private set; }
 
-        public Song() { }
-
-        public Song(SongPackage package) : this(package.Path + "/" + package.SongPath, package.InfoFile.Name, package.InfoFile.Artists, package.InfoFile.Album) { }
+        /// <summary>
+        /// Info about the song
+        /// </summary>
+        public SongInfo Info { get; private set; }
 
         /// <summary>
         /// The actual audio stream that contains the sound data for playback by an <see cref="AudioStreamPlayer"/>
         /// </summary>
-        public AudioStream Stream
-        {
-            get; private set;
-        }
+        public AudioStream Stream { get; private set; }
 
         /// <summary>
         /// Whether or not the song is looping
@@ -52,24 +48,15 @@ namespace Jumpvalley.Music
         }
 
         /// <summary>
-        /// The file path to the song
+        /// Constructs a new <see cref="Song"/> instance
         /// </summary>
-        public string FilePath = null;
-
-        /// <summary>
-        /// The name of the song
-        /// </summary>
-        public string Name = null;
-
-        /// <summary>
-        /// The artists that made the song
-        /// </summary>
-        public string Artists = null;
-
-        /// <summary>
-        /// The album the song belongs to
-        /// </summary>
-        public string Album = null;
+        /// <param name="filePath">The absolute file path to the audio file</param>
+        /// <param name="info">Info about the song</param>
+        public Song(string filePath, SongInfo info)
+        {
+            FilePath = filePath;
+            Info = info;
+        }
 
         // update function for IsLooping
         private void UpdateLoop()
@@ -96,10 +83,10 @@ namespace Jumpvalley.Music
         }
 
         /// <summary>
-        /// Attempts to open up an AudioStream for the given <see cref="FilePath"/>
+        /// Attempts to open up an AudioStream for the audio file located at <see cref="Info.AudioPath"/> 
         /// </summary>
         /// <exception cref="FileNotFoundException">
-        /// Thrown when the file under the given <see cref="FilePath"/> couldn't be found or when the file path is invalid.
+        /// Thrown when the file at the given file path couldn't be found or when the file path is invalid.
         /// </exception>
         /// <exception cref="InvalidDataException">
         /// Thrown when the file was found, but the data format of the file is invalid.
@@ -183,9 +170,12 @@ namespace Jumpvalley.Music
         /// <returns>The attribution string</returns>
         public string GetAttributionString()
         {
-            return $"{Artists} - {Name}";
+            return $"{Info.Artists} - {Info.Name}";
         }
 
+        /// <summary>
+        /// Disposes of this <see cref="Song"/> instance.
+        /// </summary>
         public void Dispose()
         {
             CloseStream();

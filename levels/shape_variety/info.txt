@@ -1,5 +1,0 @@
-id: shape_variety
-full_name: Shape Variety Demo
-creators: UTheDev
-difficulty: 6.54
-scene_path: level.tscn

@@ -47,7 +47,7 @@ namespace Jumpvalley.Levels
         /// Information about the level that's specified in the level's info file.
         /// This includes things like level ID and full name.
         /// </summary>
-        public LevelInfoFile Info { get; private set; }
+        public LevelInfo Info { get; private set; }
 
         /// <summary>
         /// The root node of the level
@@ -100,7 +100,7 @@ namespace Jumpvalley.Levels
         /// <param name="info">Info about the level</param>
         /// <param name="node">The root node of the level to represent</param>
         /// <param name="lastElapsedTime">The most recent amount of elapsed running time that the level left off of</param>
-        public Level(LevelInfoFile info, Node root, TimeSpan lastElapsedTime) : base(new OffsetStopwatch(lastElapsedTime))
+        public Level(LevelInfo info, Node root, TimeSpan lastElapsedTime) : base(new OffsetStopwatch(lastElapsedTime))
         {
             Info = info;
             RootNode = root;
