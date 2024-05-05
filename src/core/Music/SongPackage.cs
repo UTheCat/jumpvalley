@@ -1,6 +1,5 @@
 ﻿using Godot;
 using System;
-using System.IO;
 using System.Text.Json.Nodes;
 
 using Jumpvalley.IO;
@@ -49,7 +48,7 @@ namespace Jumpvalley.Music
                 //Console.WriteLine("Try opening info file");
 
                 // if so, try opening the files inside
-                using Godot.FileAccess infoFile = Godot.FileAccess.Open(Path.Combine(path, INFO_FILE_NAME), Godot.FileAccess.ModeFlags.Read);
+                using Godot.FileAccess infoFile = Godot.FileAccess.Open(PathUtil.GodotCombine(path, INFO_FILE_NAME), Godot.FileAccess.ModeFlags.Read);
                 if (infoFile == null)
                 {
                     throw new Exception($"Failed to open the corresponding {INFO_FILE_NAME} file. This is the message returned by Godot.FileAccess.GetOpenError(): {Godot.FileAccess.GetOpenError()}");
