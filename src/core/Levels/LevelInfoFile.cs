@@ -5,6 +5,7 @@ namespace Jumpvalley.Levels
     /// <summary>
     /// Reads an info file for a Jumpvalley level
     /// </summary>
+    [System.Obsolete]
     public partial class LevelInfoFile : IO.InfoFile
     {
         /// <summary>

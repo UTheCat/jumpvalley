@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Jumpvalley.IO
 {
@@ -18,6 +19,7 @@ namespace Jumpvalley.IO
     /// <br/><br/>
     /// This text formatting is inspired by the way that the content of .osu files are formatted in Osu (the rhythm game).
     /// </summary>
+    [Obsolete]
     public partial class InfoFile
     {
         /// <summary>
