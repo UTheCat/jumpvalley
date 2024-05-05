@@ -1,7 +1,7 @@
 namespace Jumpvalley.IO
 {
     /// <summary>
-    /// Provides some methods for performing operations related to file paths.
+    /// Provides some values and methods for performing operations related to file paths.
     /// </summary>
     public partial class PathUtil
     {
