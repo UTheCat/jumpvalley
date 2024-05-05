@@ -72,7 +72,7 @@ namespace Jumpvalley.Music
         /// <returns></returns>
         public Song CreateSongInstance()
         {
-            return new Song(Path.Combine(DirPath, AudioPath), Info);
+            return new Song(new Uri(new Uri(DirPath), AudioPath).ToString(), Info);
         }
     }
 }
