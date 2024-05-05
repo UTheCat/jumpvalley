@@ -50,26 +50,6 @@ namespace Jumpvalley.Music
             }
         }
 
-        /// <summary>
-        /// The file path to the song
-        /// </summary>
-        public string FilePath = null;
-
-        /// <summary>
-        /// The name of the song
-        /// </summary>
-        public string Name = null;
-
-        /// <summary>
-        /// The artists that made the song
-        /// </summary>
-        public string Artists = null;
-
-        /// <summary>
-        /// The album the song belongs to
-        /// </summary>
-        public string Album = null;
-
         // update function for IsLooping
         private void UpdateLoop()
         {
@@ -95,10 +75,10 @@ namespace Jumpvalley.Music
         }
 
         /// <summary>
-        /// Attempts to open up an AudioStream for the given <see cref="FilePath"/>
+        /// Attempts to open up an AudioStream for the audio file located at <see cref="Info.AudioPath"/> 
         /// </summary>
         /// <exception cref="FileNotFoundException">
-        /// Thrown when the file under the given <see cref="FilePath"/> couldn't be found or when the file path is invalid.
+        /// Thrown when the file at the given file path couldn't be found or when the file path is invalid.
         /// </exception>
         /// <exception cref="InvalidDataException">
         /// Thrown when the file was found, but the data format of the file is invalid.
@@ -109,7 +89,7 @@ namespace Jumpvalley.Music
             {
                 // This should be set before trying to load the corresponding stream so that once the stream is loaded, we can check if the
                 // the stream has the correct resource path
-                streamResPath = FilePath;
+                streamResPath = Info.AudioPath;
 
                 // try loading the file
                 AudioStreamReader audioStreamReader = new AudioStreamReader(streamResPath);
@@ -182,7 +162,7 @@ namespace Jumpvalley.Music
         /// <returns>The attribution string</returns>
         public string GetAttributionString()
         {
-            return $"{Artists} - {Name}";
+            return $"{Info.Artists} - {Info.Name}";
         }
 
         public void Dispose()
