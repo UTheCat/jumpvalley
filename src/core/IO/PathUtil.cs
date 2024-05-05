@@ -35,6 +35,11 @@ namespace Jumpvalley.IO
                 string path = paths[i];
 
                 path.Replace(WINDOWS_DIR_SEPARATOR, GODOT_DIR_SEPARATOR);
+                if (!path.EndsWith(GODOT_DIR_SEPARATOR))
+                {
+                    path += GODOT_DIR_SEPARATOR;
+                }
+
                 finalPath += path;
             }
 
