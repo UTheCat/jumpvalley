@@ -7,6 +7,7 @@ namespace JumpvalleyGame.Testing
     /// <summary>
     /// Test class for making sure the <see cref="InfoFile"/> class works properly
     /// </summary>
+    [Obsolete]
     public partial class InfoFileTest
     {
         private InfoFile infoFile;
