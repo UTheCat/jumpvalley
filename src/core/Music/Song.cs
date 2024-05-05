@@ -20,22 +20,19 @@ namespace Jumpvalley.Music
         private string streamResPath = null;
 
         /// <summary>
+        /// The absolute file path to the audio file
+        /// </summary>
+        public string FilePath { get; private set; }
+
+        /// <summary>
         /// Info about the song
         /// </summary>
         public SongInfo Info { get; private set; }
 
-        public Song(SongInfo info)
-        {
-            Info = info;
-        }
-
         /// <summary>
         /// The actual audio stream that contains the sound data for playback by an <see cref="AudioStreamPlayer"/>
         /// </summary>
-        public AudioStream Stream
-        {
-            get; private set;
-        }
+        public AudioStream Stream { get; private set; }
 
         /// <summary>
         /// Whether or not the song is looping
@@ -48,6 +45,17 @@ namespace Jumpvalley.Music
                 _isLooping = value;
                 UpdateLoop();
             }
+        }
+
+        /// <summary>
+        /// Constructs a new <see cref="Song"/> instance
+        /// </summary>
+        /// <param name="filePath">The absolute file path to the audio file</param>
+        /// <param name="info">Info about the song</param>
+        public Song(string filePath, SongInfo info)
+        {
+            FilePath = filePath;
+            Info = info;
         }
 
         // update function for IsLooping
@@ -89,7 +97,7 @@ namespace Jumpvalley.Music
             {
                 // This should be set before trying to load the corresponding stream so that once the stream is loaded, we can check if the
                 // the stream has the correct resource path
-                streamResPath = Info.AudioPath;
+                streamResPath = FilePath;
 
                 // try loading the file
                 AudioStreamReader audioStreamReader = new AudioStreamReader(streamResPath);
@@ -165,6 +173,9 @@ namespace Jumpvalley.Music
             return $"{Info.Artists} - {Info.Name}";
         }
 
+        /// <summary>
+        /// Disposes of this <see cref="Song"/> instance.
+        /// </summary>
         public void Dispose()
         {
             CloseStream();

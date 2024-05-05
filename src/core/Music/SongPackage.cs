@@ -62,5 +62,17 @@ namespace Jumpvalley.Music
                 AudioPath = Info.AudioPath;
             }
         }
+
+        /// <summary>
+        /// Creates a new <see cref="Song"/> instance using the file paths
+        /// specified in <see cref="DirPath"/> and <see cref="AudioPath"/>.
+        /// The created <see cref="Song"/> instance will have its info
+        /// set to this <see cref="SongPackage"/>'s current song info.  
+        /// </summary>
+        /// <returns></returns>
+        public Song CreateSongInstance()
+        {
+            return new Song(Path.Combine(DirPath, AudioPath), Info);
+        }
     }
 }

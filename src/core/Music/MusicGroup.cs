@@ -87,7 +87,7 @@ namespace Jumpvalley.Music
             // Add the corresponding songs to the playlist
             for (int i = 0; i < SongPackages.Count; i++)
             {
-                Add(new Song(SongPackages[i].Info));
+                Add(SongPackages[i].CreateSongInstance());
             }
         }
 
