@@ -20,6 +20,7 @@
     /// </list>
     /// This text formatting is inspired by the way that the content of .osu files are formatted in Osu (the rhythm game).
     /// </summary>
+    [System.Obsolete]
     public partial class SongInfoFile: IO.InfoFile
     {
         /// <summary>
