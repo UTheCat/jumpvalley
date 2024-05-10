@@ -1,25 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfirwq7r0jq20"]
+[gd_scene load_steps=5 format=3 uid="uid://dfirwq7r0jq20"]
 
 [ext_resource type="Texture2D" uid="uid://cbtq8qw7d17ij" path="res://addons/kenney_prototype_textures/green/texture_10.png" id="1_aac5p"]
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_c6jsr"]
-[ext_resource type="Shader" path="res://gui/music_panel.gdshader" id="1_d4jbm"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c533v"]
-shader = ExtResource("1_d4jbm")
-shader_parameter/image = ExtResource("1_aac5p")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkvd5"]
+bg_color = Color(0, 0, 0, 0.501961)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ml8dw"]
-bg_color = Color(0.790835, 0.523237, 0.445736, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri572"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="MusicPanel" type="Control"]
 layout_mode = 3
@@ -30,7 +22,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="."]
-material = SubResource("ShaderMaterial_c533v")
 clip_contents = true
 layout_mode = 1
 anchors_preset = -1
@@ -38,37 +29,51 @@ offset_right = 500.0
 offset_bottom = 250.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vkvd5")
 
-[node name="Background" type="PanelContainer" parent="Panel"]
-visible = false
-clip_contents = true
-layout_mode = 0
-offset_right = 100.0
-offset_bottom = 100.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ml8dw")
+[node name="ThumbnailOutline" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.5
+anchor_right = 0.25
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -52.0
+offset_right = 52.0
+offset_bottom = 52.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ri572")
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Background"]
-layout_mode = 2
+[node name="Thumbnail" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.5
+anchor_right = 0.25
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
 texture = ExtResource("1_aac5p")
 expand_mode = 1
 
 [node name="SongName" type="Label" parent="Panel"]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.5
 anchor_right = 1.0
 offset_top = 96.0
 offset_bottom = 131.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 28
 text = "Song Name"
-horizontal_alignment = 1
 
 [node name="Artists" type="Label" parent="Panel"]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.5
 anchor_right = 1.0
 offset_top = 136.0
 offset_bottom = 161.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 20
 text = "Artists"
-horizontal_alignment = 1
