@@ -50,7 +50,7 @@ This tells the operating system to let itself execute the file (in this case, th
 
 ## Documentation
 
-Jumpvalley's documentation can be found on its [website](https://uthedev.github.io/jumpvalley_docs/index.html) hosted on GitHub.
+Jumpvalley's documentation can be found on its [website](https://uthedev.github.io/jumpvalley-docs/) hosted on GitHub.
 
 ## Working with this repository
 
