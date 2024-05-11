@@ -121,7 +121,6 @@ namespace JumpvalleyGame
 
             MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
             bottomBar.PrimaryMusicPanel = musicPanel;
-            PrimaryGui.AddChild(musicPanelNode);
 
             // Set up level-running stuff
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
