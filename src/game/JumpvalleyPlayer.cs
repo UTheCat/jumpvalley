@@ -119,8 +119,10 @@ namespace JumpvalleyGame
             if (primaryMusicPanelScene != null)
             {
                 Control musicPanelNode = primaryMusicPanelScene.Instantiate<Control>();
+
                 MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
                 bottomBar.PrimaryMusicPanel = musicPanel;
+                PrimaryGui.AddChild(musicPanelNode);
 
                 primaryMusicPanelScene.Dispose();
             }
