@@ -11,15 +11,20 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri572"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1d3y"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
 shadow_color = Color(1, 1, 1, 0.6)
 shadow_size = 4
 
 [node name="MusicPanel" type="Control"]
 layout_mode = 3
 offset_right = 500.0
-offset_bottom = 250.0
+offset_bottom = 225.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -33,30 +38,30 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vkvd5")
 
-[node name="ThumbnailOutline" type="Panel" parent="."]
+[node name="Thumbnail" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.25
+anchor_left = 0.2
 anchor_top = 0.5
-anchor_right = 0.25
+anchor_right = 0.2
 anchor_bottom = 0.5
 offset_left = -52.0
 offset_top = -52.0
 offset_right = 52.0
 offset_bottom = 52.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ri572")
+theme_override_styles/panel = SubResource("StyleBoxFlat_s1d3y")
 
-[node name="Thumbnail" type="TextureRect" parent="."]
+[node name="Image" type="TextureRect" parent="Thumbnail"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.25
-anchor_top = 0.5
-anchor_right = 0.25
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_aac5p")
 expand_mode = 1
 
@@ -65,8 +70,8 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 1.0
-offset_top = 96.0
-offset_bottom = 131.0
+offset_top = 53.0
+offset_bottom = 88.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 28
 text = "Song Name"
@@ -76,28 +81,32 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 1.0
-offset_top = 136.0
-offset_bottom = 161.0
+offset_top = 95.0
+offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 20
 text = "Artists"
 
-[node name="VolumeControl" type="HSlider" parent="."]
+[node name="Volume" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
+anchor_left = 0.4
 anchor_top = 1.0
 anchor_right = 0.9
 anchor_bottom = 1.0
-offset_top = -62.0
-offset_bottom = -46.0
+offset_top = -97.0
+offset_bottom = -81.0
 
-[node name="VolumeIcon" type="TextureRect" parent="."]
+[node name="Slider" type="HSlider" parent="Volume"]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 216.0
-offset_top = 184.0
-offset_right = 240.0
-offset_bottom = 208.0
+anchor_right = 1.0
+offset_left = 24.0
+offset_bottom = 24.0
+
+[node name="Icon" type="TextureRect" parent="Volume"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 24.0
+offset_bottom = 24.0
 texture = ExtResource("3_yrcgy")
 expand_mode = 1

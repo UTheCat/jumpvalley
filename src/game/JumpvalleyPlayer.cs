@@ -115,17 +115,11 @@ namespace JumpvalleyGame
                 primaryLevelMenuScene.Dispose();
             }
 
-            PackedScene primaryMusicPanelScene = ResourceLoader.Load<PackedScene>("res://gui/music_panel.tscn");
-            if (primaryMusicPanelScene != null)
-            {
-                Control musicPanelNode = primaryMusicPanelScene.Instantiate<Control>();
+            Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");
 
-                MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
-                bottomBar.PrimaryMusicPanel = musicPanel;
-                PrimaryGui.AddChild(musicPanelNode);
-
-                primaryMusicPanelScene.Dispose();
-            }
+            MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
+            bottomBar.PrimaryMusicPanel = musicPanel;
+            PrimaryGui.AddChild(musicPanelNode);
 
             // Set up level-running stuff
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
