@@ -181,6 +181,11 @@ namespace Jumpvalley.Music
                     if (playlist != null)
                     {
                         playlist.LocalVolumeScale = value;
+
+                        foreach (Playlist p in fadingOutPlaylists)
+                        {
+                            p.LocalVolumeScale = value;
+                        }
                     }
                 }
             }
