@@ -9,6 +9,7 @@ Thanks to the creators of the assets listed below for making these beautiful ass
 - [More Horizontal Icon by Google](https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Amore_horiz%3A)
 - [Close Icon by Google](https://fonts.google.com/icons?selected=Material%20Icons%20Round%3Aclose%3A)
 - [Logout Icon by Google](https://fonts.google.com/icons?selected=Material%20Icons%20Round%3Alogout%3A)
+- [Volume Down Icon by Google](https://fonts.google.com/icons?selected=Material%20Icons%20Round%3Avolume_down%3A)
 
 ## Music
 

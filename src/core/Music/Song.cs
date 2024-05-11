@@ -59,9 +59,11 @@ namespace Jumpvalley.Music
         }
 
         // update function for IsLooping
-        private void UpdateLoop()
+        private void UpdateLoop(AudioStream stream)
         {
-            if (Stream is AudioStreamWav sWav)
+            if (stream == null) return;
+
+            if (stream is AudioStreamWav sWav)
             {
                 if (IsLooping)
                 {
@@ -72,14 +74,19 @@ namespace Jumpvalley.Music
                     sWav.LoopMode = AudioStreamWav.LoopModeEnum.Disabled;
                 }
             }
-            else if (Stream is AudioStreamOggVorbis sOgg)
+            else if (stream is AudioStreamOggVorbis sOgg)
             {
                 sOgg.Loop = IsLooping;
             }
-            else if (Stream is AudioStreamMP3 sMp3)
+            else if (stream is AudioStreamMP3 sMp3)
             {
                 sMp3.Loop = IsLooping;
             }
+        }
+
+        private void UpdateLoop()
+        {
+            UpdateLoop(Stream);
         }
 
         /// <summary>
@@ -98,12 +105,18 @@ namespace Jumpvalley.Music
                 // This should be set before trying to load the corresponding stream so that once the stream is loaded, we can check if the
                 // the stream has the correct resource path
                 streamResPath = FilePath;
+                if (string.IsNullOrEmpty(streamResPath)) return;
+
+                // Path to the currently loading audio file
+                string currentlyLoadingFile = streamResPath;
 
                 // try loading the file
                 AudioStreamReader audioStreamReader = new AudioStreamReader(streamResPath);
                 AudioStream audioStream = audioStreamReader.Stream;
 
-                if (streamResPath == null || !streamResPath.Equals(audioStream.ResourcePath))
+                // If the currently requested audio file does not match the audio file
+                // we're trying to load, cancel this operation.
+                if (streamResPath == null || streamResPath.Equals(currentlyLoadingFile) == false)
                 {
                     //audioStream.Free();
                     audioStream.Dispose();
@@ -111,40 +124,8 @@ namespace Jumpvalley.Music
                     return;
                 }
 
+                UpdateLoop(audioStream);
                 Stream = audioStream;
-                UpdateLoop();
-
-                /*
-                Resource resource = GD.Load(streamResPath);
-
-                if (resource == null)
-                {
-                    throw new FileNotFoundException("The file path of the song is invalid. Please make sure that such file path is correct and is an absolute file path.");
-                }
-
-                // update Stream variable
-                if (resource is AudioStreamWav || resource is AudioStreamOggVorbis || resource is AudioStreamMP3)
-                {
-                    AudioStream audioStream = (AudioStream)resource;
-
-                    // If the resource path of the loaded AudioStream doesn't match the file path, cancel the current operation.
-                    // This can happen because CloseStream() was called while the resource was loading.
-                    if (streamResPath == null || !streamResPath.Equals(audioStream.ResourcePath))
-                    {
-                        audioStream.Free();
-                        audioStream.Dispose();
-
-                        return;
-                    }
-
-                    Stream = audioStream;
-                    UpdateLoop();
-                }
-                else
-                {
-                    throw new InvalidDataException("The data format of the song file is invalid. Please check that the song's file format is either WAV, OGG, or MP3.");
-                }
-                */
             }
         }
 
@@ -155,10 +136,12 @@ namespace Jumpvalley.Music
         {
             streamResPath = null;
 
-            if (Stream != null)
+            AudioStream stream = Stream;
+            if (stream != null)
             {
-                Stream.Dispose();
                 Stream = null;
+                
+                stream.Dispose();
             }
         }
 

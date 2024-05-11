@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=9 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/game/Program.cs" id="1_r1x4e"]
 [ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
+[ext_resource type="PackedScene" uid="uid://dfirwq7r0jq20" path="res://gui/music_panel.tscn" id="3_dfcbn"]
 [ext_resource type="PackedScene" uid="uid://kou88p3rb0fq" path="res://gui/level_timer.tscn" id="9_1cbro"]
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/player.tscn" id="9_1wvm3"]
 
@@ -42,6 +43,19 @@ grow_vertical = 2
 
 [node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
 layout_mode = 1
+
+[node name="MusicPanel" parent="PrimaryGui" instance=ExtResource("3_dfcbn")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -267.0
+offset_right = 250.0
+offset_bottom = -42.0
+grow_vertical = 0
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
 

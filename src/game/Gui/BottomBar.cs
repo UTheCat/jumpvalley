@@ -52,13 +52,36 @@ namespace JumpvalleyGame.Gui
             {
                 if (_primaryLevelMenu != null)
                 {
-                    _primaryLevelMenu.VisibilityChanged -= OnPrimaryLevelMenuVisibilityChanged;
+                    _primaryLevelMenu.VisibilityChanged -= HandleMenuVisibilityChange;
                 }
 
                 _primaryLevelMenu = value;
                 if (value != null)
                 {
-                    value.VisibilityChanged += OnPrimaryLevelMenuVisibilityChanged;
+                    value.VisibilityChanged += HandleMenuVisibilityChange;
+                }
+            }
+        }
+
+        private MusicPanel _primaryMusicPanel;
+
+        /// <summary>
+        /// The music panel associated with this bottom bar
+        /// </summary>
+        public MusicPanel PrimaryMusicPanel
+        {
+            get => _primaryMusicPanel;
+            set
+            {
+                if (_primaryMusicPanel != null)
+                {
+                    _primaryMusicPanel.VisibilityChanged -= HandleMenuVisibilityChange;
+                }
+
+                _primaryMusicPanel = value;
+                if (value != null)
+                {
+                    value.VisibilityChanged += HandleMenuVisibilityChange;
                 }
             }
         }
@@ -111,9 +134,16 @@ namespace JumpvalleyGame.Gui
             // allow the bottom bar's menu button to toggle the primary level menu
             MainMenuButton.Pressed += () =>
             {
-                if (PrimaryLevelMenu != null)
+                LevelMenu levelMenu = PrimaryLevelMenu;
+                if (levelMenu != null)
                 {
-                    PrimaryLevelMenu.IsVisible = !PrimaryLevelMenu.IsVisible;
+                    levelMenu.IsVisible = !levelMenu.IsVisible;
+
+                    MusicPanel musicPanel = PrimaryMusicPanel;
+                    if (musicPanel != null)
+                    {
+                        musicPanel.IsVisible = false;
+                    }
                 }
             };
 
@@ -130,6 +160,22 @@ namespace JumpvalleyGame.Gui
             {
                 MainMenuButtonHovering = false;
                 RefreshDescriptionOpacity();
+            };
+
+            // allow music panel visibility to be toggled by the music button
+            MusicButton.Pressed += () =>
+            {
+                MusicPanel musicPanel = PrimaryMusicPanel;
+                if (musicPanel != null)
+                {
+                    musicPanel.IsVisible = !musicPanel.IsVisible;
+
+                    LevelMenu levelMenu = PrimaryLevelMenu;
+                    if (levelMenu != null)
+                    {
+                        levelMenu.IsVisible = false;
+                    }
+                }
             };
 
             MusicButton.MouseEntered += () =>
@@ -229,11 +275,11 @@ namespace JumpvalleyGame.Gui
             DescriptionOpacityTween.Resume();
         }
 
-        private void OnPrimaryLevelMenuVisibilityChanged(object o, bool isVisible)
+        private void UpdateBackPanelVisibility()
         {
             if (backPanelOpacityTween != null)
             {
-                if (PrimaryLevelMenu != null && PrimaryLevelMenu.IsVisible)
+                if ((PrimaryLevelMenu != null && PrimaryLevelMenu.IsVisible) || (PrimaryMusicPanel != null && PrimaryMusicPanel.IsVisible))
                 {
                     backPanelOpacityTween.Speed = 1;
                 }
@@ -244,6 +290,11 @@ namespace JumpvalleyGame.Gui
 
                 backPanelOpacityTween.Resume();
             }
+        }
+
+        private void HandleMenuVisibilityChange(object _o, bool isVisible)
+        {
+            UpdateBackPanelVisibility();
         }
 
         public void Dispose()

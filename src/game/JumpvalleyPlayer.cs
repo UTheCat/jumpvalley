@@ -37,6 +37,8 @@ namespace JumpvalleyGame
             CurrentMusicPlayer.BindedNode = Character;
             CurrentMusicPlayer.TransitionTime = 3;
             CurrentMusicPlayer.OverrideTransitionTime = true;
+            CurrentMusicPlayer.VolumeScale = 1;
+            CurrentMusicPlayer.OverrideLocalVolumeScale = true;
             CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;
 
             Disposables.Add(primaryMusic);
@@ -114,6 +116,11 @@ namespace JumpvalleyGame
 
                 primaryLevelMenuScene.Dispose();
             }
+
+            Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");
+
+            MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
+            bottomBar.PrimaryMusicPanel = musicPanel;
 
             // Set up level-running stuff
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
