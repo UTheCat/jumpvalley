@@ -34,6 +34,14 @@ namespace JumpvalleyGame.Gui
 
             Update();
             musicPlayer.SongChanged += HandleSongChanged;
+
+            volumeSlider.MinValue = 0;
+            volumeSlider.MaxValue = 1;
+            if (musicPlayer != null)
+            {
+                volumeSlider.Value = musicPlayer.VolumeScale;
+                volumeSlider.ValueChanged += HandleVolumeSliderChanged;
+            }
         }
 
         public void Update()
@@ -68,6 +76,14 @@ namespace JumpvalleyGame.Gui
         private void HandleSongChanged(object _o, SongChangedArgs _args)
         {
             Update();
+        }
+
+        private void HandleVolumeSliderChanged(double newVolume)
+        {
+            if (musicPlayer != null)
+            {
+                musicPlayer.VolumeScale = newVolume;
+            }
         }
 
         public new void Dispose()
