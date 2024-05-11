@@ -31,6 +31,7 @@ namespace JumpvalleyGame.Gui
             volumeControl = node.GetNode<HSlider>("VolumeControl");
 
             Update();
+            musicPlayer.SongChanged += HandleSongChanged;
         }
 
         public void Update()
@@ -60,6 +61,18 @@ namespace JumpvalleyGame.Gui
                     }
                 }
             }
+        }
+
+        private void HandleSongChanged(object _o, SongChangedArgs _args)
+        {
+            Update();
+        }
+
+        public new void Dispose()
+        {
+            musicPlayer.SongChanged -= HandleSongChanged;
+
+            base.Dispose();
         }
     }
 }
