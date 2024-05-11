@@ -12,6 +12,8 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri572"]
 bg_color = Color(1, 1, 1, 1)
+shadow_color = Color(1, 1, 1, 0.6)
+shadow_size = 4
 
 [node name="MusicPanel" type="Control"]
 layout_mode = 3
@@ -77,3 +79,13 @@ offset_bottom = 161.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 20
 text = "Artists"
+
+[node name="VolumeControl" type="HSlider" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.9
+anchor_bottom = 1.0
+offset_top = -62.0
+offset_bottom = -46.0
