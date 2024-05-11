@@ -1,4 +1,5 @@
 using Godot;
+using Jumpvalley.Music;
 
 namespace JumpvalleyGame.Gui
 {
@@ -8,14 +9,20 @@ namespace JumpvalleyGame.Gui
     /// </summary>
     public partial class MusicPanel : LevelMenu
     {
+        /// <summary>
+        /// The MusicPlayer we're working with
+        /// </summary>
+        private MusicPlayer musicPlayer;
+
         private Control actualNode;
 
         private Label songNameLabel;
         private Label artistsLabel;
         private HSlider volumeControl;
 
-        public MusicPanel(Control node, SceneTree tree) : base(node, tree)
+        public MusicPanel(MusicPlayer musicPlayer, Control node, SceneTree tree) : base(node, tree)
         {
+            this.musicPlayer = musicPlayer;
             actualNode = node;
 
             songNameLabel = node.GetNode<Label>("SongName");
