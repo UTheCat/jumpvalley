@@ -85,7 +85,7 @@ fullscreen_toggle={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation", "res://strings/primary_level_menu.en.translation", "res://strings/music_panel.csv")
+locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation", "res://strings/primary_level_menu.en.translation", "res://strings/music_panel.csv", "res://strings/general.csv")
 
 [physics]
 

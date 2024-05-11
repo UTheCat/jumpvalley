@@ -32,8 +32,6 @@ namespace JumpvalleyGame.Gui
             menuTitleLabel = node.GetNode<Label>("MenuTitle");
             volumeControl = node.GetNode<HSlider>("VolumeControl");
 
-            menuTitleLabel.Text = node.Tr("MUSIC_PANEL_TITLE");
-
             Update();
             musicPlayer.SongChanged += HandleSongChanged;
         }
