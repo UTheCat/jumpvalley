@@ -52,13 +52,36 @@ namespace JumpvalleyGame.Gui
             {
                 if (_primaryLevelMenu != null)
                 {
-                    _primaryLevelMenu.VisibilityChanged -= OnPrimaryLevelMenuVisibilityChanged;
+                    _primaryLevelMenu.VisibilityChanged -= HandleMenuVisibilityChange;
                 }
 
                 _primaryLevelMenu = value;
                 if (value != null)
                 {
-                    value.VisibilityChanged += OnPrimaryLevelMenuVisibilityChanged;
+                    value.VisibilityChanged += HandleMenuVisibilityChange;
+                }
+            }
+        }
+
+        private MusicPanel _primaryMusicPanel;
+
+        /// <summary>
+        /// The music panel associated with this bottom bar
+        /// </summary>
+        public MusicPanel PrimaryMusicPanel
+        {
+            get => _primaryMusicPanel;
+            set
+            {
+                if (_primaryMusicPanel != null)
+                {
+                    _primaryMusicPanel.VisibilityChanged -= HandleMenuVisibilityChange;
+                }
+
+                _primaryMusicPanel = value;
+                if (value != null)
+                {
+                    value.VisibilityChanged += HandleMenuVisibilityChange;
                 }
             }
         }
@@ -229,11 +252,11 @@ namespace JumpvalleyGame.Gui
             DescriptionOpacityTween.Resume();
         }
 
-        private void OnPrimaryLevelMenuVisibilityChanged(object o, bool isVisible)
+        private void UpdateBackPanelVisibility()
         {
             if (backPanelOpacityTween != null)
             {
-                if (PrimaryLevelMenu != null && PrimaryLevelMenu.IsVisible)
+                if ((PrimaryLevelMenu != null && PrimaryLevelMenu.IsVisible) || (PrimaryMusicPanel != null && PrimaryMusicPanel.IsVisible))
                 {
                     backPanelOpacityTween.Speed = 1;
                 }
@@ -244,6 +267,11 @@ namespace JumpvalleyGame.Gui
 
                 backPanelOpacityTween.Resume();
             }
+        }
+
+        private void HandleMenuVisibilityChange(object _o, bool isVisible)
+        {
+            UpdateBackPanelVisibility();
         }
 
         public void Dispose()
