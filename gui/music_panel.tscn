@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://df6f5u3lobv06" path="res://addons/icons/volume_down_48dp.svg" id="3_yrcgy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkvd5"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.222698, 0.269022, 0.372289, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
