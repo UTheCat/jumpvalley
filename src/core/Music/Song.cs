@@ -140,7 +140,7 @@ namespace Jumpvalley.Music
             if (stream != null)
             {
                 Stream = null;
-
+                
                 stream.Dispose();
             }
         }

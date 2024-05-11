@@ -144,7 +144,7 @@ namespace Jumpvalley.Music
             }
         }
 
-        private void CreateAudioStream()
+        private void CreateAudioStreamPlayer()
         {
             if (streamPlayer == null)
             {
@@ -189,7 +189,7 @@ namespace Jumpvalley.Music
             Song s = SongList[index];
 
             bool onlyOneSong = SongList.Count == 1;
-            CreateAudioStream();
+            CreateAudioStreamPlayer();
             s.IsLooping = onlyOneSong;
             s.OpenStream();
             streamPlayer.Stream = s.Stream;
