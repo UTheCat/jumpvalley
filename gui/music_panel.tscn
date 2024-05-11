@@ -65,13 +65,24 @@ grow_vertical = 2
 texture = ExtResource("1_aac5p")
 expand_mode = 1
 
+[node name="MenuTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("1_c6jsr")
+theme_override_font_sizes/font_size = 28
+text = "Music"
+
 [node name="SongName" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
+anchor_left = 0.4
 anchor_right = 1.0
-offset_top = 53.0
-offset_bottom = 88.0
+offset_top = 63.0
+offset_bottom = 98.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 28
 text = "Song Name"
@@ -79,10 +90,10 @@ text = "Song Name"
 [node name="Artists" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
+anchor_left = 0.4
 anchor_right = 1.0
-offset_top = 95.0
-offset_bottom = 120.0
+offset_top = 105.0
+offset_bottom = 130.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 20
 text = "Artists"
@@ -93,14 +104,14 @@ anchor_left = 0.4
 anchor_top = 1.0
 anchor_right = 0.9
 anchor_bottom = 1.0
-offset_top = -97.0
-offset_bottom = -81.0
+offset_top = -82.0
+offset_bottom = -58.0
 
 [node name="Slider" type="HSlider" parent="Volume"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_left = 24.0
+offset_left = 30.0
 offset_bottom = 24.0
 
 [node name="Icon" type="TextureRect" parent="Volume"]

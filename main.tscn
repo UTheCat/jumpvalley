@@ -51,9 +51,10 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -250.0
-offset_top = -242.0
+offset_top = -267.0
 offset_right = 250.0
 offset_bottom = -42.0
+grow_vertical = 0
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
 
