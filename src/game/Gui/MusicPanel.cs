@@ -37,6 +37,7 @@ namespace JumpvalleyGame.Gui
 
             volumeSlider.MinValue = 0;
             volumeSlider.MaxValue = 1;
+            volumeSlider.Step = 0.01;
             if (musicPlayer != null)
             {
                 volumeSlider.Value = musicPlayer.VolumeScale;

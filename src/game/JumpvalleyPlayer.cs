@@ -37,6 +37,8 @@ namespace JumpvalleyGame
             CurrentMusicPlayer.BindedNode = Character;
             CurrentMusicPlayer.TransitionTime = 3;
             CurrentMusicPlayer.OverrideTransitionTime = true;
+            CurrentMusicPlayer.VolumeScale = 1;
+            CurrentMusicPlayer.OverrideLocalVolumeScale = true;
             CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;
 
             Disposables.Add(primaryMusic);
