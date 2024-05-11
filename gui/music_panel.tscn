@@ -16,23 +16,14 @@ bg_color = Color(1, 1, 1, 1)
 shadow_color = Color(1, 1, 1, 0.6)
 shadow_size = 4
 
-[node name="MusicPanel" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="."]
+[node name="MusicPanel" type="Panel"]
 clip_contents = true
-layout_mode = 1
 anchors_preset = -1
 offset_right = 500.0
 offset_bottom = 250.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vkvd5")
 
-[node name="ThumbnailOutline" type="Panel" parent="Panel"]
+[node name="ThumbnailOutline" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -45,7 +36,7 @@ offset_right = 52.0
 offset_bottom = 52.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ri572")
 
-[node name="Thumbnail" type="TextureRect" parent="Panel"]
+[node name="Thumbnail" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -59,7 +50,7 @@ offset_bottom = 50.0
 texture = ExtResource("1_aac5p")
 expand_mode = 1
 
-[node name="SongName" type="Label" parent="Panel"]
+[node name="SongName" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -70,7 +61,7 @@ theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 28
 text = "Song Name"
 
-[node name="Artists" type="Label" parent="Panel"]
+[node name="Artists" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -81,7 +72,7 @@ theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 20
 text = "Artists"
 
-[node name="VolumeControl" type="HSlider" parent="Panel"]
+[node name="VolumeControl" type="HSlider" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -91,7 +82,7 @@ anchor_bottom = 1.0
 offset_top = -62.0
 offset_bottom = -46.0
 
-[node name="VolumeIcon" type="TextureRect" parent="Panel"]
+[node name="VolumeIcon" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 216.0
@@ -100,3 +91,11 @@ offset_right = 240.0
 offset_bottom = 208.0
 texture = ExtResource("3_yrcgy")
 expand_mode = 1
+
+[node name="MusicPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
