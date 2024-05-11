@@ -61,7 +61,10 @@ namespace Jumpvalley.Music
         // update function for IsLooping
         private void UpdateLoop()
         {
-            if (Stream is AudioStreamWav sWav)
+            AudioStream stream = Stream;
+            if (stream == null) return;
+
+            if (stream is AudioStreamWav sWav)
             {
                 if (IsLooping)
                 {
@@ -72,11 +75,11 @@ namespace Jumpvalley.Music
                     sWav.LoopMode = AudioStreamWav.LoopModeEnum.Disabled;
                 }
             }
-            else if (Stream is AudioStreamOggVorbis sOgg)
+            else if (stream is AudioStreamOggVorbis sOgg)
             {
                 sOgg.Loop = IsLooping;
             }
-            else if (Stream is AudioStreamMP3 sMp3)
+            else if (stream is AudioStreamMP3 sMp3)
             {
                 sMp3.Loop = IsLooping;
             }
@@ -163,9 +166,10 @@ namespace Jumpvalley.Music
 
             if (Stream != null)
             {
-                Stream.Dispose();
-                
+                AudioStream stream = Stream;
                 Stream = null;
+
+                stream.Dispose();
             }
         }
 
