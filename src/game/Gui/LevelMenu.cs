@@ -92,11 +92,11 @@ namespace JumpvalleyGame.Gui
         /// <exception cref="ArgumentNullException"></exception>
         public LevelMenu(Control actualNode, SceneTree tree): base(actualNode)
         {
-            BackgroundControl = actualNode.GetNode<Control>("Background");
-            TitleLabel = actualNode.GetNode<Label>("Title");
-            SubtitleLabel = actualNode.GetNode<Label>("Subtitle");
-            ItemsControl = actualNode.GetNode<Control>("Items");
-            CloseButton = actualNode.GetNode<Button>("CloseButton");
+            BackgroundControl = actualNode.GetNodeOrNull<Control>("Background");
+            TitleLabel = actualNode.GetNodeOrNull<Label>("Title");
+            SubtitleLabel = actualNode.GetNodeOrNull<Label>("Subtitle");
+            ItemsControl = actualNode.GetNodeOrNull<Control>("Items");
+            CloseButton = actualNode.GetNodeOrNull<Button>("CloseButton");
 
             transparencyTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
             transparencyTween.InitialValue = 0;
