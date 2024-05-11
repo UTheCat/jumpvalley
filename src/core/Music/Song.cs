@@ -59,9 +59,8 @@ namespace Jumpvalley.Music
         }
 
         // update function for IsLooping
-        private void UpdateLoop()
+        private void UpdateLoop(AudioStream stream)
         {
-            AudioStream stream = Stream;
             if (stream == null) return;
 
             if (stream is AudioStreamWav sWav)
@@ -83,6 +82,11 @@ namespace Jumpvalley.Music
             {
                 sMp3.Loop = IsLooping;
             }
+        }
+
+        private void UpdateLoop()
+        {
+            UpdateLoop(Stream);
         }
 
         /// <summary>
@@ -120,40 +124,8 @@ namespace Jumpvalley.Music
                     return;
                 }
 
+                UpdateLoop(audioStream);
                 Stream = audioStream;
-                UpdateLoop();
-
-                /*
-                Resource resource = GD.Load(streamResPath);
-
-                if (resource == null)
-                {
-                    throw new FileNotFoundException("The file path of the song is invalid. Please make sure that such file path is correct and is an absolute file path.");
-                }
-
-                // update Stream variable
-                if (resource is AudioStreamWav || resource is AudioStreamOggVorbis || resource is AudioStreamMP3)
-                {
-                    AudioStream audioStream = (AudioStream)resource;
-
-                    // If the resource path of the loaded AudioStream doesn't match the file path, cancel the current operation.
-                    // This can happen because CloseStream() was called while the resource was loading.
-                    if (streamResPath == null || !streamResPath.Equals(audioStream.ResourcePath))
-                    {
-                        audioStream.Free();
-                        audioStream.Dispose();
-
-                        return;
-                    }
-
-                    Stream = audioStream;
-                    UpdateLoop();
-                }
-                else
-                {
-                    throw new InvalidDataException("The data format of the song file is invalid. Please check that the song's file format is either WAV, OGG, or MP3.");
-                }
-                */
             }
         }
 
