@@ -20,7 +20,7 @@ namespace JumpvalleyGame.Gui
         private Label songNameLabel;
         private Label artistsLabel;
         private Label menuTitleLabel;
-        private HSlider volumeControl;
+        private HSlider volumeSlider;
 
         public MusicPanel(MusicPlayer musicPlayer, Control node, SceneTree tree) : base(node, tree)
         {
@@ -30,7 +30,7 @@ namespace JumpvalleyGame.Gui
             songNameLabel = node.GetNode<Label>("SongName");
             artistsLabel = node.GetNode<Label>("Artists");
             menuTitleLabel = node.GetNode<Label>("MenuTitle");
-            volumeControl = node.GetNode<HSlider>("VolumeControl");
+            volumeSlider = node.GetNode<HSlider>("Volume/Slider");
 
             Update();
             musicPlayer.SongChanged += HandleSongChanged;
