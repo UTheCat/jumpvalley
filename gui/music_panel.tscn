@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfirwq7r0jq20"]
+[gd_scene load_steps=6 format=3 uid="uid://dfirwq7r0jq20"]
 
 [ext_resource type="Texture2D" uid="uid://cbtq8qw7d17ij" path="res://addons/kenney_prototype_textures/green/texture_10.png" id="1_aac5p"]
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_c6jsr"]
+[ext_resource type="Texture2D" uid="uid://df6f5u3lobv06" path="res://addons/icons/volume_down_48dp.svg" id="3_yrcgy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkvd5"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -89,3 +90,13 @@ anchor_right = 0.9
 anchor_bottom = 1.0
 offset_top = -62.0
 offset_bottom = -46.0
+
+[node name="VolumeIcon" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 216.0
+offset_top = 184.0
+offset_right = 240.0
+offset_bottom = 208.0
+texture = ExtResource("3_yrcgy")
+expand_mode = 1
