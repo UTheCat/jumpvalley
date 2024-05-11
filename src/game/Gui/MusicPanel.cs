@@ -29,5 +29,13 @@ namespace JumpvalleyGame.Gui
             artistsLabel = node.GetNode<Label>("Artists");
             volumeControl = node.GetNode<HSlider>("VolumeControl");
         }
+
+        public void Update()
+        {
+            if (musicPlayer != null)
+            {
+                Song currentSong = musicPlayer.CurrentPlaylist?.CurrentSong;
+            }
+        }
     }
 }
