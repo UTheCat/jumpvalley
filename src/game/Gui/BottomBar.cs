@@ -134,9 +134,16 @@ namespace JumpvalleyGame.Gui
             // allow the bottom bar's menu button to toggle the primary level menu
             MainMenuButton.Pressed += () =>
             {
-                if (PrimaryLevelMenu != null)
+                LevelMenu levelMenu = PrimaryLevelMenu;
+                if (levelMenu != null)
                 {
-                    PrimaryLevelMenu.IsVisible = !PrimaryLevelMenu.IsVisible;
+                    levelMenu.IsVisible = !levelMenu.IsVisible;
+
+                    MusicPanel musicPanel = PrimaryMusicPanel;
+                    if (musicPanel != null)
+                    {
+                        musicPanel.IsVisible = false;
+                    }
                 }
             };
 
@@ -153,6 +160,22 @@ namespace JumpvalleyGame.Gui
             {
                 MainMenuButtonHovering = false;
                 RefreshDescriptionOpacity();
+            };
+
+            // allow music panel visibility to be toggled by the music button
+            MusicButton.Pressed += () =>
+            {
+                MusicPanel musicPanel = PrimaryMusicPanel;
+                if (musicPanel != null)
+                {
+                    musicPanel.IsVisible = !musicPanel.IsVisible;
+
+                    LevelMenu levelMenu = PrimaryLevelMenu;
+                    if (levelMenu != null)
+                    {
+                        levelMenu.IsVisible = false;
+                    }
+                }
             };
 
             MusicButton.MouseEntered += () =>
