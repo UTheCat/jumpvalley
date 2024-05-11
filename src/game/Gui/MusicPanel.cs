@@ -10,11 +10,17 @@ namespace JumpvalleyGame.Gui
     {
         private Control actualNode;
 
+        private Label songNameLabel;
+        private Label artistsLabel;
+        private HSlider volumeControl;
+
         public MusicPanel(Control node, SceneTree tree) : base(node, tree)
         {
             actualNode = node;
+
+            songNameLabel = node.GetNode<Label>("SongName");
+            artistsLabel = node.GetNode<Label>("Artists");
+            volumeControl = node.GetNode<HSlider>("VolumeControl");
         }
-
-
     }
 }
