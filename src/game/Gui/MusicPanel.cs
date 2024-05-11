@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Jumpvalley.Music;
 
@@ -7,7 +8,7 @@ namespace JumpvalleyGame.Gui
     /// Class that handles the music panel's functionality.
     /// The music panel displays some information about the currently playing song.
     /// </summary>
-    public partial class MusicPanel : LevelMenu
+    public partial class MusicPanel : LevelMenu, IDisposable
     {
         /// <summary>
         /// The MusicPlayer we're working with
@@ -28,6 +29,8 @@ namespace JumpvalleyGame.Gui
             songNameLabel = node.GetNode<Label>("SongName");
             artistsLabel = node.GetNode<Label>("Artists");
             volumeControl = node.GetNode<HSlider>("VolumeControl");
+
+            Update();
         }
 
         public void Update()
@@ -35,6 +38,27 @@ namespace JumpvalleyGame.Gui
             if (musicPlayer != null)
             {
                 Song currentSong = musicPlayer.CurrentPlaylist?.CurrentSong;
+
+                if (currentSong == null)
+                {
+                    songNameLabel.Text = actualNode.Tr("NO_SONG_PLAYING");
+                    artistsLabel.Visible = false;
+                }
+                else
+                {
+                    SongInfo info = currentSong.Info;
+                    if (info == null)
+                    {
+                        songNameLabel.Text = actualNode.Tr("PLAYING_A_SONG");
+                        artistsLabel.Visible = false;
+                    }
+                    else
+                    {
+                        songNameLabel.Text = info.Name;
+                        artistsLabel.Text = info.Artists;
+                        artistsLabel.Visible = true;
+                    }
+                }
             }
         }
     }
