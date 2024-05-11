@@ -20,7 +20,9 @@ namespace JumpvalleyGame.Gui
         private Label songNameLabel;
         private Label artistsLabel;
         private Label menuTitleLabel;
+
         private HSlider volumeSlider;
+        private Label volumePercentage;
 
         public MusicPanel(MusicPlayer musicPlayer, Control node, SceneTree tree) : base(node, tree)
         {
@@ -30,7 +32,10 @@ namespace JumpvalleyGame.Gui
             songNameLabel = node.GetNode<Label>("SongName");
             artistsLabel = node.GetNode<Label>("Artists");
             menuTitleLabel = node.GetNode<Label>("MenuTitle");
-            volumeSlider = node.GetNode<HSlider>("Volume/Slider");
+
+            Node volumeNode = node.GetNode("Volume");
+            volumeSlider = volumeNode.GetNode<HSlider>("Slider");
+            volumePercentage = volumeNode.GetNode<Label>("Percentage");
 
             Update();
             musicPlayer.SongChanged += HandleSongChanged;
@@ -41,6 +46,7 @@ namespace JumpvalleyGame.Gui
             if (musicPlayer != null)
             {
                 volumeSlider.Value = musicPlayer.VolumeScale;
+                UpdateVolumePercentageText();
                 volumeSlider.ValueChanged += HandleVolumeSliderChanged;
             }
         }
@@ -74,6 +80,11 @@ namespace JumpvalleyGame.Gui
             }
         }
 
+        private void UpdateVolumePercentageText()
+        {
+            volumePercentage.Text = $"{(int)(volumeSlider.Value * 100)}%";
+        }
+
         private void HandleSongChanged(object _o, SongChangedArgs _args)
         {
             Update();
@@ -84,6 +95,7 @@ namespace JumpvalleyGame.Gui
             if (musicPlayer != null)
             {
                 musicPlayer.VolumeScale = newVolume;
+                UpdateVolumePercentageText();
             }
         }
 
