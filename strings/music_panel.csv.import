@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c0ikvt7uj2qc"
+
+[deps]
+
+files=["res://strings/music_panel.en.translation"]
+
+source_file="res://strings/music_panel.csv"
+dest_files=["res://strings/music_panel.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0
