@@ -98,12 +98,18 @@ namespace Jumpvalley.Music
                 // This should be set before trying to load the corresponding stream so that once the stream is loaded, we can check if the
                 // the stream has the correct resource path
                 streamResPath = FilePath;
+                if (string.IsNullOrEmpty(streamResPath)) return;
+
+                // Path to the currently loading audio file
+                string currentlyLoadingFile = streamResPath;
 
                 // try loading the file
                 AudioStreamReader audioStreamReader = new AudioStreamReader(streamResPath);
                 AudioStream audioStream = audioStreamReader.Stream;
 
-                if (streamResPath == null || !streamResPath.Equals(audioStream.ResourcePath))
+                // If the currently requested audio file does not match the audio file
+                // we're trying to load, cancel this operation.
+                if (streamResPath == null || streamResPath.Equals(currentlyLoadingFile) == false)
                 {
                     //audioStream.Free();
                     audioStream.Dispose();
@@ -158,6 +164,7 @@ namespace Jumpvalley.Music
             if (Stream != null)
             {
                 Stream.Dispose();
+                
                 Stream = null;
             }
         }
