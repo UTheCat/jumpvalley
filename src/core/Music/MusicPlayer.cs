@@ -139,7 +139,10 @@ namespace Jumpvalley.Music
                     {
                         value.TransitionTime = TransitionTime;
                     }
-
+                    if (OverrideLocalVolumeScale)
+                    {
+                        value.LocalVolumeScale = VolumeScale;
+                    }
                     value.Play();
                 }
             }
@@ -154,6 +157,34 @@ namespace Jumpvalley.Music
         /// Playlists played by this music player will have their volume transition time set to the value of this variable whenever <see cref="OverrideTransitionTime"/> is set to true, 
         /// </summary>
         public double TransitionTime = 0;
+
+        /// <summary>
+        /// Whether or not the a playlist's LocalVolumeScale will get set to <see cref="VolumeScale"/> whenever it gets played by this music player.
+        /// </summary>
+        public bool OverrideLocalVolumeScale = false;
+
+        private double _volumeScale;
+
+        /// <summary>
+        /// Playlists played by this music player will have their LocalVolumeScale set to the value of this variable whenever <see cref="OverrideLocalVolumeScale"/> is set to true, 
+        /// </summary>
+        public double VolumeScale
+        {
+            get => _volumeScale;
+            set
+            {
+                _volumeScale = value;
+
+                if (OverrideLocalVolumeScale)
+                {
+                    Playlist playlist = CurrentPlaylist;
+                    if (playlist != null)
+                    {
+                        playlist.LocalVolumeScale = value;
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// The MusicPlayer's primary playlist. If set, this playlist will be played whenever <see cref="IsPlaying"/> is set to true.
