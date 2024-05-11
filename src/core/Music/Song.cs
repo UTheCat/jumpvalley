@@ -164,9 +164,9 @@ namespace Jumpvalley.Music
         {
             streamResPath = null;
 
-            if (Stream != null)
+            AudioStream stream = Stream;
+            if (stream != null)
             {
-                AudioStream stream = Stream;
                 Stream = null;
 
                 stream.Dispose();
