@@ -5,13 +5,19 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
 size = Vector3(1, 2, 0.5)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_mx087"]
-radius = 0.1
-height = 0.75
+[sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
+size = Vector3(1, 2, 0.5)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7bhqx"]
 radius = 0.1
 height = 0.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mx087"]
+radius = 0.1
+height = 0.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
+height = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5oda"]
 albedo_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -20,52 +26,65 @@ albedo_color = Color(0.152941, 0.152941, 0.152941, 1)
 material = SubResource("StandardMaterial3D_u5oda")
 text = ":)"
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
-height = 1.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
-size = Vector3(1, 2, 0.5)
-
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="RootCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_s2be1")
 
-[node name="LeftArm" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
-mesh = SubResource("CapsuleMesh_mx087")
-skeleton = NodePath("")
-
-[node name="LeftLeg" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.625, 0)
-mesh = SubResource("CapsuleMesh_7bhqx")
-skeleton = NodePath("")
-
-[node name="RightLeg" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.625, 0)
-mesh = SubResource("CapsuleMesh_7bhqx")
-skeleton = NodePath("")
-
-[node name="RightArm" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
-mesh = SubResource("CapsuleMesh_mx087")
-skeleton = NodePath("")
-
-[node name="Face" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 3, 0.0642553, 0.591883, -0.443492)
-mesh = SubResource("TextMesh_a5yrm")
-
-[node name="Torso" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-material_override = ExtResource("1_8fnx3")
-mesh = SubResource("CapsuleMesh_d4gh2")
-skeleton = NodePath("")
-
 [node name="CollisionHitboxIndicator" type="MeshInstance3D" parent="."]
 material_override = ExtResource("1_8fnx3")
 mesh = SubResource("BoxMesh_rl4hs")
 
-[node name="Head" type="MeshInstance3D" parent="."]
+[node name="Body" type="Node3D" parent="."]
+
+[node name="LeftLeg" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.625, 0)
+
+[node name="LeftLeg" type="MeshInstance3D" parent="Body/LeftLeg"]
+mesh = SubResource("CapsuleMesh_7bhqx")
+skeleton = NodePath("")
+
+[node name="RightLeg" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.625, 0)
+
+[node name="RightLeg" type="MeshInstance3D" parent="Body/RightLeg"]
+mesh = SubResource("CapsuleMesh_7bhqx")
+skeleton = NodePath("")
+
+[node name="LeftArm" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
+
+[node name="LeftArm" type="MeshInstance3D" parent="Body/LeftArm"]
+mesh = SubResource("CapsuleMesh_mx087")
+skeleton = NodePath("")
+
+[node name="RightArm" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
+
+[node name="RightArm" type="MeshInstance3D" parent="Body/RightArm"]
+mesh = SubResource("CapsuleMesh_mx087")
+skeleton = NodePath("")
+
+[node name="Torso" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="Torso" type="MeshInstance3D" parent="Body/Torso"]
+material_override = ExtResource("1_8fnx3")
+mesh = SubResource("CapsuleMesh_d4gh2")
+skeleton = NodePath("")
+
+[node name="Head" type="Node3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="Head" type="MeshInstance3D" parent="Body/Head"]
 visible = false
+skeleton = NodePath("../../..")
+
+[node name="Face" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0642553, 0.591883, -0.443492)
+
+[node name="Face" type="MeshInstance3D" parent="Body/Face"]
+transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("TextMesh_a5yrm")
+skeleton = NodePath("../../..")
