@@ -89,3 +89,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0642553, 0.591883, -0.44349
 transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("TextMesh_a5yrm")
 skeleton = NodePath("../../..")
+
+[node name="CameraFocus" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
