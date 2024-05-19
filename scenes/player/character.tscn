@@ -1,30 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhraj4ym0cswa"]
+[gd_scene load_steps=5 format=3 uid="uid://bhraj4ym0cswa"]
 
 [ext_resource type="Material" uid="uid://bmtoyp50ewt6w" path="res://scenes/player/torso_texture.tres" id="1_8fnx3"]
+[ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
 size = Vector3(1, 2, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
 size = Vector3(1, 2, 0.5)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_7bhqx"]
-radius = 0.1
-height = 0.75
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_mx087"]
-radius = 0.1
-height = 0.75
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_d4gh2"]
-height = 1.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5oda"]
-albedo_color = Color(0.152941, 0.152941, 0.152941, 1)
-
-[sub_resource type="TextMesh" id="TextMesh_a5yrm"]
-material = SubResource("StandardMaterial3D_u5oda")
-text = ":)"
 
 [node name="Character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -37,58 +20,7 @@ material_override = ExtResource("1_8fnx3")
 mesh = SubResource("BoxMesh_rl4hs")
 skeleton = NodePath("../..")
 
-[node name="Body" type="Node3D" parent="."]
-
-[node name="LeftLeg" type="Node3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -0.625, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Body/LeftLeg"]
-mesh = SubResource("CapsuleMesh_7bhqx")
-skeleton = NodePath("")
-
-[node name="RightLeg" type="Node3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.625, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Body/RightLeg"]
-mesh = SubResource("CapsuleMesh_7bhqx")
-skeleton = NodePath("")
-
-[node name="LeftArm" type="Node3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Body/LeftArm"]
-mesh = SubResource("CapsuleMesh_mx087")
-skeleton = NodePath("")
-
-[node name="RightArm" type="Node3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Body/RightArm"]
-mesh = SubResource("CapsuleMesh_mx087")
-skeleton = NodePath("")
-
-[node name="Torso" type="Node3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Body/Torso"]
-material_override = ExtResource("1_8fnx3")
-mesh = SubResource("CapsuleMesh_d4gh2")
-skeleton = NodePath("")
-
-[node name="Head" type="Node3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Body/Head"]
-visible = false
-skeleton = NodePath("../../..")
-
-[node name="Face" type="Node3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0642553, 0.591883, -0.443492)
-
-[node name="Mesh" type="MeshInstance3D" parent="Body/Face"]
-transform = Transform3D(-1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 0, 0, 3, 0, 0, 0)
-mesh = SubResource("TextMesh_a5yrm")
-skeleton = NodePath("../../..")
+[node name="CharacterBody" parent="." instance=ExtResource("2_3ohbj")]
 
 [node name="CameraFocus" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
