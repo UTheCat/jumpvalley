@@ -25,7 +25,7 @@ namespace JumpvalleyGame.Gui
         /// <summary>
         /// The button's background color
         /// </summary>
-        public Color ButtonColor
+        public Color BackgroundColor
         {
             get => ActualButton.SelfModulate;
             set => ActualButton.SelfModulate = value;
