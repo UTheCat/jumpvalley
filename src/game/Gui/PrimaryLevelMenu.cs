@@ -34,9 +34,9 @@ namespace JumpvalleyGame.Gui
 				tree.Root.PropagateNotification((int)Node.NotificationWMCloseRequest);
 				tree.Quit();
 			};
-			exitGameButton.SelfModulate = Color.Color8(255, 100, 89, 255);
-			exitGameButtonHandler.LabelNode.Text = exitGameButton.Tr("EXIT_GAME");
-			exitGameButtonHandler.IconNode.Texture = GD.Load<CompressedTexture2D>("res://addons/icons/logout_white_48dp.svg");
+			exitGameButtonHandler.ButtonColor = Color.Color8(255, 100, 89, 255);
+			exitGameButtonHandler.Text = exitGameButton.Tr("EXIT_GAME");
+			exitGameButtonHandler.Icon = GD.Load<CompressedTexture2D>("res://addons/icons/logout_white_48dp.svg");
 
 			menuButtonResource.Dispose();
 
