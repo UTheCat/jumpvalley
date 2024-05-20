@@ -73,7 +73,7 @@ namespace Jumpvalley.Players
             RootNode = rootNode;
 
             PrimaryGui = rootNode.GetNode<Control>("PrimaryGui");
-            Character = rootNode.GetNode<CharacterBody3D>("Player");
+            Character = rootNode.GetNode<CharacterBody3D>("Character");
 
             CurrentMusicPlayer = new MusicZonePlayer();
             Disposables.Add(CurrentMusicPlayer);

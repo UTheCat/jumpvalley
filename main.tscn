@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
 [ext_resource type="PackedScene" uid="uid://dfirwq7r0jq20" path="res://gui/music_panel.tscn" id="3_dfcbn"]
 [ext_resource type="PackedScene" uid="uid://kou88p3rb0fq" path="res://gui/level_timer.tscn" id="9_1cbro"]
-[ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/player.tscn" id="9_1wvm3"]
+[ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/character.tscn" id="9_1wvm3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -59,7 +59,7 @@ grow_vertical = 0
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
 
-[node name="Player" parent="." instance=ExtResource("9_1wvm3")]
+[node name="Character" parent="." instance=ExtResource("9_1wvm3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
 
 [node name="Levels" type="Node3D" parent="."]

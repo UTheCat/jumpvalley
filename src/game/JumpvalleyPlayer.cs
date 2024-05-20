@@ -66,7 +66,7 @@ namespace JumpvalleyGame
 
             // Set up the player's camera. This is done in between movement setup steps because
             // some of the movement stuff depends on the state of the player's camera.
-            Camera.FocusedNode = Character.GetNode<Node3D>("Head");
+            Camera.FocusedNode = Character.GetNode<Node3D>("CameraFocus");
             Camera.Camera = RootNode.GetNode<Camera3D>("Camera");
             Camera.PanningSensitivity = 1;
             Camera.PanningSpeed = (float)(0.2 * Math.PI) * 0.33f;
