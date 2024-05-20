@@ -8,7 +8,7 @@ namespace JumpvalleyGame.Gui
 	/// </summary>
 	public partial class PrimaryLevelMenu : LevelMenu
 	{
-		private readonly int BUTTON_Y_POS_DIFF = 52;
+		private readonly float BUTTON_Y_POS_DIFF = 52f;
 
 		public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
 		{
@@ -52,11 +52,13 @@ namespace JumpvalleyGame.Gui
 				settingsButton.ActualButton,
 				exitGameButton
 			};
+			float buttonYSize = exitGameButton.Size.Y;
 
 			for (int i = 0; i < buttonList.Length; i++)
 			{
 				Button b = buttonList[i];
-				b.Position = new Vector2(0, BUTTON_Y_POS_DIFF * i);
+				b.OffsetTop = BUTTON_Y_POS_DIFF * i;
+				b.OffsetBottom = b.OffsetTop + buttonYSize;
 				ItemsControl.AddChild(b);
 			}
 		}
