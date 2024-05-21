@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace JumpvalleyGame.Settings
 {
     /// <summary>
@@ -5,6 +7,8 @@ namespace JumpvalleyGame.Settings
     /// </summary>
     public partial class SettingGroup
     {
-
+        public string LocalizationId;
+        public List<SettingGroup> Subgroups;
+        public List<SettingBase<object>> SettingList;
     }
 }
