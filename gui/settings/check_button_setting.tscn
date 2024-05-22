@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://4x6cwtsb3vjf"]
+
+[ext_resource type="LabelSettings" uid="uid://dky074m66u2lu" path="res://gui/settings/setting_name.tres" id="1_t2fq7"]
+
+[node name="CheckButtonSetting" type="Control"]
+layout_mode = 3
+anchor_right = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -50.0
+text = "bool setting name"
+label_settings = ExtResource("1_t2fq7")
+vertical_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0

@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dky074m66u2lu"]
+
+[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_rms3r"]
+
+[resource]
+font = ExtResource("1_rms3r")
+font_size = 28
