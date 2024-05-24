@@ -8,6 +8,11 @@ namespace JumpvalleyGame.Settings
     public partial class SettingBase<T>
     {
         /// <summary>
+        /// The internal identifier of the setting
+        /// </summary>
+        public string Id;
+
+        /// <summary>
         /// The key in the localization table that points to the setting's name
         /// </summary>
         public string LocalizationId;
