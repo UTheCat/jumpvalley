@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgfjvgik6m4a5"]
+[gd_scene load_steps=6 format=3 uid="uid://dgfjvgik6m4a5"]
 
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_thenv"]
-[ext_resource type="Texture2D" uid="uid://xfjrsfu0kh4v" path="res://addons/icons/close_white_48dp.svg" id="2_83y4n"]
+[ext_resource type="PackedScene" uid="uid://olrc8iep31yb" path="res://gui/close_button.tscn" id="2_qiqfo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tlkk"]
 bg_color = Color(0.105882, 0.105882, 0.105882, 1)
@@ -17,13 +17,6 @@ font_size = 40
 [sub_resource type="LabelSettings" id="LabelSettings_kiqen"]
 font = ExtResource("1_thenv")
 font_size = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8psry"]
-bg_color = Color(0.678431, 0.145098, 0.25098, 1)
-corner_radius_top_left = 500
-corner_radius_top_right = 500
-corner_radius_bottom_right = 500
-corner_radius_bottom_left = 500
 
 [node name="LevelMenu" type="Control"]
 layout_mode = 3
@@ -79,25 +72,6 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 offset_top = 80.0
 
-[node name="CloseButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.95
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.05
-offset_left = -30.0
-offset_bottom = 30.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_8psry")
-
-[node name="TextureRect" type="TextureRect" parent="CloseButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_83y4n")
-expand_mode = 1
+[node name="CloseButton" parent="." instance=ExtResource("2_qiqfo")]
+layout_mode = 0
+anchors_preset = 0
