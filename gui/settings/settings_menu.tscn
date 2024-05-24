@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2jxb8y2m4xf0"]
+[gd_scene load_steps=5 format=3 uid="uid://d2jxb8y2m4xf0"]
 
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_4vxkx"]
+[ext_resource type="PackedScene" uid="uid://4x6cwtsb3vjf" path="res://gui/settings/check_button_setting.tscn" id="2_11b5i"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3l671"]
 font = ExtResource("1_4vxkx")
@@ -36,3 +37,7 @@ label_settings = SubResource("LabelSettings_3l671")
 layout_mode = 2
 text = "Customize the game"
 label_settings = SubResource("LabelSettings_bd3vs")
+
+[node name="CheckButtonSetting" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_11b5i")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
