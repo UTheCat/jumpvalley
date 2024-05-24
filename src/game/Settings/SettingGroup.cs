@@ -8,6 +8,7 @@ namespace JumpvalleyGame.Settings
     /// </summary>
     public partial class SettingGroup : IDisposable
     {
+        public string Id;
         public string LocalizationId;
         public List<SettingGroup> Subgroups;
         public List<SettingBase<object>> SettingList;
