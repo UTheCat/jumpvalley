@@ -35,6 +35,7 @@ namespace JumpvalleyGame.Settings
                 if (value.Equals(_value)) return;
 
                 _value = value;
+                RaiseChanged();
             }
         }
 
@@ -42,5 +43,10 @@ namespace JumpvalleyGame.Settings
         /// Event raised when the value of <see cref="Value"/> changes 
         /// </summary>
         public event EventHandler Changed;
+
+        protected void RaiseChanged()
+        {
+            Changed?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
