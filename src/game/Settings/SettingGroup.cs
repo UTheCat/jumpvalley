@@ -44,7 +44,19 @@ namespace JumpvalleyGame.Settings
 
         public void RemoveSettingGroup(SettingGroup group)
         {
-            
+            if (group != null)
+            {
+                int index = Subgroups.IndexOf(group);
+                if (index >= 0)
+                {
+                    group.SettingChanged -= HandleSettingChangedFromSubgroup;
+                }
+            }
+        }
+
+        public void AddSettingGroup(SettingGroup group)
+        {
+
         }
 
         public void Dispose()
@@ -66,7 +78,7 @@ namespace JumpvalleyGame.Settings
             }
         }
 
-        private void HandleSubgroupSettingChanged()
+        private void HandleSettingChangedFromSubgroup(object o, SettingBase setting)
         {
 
         }
@@ -90,7 +102,7 @@ namespace JumpvalleyGame.Settings
 
         protected void RaiseSubgroupSettingChanged()
         {
-
+            
         }
     }
 }
