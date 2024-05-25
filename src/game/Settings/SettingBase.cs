@@ -5,7 +5,7 @@ namespace JumpvalleyGame.Settings
     /// <summary>
     /// Class that represents one setting (user toggle-able value) in Jumpvalley
     /// </summary>
-    public partial class SettingBase<T>
+    public partial class SettingBase
     {
         /// <summary>
         /// The internal identifier of the setting
@@ -22,12 +22,12 @@ namespace JumpvalleyGame.Settings
         /// </summary>
         public string DescriptionLocalizationId;
 
-        public T _value;
+        public object _value;
 
         /// <summary>
         /// The setting's value
         /// </summary>
-        public T Value
+        public object Value
         {
             get => _value;
             set

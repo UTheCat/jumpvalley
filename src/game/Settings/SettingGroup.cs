@@ -11,13 +11,13 @@ namespace JumpvalleyGame.Settings
         public string Id;
         public string LocalizationId;
         public List<SettingGroup> Subgroups;
-        public List<SettingBase<object>> SettingList;
+        public List<SettingBase> SettingList;
 
         /// <summary>
         /// Removes a setting from the setting list
         /// </summary>
         /// <param name="setting"></param>
-        public void Remove(SettingBase<object> setting)
+        public void Remove(SettingBase setting)
         {
             if (setting != null)
             {
@@ -33,7 +33,7 @@ namespace JumpvalleyGame.Settings
         /// Adds a setting to the setting list
         /// </summary>
         /// <param name="setting"></param>
-        public void Add(SettingBase<object> setting)
+        public void Add(SettingBase setting)
         {
             if (setting == null) return;
 
@@ -43,7 +43,7 @@ namespace JumpvalleyGame.Settings
 
         public void Dispose()
         {
-            foreach (SettingBase<object> s in SettingList)
+            foreach (SettingBase s in SettingList)
             {
                 s.Changed -= HandleSettingChanged;
             }
@@ -53,7 +53,7 @@ namespace JumpvalleyGame.Settings
 
         private void HandleSettingChanged(object o, EventArgs _e)
         {
-            SettingBase<object> setting = o as SettingBase<object>;
+            SettingBase setting = o as SettingBase;
             if (setting != null)
             {
                 RaiseSettingChanged(setting);
@@ -65,9 +65,9 @@ namespace JumpvalleyGame.Settings
         /// <br/>
         /// The EventArgs parameter is the setting that was changed as a <see cref="SettingBase{T}"/>. 
         /// </summary>
-        public event EventHandler<SettingBase<object>> SettingChanged;
+        public event EventHandler<SettingBase> SettingChanged;
 
-        protected void RaiseSettingChanged(SettingBase<object> setting)
+        protected void RaiseSettingChanged(SettingBase setting)
         {
             SettingChanged?.Invoke(this, setting);
         }
