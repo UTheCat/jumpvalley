@@ -56,7 +56,10 @@ namespace JumpvalleyGame.Settings
 
         public void AddSettingGroup(SettingGroup group)
         {
+            if (group == null || Subgroups.Contains(group)) return;
 
+            Subgroups.Add(group);
+            group.SettingChanged += HandleSettingChangedFromSubgroup;
         }
 
         public void Dispose()
@@ -67,6 +70,13 @@ namespace JumpvalleyGame.Settings
             }
 
             SettingList.Clear();
+
+            foreach (SettingGroup group in Subgroups)
+            {
+                group.SettingChanged -= HandleSettingChangedFromSubgroup;
+            }
+
+            Subgroups.Clear();
         }
 
         private void HandleSettingChanged(object o, EventArgs _e)
