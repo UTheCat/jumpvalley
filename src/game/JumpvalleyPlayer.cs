@@ -10,19 +10,24 @@ using Jumpvalley.Players.Movement;
 
 using JumpvalleyGame.Gui;
 using JumpvalleyGame.Levels;
+using JumpvalleyGame.Settings;
 
 namespace JumpvalleyGame
 {
     /// <summary>
     /// Full implementation of the Player class specific to Jumpvalley itself
     /// </summary>
-    public partial class JumpvalleyPlayer : Player
+    public partial class JumpvalleyPlayer : Player, IDisposable
     {
         private ConsoleLogger logger;
+
+        private JumpvalleySettings settings;
 
         public JumpvalleyPlayer(SceneTree tree, Node rootNode) : base(tree, rootNode)
         {
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
+
+            settings = new JumpvalleySettings();
         }
 
         public override void Start()
@@ -177,6 +182,12 @@ namespace JumpvalleyGame
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
             Disposables.Add(bottomBar);
+        }
+
+        public new void Dispose()
+        {
+            settings.Group.Dispose();
+            base.Dispose();
         }
     }
 }
