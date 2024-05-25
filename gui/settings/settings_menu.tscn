@@ -43,6 +43,8 @@ label_settings = SubResource("LabelSettings_bd3vs")
 
 [node name="SettingsList" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+metadata/setting_category_scene = "res://gui/settings/setting_category.tscn"
+metadata/check_button_setting_scene = "res://gui/settings/check_button_setting.tscn"
 
 [node name="CloseButton" parent="." instance=ExtResource("2_rklti")]
 layout_mode = 1
