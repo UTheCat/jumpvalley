@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8fqbn48544bp"]
+
+[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_gg4se"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vw2l0"]
+font = ExtResource("1_gg4se")
+font_size = 24
+
+[node name="SettingCategory" type="Label"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "setting category name"
+label_settings = SubResource("LabelSettings_vw2l0")
