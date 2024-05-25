@@ -80,7 +80,13 @@ namespace JumpvalleyGame.Settings
 
         private void HandleSettingChangedFromSubgroup(object o, SettingBase setting)
         {
-
+            SettingGroup group = o as SettingGroup;
+            if (group != null)
+            {
+                RaiseSubgroupSettingChanged(
+                    new SubgroupSettingChangedArgs(group, setting)
+                );
+            }
         }
 
         /// <summary>
@@ -93,16 +99,16 @@ namespace JumpvalleyGame.Settings
         /// <summary>
         /// Fired when one of the subgroup's <see cref="SettingChanged"/> event gets raised. 
         /// </summary>
-        public event EventHandler<SettingGroup> SubgroupSettingChanged;
+        public event EventHandler<SubgroupSettingChangedArgs> SubgroupSettingChanged;
 
         protected void RaiseSettingChanged(SettingBase setting)
         {
             SettingChanged?.Invoke(this, setting);
         }
 
-        protected void RaiseSubgroupSettingChanged()
+        protected void RaiseSubgroupSettingChanged(SubgroupSettingChangedArgs args)
         {
-            
+            SubgroupSettingChanged?.Invoke(this, args);
         }
     }
 }
