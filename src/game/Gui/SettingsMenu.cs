@@ -44,8 +44,14 @@ namespace JumpvalleyGame.Gui
                 if (setting.Value is bool)
                 {
                     Control checkButtonSettingNode = checkButtonSettingScene.Instantiate<Control>();
-                    
+                    checkButtonSettingNode.GetNode<Label>("Title").Text = actualNode.Tr(setting.LocalizationId);
+                    settingListNode.AddChild(checkButtonSettingNode);
                 }
+            }
+
+            foreach (SettingGroup subgroup in settingGroup.Subgroups)
+            {
+                Populate(subgroup);
             }
         }
 
@@ -54,7 +60,7 @@ namespace JumpvalleyGame.Gui
         /// </summary>
         public void Populate()
         {
-            
+            Populate(settings);
         }
 
         public void Dispose()
