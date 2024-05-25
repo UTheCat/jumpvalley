@@ -13,6 +13,7 @@ font_size = 32
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 638.0
 grow_horizontal = 2
@@ -27,15 +28,15 @@ offset_right = -38.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="SettingList" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 
-[node name="MenuTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
+[node name="MenuTitle" type="Label" parent="ScrollContainer/SettingList"]
 layout_mode = 2
 text = "Settings"
 label_settings = SubResource("LabelSettings_3l671")
 
-[node name="MenuDescription" type="Label" parent="ScrollContainer/VBoxContainer"]
+[node name="MenuDescription" type="Label" parent="ScrollContainer/SettingList"]
 layout_mode = 2
 text = "Customize the game"
 label_settings = SubResource("LabelSettings_bd3vs")
