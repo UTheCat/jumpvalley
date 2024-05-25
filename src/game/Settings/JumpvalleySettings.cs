@@ -10,6 +10,8 @@ namespace JumpvalleyGame.Settings
         public JumpvalleySettings()
         {
             SettingGroup group = new SettingGroup();
+
+            group.AddSettingGroup(new DisplaySettings());
         }
     }
 }
