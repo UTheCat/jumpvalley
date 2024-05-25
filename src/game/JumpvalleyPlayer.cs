@@ -106,8 +106,10 @@ namespace JumpvalleyGame
             RootNode.AddChild(fpsLimiter);
 
             // Initialize GUI stuff
+            // Bottom bar
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
 
+            // Level menu
             PackedScene primaryLevelMenuScene = ResourceLoader.Load<PackedScene>("res://gui/level_menu.tscn");
             if (primaryLevelMenuScene != null)
             {
@@ -122,10 +124,28 @@ namespace JumpvalleyGame
                 primaryLevelMenuScene.Dispose();
             }
 
+            // Music panel
             Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");
 
             MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
             bottomBar.PrimaryMusicPanel = musicPanel;
+
+            // Settings menu
+            using (PackedScene settingsMenuScene = ResourceLoader.Load<PackedScene>("res://gui/settings/settings_menu.tscn"))
+            {
+                if (settingsMenuScene != null)
+                {
+                    Control settingsMenuNode = settingsMenuScene.Instantiate<Control>();
+
+                    SettingsMenu settingsMenu = new SettingsMenu(settingsMenuNode, settings.Group);
+                    settingsMenu.Populate();
+
+                    PrimaryGui.AddChild(settingsMenuNode);
+
+                    Disposables.Add(settingsMenu);
+                    Disposables.Add(settingsMenuNode);
+                }
+            }
 
             // Set up level-running stuff
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
