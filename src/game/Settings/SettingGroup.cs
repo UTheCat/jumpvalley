@@ -24,6 +24,7 @@ namespace JumpvalleyGame.Settings
                 int index = SettingList.IndexOf(setting);
                 if (index >= 0)
                 {
+                    setting.Changed -= HandleSettingChanged;
                     SettingList.Remove(setting);
                 }
             }
@@ -35,10 +36,15 @@ namespace JumpvalleyGame.Settings
         /// <param name="setting"></param>
         public void Add(SettingBase setting)
         {
-            if (setting == null) return;
+            if (setting == null || SettingList.Contains(setting)) return;
 
             SettingList.Add(setting);
             setting.Changed += HandleSettingChanged;
+        }
+
+        public void RemoveSettingGroup(SettingGroup group)
+        {
+            
         }
 
         public void Dispose()
@@ -60,16 +66,31 @@ namespace JumpvalleyGame.Settings
             }
         }
 
+        private void HandleSubgroupSettingChanged()
+        {
+
+        }
+
         /// <summary>
         /// Fired when one of the setting group's settings changes
         /// <br/>
-        /// The EventArgs parameter is the setting that was changed as a <see cref="SettingBase{T}"/>. 
+        /// The EventArgs parameter is the <see cref="SettingBase"/> that had its value property changed. 
         /// </summary>
         public event EventHandler<SettingBase> SettingChanged;
+
+        /// <summary>
+        /// Fired when one of the subgroup's <see cref="SettingChanged"/> event gets raised. 
+        /// </summary>
+        public event EventHandler<SettingGroup> SubgroupSettingChanged;
 
         protected void RaiseSettingChanged(SettingBase setting)
         {
             SettingChanged?.Invoke(this, setting);
+        }
+
+        protected void RaiseSubgroupSettingChanged()
+        {
+
         }
     }
 }
