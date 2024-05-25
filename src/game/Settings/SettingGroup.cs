@@ -13,6 +13,12 @@ namespace JumpvalleyGame.Settings
         public List<SettingGroup> Subgroups;
         public List<SettingBase> SettingList;
 
+        public SettingGroup()
+        {
+            Subgroups = new List<SettingGroup>();
+            SettingList = new List<SettingBase>();
+        }
+
         /// <summary>
         /// Removes a setting from the setting list
         /// </summary>

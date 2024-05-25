@@ -12,6 +12,8 @@ namespace JumpvalleyGame.Settings
             SettingGroup group = new SettingGroup();
 
             group.AddSettingGroup(new DisplaySettings());
+
+            Group = group;
         }
     }
 }
