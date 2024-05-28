@@ -142,8 +142,6 @@ namespace JumpvalleyGame
                 primaryLevelMenu.CurrentSettingsMenu = settingsMenu;
             }
 
-            PrimaryGui.AddChild(settingsMenuNode);
-
             Disposables.Add(settingsMenu);
             Disposables.Add(settingsMenuNode);
 
