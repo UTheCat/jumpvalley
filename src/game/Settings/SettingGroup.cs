@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 
 namespace JumpvalleyGame.Settings
 {
     /// <summary>
     /// Class that represents a group/category of settings
     /// </summary>
-    public partial class SettingGroup : IDisposable
+    public partial class SettingGroup : Node, IDisposable
     {
         public string Id;
         public string LocalizationId;
@@ -30,6 +31,8 @@ namespace JumpvalleyGame.Settings
                 int index = SettingList.IndexOf(setting);
                 if (index >= 0)
                 {
+                    RemoveChild(setting);
+
                     setting.Changed -= HandleSettingChanged;
                     SettingList.Remove(setting);
                 }
@@ -46,6 +49,8 @@ namespace JumpvalleyGame.Settings
 
             SettingList.Add(setting);
             setting.Changed += HandleSettingChanged;
+
+            AddChild(setting);
         }
 
         public void RemoveSettingGroup(SettingGroup group)
@@ -56,6 +61,9 @@ namespace JumpvalleyGame.Settings
                 if (index >= 0)
                 {
                     group.SettingChanged -= HandleSettingChangedFromSubgroup;
+                    Subgroups.Remove(group);
+
+                    RemoveChild(group);
                 }
             }
         }
@@ -66,10 +74,14 @@ namespace JumpvalleyGame.Settings
 
             Subgroups.Add(group);
             group.SettingChanged += HandleSettingChangedFromSubgroup;
+
+            AddChild(group);
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
+            QueueFree();
+
             foreach (SettingBase s in SettingList)
             {
                 s.Changed -= HandleSettingChanged;
@@ -83,6 +95,8 @@ namespace JumpvalleyGame.Settings
             }
 
             Subgroups.Clear();
+
+            base.Dispose();
         }
 
         private void HandleSettingChanged(object o, EventArgs _e)
