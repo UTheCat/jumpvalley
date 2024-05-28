@@ -10,6 +10,8 @@ namespace JumpvalleyGame.Gui
 	{
 		private readonly float BUTTON_Y_POS_DIFF = 52f;
 
+		public SettingsMenu CurrentSettingsMenu;
+
 		public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
 		{
 			if (TitleLabel != null)
@@ -25,11 +27,18 @@ namespace JumpvalleyGame.Gui
 			PackedScene menuButtonResource = ResourceLoader.Load<PackedScene>("res://gui/level_menu_button.tscn");
 
 			// Add the Settings button
-			LevelMenuButton settingsButton = new LevelMenuButton(menuButtonResource.Instantiate<Button>())
+			Button settingsButtonNode = menuButtonResource.Instantiate<Button>();
+			LevelMenuButton settingsButton = new LevelMenuButton(settingsButtonNode)
 			{
 				Text = actualNode.Tr("SETTINGS_MENU_TITLE"),
 				Icon = GD.Load<CompressedTexture2D>("res://addons/icons/settings_48dp.svg"),
 				BackgroundColor = Color.FromHsv(48f / 360f, 0.65f, 1f)
+			};
+			settingsButtonNode.Pressed += () =>
+			{
+				if (IsVisible == false) return;
+				IsVisible = false;
+				CurrentSettingsMenu.IsVisible = true;
 			};
 
 			// Add the Exit Game button
