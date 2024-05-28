@@ -45,6 +45,12 @@ namespace JumpvalleyGame.Settings
         /// </summary>
         public event EventHandler Changed;
 
+        /// <summary>
+        /// Update function for responding to changes to the setting's value.
+        /// This function should be overriden by classes inheriting from <see cref="SettingBase"/>. 
+        /// </summary>
+        public virtual void Update() { }
+
         protected void RaiseChanged()
         {
             Changed?.Invoke(this, EventArgs.Empty);
