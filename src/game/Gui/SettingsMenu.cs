@@ -15,6 +15,8 @@ namespace JumpvalleyGame.Gui
         private Control menu;
         private SettingGroup settings;
         private Control settingListNode;
+        private Button closeButton;
+
         private PackedScene categoryScene;
         private PackedScene checkButtonSettingScene;
 
@@ -45,6 +47,7 @@ namespace JumpvalleyGame.Gui
             menu = actualNode;
             this.settings = settings;
             settingListNode = actualNode.GetNode<Control>("ScrollContainer/VBoxContainer/SettingList");
+            closeButton = actualNode.GetNode<Button>("CloseButton");
 
             categoryScene = LoadSettingNodeScene("setting_category_scene");
             checkButtonSettingScene = LoadSettingNodeScene("check_button_setting_scene");
@@ -61,6 +64,8 @@ namespace JumpvalleyGame.Gui
                 menu.Visible = pos < 1f;
                 SetMenuPosition(pos);
             };
+
+            closeButton.Pressed += HandleCloseButtonPressed;
         }
 
         private void SetMenuPosition(float anchorTop)
@@ -99,6 +104,11 @@ namespace JumpvalleyGame.Gui
             }
         }
 
+        private void HandleCloseButtonPressed()
+        {
+            IsVisible = false;
+        }
+
         /// <summary>
         /// Generates the actual GUI nodes that will display the game's settings
         /// </summary>
@@ -109,6 +119,8 @@ namespace JumpvalleyGame.Gui
 
         public void Dispose()
         {
+            closeButton.Pressed -= HandleCloseButtonPressed;
+
             positionTween.Dispose();
             categoryScene.Dispose();
             checkButtonSettingScene.Dispose();
