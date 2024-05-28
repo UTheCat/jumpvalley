@@ -109,6 +109,7 @@ namespace JumpvalleyGame.Gui
 
         public void Dispose()
         {
+            positionTween.Dispose();
             categoryScene.Dispose();
             checkButtonSettingScene.Dispose();
         }
