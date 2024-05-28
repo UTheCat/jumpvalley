@@ -42,17 +42,17 @@ namespace JumpvalleyGame.Settings
         }
 
         /// <summary>
-        /// Event raised when the value of <see cref="Value"/> changes 
-        /// </summary>
-        public event EventHandler Changed;
-
-        /// <summary>
         /// Update function for responding to changes to the setting's value.
         /// It's called whenever <see cref="Value"/> is changed.
         /// <br/><br/>
         /// This function should be overriden by classes inheriting from <see cref="SettingBase"/>. 
         /// </summary>
         public virtual void Update() { }
+
+        /// <summary>
+        /// Event raised when the value of <see cref="Value"/> changes 
+        /// </summary>
+        public event EventHandler Changed;
 
         protected void RaiseChanged()
         {
