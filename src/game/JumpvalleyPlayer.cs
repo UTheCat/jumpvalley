@@ -131,21 +131,15 @@ namespace JumpvalleyGame
             bottomBar.PrimaryMusicPanel = musicPanel;
 
             // Settings menu
-            using (PackedScene settingsMenuScene = ResourceLoader.Load<PackedScene>("res://gui/settings/settings_menu.tscn"))
-            {
-                if (settingsMenuScene != null)
-                {
-                    Control settingsMenuNode = settingsMenuScene.Instantiate<Control>();
+            Control settingsMenuNode = PrimaryGui.GetNode<Control>("SettingsMenu");
 
-                    SettingsMenu settingsMenu = new SettingsMenu(settingsMenuNode, settings.Group);
-                    settingsMenu.Populate();
+            SettingsMenu settingsMenu = new SettingsMenu(settingsMenuNode, Tree, settings.Group);
+            settingsMenu.Populate();
 
-                    PrimaryGui.AddChild(settingsMenuNode);
+            PrimaryGui.AddChild(settingsMenuNode);
 
-                    Disposables.Add(settingsMenu);
-                    Disposables.Add(settingsMenuNode);
-                }
-            }
+            Disposables.Add(settingsMenu);
+            Disposables.Add(settingsMenuNode);
 
             // Set up level-running stuff
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
