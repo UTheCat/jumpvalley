@@ -1,11 +1,12 @@
 using System;
+using Godot;
 
 namespace JumpvalleyGame.Settings
 {
     /// <summary>
     /// Class that represents one setting (user toggle-able value) in Jumpvalley
     /// </summary>
-    public partial class SettingBase
+    public partial class SettingBase : Node
     {
         /// <summary>
         /// The internal identifier of the setting
