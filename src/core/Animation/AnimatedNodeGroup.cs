@@ -26,9 +26,7 @@ namespace Jumpvalley.Animation
         /// </summary>
         public Dictionary<string, AnimatedNode> NodeList;
 
-        // Set to -2 initially so that the MaxVisibleNodes setter will actually work
-        // when the AnimatedNodeGroup instance is being constructed.
-        private int _maxVisibleNodes = -2;
+        private int _maxVisibleNodes;
 
         /// <summary>
         /// The maximum amount of <see cref="AnimatedNode"/>s within <see cref="NodeList"/>
@@ -44,6 +42,7 @@ namespace Jumpvalley.Animation
                 if (value < -1) throw new ArgumentOutOfRangeException("", "Maximum amount must be set to an integer greater than or equal to -1");
 
                 _maxVisibleNodes = value;
+                HideExcessVisibleNodes();
             }
         }
 
@@ -115,6 +114,25 @@ namespace Jumpvalley.Animation
             visibleNodes.Clear();
         }
 
+        private void HideExcessVisibleNodes()
+        {
+            int maxVisibleNodes = MaxVisibleNodes;
+
+            // If we went over the maximum visible node count,
+            // hide visible nodes at the end of the list.
+            if (maxVisibleNodes >= 0 && visibleNodes.Count > maxVisibleNodes)
+            {
+                int excess = visibleNodes.Count - maxVisibleNodes;
+                for (int i = 0; i < excess; i++)
+                {
+                    AnimatedNode removedNode = visibleNodes[i];
+                    removedNode.IsVisible = false;
+
+                    visibleNodes.RemoveAt(visibleNodes.Count - 1);
+                }
+            }
+        }
+
         /// <summary>
         /// Shows one of the <see cref="AnimatedNode"/>s in <see cref="NodeList"/>.
         /// </summary>
@@ -125,22 +143,13 @@ namespace Jumpvalley.Animation
 
             if (!visibleNodes.Contains(node))
             {
-                visibleNodes.Add(node);
-                node.IsVisible = true;
-
-                // If we went over the maximum visible node count,
-                // hide visible nodes at the end of the list.
-                if (visibleNodes.Count > MaxVisibleNodes)
+                if (MaxVisibleNodes != 0)
                 {
-                    int excess = visibleNodes.Count - MaxVisibleNodes;
-                    for (int i = 0; i < excess; i++)
-                    {
-                        AnimatedNode removedNode = visibleNodes[i];
-                        removedNode.IsVisible = false;
-
-                        visibleNodes.RemoveAt(visibleNodes.Count - 1);
-                    }
+                    visibleNodes.Add(node);
+                    node.IsVisible = true;
                 }
+
+                HideExcessVisibleNodes();
             }
         }
     }
