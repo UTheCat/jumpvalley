@@ -1,8 +1,9 @@
 using Godot;
+
 using Jumpvalley.Animation;
 using Jumpvalley.Tweening;
 
-namespace JumpvalleyGame.Gui
+namespace Jumpvalley.Gui
 {
     /// <summary>
     /// Handler for the BackgroundPanel,
