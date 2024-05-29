@@ -51,6 +51,12 @@ namespace JumpvalleyGame.Gui
         public BackgroundPanel(Control node) : base(node)
         {
             panel = node;
+
+            node.Visible = false;
+            Color initialModulate = node.Modulate;
+            initialModulate.A = 0f;
+            node.Modulate = initialModulate;
+
             opacityTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, node.GetTree())
             {
                 InitialValue = 0
@@ -65,6 +71,7 @@ namespace JumpvalleyGame.Gui
             };
 
             Opacity = 0.25f;
+            IsVisible = false;
         }
     }
 }
