@@ -37,7 +37,6 @@ namespace Jumpvalley.Animation
             set
             {
                 if (value < -1) throw new ArgumentOutOfRangeException("", "Maximum amount must be set to an integer greater than or equal to -1");
-                if (value == _maxVisibleNodes) return;
 
                 _maxVisibleNodes = value;
             }
