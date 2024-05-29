@@ -63,6 +63,8 @@ namespace JumpvalleyGame.Gui
                 modulate.A = opacity;
                 panel.SelfModulate = modulate;
             };
+
+            Opacity = 0.25f;
         }
     }
 }
