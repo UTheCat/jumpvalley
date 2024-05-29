@@ -85,7 +85,16 @@ namespace Jumpvalley.Animation
         /// <param name="id">The string identifier of the animated node to hide</param>
         public void Hide(string id)
         {
+            AnimatedNode node = NodeList[id];
 
+            // For stability reasons, only hide the AnimatedNode if it was shown
+            // via this class's Show method
+            int index = visibleNodes.IndexOf(node);
+            if (index >= 0)
+            {
+                node.IsVisible = false;
+                visibleNodes.RemoveAt(index);
+            }
         }
 
         /// <summary>
@@ -99,6 +108,7 @@ namespace Jumpvalley.Animation
             if (!visibleNodes.Contains(node))
             {
                 visibleNodes.Add(node);
+                node.IsVisible = true;
 
                 // If we went over the maximum visible node count,
                 // hide visible nodes at the end of the list.
