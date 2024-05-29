@@ -10,6 +10,8 @@ namespace Jumpvalley.Animation
     /// </summary>
     public partial class AnimatedNodeGroup
     {
+        private AnimatedNode[] visibleNodes;
+
         /// <summary>
         /// The nodes within the group.
         /// <br/><br/>
@@ -19,7 +21,9 @@ namespace Jumpvalley.Animation
         /// </summary>
         public Dictionary<string, AnimatedNode> NodeList;
 
-        private int _maxVisibleNodes;
+        // Set to -2 initially so that the MaxVisibleNodes setter will actually work
+        // when the AnimatedNodeGroup instance is being constructed.
+        private int _maxVisibleNodes = -2;
 
         /// <summary>
         /// The maximum amount of <see cref="AnimatedNode"/>s within <see cref="NodeList"/>
@@ -33,7 +37,10 @@ namespace Jumpvalley.Animation
             set
             {
                 if (value < -1) throw new ArgumentOutOfRangeException("", "Maximum amount must be set to an integer greater than or equal to -1");
+                if (value == _maxVisibleNodes) return;
+
                 _maxVisibleNodes = value;
+                visibleNodes = new AnimatedNode[Math.Max(value, 0)];
             }
         }
 
