@@ -65,6 +65,14 @@ namespace Jumpvalley.Animation
         {
             if (NodeList.ContainsKey(id))
             {
+                // Remove the AnimatedNode from the visible nodes list,
+                // just in case it's still in there.
+                int index = visibleNodes.IndexOf(NodeList[id]);
+                if (index >= 0)
+                {
+                    visibleNodes.RemoveAt(index);
+                }
+
                 NodeList.Remove(id);
             }
         }
