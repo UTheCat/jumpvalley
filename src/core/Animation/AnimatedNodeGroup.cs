@@ -10,7 +10,11 @@ namespace Jumpvalley.Animation
     public partial class AnimatedNodeGroup
     {
         /// <summary>
-        /// List of nodes
+        /// The nodes within the group.
+        /// <br/><br/>
+        /// In this dictionary, the keys are strings which are IDs that
+        /// can be assigned to an <see cref="AnimatedNode"/> within the group.
+        /// The corresponding value is the <see cref="AnimatedNode"/> associated with the ID. 
         /// </summary>
         public Dictionary<string, AnimatedNode> NodeList;
     }
