@@ -33,13 +33,27 @@ namespace JumpvalleyGame.Gui
             }
         }
 
+        public float _opacity;
+
+        /// <summary>
+        /// The opacity of the background panel to reach when it's visible
+        /// </summary>
+        public float Opacity
+        {
+            get => _opacity;
+            set
+            {
+                _opacity = value;
+                opacityTween.FinalValue = value;
+            }
+        }
+
         public BackgroundPanel(Control node) : base(node)
         {
             panel = node;
             opacityTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, node.GetTree())
             {
-                InitialValue = 0,
-                FinalValue = 0.25
+                InitialValue = 0
             };
             opacityTween.OnStep += (object o, float frac) =>
             {
