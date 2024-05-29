@@ -98,6 +98,20 @@ namespace Jumpvalley.Animation
         }
 
         /// <summary>
+        /// Hides all of the <see cref="AnimatedNode"/>s that have been made visible
+        /// by this instance of <see cref="AnimatedNodeGroup"/>. 
+        /// </summary>
+        public void HideAll()
+        {
+            foreach (AnimatedNode node in visibleNodes)
+            {
+                node.IsVisible = false;
+            }
+
+            visibleNodes.Clear();
+        }
+
+        /// <summary>
         /// Shows one of the <see cref="AnimatedNode"/>s in <see cref="NodeList"/>.
         /// </summary>
         /// <param name="id">The string identifier of the animated node to show</param>
