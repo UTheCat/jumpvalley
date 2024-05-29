@@ -10,6 +10,10 @@ namespace Jumpvalley.Animation
     /// </summary>
     public partial class AnimatedNodeGroup
     {
+        /// <summary>
+        /// List of currently visible AnimatedNodes.
+        /// As the end of this list is reached, the earlier the AnimatedNode has been shown.
+        /// </summary>
         private List<AnimatedNode> visibleNodes;
 
         /// <summary>
@@ -47,6 +51,49 @@ namespace Jumpvalley.Animation
             NodeList = new Dictionary<string, AnimatedNode>();
             visibleNodes = new List<AnimatedNode>();
             MaxVisibleNodes = -1;
+        }
+
+        /// <summary>
+        /// Removes the <see cref="AnimatedNode"/> from the group that corresponds
+        /// to the string identifier as specified in the <paramref name="id"/> parameter.
+        /// </summary>
+        /// <param name="id">The string identifier of the <see cref="AnimatedNode"/> to remove</param>
+        public void Remove(string id)
+        {
+            if (NodeList.ContainsKey(id))
+            {
+                NodeList.Remove(id);
+            }
+        }
+
+        /// <summary>
+        /// Adds an <see cref="AnimatedNode"/> to this <see cref="AnimatedNodeGroup"/>.  
+        /// </summary>
+        /// <param name="id">The string identifier to assign to the <see cref="AnimatedNode"/></param>
+        /// <param name="node">The <see cref="AnimatedNode"/> to add</param>
+        public void Add(string id, AnimatedNode node)
+        {
+            if (!NodeList.ContainsKey(id))
+            {
+                NodeList.Add(id, node);
+            }
+        }
+
+        /// <summary>
+        /// Shows one of the <see cref="AnimatedNode"/>s in <see cref="NodeList"/>.
+        /// </summary>
+        /// <param name="id">The string identifier of the animated node</param>
+        public void Show(string id)
+        {
+            AnimatedNode node = NodeList[id];
+
+            if (!visibleNodes.Contains(node))
+            {
+                visibleNodes.Add(node);
+
+                // If we went over the maximum visible node count,
+                // hide visible nodes at the end of the list.
+            }
         }
     }
 }
