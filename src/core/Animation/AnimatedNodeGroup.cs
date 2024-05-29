@@ -71,9 +71,14 @@ namespace Jumpvalley.Animation
                 if (index >= 0)
                 {
                     VisibleNodes.RemoveAt(index);
+                    NodeList.Remove(id);
+                    
+                    RaiseVisibleNodesUpdated();
                 }
-
-                NodeList.Remove(id);
+                else
+                {
+                    NodeList.Remove(id);
+                }
             }
         }
 
@@ -105,6 +110,8 @@ namespace Jumpvalley.Animation
             {
                 node.IsVisible = false;
                 VisibleNodes.RemoveAt(index);
+
+                RaiseVisibleNodesUpdated();
             }
         }
 
@@ -120,6 +127,14 @@ namespace Jumpvalley.Animation
             }
 
             VisibleNodes.Clear();
+            
+            RaiseVisibleNodesUpdated();
+        }
+
+        private bool ShouldRemoveExcessVisibleNodes()
+        {
+            int maxVisibleNodes = MaxVisibleNodes;
+            return maxVisibleNodes >= 0 && VisibleNodes.Count > maxVisibleNodes;
         }
 
         private void HideExcessVisibleNodes()
@@ -128,7 +143,7 @@ namespace Jumpvalley.Animation
 
             // If we went over the maximum visible node count,
             // hide visible nodes at the end of the list.
-            if (maxVisibleNodes >= 0 && VisibleNodes.Count > maxVisibleNodes)
+            if (ShouldRemoveExcessVisibleNodes())
             {
                 int excess = VisibleNodes.Count - maxVisibleNodes;
                 for (int i = 0; i < excess; i++)
@@ -138,6 +153,8 @@ namespace Jumpvalley.Animation
 
                     VisibleNodes.RemoveAt(VisibleNodes.Count - 1);
                 }
+
+                RaiseVisibleNodesUpdated();
             }
         }
 
@@ -157,8 +174,27 @@ namespace Jumpvalley.Animation
                     node.IsVisible = true;
                 }
 
-                HideExcessVisibleNodes();
+                // We don't want to raise the VisibleNodesUpdated
+                // event twice at a time
+                if (ShouldRemoveExcessVisibleNodes())
+                {
+                    HideExcessVisibleNodes();
+                }
+                else
+                {
+                    RaiseVisibleNodesUpdated();
+                }
             }
+        }
+
+        /// <summary>
+        /// Event raised when the <see cref="VisibleNodes"/> list is updated
+        /// </summary>
+        public event EventHandler VisibleNodesUpdated;
+
+        protected void RaiseVisibleNodesUpdated()
+        {
+            VisibleNodesUpdated?.Invoke(this, EventArgs.Empty);
         }
     }
 }
