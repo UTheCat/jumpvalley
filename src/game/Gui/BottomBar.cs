@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Jumpvalley.Animation;
 using Jumpvalley.Music;
 using Jumpvalley.Tweening;
 using System;
@@ -38,53 +39,7 @@ namespace JumpvalleyGame.Gui
 
         public LastHoveredButton LastHovered = LastHoveredButton.None;
 
-        private SceneTreeTween backPanelOpacityTween;
-
-        private LevelMenu _primaryLevelMenu;
-
-        /// <summary>
-        /// The primary level menu that will have its visibility toggled by the bottom bar's menu button.
-        /// </summary>
-        public LevelMenu PrimaryLevelMenu
-        {
-            get => _primaryLevelMenu;
-            set
-            {
-                if (_primaryLevelMenu != null)
-                {
-                    _primaryLevelMenu.VisibilityChanged -= HandleMenuVisibilityChange;
-                }
-
-                _primaryLevelMenu = value;
-                if (value != null)
-                {
-                    value.VisibilityChanged += HandleMenuVisibilityChange;
-                }
-            }
-        }
-
-        private MusicPanel _primaryMusicPanel;
-
-        /// <summary>
-        /// The music panel associated with this bottom bar
-        /// </summary>
-        public MusicPanel PrimaryMusicPanel
-        {
-            get => _primaryMusicPanel;
-            set
-            {
-                if (_primaryMusicPanel != null)
-                {
-                    _primaryMusicPanel.VisibilityChanged -= HandleMenuVisibilityChange;
-                }
-
-                _primaryMusicPanel = value;
-                if (value != null)
-                {
-                    value.VisibilityChanged += HandleMenuVisibilityChange;
-                }
-            }
-        }
+        public AnimatedNodeGroup AnimatedNodes;
 
         //private bool eventsConnected = false;
 
@@ -128,17 +83,7 @@ namespace JumpvalleyGame.Gui
             // allow the bottom bar's menu button to toggle the primary level menu
             MainMenuButton.Pressed += () =>
             {
-                LevelMenu levelMenu = PrimaryLevelMenu;
-                if (levelMenu != null)
-                {
-                    levelMenu.IsVisible = !levelMenu.IsVisible;
-
-                    MusicPanel musicPanel = PrimaryMusicPanel;
-                    if (musicPanel != null)
-                    {
-                        musicPanel.IsVisible = false;
-                    }
-                }
+                
             };
 
             // connect button hovering events to description label updating
@@ -159,17 +104,7 @@ namespace JumpvalleyGame.Gui
             // allow music panel visibility to be toggled by the music button
             MusicButton.Pressed += () =>
             {
-                MusicPanel musicPanel = PrimaryMusicPanel;
-                if (musicPanel != null)
-                {
-                    musicPanel.IsVisible = !musicPanel.IsVisible;
-
-                    LevelMenu levelMenu = PrimaryLevelMenu;
-                    if (levelMenu != null)
-                    {
-                        levelMenu.IsVisible = false;
-                    }
-                }
+                
             };
 
             MusicButton.MouseEntered += () =>
@@ -254,37 +189,10 @@ namespace JumpvalleyGame.Gui
             DescriptionOpacityTween.Resume();
         }
 
-        private void UpdateBackPanelVisibility()
-        {
-            if (backPanelOpacityTween != null)
-            {
-                if ((PrimaryLevelMenu != null && PrimaryLevelMenu.IsVisible) || (PrimaryMusicPanel != null && PrimaryMusicPanel.IsVisible))
-                {
-                    backPanelOpacityTween.Speed = 1;
-                }
-                else
-                {
-                    backPanelOpacityTween.Speed = -1;
-                }
-
-                backPanelOpacityTween.Resume();
-            }
-        }
-
-        private void HandleMenuVisibilityChange(object _o, bool isVisible)
-        {
-            UpdateBackPanelVisibility();
-        }
-
         public void Dispose()
         {
             //ActualNode.Dispose();
             DescriptionOpacityTween.Dispose();
-
-            if (backPanelOpacityTween != null)
-            {
-                backPanelOpacityTween.Dispose();
-            }
         }
 
         /*
