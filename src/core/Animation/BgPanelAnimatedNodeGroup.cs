@@ -6,7 +6,7 @@ namespace Jumpvalley.Animation
     /// Version of <see cref="AnimatedNodeGroup"/> that displays a background panel
     /// when at least one of the <see cref="AnimatedNode"/>s in the group are visible. 
     /// </summary>
-    public partial class BgPanelAnimatedNodeGroup
+    public partial class BgPanelAnimatedNodeGroup : AnimatedNodeGroup
     {
         /// <summary>
         /// The group's <see cref="BackgroundPanel"/> that will act as
