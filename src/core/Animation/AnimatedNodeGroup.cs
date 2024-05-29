@@ -94,6 +94,28 @@ namespace Jumpvalley.Animation
                 NodeList.Add(id, node);
             }
         }
+        
+        /// <summary>
+        /// Returns whether or not the node in the group assigned to the specified
+        /// string identifier (ID) is visible.
+        /// <br/><br/>
+        /// The node is considered "visible" by this function if it's in the group
+        /// and is in the <see cref="VisibleNodes"/> list. 
+        /// </summary>
+        /// <param name="id">The string identifier of the node</param>
+        /// <returns>Whether or not the node is visible</returns>
+        public bool IsNodeVisible(string id)
+        {
+            AnimatedNode node;
+            NodeList.TryGetValue(id, out node);
+
+            if (node != null)
+            {
+                return VisibleNodes.Contains(node);
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Hides one of the <see cref="AnimatedNode"/>s in <see cref="NodeList"/>.
