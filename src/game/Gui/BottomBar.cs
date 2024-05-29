@@ -86,11 +86,6 @@ namespace JumpvalleyGame.Gui
             }
         }
 
-        /// <summary>
-        /// The background panel shown behind a bottom bar menu that covers the full screen when a menu is being shown
-        /// </summary>
-        public Panel MenuBackPanel { get; private set; }
-
         //private bool eventsConnected = false;
 
         /// <summary>
@@ -108,7 +103,6 @@ namespace JumpvalleyGame.Gui
 
             MainMenuButton = (Button)ButtonsContainer.GetNode("Menu");
             MusicButton = (Button)ButtonsContainer.GetNode("Music");
-            MenuBackPanel = ActualNode.GetNode<Panel>("BackPanel");
 
             DescriptionLabel.Visible = false;
             DescriptionFontColor = DescriptionLabel.GetThemeColor("font_color");
@@ -208,21 +202,6 @@ namespace JumpvalleyGame.Gui
                 DescriptionFontColor.A = opacity;
                 RefreshDescriptionColor();
             };
-
-            if (MenuBackPanel != null)
-            {
-                backPanelOpacityTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, actualNodeTree);
-                backPanelOpacityTween.InitialValue = 0;
-                backPanelOpacityTween.FinalValue = 0.25;
-                backPanelOpacityTween.OnStep += (object o, float frac) =>
-                {
-                    float opacity = (float)backPanelOpacityTween.GetCurrentValue();
-                    MenuBackPanel.Visible = opacity > 0;
-                    Color modulate = MenuBackPanel.SelfModulate;
-                    modulate.A = opacity;
-                    MenuBackPanel.SelfModulate = modulate;
-                };
-            }
         }
 
         public void UpdateMusicDescription(Song song)
@@ -306,8 +285,6 @@ namespace JumpvalleyGame.Gui
             {
                 backPanelOpacityTween.Dispose();
             }
-
-            MenuBackPanel = null;
         }
 
         /*
