@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+using Jumpvalley.Animation;
+using Jumpvalley.Gui;
 using Jumpvalley.Levels;
 using Jumpvalley.Logging;
 using Jumpvalley.Music;
@@ -106,8 +108,16 @@ namespace JumpvalleyGame
             RootNode.AddChild(fpsLimiter);
 
             // Initialize GUI stuff
+            BackgroundPanel bgPanel = new BackgroundPanel(PrimaryGui.GetNode<Control>("BackgroundPanel"));
+
+            // Primary AnimatedNodeGroup
+            BgPanelAnimatedNodeGroup animatedNodes = new BgPanelAnimatedNodeGroup(bgPanel);
+
             // Bottom bar
-            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
+            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer)
+            {
+                AnimatedNodes = animatedNodes
+            };
 
             // Level menu
             PackedScene primaryLevelMenuScene = ResourceLoader.Load<PackedScene>("res://gui/level_menu.tscn");
@@ -116,7 +126,8 @@ namespace JumpvalleyGame
             {
                 Control primaryLevelMenuNode = primaryLevelMenuScene.Instantiate<Control>();
                 primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
-                bottomBar.PrimaryLevelMenu = primaryLevelMenu;
+                animatedNodes.Add("primary_level_menu", primaryLevelMenu);
+                //bottomBar.PrimaryLevelMenu = primaryLevelMenu;
                 primaryLevelMenuScene.Dispose();
 
                 PrimaryGui.AddChild(primaryLevelMenuNode);
@@ -129,13 +140,16 @@ namespace JumpvalleyGame
             Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");
 
             MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
-            bottomBar.PrimaryMusicPanel = musicPanel;
+            animatedNodes.Add("music_panel", musicPanel);
+
+            //bottomBar.PrimaryMusicPanel = musicPanel;
 
             // Settings menu
             Control settingsMenuNode = PrimaryGui.GetNode<Control>("SettingsMenu");
 
             SettingsMenu settingsMenu = new SettingsMenu(settingsMenuNode, Tree, settings.Group);
             settingsMenu.Populate();
+            animatedNodes.Add("settings_menu", settingsMenu);
 
             if (primaryLevelMenu != null)
             {
@@ -200,6 +214,7 @@ namespace JumpvalleyGame
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
             Disposables.Add(bottomBar);
+            Disposables.Add(animatedNodes);
         }
 
         public new void Dispose()
