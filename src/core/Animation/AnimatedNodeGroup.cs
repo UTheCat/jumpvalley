@@ -10,7 +10,7 @@ namespace Jumpvalley.Animation
     /// </summary>
     public partial class AnimatedNodeGroup
     {
-        private AnimatedNode[] visibleNodes;
+        private List<AnimatedNode> visibleNodes;
 
         /// <summary>
         /// The nodes within the group.
@@ -40,13 +40,13 @@ namespace Jumpvalley.Animation
                 if (value == _maxVisibleNodes) return;
 
                 _maxVisibleNodes = value;
-                visibleNodes = new AnimatedNode[Math.Max(value, 0)];
             }
         }
 
         public AnimatedNodeGroup()
         {
             NodeList = new Dictionary<string, AnimatedNode>();
+            visibleNodes = new List<AnimatedNode>();
             MaxVisibleNodes = -1;
         }
     }
