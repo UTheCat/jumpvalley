@@ -47,6 +47,9 @@ namespace Jumpvalley.Animation
             }
         }
 
+        /// <summary>
+        /// Constructs a new instance of <see cref="AnimatedNodeGroup"/> 
+        /// </summary>
         public AnimatedNodeGroup()
         {
             NodeList = new Dictionary<string, AnimatedNode>();
