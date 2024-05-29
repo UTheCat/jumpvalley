@@ -13,5 +13,10 @@ namespace Jumpvalley.Animation
         /// a background for the <see cref="AnimatedNode"/>s in the group. 
         /// </summary>
         public BackgroundPanel BgPanel { get; private set; }
+
+        public BgPanelAnimatedNodeGroup(BackgroundPanel bgPanel)
+        {
+            BgPanel = bgPanel;
+        }
     }
 }
