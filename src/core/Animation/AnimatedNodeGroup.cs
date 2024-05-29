@@ -12,10 +12,10 @@ namespace Jumpvalley.Animation
     public partial class AnimatedNodeGroup
     {
         /// <summary>
-        /// List of currently visible AnimatedNodes.
-        /// As the end of this list is reached, the earlier the AnimatedNode has been shown.
+        /// List of currently visible <see cref="AnimatedNode"/>s.
+        /// As the end of this list is reached, the earlier the <see cref="AnimatedNode"/> has been shown.
         /// </summary>
-        private List<AnimatedNode> visibleNodes;
+        public List<AnimatedNode> VisibleNodes;
 
         /// <summary>
         /// The nodes within the group.
@@ -52,7 +52,7 @@ namespace Jumpvalley.Animation
         public AnimatedNodeGroup()
         {
             NodeList = new Dictionary<string, AnimatedNode>();
-            visibleNodes = new List<AnimatedNode>();
+            VisibleNodes = new List<AnimatedNode>();
             MaxVisibleNodes = -1;
         }
 
@@ -67,10 +67,10 @@ namespace Jumpvalley.Animation
             {
                 // Remove the AnimatedNode from the visible nodes list,
                 // just in case it's still in there.
-                int index = visibleNodes.IndexOf(NodeList[id]);
+                int index = VisibleNodes.IndexOf(NodeList[id]);
                 if (index >= 0)
                 {
-                    visibleNodes.RemoveAt(index);
+                    VisibleNodes.RemoveAt(index);
                 }
 
                 NodeList.Remove(id);
@@ -100,11 +100,11 @@ namespace Jumpvalley.Animation
 
             // For stability reasons, only hide the AnimatedNode if it was shown
             // via this class's Show method
-            int index = visibleNodes.IndexOf(node);
+            int index = VisibleNodes.IndexOf(node);
             if (index >= 0)
             {
                 node.IsVisible = false;
-                visibleNodes.RemoveAt(index);
+                VisibleNodes.RemoveAt(index);
             }
         }
 
@@ -114,12 +114,12 @@ namespace Jumpvalley.Animation
         /// </summary>
         public void HideAll()
         {
-            foreach (AnimatedNode node in visibleNodes)
+            foreach (AnimatedNode node in VisibleNodes)
             {
                 node.IsVisible = false;
             }
 
-            visibleNodes.Clear();
+            VisibleNodes.Clear();
         }
 
         private void HideExcessVisibleNodes()
@@ -128,15 +128,15 @@ namespace Jumpvalley.Animation
 
             // If we went over the maximum visible node count,
             // hide visible nodes at the end of the list.
-            if (maxVisibleNodes >= 0 && visibleNodes.Count > maxVisibleNodes)
+            if (maxVisibleNodes >= 0 && VisibleNodes.Count > maxVisibleNodes)
             {
-                int excess = visibleNodes.Count - maxVisibleNodes;
+                int excess = VisibleNodes.Count - maxVisibleNodes;
                 for (int i = 0; i < excess; i++)
                 {
-                    AnimatedNode removedNode = visibleNodes[i];
+                    AnimatedNode removedNode = VisibleNodes[i];
                     removedNode.IsVisible = false;
 
-                    visibleNodes.RemoveAt(visibleNodes.Count - 1);
+                    VisibleNodes.RemoveAt(VisibleNodes.Count - 1);
                 }
             }
         }
@@ -149,11 +149,11 @@ namespace Jumpvalley.Animation
         {
             AnimatedNode node = NodeList[id];
 
-            if (!visibleNodes.Contains(node))
+            if (!VisibleNodes.Contains(node))
             {
                 if (MaxVisibleNodes != 0)
                 {
-                    visibleNodes.Add(node);
+                    VisibleNodes.Add(node);
                     node.IsVisible = true;
                 }
 
