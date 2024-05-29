@@ -111,7 +111,10 @@ namespace JumpvalleyGame
             BackgroundPanel bgPanel = new BackgroundPanel(PrimaryGui.GetNode<Control>("BackgroundPanel"));
 
             // Primary AnimatedNodeGroup
-            BgPanelAnimatedNodeGroup animatedNodes = new BgPanelAnimatedNodeGroup(bgPanel);
+            BgPanelAnimatedNodeGroup animatedNodes = new BgPanelAnimatedNodeGroup(bgPanel)
+            {
+                MaxVisibleNodes = 1
+            };
 
             // Bottom bar
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer)
