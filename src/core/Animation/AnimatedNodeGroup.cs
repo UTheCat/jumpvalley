@@ -80,9 +80,18 @@ namespace Jumpvalley.Animation
         }
 
         /// <summary>
+        /// Hides one of the <see cref="AnimatedNode"/>s in <see cref="NodeList"/>.
+        /// </summary>
+        /// <param name="id">The string identifier of the animated node to hide</param>
+        public void Hide(string id)
+        {
+
+        }
+
+        /// <summary>
         /// Shows one of the <see cref="AnimatedNode"/>s in <see cref="NodeList"/>.
         /// </summary>
-        /// <param name="id">The string identifier of the animated node</param>
+        /// <param name="id">The string identifier of the animated node to show</param>
         public void Show(string id)
         {
             AnimatedNode node = NodeList[id];
@@ -93,6 +102,17 @@ namespace Jumpvalley.Animation
 
                 // If we went over the maximum visible node count,
                 // hide visible nodes at the end of the list.
+                if (visibleNodes.Count > MaxVisibleNodes)
+                {
+                    int excess = visibleNodes.Count - MaxVisibleNodes;
+                    for (int i = 0; i < excess; i++)
+                    {
+                        AnimatedNode removedNode = visibleNodes[i];
+                        removedNode.IsVisible = false;
+
+                        visibleNodes.RemoveAt(visibleNodes.Count - 1);
+                    }
+                }
             }
         }
     }
