@@ -192,7 +192,7 @@ namespace Jumpvalley.Animation
             {
                 if (MaxVisibleNodes != 0)
                 {
-                    VisibleNodes.Add(node);
+                    VisibleNodes.Insert(0, node);
                     node.IsVisible = true;
                 }
 
