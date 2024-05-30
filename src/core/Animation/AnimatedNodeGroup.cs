@@ -80,10 +80,10 @@ namespace Jumpvalley.Animation
 
                 // Remove the AnimatedNode from the visible nodes list,
                 // just in case it's still in there.
-                int index = VisibleNodes.IndexOf(node);
-                if (index >= 0)
+                //int index = VisibleNodes.IndexOf(node);
+                if (VisibleNodes.Contains(node))
                 {
-                    VisibleNodes.RemoveAt(index);
+                    VisibleNodes.Remove(node);
                     RemoveInternal(id, node);
                     
                     RaiseVisibleNodesUpdated();
@@ -121,15 +121,18 @@ namespace Jumpvalley.Animation
                         && VisibleNodes.Contains(node) == false)
                     {
                         VisibleNodes.Add(node);
+                        HideExcessVisibleNodes();
+                        RaiseVisibleNodesUpdated();
                     }
                 }
                 else
                 {
-                    int index = VisibleNodes.IndexOf(node);
+                    //int index = VisibleNodes.IndexOf(node);
 
-                    if (index >= 0)
+                    if (VisibleNodes.Contains(node))
                     {
-                        VisibleNodes.RemoveAt(index);
+                        VisibleNodes.Remove(node);
+                        RaiseVisibleNodesUpdated();
                     }
                 }
             }
@@ -171,9 +174,9 @@ namespace Jumpvalley.Animation
             if (index >= 0)
             {
                 node.IsVisible = false;
-                VisibleNodes.RemoveAt(index);
+                //VisibleNodes.RemoveAt(index);
 
-                RaiseVisibleNodesUpdated();
+                //RaiseVisibleNodesUpdated();
             }
         }
 
@@ -191,7 +194,7 @@ namespace Jumpvalley.Animation
             // Just in case
             VisibleNodes.Clear();
             
-            RaiseVisibleNodesUpdated();
+            //RaiseVisibleNodesUpdated();
         }
 
         private bool ShouldRemoveExcessVisibleNodes()
@@ -217,7 +220,7 @@ namespace Jumpvalley.Animation
                     VisibleNodes.RemoveAt(VisibleNodes.Count - 1);
                 }
 
-                RaiseVisibleNodesUpdated();
+                //RaiseVisibleNodesUpdated();
             }
         }
 
@@ -233,12 +236,13 @@ namespace Jumpvalley.Animation
             {
                 if (MaxVisibleNodes != 0)
                 {
-                    VisibleNodes.Add(node);
+                    //VisibleNodes.Add(node);
                     node.IsVisible = true;
                 }
 
                 // We don't want to raise the VisibleNodesUpdated
                 // event twice at a time
+                /*
                 if (ShouldRemoveExcessVisibleNodes())
                 {
                     HideExcessVisibleNodes();
@@ -247,6 +251,7 @@ namespace Jumpvalley.Animation
                 {
                     RaiseVisibleNodesUpdated();
                 }
+                */
             }
         }
 
