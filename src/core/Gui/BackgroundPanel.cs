@@ -66,9 +66,9 @@ namespace Jumpvalley.Gui
             {
                 float opacity = (float)opacityTween.GetCurrentValue();
                 panel.Visible = opacity > 0;
-                Color modulate = panel.SelfModulate;
+                Color modulate = panel.Modulate;
                 modulate.A = opacity;
-                panel.SelfModulate = modulate;
+                panel.Modulate = modulate;
             };
 
             Opacity = 0.25f;

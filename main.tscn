@@ -47,14 +47,6 @@ grow_vertical = 2
 
 [node name="BackgroundPanel" parent="PrimaryGui" instance=ExtResource("3_28c11")]
 visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
 layout_mode = 1
 
 [node name="MusicPanel" parent="PrimaryGui" instance=ExtResource("3_dfcbn")]
@@ -79,6 +71,9 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -300.0
 offset_right = 338.0
+
+[node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
+layout_mode = 1
 
 [node name="Character" parent="." instance=ExtResource("9_1wvm3")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, -10)
