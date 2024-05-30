@@ -120,7 +120,7 @@ namespace Jumpvalley.Animation
                         NodeList.ContainsValue(node) == true
                         && VisibleNodes.Contains(node) == false)
                     {
-                        VisibleNodes.Add(node);
+                        VisibleNodes.Insert(0, node);
                         HideExcessVisibleNodes();
                         RaiseVisibleNodesUpdated();
                     }
