@@ -6,17 +6,29 @@ namespace Jumpvalley.Animation
     /// <summary>
     /// Class that groups multiple <see cref="AnimatedNode"/>s together so that they can communicate with each other.
     /// <br/><br/>
-    /// This class can also help make it so only one <see cref="AnimatedNode"/>s within the group
+    /// This class can also help make it so only one <see cref="AnimatedNode"/> within the group
     /// can be shown at a time.
     /// </summary>
     public partial class AnimatedNodeGroup : IDisposable
     {
+        private AnimatedNode _currentlyVisibleNode;
+        
         /// <summary>
         /// The node within the <see cref="AnimatedNodes"/> list that's currently visible.
         /// <br/><br/>
         /// This is set to <c>null</c> if <see cref="CanOnlyShowOneNode"/> is set to <c>false</c>.  
         /// </summary>
-        public AnimatedNode CurrentlyVisibleNode { get; private set; }
+        public AnimatedNode CurrentlyVisibleNode
+        {
+            get => _currentlyVisibleNode;
+            private set
+            {
+                if (_currentlyVisibleNode == value) return;
+
+                _currentlyVisibleNode = value;
+                RaiseCurrentlyVisibleNodeChanged();
+            }
+        }
 
         /// <summary>
         /// The nodes within the group.
@@ -210,6 +222,16 @@ namespace Jumpvalley.Animation
         public void Dispose()
         {
             ClearNodeList();
+        }
+
+        /// <summary>
+        /// Event raised when the value of <see cref="CurrentlyVisibleNode"/> changes 
+        /// </summary>
+        public event EventHandler CurrentlyVisibleNodeChanged;
+
+        protected void RaiseCurrentlyVisibleNodeChanged()
+        {
+            CurrentlyVisibleNodeChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
