@@ -9,7 +9,7 @@ namespace Jumpvalley.Animation
     /// This class can also help make it so only one <see cref="AnimatedNode"/>s within the group
     /// can be shown at a time.
     /// </summary>
-    public partial class AnimatedNodeGroup
+    public partial class AnimatedNodeGroup : IDisposable
     {
         /// <summary>
         /// The node within the <see cref="AnimatedNodes"/> list that's currently visible.
@@ -192,6 +192,11 @@ namespace Jumpvalley.Animation
             {
                 node.IsVisible = true;
             }
+        }
+
+        public void Dispose()
+        {
+            ClearNodeList();
         }
     }
 }
