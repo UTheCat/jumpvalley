@@ -1,7 +1,8 @@
 using System;
+using Jumpvalley.Animation;
 using Jumpvalley.Gui;
 
-namespace Jumpvalley.Animation
+namespace JumpvalleyGame.Gui
 {
     /// <summary>
     /// Version of <see cref="AnimatedNodeGroup"/> that displays a background panel
