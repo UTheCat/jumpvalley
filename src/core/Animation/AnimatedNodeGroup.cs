@@ -14,7 +14,7 @@ namespace Jumpvalley.Animation
         /// <summary>
         /// The node within the <see cref="AnimatedNodes"/> list that's currently visible.
         /// </summary>
-        public AnimatedNode CurrentlyVisibleNode;
+        public AnimatedNode CurrentlyVisibleNode { get; private set; }
 
         /// <summary>
         /// The nodes within the group.
@@ -23,11 +23,9 @@ namespace Jumpvalley.Animation
         /// can be assigned to an <see cref="AnimatedNode"/> within the group.
         /// The corresponding value is the <see cref="AnimatedNode"/> associated with the ID.
         /// </summary>
-        public Dictionary<string, AnimatedNode> NodeList;
+        public Dictionary<string, AnimatedNode> NodeList { get; private set; }
 
         private bool _canOnlyShowOneNode;
-        
-        
         public bool CanOnlyShowOneNode
         {
             get => _canOnlyShowOneNode;
