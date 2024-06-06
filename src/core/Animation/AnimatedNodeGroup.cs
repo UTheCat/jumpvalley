@@ -12,10 +12,9 @@ namespace Jumpvalley.Animation
     public partial class AnimatedNodeGroup
     {
         /// <summary>
-        /// List of currently visible <see cref="AnimatedNode"/>s.
-        /// As the end of this list is reached, the earlier the <see cref="AnimatedNode"/> has been shown.
+        /// The node within the <see cref="AnimatedNodes"/> list that's currently visible.
         /// </summary>
-        public List<AnimatedNode> VisibleNodes;
+        public AnimatedNode CurrentlyVisibleNode;
 
         /// <summary>
         /// The nodes within the group.
@@ -26,23 +25,15 @@ namespace Jumpvalley.Animation
         /// </summary>
         public Dictionary<string, AnimatedNode> NodeList;
 
-        private int _maxVisibleNodes;
-
-        /// <summary>
-        /// The maximum amount of <see cref="AnimatedNode"/>s within <see cref="NodeList"/>
-        /// that can be shown at a time.
-        /// <br/><br/>
-        /// Set this to -1 to specify that there should be no maximum amount.
-        /// </summary>
-        public int MaxVisibleNodes
+        private bool _canOnlyShowOneNode;
+        
+        
+        public bool CanOnlyShowOneNode
         {
-            get => _maxVisibleNodes;
+            get => _canOnlyShowOneNode;
             set
             {
-                if (value < -1) throw new ArgumentOutOfRangeException("", "Maximum amount must be set to an integer greater than or equal to -1");
-
-                _maxVisibleNodes = value;
-                HideExcessVisibleNodes();
+                _canOnlyShowOneNode = value;
             }
         }
 
@@ -52,8 +43,6 @@ namespace Jumpvalley.Animation
         public AnimatedNodeGroup()
         {
             NodeList = new Dictionary<string, AnimatedNode>();
-            VisibleNodes = new List<AnimatedNode>();
-            MaxVisibleNodes = -1;
         }
 
         /// <summary>
@@ -65,20 +54,7 @@ namespace Jumpvalley.Animation
         {
             if (NodeList.ContainsKey(id))
             {
-                // Remove the AnimatedNode from the visible nodes list,
-                // just in case it's still in there.
-                int index = VisibleNodes.IndexOf(NodeList[id]);
-                if (index >= 0)
-                {
-                    VisibleNodes.RemoveAt(index);
-                    NodeList.Remove(id);
-
-                    RaiseVisibleNodesUpdated();
-                }
-                else
-                {
-                    NodeList.Remove(id);
-                }
+                NodeList.Remove(id);
             }
         }
 
@@ -98,9 +74,6 @@ namespace Jumpvalley.Animation
         /// <summary>
         /// Returns whether or not the node in the group assigned to the specified
         /// string identifier (ID) is visible.
-        /// <br/><br/>
-        /// The node is considered "visible" by this function if it's in the group
-        /// and is in the <see cref="VisibleNodes"/> list.
         /// </summary>
         /// <param name="id">The string identifier of the node</param>
         /// <returns>Whether or not the node is visible</returns>
@@ -111,7 +84,7 @@ namespace Jumpvalley.Animation
 
             if (node != null)
             {
-                return VisibleNodes.Contains(node);
+                return node.IsVisible;
             }
 
             return false;
@@ -125,15 +98,9 @@ namespace Jumpvalley.Animation
         {
             AnimatedNode node = NodeList[id];
 
-            // For stability reasons, only hide the AnimatedNode if it was shown
-            // via this class's Show method
-            int index = VisibleNodes.IndexOf(node);
-            if (index >= 0)
+            if (node != null)
             {
                 node.IsVisible = false;
-                VisibleNodes.RemoveAt(index);
-
-                RaiseVisibleNodesUpdated();
             }
         }
 
@@ -143,41 +110,12 @@ namespace Jumpvalley.Animation
         /// </summary>
         public void HideAll()
         {
-            foreach (AnimatedNode node in VisibleNodes)
+            foreach (KeyValuePair<string, AnimatedNode> pair in NodeList)
             {
-                node.IsVisible = false;
+                pair.Value.IsVisible = false;
             }
 
-            VisibleNodes.Clear();
-
-            RaiseVisibleNodesUpdated();
-        }
-
-        private bool ShouldRemoveExcessVisibleNodes()
-        {
-            int maxVisibleNodes = MaxVisibleNodes;
-            return maxVisibleNodes >= 0 && VisibleNodes.Count > maxVisibleNodes;
-        }
-
-        private void HideExcessVisibleNodes()
-        {
-            int maxVisibleNodes = MaxVisibleNodes;
-
-            // If we went over the maximum visible node count,
-            // hide visible nodes at the end of the list.
-            if (ShouldRemoveExcessVisibleNodes())
-            {
-                int excess = VisibleNodes.Count - maxVisibleNodes;
-                for (int i = 0; i < excess; i++)
-                {
-                    AnimatedNode removedNode = VisibleNodes[i];
-                    removedNode.IsVisible = false;
-
-                    VisibleNodes.RemoveAt(VisibleNodes.Count - 1);
-                }
-
-                RaiseVisibleNodesUpdated();
-            }
+            CurrentlyVisibleNode = null;
         }
 
         /// <summary>
@@ -188,35 +126,10 @@ namespace Jumpvalley.Animation
         {
             AnimatedNode node = NodeList[id];
 
-            if (!VisibleNodes.Contains(node))
+            if (node != null)
             {
-                if (MaxVisibleNodes != 0)
-                {
-                    VisibleNodes.Insert(0, node);
-                    node.IsVisible = true;
-                }
-
-                // We don't want to raise the VisibleNodesUpdated
-                // event twice at a time
-                if (ShouldRemoveExcessVisibleNodes())
-                {
-                    HideExcessVisibleNodes();
-                }
-                else
-                {
-                    RaiseVisibleNodesUpdated();
-                }
+                node.IsVisible = true;
             }
-        }
-
-        /// <summary>
-        /// Event raised when the <see cref="VisibleNodes"/> list is updated
-        /// </summary>
-        public event EventHandler VisibleNodesUpdated;
-
-        protected void RaiseVisibleNodesUpdated()
-        {
-            VisibleNodesUpdated?.Invoke(this, EventArgs.Empty);
         }
     }
 }
