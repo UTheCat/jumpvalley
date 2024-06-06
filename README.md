@@ -12,17 +12,17 @@ Though if you want to test it, it is playable. There's currently a small obstacl
 
 The ```addons``` folder contains assets made by 3rd-parties. They're super useful in this project because not only do I not have the skill, time, and/or resources to make a lot of these assets, but they also allow me to speed up development and testing using resources that the creators of these assets have allowed others to use.
 
-A list of such assets can be found [here](https://github.com/UTheDev/jumpvalley/blob/main/credits.md).
+A list of such assets can be found [here](https://github.com/UTheCat/jumpvalley/blob/main/credits.md).
 
 ## Licensing
 
-This project's source code is licensed under the MIT License. The source code's license can be found [here](https://github.com/UTheDev/jumpvalley/blob/main/LICENSE.md).
+This project's source code is licensed under the MIT License. The source code's license can be found [here](https://github.com/UTheCat/jumpvalley/blob/main/LICENSE.md).
 
 Assets under the ```addons``` folder are covered by different licenses (especially since they were made by other individuals).
 
 ## Running the game
 
-If you're looking to simply run Jumpvalley, you can find the game precompiled in the [releases](https://github.com/UTheDev/jumpvalley/releases) tab.
+If you're looking to simply run Jumpvalley, you can find the game precompiled in the [releases](https://github.com/UTheCat/jumpvalley/releases) tab.
 
 Jumpvalley currently doesn't have an installer executable. Therefore, downloading the compressed folder corresponding to your device's operating system, and then extracting it, should give you the files needed to run precompiled Jumpvalley.
 
@@ -50,7 +50,7 @@ This tells the operating system to let itself execute the file (in this case, th
 
 ## Documentation
 
-Jumpvalley's documentation can be found on its [website](https://uthedev.github.io/jumpvalley-docs/) hosted on GitHub.
+Jumpvalley's documentation can be found on its [website](https://uthecat.github.io/jumpvalley-docs/) hosted on GitHub.
 
 ## Working with this repository
 

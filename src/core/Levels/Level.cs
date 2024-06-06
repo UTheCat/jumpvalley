@@ -14,7 +14,7 @@ namespace Jumpvalley.Levels
     /// This class represents a level that's playable in Jumpvalley.
     /// <br/>
     /// Each level contains four primary components: interactives, music, static objects, and start point.
-    /// More details can be found on Jumpvalley's wiki article on <see href="https://github.com/UTheDev/jumpvalley/wiki/Level-Layout">Level Layout</see>.
+    /// More details can be found on Jumpvalley's wiki article on <see href="https://github.com/UTheCat/jumpvalley/wiki/Level-Layout">Level Layout</see>.
     /// </summary>
     public partial class Level : Interactive, IDisposable
     {
