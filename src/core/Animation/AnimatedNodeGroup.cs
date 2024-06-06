@@ -13,6 +13,8 @@ namespace Jumpvalley.Animation
     {
         /// <summary>
         /// The node within the <see cref="AnimatedNodes"/> list that's currently visible.
+        /// <br/><br/>
+        /// This is set to <c>null</c> if <see cref="CanOnlyShowOneNode"/> is set to <c>false</c>.  
         /// </summary>
         public AnimatedNode CurrentlyVisibleNode { get; private set; }
 
@@ -26,12 +28,21 @@ namespace Jumpvalley.Animation
         public Dictionary<string, AnimatedNode> NodeList { get; private set; }
 
         private bool _canOnlyShowOneNode;
+
+        /// <summary>
+        /// Whether or not only one node within the group can be shown at a time
+        /// </summary>
         public bool CanOnlyShowOneNode
         {
             get => _canOnlyShowOneNode;
             set
             {
                 _canOnlyShowOneNode = value;
+
+                if (!value)
+                {
+                    CurrentlyVisibleNode = null;
+                }
             }
         }
 
@@ -41,6 +52,8 @@ namespace Jumpvalley.Animation
         public AnimatedNodeGroup()
         {
             NodeList = new Dictionary<string, AnimatedNode>();
+            CanOnlyShowOneNode = false;
+            CurrentlyVisibleNode = null;
         }
 
         /// <summary>
@@ -67,6 +80,11 @@ namespace Jumpvalley.Animation
             {
                 NodeList.Add(id, node);
             }
+        }
+
+        private void HandleVisiblityToggled(object o, bool isVisible)
+        {
+            
         }
 
         /// <summary>
