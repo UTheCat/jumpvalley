@@ -65,7 +65,14 @@ namespace Jumpvalley.Animation
         {
             if (NodeList.ContainsKey(id))
             {
-                NodeList[id].VisibilityChanged -= HandleVisiblityToggled;
+                AnimatedNode node = NodeList[id];
+                node.VisibilityChanged -= HandleVisiblityToggled;
+
+                if (CurrentlyVisibleNode == node)
+                {
+                    CurrentlyVisibleNode = null;
+                }
+
                 NodeList.Remove(id);
             }
         }
@@ -96,7 +103,26 @@ namespace Jumpvalley.Animation
             if (!NodeList.ContainsKey(id))
             {
                 NodeList.Add(id, node);
+                UpdateCurrentlyVisibleNode(node);
                 node.VisibilityChanged += HandleVisiblityToggled;
+            }
+        }
+
+        private void UpdateCurrentlyVisibleNode(AnimatedNode node)
+        {
+            if (CanOnlyShowOneNode)
+            {
+                CurrentlyVisibleNode = node;
+
+                foreach (KeyValuePair<string, AnimatedNode> pair in NodeList)
+                {
+                    AnimatedNode pairNode = pair.Value;
+
+                    if (pairNode != node)
+                    {
+                        pairNode.IsVisible = false;
+                    }
+                }
             }
         }
 
@@ -108,20 +134,7 @@ namespace Jumpvalley.Animation
             {
                 if (isVisible)
                 {
-                    if (CanOnlyShowOneNode)
-                    {
-                        CurrentlyVisibleNode = node;
-
-                        foreach (KeyValuePair<string, AnimatedNode> pair in NodeList)
-                        {
-                            AnimatedNode pairNode = pair.Value;
-                            
-                            if (pairNode != node)
-                            {
-                                pairNode.IsVisible = false;
-                            }
-                        }
-                    }
+                    UpdateCurrentlyVisibleNode(node);
                 }
                 else
                 {
