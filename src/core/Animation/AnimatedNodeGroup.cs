@@ -65,8 +65,25 @@ namespace Jumpvalley.Animation
         {
             if (NodeList.ContainsKey(id))
             {
+                NodeList[id].VisibilityChanged -= HandleVisiblityToggled;
                 NodeList.Remove(id);
             }
+        }
+
+        /// <summary>
+        /// Removes all of the <see cref="AnimatedNode"/>s within <see cref="NodeList"/>,
+        /// disconnecting this <see cref="AnimatedNodeGroup"/>'s visibility toggle handler
+        /// from the <see cref="AnimatedNode"/>s.
+        /// </summary>
+        public void ClearNodeList()
+        {
+            foreach (KeyValuePair<string, AnimatedNode> pair in NodeList)
+            {
+                pair.Value.VisibilityChanged -= HandleVisiblityToggled;
+            }
+
+            CurrentlyVisibleNode = null;
+            NodeList.Clear();
         }
 
         /// <summary>
@@ -79,12 +96,41 @@ namespace Jumpvalley.Animation
             if (!NodeList.ContainsKey(id))
             {
                 NodeList.Add(id, node);
+                node.VisibilityChanged += HandleVisiblityToggled;
             }
         }
 
         private void HandleVisiblityToggled(object o, bool isVisible)
         {
-            
+            AnimatedNode node = o as AnimatedNode;
+
+            if (node != null)
+            {
+                if (isVisible)
+                {
+                    if (CanOnlyShowOneNode)
+                    {
+                        CurrentlyVisibleNode = node;
+
+                        foreach (KeyValuePair<string, AnimatedNode> pair in NodeList)
+                        {
+                            AnimatedNode pairNode = pair.Value;
+                            
+                            if (pairNode != node)
+                            {
+                                pairNode.IsVisible = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (CurrentlyVisibleNode == node)
+                    {
+                        CurrentlyVisibleNode = null;
+                    }
+                }
+            }
         }
 
         /// <summary>
