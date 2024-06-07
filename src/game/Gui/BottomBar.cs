@@ -115,7 +115,12 @@ namespace JumpvalleyGame.Gui
             // allow music panel visibility to be toggled by the music button
             MusicButton.Pressed += () =>
             {
-                
+                AnimatedNode node = AnimatedNodes.NodeList["music_panel"];
+
+                if (node != null)
+                {
+                    node.IsVisible = !node.IsVisible;
+                }
             };
 
             MusicButton.MouseEntered += () =>
