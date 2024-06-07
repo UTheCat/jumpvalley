@@ -36,7 +36,7 @@ namespace JumpvalleyGame.Settings
                 if (value.Equals(_value)) return;
 
                 _value = value;
-                Update();
+                Update(value);
                 RaiseChanged();
             }
         }
@@ -47,7 +47,8 @@ namespace JumpvalleyGame.Settings
         /// <br/><br/>
         /// This function should be overriden by classes inheriting from <see cref="SettingBase"/>. 
         /// </summary>
-        public virtual void Update() { }
+        /// <param name="newValue">The new value of the <see cref="Value"/> variable</param>
+        public virtual void Update(object newValue) { }
 
         /// <summary>
         /// Event raised when the value of <see cref="Value"/> changes 
