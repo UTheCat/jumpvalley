@@ -73,11 +73,11 @@ anchor_right = 0.5
 offset_left = -300.0
 offset_right = 338.0
 
-[node name="PrimaryLevelMenu" parent="PrimaryGui" instance=ExtResource("6_faadj")]
-visible = false
+[node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
 layout_mode = 1
 
-[node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
+[node name="PrimaryLevelMenu" parent="PrimaryGui" instance=ExtResource("6_faadj")]
+visible = false
 layout_mode = 1
 
 [node name="Character" parent="." instance=ExtResource("9_1wvm3")]
