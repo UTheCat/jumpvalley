@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 using Jumpvalley.Animation;
 using Jumpvalley.Tweening;
 
+using JumpvalleyGame.Gui.Settings;
 using JumpvalleyGame.Settings;
 
 namespace JumpvalleyGame.Gui
@@ -22,6 +24,8 @@ namespace JumpvalleyGame.Gui
         private PackedScene checkButtonSettingScene;
 
         private SceneTreeTween positionTween;
+
+        private List<SettingUiHandler> settingUiHandlers;
 
         public override bool IsVisible
         {
@@ -115,6 +119,12 @@ namespace JumpvalleyGame.Gui
                     minSize.X = nodeMinSizeX;
                     settingNode.CustomMinimumSize = minSize;
 
+                    SettingUiHandler handler = new SettingUiHandler(setting, settingNode)
+                    {
+                        ActionMapKey = setting.ActionMapKey
+                    };
+
+                    settingNode.AddChild(handler);
                     settingListNode.AddChild(settingNode);
                 }
             }
@@ -145,6 +155,12 @@ namespace JumpvalleyGame.Gui
             positionTween.Dispose();
             categoryScene.Dispose();
             checkButtonSettingScene.Dispose();
+
+            foreach (SettingUiHandler handler in settingUiHandlers)
+            {
+                handler.Dispose();
+            }
+            settingUiHandlers.Clear();
         }
     }
 }
