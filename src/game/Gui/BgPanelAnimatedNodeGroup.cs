@@ -19,12 +19,12 @@ namespace JumpvalleyGame.Gui
         public BgPanelAnimatedNodeGroup(BackgroundPanel bgPanel)
         {
             BgPanel = bgPanel;
-            VisibleNodesUpdated += HandleVisibleNodesUpdated;
+            CurrentlyVisibleNodeChanged += HandleCurrentlyVisibleNodeChanged;
         }
 
-        private void HandleVisibleNodesUpdated(object _o, EventArgs _e)
+        private void HandleCurrentlyVisibleNodeChanged(object _o, EventArgs _e)
         {
-            bool shouldBeVisible = VisibleNodes.Count > 0;
+            bool shouldBeVisible = CurrentlyVisibleNode != null;
 
             if (shouldBeVisible != BgPanel.IsVisible)
             {
@@ -37,9 +37,11 @@ namespace JumpvalleyGame.Gui
         /// disconnecting the handler function used to modify the visibilty
         /// of <see cref="BgPanel"/>
         /// </summary>
-        public void Dispose()
+        public new void Dispose()
         {
-            VisibleNodesUpdated -= HandleVisibleNodesUpdated;
+            CurrentlyVisibleNodeChanged -= HandleCurrentlyVisibleNodeChanged;
+
+            base.Dispose();
         }
     }
 }
