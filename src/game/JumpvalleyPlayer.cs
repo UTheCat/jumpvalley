@@ -1,13 +1,11 @@
 using Godot;
 using System;
 
-using Jumpvalley.Animation;
 using Jumpvalley.Gui;
 using Jumpvalley.Levels;
 using Jumpvalley.Logging;
 using Jumpvalley.Music;
 using Jumpvalley.Players;
-using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Movement;
 
 using JumpvalleyGame.Gui;
