@@ -1,4 +1,4 @@
-namespace JumpvalleyGame.Settings
+namespace JumpvalleyGame.Settings.Display
 {
     /// <summary>
     /// Display settings for Jumpvalley

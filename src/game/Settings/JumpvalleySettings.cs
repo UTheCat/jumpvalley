@@ -1,3 +1,5 @@
+using JumpvalleyGame.Settings.Display;
+
 namespace JumpvalleyGame.Settings
 {
     /// <summary>
