@@ -13,11 +13,13 @@ namespace JumpvalleyGame.Settings
         public string LocalizationId;
         public List<SettingGroup> Subgroups;
         public List<SettingBase> SettingList;
+        public bool ShouldDisplayTitle;
 
         public SettingGroup()
         {
             Subgroups = new List<SettingGroup>();
             SettingList = new List<SettingBase>();
+            ShouldDisplayTitle = true;
         }
 
         /// <summary>

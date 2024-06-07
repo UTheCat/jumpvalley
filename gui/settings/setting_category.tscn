@@ -4,12 +4,13 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_vw2l0"]
 font = ExtResource("1_gg4se")
-font_size = 24
+font_size = 30
+font_color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="SettingCategory" type="Label"]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 30.0
+offset_bottom = 38.0
 grow_horizontal = 2
 text = "setting category name"
 label_settings = SubResource("LabelSettings_vw2l0")

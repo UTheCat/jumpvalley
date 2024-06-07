@@ -41,6 +41,10 @@ layout_mode = 2
 text = "Customize the game"
 label_settings = SubResource("LabelSettings_bd3vs")
 
+[node name="Padding" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
 [node name="SettingList" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 metadata/setting_category_scene = "res://gui/settings/setting_category.tscn"

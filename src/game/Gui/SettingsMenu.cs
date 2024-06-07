@@ -15,6 +15,7 @@ namespace JumpvalleyGame.Gui
         private Control menu;
         private SettingGroup settings;
         private Control settingListNode;
+        private Control scrollContainer;
         private Button closeButton;
 
         private PackedScene categoryScene;
@@ -46,7 +47,8 @@ namespace JumpvalleyGame.Gui
         {
             menu = actualNode;
             this.settings = settings;
-            settingListNode = actualNode.GetNode<Control>("ScrollContainer/VBoxContainer/SettingList");
+            scrollContainer = actualNode.GetNode<Control>("ScrollContainer");
+            settingListNode = scrollContainer.GetNode<Control>("VBoxContainer/SettingList");
             closeButton = actualNode.GetNode<Button>("CloseButton");
 
             categoryScene = LoadSettingNodeScene("setting_category_scene");
@@ -82,19 +84,38 @@ namespace JumpvalleyGame.Gui
         private void Populate(SettingGroup settingGroup)
         {
             Node actualNode = ActualNode;
+            float nodeMinSizeX = scrollContainer.Size.X;
 
             // Add category title
-            Label categoryLabel = categoryScene.Instantiate<Label>();
-            categoryLabel.Text = actualNode.Tr(settingGroup.LocalizationId);
-            settingListNode.AddChild(categoryLabel);
+            if (settingGroup.ShouldDisplayTitle)
+            {
+                Label categoryLabel = categoryScene.Instantiate<Label>();
+                categoryLabel.Text = actualNode.Tr(settingGroup.LocalizationId);
+
+                Vector2 minSize = categoryLabel.CustomMinimumSize;
+                minSize.X = nodeMinSizeX;
+                categoryLabel.CustomMinimumSize = minSize;
+
+                settingListNode.AddChild(categoryLabel);
+            }
 
             foreach (SettingBase setting in settingGroup.SettingList)
             {
+                Control settingNode = null;
+
                 if (setting.Value is bool)
                 {
-                    Control checkButtonSettingNode = checkButtonSettingScene.Instantiate<Control>();
-                    checkButtonSettingNode.GetNode<Label>("Title").Text = actualNode.Tr(setting.LocalizationId);
-                    settingListNode.AddChild(checkButtonSettingNode);
+                    settingNode = checkButtonSettingScene.Instantiate<Control>();
+                    settingNode.GetNode<Label>("Title").Text = actualNode.Tr(setting.LocalizationId);
+                }
+
+                if (settingNode != null)
+                {
+                    Vector2 minSize = settingNode.CustomMinimumSize;
+                    minSize.X = nodeMinSizeX;
+                    settingNode.CustomMinimumSize = minSize;
+
+                    settingListNode.AddChild(settingNode);
                 }
             }
 
