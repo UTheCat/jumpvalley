@@ -83,18 +83,7 @@ namespace JumpvalleyGame.Gui
             // allow the bottom bar's menu button to toggle the primary level menu
             MainMenuButton.Pressed += () =>
             {
-                AnimatedNodeGroup nodes = AnimatedNodes;
-                if (nodes != null)
-                {
-                    if (nodes.IsNodeVisible("primary_level_menu"))
-                    {
-                        nodes.Hide("primary_level_menu");
-                    }
-                    else
-                    {
-                        nodes.Show("primary_level_menu");
-                    }
-                }
+                ToggleNodeVisibility("primary_level_menu");
             };
 
             // connect button hovering events to description label updating
@@ -115,12 +104,7 @@ namespace JumpvalleyGame.Gui
             // allow music panel visibility to be toggled by the music button
             MusicButton.Pressed += () =>
             {
-                AnimatedNode node = AnimatedNodes.NodeList["music_panel"];
-
-                if (node != null)
-                {
-                    node.IsVisible = !node.IsVisible;
-                }
+                ToggleNodeVisibility("music_panel");
             };
 
             MusicButton.MouseEntered += () =>
@@ -145,7 +129,7 @@ namespace JumpvalleyGame.Gui
             DescriptionOpacityTween.FinalValue = 1;
             DescriptionOpacityTween.OnStep += (object o, float frac) =>
             {
-                float opacity = (float) DescriptionOpacityTween.GetCurrentValue();
+                float opacity = (float)DescriptionOpacityTween.GetCurrentValue();
 
                 // set visibility to false if description label is completely transparent
                 DescriptionLabel.Visible = opacity > 0f;
@@ -153,6 +137,21 @@ namespace JumpvalleyGame.Gui
                 DescriptionFontColor.A = opacity;
                 RefreshDescriptionColor();
             };
+        }
+
+        private void ToggleNodeVisibility(string nodeId)
+        {
+            AnimatedNodeGroup nodes = AnimatedNodes;
+
+            if (nodes != null)
+            {
+                AnimatedNode node = nodes.NodeList[nodeId];
+
+                if (node != null)
+                {
+                    node.IsVisible = !node.IsVisible;
+                }
+            }
         }
 
         public void UpdateMusicDescription(Song song)
