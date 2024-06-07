@@ -11,12 +11,7 @@ namespace JumpvalleyGame.Settings.Display
             LocalizationId = "SETTINGS_GROUP_DISPLAY";
 
             SettingBase[] settings = [
-                new SettingBase()
-                {
-                    Id = "fullscreen",
-                    LocalizationId = "SETTINGS_FULLSCREEN",
-                    Value = false
-                }
+                new FullscreenControl()
             ];
 
             foreach (SettingBase s in settings)
