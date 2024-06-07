@@ -115,7 +115,12 @@ namespace Jumpvalley.Animation
             if (!NodeList.ContainsKey(id))
             {
                 NodeList.Add(id, node);
-                UpdateCurrentlyVisibleNode(node);
+
+                if (node.IsVisible)
+                {
+                    UpdateCurrentlyVisibleNode(node);
+                }
+
                 node.VisibilityChanged += HandleVisiblityToggled;
             }
         }
