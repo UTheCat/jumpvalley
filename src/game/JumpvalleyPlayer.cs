@@ -123,21 +123,14 @@ namespace JumpvalleyGame
             };
 
             // Level menu
-            PackedScene primaryLevelMenuScene = ResourceLoader.Load<PackedScene>("res://gui/level_menu.tscn");
-            PrimaryLevelMenu primaryLevelMenu = null;
-            if (primaryLevelMenuScene != null)
-            {
-                Control primaryLevelMenuNode = primaryLevelMenuScene.Instantiate<Control>();
-                primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
-                animatedNodes.Add("primary_level_menu", primaryLevelMenu);
-                //bottomBar.PrimaryLevelMenu = primaryLevelMenu;
-                primaryLevelMenuScene.Dispose();
+            Control primaryLevelMenuNode = PrimaryGui.GetNode<Control>("PrimaryLevelMenu");
+            PrimaryLevelMenu primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
+            animatedNodes.Add("primary_level_menu", primaryLevelMenu);
+            //bottomBar.PrimaryLevelMenu = primaryLevelMenu;
 
-                PrimaryGui.AddChild(primaryLevelMenuNode);
-                Disposables.Add(primaryLevelMenu);
-
-                primaryLevelMenuScene.Dispose();
-            }
+            PrimaryGui.AddChild(primaryLevelMenuNode);
+            Disposables.Add(primaryLevelMenu);
+            Disposables.Add(primaryLevelMenuNode);
 
             // Music panel
             Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");
