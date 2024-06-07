@@ -19,7 +19,7 @@ text = "bool setting name"
 label_settings = ExtResource("1_t2fq7")
 vertical_alignment = 1
 
-[node name="CheckButton" type="CheckButton" parent="."]
+[node name="ToggleNode" type="CheckButton" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0

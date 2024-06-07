@@ -9,7 +9,7 @@ font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_bd3vs"]
 font = ExtResource("1_4vxkx")
-font_size = 32
+font_size = 34
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
@@ -42,7 +42,7 @@ text = "Customize the game"
 label_settings = SubResource("LabelSettings_bd3vs")
 
 [node name="Padding" type="Control" parent="ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
 [node name="SettingList" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
