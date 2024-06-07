@@ -23,6 +23,12 @@ namespace JumpvalleyGame.Settings
         /// </summary>
         public string DescriptionLocalizationId;
 
+        /// <summary>
+        /// The action map key (typically one corresponding to a keybind)
+        /// to associate with this setting.
+        /// </summary>
+        public string ActionMapKey;
+
         public object _value;
 
         /// <summary>
