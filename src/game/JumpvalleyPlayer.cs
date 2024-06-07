@@ -126,9 +126,7 @@ namespace JumpvalleyGame
             Control primaryLevelMenuNode = PrimaryGui.GetNode<Control>("PrimaryLevelMenu");
             PrimaryLevelMenu primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
             animatedNodes.Add("primary_level_menu", primaryLevelMenu);
-            //bottomBar.PrimaryLevelMenu = primaryLevelMenu;
-
-            PrimaryGui.AddChild(primaryLevelMenuNode);
+            
             Disposables.Add(primaryLevelMenu);
             Disposables.Add(primaryLevelMenuNode);
 
