@@ -58,6 +58,8 @@ namespace JumpvalleyGame.Gui
             categoryScene = LoadSettingNodeScene("setting_category_scene");
             checkButtonSettingScene = LoadSettingNodeScene("check_button_setting_scene");
 
+            settingUiHandlers = new List<SettingUiHandler>();
+
             menu.Visible = false;
             SetMenuPosition(1f);
 
@@ -123,6 +125,7 @@ namespace JumpvalleyGame.Gui
                     {
                         ActionMapKey = setting.ActionMapKey
                     };
+                    settingUiHandlers.Add(handler);
 
                     settingNode.AddChild(handler);
                     settingListNode.AddChild(settingNode);
