@@ -113,7 +113,7 @@ namespace JumpvalleyGame
             // Primary AnimatedNodeGroup
             BgPanelAnimatedNodeGroup animatedNodes = new BgPanelAnimatedNodeGroup(bgPanel)
             {
-                MaxVisibleNodes = 1
+                CanOnlyShowOneNode = true
             };
 
             // Bottom bar
