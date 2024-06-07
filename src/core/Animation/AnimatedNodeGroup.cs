@@ -12,7 +12,7 @@ namespace Jumpvalley.Animation
     public partial class AnimatedNodeGroup : IDisposable
     {
         private AnimatedNode _currentlyVisibleNode;
-        
+
         /// <summary>
         /// The node within the <see cref="AnimatedNodes"/> list that's currently visible.
         /// <br/><br/>
