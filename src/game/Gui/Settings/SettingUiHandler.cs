@@ -71,7 +71,7 @@ namespace JumpvalleyGame.Gui.Settings
                     {
                         if (setting.Value is bool vBool)
                         {
-                            toggleButton.ToggleMode = vBool;
+                            toggleButton.SetPressedNoSignal(vBool);
                         }
                     };
                 }
