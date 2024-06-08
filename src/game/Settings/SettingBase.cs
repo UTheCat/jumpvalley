@@ -57,6 +57,15 @@ namespace JumpvalleyGame.Settings
         public virtual void Update(object newValue) { }
 
         /// <summary>
+        /// Calls the <see cref="Update(object)"/> method using the current value
+        /// of the <see cref="Value"/> variable. 
+        /// </summary>
+        public void Update()
+        {
+            Update(Value);
+        }
+
+        /// <summary>
         /// Event raised when the value of <see cref="Value"/> changes 
         /// </summary>
         public event EventHandler Changed;
