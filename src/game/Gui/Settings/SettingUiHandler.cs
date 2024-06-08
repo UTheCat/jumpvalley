@@ -26,12 +26,22 @@ namespace JumpvalleyGame.Gui.Settings
 
         public bool DefaultInputProcessingEnabled;
 
+        private bool isDisposed;
+
         /// <summary>
         /// Function/method that disconnects user interaction with
         /// the setting's toggle control node from the actual modification
         /// of the setting's value.
         /// </summary>
         private Action togglePressedDisconnectFunction;
+
+        /// <summary>
+        /// Function/method that updates the toggle node that the user would
+        /// interact with. This is useful for updating the toggle node
+        /// when the setting's value has been modified in a way that
+        /// doesn't use the toggle node.
+        /// </summary>
+        private Action toggleNodeUpdateFunction;
 
         public SettingUiHandler(SettingBase setting, Node gui)
         {
@@ -44,7 +54,7 @@ namespace JumpvalleyGame.Gui.Settings
             object settingValue = setting.Value;
             if (settingValue is bool)
             {
-                Button toggleButton = gui.GetNode<Button>("ToggleNode");
+                Button toggleButton = gui.GetNode<CheckButton>("ToggleNode");
                 if (toggleButton != null)
                 {
                     void HandleToggle(bool newValue)
@@ -57,6 +67,13 @@ namespace JumpvalleyGame.Gui.Settings
                     {
                         toggleButton.Toggled -= HandleToggle;
                     };
+                    toggleNodeUpdateFunction = () =>
+                    {
+                        if (setting.Value is bool vBool)
+                        {
+                            toggleButton.ToggleMode = vBool;
+                        }
+                    };
                 }
             }
 
@@ -66,7 +83,7 @@ namespace JumpvalleyGame.Gui.Settings
 
         public override void _Input(InputEvent @event)
         {
-            if (!DefaultInputProcessingEnabled) return;
+            if (isDisposed == true || DefaultInputProcessingEnabled == false) return;
 
             string actionMapKey = ActionMapKey;
             if (actionMapKey != null && Input.IsActionJustPressed(actionMapKey))
@@ -79,6 +96,11 @@ namespace JumpvalleyGame.Gui.Settings
                     {
                         setting.Value = !vBool;
                     }
+
+                    if (toggleNodeUpdateFunction != null)
+                    {
+                        toggleNodeUpdateFunction();
+                    }
                 }
             }
 
@@ -87,6 +109,7 @@ namespace JumpvalleyGame.Gui.Settings
 
         public new void Dispose()
         {
+            isDisposed = true;
             togglePressedDisconnectFunction();
 
             QueueFree();
