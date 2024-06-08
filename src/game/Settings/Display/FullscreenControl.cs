@@ -6,6 +6,7 @@ namespace JumpvalleyGame.Settings.Display
     {
         public FullscreenControl()
         {
+            Value = false;
             Id = "fullscreen";
             LocalizationId = "SETTINGS_FULLSCREEN";
             ActionMapKey = "fullscreen_toggle";
