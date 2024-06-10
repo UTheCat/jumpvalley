@@ -17,7 +17,7 @@ namespace Jumpvalley.Levels
         /// <br/><br/>
         /// For example, a level with a difficulty rating of 23.5
         /// would be yellow-intermediate if you were using
-        /// the Celeste difficulty rating system
+        /// the <see href="https://www.celestegame.com/">Celeste</see> difficulty rating system
         /// (specifically, the system found in the Difficulty Reference Chart in
         /// <see href="https://docs.google.com/spreadsheets/d/1KNJ344lsZEmTU9P6eeFInckUbT5dkaWhRcxv_Yy2ZS0">Parrot's Celeste Clears List</see>).
         /// </summary>
