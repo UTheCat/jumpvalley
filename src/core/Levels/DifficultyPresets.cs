@@ -15,6 +15,10 @@ namespace Jumpvalley.Levels
 
         /// <summary>
         /// Jumpvalley's main set of difficulties.
+        /// <br/><br/>
+        /// These come from the Celeste community.
+        /// The numerical difficulty ratings assigned to each difficulty name
+        /// come from <see href="https://docs.google.com/spreadsheets/d/1KNJ344lsZEmTU9P6eeFInckUbT5dkaWhRcxv_Yy2ZS0">Parrot's Celeste Clears List</see>.
         /// </summary>
         public readonly static List<Difficulty> PRIMARY = new List<Difficulty>
         {
