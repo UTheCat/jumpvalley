@@ -15,6 +15,20 @@ namespace Jumpvalley.Levels
         public List<Difficulty> Difficulties;
 
         /// <summary>
+        /// Creates a new instance of <see cref="DifficultySet"/> with an initial list of difficulties. 
+        /// </summary>
+        /// <param name="difficulties">The initial list of difficulties</param>
+        public DifficultySet(List<Difficulty> difficulties)
+        {
+            Difficulties = difficulties;
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="DifficultySet"/> with a blank list of difficulties.
+        /// </summary>
+        public DifficultySet() : this(new List<Difficulty>()) { }
+
+        /// <summary>
         /// Returns the difficulty within the <see cref="Difficulties"/> list
         /// who has the highest difficulty rating less than or equal to the
         /// difficulty rating specified in the <paramref name="rating"/> parameter.
