@@ -20,19 +20,11 @@ namespace Jumpvalley.Levels
         /// The numerical difficulty ratings assigned to each difficulty name
         /// come from <see href="https://docs.google.com/spreadsheets/d/1KNJ344lsZEmTU9P6eeFInckUbT5dkaWhRcxv_Yy2ZS0">Parrot's Celeste Clears List</see>.
         /// </summary>
-        public readonly static List<Difficulty> PRIMARY = new List<Difficulty>
-        {
-            
-        };
-
-        /// <returns>
-        /// The difficulty in the <see cref="PRIMARY"/> list associated with the given numerical rating specified in the <paramref name="rating"/> parameter.
-        /// </returns>
-        public static Difficulty GetPrimaryDifficultyFromRating(double rating)
-        {
-            return PRIMARY[
-                Mathf.FloorToInt(Mathf.Clamp(rating, 0, PRIMARY.Count))
-                ];
-        }
+        public readonly static DifficultySet PRIMARY_DIFFICULTIES = new DifficultySet(
+            new List<Difficulty>()
+            {
+                new Difficulty("Beginner", 0.0, new Color(231f / 255f, 0.41f, 1f))
+            }
+        );
     }
 }
