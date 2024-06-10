@@ -23,7 +23,14 @@ namespace Jumpvalley.Levels
         public readonly static DifficultySet PRIMARY_DIFFICULTIES = new DifficultySet(
             new List<Difficulty>()
             {
-                new Difficulty("Beginner", 0.0, new Color(231f / 255f, 0.41f, 1f))
+                new Difficulty("Beginner", 0.0, new Color(231f / 255f, 0.41f, 1f)),
+                new Difficulty("Intermediate", 15.0, new Color(231f / 255f, 0.41f, 1f)),
+                new Difficulty("Advanced", 30.0, new Color(231f / 255f, 0.41f, 1f)),
+                new Difficulty("Expert", 45.0, new Color(231f / 255f, 0.41f, 1f)),
+                new Difficulty("Grandmaster", 60.0, new Color(231f / 255f, 0.41f, 1f)),
+                new Difficulty("GM+1", 80.0, new Color(231f / 255f, 0.41f, 1f)),
+                new Difficulty("GM+2", 90.0, new Color(231f / 255f, 0.41f, 1f)),
+                new Difficulty("GM+3", 95.0, new Color(231f / 255f, 0.41f, 1f)),
             }
         );
     }
