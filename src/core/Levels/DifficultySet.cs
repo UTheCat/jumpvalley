@@ -23,7 +23,23 @@ namespace Jumpvalley.Levels
         /// <returns>The corresponding difficulty</returns>
         public Difficulty GetDifficultyByRating(double rating)
         {
-            return null;
+            Difficulty difficulty = null;
+            double correspondingRating = 0;
+            bool firstRatingReached = false;
+
+            foreach (Difficulty d in Difficulties)
+            {
+                double diffRating = d.Rating;
+
+                if ((firstRatingReached == false || diffRating > correspondingRating) && diffRating <= rating)
+                {
+                    firstRatingReached = true;
+                    correspondingRating = diffRating;
+                    difficulty = d;
+                }
+            }
+
+            return difficulty;
         }
     }
 }
