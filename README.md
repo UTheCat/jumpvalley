@@ -1,6 +1,6 @@
 # Jumpvalley
 
-This is a 3D-platformer made with the [Godot Engine](https://godotengine.org) based on the hardcore platformer, [Juke's Towers of Hell](https://www.roblox.com/games/8562822414/Jukes-Towers-of-Hell). Yes, this means you will not need to be connected to the internet while playing an obstacle course that runs on Jumpvalley!
+This is a 3D-platformer made with the [Godot Engine](https://godotengine.org) based on the precision platformers, [Celeste](https://www.celestegame.com/) and [Juke's Towers of Hell](https://www.roblox.com/games/8562822414/Jukes-Towers-of-Hell). Yes, this means you will not need to be connected to the internet while playing an obstacle course that runs on Jumpvalley!
 
 Currently, it's a work in progress. A lot of basic features, like being able to load other obstacle courses (other than the ones present when you first load the game), as well as various level mechanics such as jump pads, have yet to be implemented.
 

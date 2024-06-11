@@ -14,39 +14,24 @@ namespace Jumpvalley.Levels
         public readonly static Difficulty FALLBACK = new Difficulty();
 
         /// <summary>
-        /// Jumpvalley's main set of difficulties. These are taken directly from Juke's Towers of Hell.
-        /// <br/>
-        /// Note that Jumpvalley may use a different set of difficulty ratings in the future.
+        /// Jumpvalley's main set of difficulties.
+        /// <br/><br/>
+        /// These come from the <see href="https://www.celestegame.com/">Celeste</see> community.
+        /// The numerical difficulty ratings assigned to each difficulty name come from
+        /// the Difficulty Reference Chart in <see href="https://docs.google.com/spreadsheets/d/1KNJ344lsZEmTU9P6eeFInckUbT5dkaWhRcxv_Yy2ZS0">Parrot's Celeste Clears List</see>.
         /// </summary>
-        public readonly static List<Difficulty> PRIMARY = new List<Difficulty>
-        {
-            // Remember that when setting this, make sure that each difficulty's list index matches with the difficulty's numerical rating rounded down
-            new Difficulty("Effortless", 0, Color.Color8(0, 206, 0)),
-            new Difficulty("Easy", 1, Color.Color8(117, 243, 71)),
-            new Difficulty("Medium", 2, Color.Color8(0, 206, 0)),
-            new Difficulty("Hard", 3, Color.Color8(253, 124, 0)),
-            new Difficulty("Difficult", 4, Color.Color8(255, 12, 4)),
-            new Difficulty("Challenging", 5, Color.Color8(193, 0, 0)),
-            new Difficulty("Intense", 6, Color.Color8(25, 40, 50)),
-            new Difficulty("Remorseless", 7, Color.Color8(200, 0, 200)),
-            new Difficulty("Insane", 8, Color.Color8(0, 0, 255)),
-            new Difficulty("Extreme", 9, Color.Color8(3, 137, 255)),
-            new Difficulty("Terrifying", 10, Color.Color8(0, 255, 255)),
-            new Difficulty("Catastrophic", 11, Color.Color8(255, 255, 255)),
-
-            // difficulties beyond sane limits
-            new Difficulty("Horrific", 12, Color.Color8(140, 139, 238)),
-            new Difficulty("Unreal", 13, Color.Color8(81, 0, 203))
-        };
-
-        /// <returns>
-        /// The difficulty in the <see cref="PRIMARY"/> list associated with the given numerical rating specified in the <paramref name="rating"/> parameter.
-        /// </returns>
-        public static Difficulty GetPrimaryDifficultyFromRating(double rating)
-        {
-            return PRIMARY[
-                Mathf.FloorToInt(Mathf.Clamp(rating, 0, PRIMARY.Count))
-                ];
-        }
+        public readonly static DifficultySet PRIMARY_DIFFICULTIES = new DifficultySet(
+            new List<Difficulty>()
+            {
+                new Difficulty("Beginner", 0.0, new Color(231f / 255f, 0.41f, 1f)),
+                new Difficulty("Intermediate", 15.0, new Color(198f / 255f, 0.44f, 1f)),
+                new Difficulty("Advanced", 30.0, new Color(140f / 255f, 0.47f, 0.88f)),
+                new Difficulty("Expert", 45.0, new Color(95f / 255f, 0.53f, 1f)),
+                new Difficulty("Grandmaster", 60.0, new Color(51f / 255f, 0.47f, 1f)),
+                new Difficulty("GM+1", 80.0, new Color(36f / 255f, 0.55f, 1f)),
+                new Difficulty("GM+2", 90.0, new Color(8f / 255f, 0.6f, 1f)),
+                new Difficulty("GM+3", 95.0, new Color(332f / 255f, 0.92f, 1f)),
+            }
+        );
     }
 }
