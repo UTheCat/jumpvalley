@@ -62,7 +62,7 @@ namespace Jumpvalley.Levels
             }
 
             // We'll need to retain the exact numerical difficulty when setting LevelDifficulty
-            Difficulty difficulty = DifficultyPresets.GetPrimaryDifficultyFromRating(difficultyRating);
+            Difficulty difficulty = DifficultyPresets.PRIMARY_DIFFICULTIES.GetDifficultyByRating(difficultyRating);
             LevelDifficulty = new Difficulty(difficulty.Name, difficultyRating, difficulty.Color);
         }
     }
