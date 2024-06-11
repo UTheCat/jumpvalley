@@ -2,6 +2,6 @@
     "id": "demo_platformer",
     "fullName": "Demo Platformer",
     "creators": "UTheCat",
-    "difficulty": 5.03,
+    "difficulty": 10,
     "scenePath": "level.tscn"
 }
