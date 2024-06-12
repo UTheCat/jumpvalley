@@ -23,6 +23,16 @@ namespace JumpvalleyGame.Settings
             ShouldDisplayTitle = true;
         }
 
+        public SettingBase GetSettingById(string id)
+        {
+            foreach (SettingBase setting in SettingList)
+            {
+                if (id.Equals(setting.Id)) return setting;
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Removes a setting from the setting list
         /// </summary>
@@ -79,6 +89,17 @@ namespace JumpvalleyGame.Settings
             group.SettingChanged += HandleSettingChangedFromSubgroup;
 
             AddChild(group);
+        }
+
+        /// <summary>
+        /// Applies values contained in a JSON node
+        /// to this group's settings and subgroups.
+        /// This method can be used to load a settings configuration from a file.
+        /// </summary>
+        /// <param name="json"></param>
+        public void ApplyJson(JsonNode json)
+        {
+            
         }
 
         /// <summary>
