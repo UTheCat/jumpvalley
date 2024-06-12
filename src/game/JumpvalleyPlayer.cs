@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Text.Json.Nodes;
 
 using Jumpvalley.Gui;
 using Jumpvalley.Levels;
@@ -145,6 +146,16 @@ namespace JumpvalleyGame
 
             Disposables.Add(settingsMenu);
             Disposables.Add(settingsMenuNode);
+
+            // Apply saved settings configuration
+            SettingsFile settingsFile = settings.File;
+            settingsFile.Read();
+
+            JsonNode node = settingsFile.Data;
+            if (node != null)
+            {
+                settings.Group.ApplyJson(node.AsObject());
+            }
 
             // Set up level-running stuff
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
