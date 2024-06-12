@@ -206,6 +206,10 @@ namespace JumpvalleyGame
 
         public new void Dispose()
         {
+            // test settings stuff
+            settings.File.Data = settings.Group.ToJsonObject();
+            settings.File.Write();
+
             settings.Group.Dispose();
             base.Dispose();
         }
