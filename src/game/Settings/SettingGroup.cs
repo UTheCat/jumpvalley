@@ -92,7 +92,7 @@ namespace JumpvalleyGame.Settings
             JsonObject settingsJson = new JsonObject();
             foreach (SettingBase setting in SettingList)
             {
-                settingsJson[setting.Id] = (JsonNode)setting.Value;
+                settingsJson[setting.Id] = JsonValue.Create(setting.Value);
             }
 
             json.Add("settings", settingsJson);
