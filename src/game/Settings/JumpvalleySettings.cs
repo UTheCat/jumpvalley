@@ -8,6 +8,7 @@ namespace JumpvalleyGame.Settings
     public partial class JumpvalleySettings
     {
         public SettingGroup Group;
+        public SettingsFile File;
 
         public JumpvalleySettings()
         {
@@ -17,6 +18,8 @@ namespace JumpvalleyGame.Settings
             group.ShouldDisplayTitle = false;
 
             Group = group;
+
+            File = new SettingsFile();
         }
     }
 }
