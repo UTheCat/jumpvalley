@@ -69,11 +69,15 @@ namespace JumpvalleyGame.Settings
             string sData = Data.ToJsonString();
 
             FileAccess file = FileAccess.Open(fileLocation, FileAccess.ModeFlags.Write);
+            if (file == null) throw new Exception(FileAccess.GetOpenError().ToString());
+
             file.StoreString(sData);
 
             // Godot.FileAccess flushes a file automatically on close
             file.Close();
             file.Dispose();
+
+            logger.Print($"Successfully wrote current settings configuration to {fileLocation}");
         }
     }
 }
