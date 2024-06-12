@@ -66,6 +66,16 @@ namespace JumpvalleyGame.Settings
             AddChild(setting);
         }
 
+        public SettingGroup GetSubgroupById(string id)
+        {
+            foreach (SettingGroup group in Subgroups)
+            {
+                if (id.Equals(group.Id)) return group;
+            }
+
+            return null;
+        }
+
         public void RemoveSettingGroup(SettingGroup group)
         {
             if (group != null)
@@ -92,14 +102,44 @@ namespace JumpvalleyGame.Settings
         }
 
         /// <summary>
-        /// Applies values contained in a JSON node
+        /// Applies values contained in a JSON object
         /// to this group's settings and subgroups.
         /// This method can be used to load a settings configuration from a file.
         /// </summary>
         /// <param name="json"></param>
-        public void ApplyJson(JsonNode json)
+        public void ApplyJson(JsonObject json)
         {
-            
+            JsonObject settingsJson = json["settings"].AsObject();
+
+            foreach (KeyValuePair<string, JsonNode> pair in settingsJson)
+            {
+                string id = pair.Key;
+                SettingBase setting = GetSettingById(id);
+
+                if (setting != null)
+                {
+                    JsonNode value = pair.Value;
+                    object settingValue = setting.Value;
+
+                    if (settingValue is bool)
+                    {
+                        value = value.GetValue<bool>();
+                    }
+                }
+            }
+
+            JsonObject subgroupsJson = json["subgroups"].AsObject();
+
+            foreach (KeyValuePair<string, JsonNode> pair in subgroupsJson)
+            {
+                string id = pair.Key;
+
+                SettingGroup group = GetSubgroupById(id);
+                if (group != null)
+                {
+                    ApplyJson(pair.Value.AsObject());
+                }
+            }
         }
 
         /// <summary>
