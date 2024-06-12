@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Nodes;
 using Godot;
 
 namespace JumpvalleyGame.Settings
@@ -78,6 +79,31 @@ namespace JumpvalleyGame.Settings
             group.SettingChanged += HandleSettingChangedFromSubgroup;
 
             AddChild(group);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>The current state of this SettingGroup as a JSON object</returns>
+        public JsonObject ToJsonObject()
+        {
+            JsonObject json = new JsonObject();
+
+            JsonObject settingsJson = new JsonObject();
+            foreach (SettingBase setting in SettingList)
+            {
+                settingsJson[setting.Id] = (JsonNode)setting.Value;
+            }
+
+            json.Add("settings", settingsJson);
+
+            JsonObject subgroupsJson = new JsonObject();
+            foreach (SettingGroup group in Subgroups)
+            {
+                subgroupsJson[group.Id] = group.ToJsonObject();
+            }
+
+            return json;
         }
 
         public new void Dispose()
