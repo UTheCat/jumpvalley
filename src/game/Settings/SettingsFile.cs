@@ -18,6 +18,9 @@ namespace JumpvalleyGame.Settings
 
         public string SettingsFileLocation;
 
+        /// <summary>
+        /// The current settings data
+        /// </summary>
         public JsonNode Data;
 
         public SettingsFile()
@@ -27,6 +30,11 @@ namespace JumpvalleyGame.Settings
             SettingsFileLocation = $"user://{FILE_NAME}";
         }
 
+        /// <summary>
+        /// Reads the settings data from the settings file and stores it in
+        /// the <see cref="Data"/> variable 
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         public void Read()
         {
             logger.Print("Now attempting to read settings file");
@@ -50,6 +58,22 @@ namespace JumpvalleyGame.Settings
             {
                 logger.Print($"{fileLocation} doesn't exist. A new settings file at this location should be created when Write() is called");
             }
+        }
+
+        /// <summary>
+        /// Saves the settings data to the settings file
+        /// </summary>
+        public void Write()
+        {
+            string fileLocation = SettingsFileLocation;
+            string sData = Data.ToJsonString();
+
+            FileAccess file = FileAccess.Open(fileLocation, FileAccess.ModeFlags.Write);
+            file.StoreString(sData);
+
+            // Godot.FileAccess flushes a file automatically on close
+            file.Close();
+            file.Dispose();
         }
     }
 }
