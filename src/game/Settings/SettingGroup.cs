@@ -103,6 +103,8 @@ namespace JumpvalleyGame.Settings
                 subgroupsJson[group.Id] = group.ToJsonObject();
             }
 
+            json.Add("subgroups", subgroupsJson);
+
             return json;
         }
 
