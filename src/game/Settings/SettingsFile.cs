@@ -1,3 +1,4 @@
+using System;
 using System.Text.Json.Nodes;
 using Godot;
 using Jumpvalley.Logging;
@@ -14,7 +15,6 @@ namespace JumpvalleyGame.Settings
         public static readonly string FILE_NAME = "settings.json";
 
         private ConsoleLogger logger;
-        private FileAccess file;
 
         public string SettingsFileLocation;
 
@@ -35,7 +35,16 @@ namespace JumpvalleyGame.Settings
 
             if (FileAccess.FileExists(fileLocation))
             {
-                file = FileAccess.Open(fileLocation, FileAccess.ModeFlags.Read);
+                FileAccess file = FileAccess.Open(fileLocation, FileAccess.ModeFlags.Read);
+
+                if (file == null) throw new Exception(FileAccess.GetOpenError().ToString());
+
+                string sData = file.GetAsText();
+
+                file.Close();
+                file.Dispose();
+
+                Data = JsonNode.Parse(sData);
             }
             else
             {
