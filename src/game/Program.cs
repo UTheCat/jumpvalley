@@ -14,7 +14,27 @@ namespace JumpvalleyGame
 		public override void _Ready()
 		{
 			Console.WriteLine("hi :3");
-			Console.WriteLine($"Now running: {ProjectSettings.GetSettingWithOverride("application/config/name").As<string>()} v{ProjectSettings.GetSettingWithOverride("application/config/version").As<string>()}");
+
+			string nowRunningText = "Now running: ";
+			string projectName = ProjectSettings.GetSettingWithOverride("application/config/name").As<string>();
+			if (string.IsNullOrEmpty(projectName))
+			{
+				// This is the folder title used in Godot's default user data folder
+				// on desktop platforms for a project that has no name
+				nowRunningText += "[unnamed project]";
+			}
+			else
+			{
+				nowRunningText += projectName;
+			}
+
+			string projectVersion = ProjectSettings.GetSettingWithOverride("application/config/version").As<string>();
+			if (!string.IsNullOrEmpty(projectVersion))
+			{
+				nowRunningText += $" {projectVersion}";
+			}
+			
+			Console.WriteLine(nowRunningText);
 
 			player = new JumpvalleyPlayer(GetTree(), this);
 			player.Start();
