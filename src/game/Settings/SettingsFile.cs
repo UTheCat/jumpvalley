@@ -37,9 +37,9 @@ namespace JumpvalleyGame.Settings
         /// <exception cref="Exception"></exception>
         public void Read()
         {
-            logger.Print("Now attempting to read settings file");
-
             string fileLocation = SettingsFileLocation;
+
+            logger.Print($"Now attempting to read settings file located at {fileLocation}");
 
             if (FileAccess.FileExists(fileLocation))
             {
@@ -53,6 +53,8 @@ namespace JumpvalleyGame.Settings
                 file.Dispose();
 
                 Data = JsonNode.Parse(sData);
+
+                logger.Print("Successfully read settings file");
             }
             else
             {
