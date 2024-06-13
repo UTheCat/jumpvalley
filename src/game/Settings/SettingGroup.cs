@@ -137,7 +137,7 @@ namespace JumpvalleyGame.Settings
                 SettingGroup group = GetSubgroupById(id);
                 if (group != null)
                 {
-                    ApplyJson(pair.Value.AsObject());
+                    group.ApplyJson(pair.Value.AsObject());
                 }
             }
         }
