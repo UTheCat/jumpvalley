@@ -120,7 +120,7 @@ namespace JumpvalleyGame
             Control primaryLevelMenuNode = PrimaryGui.GetNode<Control>("PrimaryLevelMenu");
             PrimaryLevelMenu primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
             animatedNodes.Add("primary_level_menu", primaryLevelMenu);
-            
+
             Disposables.Add(primaryLevelMenu);
             Disposables.Add(primaryLevelMenuNode);
 
@@ -217,9 +217,13 @@ namespace JumpvalleyGame
 
         public new void Dispose()
         {
-            // test settings stuff
-            settings.File.Data = settings.Group.ToJsonObject();
-            settings.File.Write();
+            // Save settings configuration to file
+            SettingsFile settingsFile = settings.File;
+            if (settingsFile != null)
+            {
+                settingsFile.Data = settings.Group.ToJsonObject();
+                settingsFile.Write();
+            }
 
             settings.Group.Dispose();
             base.Dispose();
