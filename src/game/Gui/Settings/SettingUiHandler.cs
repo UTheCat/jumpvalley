@@ -10,8 +10,8 @@ namespace JumpvalleyGame.Gui.Settings
     /// </summary>
     public partial class SettingUiHandler : Node, IDisposable
     {
-        public SettingBase Setting;
-        public Node Gui;
+        public SettingBase Setting { get; private set; }
+        public Node Gui { get; private set; }
 
         private string _actionMapKey;
         public string ActionMapKey
@@ -77,8 +77,27 @@ namespace JumpvalleyGame.Gui.Settings
                 }
             }
 
+            // Respond to external/manual setting updates
+            if (toggleNodeUpdateFunction != null)
+            {
+                setting.Changed += HandleSettingChanged;
+            }
+
             ActionMapKey = null;
             DefaultInputProcessingEnabled = true;
+        }
+
+        private void HandleSettingChanged(object o, EventArgs _e)
+        {
+            SettingBase handlerSetting = o as SettingBase;
+
+            if (
+                handlerSetting != null
+                && handlerSetting == Setting
+                && toggleNodeUpdateFunction != null)
+            {
+                toggleNodeUpdateFunction();
+            }
         }
 
         public override void _Input(InputEvent @event)
@@ -110,7 +129,11 @@ namespace JumpvalleyGame.Gui.Settings
         public new void Dispose()
         {
             isDisposed = true;
-            togglePressedDisconnectFunction();
+            if (togglePressedDisconnectFunction != null)
+            {
+                togglePressedDisconnectFunction();
+            }
+            Setting.Changed -= HandleSettingChanged;
 
             QueueFree();
             base.Dispose();
