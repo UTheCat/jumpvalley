@@ -1,7 +1,4 @@
 ﻿using Godot;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace JumpvalleyGame.Gui
 {
@@ -24,6 +21,27 @@ namespace JumpvalleyGame.Gui
         /// The texture rectangle displaying the button's icon
         /// </summary>
         public TextureRect IconNode { get; private set; }
+
+        /// <summary>
+        /// The button's background color
+        /// </summary>
+        public Color BackgroundColor
+        {
+            get => ActualButton.SelfModulate;
+            set => ActualButton.SelfModulate = value;
+        }
+
+        public string Text
+        {
+            get => LabelNode.Text;
+            set => LabelNode.Text = value;
+        }
+
+        public Texture2D Icon
+        {
+            get => IconNode.Texture;
+            set => IconNode.Texture = value;
+        }
 
         public LevelMenuButton(Button actualButton)
         {

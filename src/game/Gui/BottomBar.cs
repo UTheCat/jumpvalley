@@ -1,4 +1,5 @@
 ﻿using Godot;
+using Jumpvalley.Animation;
 using Jumpvalley.Music;
 using Jumpvalley.Tweening;
 using System;
@@ -38,58 +39,7 @@ namespace JumpvalleyGame.Gui
 
         public LastHoveredButton LastHovered = LastHoveredButton.None;
 
-        private SceneTreeTween backPanelOpacityTween;
-
-        private LevelMenu _primaryLevelMenu;
-
-        /// <summary>
-        /// The primary level menu that will have its visibility toggled by the bottom bar's menu button.
-        /// </summary>
-        public LevelMenu PrimaryLevelMenu
-        {
-            get => _primaryLevelMenu;
-            set
-            {
-                if (_primaryLevelMenu != null)
-                {
-                    _primaryLevelMenu.VisibilityChanged -= HandleMenuVisibilityChange;
-                }
-
-                _primaryLevelMenu = value;
-                if (value != null)
-                {
-                    value.VisibilityChanged += HandleMenuVisibilityChange;
-                }
-            }
-        }
-
-        private MusicPanel _primaryMusicPanel;
-
-        /// <summary>
-        /// The music panel associated with this bottom bar
-        /// </summary>
-        public MusicPanel PrimaryMusicPanel
-        {
-            get => _primaryMusicPanel;
-            set
-            {
-                if (_primaryMusicPanel != null)
-                {
-                    _primaryMusicPanel.VisibilityChanged -= HandleMenuVisibilityChange;
-                }
-
-                _primaryMusicPanel = value;
-                if (value != null)
-                {
-                    value.VisibilityChanged += HandleMenuVisibilityChange;
-                }
-            }
-        }
-
-        /// <summary>
-        /// The background panel shown behind a bottom bar menu that covers the full screen when a menu is being shown
-        /// </summary>
-        public Panel MenuBackPanel { get; private set; }
+        public AnimatedNodeGroup AnimatedNodes;
 
         //private bool eventsConnected = false;
 
@@ -108,7 +58,6 @@ namespace JumpvalleyGame.Gui
 
             MainMenuButton = (Button)ButtonsContainer.GetNode("Menu");
             MusicButton = (Button)ButtonsContainer.GetNode("Music");
-            MenuBackPanel = ActualNode.GetNode<Panel>("BackPanel");
 
             DescriptionLabel.Visible = false;
             DescriptionFontColor = DescriptionLabel.GetThemeColor("font_color");
@@ -134,17 +83,7 @@ namespace JumpvalleyGame.Gui
             // allow the bottom bar's menu button to toggle the primary level menu
             MainMenuButton.Pressed += () =>
             {
-                LevelMenu levelMenu = PrimaryLevelMenu;
-                if (levelMenu != null)
-                {
-                    levelMenu.IsVisible = !levelMenu.IsVisible;
-
-                    MusicPanel musicPanel = PrimaryMusicPanel;
-                    if (musicPanel != null)
-                    {
-                        musicPanel.IsVisible = false;
-                    }
-                }
+                ToggleNodeVisibility("primary_level_menu");
             };
 
             // connect button hovering events to description label updating
@@ -165,17 +104,7 @@ namespace JumpvalleyGame.Gui
             // allow music panel visibility to be toggled by the music button
             MusicButton.Pressed += () =>
             {
-                MusicPanel musicPanel = PrimaryMusicPanel;
-                if (musicPanel != null)
-                {
-                    musicPanel.IsVisible = !musicPanel.IsVisible;
-
-                    LevelMenu levelMenu = PrimaryLevelMenu;
-                    if (levelMenu != null)
-                    {
-                        levelMenu.IsVisible = false;
-                    }
-                }
+                ToggleNodeVisibility("music_panel");
             };
 
             MusicButton.MouseEntered += () =>
@@ -200,7 +129,7 @@ namespace JumpvalleyGame.Gui
             DescriptionOpacityTween.FinalValue = 1;
             DescriptionOpacityTween.OnStep += (object o, float frac) =>
             {
-                float opacity = (float) DescriptionOpacityTween.GetCurrentValue();
+                float opacity = (float)DescriptionOpacityTween.GetCurrentValue();
 
                 // set visibility to false if description label is completely transparent
                 DescriptionLabel.Visible = opacity > 0f;
@@ -208,20 +137,20 @@ namespace JumpvalleyGame.Gui
                 DescriptionFontColor.A = opacity;
                 RefreshDescriptionColor();
             };
+        }
 
-            if (MenuBackPanel != null)
+        private void ToggleNodeVisibility(string nodeId)
+        {
+            AnimatedNodeGroup nodes = AnimatedNodes;
+
+            if (nodes != null)
             {
-                backPanelOpacityTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, actualNodeTree);
-                backPanelOpacityTween.InitialValue = 0;
-                backPanelOpacityTween.FinalValue = 0.25;
-                backPanelOpacityTween.OnStep += (object o, float frac) =>
+                AnimatedNode node = nodes.NodeList[nodeId];
+
+                if (node != null)
                 {
-                    float opacity = (float)backPanelOpacityTween.GetCurrentValue();
-                    MenuBackPanel.Visible = opacity > 0;
-                    Color modulate = MenuBackPanel.SelfModulate;
-                    modulate.A = opacity;
-                    MenuBackPanel.SelfModulate = modulate;
-                };
+                    node.IsVisible = !node.IsVisible;
+                }
             }
         }
 
@@ -275,39 +204,10 @@ namespace JumpvalleyGame.Gui
             DescriptionOpacityTween.Resume();
         }
 
-        private void UpdateBackPanelVisibility()
-        {
-            if (backPanelOpacityTween != null)
-            {
-                if ((PrimaryLevelMenu != null && PrimaryLevelMenu.IsVisible) || (PrimaryMusicPanel != null && PrimaryMusicPanel.IsVisible))
-                {
-                    backPanelOpacityTween.Speed = 1;
-                }
-                else
-                {
-                    backPanelOpacityTween.Speed = -1;
-                }
-
-                backPanelOpacityTween.Resume();
-            }
-        }
-
-        private void HandleMenuVisibilityChange(object _o, bool isVisible)
-        {
-            UpdateBackPanelVisibility();
-        }
-
         public void Dispose()
         {
             //ActualNode.Dispose();
             DescriptionOpacityTween.Dispose();
-
-            if (backPanelOpacityTween != null)
-            {
-                backPanelOpacityTween.Dispose();
-            }
-
-            MenuBackPanel = null;
         }
 
         /*

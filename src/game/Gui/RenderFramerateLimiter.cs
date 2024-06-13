@@ -1,11 +1,7 @@
 ﻿using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jumpvalley.Players.Controls
+namespace JumpvalleyGame.Gui
 {
     /// <summary>
     /// Limits how many times the game screen is rendered within a given time interval

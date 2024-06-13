@@ -1,28 +1,34 @@
 using Godot;
 using System;
+using System.Text.Json.Nodes;
 
+using Jumpvalley.Gui;
 using Jumpvalley.Levels;
 using Jumpvalley.Logging;
 using Jumpvalley.Music;
 using Jumpvalley.Players;
-using Jumpvalley.Players.Controls;
 using Jumpvalley.Players.Movement;
 
 using JumpvalleyGame.Gui;
 using JumpvalleyGame.Levels;
+using JumpvalleyGame.Settings;
 
 namespace JumpvalleyGame
 {
     /// <summary>
     /// Full implementation of the Player class specific to Jumpvalley itself
     /// </summary>
-    public partial class JumpvalleyPlayer : Player
+    public partial class JumpvalleyPlayer : Player, IDisposable
     {
         private ConsoleLogger logger;
+
+        private JumpvalleySettings settings;
 
         public JumpvalleyPlayer(SceneTree tree, Node rootNode) : base(tree, rootNode)
         {
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
+
+            settings = new JumpvalleySettings();
         }
 
         public override void Start()
@@ -85,11 +91,6 @@ namespace JumpvalleyGame
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
-            // Set up fullscreen toggling
-            FullscreenControl fullscreenControl = new FullscreenControl(false);
-            RootNode.AddChild(fullscreenControl);
-            Disposables.Add(fullscreenControl);
-
             // Input with higher accuracy and less lag is preferred in Juke's Towers of Hell fangames,
             // since very small differences in input can have a large impact on gameplay.
             // This is why it's important to make the input refresh rate independent from display refresh rate.
@@ -101,26 +102,60 @@ namespace JumpvalleyGame
             RootNode.AddChild(fpsLimiter);
 
             // Initialize GUI stuff
-            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer);
+            BackgroundPanel bgPanel = new BackgroundPanel(PrimaryGui.GetNode<Control>("BackgroundPanel"));
 
-            PackedScene primaryLevelMenuScene = ResourceLoader.Load<PackedScene>("res://gui/level_menu.tscn");
-            if (primaryLevelMenuScene != null)
+            // Primary AnimatedNodeGroup
+            BgPanelAnimatedNodeGroup animatedNodes = new BgPanelAnimatedNodeGroup(bgPanel)
             {
-                Control primaryLevelMenuNode = primaryLevelMenuScene.Instantiate<Control>();
-                PrimaryLevelMenu primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
-                bottomBar.PrimaryLevelMenu = primaryLevelMenu;
-                primaryLevelMenuScene.Dispose();
+                CanOnlyShowOneNode = true
+            };
 
-                PrimaryGui.AddChild(primaryLevelMenuNode);
-                Disposables.Add(primaryLevelMenu);
+            // Bottom bar
+            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer)
+            {
+                AnimatedNodes = animatedNodes
+            };
 
-                primaryLevelMenuScene.Dispose();
-            }
+            // Level menu
+            Control primaryLevelMenuNode = PrimaryGui.GetNode<Control>("PrimaryLevelMenu");
+            PrimaryLevelMenu primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
+            animatedNodes.Add("primary_level_menu", primaryLevelMenu);
 
+            Disposables.Add(primaryLevelMenu);
+            Disposables.Add(primaryLevelMenuNode);
+
+            // Music panel
             Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");
 
             MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
-            bottomBar.PrimaryMusicPanel = musicPanel;
+            animatedNodes.Add("music_panel", musicPanel);
+
+            //bottomBar.PrimaryMusicPanel = musicPanel;
+
+            // Settings menu
+            Control settingsMenuNode = PrimaryGui.GetNode<Control>("SettingsMenu");
+
+            SettingsMenu settingsMenu = new SettingsMenu(settingsMenuNode, Tree, settings.Group);
+            settingsMenu.Populate();
+            animatedNodes.Add("settings_menu", settingsMenu);
+
+            if (primaryLevelMenu != null)
+            {
+                primaryLevelMenu.CurrentSettingsMenu = settingsMenu;
+            }
+
+            Disposables.Add(settingsMenu);
+            Disposables.Add(settingsMenuNode);
+
+            // Apply saved settings configuration
+            SettingsFile settingsFile = settings.File;
+            settingsFile.Read();
+
+            JsonNode node = settingsFile.Data;
+            if (node != null)
+            {
+                settings.Group.ApplyJson(node.AsObject());
+            }
 
             // Set up level-running stuff
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
@@ -177,6 +212,21 @@ namespace JumpvalleyGame
             Disposables.Add(fpsLimiter);
             Disposables.Add(rotationLockControl);
             Disposables.Add(bottomBar);
+            Disposables.Add(animatedNodes);
+        }
+
+        public new void Dispose()
+        {
+            // Save settings configuration to file
+            SettingsFile settingsFile = settings.File;
+            if (settingsFile != null)
+            {
+                settingsFile.Data = settings.Group.ToJsonObject();
+                settingsFile.Write();
+            }
+
+            settings.Group.Dispose();
+            base.Dispose();
         }
     }
 }
