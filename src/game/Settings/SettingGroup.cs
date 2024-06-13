@@ -123,7 +123,7 @@ namespace JumpvalleyGame.Settings
 
                     if (settingValue is bool)
                     {
-                        value = value.GetValue<bool>();
+                        setting.Value = value.GetValue<bool>();
                     }
                 }
             }
