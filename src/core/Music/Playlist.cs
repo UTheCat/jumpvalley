@@ -20,7 +20,7 @@ namespace Jumpvalley.Music
         {
             /// <summary>
             /// Specifies that the <see cref="Playlist"/> shouldn't open or close
-            /// <see cref="Song"/> instances it handles 
+            /// the audio streams of <see cref="Song"/> instances it handles 
             /// </summary>
             Disabled = 0,
 
