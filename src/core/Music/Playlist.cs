@@ -12,6 +12,27 @@ namespace Jumpvalley.Music
     public partial class Playlist : Node, IDisposable
     {
         /// <summary>
+        /// Enumerator that specifies how a <see cref="Playlist"/>
+        /// should approach opening and closing the audio streams
+        /// of its <see cref="Song"/> instances. 
+        /// </summary>
+        public enum SongStreamHandlingMode
+        {
+            /// <summary>
+            /// Specifies that the <see cref="Playlist"/> shouldn't open or close
+            /// <see cref="Song"/> instances it handles 
+            /// </summary>
+            Disabled = 0,
+
+            /// <summary>
+            /// Specifies that the <see cref="Playlist"/> should
+            /// open a song's audio stream when it's added to the playlist,
+            /// and close a song's audio stream when it's removed from the playlist.
+            /// </summary>
+            AddAndRemove = 1
+        }
+
+        /// <summary>
         /// Converts a volume percentage in the range of [0, 1] to the corresponding value in decibels and returns the result
         /// </summary>
         /// <returns></returns>
