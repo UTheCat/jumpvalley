@@ -226,6 +226,11 @@ namespace Jumpvalley.Music
                     {
                         currentPlaylist.SongStreamHandlingMode = value;
                     }
+
+                    foreach (Playlist p in Playlists)
+                    {
+                        p.SongStreamHandlingMode = value;
+                    }
                 }
             }
         }

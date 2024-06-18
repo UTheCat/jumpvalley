@@ -128,7 +128,7 @@ namespace Jumpvalley.Music
         {
             LinearVolume = NonAudibleVolume;
             LocalVolumeScale = 1;
-            SongStreamHandlingMode = SongStreamHandlingModeFlags.Disabled;
+            SongStreamHandlingMode = SongStreamHandlingModeFlags.AddAndRemove;
         }
 
         /// <summary>
