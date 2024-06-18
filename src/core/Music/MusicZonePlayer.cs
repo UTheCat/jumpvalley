@@ -45,6 +45,7 @@ namespace Jumpvalley.Music
         {
             if (zone != null)
             {
+                RemovePlaylist(zone);
                 Zones.Remove(zone);
             }
         }
@@ -55,7 +56,11 @@ namespace Jumpvalley.Music
         /// <param name="zone">The MusicZone</param>
         public void Add(MusicZone zone)
         {
-            if (!Zones.Contains(zone)) Zones.Add(zone);
+            if (!Zones.Contains(zone))
+            {
+                AddPlaylist(zone);
+                Zones.Add(zone);
+            }
         }
 
         protected override void RefreshPlayback()
