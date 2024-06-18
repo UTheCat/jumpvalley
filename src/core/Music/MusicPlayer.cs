@@ -148,7 +148,7 @@ namespace Jumpvalley.Music
                     {
                         value.LocalVolumeScale = VolumeScale;
                     }
-                    
+
                     value.Play();
                 }
             }
@@ -256,6 +256,11 @@ namespace Jumpvalley.Music
                 _isPlaying = value;
                 RefreshPlayback();
             }
+        }
+
+        public MusicPlayer()
+        {
+            Playlists = new List<Playlist>();
         }
 
         /// <summary>
