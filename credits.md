@@ -19,6 +19,7 @@ Songs listed here are listed in the format `artist - song name`. These are the s
 - [Pahgawk - Shivers](https://www.newgrounds.com/audio/listen/1215548)
 - [KORAII - The Trail](https://www.newgrounds.com/audio/listen/1139009)
 - [korewakosu - keygen w/ South](https://www.newgrounds.com/audio/listen/1187165)
+- [Zane Little - The Way It Is](https://www.newgrounds.com/audio/listen/1226171)
 
 ## Misc
 
