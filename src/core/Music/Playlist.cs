@@ -16,7 +16,7 @@ namespace Jumpvalley.Music
         /// should approach opening and closing the audio streams
         /// of its <see cref="Song"/> instances. 
         /// </summary>
-        public enum SongStreamHandlingMode
+        public enum SongStreamHandlingModeFlags
         {
             /// <summary>
             /// Specifies that the <see cref="Playlist"/> shouldn't open or close
@@ -100,6 +100,8 @@ namespace Jumpvalley.Music
                 OnSongChanged(new SongChangedArgs(value));
             }
         }
+
+        public SongStreamHandlingModeFlags SongStreamHandlingMode;
 
         /// <summary>
         /// The list of <see cref="Song"/>s being played by this playlist.
@@ -212,7 +214,7 @@ namespace Jumpvalley.Music
             bool onlyOneSong = SongList.Count == 1;
             CreateAudioStreamPlayer();
             s.IsLooping = onlyOneSong;
-            s.OpenStream();
+            //s.OpenStream();
             streamPlayer.Stream = s.Stream;
 
             // If there's more than one song, switch to the next song on finish
@@ -336,11 +338,13 @@ namespace Jumpvalley.Music
             }
 
             // free memory used by CurrentSong's stream
+            /*
             Song song = CurrentSong;
             if (song != null)
             {
                 song.CloseStream();
             }
+            */
 
             RaiseStoppedEvent();
         }
