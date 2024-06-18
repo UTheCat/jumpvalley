@@ -317,7 +317,7 @@ mesh = SubResource("BoxMesh_p3ea6")
 [node name="MusicZone1" type="Node3D" parent="Music/MusicZones"]
 
 [node name="Music" type="Node" parent="Music/MusicZones/MusicZone1"]
-metadata/song1 = "res://addons/music/1187165_keygen-w-South/"
+metadata/song1 = "res://addons/music/1226171_The-Way-It-Is/"
 
 [node name="ZoneParts" type="Node3D" parent="Music/MusicZones/MusicZone1"]
 
