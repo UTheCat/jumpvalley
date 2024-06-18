@@ -45,6 +45,9 @@ namespace JumpvalleyGame
             CurrentMusicPlayer.OverrideTransitionTime = true;
             CurrentMusicPlayer.VolumeScale = 1;
             CurrentMusicPlayer.OverrideLocalVolumeScale = true;
+            CurrentMusicPlayer.OverrideSongStreamHandlingMode = true;
+
+            CurrentMusicPlayer.AddPlaylist(primaryMusic);
             CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;
 
             Disposables.Add(primaryMusic);
