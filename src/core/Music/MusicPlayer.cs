@@ -18,6 +18,11 @@ namespace Jumpvalley.Music
         private bool _isPlaying;
 
         /// <summary>
+        /// <see cref="Playlist"/>s currently being handled by this <see cref="MusicPlayer"/>  
+        /// </summary>
+        public List<Playlist> Playlists { get; private set; }
+
+        /// <summary>
         /// A list of playlists that are currently fading out.
         /// <br/>
         /// In case a playlist wants to be played again while it is fading out,
@@ -25,7 +30,7 @@ namespace Jumpvalley.Music
         /// </summary>
         private List<Playlist> fadingOutPlaylists = new List<Playlist>();
 
-        private void RemovePlaylist(Playlist playlist)
+        private void RemovePlaylistInternal(Playlist playlist)
         {
             if (playlist.GetParent() == this)
             {
@@ -46,7 +51,7 @@ namespace Jumpvalley.Music
             // disconnect after this event handler has been called
             DisconnectHandlePlaylistStop(playlist);
 
-            RemovePlaylist(playlist);
+            RemovePlaylistInternal(playlist);
         }
 
         /// <summary>
@@ -60,7 +65,7 @@ namespace Jumpvalley.Music
                 if (immediateStop)
                 {
                     playlist.StopImmediately();
-                    RemovePlaylist(playlist);
+                    RemovePlaylistInternal(playlist);
                 }
                 else
                 {
@@ -143,6 +148,7 @@ namespace Jumpvalley.Music
                     {
                         value.LocalVolumeScale = VolumeScale;
                     }
+                    
                     value.Play();
                 }
             }
@@ -192,6 +198,39 @@ namespace Jumpvalley.Music
         }
 
         /// <summary>
+        /// Whether or not playlist handled by this music player
+        /// should have their <see cref="Playlist.SongStreamHandlingMode"/>
+        /// property overriden to the value of this music player's
+        /// <see cref="SongStreamHandlingMode"/> variable. 
+        /// </summary>
+        public bool OverrideSongStreamHandlingMode = false;
+
+        private Playlist.SongStreamHandlingModeFlags _songStreamHandlingMode;
+
+        /// <summary>
+        /// The song stream handling mode that the playlists handled
+        /// by this music player should use if
+        /// <see cref="OverrideSongStreamHandlingMode"/> is set to true. 
+        /// </summary>
+        public Playlist.SongStreamHandlingModeFlags SongStreamHandlingMode
+        {
+            get => _songStreamHandlingMode;
+            set
+            {
+                _songStreamHandlingMode = value;
+
+                if (OverrideSongStreamHandlingMode)
+                {
+                    Playlist currentPlaylist = CurrentPlaylist;
+                    if (currentPlaylist != null)
+                    {
+                        currentPlaylist.SongStreamHandlingMode = value;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// The MusicPlayer's primary playlist. If set, this playlist will be played whenever <see cref="IsPlaying"/> is set to true.
         /// </summary>
         public Playlist PrimaryPlaylist
@@ -216,6 +255,35 @@ namespace Jumpvalley.Music
             {
                 _isPlaying = value;
                 RefreshPlayback();
+            }
+        }
+
+        /// <summary>
+        /// Removes a playlist from this <see cref="MusicPlayer"/>.
+        /// This will cause this <see cref="MusicPlayer"/>
+        /// to no longer make changes to the removed <see cref="Playlist"/>. 
+        /// </summary>
+        /// <param name="playlist"></param>
+        public void RemovePlaylist(Playlist playlist)
+        {
+            if (Playlists.Contains(playlist)) Playlists.Remove(playlist);
+        }
+
+        /// <summary>
+        /// Adds a playlist to this <see cref="MusicPlayer"/>.
+        /// This will let this <see cref="MusicPlayer"/> make some
+        /// changes to the added playlist.
+        /// </summary>
+        /// <param name="playlist"></param>
+        public void AddPlaylist(Playlist playlist)
+        {
+            if (Playlists.Contains(playlist)) return;
+
+            Playlists.Add(playlist);
+
+            if (OverrideSongStreamHandlingMode)
+            {
+                playlist.SongStreamHandlingMode = SongStreamHandlingMode;
             }
         }
 
