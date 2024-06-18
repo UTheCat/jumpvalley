@@ -124,6 +124,7 @@ namespace Jumpvalley.Music
         {
             LinearVolume = NonAudibleVolume;
             LocalVolumeScale = 1;
+            SongStreamHandlingMode = SongStreamHandlingModeFlags.Disabled;
         }
 
         /// <summary>
@@ -135,6 +136,11 @@ namespace Jumpvalley.Music
             if (!SongList.Contains(s))
             {
                 SongList.Add(s);
+
+                if (SongStreamHandlingMode == SongStreamHandlingModeFlags.AddAndRemove)
+                {
+                    s.OpenStream();
+                }
             }
         }
 
@@ -164,6 +170,11 @@ namespace Jumpvalley.Music
                 {
                     StopImmediately();
                 }
+            }
+
+            if (SongStreamHandlingMode == SongStreamHandlingModeFlags.AddAndRemove)
+            {
+                s.CloseStream();
             }
         }
 
@@ -376,14 +387,14 @@ namespace Jumpvalley.Music
         }
 
         private bool tweenFinishConnected = false;
-        
+
         private void ConnectTweenFinish()
         {
             if (!tweenFinishConnected)
             {
                 tweenFinishConnected = true;
                 currentTween.OnFinish += HandleTweenFinish;
-            }    
+            }
         }
 
         private void DisconnectTweenFinish()
