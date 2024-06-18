@@ -101,6 +101,10 @@ namespace Jumpvalley.Music
             }
         }
 
+        /// <summary>
+        /// How the playlist is currently opening and closing audio streams
+        /// of its songs.
+        /// </summary>
         public SongStreamHandlingModeFlags SongStreamHandlingMode;
 
         /// <summary>
