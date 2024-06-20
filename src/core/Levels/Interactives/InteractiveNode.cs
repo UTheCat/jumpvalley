@@ -24,6 +24,11 @@ namespace Jumpvalley.Levels.Interactives
         public Node NodeMarker { get; private set; }
 
         /// <summary>
+        /// The interactive's root node
+        /// </summary>
+        public Node RootNode => NodeMarker.GetParent();
+
+        /// <summary>
         /// Creates a new instance of <see cref="InteractiveNode"/> for a given <see cref="Stopwatch"/> and <see cref="Node"/>
         /// </summary>
         /// <param name="stopwatch">The stopwatch to bind the interactive to</param>
