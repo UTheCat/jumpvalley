@@ -12,21 +12,21 @@ namespace Jumpvalley.Levels.Interactives
     public partial class InteractiveNode: Interactive
     {
         /// <summary>
-        /// The node which indicates that its parent node belongs to an interactive.
+        /// The node which indicates that its parent node is the root node of an interactive.
         /// Its name should begin with <c>_Interactive</c>
         /// </summary>
-        public Node ActualNode { get; private set; }
+        public Node NodeMarker { get; private set; }
 
         /// <summary>
         /// Creates a new instance of <see cref="InteractiveNode"/> for a given <see cref="Stopwatch"/> and <see cref="Node"/>
         /// </summary>
         /// <param name="stopwatch">The stopwatch to bind the interactive to</param>
         /// <param name="node">The node to operate over</param>
-        public InteractiveNode(OffsetStopwatch stopwatch, Node node) : base(stopwatch)
+        public InteractiveNode(OffsetStopwatch stopwatch, Node nodeMarker) : base(stopwatch)
         {
-            if (node == null) throw new ArgumentNullException("node");
+            if (nodeMarker == null) throw new ArgumentNullException(nameof(nodeMarker));
 
-            ActualNode = node;
+            NodeMarker = nodeMarker;
         }
 
         /// <summary>
