@@ -42,7 +42,9 @@ size = Vector3(50, 100, 50)
 [node name="Interactives" type="Node3D" parent="."]
 
 [node name="InteractiveRootNode" type="Node3D" parent="Interactives"]
-metadata/interactive_type = "TestInteractive"
+
+[node name="_Interactive" type="Node" parent="Interactives/InteractiveRootNode"]
+metadata/type = "TestInteractive"
 metadata/property1 = false
 metadata/property2 = 0.5
 
