@@ -12,6 +12,11 @@ namespace Jumpvalley.Levels.Interactives
     public partial class InteractiveNode: Interactive
     {
         /// <summary>
+        /// What an interactive's node marker name should begin with
+        /// </summary>
+        public static readonly string NODE_MARKER_NAME_PREFIX = "_Interactive";
+
+        /// <summary>
         /// The node which indicates that its parent node is the root node of an interactive.
         /// Its name should begin with <c>_Interactive</c>
         /// </summary>
