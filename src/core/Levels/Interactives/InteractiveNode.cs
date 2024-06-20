@@ -12,7 +12,8 @@ namespace Jumpvalley.Levels.Interactives
     public partial class InteractiveNode: Interactive
     {
         /// <summary>
-        /// The Godot node being operated on
+        /// The node which indicates that its parent node belongs to an interactive.
+        /// Its name should begin with <c>_Interactive</c>
         /// </summary>
         public Node ActualNode { get; private set; }
 
