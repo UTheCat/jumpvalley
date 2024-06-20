@@ -8,8 +8,9 @@ namespace Jumpvalley.Levels.Interactives
     /// <summary>
     /// A subclass of <see cref="Interactive"/> that operates over a Godot node.
     /// It makes using a Godot node's properties and metadata easier.
+    /// See the relevant <see href="https://github.com/UTheCat/jumpvalley/wiki/Interactives#node-based-interactives">wiki section</see> for details.
     /// </summary>
-    public partial class InteractiveNode: Interactive
+    public partial class InteractiveNode : Interactive
     {
         /// <summary>
         /// What an interactive's node marker name should begin with
