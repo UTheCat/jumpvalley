@@ -93,6 +93,17 @@ namespace Jumpvalley.Levels.Interactives
         }
 
         /// <summary>
+        /// Sets the metadata entry belonging to <see cref="NodeMarker"/>
+        /// with the given name to the specified value.
+        /// </summary>
+        /// <param name="name">The name of the metadata entry</param>
+        /// <param name="value">The value to set the metadata entry to</param>
+        public void SetMeta(string name, Variant value)
+        {
+            NodeMarker.SetMeta(name, value);
+        }
+
+        /// <summary>
         /// Event that's raised when one of the metadata of the node changes.
         /// </summary>
         //public event EventHandler<NodeMetadataChangedArgs> NodeMetadataChanged;
