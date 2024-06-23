@@ -23,7 +23,7 @@ namespace Jumpvalley.Levels.Interactives
         /// <returns>The current number of physics updates per second</returns>
         public static int GetPhysicsTicksPerSecond()
         {
-            return Engine.MaxFps;
+            return Engine.PhysicsTicksPerSecond;
         }
     }
 }
