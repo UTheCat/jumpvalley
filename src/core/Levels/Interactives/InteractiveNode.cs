@@ -67,6 +67,32 @@ namespace Jumpvalley.Levels.Interactives
         }
 
         /// <summary>
+        /// Version of <see cref="TryGetMeta(string, out Variant)"/>
+        /// that outputs the metadata entry value as a specified type
+        /// <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="name">The name of the metadata entry</param>
+        /// <param name="meta">The reference variable where the metadata entry value should be stored</param>
+        /// <returns>
+        /// <c>true</c> if the metadata entry under the given name was found
+        /// and grabbing its value was successful, <c>false</c> otherwise.
+        /// </returns>
+        public bool TryGetMeta<[MustBeVariant] T>(string name, out T meta)
+        {
+            Variant metadataValue;
+            bool success = TryGetMeta(name, out metadataValue);
+
+            if (success)
+            {
+                meta = metadataValue.As<T>();
+                return true;
+            }
+
+            meta = default;
+            return false;
+        }
+
+        /// <summary>
         /// Event that's raised when one of the metadata of the node changes.
         /// </summary>
         //public event EventHandler<NodeMetadataChangedArgs> NodeMetadataChanged;
