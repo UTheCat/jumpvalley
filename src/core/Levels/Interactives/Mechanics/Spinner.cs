@@ -20,7 +20,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
     {
         /// <summary>
         /// The name of the metadata entry that defines the spinner's constant angular velocity in radians per second.
-        /// This metadata entry should be placed in the StaticBody3D that will be spinning (which should be the spinner's root node).
+        /// This metadata entry should be placed in the spinner's interactive node marker.
         /// </summary>
         public readonly string CONSTANT_ANGULAR_VELOCITY_METADATA_NAME = "constant_angular_velocity";
 
@@ -60,22 +60,10 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             }
         }
 
-        public Spinner(OffsetStopwatch stopwatch, Node node) : base(stopwatch, node)
+        public Spinner(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
         {
             body = RootNode as StaticBody3D;
             if (body == null) throw new ArgumentException("The node specified in the 2nd argument must be a StaticBody3D.");
-
-            // Set the initial constant angular velocity of the StaticBody3D to Vector3.Zero.
-            // This is because we don't want objects on top of the spinner to be moving before the level has started.
-            // Otherwise, unexpected behavior could occur.
-            // Level developers should set the constant angular velocity of a spinner by defining in the StaticBody3D's metadata as described
-            // by CONSTANT_ANGULAR_VELOCITY_METADATA_NAME's documentation.
-
-            // On second thought, maybe level developers may have a use for a spinner that moves objects in a circular fashion,
-            // but does not actually rotate itself.
-            // I wouldn't recommend making such an object a Spinner interactive though.
-            //body.ConstantAngularVelocity = Vector3.Zero;
-            //originalConstantAngularVelocity = body.ConstantAngularVelocity;
 
             Vector3 angularVelocityDeg;
             if (TryGetMarkerMeta<Vector3>(
