@@ -56,13 +56,13 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             set
             {
                 _constantAngularVelocity = value;
-                body.SetMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, value);
+                SetMarkerMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, value);
             }
         }
 
         public Spinner(OffsetStopwatch stopwatch, Node node) : base(stopwatch, node)
         {
-            body = node as StaticBody3D;
+            body = RootNode as StaticBody3D;
             if (body == null) throw new ArgumentException("The node specified in the 2nd argument must be a StaticBody3D.");
 
             // Set the initial constant angular velocity of the StaticBody3D to Vector3.Zero.
@@ -77,19 +77,23 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             //body.ConstantAngularVelocity = Vector3.Zero;
             //originalConstantAngularVelocity = body.ConstantAngularVelocity;
 
-            if (body.HasMeta(CONSTANT_ANGULAR_VELOCITY_DEGREES_METADATA_NAME))
+            Vector3 angularVelocityDeg;
+            if (TryGetMarkerMeta<Vector3>(
+                CONSTANT_ANGULAR_VELOCITY_DEGREES_METADATA_NAME,
+                out angularVelocityDeg))
             {
-                Vector3 angularVelocity = body.GetMeta(CONSTANT_ANGULAR_VELOCITY_DEGREES_METADATA_NAME).As<Vector3>();
-                angularVelocity.X = Mathf.DegToRad(angularVelocity.X);
-                angularVelocity.Y = Mathf.DegToRad(angularVelocity.Y);
-                angularVelocity.Z = Mathf.DegToRad(angularVelocity.Z);
+                Vector3 angularVelocityRad = Vector3.Zero;
+                angularVelocityRad.X = Mathf.DegToRad(angularVelocityDeg.X);
+                angularVelocityRad.Y = Mathf.DegToRad(angularVelocityDeg.Y);
+                angularVelocityRad.Z = Mathf.DegToRad(angularVelocityDeg.Z);
 
-                body.SetMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, angularVelocity);
+                SetMarkerMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, angularVelocityRad);
             }
 
-            if (body.HasMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME))
+            Vector3 angularVelocity;
+            if (TryGetMarkerMeta<Vector3>(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, out angularVelocity))
             {
-                ConstantAngularVelocity = body.GetMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME).As<Vector3>();
+                ConstantAngularVelocity = angularVelocity;
             }
             else
             {

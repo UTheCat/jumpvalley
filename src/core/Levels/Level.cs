@@ -116,7 +116,7 @@ namespace Jumpvalley.Levels
                 {
                     foreach (Node node in parentNode.GetChildren())
                     {
-                        if (node.HasMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME))
+                        if (node.Name.ToString().StartsWith(InteractiveNode.NODE_MARKER_NAME_PREFIX))
                         {
                             string interactiveType = node.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
 
