@@ -42,7 +42,9 @@ size = Vector3(50, 100, 50)
 [node name="Interactives" type="Node3D" parent="."]
 
 [node name="InteractiveRootNode" type="Node3D" parent="Interactives"]
-metadata/interactive_type = "TestInteractive"
+
+[node name="_Interactive" type="Node" parent="Interactives/InteractiveRootNode"]
+metadata/type = "TestInteractive"
 metadata/property1 = false
 metadata/property2 = 0.5
 
@@ -167,7 +169,9 @@ mesh = SubResource("BoxMesh_hf4fk")
 
 [node name="Spinner" type="StaticBody3D" parent="Interactives/Floor1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 6)
-metadata/interactive_type = "Spinner"
+
+[node name="_Interactive" type="Node" parent="Interactives/Floor1/Spinner"]
+metadata/type = "Spinner"
 metadata/constant_angular_velocity = Vector3(0, 0, 0)
 metadata/constant_angular_velocity_degrees = Vector3(0, 15, 0)
 
@@ -182,7 +186,9 @@ mesh = SubResource("BoxMesh_eq5ge")
 
 [node name="Spinner" type="StaticBody3D" parent="Interactives/Floor2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 58, 22)
-metadata/interactive_type = "Spinner"
+
+[node name="_Interactive" type="Node" parent="Interactives/Floor2/Spinner"]
+metadata/type = "Spinner"
 metadata/constant_angular_velocity = Vector3(0, 0, 0)
 metadata/constant_angular_velocity_degrees = Vector3(0, 30, 0)
 
