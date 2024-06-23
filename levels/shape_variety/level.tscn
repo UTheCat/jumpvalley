@@ -111,16 +111,18 @@ shape = SubResource("BoxShape3D_b766v")
 material_override = ExtResource("2_tx8br")
 mesh = SubResource("BoxMesh_63nxk")
 
-[node name="Box8" type="StaticBody3D" parent="Interactives"]
+[node name="Spinner" type="StaticBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 14.5, 26.5)
-metadata/interactive_type = "Spinner"
+
+[node name="_Interactive" type="Node" parent="Interactives/Spinner"]
+metadata/type = "Spinner"
 metadata/constant_angular_velocity = Vector3(0, 0, 0)
 metadata/constant_angular_velocity_degrees = Vector3(0, 30, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Box8"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Spinner"]
 shape = SubResource("BoxShape3D_fw6gq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Box8"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Spinner"]
 material_override = ExtResource("2_tx8br")
 mesh = SubResource("BoxMesh_p3poc")
 
