@@ -90,9 +90,10 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
                 SetMarkerMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, angularVelocityRad);
             }
 
-            if (body.HasMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME))
+            Vector3 angularVelocity;
+            if (TryGetMarkerMeta<Vector3>(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, out angularVelocity))
             {
-                ConstantAngularVelocity = body.GetMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME).As<Vector3>();
+                ConstantAngularVelocity = angularVelocity;
             }
             else
             {
