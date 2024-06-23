@@ -50,7 +50,7 @@ namespace Jumpvalley.Levels.Interactives
         /// <c>true</c> if the metadata entry under the given name was found
         /// and grabbing its value was successful, <c>false</c> otherwise.
         /// </returns>
-        public bool TryGetMeta(string name, out Variant meta)
+        public bool TryGetMarkerMeta(string name, out Variant meta)
         {
             Node marker = NodeMarker;
             if (marker != null)
@@ -77,10 +77,10 @@ namespace Jumpvalley.Levels.Interactives
         /// <c>true</c> if the metadata entry under the given name was found
         /// and grabbing its value was successful, <c>false</c> otherwise.
         /// </returns>
-        public bool TryGetMeta<[MustBeVariant] T>(string name, out T meta)
+        public bool TryGetMarkerMeta<[MustBeVariant] T>(string name, out T meta)
         {
             Variant metadataValue;
-            bool success = TryGetMeta(name, out metadataValue);
+            bool success = TryGetMarkerMeta(name, out metadataValue);
 
             if (success)
             {
@@ -98,7 +98,7 @@ namespace Jumpvalley.Levels.Interactives
         /// </summary>
         /// <param name="name">The name of the metadata entry</param>
         /// <param name="value">The value to set the metadata entry to</param>
-        public void SetMeta(string name, Variant value)
+        public void SetMarkerMeta(string name, Variant value)
         {
             NodeMarker.SetMeta(name, value);
         }
