@@ -20,6 +20,6 @@ namespace Jumpvalley.Levels.Interactives
         /// </summary>
         public Node3D Destination;
 
-        public Teleporter(OffsetStopwatch stopwatch, Node actualNode) : base(stopwatch, actualNode) { }
+        public Teleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker) { }
     }
 }
