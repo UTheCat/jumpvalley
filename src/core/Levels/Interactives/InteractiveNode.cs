@@ -41,6 +41,32 @@ namespace Jumpvalley.Levels.Interactives
         }
 
         /// <summary>
+        /// Attempts to get the value of a metadata entry with a specified name
+        /// if it exists and assigns it to the <paramref name="meta"/> reference variable.
+        /// </summary>
+        /// <param name="name">The name of the metadata entry</param>
+        /// <param name="meta">The reference variable where the metadata entry value should be stored</param>
+        /// <returns>
+        /// <c>true</c> if the metadata entry under the given name was found
+        /// and grabbing its value was successful, <c>false</c> otherwise.
+        /// </returns>
+        public bool TryGetMeta(string name, out Variant meta)
+        {
+            Node marker = NodeMarker;
+            if (marker != null)
+            {
+                if (marker.HasMeta(name))
+                {
+                    meta = marker.GetMeta(name);
+                    return true;
+                }
+            }
+
+            meta = default;
+            return false;
+        }
+
+        /// <summary>
         /// Event that's raised when one of the metadata of the node changes.
         /// </summary>
         //public event EventHandler<NodeMetadataChangedArgs> NodeMetadataChanged;
