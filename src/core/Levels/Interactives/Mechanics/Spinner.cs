@@ -77,17 +77,17 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             //body.ConstantAngularVelocity = Vector3.Zero;
             //originalConstantAngularVelocity = body.ConstantAngularVelocity;
 
-            Vector3 angularVelocityDegrees;
+            Vector3 angularVelocityDeg;
             if (TryGetMarkerMeta<Vector3>(
                 CONSTANT_ANGULAR_VELOCITY_DEGREES_METADATA_NAME,
-                out angularVelocityDegrees))
+                out angularVelocityDeg))
             {
-                Vector3 angularVelocity = Vector3.Zero;
-                angularVelocity.X = Mathf.DegToRad(angularVelocityDegrees.X);
-                angularVelocity.Y = Mathf.DegToRad(angularVelocityDegrees.Y);
-                angularVelocity.Z = Mathf.DegToRad(angularVelocityDegrees.Z);
+                Vector3 angularVelocityRad = Vector3.Zero;
+                angularVelocityRad.X = Mathf.DegToRad(angularVelocityDeg.X);
+                angularVelocityRad.Y = Mathf.DegToRad(angularVelocityDeg.Y);
+                angularVelocityRad.Z = Mathf.DegToRad(angularVelocityDeg.Z);
 
-                SetMarkerMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, angularVelocity);
+                SetMarkerMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME, angularVelocityRad);
             }
 
             if (body.HasMeta(CONSTANT_ANGULAR_VELOCITY_METADATA_NAME))
