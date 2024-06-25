@@ -403,7 +403,7 @@ namespace Jumpvalley.Players.Movement
         /// </returns>
         public bool IsTryingToMove()
         {
-            return ForwardValue == 0 && RightValue == 0;
+            return ForwardValue != 0 || RightValue != 0;
         }
 
         /// <summary>
@@ -713,13 +713,16 @@ namespace Jumpvalley.Players.Movement
                 }
 
                 // The velocity we want to approach
+                Vector3 lastVelocity = LastVelocity;
                 Vector3 moveVelocity = GetMoveVelocity(fDelta, yaw);
+
+                Vector2 lastXZVelocity = new Vector2(lastVelocity.X, lastVelocity.Z);
                 Vector2 goalXZVelocity = new Vector2(moveVelocity.X, moveVelocity.Z);
 
                 // Determine which value of acceleration to use
                 float acceleration = 0f;
                 bool isTryingToMove = IsTryingToMove();
-                bool hasExceededMaxSpeed = goalXZVelocity.Length() > Speed;
+                bool hasExceededMaxSpeed = lastXZVelocity.Length() > Speed;
                 if (isTryingToMove && hasExceededMaxSpeed == false)
                 {
                     acceleration = Acceleration;
@@ -739,9 +742,8 @@ namespace Jumpvalley.Players.Movement
                 // Apply acceleration
                 // Acceleration should be relative to the change in direction based
                 // on how the currently requested velocity differs from the previous velocity.
-                Vector3 lastVelocity = LastVelocity;
                 Vector2 newXZvelocity = ApproachXZVelocity(
-                    new Vector2(lastVelocity.X, lastVelocity.Z),
+                    lastXZVelocity,
                     goalXZVelocity,
                     acceleration,
                     fDelta
