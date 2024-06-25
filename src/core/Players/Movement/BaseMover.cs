@@ -621,7 +621,6 @@ namespace Jumpvalley.Players.Movement
             Vector2 xzVelocityDelta = direction * acceleration * physicsStepDelta;
 
             Vector2 finalVelocity = currentVelocity + new Vector2(xzVelocityDelta.X, xzVelocityDelta.Y);
-            finalVelocity.Y = goalVelocity.Y;
 
             // We don't want velocity changes to "overshoot" past the destination velocity.
             // Therefore, we'll have to snap the velocity to the goal velocity once it's time to do so.
