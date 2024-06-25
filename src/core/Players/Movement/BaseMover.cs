@@ -117,12 +117,23 @@ namespace Jumpvalley.Players.Movement
         public float JumpVelocity = 5f;
 
         /// <summary>
-        /// The acceleration that the character's velocity changes at.
+        /// The acceleration that the character's XZ velocity increases at
+        /// while the character is trying to move.
         /// <br/>
         /// This doesn't affect upward and downward movement,
         /// and therefore, this only affects X and Z movement.
         /// </summary>
         public float Acceleration = 16f;
+
+        /// <summary>
+        /// The deceleration that the character's XZ velocity decreases at when
+        /// on the ground and one of these other conditions is true:
+        /// <list type="bullet">
+        /// <item>The character is trying to stop</item>
+        /// <item>The character has exceeded max speed</item>
+        /// </list>
+        /// </summary>
+        public float Deceleration = 16f;
 
         private float _speed;
 
