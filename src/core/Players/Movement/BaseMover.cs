@@ -392,6 +392,21 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
+        /// Returns whether or not the character is trying to move.
+        /// <br/><br/>
+        /// The character is considered to want to move when
+        /// either <see cref="ForwardValue"/> or <see cref="RightValue"/>
+        /// isn't zero.
+        /// </summary>
+        /// <returns>
+        /// Whether or not the character is trying to move.
+        /// </returns>
+        public bool IsTryingToMove()
+        {
+            return ForwardValue == 0 && RightValue == 0;
+        }
+
+        /// <summary>
         /// Gets the velocity that the character wants to move at for the current physics frame
         /// </summary>
         /// <param name="delta">The time it took to complete the physics frame in seconds</param>
@@ -442,7 +457,7 @@ namespace Jumpvalley.Players.Movement
                 // and "wanting to move backward" while climbing means we want to go down.
                 bool shouldApplyClimbVelocity = true;
 
-                if (ForwardValue == 0 && RightValue == 0)
+                if (IsTryingToMove())
                 {
                     climbVelocity = 0;
                 }
@@ -670,7 +685,6 @@ namespace Jumpvalley.Players.Movement
             if (body != null)
             {
                 float fDelta = (float)delta;
-                float acceleration = Acceleration;
                 float yaw = GetYaw();
 
                 // Make sure this physics frame picks up the latest character rotation
@@ -700,6 +714,27 @@ namespace Jumpvalley.Players.Movement
 
                 // The velocity we want to approach
                 Vector3 moveVelocity = GetMoveVelocity(fDelta, yaw);
+                Vector2 goalXZVelocity = new Vector2(moveVelocity.X, moveVelocity.Z);
+
+                // Determine which value of acceleration to use
+                float acceleration = 0f;
+                bool isTryingToMove = IsTryingToMove();
+                bool hasExceededMaxSpeed = goalXZVelocity.Length() > Speed;
+                if (isTryingToMove && hasExceededMaxSpeed == false)
+                {
+                    acceleration = Acceleration;
+                }
+                else
+                {
+                    if (IsOnFloor())
+                    {
+                        acceleration = Deceleration;
+                    }
+                    else
+                    {
+                        acceleration = AirDeceleration;
+                    }
+                }
 
                 // Apply acceleration
                 // Acceleration should be relative to the change in direction based
@@ -707,7 +742,7 @@ namespace Jumpvalley.Players.Movement
                 Vector3 lastVelocity = LastVelocity;
                 Vector2 newXZvelocity = ApproachXZVelocity(
                     new Vector2(lastVelocity.X, lastVelocity.Z),
-                    new Vector2(moveVelocity.X, moveVelocity.Z),
+                    goalXZVelocity,
                     acceleration,
                     fDelta
                 );
