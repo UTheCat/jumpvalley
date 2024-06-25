@@ -118,12 +118,18 @@ namespace Jumpvalley.Players.Movement
 
         /// <summary>
         /// The acceleration that the character's XZ velocity increases at
-        /// while the character is trying to move.
+        /// while the character is trying to move on the ground.
         /// <br/>
         /// This doesn't affect upward and downward movement,
         /// and therefore, this only affects X and Z movement.
         /// </summary>
         public float Acceleration = 16f;
+
+        /// <summary>
+        /// The acceleration that the character's XZ velocity increases at while
+        /// in the air.
+        /// </summary>
+        public float AirAcceleration = 1.6f;
 
         /// <summary>
         /// The deceleration that the character's XZ velocity decreases at when
@@ -723,15 +729,24 @@ namespace Jumpvalley.Players.Movement
                 float acceleration = 0f;
                 bool isTryingToMove = IsTryingToMove();
                 bool hasExceededMaxSpeed = lastXZVelocity.Length() > Speed;
-                if (isTryingToMove && hasExceededMaxSpeed == false)
+                bool canMoveFaster = isTryingToMove && hasExceededMaxSpeed == false;
+
+                if (IsOnFloor())
                 {
-                    acceleration = Acceleration;
+                    if (canMoveFaster)
+                    {
+                        acceleration = Acceleration;
+                    }
+                    else
+                    {
+                        acceleration = Deceleration;
+                    }
                 }
                 else
                 {
-                    if (IsOnFloor())
+                    if (canMoveFaster)
                     {
-                        acceleration = Deceleration;
+                        acceleration = AirAcceleration;
                     }
                     else
                     {
