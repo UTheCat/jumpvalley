@@ -135,6 +135,16 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public float Deceleration = 16f;
 
+        /// <summary>
+        /// The deceleration that the character's XZ velocity decreases at when
+        /// in the air and one of these other conditions is true:
+        /// <list type="bullet">
+        /// <item>The character is trying to stop</item>
+        /// <item>The character has exceeded max speed</item>
+        /// </list>
+        /// </summary>
+        public float AirDeceleration = 1.6f;
+
         private float _speed;
 
         /// <summary>
