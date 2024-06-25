@@ -595,6 +595,52 @@ namespace Jumpvalley.Players.Movement
         }
 
         /// <summary>
+        /// Calculates XZ velocity using Vector2.
+        /// x-velocity maps to the Vector2's x-coordinate,
+        /// and z-velocity maps to the Vector2's y-coordinate.
+        /// </summary>
+        /// <param name="currentVelocity"></param>
+        /// <param name="goalVelocity"></param>
+        /// <param name="acceleration"></param>
+        /// <param name="physicsStepDelta"></param>
+        /// <returns></returns>
+        private static Vector2 ApproachXZVelocity(
+            Vector2 currentVelocity,
+            Vector2 goalVelocity,
+            float acceleration,
+            float physicsStepDelta
+        )
+        {
+            // The direction that velocity is changing in.
+            // We only calculate this based on X and Z movement, since
+            // we don't want the value of the Acceleration variable
+            // to affect upward and downward movement.
+            // We are therefore using a Vector2 instead of a Vector3 here to calculate direction change for the X and Z movement
+            // (for optimization purposes) (the Vector2's Y-value would be the Z component of our 3d velocity).
+            Vector2 direction = (new Vector2(goalVelocity.X, goalVelocity.Y) - new Vector2(currentVelocity.X, currentVelocity.Y)).Normalized();
+            Vector2 xzVelocityDelta = direction * acceleration * physicsStepDelta;
+
+            Vector2 finalVelocity = currentVelocity + new Vector2(xzVelocityDelta.X, xzVelocityDelta.Y);
+            finalVelocity.Y = goalVelocity.Y;
+
+            // We don't want velocity changes to "overshoot" past the destination velocity.
+            // Therefore, we'll have to snap the velocity to the goal velocity once it's time to do so.
+            // We know we've shot past the goal velocity if the direction from the current velocity to the goal velocity
+            // changed as a result of applying acceleration for this frame.
+            Vector2 newXZVelocityDiff = new Vector2(goalVelocity.X, goalVelocity.Y) - new Vector2(finalVelocity.X, finalVelocity.Y);
+            //logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
+            if (newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
+            || Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle()) == false
+            )
+            {
+                finalVelocity = goalVelocity;
+                //logger.Print("Snapped velocity");
+            }
+
+            return finalVelocity;
+        }
+
+        /// <summary>
         /// Callback to associate with the physics process step in the current scene tree
         /// </summary>
         /// <param name="delta">The time it took and should take to complete the physics frame in seconds</param>
@@ -632,38 +678,20 @@ namespace Jumpvalley.Players.Movement
                     }
                 }
 
+                // The velocity we want to approach
                 Vector3 moveVelocity = GetMoveVelocity(fDelta, yaw);
 
                 // Apply acceleration
                 // Acceleration should be relative to the change in direction based
                 // on how the currently requested velocity differs from the previous velocity.
                 Vector3 lastVelocity = LastVelocity;
-
-                // The direction that velocity is changing in.
-                // We only calculate this based on X and Z movement, since
-                // we don't want the value of the Acceleration variable
-                // to affect upward and downward movement.
-                // We are therefore using a Vector2 instead of a Vector3 here to calculate direction change for the X and Z movement
-                // (for optimization purposes) (the Vector2's Y-value would be the Z component of our 3d velocity).
-                Vector2 direction = (new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(lastVelocity.X, lastVelocity.Z)).Normalized();
-                Vector2 xzVelocityDelta = direction * acceleration * fDelta;
-
-                Vector3 finalVelocity = lastVelocity + new Vector3(xzVelocityDelta.X, 0, xzVelocityDelta.Y);
-                finalVelocity.Y = moveVelocity.Y;
-
-                // We don't want velocity changes to "overshoot" past the destination velocity.
-                // Therefore, we'll have to snap the velocity to the goal velocity once it's time to do so.
-                // We know we've shot past the goal velocity if the direction from the current velocity to the goal velocity
-                // changed as a result of applying acceleration for this frame.
-                Vector2 newXZVelocityDiff = new Vector2(moveVelocity.X, moveVelocity.Z) - new Vector2(finalVelocity.X, finalVelocity.Z);
-                //logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
-                if (newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
-                || Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle()) == false
-                )
-                {
-                    finalVelocity = moveVelocity;
-                    //logger.Print("Snapped velocity");
-                }
+                Vector2 newXZvelocity = ApproachXZVelocity(
+                    new Vector2(lastVelocity.X, lastVelocity.Z),
+                    new Vector2(moveVelocity.X, moveVelocity.Z),
+                    acceleration,
+                    fDelta
+                );
+                Vector3 finalVelocity = new Vector3(newXZvelocity.X, moveVelocity.Y, newXZvelocity.Y);
 
                 body.Velocity = finalVelocity;
                 body.MoveAndSlide();
