@@ -129,7 +129,7 @@ namespace Jumpvalley.Players.Movement
         /// The acceleration that the character's XZ velocity increases at while
         /// in the air.
         /// </summary>
-        public float AirAcceleration = 1.6f;
+        public float AirAcceleration = 8f;
 
         /// <summary>
         /// The deceleration that the character's XZ velocity decreases at when
@@ -149,7 +149,7 @@ namespace Jumpvalley.Players.Movement
         /// <item>The character has exceeded max speed</item>
         /// </list>
         /// </summary>
-        public float AirDeceleration = 1.6f;
+        public float AirDeceleration = 8f;
 
         private float _speed;
 
