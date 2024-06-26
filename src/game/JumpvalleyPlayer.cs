@@ -70,6 +70,9 @@ namespace JumpvalleyGame
             Mover.JumpVelocity = 25f;
             Mover.Speed = 8f;
             Mover.Acceleration = 180f;
+            Mover.AirAcceleration = 90f;
+            Mover.Deceleration = 180f;
+            Mover.AirDeceleration = 90f;
 
             Mover.Body = Character;
 
