@@ -112,7 +112,7 @@ namespace Jumpvalley.Players.Movement
         public float Gravity = 9.8f;
 
         /// <summary>
-        /// The initial velocity of the character's jump
+        /// The initial Y-velocity of the character's jump
         /// </summary>
         public float JumpVelocity = 5f;
 
