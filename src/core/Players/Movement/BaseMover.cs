@@ -463,7 +463,7 @@ namespace Jumpvalley.Players.Movement
                 // and "wanting to move backward" while climbing means we want to go down.
                 bool shouldApplyClimbVelocity = true;
 
-                if (IsTryingToMove())
+                if (!IsTryingToMove())
                 {
                     climbVelocity = 0;
                 }
