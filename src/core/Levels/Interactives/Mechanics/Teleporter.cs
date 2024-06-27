@@ -15,27 +15,44 @@ namespace Jumpvalley.Levels.Interactives
         public bool ShouldSetRotation;
 
         /// <summary>
+        /// Whether or not nodes being sent to <see cref="Destination"/>
+        /// should be teleported on top of <see cref="Destination"/>.
+        /// Only applies if the current <see cref="Destination"/>
+        /// is a <see cref="VisualInstance3D"/>. 
+        /// </summary>
+        public bool TeleportsOnTop;
+
+        /// <summary>
         /// Where <see cref="Node3D"/>s being teleported by this teleporter
         /// should be sent.
-        /// <br/><br/>
-        /// If this node is a <see cref="VisualInstance3D"/> and has a metadata entry named <c>teleports_on_top</c> set to true,
-        /// objects sent to this destination will be teleported on top of this node.
         /// </summary>
         public Node3D Destination;
 
         public Teleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker) { }
 
         /// <summary>
-        /// Gets the 3D coordinates of the actual point
+        /// Returns the global-space 3D coordinates of the actual point
         /// where nodes will get sent to when being teleported
         /// by this teleporter.
-        /// <br/><br/>
-        /// If <see cref="Destination"/> is a <see cref="VisualInstance3D"/> and has a metadata entry named <c>teleports_on_top</c> set to true,
-        /// objects sent to this destination will be teleported on top of this node.
         /// </summary>
-        /// <returns></returns>
-        public Vector3 GetDestinationPoint()
+        /// <returns>
+        /// The destination point
+        /// </returns>
+        public Vector3 GetDestinationPoint(Node3D nodeToTeleport)
         {
+            Node3D destination = Destination;
+            if (destination != null)
+            {
+                Vector3 pos = destination.GlobalPosition;
+
+                if (TeleportsOnTop == true && destination is VisualInstance3D vDestination)
+                {
+                    pos.Y += vDestination.GetAabb().Size.Y * 0.5f;
+                }
+
+                return pos;
+            }
+
             return Vector3.Zero;
         }
 
