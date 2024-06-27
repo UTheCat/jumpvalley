@@ -38,7 +38,7 @@ namespace Jumpvalley.Levels.Interactives
         /// <returns>
         /// The destination point
         /// </returns>
-        public Vector3 GetDestinationPoint(Node3D nodeToTeleport)
+        public Vector3 GetDestinationPoint()
         {
             Node3D destination = Destination;
             if (destination != null)
