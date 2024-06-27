@@ -15,6 +15,13 @@ namespace Jumpvalley.Levels.Mechanics.Teleporters
     /// </summary>
     public partial class TeleportableObject : InteractiveNode
     {
+        /// <summary>
+        /// The bounding box of all the <see cref="VisualInstance3D"/>s
+        /// that are a descendant of this <see cref="TeleportableObject"/>'s
+        /// root node.
+        /// </summary>
+        public Aabb OverallBoundingBox;
+
         public TeleportableObject(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker) { }
     }
 }
