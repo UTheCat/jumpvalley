@@ -1,7 +1,7 @@
 using Godot;
 using Jumpvalley.Timing;
 
-namespace Jumpvalley.Levels.Interactives
+namespace Jumpvalley.Levels.Interactives.Teleporters
 {
     /// <summary>
     /// Interactive that sends a Node3D to a defined destination.
