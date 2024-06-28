@@ -49,16 +49,10 @@ namespace Jumpvalley.Levels.Mechanics
         }
 
         /// <summary>
-        /// Returns the overall bounding box of a specified
-        /// root node by merging its bounding box and that of its descendants.
-        /// <br/><br/>
-        /// This method obtains a node's bounding box either by getting the value of
-        /// its <c>custom_overall_bounding_box</c> metadata entry (if it exists),
-        /// or by obtaining its <see cref="Aabb"/> automatically (if it's a
-        /// <see cref="VisualInstance3D"/> since they have the
-        /// <see cref="VisualInstance3D.GetAabb"/> method). 
+        /// Calculates and returns the overall bounding box of the specified
+        /// root node.
         /// </summary>
-        /// <param name="rootNode">The root node to get the overall bounding box of</param>
+        /// <param name="rootNode">The root node to calculate the overall bounding box of</param>
         /// <returns>
         /// The overall bounding box
         /// </returns>
@@ -78,6 +72,8 @@ namespace Jumpvalley.Levels.Mechanics
                     total = total.Merge(
                         node.GetMeta(CUSTOM_OVERALL_BOUNDING_BOX_META_NAME).As<Aabb>()
                         );
+
+                    return;
                 }
                 else if (node is VisualInstance3D visual)
                 {
