@@ -1,8 +1,7 @@
 using Godot;
-using Jumpvalley.Levels.Mechanics;
 using Jumpvalley.Timing;
 
-namespace Jumpvalley.Levels.Interactives.Teleporters
+namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
 {
     /// <summary>
     /// Interactive that sends a Node3D to a defined destination.
