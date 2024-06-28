@@ -39,7 +39,10 @@ namespace Jumpvalley.Levels.Mechanics.Teleporters
             }
         }
 
-        public TeleportableObject(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker) { }
+        public TeleportableObject(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
+        {
+            UpdateOverallBoundingBox();
+        }
 
         /// <summary>
         /// Returns the overall bounding box of a specified
