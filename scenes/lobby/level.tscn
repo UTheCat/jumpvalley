@@ -497,3 +497,11 @@ mesh = SubResource("CylinderMesh_h17i4")
 metadata/song1 = "res://addons/music/1215548_Shivers/"
 
 [node name="MusicZones" type="Node3D" parent="Music"]
+
+[node name="StartPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.5, -10.5)
+
+[node name="_Interactive" type="Node" parent="StartPoint"]
+metadata/type = "Teleporter"
+metadata/should_set_rotation = false
+metadata/teleports_on_top = false
