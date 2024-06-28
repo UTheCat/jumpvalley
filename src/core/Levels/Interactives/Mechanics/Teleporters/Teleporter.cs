@@ -11,7 +11,7 @@ namespace Jumpvalley.Levels.Interactives.Teleporters
     {
         /// <summary>
         /// Whether or not the Node3D being teleported should have
-        /// its rotation set to the rotation of <see cref="Destination"/> 
+        /// its rotation set to the global-space rotation of <see cref="Destination"/> 
         /// </summary>
         public bool ShouldSetRotation;
 
@@ -71,7 +71,12 @@ namespace Jumpvalley.Levels.Interactives.Teleporters
         /// <param name="node">The node to send to the destination</param>
         public void SendToDestination(Node3D node)
         {
+            node.GlobalPosition = GetDestinationPoint(node);
 
+            if (ShouldSetRotation)
+            {
+                node.Rotation = Destination.GlobalRotation;
+            }
         }
     }
 }
