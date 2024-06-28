@@ -83,15 +83,18 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             {
                 Vector3 pos = destination.GlobalPosition;
 
-                if (TeleportsOnTop == true && destination is VisualInstance3D vDestination)
+                if (TeleportsOnTop == true)
                 {
-                    pos.Y += vDestination.GetAabb().Size.Y * 0.5f;
-                }
+                    if (destination is VisualInstance3D vDestination)
+                    {
+                        pos.Y += vDestination.GetAabb().Size.Y * 0.5f;
+                    }
 
-                if (obj != null && obj.HasMeta(OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME))
-                {
-                    Aabb boundingBox = obj.GetMeta(OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME).As<Aabb>();
-                    pos.Y += boundingBox.Size.Y * 0.5f;
+                    if (obj != null && obj.HasMeta(OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME))
+                    {
+                        Aabb boundingBox = obj.GetMeta(OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME).As<Aabb>();
+                        pos.Y += boundingBox.Size.Y * 0.5f;
+                    }
                 }
 
                 return pos;
