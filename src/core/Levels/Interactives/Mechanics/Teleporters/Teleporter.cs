@@ -9,11 +9,26 @@ namespace Jumpvalley.Levels.Interactives.Teleporters
     /// </summary>
     public partial class Teleporter : InteractiveNode
     {
+        private static readonly string SHOULD_SET_ROTATION_META_NAME = "should_set_rotation";
+        private static readonly string TELEPORTS_ON_TOP_META_NAME = "teleports_on_top";
+
+        private bool _shouldSetRotation;
+
         /// <summary>
         /// Whether or not the Node3D being teleported should have
         /// its rotation set to the global-space rotation of <see cref="Destination"/> 
         /// </summary>
-        public bool ShouldSetRotation;
+        public bool ShouldSetRotation
+        {
+            get => _shouldSetRotation;
+            set
+            {
+                _shouldSetRotation = value;
+                SetMarkerMeta(SHOULD_SET_ROTATION_META_NAME, value);
+            }
+        }
+
+        private bool _teleportsOnTop;
 
         /// <summary>
         /// Whether or not nodes being sent to <see cref="Destination"/>
@@ -22,7 +37,15 @@ namespace Jumpvalley.Levels.Interactives.Teleporters
         /// If <see cref="Destination"/> has height, <see cref="Destination"/>
         /// will have to be a <see cref="VisualInstance3D"/> in order to work properly. 
         /// </summary>
-        public bool TeleportsOnTop;
+        public bool TeleportsOnTop
+        {
+            get => _teleportsOnTop;
+            set
+            {
+                _teleportsOnTop = value;
+                SetMarkerMeta(TELEPORTS_ON_TOP_META_NAME, value);
+            }
+        }
 
         /// <summary>
         /// Where <see cref="Node3D"/>s being teleported by this teleporter
@@ -30,7 +53,20 @@ namespace Jumpvalley.Levels.Interactives.Teleporters
         /// </summary>
         public Node3D Destination;
 
-        public Teleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker) { }
+        public Teleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
+        {
+            bool shouldSetRotation;
+            if (TryGetMarkerMeta(SHOULD_SET_ROTATION_META_NAME, out shouldSetRotation))
+            {
+                ShouldSetRotation = shouldSetRotation;
+            }
+
+            bool teleportsOnTop;
+            if (TryGetMarkerMeta(TELEPORTS_ON_TOP_META_NAME, out teleportsOnTop))
+            {
+                TeleportsOnTop = teleportsOnTop;
+            }
+        }
 
         /// <summary>
         /// Returns the global-space 3D coordinates of the actual point
