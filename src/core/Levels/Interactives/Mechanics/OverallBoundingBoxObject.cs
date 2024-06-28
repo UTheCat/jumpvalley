@@ -81,7 +81,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
 
                 foreach (Node n in node.GetChildren())
                 {
-                    Add(node);
+                    Add(n);
                 }
             }
             Add(rootNode);
