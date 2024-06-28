@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Jumpvalley.Levels.Interactives;
+using Jumpvalley.Levels.Interactives.Mechanics;
 using Jumpvalley.Levels.Interactives.Mechanics.Teleporters;
 using Jumpvalley.Timing;
 
@@ -19,6 +20,11 @@ namespace JumpvalleyGame.Testing
         {
             this.nodeToTeleport = nodeToTeleport;
             this.destination = destination;
+
+            nodeToTeleport.SetMeta(
+                OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME,
+                OverallBoundingBoxObject.GetOverallBoundingBox(nodeToTeleport)
+            );
 
             teleporter = new Teleporter(
                 new OffsetStopwatch(new TimeSpan()),
