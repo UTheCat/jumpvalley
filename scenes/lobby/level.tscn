@@ -499,9 +499,9 @@ metadata/song1 = "res://addons/music/1215548_Shivers/"
 [node name="MusicZones" type="Node3D" parent="Music"]
 
 [node name="StartPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.5, -10.5)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13, 0.5, -10.5)
 
 [node name="_Interactive" type="Node" parent="StartPoint"]
 metadata/type = "Teleporter"
-metadata/should_set_rotation = false
-metadata/teleports_on_top = false
+metadata/should_set_rotation = true
+metadata/teleports_on_top = true
