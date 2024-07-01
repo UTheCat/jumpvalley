@@ -12,6 +12,7 @@ using Jumpvalley.Players.Movement;
 using JumpvalleyGame.Gui;
 using JumpvalleyGame.Levels;
 using JumpvalleyGame.Settings;
+using JumpvalleyGame.Testing;
 
 namespace JumpvalleyGame
 {

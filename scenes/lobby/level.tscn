@@ -194,6 +194,17 @@ text = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Conveyor"]
 shape = SubResource("BoxShape3D_jpkqu")
 
+[node name="Checkpoints" type="Node3D" parent="Interactives"]
+
+[node name="Start" type="Node3D" parent="Interactives/Checkpoints"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13, 0.5, -10.5)
+
+[node name="_Interactive" type="Node" parent="Interactives/Checkpoints/Start"]
+metadata/type = "Teleporter"
+metadata/should_set_rotation = true
+metadata/teleports_on_top = true
+metadata/destination_node_path = NodePath("..")
+
 [node name="SpinningMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
 mesh = SubResource("BoxMesh_rmlu0")

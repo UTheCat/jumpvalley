@@ -6,6 +6,7 @@ using Jumpvalley.Players;
 using Jumpvalley.Music;
 using Jumpvalley.Levels.Interactives;
 using Jumpvalley.Levels.Interactives.Mechanics;
+using Jumpvalley.Levels.Interactives.Mechanics.Teleporters;
 using Jumpvalley.Timing;
 
 namespace Jumpvalley.Levels
@@ -126,6 +127,11 @@ namespace Jumpvalley.Levels
                             {
                                 Spinner spinner = new Spinner(Clock, node);
                                 interactive = spinner;
+                            }
+                            else if (interactiveType.Equals("Teleporter"))
+                            {
+                                Teleporter teleporter = new Teleporter(Clock, node);
+                                interactive = teleporter;
                             }
 
                             // If the interactive's type is recognized,
