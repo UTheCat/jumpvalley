@@ -10,6 +10,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
     {
         private static readonly string SHOULD_SET_ROTATION_META_NAME = "should_set_rotation";
         private static readonly string TELEPORTS_ON_TOP_META_NAME = "teleports_on_top";
+        private static readonly string DESTINATION_NODE_PATH_META_NAME = "destination_node_path";
 
         private bool _shouldSetRotation;
 
@@ -46,6 +47,28 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             }
         }
 
+        private NodePath _destinationNodePath;
+
+        /// <summary>
+        /// The node path to the teleporter's destination node (relative to <see cref="NodeMarker"/>).
+        /// This should be <see cref="null"/> if you want to set <see cref="Destination"/> manually.
+        /// <br/><br/>
+        /// Setting this to null will not set <see cref="Destination"/> to null. 
+        /// </summary>
+        public NodePath DestinationNodePath
+        {
+            get => _destinationNodePath;
+            set
+            {
+                _destinationNodePath = value;
+
+                if (_destinationNodePath != null)
+                {
+                    Destination = NodeMarker.GetNode<Node3D>(value);
+                }
+            }
+        }
+
         /// <summary>
         /// Where <see cref="Node3D"/>s being teleported by this teleporter
         /// should be sent.
@@ -64,6 +87,12 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             if (TryGetMarkerMeta(TELEPORTS_ON_TOP_META_NAME, out teleportsOnTop))
             {
                 TeleportsOnTop = teleportsOnTop;
+            }
+
+            NodePath destinationNodePath;
+            if (TryGetMarkerMeta(DESTINATION_NODE_PATH_META_NAME, out destinationNodePath))
+            {
+                DestinationNodePath = destinationNodePath;
             }
         }
 
