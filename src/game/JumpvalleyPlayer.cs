@@ -220,10 +220,6 @@ namespace JumpvalleyGame
             Disposables.Add(rotationLockControl);
             Disposables.Add(bottomBar);
             Disposables.Add(animatedNodes);
-
-            TeleporterTest teleporterTest = new TeleporterTest(Character, lobby.RootNode.GetNode<Node3D>("StartPoint"));
-            Disposables.Add(teleporterTest);
-            teleporterTest.Teleport();
         }
 
         public new void Dispose()
