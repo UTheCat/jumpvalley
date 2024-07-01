@@ -30,7 +30,6 @@ namespace JumpvalleyGame.Testing
                 new OffsetStopwatch(new TimeSpan()),
                 destination.GetNode(InteractiveNode.NODE_MARKER_NAME_PREFIX)
             );
-            teleporter.Destination = destination;
         }
 
         public void Teleport()
