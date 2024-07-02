@@ -41,6 +41,18 @@ namespace Jumpvalley.Levels.Interactives
         }
 
         /// <summary>
+        /// Returns the type name of an <see cref="InteractiveNode"/> defined in its node marker.
+        /// <br/><br/>
+        /// The type name should be defined in the marker's metadata with the entry name
+        /// <c>type</c>.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetTypeNameFromMarker(Node nodeMarker)
+        {
+            return nodeMarker.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
+        }
+
+        /// <summary>
         /// Attempts to get the value of a metadata entry with a specified name
         /// if it exists and assigns it to the <paramref name="meta"/> reference variable.
         /// </summary>

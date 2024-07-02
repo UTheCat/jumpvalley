@@ -119,29 +119,7 @@ namespace Jumpvalley.Levels
                     {
                         if (node.Name.ToString().StartsWith(InteractiveNode.NODE_MARKER_NAME_PREFIX))
                         {
-                            string interactiveType = node.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
-
-                            Interactive interactive = null;
-
-                            if (interactiveType.Equals("Spinner"))
-                            {
-                                Spinner spinner = new Spinner(Clock, node);
-                                interactive = spinner;
-                            }
-                            else if (interactiveType.Equals("Teleporter"))
-                            {
-                                Teleporter teleporter = new Teleporter(Clock, node);
-                                interactive = teleporter;
-                            }
-
-                            // If the interactive's type is recognized,
-                            // let it know that this level is running it,
-                            // and then add the interactive to the Interactives list
-                            if (interactive != null)
-                            {
-                                interactive.Runner = this;
-                                Interactives.Add(interactive);
-                            }
+                            InitializeInteractive(node);
                         }
                         else
                         {
@@ -168,6 +146,40 @@ namespace Jumpvalley.Levels
             }
 
             CurrentRunState = RunState.Stopped;
+        }
+
+        /// <summary>
+        /// The level's method for initializing each of its <see cref="Interactive"/>s.
+        /// <br/><br/>
+        /// This method can be overriden to provide custom logic for initalizing an interactive
+        /// (e.g. when a level has custom <see cref="Interactive"/> types).
+        /// </summary>
+        /// <param name="nodeMarker">The interactive's node marker</param>
+        public virtual void InitializeInteractive(Node nodeMarker)
+        {
+            string interactiveType = InteractiveNode.GetTypeNameFromMarker(nodeMarker);
+
+            Interactive interactive = null;
+
+            if (interactiveType.Equals("Spinner"))
+            {
+                Spinner spinner = new Spinner(Clock, nodeMarker);
+                interactive = spinner;
+            }
+            else if (interactiveType.Equals("Teleporter"))
+            {
+                Teleporter teleporter = new Teleporter(Clock, nodeMarker);
+                interactive = teleporter;
+            }
+
+            // If the interactive's type is recognized,
+            // let it know that this level is running it,
+            // and then add the interactive to the Interactives list
+            if (interactive != null)
+            {
+                interactive.Runner = this;
+                Interactives.Add(interactive);
+            }
         }
 
         /// <summary>
