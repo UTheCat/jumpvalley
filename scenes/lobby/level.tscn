@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=42 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -38,6 +38,26 @@ size = Vector3(1, 1, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jpkqu"]
 size = Vector3(1, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dv07x"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqo4w"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mu0vs"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5jrae"]
+albedo_color = Color(0.419608, 0.356863, 1, 1)
+emission_enabled = true
+emission = Color(0.419608, 0.356863, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yb2eo"]
+albedo_color = Color(1, 0.862745, 0.360784, 1)
+emission_enabled = true
+emission = Color(1, 0.862745, 0.360784, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rmlu0"]
 
@@ -204,6 +224,47 @@ metadata/type = "Teleporter"
 metadata/should_set_rotation = true
 metadata/teleports_on_top = true
 metadata/destination_node_path = NodePath("..")
+
+[node name="StartEndTeleporter" type="Node3D" parent="Interactives"]
+
+[node name="_Interactive" type="Node" parent="Interactives/StartEndTeleporter"]
+metadata/type = "StartEndTeleporter"
+metadata/should_set_rotation = true
+metadata/teleports_on_top = true
+metadata/destination_node_path = NodePath("..")
+metadata/StartNodes = [NodePath(""), NodePath("")]
+
+[node name="StartNodes" type="Node3D" parent="Interactives/StartEndTeleporter"]
+
+[node name="Start0" type="RigidBody3D" parent="Interactives/StartEndTeleporter/StartNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.75, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/StartEndTeleporter/StartNodes/Start0"]
+shape = SubResource("BoxShape3D_dv07x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/StartEndTeleporter/StartNodes/Start0/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_vqo4w")
+mesh = SubResource("BoxMesh_mu0vs")
+
+[node name="Start1" type="RigidBody3D" parent="Interactives/StartEndTeleporter/StartNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 6.75, -35)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/StartEndTeleporter/StartNodes/Start1"]
+shape = SubResource("BoxShape3D_dv07x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/StartEndTeleporter/StartNodes/Start1/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_5jrae")
+mesh = SubResource("BoxMesh_mu0vs")
+
+[node name="Destination" type="RigidBody3D" parent="Interactives/StartEndTeleporter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 15.75, -20.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/StartEndTeleporter/Destination"]
+shape = SubResource("BoxShape3D_dv07x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/StartEndTeleporter/Destination/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_yb2eo")
+mesh = SubResource("BoxMesh_mu0vs")
 
 [node name="SpinningMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
