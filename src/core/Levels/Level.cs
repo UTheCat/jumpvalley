@@ -157,7 +157,7 @@ namespace Jumpvalley.Levels
         /// <param name="nodeMarker">The interactive's node marker</param>
         public virtual void InitializeInteractive(Node nodeMarker)
         {
-            string interactiveType = nodeMarker.GetMeta(InteractiveToolkit.INTERACTIVE_TYPE_METADATA_NAME).As<string>();
+            string interactiveType = InteractiveNode.GetTypeNameFromMarker(nodeMarker);
 
             Interactive interactive = null;
 
