@@ -68,11 +68,27 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             }
         }
 
+        private void HandleStartNodeTouch(Node body)
+        {
+            if (NodesToTeleport.Contains(body))
+            {
+                if (body is Node3D node3d)
+                {
+                    SendToDestination(node3d);
+                }
+            }
+        }
+
         public override void Start()
         {
             if (IsRunning) return;
 
             base.Start();
+
+            foreach (RigidBody3D body in StartNodes)
+            {
+                body.BodyEntered += HandleStartNodeTouch;
+            }
         }
     }
 }
