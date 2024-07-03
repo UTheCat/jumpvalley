@@ -12,6 +12,12 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
     public partial class StartEndTeleporter : Teleporter
     {
         private static readonly string START_NODE_PATHS_META_NAME = "start_node_paths";
+        
+        /// <summary>
+        /// The list of node paths to the teleporter's start nodes.
+        /// Obtained from <see cref="InteractiveNode.NodeMarker"/>'s
+        /// <c>start_node_paths</c> metadata entry.
+        /// </summary>
         public List<NodePath> StartNodePaths { get; private set; }
 
         public StartEndTeleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
