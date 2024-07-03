@@ -90,5 +90,15 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
                 body.BodyEntered += HandleStartNodeTouch;
             }
         }
+
+        public override void Stop()
+        {
+            base.Stop();
+
+            foreach (RigidBody3D body in StartNodes)
+            {
+                body.BodyEntered -= HandleStartNodeTouch;
+            }
+        }
     }
 }
