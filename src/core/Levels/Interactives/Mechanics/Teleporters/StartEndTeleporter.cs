@@ -15,19 +15,30 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         
         /// <summary>
         /// The list of node paths to the teleporter's start nodes.
+        /// These paths should be relative to <see cref="InteractiveNode.NodeMarker"/>.
+        /// <br/><br/>
         /// Obtained from <see cref="InteractiveNode.NodeMarker"/>'s
         /// <c>start_node_paths</c> metadata entry.
         /// </summary>
         public List<NodePath> StartNodePaths { get; private set; }
 
         /// <summary>
+        /// The list of start nodes. Nodes in <see cref="NodesToTeleport"/>
+        /// will get teleported by this <see cref="StartEndTeleporter"/>
+        /// when they touch a node in this list.
+        /// </summary>
+        public List<RigidBody3D> StartNodes { get; private set; }
+
+        /// <summary>
         /// Nodes that can be teleported by this <see cref="StartEndTeleporter"/> 
         /// </summary>
-        public List<Node> NodesToTeleport;
+        public List<Node> NodesToTeleport { get; private set; }
 
         public StartEndTeleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
         {
             StartNodePaths = new List<NodePath>();
+            StartNodes = new List<RigidBody3D>();
+            NodesToTeleport = new List<Node>();
 
             Array startNodesMetadata;
             if (TryGetMarkerMeta<Array>(START_NODE_PATHS_META_NAME, out startNodesMetadata))
@@ -40,7 +51,28 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
                         StartNodePaths.Add(path);
                     }
                 }
+
+                PopulateStartNodesList();
             }
+        }
+
+        private void PopulateStartNodesList()
+        {
+            foreach (NodePath path in StartNodePaths)
+            {
+                RigidBody3D rigidBody = NodeMarker.GetNode<RigidBody3D>(path);
+                if (rigidBody != null)
+                {
+                    StartNodes.Add(rigidBody);
+                }
+            }
+        }
+
+        public override void Start()
+        {
+            if (IsRunning) return;
+
+            base.Start();
         }
     }
 }
