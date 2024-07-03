@@ -56,6 +56,24 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             }
         }
 
+        /// <summary>
+        /// Removes a node from the <see cref="NodesToTeleport"/> list
+        /// </summary>
+        /// <param name="node">The node to remove</param>
+        public void RemoveNodeToTeleport(Node node)
+        {
+            NodesToTeleport.Remove(node);
+        }
+
+        /// <summary>
+        /// Adds a node to the <see cref="NodesToTeleport"/> list
+        /// </summary>
+        /// <param name="node">The node to add</param>
+        public void AddNodeToTeleport(Node node)
+        {
+            if (!NodesToTeleport.Contains(node)) NodesToTeleport.Add(node);
+        }
+
         private void PopulateStartNodesList()
         {
             foreach (NodePath path in StartNodePaths)
