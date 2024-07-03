@@ -71,7 +71,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         /// <param name="node">The node to add</param>
         public void AddNodeToTeleport(Node node)
         {
-            if (!NodesToTeleport.Contains(node)) NodesToTeleport.Add(node);
+            if (node != null && NodesToTeleport.Contains(node) == false) NodesToTeleport.Add(node);
         }
 
         private void PopulateStartNodesList()
