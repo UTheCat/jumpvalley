@@ -96,6 +96,8 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
 
         public override void Stop()
         {
+            if (!IsRunning) return;
+
             base.Stop();
 
             foreach (RigidBody3D body in StartNodes)

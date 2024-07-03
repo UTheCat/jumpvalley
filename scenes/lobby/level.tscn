@@ -238,6 +238,9 @@ metadata/start_node_paths = [NodePath("../StartNodes/Start0"), NodePath("../Star
 
 [node name="Start0" type="RigidBody3D" parent="Interactives/StartEndTeleporter/StartNodes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.75, -10)
+freeze = true
+max_contacts_reported = 1
+contact_monitor = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/StartEndTeleporter/StartNodes/Start0"]
 shape = SubResource("BoxShape3D_dv07x")
@@ -248,6 +251,9 @@ mesh = SubResource("BoxMesh_mu0vs")
 
 [node name="Start1" type="RigidBody3D" parent="Interactives/StartEndTeleporter/StartNodes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 6.75, -35)
+freeze = true
+max_contacts_reported = 1
+contact_monitor = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/StartEndTeleporter/StartNodes/Start1"]
 shape = SubResource("BoxShape3D_dv07x")
@@ -258,6 +264,7 @@ mesh = SubResource("BoxMesh_mu0vs")
 
 [node name="Destination" type="RigidBody3D" parent="Interactives/StartEndTeleporter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 15.75, -20.5)
+freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/StartEndTeleporter/Destination"]
 shape = SubResource("BoxShape3D_dv07x")
