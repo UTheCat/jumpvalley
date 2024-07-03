@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 using Jumpvalley.Timing;
 
 namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
@@ -9,9 +11,25 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
     /// </summary>
     public partial class StartEndTeleporter : Teleporter
     {
+        private static readonly string START_NODE_PATHS_META_NAME = "start_node_paths";
+        public List<NodePath> StartNodePaths { get; private set; }
+
         public StartEndTeleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
         {
+            StartNodePaths = new List<NodePath>();
 
+            Array startNodesMetadata;
+            if (TryGetMarkerMeta<Array>(START_NODE_PATHS_META_NAME, out startNodesMetadata))
+            {
+                foreach (Variant item in startNodesMetadata)
+                {
+                    NodePath path = item.As<NodePath>();
+                    if (path != null)
+                    {
+                        StartNodePaths.Add(path);
+                    }
+                }
+            }
         }
     }
 }
