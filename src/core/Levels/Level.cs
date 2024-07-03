@@ -171,6 +171,11 @@ namespace Jumpvalley.Levels
                 Teleporter teleporter = new Teleporter(Clock, nodeMarker);
                 interactive = teleporter;
             }
+            else if (interactiveType.Equals("StartEndTeleporter"))
+            {
+                StartEndTeleporter teleporter = new StartEndTeleporter(Clock, nodeMarker);
+                interactive = teleporter;
+            }
 
             // If the interactive's type is recognized,
             // let it know that this level is running it,
