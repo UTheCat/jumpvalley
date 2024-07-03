@@ -27,7 +27,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         /// will get teleported by this <see cref="StartEndTeleporter"/>
         /// when they touch a node in this list.
         /// </summary>
-        public List<RigidBody3D> StartNodes { get; private set; }
+        public List<Node> StartNodes { get; private set; }
 
         /// <summary>
         /// Nodes that can be teleported by this <see cref="StartEndTeleporter"/> 
@@ -37,7 +37,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         public StartEndTeleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
         {
             StartNodePaths = new List<NodePath>();
-            StartNodes = new List<RigidBody3D>();
+            StartNodes = new List<Node>();
             NodesToTeleport = new List<Node>();
 
             Array startNodesMetadata;
@@ -85,9 +85,12 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
 
             base.Start();
 
-            foreach (RigidBody3D body in StartNodes)
+            foreach (Node node in StartNodes)
             {
-                body.BodyEntered += HandleStartNodeTouch;
+                if (node is RigidBody3D body)
+                {
+                    body.BodyEntered += HandleStartNodeTouch;
+                }
             }
         }
 
