@@ -232,7 +232,7 @@ metadata/type = "StartEndTeleporter"
 metadata/should_set_rotation = true
 metadata/teleports_on_top = true
 metadata/destination_node_path = NodePath("..")
-metadata/StartNodes = [NodePath(""), NodePath("")]
+metadata/start_nodes = [NodePath("../StartNodes/Start0"), NodePath("../StartNodes/Start1")]
 
 [node name="StartNodes" type="Node3D" parent="Interactives/StartEndTeleporter"]
 
