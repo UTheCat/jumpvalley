@@ -20,6 +20,11 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         /// </summary>
         public List<NodePath> StartNodePaths { get; private set; }
 
+        /// <summary>
+        /// Nodes that can be teleported by this <see cref="StartEndTeleporter"/> 
+        /// </summary>
+        public List<Node> NodesToTeleport;
+
         public StartEndTeleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
         {
             StartNodePaths = new List<NodePath>();
