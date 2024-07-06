@@ -160,6 +160,16 @@ namespace Jumpvalley.Levels
         {
             string interactiveType = InteractiveNode.GetTypeNameFromMarker(nodeMarker);
 
+            CharacterBody3D character = null;
+            if (Runner is LevelRunner levelRunner && levelRunner != null)
+            {
+                Player player = levelRunner.CurrentPlayer;
+                if (player != null)
+                {
+                    character = player.Character;
+                }
+            }
+
             Interactive interactive = null;
 
             if (interactiveType.Equals("Spinner"))
@@ -170,6 +180,13 @@ namespace Jumpvalley.Levels
             else if (interactiveType.Equals("Teleporter"))
             {
                 Teleporter teleporter = new Teleporter(Clock, nodeMarker);
+                interactive = teleporter;
+            }
+            else if (interactiveType.Equals("StartEndTeleporter"))
+            {
+                StartEndTeleporter teleporter = new StartEndTeleporter(Clock, nodeMarker);
+                teleporter.AddNodeToTeleport(character);
+
                 interactive = teleporter;
             }
 
