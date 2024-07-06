@@ -7,12 +7,14 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
 {
     /// <summary>
     /// Type of teleporter that teleports a node to <see cref="Teleporter.Destination"/>
-    /// when the node touches specified parts.
+    /// when the node touches specified parts called start nodes.
+    /// <br/><br/>
+    /// Start nodes should be <see cref="Area3D"/>s.  
     /// </summary>
     public partial class StartEndTeleporter : Teleporter
     {
         private static readonly string START_NODE_PATHS_META_NAME = "start_node_paths";
-        
+
         /// <summary>
         /// The list of node paths to the teleporter's start nodes.
         /// These paths should be relative to <see cref="InteractiveNode.NodeMarker"/>.
@@ -27,18 +29,18 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         /// will get teleported by this <see cref="StartEndTeleporter"/>
         /// when they touch a node in this list.
         /// </summary>
-        public List<Node> StartNodes { get; private set; }
+        public List<Node3D> StartNodes { get; private set; }
 
         /// <summary>
         /// Nodes that can be teleported by this <see cref="StartEndTeleporter"/> 
         /// </summary>
-        public List<Node> NodesToTeleport { get; private set; }
+        public List<Node3D> NodesToTeleport { get; private set; }
 
         public StartEndTeleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
         {
             StartNodePaths = new List<NodePath>();
-            StartNodes = new List<Node>();
-            NodesToTeleport = new List<Node>();
+            StartNodes = new List<Node3D>();
+            NodesToTeleport = new List<Node3D>();
 
             Array startNodesMetadata;
             if (TryGetMarkerMeta<Array>(START_NODE_PATHS_META_NAME, out startNodesMetadata))
@@ -60,7 +62,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         /// Removes a node from the <see cref="NodesToTeleport"/> list
         /// </summary>
         /// <param name="node">The node to remove</param>
-        public void RemoveNodeToTeleport(Node node)
+        public void RemoveNodeToTeleport(Node3D node)
         {
             NodesToTeleport.Remove(node);
         }
@@ -69,7 +71,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         /// Adds a node to the <see cref="NodesToTeleport"/> list
         /// </summary>
         /// <param name="node">The node to add</param>
-        public void AddNodeToTeleport(Node node)
+        public void AddNodeToTeleport(Node3D node)
         {
             if (node != null && NodesToTeleport.Contains(node) == false) NodesToTeleport.Add(node);
         }
@@ -86,15 +88,12 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             }
         }
 
-        private void HandleStartNodeTouch(Node body)
+        private void HandleStartNodeTouch(Node3D body)
         {
             System.Console.WriteLine(body.Name);
             if (NodesToTeleport.Contains(body))
             {
-                if (body is Node3D node3d)
-                {
-                    SendToDestination(node3d);
-                }
+                SendToDestination(body);
             }
         }
 
@@ -104,11 +103,11 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
 
             base.Start();
 
-            foreach (Node node in StartNodes)
+            foreach (Node3D node in StartNodes)
             {
-                if (node is RigidBody3D body)
+                if (node is Area3D area)
                 {
-                    body.BodyEntered += HandleStartNodeTouch;
+                    area.BodyEntered += HandleStartNodeTouch;
                 }
             }
         }
@@ -119,9 +118,12 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
 
             base.Stop();
 
-            foreach (RigidBody3D body in StartNodes)
+            foreach (Node3D node in StartNodes)
             {
-                body.BodyEntered -= HandleStartNodeTouch;
+                if (node is Area3D area)
+                {
+                    area.BodyEntered -= HandleStartNodeTouch;
+                }
             }
         }
     }
