@@ -36,7 +36,8 @@ namespace Jumpvalley.Levels.Interactives
         /// Creates a new instance of <see cref="Interactive"/> that will run on the given <see cref="OffsetStopwatch"/>.
         /// </summary>
         /// <param name="clock">The <see cref="Stopwatch"/> that the Interactive will run on</param>
-        public Interactive(OffsetStopwatch clock, LevelRunner runner = null)
+        /// <param name="runner">The object that's running this interactive</param>
+        public Interactive(OffsetStopwatch clock, object runner = null)
         {
             IsInitialized = false;
             Clock = clock;
