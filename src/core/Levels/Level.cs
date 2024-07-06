@@ -101,7 +101,8 @@ namespace Jumpvalley.Levels
         /// <param name="info">Info about the level</param>
         /// <param name="root">The root node of the level to represent</param>
         /// <param name="lastElapsedTime">The most recent amount of elapsed running time that the level left off of</param>
-        public Level(LevelInfo info, Node root, TimeSpan lastElapsedTime) : base(new OffsetStopwatch(lastElapsedTime))
+        /// <param name="runner">The object that's running this level. Typically, this should be a <see cref="LevelRunner"/>.</param>  
+        public Level(LevelInfo info, Node root, TimeSpan lastElapsedTime, object runner) : base(new OffsetStopwatch(lastElapsedTime), runner)
         {
             Info = info;
             RootNode = root;
