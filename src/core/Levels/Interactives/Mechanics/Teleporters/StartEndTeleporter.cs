@@ -80,10 +80,10 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         {
             foreach (NodePath path in StartNodePaths)
             {
-                RigidBody3D rigidBody = NodeMarker.GetNode<RigidBody3D>(path);
-                if (rigidBody != null)
+                Area3D area = NodeMarker.GetNode<Area3D>(path);
+                if (area != null)
                 {
-                    StartNodes.Add(rigidBody);
+                    StartNodes.Add(area);
                 }
             }
         }
