@@ -101,8 +101,8 @@ namespace Jumpvalley.Levels
         /// <param name="info">Info about the level</param>
         /// <param name="root">The root node of the level to represent</param>
         /// <param name="lastElapsedTime">The most recent amount of elapsed running time that the level left off of</param>
-        /// <param name="runner">The object that's running this level. Typically, this should be a <see cref="LevelRunner"/>.</param>
-        public Level(LevelInfo info, Node root, TimeSpan lastElapsedTime, object runner) : base(new OffsetStopwatch(lastElapsedTime), runner)
+        /// <param name="runner">The object that's running this level. Typically, this should be a <see cref="LevelRunner"/>.</param>  
+        public Level(LevelInfo info, Node root, TimeSpan lastElapsedTime, object runner = null) : base(new OffsetStopwatch(lastElapsedTime), runner)
         {
             Info = info;
             RootNode = root;
@@ -160,16 +160,6 @@ namespace Jumpvalley.Levels
         {
             string interactiveType = InteractiveNode.GetTypeNameFromMarker(nodeMarker);
 
-            CharacterBody3D character = null;
-            if (Runner is LevelRunner levelRunner && levelRunner != null)
-            {
-                Player player = levelRunner.CurrentPlayer;
-                if (player != null)
-                {
-                    character = player.Character;
-                }
-            }
-
             Interactive interactive = null;
 
             if (interactiveType.Equals("Spinner"))
@@ -180,13 +170,6 @@ namespace Jumpvalley.Levels
             else if (interactiveType.Equals("Teleporter"))
             {
                 Teleporter teleporter = new Teleporter(Clock, nodeMarker);
-                interactive = teleporter;
-            }
-            else if (interactiveType.Equals("StartEndTeleporter"))
-            {
-                StartEndTeleporter teleporter = new StartEndTeleporter(Clock, nodeMarker);
-                teleporter.AddNodeToTeleport(character);
-
                 interactive = teleporter;
             }
 
