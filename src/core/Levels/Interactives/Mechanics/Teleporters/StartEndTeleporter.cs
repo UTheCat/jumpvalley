@@ -88,6 +88,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
 
         private void HandleStartNodeTouch(Node body)
         {
+            System.Console.WriteLine(body.Name);
             if (NodesToTeleport.Contains(body))
             {
                 if (body is Node3D node3d)
