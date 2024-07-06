@@ -239,6 +239,7 @@ metadata/start_node_paths = [NodePath("../StartNodes/Start0"), NodePath("../Star
 [node name="Start0" type="RigidBody3D" parent="Interactives/StartEndTeleporter/StartNodes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.75, -10)
 freeze = true
+freeze_mode = 1
 max_contacts_reported = 50
 contact_monitor = true
 
