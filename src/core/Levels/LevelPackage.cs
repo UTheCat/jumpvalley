@@ -110,9 +110,8 @@ namespace Jumpvalley.Levels
         {
             if (LevelInstance == null && RootNode != null)
             {
-                Level level = new Level(Info, RootNode, TimeSpan.Zero);
+                Level level = new Level(Info, RootNode, TimeSpan.Zero, Runner);
                 level.Package = this;
-                level.Runner = Runner;
 
                 LevelInstance = level;
             }
