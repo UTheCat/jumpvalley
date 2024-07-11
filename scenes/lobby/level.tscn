@@ -256,14 +256,17 @@ shape = SubResource("BoxShape3D_dv07x")
 material_override = SubResource("StandardMaterial3D_5jrae")
 mesh = SubResource("BoxMesh_mu0vs")
 
-[node name="Destination" type="RigidBody3D" parent="Interactives/StartEndTeleporter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 15.75, -20.5)
+[node name="Destination" type="Node3D" parent="Interactives/StartEndTeleporter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 16, -20.5)
+
+[node name="Platform" type="RigidBody3D" parent="Interactives/StartEndTeleporter/Destination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/StartEndTeleporter/Destination"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/StartEndTeleporter/Destination/Platform"]
 shape = SubResource("BoxShape3D_dv07x")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/StartEndTeleporter/Destination/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/StartEndTeleporter/Destination/Platform/CollisionShape3D"]
 material_override = SubResource("StandardMaterial3D_yb2eo")
 mesh = SubResource("BoxMesh_mu0vs")
 

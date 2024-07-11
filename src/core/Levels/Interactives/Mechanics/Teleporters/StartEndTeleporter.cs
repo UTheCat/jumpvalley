@@ -93,6 +93,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             System.Console.WriteLine(body.Name);
             if (NodesToTeleport.Contains(body))
             {
+                System.Console.WriteLine($"Teleporting {body.Name} to {GetDestinationPoint(body)}");
                 SendToDestination(body);
             }
         }

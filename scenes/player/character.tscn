@@ -12,6 +12,9 @@ size = Vector3(1, 2, 0.5)
 [node name="Character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
+[node name="_InteractiveBoundingBox" type="Node" parent="."]
+metadata/type = "OverallBoundingBoxObject"
+
 [node name="RootCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_s2be1")
 

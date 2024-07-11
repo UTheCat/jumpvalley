@@ -13,6 +13,7 @@ using JumpvalleyGame.Gui;
 using JumpvalleyGame.Levels;
 using JumpvalleyGame.Settings;
 using JumpvalleyGame.Testing;
+using Jumpvalley.Levels.Interactives.Mechanics;
 
 namespace JumpvalleyGame
 {
@@ -61,6 +62,10 @@ namespace JumpvalleyGame
             }
 
             //CurrentMusicPlayer.IsPlaying = true;
+
+            // Character bounding box
+            OverallBoundingBoxObject characterBoundingBox = new OverallBoundingBoxObject(Clock, Character.GetNode("_InteractiveBoundingBox"));
+            Disposables.Add(characterBoundingBox);
 
             // Set up character movement
             // Some values here are based on Juke's Towers of Hell physics (or somewhere close), except we're working with meters.
