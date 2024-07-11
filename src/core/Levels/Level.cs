@@ -150,6 +150,23 @@ namespace Jumpvalley.Levels
         }
 
         /// <summary>
+        /// Gets the player instance that this level is running under.
+        /// Returns the player instance if found, null otherwise.
+        /// <br/><br/>
+        /// Player instance is obtained from this level's runner
+        /// if it's of type <see cref="LevelRunner"/>. 
+        /// </summary>
+        public Player GetCurrentPlayer()
+        {
+            if (Runner is LevelRunner levelRunner && levelRunner != null)
+            {
+                return levelRunner.CurrentPlayer;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// The level's method for initializing each of its <see cref="Interactive"/>s.
         /// <br/><br/>
         /// This method can be overriden to provide custom logic for initalizing an interactive
