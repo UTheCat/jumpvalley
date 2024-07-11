@@ -14,6 +14,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
     public partial class StartEndTeleporter : Teleporter
     {
         private static readonly string START_NODE_PATHS_META_NAME = "start_node_paths";
+        private static readonly string TELEPORTS_PLAYER_META_NAME = "teleports_player";
 
         /// <summary>
         /// The list of node paths to the teleporter's start nodes.
@@ -35,6 +36,21 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         /// Nodes that can be teleported by this <see cref="StartEndTeleporter"/> 
         /// </summary>
         public List<Node3D> NodesToTeleport { get; private set; }
+        
+        private bool _teleportsPlayer;
+
+        /// <summary>
+        /// Whether or not to teleport the player's character
+        /// </summary>
+        public bool TeleportsPlayer
+        {
+            get => _teleportsPlayer;
+            set
+            {
+                _teleportsPlayer = value;
+                SetMarkerMeta(TELEPORTS_PLAYER_META_NAME, value);
+            }
+        }
 
         public StartEndTeleporter(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
         {
@@ -55,6 +71,12 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
                 }
 
                 PopulateStartNodesList();
+            }
+
+            bool teleportsPlayer;
+            if (TryGetMarkerMeta<bool>(TELEPORTS_PLAYER_META_NAME, out teleportsPlayer))
+            {
+                TeleportsPlayer = teleportsPlayer;
             }
         }
 
