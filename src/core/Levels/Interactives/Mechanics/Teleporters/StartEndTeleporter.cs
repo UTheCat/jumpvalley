@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
+using Jumpvalley.Players;
 using Jumpvalley.Timing;
 
 namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
@@ -110,6 +111,21 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             }
         }
 
+        private CharacterBody3D GetPlayerCharacter()
+        {
+            if (Runner is Level level && level != null)
+            {
+                Player player = level.GetCurrentPlayer();
+
+                if (player != null)
+                {
+                    return player.Character;
+                }
+            }
+
+            return null;
+        }
+
         private void HandleStartNodeTouch(Node3D body)
         {
             System.Console.WriteLine(body.Name);
@@ -117,6 +133,15 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
             {
                 System.Console.WriteLine($"Teleporting {body.Name} to {GetDestinationPoint(body)}");
                 SendToDestination(body);
+            }
+            else if (TeleportsPlayer)
+            {
+                CharacterBody3D character = GetPlayerCharacter();
+                if (body == character)
+                {
+                    System.Console.WriteLine($"Teleporting character to {GetDestinationPoint(body)}");
+                    SendToDestination(body);
+                }
             }
         }
 
