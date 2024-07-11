@@ -37,7 +37,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
         /// Nodes that can be teleported by this <see cref="StartEndTeleporter"/> 
         /// </summary>
         public List<Node3D> NodesToTeleport { get; private set; }
-        
+
         private bool _teleportsPlayer;
 
         /// <summary>
@@ -128,10 +128,8 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
 
         private void HandleStartNodeTouch(Node3D body)
         {
-            System.Console.WriteLine(body.Name);
             if (NodesToTeleport.Contains(body))
             {
-                System.Console.WriteLine($"Teleporting {body.Name} to {GetDestinationPoint(body)}");
                 SendToDestination(body);
             }
             else if (TeleportsPlayer)
@@ -139,7 +137,6 @@ namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
                 CharacterBody3D character = GetPlayerCharacter();
                 if (body == character)
                 {
-                    System.Console.WriteLine($"Teleporting character to {GetDestinationPoint(body)}");
                     SendToDestination(body);
                 }
             }
