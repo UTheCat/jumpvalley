@@ -36,7 +36,7 @@ While there are precompiled versions of Jumpvalley for Android, Android support 
 
 The Jumpvalley executable for the Linux version of Jumpvalley is named `jumpvalley` (with no file extension).
 
-On Linux, the operating system itself controls whether or not a file can be executed, regardless of the file's file extension. Therefore, your copy of the  Jumpvalley executable for Linux might not be marked as executable.
+On Linux, the operating system itself controls whether or not a file can be executed, regardless of the file's file extension. Therefore, your copy of the Jumpvalley executable for Linux might not be marked as executable.
 
 In order to fix this, open up a terminal session, change the working directory to the directory containing the Jumpvalley executable like this:
 
@@ -46,7 +46,7 @@ and type this command:
 
 `chmod a+x jumpvalley`
 
-This tells the operating system to let itself execute the file (in this case, the file is the Jumpvalley executable). You should then be able to run the Jumpvalley executable.
+This tells Linux to allow running the code in the Jumpvalley executable.
 
 ## Documentation
 
