@@ -65,11 +65,11 @@ namespace Jumpvalley.Music
                 if (immediateStop)
                 {
                     playlist.StopImmediately();
-                    RemovePlaylistInternal(playlist);
+                    //RemovePlaylistInternal(playlist);
                 }
                 else
                 {
-                    playlist.Stopped += HandlePlaylistStop;
+                    //playlist.Stopped += HandlePlaylistStop;
                     fadingOutPlaylists.Add(playlist);
                     playlist.Stop();
                 }
@@ -276,7 +276,15 @@ namespace Jumpvalley.Music
         /// <param name="playlist"></param>
         public void RemovePlaylist(Playlist playlist)
         {
-            if (Playlists.Contains(playlist)) Playlists.Remove(playlist);
+            if (Playlists.Contains(playlist))
+            {
+                if (playlist.GetParent() == this)
+                {
+                    RemoveChild(playlist);
+                }
+                
+                Playlists.Remove(playlist);
+            }
         }
 
         /// <summary>
@@ -295,6 +303,8 @@ namespace Jumpvalley.Music
             {
                 playlist.SongStreamHandlingMode = SongStreamHandlingMode;
             }
+
+            AddChild(playlist);
         }
 
         /// <summary>
