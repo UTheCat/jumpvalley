@@ -65,11 +65,11 @@ namespace Jumpvalley.Music
                 if (immediateStop)
                 {
                     playlist.StopImmediately();
-                    RemovePlaylistInternal(playlist);
+                    //RemovePlaylistInternal(playlist);
                 }
                 else
                 {
-                    playlist.Stopped += HandlePlaylistStop;
+                    //playlist.Stopped += HandlePlaylistStop;
                     fadingOutPlaylists.Add(playlist);
                     playlist.Stop();
                 }
@@ -125,10 +125,12 @@ namespace Jumpvalley.Music
                     // connect to the new playlist's SongChanged event
                     value.SongChanged += HandlePlaylistSongChange;
 
+                    /*
                     if (!value.IsInsideTree())
                     {
                         AddChild(value);
                     }
+                    */
 
                     // in case this playlist wanting to be played is currently fading out, stop it from being removed
                     if (fadingOutPlaylists.Contains(value))
@@ -140,15 +142,6 @@ namespace Jumpvalley.Music
                     }
 
                     // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)
-                    if (OverrideTransitionTime)
-                    {
-                        value.TransitionTime = TransitionTime;
-                    }
-                    if (OverrideLocalVolumeScale)
-                    {
-                        value.LocalVolumeScale = VolumeScale;
-                    }
-
                     value.Play();
                 }
             }
@@ -263,9 +256,39 @@ namespace Jumpvalley.Music
             }
         }
 
+        /// <summary>
+        /// Whether or not this <see cref="MusicPlayer"/> should add/remove this music player
+        /// as a parent when the <see cref="AddPlaylist"/> and <see cref="RemovePlaylist"/>
+        /// methods are called.
+        /// </summary>
+        public bool ShouldSetPlaylistParent;
+
         public MusicPlayer()
         {
             Playlists = new List<Playlist>();
+            ShouldSetPlaylistParent = false;
+        }
+
+        /// <summary>
+        /// Method that can be overriden to define how playlists added to this music player
+        /// should have their properties overriden.
+        /// By default, overrides defined in the <see cref="MusicPlayer"/> class are applied here.
+        /// </summary>
+        /// <param name="playlist">The playlist to apply overrides to</param>
+        public virtual void ApplyOverrides(Playlist playlist)
+        {
+            if (OverrideTransitionTime)
+            {
+                playlist.TransitionTime = TransitionTime;
+            }
+            if (OverrideLocalVolumeScale)
+            {
+                playlist.LocalVolumeScale = VolumeScale;
+            }
+            if (OverrideSongStreamHandlingMode)
+            {
+                playlist.SongStreamHandlingMode = SongStreamHandlingMode;
+            }
         }
 
         /// <summary>
@@ -276,7 +299,15 @@ namespace Jumpvalley.Music
         /// <param name="playlist"></param>
         public void RemovePlaylist(Playlist playlist)
         {
-            if (Playlists.Contains(playlist)) Playlists.Remove(playlist);
+            if (Playlists.Contains(playlist))
+            {
+                if (ShouldSetPlaylistParent == true && playlist.GetParent() == this)
+                {
+                    RemoveChild(playlist);
+                }
+
+                Playlists.Remove(playlist);
+            }
         }
 
         /// <summary>
@@ -291,9 +322,11 @@ namespace Jumpvalley.Music
 
             Playlists.Add(playlist);
 
-            if (OverrideSongStreamHandlingMode)
+            ApplyOverrides(playlist);
+
+            if (ShouldSetPlaylistParent == true && playlist.GetParent() == null)
             {
-                playlist.SongStreamHandlingMode = SongStreamHandlingMode;
+                AddChild(playlist);
             }
         }
 
