@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Godot;
+using Jumpvalley.Levels.Interactives.Mechanics.Teleporters;
 using Jumpvalley.Timing;
 
 namespace Jumpvalley.Levels.Interactives.Mechanics
@@ -8,6 +10,16 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
     /// </summary>
     public partial class CheckpointSet : InteractiveNode
     {
+        /// <summary>
+        /// The set's checkpoints (typically a level's checkpoints)
+        /// </summary>
+        public List<Teleporter> Checkpoints;
+
+        /// <summary>
+        /// The checkpoint that the player is currently on
+        /// </summary>
+        public int CurrentCheckpoint;
+
         public CheckpointSet(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker) { }
     }
 }
