@@ -10,6 +10,9 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
     /// </summary>
     public partial class CheckpointSet : InteractiveNode
     {
+        public static readonly string CHECKPOINTS_META_NAME = "checkpoints";
+        public static readonly string CURRENT_CHECKPOINT_META_NAME = "current_checkpoint";
+
         /// <summary>
         /// The set's checkpoints (typically a level's checkpoints)
         /// </summary>
@@ -26,5 +29,29 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
         public Node3D NodeToTeleport;
 
         public CheckpointSet(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker) { }
+
+        private void UpdateCheckpointsFromNodePathsList()
+        {
+            Node marker = NodeMarker;
+            if (marker != null)
+            {
+                Godot.Collections.Array paths;
+                if (TryGetMarkerMeta<Godot.Collections.Array>(CHECKPOINTS_META_NAME, out paths))
+                {
+                    foreach (object path in paths)
+                    {
+                        if (path is NodePath nodePath)
+                        {
+                            Node checkpointMarker = marker.GetNode(nodePath);
+
+                            if (checkpointMarker != null)
+                            {
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
