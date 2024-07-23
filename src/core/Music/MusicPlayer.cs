@@ -142,15 +142,6 @@ namespace Jumpvalley.Music
                     }
 
                     // play the new playlist (this is where MusicPlayer.SongChanged will get raised for the song change)
-                    if (OverrideTransitionTime)
-                    {
-                        value.TransitionTime = TransitionTime;
-                    }
-                    if (OverrideLocalVolumeScale)
-                    {
-                        value.LocalVolumeScale = VolumeScale;
-                    }
-
                     value.Play();
                 }
             }
@@ -279,6 +270,28 @@ namespace Jumpvalley.Music
         }
 
         /// <summary>
+        /// Method that can be overriden to define how playlists added to this music player
+        /// should have their properties overriden.
+        /// By default, overrides defined in the <see cref="MusicPlayer"/> class are applied here.
+        /// </summary>
+        /// <param name="playlist">The playlist to apply overrides to</param>
+        public virtual void ApplyOverrides(Playlist playlist)
+        {
+            if (OverrideTransitionTime)
+            {
+                playlist.TransitionTime = TransitionTime;
+            }
+            if (OverrideLocalVolumeScale)
+            {
+                playlist.LocalVolumeScale = VolumeScale;
+            }
+            if (OverrideSongStreamHandlingMode)
+            {
+                playlist.SongStreamHandlingMode = SongStreamHandlingMode;
+            }
+        }
+
+        /// <summary>
         /// Removes a playlist from this <see cref="MusicPlayer"/>.
         /// This will cause this <see cref="MusicPlayer"/>
         /// to no longer make changes to the removed <see cref="Playlist"/>. 
@@ -292,7 +305,7 @@ namespace Jumpvalley.Music
                 {
                     RemoveChild(playlist);
                 }
-                
+
                 Playlists.Remove(playlist);
             }
         }
@@ -309,10 +322,7 @@ namespace Jumpvalley.Music
 
             Playlists.Add(playlist);
 
-            if (OverrideSongStreamHandlingMode)
-            {
-                playlist.SongStreamHandlingMode = SongStreamHandlingMode;
-            }
+            ApplyOverrides(playlist);
 
             if (ShouldSetPlaylistParent == true && playlist.GetParent() == null)
             {
