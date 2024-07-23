@@ -125,10 +125,12 @@ namespace Jumpvalley.Music
                     // connect to the new playlist's SongChanged event
                     value.SongChanged += HandlePlaylistSongChange;
 
+                    /*
                     if (!value.IsInsideTree())
                     {
                         AddChild(value);
                     }
+                    */
 
                     // in case this playlist wanting to be played is currently fading out, stop it from being removed
                     if (fadingOutPlaylists.Contains(value))
@@ -263,9 +265,17 @@ namespace Jumpvalley.Music
             }
         }
 
+        /// <summary>
+        /// Whether or not this <see cref="MusicPlayer"/> should add/remove this music player
+        /// as a parent when the <see cref="AddPlaylist"/> and <see cref="RemovePlaylist"/>
+        /// methods are called.
+        /// </summary>
+        public bool ShouldSetPlaylistParent;
+
         public MusicPlayer()
         {
             Playlists = new List<Playlist>();
+            ShouldSetPlaylistParent = false;
         }
 
         /// <summary>
@@ -278,7 +288,7 @@ namespace Jumpvalley.Music
         {
             if (Playlists.Contains(playlist))
             {
-                if (playlist.GetParent() == this)
+                if (ShouldSetPlaylistParent == true && playlist.GetParent() == this)
                 {
                     RemoveChild(playlist);
                 }
@@ -304,7 +314,10 @@ namespace Jumpvalley.Music
                 playlist.SongStreamHandlingMode = SongStreamHandlingMode;
             }
 
-            AddChild(playlist);
+            if (ShouldSetPlaylistParent == true && playlist.GetParent() == null)
+            {
+                AddChild(playlist);
+            }
         }
 
         /// <summary>
