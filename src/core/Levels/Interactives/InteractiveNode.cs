@@ -87,6 +87,28 @@ namespace Jumpvalley.Levels.Interactives
         }
 
         /// <summary>
+        /// Returns an interactive node's handler/operator instance corresponding
+        /// to a given interactive node marker. If it can't be found, this method returns null.
+        /// <br/><br/>
+        /// The handler/operator instance returned is the first found object whose
+        /// type is <see cref="Interactive"/> and is a child of the given node marker.
+        /// </summary>
+        /// <seealso cref="ParentedToNodeMarker"/>
+        /// <returns></returns>
+        public static Interactive GetHandlerFromMarker(Node nodeMarker)
+        {
+            foreach (Node n in nodeMarker.GetChildren())
+            {
+                if (n is Interactive interactive)
+                {
+                    return interactive;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Attempts to get the value of a metadata entry with a specified name
         /// if it exists and assigns it to the <paramref name="meta"/> reference variable.
         /// </summary>
