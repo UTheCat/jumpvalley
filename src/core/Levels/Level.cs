@@ -202,6 +202,11 @@ namespace Jumpvalley.Levels
             {
                 interactive.Runner = this;
                 Interactives.Add(interactive);
+                
+                if (interactive is InteractiveNode interactiveNode)
+                {
+                    interactiveNode.ParentedToNodeMarker = true;
+                }
             }
         }
 
