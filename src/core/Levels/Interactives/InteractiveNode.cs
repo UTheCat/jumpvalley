@@ -33,9 +33,6 @@ namespace Jumpvalley.Levels.Interactives
         /// <summary>
         /// Whether or not this interactive node handler is parented to
         /// <see cref="NodeMarker"/>.
-        /// <br/><br/>
-        /// Doing so allows accessing the interactive node's
-        /// handler from <see cref="NodeMarker"/>.
         /// </summary>
         public bool ParentedToNodeMarker
         {
