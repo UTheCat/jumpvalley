@@ -29,6 +29,15 @@ namespace Jumpvalley.Levels.Interactives
         public Node RootNode => NodeMarker.GetParent();
 
         /// <summary>
+        /// Whether or not this interactive node handler is parented to
+        /// <see cref="NodeMarker"/>.
+        /// <br/><br/>
+        /// Doing so allows accessing the interactive node's
+        /// handler from <see cref="NodeMarker"/>.
+        /// </summary>
+        public bool ParentedToNodeMarker;
+
+        /// <summary>
         /// Creates a new instance of <see cref="InteractiveNode"/> for a given <see cref="Stopwatch"/> and <see cref="Node"/>
         /// </summary>
         /// <param name="stopwatch">The stopwatch to bind the interactive to</param>
