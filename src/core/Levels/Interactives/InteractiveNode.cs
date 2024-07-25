@@ -71,6 +71,7 @@ namespace Jumpvalley.Levels.Interactives
             if (nodeMarker == null) throw new ArgumentNullException(nameof(nodeMarker));
 
             NodeMarker = nodeMarker;
+            ParentedToNodeMarker = false;
         }
 
         /// <summary>
