@@ -111,7 +111,6 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             originalConstantAngularVelocity = body.ConstantAngularVelocity;
 
             body.ConstantAngularVelocity = ConstantAngularVelocity;
-            body.AddChild(this);
         }
 
         public override void Stop()
@@ -119,7 +118,6 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             if (!IsRunning) return;
 
             base.Stop();
-            body.RemoveChild(this);
             body.ConstantAngularVelocity = originalConstantAngularVelocity;
         }
 
