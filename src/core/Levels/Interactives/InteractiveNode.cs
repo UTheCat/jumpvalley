@@ -92,8 +92,10 @@ namespace Jumpvalley.Levels.Interactives
         /// <br/><br/>
         /// The handler/operator instance returned is the first found object whose
         /// type is <see cref="Interactive"/> and is a child of the given node marker.
+        /// <br/><br/>
+        /// This method is mainly intended to be used for interactive node handlers that have
+        /// <see cref="ParentedToNodeMarker"/> set to true. 
         /// </summary>
-        /// <seealso cref="ParentedToNodeMarker"/>
         /// <returns></returns>
         public static Interactive GetHandlerFromMarker(Node nodeMarker)
         {
