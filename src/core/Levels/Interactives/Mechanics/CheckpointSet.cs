@@ -79,7 +79,7 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
         /// Teleports a specified node to the current checkpoint
         /// </summary>
         /// <param name="node">The node to teleport</param>
-        public void TeleportNodeToCurrentCheckpoint(Node3D node)
+        public void SendToCurrentCheckpoint(Node3D node)
         {
             Checkpoints[CurrentCheckpoint]?.SendToDestination(node);
         }
