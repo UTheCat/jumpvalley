@@ -46,7 +46,12 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
 
                             if (checkpointMarker != null)
                             {
-                                
+                                Interactive interactive = InteractiveNode.GetHandlerFromMarker(checkpointMarker);
+
+                                if (interactive is Teleporter teleporter)
+                                {
+                                    Checkpoints.Add(teleporter);
+                                }
                             }
                         }
                     }
