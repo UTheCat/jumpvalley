@@ -18,17 +18,39 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
         /// </summary>
         public List<Teleporter> Checkpoints;
 
+        private int _currentCheckpoint;
+
         /// <summary>
         /// The checkpoint that the player is currently on
         /// </summary>
-        public int CurrentCheckpoint;
+        public int CurrentCheckpoint
+        {
+            get => _currentCheckpoint;
+            set
+            {
+                _currentCheckpoint = value;
+                SetMarkerMeta(CURRENT_CHECKPOINT_META_NAME, value);
+            }
+        }
 
         /// <summary>
         /// The node that gets sent to one of the checkpoints in the set.
         /// </summary>
         public Node3D NodeToTeleport;
 
-        public CheckpointSet(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker) { }
+        public CheckpointSet(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
+        {
+            Checkpoints = new List<Teleporter>();
+            NodeToTeleport = null;
+
+            int currentCheckpoint;
+            if (TryGetMarkerMeta<int>(CURRENT_CHECKPOINT_META_NAME, out currentCheckpoint))
+            {
+                CurrentCheckpoint = currentCheckpoint;
+            }
+
+            UpdateCheckpointsFromNodePathsList();
+        }
 
         private void UpdateCheckpointsFromNodePathsList()
         {
