@@ -33,15 +33,9 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             }
         }
 
-        /// <summary>
-        /// The node that gets sent to one of the checkpoints in the set.
-        /// </summary>
-        public Node3D NodeToTeleport;
-
         public CheckpointSet(OffsetStopwatch stopwatch, Node marker) : base(stopwatch, marker)
         {
             Checkpoints = new List<Teleporter>();
-            NodeToTeleport = null;
 
             int currentCheckpoint;
             if (TryGetMarkerMeta<int>(CURRENT_CHECKPOINT_META_NAME, out currentCheckpoint))
@@ -79,6 +73,15 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Teleports a specified node to the current checkpoint
+        /// </summary>
+        /// <param name="node">The node to teleport</param>
+        public void TeleportNodeToCurrentCheckpoint(Node3D node)
+        {
+            Checkpoints[CurrentCheckpoint]?.SendToDestination(node);
         }
     }
 }
