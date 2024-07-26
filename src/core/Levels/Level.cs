@@ -22,6 +22,7 @@ namespace Jumpvalley.Levels
         public static readonly string INTERACTIVES_NODE_NAME = "Interactives";
         public static readonly string MUSIC_NODE_NAME = "Music";
         public static readonly string STATIC_OBJECTS_NODE_NAME = "StaticObjects";
+        public static readonly string CHECKPOINTS_NODE_NAME = "Checkpoints";
 
         /// <summary>
         /// Indicates the current run state of the level.
@@ -81,9 +82,9 @@ namespace Jumpvalley.Levels
         public Node StaticObjects { get; private set; }
 
         /// <summary>
-        /// The Node3D that defines the position and rotation that the player's character will be set to when they play the level from the very beginning
+        /// The object that contains the code handling the level's checkpoints.
         /// </summary>
-        public Node3D StartPoint { get; private set; }
+        public CheckpointSet Checkpoints { get; private set; }
 
         /// <summary>
         /// The level's current run state
@@ -114,23 +115,17 @@ namespace Jumpvalley.Levels
             Interactives = new List<Interactive>();
             if (InteractivesNode != null)
             {
-                void AddInteractives(Node parentNode)
-                {
-                    foreach (Node node in parentNode.GetChildren())
-                    {
-                        if (node.Name.ToString().StartsWith(InteractiveNode.NODE_MARKER_NAME_PREFIX))
-                        {
-                            InitializeInteractive(node);
-                        }
-                        else
-                        {
-                            // Recursive search to search a child node's children within the Interactives folder
-                            AddInteractives(node);
-                        }
-                    }
-                }
+                AddInteractivesInternal(InteractivesNode);
+            }
 
-                AddInteractives(InteractivesNode);
+            Node checkpointsNode = root.GetNode($"{CHECKPOINTS_NODE_NAME}/{GetNode(InteractiveNode.NODE_MARKER_NAME_PREFIX)}");
+            if (checkpointsNode == null)
+            {
+                Checkpoints = null;
+            }
+            else
+            {
+                Checkpoints = new CheckpointSet(Clock, checkpointsNode);
             }
 
             MusicZones = new List<MusicZone>();
@@ -147,6 +142,22 @@ namespace Jumpvalley.Levels
             }
 
             CurrentRunState = RunState.Stopped;
+        }
+
+        private void AddInteractivesInternal(Node parentNode)
+        {
+            foreach (Node node in parentNode.GetChildren())
+            {
+                if (node.Name.ToString().StartsWith(InteractiveNode.NODE_MARKER_NAME_PREFIX))
+                {
+                    InitializeInteractive(node);
+                }
+                else
+                {
+                    // Recursive search to search a child node's children within the Interactives folder
+                    AddInteractivesInternal(node);
+                }
+            }
         }
 
         /// <summary>
@@ -202,7 +213,7 @@ namespace Jumpvalley.Levels
             {
                 interactive.Runner = this;
                 Interactives.Add(interactive);
-                
+
                 if (interactive is InteractiveNode interactiveNode)
                 {
                     interactiveNode.ParentedToNodeMarker = true;
@@ -272,6 +283,22 @@ namespace Jumpvalley.Levels
 
             // resume the level's main clock
             Clock.Start();
+
+            // spawn the player's character into the level
+            // at the current checkpoint
+            if (Checkpoints != null)
+            {
+                Player player = GetCurrentPlayer();
+                if (player != null)
+                {
+                    CharacterBody3D character = player.Character;
+
+                    if (character != null)
+                    {
+                        Checkpoints.SendToCurrentCheckpoint(character);
+                    }
+                }
+            }
 
             base.Start();
         }
