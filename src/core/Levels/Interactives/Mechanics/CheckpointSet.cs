@@ -54,9 +54,10 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
                 Godot.Collections.Array paths;
                 if (TryGetMarkerMeta<Godot.Collections.Array>(CHECKPOINTS_META_NAME, out paths))
                 {
-                    foreach (object path in paths)
+                    foreach (Variant path in paths)
                     {
-                        if (path is NodePath nodePath)
+                        NodePath nodePath = path.As<NodePath>();
+                        if (nodePath != null)
                         {
                             Node checkpointMarker = marker.GetNode(nodePath);
 

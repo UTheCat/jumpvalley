@@ -133,7 +133,7 @@ height = 0.5
 
 [node name="_Interactive" type="Node" parent="Checkpoints"]
 metadata/type = "CheckpointSet"
-metadata/checkpoints = [NodePath("../Start")]
+metadata/checkpoints = [NodePath("../Start/_Interactive")]
 metadata/current_checkpoint = 0
 
 [node name="Start" type="Node3D" parent="Checkpoints"]
