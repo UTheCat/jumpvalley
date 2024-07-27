@@ -181,6 +181,7 @@ namespace JumpvalleyGame
             lobby.CreateLevelInstance();
             lobby.StartLevel();
             RootNode.AddChild(lobby.RootNode);
+            lobby.LevelInstance.SendPlayerToCurrentCheckpoint();
 
             // Load the initialization level (the level we want to load in when the game starts)
             string levelsNodeName = "Levels";
@@ -201,6 +202,7 @@ namespace JumpvalleyGame
                         levelPackage.CreateLevelInstance();
                         levelPackage.StartLevel();
                         levelsNode.AddChild(levelPackage.RootNode);
+                        levelPackage.LevelInstance.SendPlayerToCurrentCheckpoint();
 
                         LevelInfo levelInfo = levelPackage.Info;
                         Difficulty difficulty = levelInfo.LevelDifficulty;

@@ -138,7 +138,7 @@ namespace Jumpvalley.Levels
             }
 
             CheckpointInteractives = new List<Interactive>();
-            CheckpointsNode = root.GetNode(CHECKPOINTS_NODE_NAME);
+            CheckpointsNode = root.GetNodeOrNull(CHECKPOINTS_NODE_NAME);
             if (CheckpointsNode == null)
             {
                 Checkpoints = null;

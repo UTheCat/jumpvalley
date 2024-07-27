@@ -89,6 +89,22 @@ size = Vector3(100, 1, 100)
 
 [node name="ShapeVariety" type="Node3D"]
 
+[node name="Checkpoints" type="Node3D" parent="."]
+
+[node name="_Interactive" type="Node" parent="Checkpoints"]
+metadata/type = "CheckpointSet"
+metadata/checkpoints = [NodePath("../Start/_Interactive")]
+metadata/current_checkpoint = 0
+
+[node name="Start" type="Node3D" parent="Checkpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -2)
+
+[node name="_Interactive" type="Node" parent="Checkpoints/Start"]
+metadata/type = "Teleporter"
+metadata/should_set_rotation = true
+metadata/teleports_on_top = true
+metadata/destination_node_path = NodePath("..")
+
 [node name="Interactives" type="Node3D" parent="."]
 
 [node name="Box" type="StaticBody3D" parent="Interactives"]
