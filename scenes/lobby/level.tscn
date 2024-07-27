@@ -129,6 +129,22 @@ height = 0.5
 
 [node name="Lobby" type="Node3D"]
 
+[node name="Checkpoints" type="Node3D" parent="."]
+
+[node name="_Interactive" type="Node" parent="Checkpoints"]
+metadata/type = "CheckpointSet"
+metadata/checkpoints = [NodePath("../Start/_Interactive")]
+metadata/current_checkpoint = 0
+
+[node name="Start" type="Node3D" parent="Checkpoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -10)
+
+[node name="_Interactive" type="Node" parent="Checkpoints/Start"]
+metadata/type = "Teleporter"
+metadata/should_set_rotation = true
+metadata/teleports_on_top = true
+metadata/destination_node_path = NodePath("..")
+
 [node name="Interactives" type="Node3D" parent="."]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Interactives"]
@@ -213,17 +229,6 @@ text = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/Conveyor"]
 shape = SubResource("BoxShape3D_jpkqu")
-
-[node name="Checkpoints" type="Node3D" parent="Interactives"]
-
-[node name="Start" type="Node3D" parent="Interactives/Checkpoints"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13, 0.5, -10.5)
-
-[node name="_Interactive" type="Node" parent="Interactives/Checkpoints/Start"]
-metadata/type = "Teleporter"
-metadata/should_set_rotation = true
-metadata/teleports_on_top = true
-metadata/destination_node_path = NodePath("..")
 
 [node name="StartEndTeleporter" type="Node3D" parent="Interactives"]
 

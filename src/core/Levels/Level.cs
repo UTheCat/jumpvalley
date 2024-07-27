@@ -22,6 +22,7 @@ namespace Jumpvalley.Levels
         public static readonly string INTERACTIVES_NODE_NAME = "Interactives";
         public static readonly string MUSIC_NODE_NAME = "Music";
         public static readonly string STATIC_OBJECTS_NODE_NAME = "StaticObjects";
+        public static readonly string CHECKPOINTS_NODE_NAME = "Checkpoints";
 
         /// <summary>
         /// Indicates the current run state of the level.
@@ -66,6 +67,12 @@ namespace Jumpvalley.Levels
         public List<Interactive> Interactives { get; private set; }
 
         /// <summary>
+        /// Interactives as instances of the <see cref="Interactive"/> class that are stored
+        /// in <see cref="CheckpointsNode"/> 
+        /// </summary>
+        public List<Interactive> CheckpointInteractives { get; private set; }
+
+        /// <summary>
         /// The node containing the level's music
         /// </summary>
         public Node Music { get; private set; }
@@ -81,9 +88,17 @@ namespace Jumpvalley.Levels
         public Node StaticObjects { get; private set; }
 
         /// <summary>
-        /// The Node3D that defines the position and rotation that the player's character will be set to when they play the level from the very beginning
+        /// The node where the level's checkpoints should be stored.
+        /// <br/><br/>
+        /// This can be used as a place to load interactives that should be loaded
+        /// after interactives placed in <see cref="InteractivesNode"/>. 
         /// </summary>
-        public Node3D StartPoint { get; private set; }
+        public Node CheckpointsNode { get; private set; }
+
+        /// <summary>
+        /// The object that contains the code handling the level's checkpoints.
+        /// </summary>
+        public CheckpointSet Checkpoints { get; private set; }
 
         /// <summary>
         /// The level's current run state
@@ -94,6 +109,11 @@ namespace Jumpvalley.Levels
         /// The <see cref="LevelPackage"/> that this <see cref="Level"/> instance belongs to
         /// </summary>
         public LevelPackage Package = null;
+
+        /// <summary>
+        /// List containing the order in which interactive lists should load and unload
+        /// </summary>
+        private List<Interactive>[] interactiveLists;
 
         /// <summary>
         /// Constructs an instance of <see cref="Level"/> to represent a level corresponding to its info file
@@ -114,24 +134,22 @@ namespace Jumpvalley.Levels
             Interactives = new List<Interactive>();
             if (InteractivesNode != null)
             {
-                void AddInteractives(Node parentNode)
-                {
-                    foreach (Node node in parentNode.GetChildren())
-                    {
-                        if (node.Name.ToString().StartsWith(InteractiveNode.NODE_MARKER_NAME_PREFIX))
-                        {
-                            InitializeInteractive(node);
-                        }
-                        else
-                        {
-                            // Recursive search to search a child node's children within the Interactives folder
-                            AddInteractives(node);
-                        }
-                    }
-                }
-
-                AddInteractives(InteractivesNode);
+                AddInteractivesInternal(InteractivesNode, Interactives);
             }
+
+            CheckpointInteractives = new List<Interactive>();
+            CheckpointsNode = root.GetNodeOrNull(CHECKPOINTS_NODE_NAME);
+            if (CheckpointsNode == null)
+            {
+                Checkpoints = null;
+            }
+            else
+            {
+                AddInteractivesInternal(CheckpointsNode, CheckpointInteractives);
+                Checkpoints = new CheckpointSet(Clock, CheckpointsNode.GetNode(InteractiveNode.NODE_MARKER_NAME_PREFIX));
+            }
+
+            interactiveLists = [Interactives, CheckpointInteractives];
 
             MusicZones = new List<MusicZone>();
             if (Music != null)
@@ -147,6 +165,22 @@ namespace Jumpvalley.Levels
             }
 
             CurrentRunState = RunState.Stopped;
+        }
+
+        private void AddInteractivesInternal(Node parentNode, List<Interactive> list)
+        {
+            foreach (Node node in parentNode.GetChildren())
+            {
+                if (node.Name.ToString().StartsWith(InteractiveNode.NODE_MARKER_NAME_PREFIX))
+                {
+                    InitializeInteractive(node);
+                }
+                else
+                {
+                    // Recursive search to search a child node's children within the Interactives folder
+                    AddInteractivesInternal(node, list);
+                }
+            }
         }
 
         /// <summary>
@@ -202,10 +236,30 @@ namespace Jumpvalley.Levels
             {
                 interactive.Runner = this;
                 Interactives.Add(interactive);
-                
+
                 if (interactive is InteractiveNode interactiveNode)
                 {
                     interactiveNode.ParentedToNodeMarker = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sends the player's character to the checkpoint they're currently on
+        /// </summary>
+        public void SendPlayerToCurrentCheckpoint()
+        {
+            if (Checkpoints != null)
+            {
+                Player player = GetCurrentPlayer();
+                if (player != null)
+                {
+                    CharacterBody3D character = player.Character;
+
+                    if (character != null)
+                    {
+                        Checkpoints.SendToCurrentCheckpoint(character);
+                    }
                 }
             }
         }
@@ -220,9 +274,12 @@ namespace Jumpvalley.Levels
         {
             if (IsInitialized) return;
 
-            foreach (InteractiveNode i in Interactives)
+            foreach (List<Interactive> list in interactiveLists)
             {
-                i.Initialize();
+                foreach (InteractiveNode i in list)
+                {
+                    i.Initialize();
+                }
             }
 
             base.Initialize();
@@ -262,9 +319,12 @@ namespace Jumpvalley.Levels
 
             CurrentRunState = RunState.Playing;
 
-            foreach (InteractiveNode i in Interactives)
+            foreach (List<Interactive> list in interactiveLists)
             {
-                i.Start();
+                foreach (InteractiveNode i in list)
+                {
+                    i.Start();
+                }
             }
 
             // prepare the level's music
@@ -288,9 +348,12 @@ namespace Jumpvalley.Levels
 
             CurrentRunState = RunState.Stopped;
 
-            foreach (InteractiveNode i in Interactives)
+            foreach (List<Interactive> list in interactiveLists)
             {
-                i.Stop();
+                foreach (InteractiveNode i in list)
+                {
+                    i.Stop();
+                }
             }
 
             ToggleMusic(false);
@@ -304,9 +367,12 @@ namespace Jumpvalley.Levels
         /// </summary>
         public new void Dispose()
         {
-            foreach (InteractiveNode i in Interactives)
+            foreach (List<Interactive> list in interactiveLists)
             {
-                i.Dispose();
+                foreach (InteractiveNode i in list)
+                {
+                    i.Dispose();
+                }
             }
 
             base.Dispose();
