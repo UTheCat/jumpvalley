@@ -245,6 +245,26 @@ namespace Jumpvalley.Levels
         }
 
         /// <summary>
+        /// Sends the player's character to the checkpoint they're currently on
+        /// </summary>
+        public void SendPlayerToCurrentCheckpoint()
+        {
+            if (Checkpoints != null)
+            {
+                Player player = GetCurrentPlayer();
+                if (player != null)
+                {
+                    CharacterBody3D character = player.Character;
+
+                    if (character != null)
+                    {
+                        Checkpoints.SendToCurrentCheckpoint(character);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Level initialization method that initializes the level after the constructor runs, in case such method is needed.
         /// <br/>
         /// By default, this method is only called once after the object's constructor runs.
@@ -312,22 +332,6 @@ namespace Jumpvalley.Levels
 
             // resume the level's main clock
             Clock.Start();
-
-            // spawn the player's character into the level
-            // at the current checkpoint
-            if (Checkpoints != null)
-            {
-                Player player = GetCurrentPlayer();
-                if (player != null)
-                {
-                    CharacterBody3D character = player.Character;
-
-                    if (character != null)
-                    {
-                        Checkpoints.SendToCurrentCheckpoint(character);
-                    }
-                }
-            }
 
             base.Start();
         }
