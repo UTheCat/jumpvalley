@@ -85,6 +85,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.
 
 [node name="Levels" type="Node3D" parent="."]
 metadata/initialization_level = "res://levels/shape_variety/"
+metadata/initialization_lobby = "res://scenes/lobby/"
 
 [node name="Music" type="Node3D" parent="."]
 
