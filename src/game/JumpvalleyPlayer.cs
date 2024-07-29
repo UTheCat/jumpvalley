@@ -22,8 +22,10 @@ namespace JumpvalleyGame
     /// </summary>
     public partial class JumpvalleyPlayer : Player, IDisposable
     {
-        private ConsoleLogger logger;
+        private static readonly string INITIALIZATION_LEVEL_META_NAME = "initialization_level";
+        private static readonly string INITIALIZATION_LOBBY_META_NAME = "initialization_lobby";
 
+        private ConsoleLogger logger;
         private JumpvalleySettings settings;
 
         public JumpvalleyPlayer(SceneTree tree, Node rootNode) : base(tree, rootNode)
@@ -173,25 +175,31 @@ namespace JumpvalleyGame
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
             RootNode.AddChild(levelRunner);
 
-            // Load the lobby
-            LevelPackage lobby = new LevelPackage("res://scenes/lobby", levelRunner);
-            levelRunner.Lobby = lobby;
-            Disposables.Add(lobby);
-            lobby.LoadRootNode();
-            lobby.CreateLevelInstance();
-            lobby.StartLevel();
-            RootNode.AddChild(lobby.RootNode);
-            lobby.LevelInstance.SendPlayerToCurrentCheckpoint();
+            // Load the initialization lobby (the lobby we want to load in when the game starts)
+            if (RootNode.HasMeta(INITIALIZATION_LOBBY_META_NAME))
+            {
+                string lobbyPath = RootNode.GetMeta(INITIALIZATION_LOBBY_META_NAME).As<string>();
+                if (!string.IsNullOrEmpty(lobbyPath))
+                {
+                    LevelPackage lobby = new LevelPackage(lobbyPath, levelRunner);
+                    levelRunner.Lobby = lobby;
+                    Disposables.Add(lobby);
+                    lobby.LoadRootNode();
+                    lobby.CreateLevelInstance();
+                    lobby.StartLevel();
+                    RootNode.AddChild(lobby.RootNode);
+                    lobby.LevelInstance.SendPlayerToCurrentCheckpoint();
+                }
+            }
 
             // Load the initialization level (the level we want to load in when the game starts)
             string levelsNodeName = "Levels";
-            string initializationLevelMetadataName = "initialization_level";
             Node levelsNode = RootNode.GetNode(levelsNodeName);
             if (levelsNode != null)
             {
-                if (levelsNode.HasMeta(initializationLevelMetadataName))
+                if (levelsNode.HasMeta(INITIALIZATION_LEVEL_META_NAME))
                 {
-                    string levelPath = levelsNode.GetMeta(initializationLevelMetadataName).As<string>();
+                    string levelPath = levelsNode.GetMeta(INITIALIZATION_LEVEL_META_NAME).As<string>();
 
                     if (!string.IsNullOrEmpty(levelPath))
                     {

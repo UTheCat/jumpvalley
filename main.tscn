@@ -24,6 +24,7 @@ glow_enabled = true
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_r1x4e")
+metadata/initialization_lobby = "res://scenes/lobby/"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0mmb7")
