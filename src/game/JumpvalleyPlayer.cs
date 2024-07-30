@@ -195,6 +195,7 @@ namespace JumpvalleyGame
                     MusicGroup lobbyPrimaryPlaylist = lobbyLevel.PrimaryPlaylist;
                     if (lobbyPrimaryPlaylist != null)
                     {
+                        CurrentMusicPlayer.AddPlaylist(lobbyPrimaryPlaylist);
                         CurrentMusicPlayer.PrimaryPlaylist = lobbyPrimaryPlaylist;
                     }
                 }
@@ -225,6 +226,7 @@ namespace JumpvalleyGame
                         MusicGroup levelPrimaryPlaylist = levelInstance.PrimaryPlaylist;
                         if (levelPrimaryPlaylist != null)
                         {
+                            CurrentMusicPlayer.AddPlaylist(levelPrimaryPlaylist);
                             CurrentMusicPlayer.PrimaryPlaylist = levelPrimaryPlaylist;
                         }
 
