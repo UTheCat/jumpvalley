@@ -85,7 +85,7 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// The level's primary music playlist
         /// </summary>
-        public MusicGroup PrimaryPlaylist;
+        public MusicGroup PrimaryPlaylist { get; private set; }
 
         /// <summary>
         /// The node containing the level's static objects
@@ -168,8 +168,12 @@ namespace Jumpvalley.Levels
                     }
                 }
 
-                Node primaryMusicNode = Music.GetNode("PrimaryMusic");
-                if (primaryMusicNode != null)
+                Node primaryMusicNode = Music.GetNodeOrNull("PrimaryMusic");
+                if (primaryMusicNode == null)
+                {
+                    PrimaryPlaylist = null;
+                }
+                else
                 {
                     PrimaryPlaylist = new MusicGroup(primaryMusicNode);
                 }
