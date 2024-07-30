@@ -69,6 +69,9 @@ namespace JumpvalleyGame.Gui
                 gui = control;
                 gui.Visible = false;
 
+                framesPerSecondLabel = gui.GetNode<Label>("FramesPerSecond");
+                msPerFrameLabel = gui.GetNode<Label>("MsPerFrame");
+
                 opacityTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, actualNode.GetTree())
                 {
                     InitialValue = 0.0,
