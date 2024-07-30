@@ -92,6 +92,5 @@ metadata/initialization_level = "res://levels/shape_variety/"
 [node name="PrimaryMusic" type="Node" parent="Music"]
 
 [node name="Music" type="Node" parent="Music/PrimaryMusic"]
-metadata/song1 = "res://addons/music/1215548_Shivers/"
 
 [node name="MusicZones" type="Node3D" parent="Music"]

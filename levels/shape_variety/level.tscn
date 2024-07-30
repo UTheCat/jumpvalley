@@ -345,11 +345,6 @@ visible = false
 mesh = SubResource("BoxMesh_bi26x")
 skeleton = NodePath("../..")
 
-[node name="PrimaryMusic" type="Node" parent="Music"]
-
-[node name="Music" type="Node" parent="Music/PrimaryMusic"]
-metadata/song1 = ""
-
 [node name="StaticObjects" type="Node3D" parent="."]
 
 [node name="Base" type="StaticBody3D" parent="StaticObjects"]

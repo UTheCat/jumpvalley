@@ -188,7 +188,16 @@ namespace JumpvalleyGame
                     lobby.CreateLevelInstance();
                     lobby.StartLevel();
                     RootNode.AddChild(lobby.RootNode);
-                    lobby.LevelInstance.SendPlayerToCurrentCheckpoint();
+
+                    Level lobbyLevel = lobby.LevelInstance;
+                    lobbyLevel.SendPlayerToCurrentCheckpoint();
+
+                    MusicGroup lobbyPrimaryPlaylist = lobbyLevel.PrimaryPlaylist;
+                    if (lobbyPrimaryPlaylist != null)
+                    {
+                        CurrentMusicPlayer.AddPlaylist(lobbyPrimaryPlaylist);
+                        CurrentMusicPlayer.PrimaryPlaylist = lobbyPrimaryPlaylist;
+                    }
                 }
             }
 
@@ -210,7 +219,16 @@ namespace JumpvalleyGame
                         levelPackage.CreateLevelInstance();
                         levelPackage.StartLevel();
                         levelsNode.AddChild(levelPackage.RootNode);
-                        levelPackage.LevelInstance.SendPlayerToCurrentCheckpoint();
+
+                        Level levelInstance = levelPackage.LevelInstance;
+                        levelInstance.SendPlayerToCurrentCheckpoint();
+
+                        MusicGroup levelPrimaryPlaylist = levelInstance.PrimaryPlaylist;
+                        if (levelPrimaryPlaylist != null)
+                        {
+                            CurrentMusicPlayer.AddPlaylist(levelPrimaryPlaylist);
+                            CurrentMusicPlayer.PrimaryPlaylist = levelPrimaryPlaylist;
+                        }
 
                         LevelInfo levelInfo = levelPackage.Info;
                         Difficulty difficulty = levelInfo.LevelDifficulty;
