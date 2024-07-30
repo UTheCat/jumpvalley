@@ -83,6 +83,11 @@ namespace Jumpvalley.Levels
         public List<MusicZone> MusicZones { get; private set; }
 
         /// <summary>
+        /// The level's primary music playlist
+        /// </summary>
+        public MusicGroup PrimaryPlaylist;
+
+        /// <summary>
         /// The node containing the level's static objects
         /// </summary>
         public Node StaticObjects { get; private set; }
@@ -161,6 +166,12 @@ namespace Jumpvalley.Levels
                     {
                         MusicZones.Add(new MusicZone(zoneNode));
                     }
+                }
+
+                Node primaryMusicNode = Music.GetNode("PrimaryMusic");
+                if (primaryMusicNode != null)
+                {
+                    PrimaryPlaylist = new MusicGroup(primaryMusicNode);
                 }
             }
 
