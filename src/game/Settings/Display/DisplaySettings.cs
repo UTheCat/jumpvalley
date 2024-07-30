@@ -11,7 +11,8 @@ namespace JumpvalleyGame.Settings.Display
             LocalizationId = "SETTINGS_GROUP_DISPLAY";
 
             SettingBase[] settings = [
-                new FullscreenControl()
+                new FullscreenControl(),
+                new FramerateCounterToggle()
             ];
 
             foreach (SettingBase s in settings)
