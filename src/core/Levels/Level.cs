@@ -389,6 +389,11 @@ namespace Jumpvalley.Levels
                     i.Dispose();
                 }
             }
+            foreach (MusicZone zone in MusicZones)
+            {
+                zone.Dispose();
+            }
+            PrimaryPlaylist?.Dispose();
 
             base.Dispose();
         }
