@@ -12,6 +12,7 @@ using Jumpvalley.Players.Movement;
 using JumpvalleyGame.Gui;
 using JumpvalleyGame.Levels;
 using JumpvalleyGame.Settings;
+using JumpvalleyGame.Settings.Display;
 using JumpvalleyGame.Testing;
 using Jumpvalley.Levels.Interactives.Mechanics;
 
@@ -27,12 +28,13 @@ namespace JumpvalleyGame
 
         private ConsoleLogger logger;
         private JumpvalleySettings settings;
+        private FramerateCounter framerateCounter;
 
         public JumpvalleyPlayer(SceneTree tree, Node rootNode) : base(tree, rootNode)
         {
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
-
             settings = new JumpvalleySettings();
+            framerateCounter = null;
         }
 
         public override void Start()
@@ -145,6 +147,14 @@ namespace JumpvalleyGame
             animatedNodes.Add("music_panel", musicPanel);
 
             //bottomBar.PrimaryMusicPanel = musicPanel;
+
+            // Framerate counter
+            framerateCounter = new FramerateCounter(PrimaryGui.GetNode<Control>("FramerateCounter"));
+            FramerateCounterToggle framerateCounterToggle = settings.Group.GetNode<FramerateCounterToggle>("display/show_framerate_counter");
+            if (framerateCounterToggle != null)
+            {
+                framerateCounterToggle.Counter = framerateCounter;
+            }
 
             // Settings menu
             Control settingsMenuNode = PrimaryGui.GetNode<Control>("SettingsMenu");
@@ -267,6 +277,15 @@ namespace JumpvalleyGame
 
             settings.Group.Dispose();
             base.Dispose();
+        }
+
+        public override void _Process(double delta)
+        {
+            FramerateCounter counter = framerateCounter;
+            if (counter != null)
+            {
+                counter.CurrentFps = 1.0 / delta;
+            }
         }
     }
 }
