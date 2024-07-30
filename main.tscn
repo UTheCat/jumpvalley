@@ -49,8 +49,13 @@ grow_vertical = 2
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
 
 [node name="FramerateCounter" parent="PrimaryGui" instance=ExtResource("3_6onu6")]
-visible = false
 layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -106.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 64.0
 
 [node name="BackgroundPanel" parent="PrimaryGui" instance=ExtResource("3_28c11")]
 visible = false
