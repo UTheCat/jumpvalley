@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsjm5305mt3le"]
+
+[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf" id="1_gn4x6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8c2d"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_watl3"]
+font = ExtResource("1_gn4x6")
+
+[node name="FpsCounter" type="Control"]
+layout_mode = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8c2d")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "60 FPS
+16.67 ms"
+label_settings = SubResource("LabelSettings_watl3")
+horizontal_alignment = 2
+vertical_alignment = 1
