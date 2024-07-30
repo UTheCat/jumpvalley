@@ -11,7 +11,7 @@ namespace JumpvalleyGame.Settings
         /// <summary>
         /// The internal identifier of the setting
         /// </summary>
-        public string Id;
+        public string Id => Name;
 
         /// <summary>
         /// The key in the localization table that points to the setting's name
