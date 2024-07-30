@@ -18,7 +18,7 @@ namespace Jumpvalley.Music
     /// <br/><br/>
     /// <b>Incremental songN metadata entries</b>
     /// <br/>
-    /// Multiple metadata entries are specified in this format:
+    /// This method is used when no songs array is present in the metadata. Multiple metadata entries should be specified in this format:
     /// <br/>
     /// Entry name: <c>songN</c> where N represents the numerical index of the song package directory starting from 1. Songs are played in numerical order.
     /// <br/>
