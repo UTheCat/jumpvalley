@@ -49,7 +49,7 @@ namespace JumpvalleyGame.Gui
                 _currentFps = value;
 
                 framesPerSecondLabel.Text = $"{value} FPS";
-                msPerFrameLabel.Text = $"{1f/value} ms";
+                msPerFrameLabel.Text = $"{1.0/value} ms";
 
                 Color labelColor = LowFpsColor.Lerp(HighFpsColor, (float)((value - HighFps) / (HighFps - LowFps)));
                 framesPerSecondLabel.SelfModulate = labelColor;
