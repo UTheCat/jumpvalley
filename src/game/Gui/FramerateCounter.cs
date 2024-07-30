@@ -15,8 +15,8 @@ namespace JumpvalleyGame.Gui
         private Label framesPerSecondLabel;
         private Label msPerFrameLabel;
 
-        public float LowFps;
-        public float HighFps;
+        public double LowFps;
+        public double HighFps;
         public Color LowFpsColor;
         public Color HighFpsColor;
 
@@ -40,8 +40,8 @@ namespace JumpvalleyGame.Gui
             }
         }
 
-        private float _currentFps;
-        public float CurrentFps
+        private double _currentFps;
+        public double CurrentFps
         {
             get => _currentFps;
             set
@@ -51,7 +51,7 @@ namespace JumpvalleyGame.Gui
                 framesPerSecondLabel.Text = $"{value} FPS";
                 msPerFrameLabel.Text = $"{1f/value} ms";
 
-                Color labelColor = LowFpsColor.Lerp(HighFpsColor, (value - HighFps) / (HighFps - LowFps));
+                Color labelColor = LowFpsColor.Lerp(HighFpsColor, (float)((value - HighFps) / (HighFps - LowFps)));
                 framesPerSecondLabel.SelfModulate = labelColor;
                 msPerFrameLabel.SelfModulate = labelColor;
             }
@@ -59,8 +59,8 @@ namespace JumpvalleyGame.Gui
 
         public FramerateCounter(Node actualNode) : base(actualNode)
         {
-            LowFps = 30f;
-            HighFps = 60f;
+            LowFps = 30.0;
+            HighFps = 60.0;
             LowFpsColor = Color.FromHsv(0f, 0.6f, 1f);
             HighFpsColor = Color.FromHsv(100f / 360f, 1f, 1f);
 
