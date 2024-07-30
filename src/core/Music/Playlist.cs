@@ -58,6 +58,7 @@ namespace Jumpvalley.Music
         private Song _currentSong;
 
         private int currentSongIndex = 0;
+        private int recentSongIndex = 0;
         private bool handleSongFinishedConnected = false;
 
         /// <summary>
@@ -222,7 +223,7 @@ namespace Jumpvalley.Music
         private void SwitchToSong(int index)
         {
             // we don't need to do anything here if there aren't any songs or if this song is already playing
-            if (SongList.Count < 1 || (streamPlayer != null && index == currentSongIndex)) { return; }
+            if (SongList.Count < 1 || (streamPlayer != null && index == recentSongIndex)) { return; }
 
             Song s = SongList[index];
 
@@ -233,7 +234,7 @@ namespace Jumpvalley.Music
             streamPlayer.Stream = s.Stream;
 
             // If there's more than one song, switch to the next song on finish
-            if (!onlyOneSong && streamPlayer != null && handleSongFinishedConnected == false)
+            if (onlyOneSong == false && streamPlayer != null && handleSongFinishedConnected == false)
             {
                 handleSongFinishedConnected = true;
                 streamPlayer.Finished += PlayNextSong;
@@ -241,6 +242,13 @@ namespace Jumpvalley.Music
 
             // take note of the song change
             CurrentSong = s;
+            recentSongIndex = index;
+
+            // play the song
+            if (!streamPlayer.Playing)
+            {
+                streamPlayer.Play();
+            }
         }
 
         private void KillCurrentTween()
@@ -283,10 +291,12 @@ namespace Jumpvalley.Music
 
             if (streamPlayer != null)
             {
+                /*
                 if (!streamPlayer.Playing)
                 {
                     streamPlayer.Play();
                 }
+                */
 
                 if (currentTween == null)
                 {
