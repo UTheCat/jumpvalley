@@ -8,10 +8,20 @@ namespace JumpvalleyGame.Settings
     /// </summary>
     public partial class SettingBase : Node
     {
+        private string _id;
+
         /// <summary>
         /// The internal identifier of the setting
         /// </summary>
-        public string Id => Name;
+        public string Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                Name = value;
+            }
+        }
 
         /// <summary>
         /// The key in the localization table that points to the setting's name

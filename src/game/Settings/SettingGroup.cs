@@ -10,7 +10,16 @@ namespace JumpvalleyGame.Settings
     /// </summary>
     public partial class SettingGroup : Node, IDisposable
     {
-        public string Id => Name;
+        private string _id;
+        public string Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                Name = value;
+            }
+        }
         public string LocalizationId;
         public List<SettingGroup> Subgroups;
         public List<SettingBase> SettingList;
