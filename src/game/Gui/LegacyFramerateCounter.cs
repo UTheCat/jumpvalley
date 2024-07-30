@@ -1,11 +1,13 @@
 using Godot;
+using System;
 
 namespace JumpvalleyGame.Gui
 {
     /// <summary>
     /// Displays refresh rate to the user (commonly called frames-per-seconds or FPS for short)
     /// </summary>
-    public partial class FramerateCounter : Node
+    [Obsolete]
+    public partial class LegacyFramerateCounter : Node
     {
         /// <summary>
         /// The label of the counter to be displayed on the user's screen
@@ -26,12 +28,12 @@ namespace JumpvalleyGame.Gui
         /// </summary>
         public double CriticallyLowFps = 20;
 
-        public FramerateCounter(Label initLabel)
+        public LegacyFramerateCounter(Label initLabel)
         {
             CountLabel = initLabel;
         }
 
-        public FramerateCounter()
+        public LegacyFramerateCounter()
         {
             CountLabel = new Label();
             CountLabel.Name = "FPSCounter";
