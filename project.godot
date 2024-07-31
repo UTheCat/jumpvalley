@@ -15,6 +15,7 @@ config/version="0.5.0"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.2", "C#")
 run/max_fps=60
+boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://icons/music_note_icon_256dp.png"
 config/use_custom_user_dir.jumpvalley_custom_user_dir=true
