@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp4l7rtotuyq5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8rbfl"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="IntroPanel" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8rbfl")
