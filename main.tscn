@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=13 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" path="res://src/game/Program.cs" id="1_r1x4e"]
 [ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
+[ext_resource type="PackedScene" uid="uid://dsjm5305mt3le" path="res://gui/framerate_counter.tscn" id="3_6onu6"]
 [ext_resource type="PackedScene" uid="uid://w1bxdo35gvho" path="res://gui/background_panel.tscn" id="3_28c11"]
 [ext_resource type="PackedScene" uid="uid://dfirwq7r0jq20" path="res://gui/music_panel.tscn" id="3_dfcbn"]
 [ext_resource type="PackedScene" uid="uid://d2jxb8y2m4xf0" path="res://gui/settings/settings_menu.tscn" id="4_7nvye"]
@@ -46,6 +47,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
+
+[node name="FramerateCounter" parent="PrimaryGui" instance=ExtResource("3_6onu6")]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -106.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 64.0
 
 [node name="BackgroundPanel" parent="PrimaryGui" instance=ExtResource("3_28c11")]
 visible = false

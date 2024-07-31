@@ -37,6 +37,7 @@ namespace JumpvalleyGame
 			Console.WriteLine(nowRunningText);
 
 			player = new JumpvalleyPlayer(GetTree(), this);
+			AddChild(player);
 			player.Start();
 
 			Console.WriteLine("Game has started successfully.");

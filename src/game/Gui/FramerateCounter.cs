@@ -1,73 +1,93 @@
+using System;
 using Godot;
+using Jumpvalley.Animation;
+using Jumpvalley.Tweening;
 
 namespace JumpvalleyGame.Gui
 {
     /// <summary>
-    /// Displays refresh rate to the user (commonly called frames-per-seconds or FPS for short)
+    /// Class that handles the game's framerate counter GUI.
     /// </summary>
-    public partial class FramerateCounter : Node
+    public partial class FramerateCounter : AnimatedNode
     {
-        /// <summary>
-        /// The label of the counter to be displayed on the user's screen
-        /// </summary>
-        public Label CountLabel;
+        private SceneTreeTween opacityTween;
+        private Control gui;
+        private Label framesPerSecondLabel;
+        private Label msPerFrameLabel;
 
-        /// <summary>
-        /// Framerate that is considered to be low.
-        /// <br/>
-        /// The label will display yellow text if the detected FPS is between the value of CriticallyLowFps (exclusive) to the value of this variable (inclusive).
-        /// </summary>
-        public double LowFps = 40;
+        public double LowFps;
+        public double HighFps;
+        public Color LowFpsColor;
+        public Color HighFpsColor;
 
-        /// <summary>
-        /// Framerate that is considered to be critically low
-        /// <br/>
-        /// The label will display red text if the detected FPS is the value of this variable or lower.
-        /// </summary>
-        public double CriticallyLowFps = 20;
-
-        public FramerateCounter(Label initLabel)
+        public override bool IsVisible
         {
-            CountLabel = initLabel;
+            get => base.IsVisible;
+            set
+            {
+                base.IsVisible = value;
+
+                if (value)
+                {
+                    opacityTween.Speed = 1;
+                }
+                else
+                {
+                    opacityTween.Speed = -1;
+                }
+
+                opacityTween.Resume();
+            }
         }
 
-        public FramerateCounter()
+        private double _currentFps;
+        public double CurrentFps
         {
-            CountLabel = new Label();
-            CountLabel.Name = "FPSCounter";
+            get => _currentFps;
+            set
+            {
+                _currentFps = value;
+
+                framesPerSecondLabel.Text = $"{value.ToString("F1")} FPS";
+                msPerFrameLabel.Text = $"{(1000.0/value).ToString("F1")} ms";
+
+                Color labelColor = LowFpsColor.Lerp(HighFpsColor, (float)Math.Clamp(((value - LowFps) / (HighFps - LowFps)), 0.0, 1.0));
+                framesPerSecondLabel.SelfModulate = labelColor;
+                msPerFrameLabel.SelfModulate = labelColor;
+            }
         }
 
-        /// <summary>
-        /// Updates the value of the framerate counter based on the time it took to complete a single frame
-        /// </summary>
-        /// <param name="delta">The time it took to complete a single frame in seconds</param>
-        public void Update(double delta)
+        public FramerateCounter(Node actualNode) : base(actualNode)
         {
-            double fps = (1 / delta);
-            CountLabel.Text = "FPS: " + fps.ToString("F1");
+            LowFps = 30.0;
+            HighFps = 60.0;
+            LowFpsColor = Color.FromHsv(0f, 0.6f, 1f);
+            HighFpsColor = Color.FromHsv(100f / 360f, 1f, 1f);
 
-            Color color;
-
-            if (fps > LowFps)
+            if (actualNode is Control control)
             {
-                color = Color.Color8(0, 255, 0);
-            }
-            else if (fps > CriticallyLowFps)
-            {
-                color = Color.Color8(255, 255, 0);
-            }
-            else
-            {
-                color = Color.Color8(255, 0, 0);
-            }
+                gui = control;
+                gui.Visible = false;
 
-            CountLabel.RemoveThemeColorOverride("font_color");
-            CountLabel.AddThemeColorOverride("font_color", color);
-        }
+                framesPerSecondLabel = gui.GetNode<Label>("FramesPerSecond");
+                msPerFrameLabel = gui.GetNode<Label>("MsPerFrame");
 
-        public override void _Process(double delta)
-        {
-            Update(delta);
+                opacityTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, actualNode.GetTree())
+                {
+                    InitialValue = 0.0,
+                    FinalValue = 1.0,
+                    Speed = 1f
+                };
+                opacityTween.OnStep += (object _o, float frac) =>
+                {
+                    float opacity = (float)opacityTween.GetCurrentValue();
+                    gui.Visible = opacity > 0;
+
+                    Color modulate = gui.Modulate;
+                    modulate.A = opacity;
+                    gui.Modulate = modulate;
+                };
+            }
         }
     }
 }

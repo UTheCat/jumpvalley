@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsjm5305mt3le"]
+
+[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf" id="1_wes5i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8c2d"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_watl3"]
+font = ExtResource("1_wes5i")
+font_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_0oqq1"]
+font = ExtResource("1_wes5i")
+font_size = 12
+
+[node name="FramerateCounter" type="Control"]
+layout_mode = 3
+offset_right = 98.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8c2d")
+
+[node name="FramesPerSecond" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "60.0 FPS"
+label_settings = SubResource("LabelSettings_watl3")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MsPerFrame" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 31.0
+offset_right = -12.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "16.67 ms"
+label_settings = SubResource("LabelSettings_0oqq1")
+horizontal_alignment = 2
+vertical_alignment = 1
