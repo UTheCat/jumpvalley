@@ -171,6 +171,10 @@ namespace JumpvalleyGame
             Disposables.Add(settingsMenu);
             Disposables.Add(settingsMenuNode);
 
+            // Intro panel
+            BackgroundPanel introPanel = new BackgroundPanel(PrimaryGui.GetNode<Panel>("IntroPanel"));
+            introPanel.IsVisible = true;
+
             // Apply saved settings configuration
             SettingsFile settingsFile = settings.File;
             settingsFile.Read();
@@ -263,6 +267,8 @@ namespace JumpvalleyGame
             Disposables.Add(rotationLockControl);
             Disposables.Add(bottomBar);
             Disposables.Add(animatedNodes);
+
+            introPanel.IsVisible = false;
         }
 
         public new void Dispose()
