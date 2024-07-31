@@ -10,7 +10,6 @@ namespace JumpvalleyGame.Gui
     /// </summary>
     public partial class FramerateCounter : AnimatedNode
     {
-        private static readonly string FONT_COLOR_NAME = "font_color";
         private SceneTreeTween opacityTween;
         private Control gui;
         private Label framesPerSecondLabel;
