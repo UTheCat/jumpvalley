@@ -3,6 +3,7 @@
 [ext_resource type="LabelSettings" uid="uid://dky074m66u2lu" path="res://gui/settings/setting_name.tres" id="1_t2fq7"]
 
 [node name="CheckButtonSetting" type="Control"]
+custom_minimum_size = Vector2(0, 56)
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
