@@ -284,7 +284,7 @@ namespace JumpvalleyGame
             FramerateCounter counter = framerateCounter;
             if (counter != null)
             {
-                counter.CurrentFps = 1.0 / delta;
+                counter.CurrentFps = Engine.GetFramesPerSecond();
             }
         }
     }

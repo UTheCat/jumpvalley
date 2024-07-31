@@ -11,6 +11,7 @@ corner_radius_bottom_left = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_watl3"]
 font = ExtResource("1_wes5i")
+font_size = 14
 
 [sub_resource type="LabelSettings" id="LabelSettings_0oqq1"]
 font = ExtResource("1_wes5i")
@@ -43,7 +44,7 @@ offset_right = -12.0
 offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "60 FPS"
+text = "60.0 FPS"
 label_settings = SubResource("LabelSettings_watl3")
 horizontal_alignment = 2
 vertical_alignment = 1

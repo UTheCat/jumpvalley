@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Jumpvalley.Animation;
 using Jumpvalley.Tweening;
@@ -48,10 +49,10 @@ namespace JumpvalleyGame.Gui
             {
                 _currentFps = value;
 
-                framesPerSecondLabel.Text = $"{value} FPS";
-                msPerFrameLabel.Text = $"{1.0/value} ms";
+                framesPerSecondLabel.Text = $"{value.ToString("F1")} FPS";
+                msPerFrameLabel.Text = $"{(1000.0/value).ToString("F1")} ms";
 
-                Color labelColor = LowFpsColor.Lerp(HighFpsColor, (float)((value - HighFps) / (HighFps - LowFps)));
+                Color labelColor = LowFpsColor.Lerp(HighFpsColor, (float)Math.Clamp(((value - LowFps) / (HighFps - LowFps)), 0.0, 1.0));
                 framesPerSecondLabel.SelfModulate = labelColor;
                 msPerFrameLabel.SelfModulate = labelColor;
             }
