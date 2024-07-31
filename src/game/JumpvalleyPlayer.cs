@@ -15,6 +15,7 @@ using JumpvalleyGame.Settings;
 using JumpvalleyGame.Settings.Display;
 using JumpvalleyGame.Testing;
 using Jumpvalley.Levels.Interactives.Mechanics;
+using Jumpvalley.Tweening;
 
 namespace JumpvalleyGame
 {
@@ -172,8 +173,30 @@ namespace JumpvalleyGame
             Disposables.Add(settingsMenuNode);
 
             // Intro panel
-            BackgroundPanel introPanel = new BackgroundPanel(PrimaryGui.GetNode<Panel>("IntroPanel"));
-            introPanel.IsVisible = true;
+            Panel introPanelNode = PrimaryGui.GetNode<Panel>("IntroPanel");
+            introPanelNode.Visible = true;
+            
+            SceneTreeTween introPanelFade = new SceneTreeTween(0.5, Tween.TransitionType.Linear, Tween.EaseType.Out, Tree)
+            {
+                InitialValue = 1.0,
+                FinalValue = 0.0
+            };
+            introPanelFade.OnStep += (object _o, float frac) =>
+            {
+                float opacity = (float)introPanelFade.GetCurrentValue();
+
+                Color modulate = introPanelNode.Modulate;
+                modulate.A = opacity;
+                introPanelNode.Modulate = modulate;
+            };
+            introPanelFade.OnFinish += (object _o, EventArgs _e) =>
+            {
+                introPanelNode.Visible = false;
+                Disposables.Remove(introPanelFade);
+                introPanelFade.Dispose();
+            };
+            Disposables.Add(introPanelFade);
+            Disposables.Add(introPanelNode);
 
             // Apply saved settings configuration
             SettingsFile settingsFile = settings.File;
@@ -268,7 +291,7 @@ namespace JumpvalleyGame
             Disposables.Add(bottomBar);
             Disposables.Add(animatedNodes);
 
-            introPanel.IsVisible = false;
+            introPanelFade.Resume();
         }
 
         public new void Dispose()
