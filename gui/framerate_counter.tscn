@@ -19,6 +19,7 @@ font_size = 12
 
 [node name="FramerateCounter" type="Control"]
 layout_mode = 3
+anchors_preset = 0
 offset_right = 98.0
 offset_bottom = 56.0
 grow_horizontal = 2
