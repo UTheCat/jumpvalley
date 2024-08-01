@@ -21,8 +21,13 @@ namespace Jumpvalley.Levels
     {
         public static readonly string INTERACTIVES_NODE_NAME = "Interactives";
         public static readonly string MUSIC_NODE_NAME = "Music";
+        public static readonly string MUSIC_ZONES_NODE_NAME = "MusicZones";
+        public static readonly string PRIMARY_MUSIC_NODE_NAME = "PrimaryMusic";
         public static readonly string STATIC_OBJECTS_NODE_NAME = "StaticObjects";
         public static readonly string CHECKPOINTS_NODE_NAME = "Checkpoints";
+        public static readonly string LIGHTING_NODE_NAME = "Lighting";
+        public static readonly string LEVEL_DIRECTIONAL_LIGHT_NODE_NAME = "LevelDirectionalLight";
+        public static readonly string LEVEL_ENVIRONMENT_META_NAME = "LevelEnvironment";
 
         /// <summary>
         /// Indicates the current run state of the level.
@@ -106,6 +111,21 @@ namespace Jumpvalley.Levels
         public CheckpointSet Checkpoints { get; private set; }
 
         /// <summary>
+        /// The node where the level's lighting is specified
+        /// </summary>
+        public Node Lighting { get; private set; }
+
+        /// <summary>
+        /// The <see cref="Godot.Environment"/> specified by the level. 
+        /// </summary>
+        public Godot.Environment LevelEnvironment { get; private set; }
+
+        /// <summary>
+        /// The <see cref="DirectionalLight3D"/> specified by the level. 
+        /// </summary>
+        public DirectionalLight3D LevelDirectionalLight { get; private set; }
+
+        /// <summary>
         /// The level's current run state
         /// </summary>
         public RunState CurrentRunState { get; private set; }
@@ -136,6 +156,27 @@ namespace Jumpvalley.Levels
             Music = root.GetNode(MUSIC_NODE_NAME);
             StaticObjects = root.GetNode(STATIC_OBJECTS_NODE_NAME);
 
+            Lighting = root.GetNode(LIGHTING_NODE_NAME);
+
+            if (Lighting == null)
+            {
+                LevelEnvironment = null;
+                LevelDirectionalLight = null;
+            }
+            else
+            {
+                if (Lighting.HasMeta(LEVEL_ENVIRONMENT_META_NAME))
+                {
+                    LevelEnvironment = Lighting.GetMeta(LEVEL_ENVIRONMENT_META_NAME).As<Godot.Environment>();
+                }
+                else
+                {
+                    LevelEnvironment = null;
+                }
+
+                LevelDirectionalLight = Lighting.GetNodeOrNull<DirectionalLight3D>(LEVEL_DIRECTIONAL_LIGHT_NODE_NAME);
+            }
+
             Interactives = new List<Interactive>();
             if (InteractivesNode != null)
             {
@@ -159,7 +200,7 @@ namespace Jumpvalley.Levels
             MusicZones = new List<MusicZone>();
             if (Music != null)
             {
-                Node musicZonesNode = Music.GetNode("MusicZones");
+                Node musicZonesNode = Music.GetNode(MUSIC_ZONES_NODE_NAME);
                 if (musicZonesNode != null)
                 {
                     foreach (Node zoneNode in musicZonesNode.GetChildren())
@@ -168,7 +209,7 @@ namespace Jumpvalley.Levels
                     }
                 }
 
-                Node primaryMusicNode = Music.GetNodeOrNull("PrimaryMusic");
+                Node primaryMusicNode = Music.GetNodeOrNull(PRIMARY_MUSIC_NODE_NAME);
                 if (primaryMusicNode == null)
                 {
                     PrimaryPlaylist = null;
