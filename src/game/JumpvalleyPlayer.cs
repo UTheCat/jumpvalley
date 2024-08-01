@@ -175,7 +175,7 @@ namespace JumpvalleyGame
             // Intro panel
             Panel introPanelNode = PrimaryGui.GetNode<Panel>("IntroPanel");
             introPanelNode.Visible = true;
-            
+
             SceneTreeTween introPanelFade = new SceneTreeTween(0.5, Tween.TransitionType.Linear, Tween.EaseType.Out, Tree)
             {
                 InitialValue = 1.0,
@@ -212,30 +212,39 @@ namespace JumpvalleyGame
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
             RootNode.AddChild(levelRunner);
 
+            LevelPackage StartLevel(string levelPath, Node levelNodeParent)
+            {
+                if (!string.IsNullOrEmpty(levelPath))
+                {
+                    LevelPackage levelPackage = new LevelPackage(levelPath, levelRunner);
+                    levelRunner.CurrentLevelPackage = levelPackage;
+                    Disposables.Add(levelPackage);
+                    levelPackage.LoadRootNode();
+                    levelPackage.CreateLevelInstance();
+                    levelPackage.StartLevel();
+                    levelNodeParent.AddChild(levelPackage.RootNode);
+
+                    Level levelInstance = levelPackage.LevelInstance;
+                    levelInstance.SendPlayerToCurrentCheckpoint();
+
+                    MusicGroup levelPrimaryPlaylist = levelInstance.PrimaryPlaylist;
+                    if (levelPrimaryPlaylist != null)
+                    {
+                        CurrentMusicPlayer.AddPlaylist(levelPrimaryPlaylist);
+                        CurrentMusicPlayer.PrimaryPlaylist = levelPrimaryPlaylist;
+                    }
+
+                    return levelPackage;
+                }
+
+                return null;
+            }
+
             // Load the initialization lobby (the lobby we want to load in when the game starts)
             if (RootNode.HasMeta(INITIALIZATION_LOBBY_META_NAME))
             {
                 string lobbyPath = RootNode.GetMeta(INITIALIZATION_LOBBY_META_NAME).As<string>();
-                if (!string.IsNullOrEmpty(lobbyPath))
-                {
-                    LevelPackage lobby = new LevelPackage(lobbyPath, levelRunner);
-                    levelRunner.Lobby = lobby;
-                    Disposables.Add(lobby);
-                    lobby.LoadRootNode();
-                    lobby.CreateLevelInstance();
-                    lobby.StartLevel();
-                    RootNode.AddChild(lobby.RootNode);
-
-                    Level lobbyLevel = lobby.LevelInstance;
-                    lobbyLevel.SendPlayerToCurrentCheckpoint();
-
-                    MusicGroup lobbyPrimaryPlaylist = lobbyLevel.PrimaryPlaylist;
-                    if (lobbyPrimaryPlaylist != null)
-                    {
-                        CurrentMusicPlayer.AddPlaylist(lobbyPrimaryPlaylist);
-                        CurrentMusicPlayer.PrimaryPlaylist = lobbyPrimaryPlaylist;
-                    }
-                }
+                StartLevel(lobbyPath, RootNode);
             }
 
             // Load the initialization level (the level we want to load in when the game starts)
@@ -247,26 +256,9 @@ namespace JumpvalleyGame
                 {
                     string levelPath = levelsNode.GetMeta(INITIALIZATION_LEVEL_META_NAME).As<string>();
 
-                    if (!string.IsNullOrEmpty(levelPath))
+                    LevelPackage levelPackage = StartLevel(levelPath, levelsNode);
+                    if (levelPackage != null)
                     {
-                        LevelPackage levelPackage = new LevelPackage(levelPath, levelRunner);
-                        levelRunner.CurrentLevelPackage = levelPackage;
-                        Disposables.Add(levelPackage);
-                        levelPackage.LoadRootNode();
-                        levelPackage.CreateLevelInstance();
-                        levelPackage.StartLevel();
-                        levelsNode.AddChild(levelPackage.RootNode);
-
-                        Level levelInstance = levelPackage.LevelInstance;
-                        levelInstance.SendPlayerToCurrentCheckpoint();
-
-                        MusicGroup levelPrimaryPlaylist = levelInstance.PrimaryPlaylist;
-                        if (levelPrimaryPlaylist != null)
-                        {
-                            CurrentMusicPlayer.AddPlaylist(levelPrimaryPlaylist);
-                            CurrentMusicPlayer.PrimaryPlaylist = levelPrimaryPlaylist;
-                        }
-
                         LevelInfo levelInfo = levelPackage.Info;
                         Difficulty difficulty = levelInfo.LevelDifficulty;
                         logger.Print($"Now playing a level: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");
