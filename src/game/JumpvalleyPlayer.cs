@@ -225,6 +225,24 @@ namespace JumpvalleyGame
                     levelNodeParent.AddChild(levelPackage.RootNode);
 
                     Level levelInstance = levelPackage.LevelInstance;
+
+                    Godot.Environment levelEnvironment = levelInstance.LevelEnvironment;
+                    if (levelEnvironment != null)
+                    {
+                        Camera.Camera.Environment = levelEnvironment;
+                    }
+
+                    DirectionalLight3D levelDirectionalLight = levelInstance.LevelDirectionalLight;
+                    if (levelDirectionalLight != null && levelDirectionalLight.IsInsideTree())
+                    {
+                        DirectionalLight3D defaultDirectionalLight = RootNode.GetNodeOrNull<DirectionalLight3D>("DefaultDirectionalLight");
+                        
+                        if (defaultDirectionalLight != null)
+                        {
+                            defaultDirectionalLight.Visible = false;
+                        }
+                    }
+
                     levelInstance.SendPlayerToCurrentCheckpoint();
 
                     MusicGroup levelPrimaryPlaylist = levelInstance.PrimaryPlaylist;
