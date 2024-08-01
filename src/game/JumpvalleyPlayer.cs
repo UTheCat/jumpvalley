@@ -222,7 +222,6 @@ namespace JumpvalleyGame
                     levelPackage.LoadRootNode();
                     levelPackage.CreateLevelInstance();
                     levelPackage.StartLevel();
-                    levelNodeParent.AddChild(levelPackage.RootNode);
 
                     Level levelInstance = levelPackage.LevelInstance;
 
@@ -233,15 +232,17 @@ namespace JumpvalleyGame
                     }
 
                     DirectionalLight3D levelDirectionalLight = levelInstance.LevelDirectionalLight;
-                    if (levelDirectionalLight != null && levelDirectionalLight.IsInsideTree())
+                    if (levelDirectionalLight != null)
                     {
                         DirectionalLight3D defaultDirectionalLight = RootNode.GetNodeOrNull<DirectionalLight3D>("DefaultDirectionalLight");
-                        
+
                         if (defaultDirectionalLight != null)
                         {
                             defaultDirectionalLight.Visible = false;
                         }
                     }
+
+                    levelNodeParent.AddChild(levelPackage.RootNode);
 
                     levelInstance.SendPlayerToCurrentCheckpoint();
 

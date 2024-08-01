@@ -156,7 +156,7 @@ namespace Jumpvalley.Levels
             Music = root.GetNode(MUSIC_NODE_NAME);
             StaticObjects = root.GetNode(STATIC_OBJECTS_NODE_NAME);
 
-            Lighting = root.GetNode(LIGHTING_NODE_NAME);
+            Lighting = root.GetNodeOrNull(LIGHTING_NODE_NAME);
 
             if (Lighting == null)
             {
