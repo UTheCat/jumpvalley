@@ -27,7 +27,7 @@ namespace Jumpvalley.Levels
         public static readonly string CHECKPOINTS_NODE_NAME = "Checkpoints";
         public static readonly string LIGHTING_NODE_NAME = "Lighting";
         public static readonly string LEVEL_DIRECTIONAL_LIGHT_NODE_NAME = "LevelDirectionalLight";
-        public static readonly string LEVEL_ENVIRONMENT_META_NAME = "LevelEnvironment";
+        public static readonly string LEVEL_ENVIRONMENT_META_NAME = "level_environment";
 
         /// <summary>
         /// Indicates the current run state of the level.
