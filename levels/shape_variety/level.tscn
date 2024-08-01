@@ -1,6 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://cu8tk1aittta"]
+[gd_scene load_steps=32 format=3 uid="uid://cu8tk1aittta"]
 
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="1_hn6mv"]
+[ext_resource type="Environment" uid="uid://doxxnvqkiecba" path="res://levels/shape_variety/level_environment.tres" id="1_k671p"]
 [ext_resource type="Material" uid="uid://bqukbe1tiexct" path="res://levels/shape_variety/textures/floor1.tres" id="2_tx8br"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b766v"]
@@ -88,6 +89,9 @@ uv1_triplanar = true
 size = Vector3(100, 1, 100)
 
 [node name="ShapeVariety" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_k671p")
 
 [node name="Checkpoints" type="Node3D" parent="."]
 
@@ -398,3 +402,9 @@ mesh = SubResource("PrismMesh_3en22")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Wedge"]
 shape = SubResource("ConcavePolygonShape3D_5sbim")
+
+[node name="Lighting" type="Node3D" parent="."]
+metadata/level_environment = ExtResource("1_k671p")
+
+[node name="LevelDirectionalLight" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
