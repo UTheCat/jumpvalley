@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Nodes;
 
 using Jumpvalley.Gui;
@@ -212,6 +213,8 @@ namespace JumpvalleyGame
             UserLevelRunner levelRunner = new UserLevelRunner(this, new LevelTimer(PrimaryGui.GetNode("LevelTimer")));
             RootNode.AddChild(levelRunner);
 
+            List<DirectionalLight3D> levelDirectionalLightList = new List<DirectionalLight3D>();
+
             LevelPackage StartLevel(string levelPath, Node levelNodeParent)
             {
                 if (!string.IsNullOrEmpty(levelPath))
@@ -239,6 +242,19 @@ namespace JumpvalleyGame
                         if (defaultDirectionalLight != null)
                         {
                             defaultDirectionalLight.Visible = false;
+                        }
+
+                        if (!levelDirectionalLightList.Contains(levelDirectionalLight))
+                        {
+                            levelDirectionalLightList.Add(levelDirectionalLight);
+                        }
+
+                        foreach (DirectionalLight3D light in levelDirectionalLightList)
+                        {
+                            if (light != levelDirectionalLight)
+                            {
+                                light.Visible = false;
+                            }
                         }
                     }
 

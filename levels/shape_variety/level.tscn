@@ -403,7 +403,7 @@ mesh = SubResource("PrismMesh_3en22")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Wedge"]
 shape = SubResource("ConcavePolygonShape3D_5sbim")
 
-[node name="Lighting" type="Node" parent="."]
+[node name="Lighting" type="Node3D" parent="."]
 metadata/level_environment = ExtResource("1_k671p")
 
 [node name="LevelDirectionalLight" type="DirectionalLight3D" parent="Lighting"]
