@@ -18,6 +18,7 @@ font_size = 34
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
+anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 638.0
 offset_bottom = -150.0
