@@ -25,9 +25,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="8"
-     inkscape:cx="23.75"
-     inkscape:cy="14.4375"
+     inkscape:zoom="24.761905"
+     inkscape:cx="21"
+     inkscape:cy="8.9855769"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -42,7 +42,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#808080;fill-opacity:0.736755;stroke:#f3f3f3;stroke-width:1.7408;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#808080;fill-opacity:0.736755;stroke:#f5f5f5;stroke-width:1.7408;stroke-dasharray:none;stroke-opacity:1"
        id="rect1"
        width="40.259197"
        height="16.259176"
@@ -55,7 +55,7 @@
      id="layer2"
      inkscape:label="Toggle">
     <rect
-       style="fill:#ffffff;fill-opacity:0.736755;stroke:none;stroke-width:1.857;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.857;stroke-dasharray:none;stroke-opacity:1"
        id="rect3"
        width="10"
        height="10"
