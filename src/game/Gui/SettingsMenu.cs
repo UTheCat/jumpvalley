@@ -17,6 +17,7 @@ namespace JumpvalleyGame.Gui
         private Control menu;
         private SettingGroup settings;
         private Control settingListNode;
+        //private Control background;
         private Control scrollContainer;
         private Button closeButton;
 
@@ -24,6 +25,7 @@ namespace JumpvalleyGame.Gui
         private PackedScene checkButtonSettingScene;
 
         private SceneTreeTween positionTween;
+        //private SceneTreeTween closeButtonTween;
 
         private List<SettingUiHandler> settingUiHandlers;
 
@@ -51,6 +53,7 @@ namespace JumpvalleyGame.Gui
         {
             menu = actualNode;
             this.settings = settings;
+            //background = actualNode.GetNode<Control>("Background");
             scrollContainer = actualNode.GetNode<Control>("ScrollContainer");
             settingListNode = scrollContainer.GetNode<Control>("VBoxContainer/SettingList");
             closeButton = actualNode.GetNode<Button>("CloseButton");
@@ -61,10 +64,10 @@ namespace JumpvalleyGame.Gui
             settingUiHandlers = new List<SettingUiHandler>();
 
             menu.Visible = false;
-            SetMenuPosition(1f);
+            SetMenuPosition(-1f);
 
             positionTween = new SceneTreeTween(0.25, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
-            positionTween.InitialValue = 1;
+            positionTween.InitialValue = -1;
             positionTween.FinalValue = 0;
             positionTween.OnStep += (object o, float frac) =>
             {
