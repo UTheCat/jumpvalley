@@ -22,6 +22,7 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 638.0
 offset_bottom = -150.0
+grow_vertical = 2
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
