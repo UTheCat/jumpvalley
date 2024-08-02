@@ -33,6 +33,7 @@ offset_right = -38.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_m5vjn")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+modulate = Color(0.612613, 0.776085, 0.915092, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
