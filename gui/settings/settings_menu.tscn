@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://olrc8iep31yb" path="res://gui/close_button.tscn" id="2_rklti"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5vjn"]
-bg_color = Color(0.10748, 0.10748, 0.10748, 1)
+bg_color = Color(0.019326, 0.0696585, 0.113778, 1)
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
@@ -20,7 +20,7 @@ font_size = 34
 layout_mode = 3
 anchor_bottom = 1.0
 offset_right = 638.0
-offset_bottom = -110.0
+offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 2
 
