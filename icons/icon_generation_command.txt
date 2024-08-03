@@ -1,9 +1,9 @@
-Using ImageMagick, the command to generate the icon (.ico) file with Windows Power Shell is:
+Using ImageMagick, the command to generate the icon (.ico) file from Terminal is:
 
-magick convert music_note_icon_16dp.png music_note_icon_32dp.png music_note_icon_48dp.png music_note_icon_64dp.png music_note_icon_128dp.png music_note_icon_256dp.png -colors 256 music_note_icon.ico
+magick convert app_icon_16px.png app_icon_32px.png app_icon_48px.png app_icon_64px.png app_icon_128px.png app_icon_256px.png -colors 256 app_icon.ico
 
 This might also work:
-magick convert music_note_icon.ico -define icon:auto-resize
+magick convert app_icon.ico -define icon:auto-resize
 
 Or this (from testing, this gives the best result):
-magick convert music_note_icon_16dp.png music_note_icon_32dp.png music_note_icon_48dp.png music_note_icon_64dp.png music_note_icon_128dp.png music_note_icon_256dp.png music_note_icon.ico
+magick convert app_icon_16px.png app_icon_32px.png app_icon_48px.png app_icon_64px.png app_icon_128px.png app_icon_256px.png app_icon.ico
