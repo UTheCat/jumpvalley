@@ -1,9 +1,9 @@
-Using ImageMagick, the command to generate the icon (.ico) file from Terminal is:
+Using ImageMagick, the command to generate the icon (.ico) file for desktop platforms from Terminal is:
 
-magick convert app_icon_16px.png app_icon_32px.png app_icon_48px.png app_icon_64px.png app_icon_128px.png app_icon_256px.png -colors 256 app_icon.ico
+magick convert app_icon_desktop_16px.png app_icon_desktop_32px.png app_icon_desktop_48px.png app_icon_desktop_64px.png app_icon_desktop_128px.png app_icon_desktop_256px.png -colors 256 app_icon_desktop.ico
 
 This might also work:
-magick convert app_icon.ico -define icon:auto-resize
+magick convert app_icon_desktop.ico -define icon:auto-resize
 
 Or this (from testing, this gives the best result):
-magick convert app_icon_16px.png app_icon_32px.png app_icon_48px.png app_icon_64px.png app_icon_128px.png app_icon_256px.png app_icon.ico
+magick convert app_icon_desktop_16px.png app_icon_desktop_32px.png app_icon_desktop_48px.png app_icon_desktop_64px.png app_icon_desktop_128px.png app_icon_desktop_256px.png app_icon_desktop.ico
