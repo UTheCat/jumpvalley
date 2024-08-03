@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 using Godot;
 using Jumpvalley.Logging;
@@ -68,7 +69,10 @@ namespace JumpvalleyGame.Settings
         public void Write()
         {
             string fileLocation = SettingsFileLocation;
-            string sData = Data.ToJsonString();
+            string sData = JsonSerializer.Serialize(
+                Data,
+                new JsonSerializerOptions() { WriteIndented = true }
+            );
 
             FileAccess file = FileAccess.Open(fileLocation, FileAccess.ModeFlags.Write);
             if (file == null) throw new Exception(FileAccess.GetOpenError().ToString());
