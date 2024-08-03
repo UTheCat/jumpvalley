@@ -69,6 +69,15 @@ layout_mode = 1
 [node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
 layout_mode = 1
 
+[node name="SettingsMenu" parent="PrimaryGui" instance=ExtResource("4_7nvye")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 338.0
+
 [node name="MusicPanel" parent="PrimaryGui" instance=ExtResource("3_dfcbn")]
 visible = false
 layout_mode = 1
@@ -82,15 +91,6 @@ offset_top = -267.0
 offset_right = 250.0
 offset_bottom = -42.0
 grow_vertical = 0
-
-[node name="SettingsMenu" parent="PrimaryGui" instance=ExtResource("4_7nvye")]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -300.0
-offset_right = 338.0
 
 [node name="PrimaryLevelMenu" parent="PrimaryGui" instance=ExtResource("6_faadj")]
 visible = false

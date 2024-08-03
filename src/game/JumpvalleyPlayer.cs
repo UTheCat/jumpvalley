@@ -152,7 +152,7 @@ namespace JumpvalleyGame
 
             // Framerate counter
             framerateCounter = new FramerateCounter(PrimaryGui.GetNode<Control>("FramerateCounter"));
-            FramerateCounterToggle framerateCounterToggle = settings.Group.GetNode<FramerateCounterToggle>("display/show_framerate_counter");
+            FramerateCounterToggle framerateCounterToggle = settings.Group.GetNode<FramerateCounterToggle>("display/show_framerate");
             if (framerateCounterToggle != null)
             {
                 framerateCounterToggle.Counter = framerateCounter;

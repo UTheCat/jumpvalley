@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2jxb8y2m4xf0"]
+[gd_scene load_steps=6 format=3 uid="uid://d2jxb8y2m4xf0"]
 
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_4vxkx"]
 [ext_resource type="PackedScene" uid="uid://olrc8iep31yb" path="res://gui/close_button.tscn" id="2_rklti"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5vjn"]
+bg_color = Color(0.019326, 0.0696585, 0.113778, 1)
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_3l671"]
 font = ExtResource("1_4vxkx")
@@ -16,15 +21,27 @@ layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 638.0
-grow_horizontal = 2
+offset_bottom = -150.0
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Background" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -38.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_m5vjn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+modulate = Color(0.612613, 0.776085, 0.915092, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -54.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
