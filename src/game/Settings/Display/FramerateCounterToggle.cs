@@ -9,9 +9,9 @@ namespace JumpvalleyGame.Settings.Display
         public FramerateCounterToggle()
         {
             Value = false;
-            Id = "show_framerate_counter";
-            LocalizationId = "SETTINGS_SHOW_FRAMERATE_COUNTER";
-            ActionMapKey = "toggle_framerate_counter_visibility";
+            Id = "show_framerate";
+            LocalizationId = "SETTINGS_SHOW_FRAMERATE";
+            ActionMapKey = "toggle_framerate_visibility";
             Counter = null;    
         }
 
