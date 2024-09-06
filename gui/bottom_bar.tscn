@@ -47,9 +47,9 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("1_h3ito")
 theme_override_styles/hover = ExtResource("2_h3ka7")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3t1g3")
+theme_override_styles/normal = ExtResource("1_h3ito")
 icon = ExtResource("3_ud5tf")
 icon_alignment = 1
 
@@ -57,14 +57,15 @@ icon_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("4_jcyjp")
 theme_override_styles/hover = ExtResource("5_sy6f8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_564ww")
+theme_override_styles/normal = ExtResource("4_jcyjp")
 icon = ExtResource("6_t8du5")
 icon_alignment = 1
 expand_icon = true
 
 [node name="Description" type="Label" parent="."]
+auto_translate_mode = 2
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -76,7 +77,6 @@ offset_top = -109.0
 offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 0
-auto_translate = false
 theme_override_fonts/font = ExtResource("7_w3sun")
 theme_override_font_sizes/font_size = 28
 text = "MUSIC
