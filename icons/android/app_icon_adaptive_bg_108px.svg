@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="2048"
+   height="2048"
+   viewBox="0 0 2048 2048"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     style="display:inline">
+    <rect
+       style="fill:#24084d;fill-opacity:1;stroke:none;stroke-width:1.857"
+       id="rect1"
+       width="1024"
+       height="1024"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#460f99;fill-opacity:1;stroke:none;stroke-width:1.857"
+       id="rect1-6"
+       width="1024"
+       height="1024"
+       x="0"
+       y="1024" />
+    <rect
+       style="fill:#460f99;fill-opacity:1;stroke:none;stroke-width:1.857"
+       id="rect1-6-7"
+       width="1024"
+       height="1024"
+       x="1024"
+       y="0" />
+    <rect
+       style="fill:#24084d;fill-opacity:1;stroke:none;stroke-width:1.857"
+       id="rect1-1"
+       width="1024"
+       height="1024"
+       x="1024"
+       y="1024" />
+  </g>
+  <g
+     id="layer2"
+     style="display:none">
+    <path
+       style="fill:#741aff;fill-opacity:1;stroke:#f5f5f5;stroke-width:48;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="M 1024.0004,322.00003 512.00038,1346 l 512.00002,-212 512,212 z"
+       id="path8" />
+    <rect
+       style="fill:#741aff;fill-opacity:1;stroke:#f5f5f5;stroke-width:48;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect22"
+       width="160"
+       height="160"
+       x="944"
+       y="1334.9564"
+       rx="80"
+       ry="80" />
+    <rect
+       style="fill:#741aff;fill-opacity:1;stroke:#f5f5f5;stroke-width:48;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect22-2"
+       width="160"
+       height="160"
+       x="944"
+       y="1600.75"
+       rx="80"
+       ry="80" />
+  </g>
+</svg>
