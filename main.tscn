@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://c7h44u0l74erl"]
 
-[ext_resource type="Script" path="res://src/game/Program.cs" id="1_r1x4e"]
+[ext_resource type="Script" path="res://src/app/Program.cs" id="1_r1x4e"]
 [ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
 [ext_resource type="PackedScene" uid="uid://dsjm5305mt3le" path="res://gui/framerate_counter.tscn" id="3_6onu6"]
 [ext_resource type="PackedScene" uid="uid://w1bxdo35gvho" path="res://gui/background_panel.tscn" id="3_28c11"]
