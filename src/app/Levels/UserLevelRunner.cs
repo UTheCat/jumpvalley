@@ -3,9 +3,9 @@ using System;
 using Jumpvalley.Levels;
 using Jumpvalley.Players;
 
-using JumpvalleyGame.Gui;
+using JumpvalleyApp.Gui;
 
-namespace JumpvalleyGame.Levels
+namespace JumpvalleyApp.Levels
 {
     /// <summary>
     /// Jumpvalley's primary level runner that's intended to be running on behalf of the user who's playing the game.

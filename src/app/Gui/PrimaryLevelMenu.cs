@@ -1,6 +1,6 @@
 using Godot;
 
-namespace JumpvalleyGame.Gui
+namespace JumpvalleyApp.Gui
 {
 	/// <summary>
 	/// The primary level menu, the menu that's accessed by pressing the three-dots at the bottom of the user's screen.

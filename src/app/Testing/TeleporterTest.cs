@@ -5,7 +5,7 @@ using Jumpvalley.Levels.Interactives.Mechanics;
 using Jumpvalley.Levels.Interactives.Mechanics.Teleporters;
 using Jumpvalley.Timing;
 
-namespace JumpvalleyGame.Testing
+namespace JumpvalleyApp.Testing
 {
     /// <summary>
     /// Class that tests the functionality of the <see cref="Teleporter"/> class 

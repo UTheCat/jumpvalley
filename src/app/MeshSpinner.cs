@@ -2,7 +2,7 @@ using Godot;
 
 // refer to this article for naming conventions:
 // https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions
-namespace JumpvalleyGame
+namespace JumpvalleyApp
 {
     public partial class MeshSpinner : Node
     {

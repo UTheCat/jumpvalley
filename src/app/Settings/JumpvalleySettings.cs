@@ -1,6 +1,6 @@
-using JumpvalleyGame.Settings.Display;
+using JumpvalleyApp.Settings.Display;
 
-namespace JumpvalleyGame.Settings
+namespace JumpvalleyApp.Settings
 {
     /// <summary>
     /// Main list of user settings for Jumpvalley

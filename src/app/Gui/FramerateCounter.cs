@@ -3,7 +3,7 @@ using Godot;
 using Jumpvalley.Animation;
 using Jumpvalley.Tweening;
 
-namespace JumpvalleyGame.Gui
+namespace JumpvalleyApp.Gui
 {
     /// <summary>
     /// Class that handles the game's framerate counter GUI.

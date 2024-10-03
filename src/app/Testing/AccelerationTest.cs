@@ -1,7 +1,7 @@
 using Godot;
 using Jumpvalley.Players.Movement;
 
-namespace JumpvalleyGame.Testing
+namespace JumpvalleyApp.Testing
 {
     /// <summary>
     /// Tests how BaseMover acceleration calculations affect the velocity of the character it's assigned to.

@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-namespace JumpvalleyGame.Gui
+namespace JumpvalleyApp.Gui
 {
     /// <summary>
     /// Limits how many times the game screen is rendered within a given time interval

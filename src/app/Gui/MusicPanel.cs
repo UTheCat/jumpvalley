@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Jumpvalley.Music;
 
-namespace JumpvalleyGame.Gui
+namespace JumpvalleyApp.Gui
 {
     /// <summary>
     /// Class that handles the music panel's functionality.

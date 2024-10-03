@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace JumpvalleyGame
+namespace JumpvalleyApp
 {
 	/// <summary>
 	/// Entry point for the game's code

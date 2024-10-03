@@ -1,6 +1,6 @@
 using Godot;
 
-namespace JumpvalleyGame.Settings.Display
+namespace JumpvalleyApp.Settings.Display
 {
     public partial class FullscreenControl : SettingBase
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json.Nodes;
 using Godot;
 
-namespace JumpvalleyGame.Settings
+namespace JumpvalleyApp.Settings
 {
     /// <summary>
     /// Class that represents a group/category of settings

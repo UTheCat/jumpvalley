@@ -10,15 +10,15 @@ using Jumpvalley.Music;
 using Jumpvalley.Players;
 using Jumpvalley.Players.Movement;
 
-using JumpvalleyGame.Gui;
-using JumpvalleyGame.Levels;
-using JumpvalleyGame.Settings;
-using JumpvalleyGame.Settings.Display;
-using JumpvalleyGame.Testing;
+using JumpvalleyApp.Gui;
+using JumpvalleyApp.Levels;
+using JumpvalleyApp.Settings;
+using JumpvalleyApp.Settings.Display;
+using JumpvalleyApp.Testing;
 using Jumpvalley.Levels.Interactives.Mechanics;
 using Jumpvalley.Tweening;
 
-namespace JumpvalleyGame
+namespace JumpvalleyApp
 {
     /// <summary>
     /// Full implementation of the Player class specific to Jumpvalley itself
