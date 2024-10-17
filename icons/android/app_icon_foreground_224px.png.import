@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://04a5ty4oysxc"
-path="res://.godot/imported/app_icon_fg_with_padding_432px.png-599186f098fdc7b709470c6309f5ff4b.ctex"
+uid="uid://rj0q6mn2s6id"
+path="res://.godot/imported/app_icon_foreground_224px.png-539d87067e0e4fc3ce2a65090144106a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/android/app_icon_fg_with_padding_432px.png"
-dest_files=["res://.godot/imported/app_icon_fg_with_padding_432px.png-599186f098fdc7b709470c6309f5ff4b.ctex"]
+source_file="res://icons/android/app_icon_foreground_224px.png"
+dest_files=["res://.godot/imported/app_icon_foreground_224px.png-539d87067e0e4fc3ce2a65090144106a.ctex"]
 
 [params]
 
