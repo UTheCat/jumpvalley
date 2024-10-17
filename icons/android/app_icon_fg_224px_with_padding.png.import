@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwdfywfpjuxgw"
-path="res://.godot/imported/music_note_icon_48px.png-e383033abef6e9ded3fbf009790f1963.ctex"
+uid="uid://c8c73tubm3ha2"
+path="res://.godot/imported/app_icon_fg_224px_with_padding.png-3a65f96e22b3a5eab0929a7dcb244842.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/music_note_icon_48px.png"
-dest_files=["res://.godot/imported/music_note_icon_48px.png-e383033abef6e9ded3fbf009790f1963.ctex"]
+source_file="res://icons/android/app_icon_fg_224px_with_padding.png"
+dest_files=["res://.godot/imported/app_icon_fg_224px_with_padding.png-3a65f96e22b3a5eab0929a7dcb244842.ctex"]
 
 [params]
 
