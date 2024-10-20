@@ -12,7 +12,7 @@ namespace JumpvalleyApp.Display
         private static readonly string VIEWPORT_WIDTH_SETTING_PATH = "display/window/size/viewport_width";
         private static readonly string VIEWPORT_HEIGHT_SETTING_PATH = "display/window/size/viewport_height";
 
-        public SceneTree Tree { get; private set; }
+        public Window HandledWindow { get; private set; }
 
         private bool _enabled;
 
@@ -22,9 +22,6 @@ namespace JumpvalleyApp.Display
             set
             {
                 _enabled = value;
-
-                if (window == null) window = GetMainWindow();
-                if (window == null) return;
 
                 if (value)
                 {
@@ -39,8 +36,6 @@ namespace JumpvalleyApp.Display
             }
         }
 
-        private Window window;
-
         private bool _respondsToWindowResize;
         private bool respondsToWindowResize
         {
@@ -52,11 +47,11 @@ namespace JumpvalleyApp.Display
 
                 if (value)
                 {
-                    window.SizeChanged += ResizeViewport;
+                    HandledWindow.SizeChanged += ResizeViewport;
                 }
                 else
                 {
-                    window.SizeChanged -= ResizeViewport;
+                    HandledWindow.SizeChanged -= ResizeViewport;
                 }
             }
         }
@@ -67,36 +62,27 @@ namespace JumpvalleyApp.Display
         /// <summary>
         /// Construct a HiDpiAdapter.
         /// </summary>
-        /// <param name="tree">This should be the app's primary scene tree</param>
-        public HiDpiAdapter(SceneTree tree)
+        /// <param name="window">The window to handle HiDPI for</param>
+        public HiDpiAdapter(Window window)
         {
-            Tree = tree;
-            window = null;
+            if (window == null) throw new ArgumentNullException(nameof(window), "Attempted to pass a Window that doesn't exist.");
+            HandledWindow = window;
 
             initialViewportWidth = ProjectSettings.GetSettingWithOverride(VIEWPORT_WIDTH_SETTING_PATH).As<int>();
             initialViewportHeight = ProjectSettings.GetSettingWithOverride(VIEWPORT_HEIGHT_SETTING_PATH).As<int>();
         }
 
-        /// <summary>
-        /// The Jumpvalley app currently only has one window per process,
-        /// so this function returns that one window.
-        /// </summary>
-        private Window GetMainWindow() => (Tree == null) ? null : Tree.Root;
-
         private void ResizeViewport()
         {
-            if (window != null)
+            if (!Enabled)
             {
-                if (!Enabled)
-                {
-                    window.ContentScaleMode = Window.ContentScaleModeEnum.Disabled;
-                    return;
-                }
-
-                Vector2I windowSize = window.Size;
-                window.ContentScaleMode = (windowSize.X <= initialViewportWidth && windowSize.Y <= initialViewportHeight)
-                    ? Window.ContentScaleModeEnum.Disabled : Window.ContentScaleModeEnum.CanvasItems;
+                HandledWindow.ContentScaleMode = Window.ContentScaleModeEnum.Disabled;
+                return;
             }
+
+            Vector2I windowSize = HandledWindow.Size;
+            HandledWindow.ContentScaleMode = (windowSize.X <= initialViewportWidth && windowSize.Y <= initialViewportHeight)
+                ? Window.ContentScaleModeEnum.Disabled : Window.ContentScaleModeEnum.CanvasItems;
         }
 
         public void Dispose()

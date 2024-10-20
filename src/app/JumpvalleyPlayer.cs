@@ -45,7 +45,7 @@ namespace JumpvalleyApp
             base.Start();
 
             // HiDPI adapter
-            HiDpiAdapter hiDpiAdapter = new HiDpiAdapter(Tree)
+            HiDpiAdapter hiDpiAdapter = new HiDpiAdapter(Tree.Root)
             {
                 Enabled = true
             };
