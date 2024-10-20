@@ -49,6 +49,7 @@ namespace JumpvalleyApp
             {
                 Enabled = true
             };
+            Disposables.Add(hiDpiAdapter);
 
             // Handle music that's played in the main scene file
             Node rootNodeMusic = RootNode.GetNode("Music");
