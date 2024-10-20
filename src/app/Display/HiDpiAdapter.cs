@@ -53,10 +53,11 @@ namespace JumpvalleyApp.Display
                 if (value)
                 {
                     if (window == null) window = GetMainWindow();
+                    if (window == null) return;
                 }
                 else
                 {
-
+                    if (window == null) return;
                 }
             }
         }
@@ -79,7 +80,7 @@ namespace JumpvalleyApp.Display
 
         public void Dispose()
         {
-
+            respondsToWindowResize = false;
         }
     }
 }
