@@ -22,19 +22,18 @@ namespace JumpvalleyApp.Display
             {
                 _enabled = value;
 
-                Window window = GetMainWindow();
+                if (window == null) window = GetMainWindow();
+                if (window == null) return;
+
                 if (value)
                 {
-                    window.ContentScaleMode = Window.ContentScaleModeEnum.Viewport;
-
+                    ResizeViewport();
                     respondsToWindowResize = true;
                 }
                 else
                 {
                     respondsToWindowResize = false;
-
-                    window.ContentScaleMode = Window.ContentScaleModeEnum.Disabled;
-                    window.MaxSize = Vector2I.Zero;
+                    ResizeViewport();
                 }
             }
         }
@@ -51,14 +50,10 @@ namespace JumpvalleyApp.Display
 
                 if (value)
                 {
-                    if (window == null) window = GetMainWindow();
-
-                    ResizeViewport();
                     window.SizeChanged += ResizeViewport;
                 }
                 else
                 {
-                    ResizeViewport();
                     window.SizeChanged -= ResizeViewport;
                 }
             }
