@@ -48,6 +48,7 @@ namespace JumpvalleyApp.Display
             set
             {
                 if (_respondsToWindowResize == value) return;
+                _respondsToWindowResize = value;
 
                 if (value)
                 {
