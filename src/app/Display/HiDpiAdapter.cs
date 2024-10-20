@@ -40,7 +40,7 @@ namespace JumpvalleyApp.Display
             }
         }
 
-        private Window mainWindow;
+        private Window window;
 
         private bool _respondsToWindowResize;
         private bool respondsToWindowResize
@@ -52,7 +52,7 @@ namespace JumpvalleyApp.Display
 
                 if (value)
                 {
-
+                    if (window == null) window = GetMainWindow();
                 }
                 else
                 {
@@ -68,7 +68,7 @@ namespace JumpvalleyApp.Display
         public HiDpiAdapter(SceneTree tree)
         {
             Tree = tree;
-            mainWindow = null;
+            window = null;
         }
 
         /// <summary>
