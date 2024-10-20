@@ -9,7 +9,8 @@ namespace JumpvalleyApp.Display
     /// </summary>
     public partial class HiDpiAdapter : IDisposable
     {
-        private static readonly Vector2I MAX_WINDOW_SIZE = new Vector2I(1920, 1080);
+        private static readonly string VIEWPORT_WIDTH_SETTING_PATH = "display/window/size/viewport_width";
+        private static readonly string VIEWPORT_HEIGHT_SETTING_PATH = "display/window/size/viewport_height";
 
         public SceneTree Tree { get; private set; }
 
@@ -59,6 +60,9 @@ namespace JumpvalleyApp.Display
             }
         }
 
+        private int initialViewportWidth;
+        private int initialViewportHeight;
+
         /// <summary>
         /// Construct a HiDpiAdapter.
         /// </summary>
@@ -67,6 +71,9 @@ namespace JumpvalleyApp.Display
         {
             Tree = tree;
             window = null;
+
+            initialViewportWidth = ProjectSettings.GetSettingWithOverride(VIEWPORT_WIDTH_SETTING_PATH).As<int>();
+            initialViewportHeight = ProjectSettings.GetSettingWithOverride(VIEWPORT_HEIGHT_SETTING_PATH).As<int>();
         }
 
         /// <summary>
@@ -86,8 +93,8 @@ namespace JumpvalleyApp.Display
                 }
 
                 Vector2I windowSize = window.Size;
-                window.ContentScaleMode = (windowSize.X <= MAX_WINDOW_SIZE.X && windowSize.Y <= MAX_WINDOW_SIZE.Y)
-                    ? Window.ContentScaleModeEnum.Disabled : Window.ContentScaleModeEnum.Viewport;
+                window.ContentScaleMode = (windowSize.X <= initialViewportWidth && windowSize.Y <= initialViewportHeight)
+                    ? Window.ContentScaleModeEnum.Disabled : Window.ContentScaleModeEnum.CanvasItems;
             }
         }
 
