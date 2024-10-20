@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 namespace JumpvalleyApp.Display
 {
@@ -6,7 +7,7 @@ namespace JumpvalleyApp.Display
     /// Class responsible for handling cases where a user is running the Jumpvalley app on a HiDPI display,
     /// affecting window width and height
     /// </summary>
-    public partial class HiDpiAdapter
+    public partial class HiDpiAdapter : IDisposable
     {
         private static readonly Vector2I MAX_WINDOW_SIZE = new Vector2I(1920, 1080);
 
@@ -35,6 +36,25 @@ namespace JumpvalleyApp.Display
             }
         }
 
+        private bool _respondsToWindowResize;
+        private bool respondsToWindowResize
+        {
+            get => _respondsToWindowResize;
+            set
+            {
+                if (_respondsToWindowResize == value) return;
+
+                if (value)
+                {
+
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+
         /// <summary>
         /// Construct a HiDpiAdapter.
         /// </summary>
@@ -49,5 +69,10 @@ namespace JumpvalleyApp.Display
         /// so this function returns that one window.
         /// </summary>
         private Window GetMainWindow() => (Tree == null) ? null : Tree.Root;
+
+        public void Dispose()
+        {
+
+        }
     }
 }
