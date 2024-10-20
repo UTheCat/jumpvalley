@@ -10,6 +10,7 @@ using Jumpvalley.Music;
 using Jumpvalley.Players;
 using Jumpvalley.Players.Movement;
 
+using JumpvalleyApp.Display;
 using JumpvalleyApp.Gui;
 using JumpvalleyApp.Levels;
 using JumpvalleyApp.Settings;
@@ -42,6 +43,12 @@ namespace JumpvalleyApp
         public override void Start()
         {
             base.Start();
+
+            // HiDPI adapter
+            HiDpiAdapter hiDpiAdapter = new HiDpiAdapter(Tree)
+            {
+                Enabled = true
+            };
 
             // Handle music that's played in the main scene file
             Node rootNodeMusic = RootNode.GetNode("Music");
