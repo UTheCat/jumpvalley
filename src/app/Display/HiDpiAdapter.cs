@@ -50,19 +50,16 @@ namespace JumpvalleyApp.Display
             {
                 if (_respondsToWindowResize == value) return;
 
-                ResizeViewport();
-
                 if (value)
                 {
                     if (window == null) window = GetMainWindow();
-                    if (window == null) return;
 
+                    ResizeViewport();
                     window.SizeChanged += ResizeViewport;
                 }
                 else
                 {
-                    if (window == null) return;
-
+                    ResizeViewport();
                     window.SizeChanged -= ResizeViewport;
                 }
             }
