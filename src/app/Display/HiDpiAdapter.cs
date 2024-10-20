@@ -8,6 +8,8 @@ namespace JumpvalleyApp.Display
     /// </summary>
     public partial class HiDpiAdapter
     {
+        private static readonly Vector2I MAX_WINDOW_SIZE = new Vector2I(1920, 1080);
+
         public SceneTree Tree { get; private set; }
 
         private bool _enabled;
@@ -17,7 +19,19 @@ namespace JumpvalleyApp.Display
             get => _enabled;
             set
             {
-                
+                _enabled = value;
+
+                Window window = GetMainWindow();
+                if (value)
+                {
+                    window.MaxSize = MAX_WINDOW_SIZE;
+                    window.ContentScaleMode = Window.ContentScaleModeEnum.Viewport;
+                }
+                else
+                {
+                    window.ContentScaleMode = Window.ContentScaleModeEnum.Disabled;
+                    window.MaxSize = Vector2I.Zero;
+                }
             }
         }
 
