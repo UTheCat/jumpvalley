@@ -88,7 +88,15 @@ namespace JumpvalleyApp.Display
         {
             if (window != null)
             {
+                if (!Enabled)
+                {
+                    window.ContentScaleMode = Window.ContentScaleModeEnum.Disabled;
+                    return;
+                }
 
+                Vector2I windowSize = window.Size;
+                window.ContentScaleMode = (windowSize.X <= MAX_WINDOW_SIZE.X && windowSize.Y <= MAX_WINDOW_SIZE.Y)
+                    ? Window.ContentScaleModeEnum.Disabled : Window.ContentScaleModeEnum.Viewport;
             }
         }
 
