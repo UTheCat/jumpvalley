@@ -25,7 +25,6 @@ namespace JumpvalleyApp.Display
                 Window window = GetMainWindow();
                 if (value)
                 {
-                    window.MaxSize = MAX_WINDOW_SIZE;
                     window.ContentScaleMode = Window.ContentScaleModeEnum.Viewport;
 
                     respondsToWindowResize = true;
