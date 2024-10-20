@@ -54,10 +54,14 @@ namespace JumpvalleyApp.Display
                 {
                     if (window == null) window = GetMainWindow();
                     if (window == null) return;
+
+                    window.SizeChanged += ResizeViewport;
                 }
                 else
                 {
                     if (window == null) return;
+
+                    window.SizeChanged -= ResizeViewport;
                 }
             }
         }
@@ -77,6 +81,14 @@ namespace JumpvalleyApp.Display
         /// so this function returns that one window.
         /// </summary>
         private Window GetMainWindow() => (Tree == null) ? null : Tree.Root;
+
+        private void ResizeViewport()
+        {
+            if (window != null)
+            {
+
+            }
+        }
 
         public void Dispose()
         {
