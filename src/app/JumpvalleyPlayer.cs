@@ -350,12 +350,6 @@ namespace JumpvalleyApp
             {
                 counter.CurrentFps = Engine.GetFramesPerSecond();
             }
-
-            Window window = Tree.Root;
-            if (window != null)
-            {
-                Console.WriteLine(window.Size);
-            }
         }
     }
 }

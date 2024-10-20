@@ -23,10 +23,6 @@ config/custom_user_dir_name.jumpvalley_custom_user_dir="Jumpvalley"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/size/window_width_override=1152
-window/size/window_height_override=648
 window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
