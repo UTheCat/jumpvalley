@@ -27,9 +27,13 @@ namespace JumpvalleyApp.Display
                 {
                     window.MaxSize = MAX_WINDOW_SIZE;
                     window.ContentScaleMode = Window.ContentScaleModeEnum.Viewport;
+
+                    respondsToWindowResize = true;
                 }
                 else
                 {
+                    respondsToWindowResize = false;
+
                     window.ContentScaleMode = Window.ContentScaleModeEnum.Disabled;
                     window.MaxSize = Vector2I.Zero;
                 }
@@ -50,7 +54,7 @@ namespace JumpvalleyApp.Display
                 }
                 else
                 {
-                    
+
                 }
             }
         }
