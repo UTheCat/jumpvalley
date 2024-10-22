@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfirwq7r0jq20"]
+[gd_scene load_steps=7 format=3 uid="uid://dfirwq7r0jq20"]
 
 [ext_resource type="Texture2D" uid="uid://cbtq8qw7d17ij" path="res://addons/kenney_prototype_textures/green/texture_10.png" id="1_aac5p"]
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_c6jsr"]
+[ext_resource type="Texture2D" uid="uid://dvir2dlbjjjxi" path="res://gui/music_panel_volume_grabber.tres" id="3_emiv0"]
 [ext_resource type="Texture2D" uid="uid://df6f5u3lobv06" path="res://addons/icons/volume_down_48dp.svg" id="3_yrcgy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkvd5"]
@@ -106,22 +107,25 @@ anchor_top = 1.0
 anchor_right = 0.9
 anchor_bottom = 1.0
 offset_top = -82.0
-offset_bottom = -58.0
+offset_bottom = -46.0
 
 [node name="Slider" type="HSlider" parent="Volume"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.85
-offset_left = 30.0
-offset_bottom = 24.0
+anchor_bottom = 1.0
+offset_left = 42.0
+theme_override_icons/grabber = ExtResource("3_emiv0")
+theme_override_icons/grabber_highlight = ExtResource("3_emiv0")
+theme_override_icons/grabber_disabled = ExtResource("3_emiv0")
 max_value = 1.0
 step = 0.01
 
 [node name="Icon" type="TextureRect" parent="Volume"]
 layout_mode = 1
 anchors_preset = -1
-offset_right = 24.0
-offset_bottom = 24.0
+offset_right = 36.0
+offset_bottom = 36.0
 texture = ExtResource("3_yrcgy")
 expand_mode = 1
 
