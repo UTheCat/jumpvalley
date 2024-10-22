@@ -95,6 +95,7 @@ grow_vertical = 0
 [node name="PrimaryLevelMenu" parent="PrimaryGui" instance=ExtResource("6_faadj")]
 visible = false
 layout_mode = 1
+anchors_preset = 8
 
 [node name="IntroPanel" parent="PrimaryGui" instance=ExtResource("9_e2o57")]
 visible = false
