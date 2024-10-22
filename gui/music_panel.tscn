@@ -25,8 +25,8 @@ shadow_size = 4
 [node name="MusicPanel" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 500.0
-offset_bottom = 225.0
+offset_right = 540.0
+offset_bottom = 265.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -75,7 +75,7 @@ offset_left = 16.0
 offset_top = 16.0
 offset_bottom = 51.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 36
 text = "Music"
 
 [node name="SongName" type="Label" parent="."]
@@ -83,10 +83,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
 anchor_right = 1.0
-offset_top = 68.0
-offset_bottom = 93.0
+offset_top = 103.0
+offset_bottom = 133.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 28
 text = "Song Name"
 
 [node name="Artists" type="Label" parent="."]
@@ -94,10 +94,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
 anchor_right = 1.0
-offset_top = 100.0
-offset_bottom = 122.0
+offset_top = 140.0
+offset_bottom = 165.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "Artists"
 
 [node name="Volume" type="Control" parent="."]
