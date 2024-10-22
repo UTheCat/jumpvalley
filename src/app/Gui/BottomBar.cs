@@ -157,7 +157,7 @@ namespace JumpvalleyApp.Gui
 
         public void UpdateMusicDescription(Song song)
         {
-            string musicDesc = ActualNode.Tr("BOTTOM_BAR_MUSIC") + "\n{0}";
+            string musicDesc = $"[{ActualNode.Tr("BOTTOM_BAR_MUSIC")}]: " + "{0}";
 
             if (song == null)
             {
