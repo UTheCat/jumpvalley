@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://xn35xb7fekfl"]
+[gd_scene load_steps=11 format=3 uid="uid://xn35xb7fekfl"]
 
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="1_h3ito"]
 [ext_resource type="StyleBox" uid="uid://g0x41qvn7p6p" path="res://styles/bottom_bar/main_menu_btn/hover.tres" id="2_h3ka7"]
@@ -21,6 +21,13 @@ corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhyqc"]
+bg_color = Color(0, 0, 0, 0.501961)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="BottomBar" type="Control"]
 layout_mode = 3
@@ -63,22 +70,29 @@ theme_override_styles/normal = ExtResource("4_jcyjp")
 icon = ExtResource("6_t8du5")
 icon_alignment = 1
 
-[node name="Description" type="Label" parent="."]
-auto_translate_mode = 2
-visible = false
+[node name="Description" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.2
+anchor_left = 0.15
 anchor_top = 1.0
-anchor_right = 0.8
+anchor_right = 0.85
 anchor_bottom = 1.0
-offset_top = -86.0
-offset_bottom = -54.0
+offset_top = -88.0
+offset_bottom = -52.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nhyqc")
+
+[node name="Label" type="Label" parent="Description"]
+auto_translate_mode = 2
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("7_w3sun")
 theme_override_font_sizes/font_size = 28
 text = "[MUSIC]: getting song info..."
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 autowrap_mode = 2
