@@ -72,14 +72,13 @@ anchor_left = 0.2
 anchor_top = 1.0
 anchor_right = 0.8
 anchor_bottom = 1.0
-offset_top = -109.0
-offset_bottom = -42.0
+offset_top = -86.0
+offset_bottom = -54.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("7_w3sun")
 theme_override_font_sizes/font_size = 28
-text = "MUSIC
-[getting song info]"
+text = "[MUSIC]: getting song info..."
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 2
