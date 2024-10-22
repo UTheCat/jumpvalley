@@ -20,7 +20,7 @@ font_size = 34
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 638.0
+offset_right = 644.0
 offset_bottom = -150.0
 grow_vertical = 2
 
@@ -29,7 +29,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -38.0
+offset_right = -44.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_m5vjn")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -72,7 +72,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -30.0
+offset_left = -36.0
 offset_top = 8.0
 offset_right = 0.0
-offset_bottom = 38.0
+offset_bottom = 44.0
