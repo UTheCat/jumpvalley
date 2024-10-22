@@ -41,6 +41,8 @@ namespace JumpvalleyApp.Gui
 
         public AnimatedNodeGroup AnimatedNodes;
 
+        private Panel descriptionPanel;
+
         //private bool eventsConnected = false;
 
         /// <summary>
@@ -54,15 +56,13 @@ namespace JumpvalleyApp.Gui
             CurrentMusicPlayer = musicPlayer;
 
             ButtonsContainer = (HBoxContainer)ActualNode.GetNode("Buttons");
-            DescriptionLabel = (Label)ActualNode.GetNode("Description");
+            descriptionPanel = ActualNode.GetNode<Panel>("Description");
+            DescriptionLabel = descriptionPanel.GetNode<Label>("Label");
 
             MainMenuButton = (Button)ButtonsContainer.GetNode("Menu");
             MusicButton = (Button)ButtonsContainer.GetNode("Music");
 
-            DescriptionLabel.Visible = false;
-            DescriptionFontColor = DescriptionLabel.GetThemeColor("font_color");
-            DescriptionFontColor.A = 0f;
-            RefreshDescriptionColor();
+            descriptionPanel.Visible = false;
 
             // listen to music player song changes
             Playlist currentPlaylist = musicPlayer.CurrentPlaylist;
@@ -132,10 +132,11 @@ namespace JumpvalleyApp.Gui
                 float opacity = (float)DescriptionOpacityTween.GetCurrentValue();
 
                 // set visibility to false if description label is completely transparent
-                DescriptionLabel.Visible = opacity > 0f;
+                descriptionPanel.Visible = opacity > 0f;
 
-                DescriptionFontColor.A = opacity;
-                RefreshDescriptionColor();
+                Color modulate = descriptionPanel.Modulate;
+                modulate.A = opacity;
+                descriptionPanel.Modulate = modulate;
             };
         }
 

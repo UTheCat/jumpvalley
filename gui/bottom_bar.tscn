@@ -71,6 +71,7 @@ icon = ExtResource("6_t8du5")
 icon_alignment = 1
 
 [node name="Description" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.15
