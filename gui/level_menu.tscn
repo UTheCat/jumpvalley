@@ -20,6 +20,7 @@ font_size = 24
 
 [node name="LevelMenu" type="Control"]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -80,4 +81,3 @@ anchor_right = 0.95
 anchor_bottom = 0.05
 offset_left = -36.0
 offset_right = 0.0
-offset_bottom = 36.0
