@@ -11,10 +11,9 @@ gradient = SubResource("Gradient_dst2d")
 
 [node name="LevelTimer" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_top = 76.0
-offset_right = 200.0
-offset_bottom = 112.0
+offset_top = 88.0
+offset_right = 250.0
+offset_bottom = 136.0
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -36,7 +35,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("1_qespd")
-theme_override_font_sizes/font_size = 27
+theme_override_font_sizes/font_size = 38
 text = "0:00"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -51,7 +50,7 @@ theme_override_colors/font_color = Color(0.901961, 0.901961, 0.901961, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("1_qespd")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 16
 text = ".000
 "
 vertical_alignment = 2
