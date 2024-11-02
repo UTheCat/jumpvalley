@@ -38,6 +38,8 @@ namespace JumpvalleyApp
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
             settings = new JumpvalleySettings();
             framerateCounter = null;
+
+            Disposables.Add(settings);
         }
 
         public override void Start()
@@ -339,7 +341,6 @@ namespace JumpvalleyApp
                 settingsFile.Write();
             }
 
-            settings.Group.Dispose();
             base.Dispose();
         }
 
