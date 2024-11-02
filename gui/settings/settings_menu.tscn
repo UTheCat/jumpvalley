@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2jxb8y2m4xf0"]
 
-[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_4vxkx"]
+[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf" id="1_6doen"]
 [ext_resource type="PackedScene" uid="uid://olrc8iep31yb" path="res://gui/close_button.tscn" id="2_rklti"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5vjn"]
@@ -9,11 +9,11 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_3l671"]
-font = ExtResource("1_4vxkx")
+font = ExtResource("1_6doen")
 font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_bd3vs"]
-font = ExtResource("1_4vxkx")
+font = ExtResource("1_6doen")
 font_size = 34
 
 [node name="SettingsMenu" type="Control"]

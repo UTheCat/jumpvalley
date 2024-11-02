@@ -11,6 +11,7 @@ gradient = SubResource("Gradient_dst2d")
 
 [node name="LevelTimer" type="Control"]
 layout_mode = 3
+anchors_preset = 0
 offset_top = 88.0
 offset_right = 250.0
 offset_bottom = 136.0
