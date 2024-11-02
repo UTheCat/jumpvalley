@@ -17,6 +17,10 @@ namespace JumpvalleyApp.Settings.Display
             ActionMapKey = null;
 
             Adapter = adapter;
+            if (Value is bool enabled)
+            {
+                Adapter.Enabled = enabled;
+            }
         }
 
         public override void Update(object newValue)

@@ -15,7 +15,6 @@ using JumpvalleyApp.Gui;
 using JumpvalleyApp.Levels;
 using JumpvalleyApp.Settings;
 using JumpvalleyApp.Settings.Display;
-using JumpvalleyApp.Testing;
 using Jumpvalley.Levels.Interactives.Mechanics;
 using Jumpvalley.Tweening;
 
@@ -46,12 +45,17 @@ namespace JumpvalleyApp
         {
             base.Start();
 
+            // The app's main setting group
+            SettingGroup mainSettingGroup = settings.Group;
+
             // HiDPI adapter
-            HiDpiAdapter hiDpiAdapter = new HiDpiAdapter(Tree.Root)
-            {
-                Enabled = true
-            };
+            HiDpiAdapter hiDpiAdapter = new HiDpiAdapter(Tree.Root);
             Disposables.Add(hiDpiAdapter);
+
+            // HiDPI adapter toggle setting
+            mainSettingGroup.GetNode<SettingGroup>("display")?.Add(
+                new HiDpiAdapterToggle(hiDpiAdapter)
+            );
 
             // Handle music that's played in the main scene file
             Node rootNodeMusic = RootNode.GetNode("Music");
