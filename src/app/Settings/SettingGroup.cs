@@ -185,6 +185,8 @@ namespace JumpvalleyApp.Settings
             foreach (SettingBase s in SettingList)
             {
                 s.Changed -= HandleSettingChanged;
+                s.QueueFree();
+                s.Dispose();
             }
 
             SettingList.Clear();
@@ -192,6 +194,8 @@ namespace JumpvalleyApp.Settings
             foreach (SettingGroup group in Subgroups)
             {
                 group.SettingChanged -= HandleSettingChangedFromSubgroup;
+                group.QueueFree();
+                group.Dispose();
             }
 
             Subgroups.Clear();
