@@ -11,16 +11,12 @@ namespace JumpvalleyApp.Settings.Display
         {
             if (adapter == null) throw new ArgumentNullException(nameof(adapter), $"Attempted to pass a {nameof(HiDpiAdapter)} that doesn't exist.");
 
+            Adapter = adapter;
+
             Value = true;
             Id = "hidpi_adapter";
             LocalizationId = "SETTINGS_HIDPI_ADAPTER";
             ActionMapKey = null;
-
-            Adapter = adapter;
-            if (Value is bool enabled)
-            {
-                Adapter.Enabled = enabled;
-            }
         }
 
         public override void Update(object newValue)
