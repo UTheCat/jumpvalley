@@ -48,7 +48,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
-anchors_preset = 0
 offset_top = 60.0
 offset_bottom = 108.0
 
