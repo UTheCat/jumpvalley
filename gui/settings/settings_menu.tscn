@@ -64,6 +64,7 @@ layout_mode = 2
 
 [node name="SettingList" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 metadata/setting_category_scene = "res://gui/settings/setting_category.tscn"
 metadata/check_button_setting_scene = "res://gui/settings/check_button_setting.tscn"
 
