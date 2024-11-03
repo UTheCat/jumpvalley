@@ -103,8 +103,9 @@ namespace JumpvalleyApp.Display
                 int dpi = DisplayServer.ScreenGetDpi();
                 if (dpi > baseDpi)
                 {
+                    float maxFactor = MaxContentScaleFactor;
                     float factor = ((float)dpi) / baseDpi;
-                    if (MaxContentScaleFactor < 0) Math.Min(factor, MaxContentScaleFactor);
+                    if (maxFactor >= 0) Math.Min(factor, maxFactor);
                     HandledWindow.ContentScaleFactor = factor;
 
                     return;
