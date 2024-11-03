@@ -36,6 +36,17 @@ namespace JumpvalleyApp.Display
             }
         }
 
+        private float _baseDpi;
+        public float BaseDpi
+        {
+            get => _baseDpi;
+            set
+            {
+                _baseDpi = value;
+                ResizeUi();
+            }
+        }
+
         private bool _respondsToWindowResize;
         private bool respondsToWindowResize
         {
