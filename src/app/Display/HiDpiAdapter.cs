@@ -9,9 +9,6 @@ namespace JumpvalleyApp.Display
     /// </summary>
     public partial class HiDpiAdapter : IDisposable
     {
-        private static readonly string VIEWPORT_WIDTH_SETTING_PATH = "display/window/size/viewport_width";
-        private static readonly string VIEWPORT_HEIGHT_SETTING_PATH = "display/window/size/viewport_height";
-
         public Window HandledWindow { get; private set; }
 
         private bool _enabled;
