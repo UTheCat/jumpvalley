@@ -42,8 +42,15 @@ namespace JumpvalleyApp.Display
             get => _baseDpi;
             set
             {
-                _baseDpi = value;
-                ResizeUi();
+                if (value > 0)
+                {
+                    _baseDpi = value;
+                    ResizeUi();
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), value, "Attempted to set Base DPI to be less than or equal to zero.");
+                }
             }
         }
 
@@ -67,33 +74,30 @@ namespace JumpvalleyApp.Display
             }
         }
 
-        private int initialViewportWidth;
-        private int initialViewportHeight;
-
         /// <summary>
         /// Construct a HiDpiAdapter.
         /// </summary>
         /// <param name="window">The window to handle HiDPI for</param>
-        public HiDpiAdapter(Window window)
+        public HiDpiAdapter(Window window, float baseDpi = 96f)
         {
             if (window == null) throw new ArgumentNullException(nameof(window), "Attempted to pass a Window that doesn't exist.");
             HandledWindow = window;
-
-            initialViewportWidth = ProjectSettings.GetSettingWithOverride(VIEWPORT_WIDTH_SETTING_PATH).As<int>();
-            initialViewportHeight = ProjectSettings.GetSettingWithOverride(VIEWPORT_HEIGHT_SETTING_PATH).As<int>();
+            BaseDpi = baseDpi;
         }
 
         private void ResizeUi()
         {
-            if (!Enabled)
+            if (Enabled)
             {
-                HandledWindow.ContentScaleMode = Window.ContentScaleModeEnum.Disabled;
-                return;
+                float baseDpi = BaseDpi;
+                float dpi = DisplayServer.ScreenGetDpi();
+                if (dpi > baseDpi)
+                {
+                    HandledWindow.ContentScaleFactor = dpi / baseDpi;
+                }
             }
 
-            Vector2I windowSize = HandledWindow.Size;
-            HandledWindow.ContentScaleMode = (windowSize.X <= initialViewportWidth && windowSize.Y <= initialViewportHeight)
-                ? Window.ContentScaleModeEnum.Disabled : Window.ContentScaleModeEnum.CanvasItems;
+            HandledWindow.ContentScaleFactor = 1f;
         }
 
         public void Dispose()
