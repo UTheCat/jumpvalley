@@ -49,10 +49,7 @@ namespace JumpvalleyApp
             SettingGroup mainSettingGroup = settings.Group;
 
             // HiDPI adapter
-            HiDpiAdapter hiDpiAdapter = new HiDpiAdapter(Tree.Root)
-            {
-                MaxContentScaleFactor = 2
-            };
+            HiDpiAdapter hiDpiAdapter = new HiDpiAdapter(Tree.Root);
             Disposables.Add(hiDpiAdapter);
 
             // HiDPI adapter toggle setting
