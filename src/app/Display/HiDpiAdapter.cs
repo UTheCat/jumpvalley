@@ -11,6 +11,18 @@ namespace JumpvalleyApp.Display
     {
         public Window HandledWindow { get; private set; }
 
+        private float _maxContentScaleFactor;
+        public float MaxContentScaleFactor
+        {
+            get => _maxContentScaleFactor;
+            set
+            {
+                _maxContentScaleFactor = value;
+
+                ResizeGui();
+            }
+        }
+
         private bool _enabled;
 
         public bool Enabled
