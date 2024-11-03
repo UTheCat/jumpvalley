@@ -91,6 +91,7 @@ namespace JumpvalleyApp.Display
                 if (dpi > baseDpi)
                 {
                     HandledWindow.ContentScaleFactor = ((float)dpi) / baseDpi;
+                    return;
                 }
             }
 
