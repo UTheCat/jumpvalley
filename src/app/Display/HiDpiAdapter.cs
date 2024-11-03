@@ -92,6 +92,7 @@ namespace JumpvalleyApp.Display
             if (window == null) throw new ArgumentNullException(nameof(window), "Attempted to pass a Window that doesn't exist.");
             HandledWindow = window;
             BaseDpi = baseDpi;
+            MaxContentScaleFactor = -1;
         }
 
         private void ResizeGui()
@@ -105,7 +106,7 @@ namespace JumpvalleyApp.Display
                     float factor = ((float)dpi) / baseDpi;
                     if (MaxContentScaleFactor < 0) Math.Min(factor, MaxContentScaleFactor);
                     HandledWindow.ContentScaleFactor = factor;
-                    
+
                     return;
                 }
             }
