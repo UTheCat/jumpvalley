@@ -25,13 +25,13 @@ namespace JumpvalleyApp.Display
 
                 if (value)
                 {
-                    ResizeViewport();
+                    ResizeUi();
                     respondsToWindowResize = true;
                 }
                 else
                 {
                     respondsToWindowResize = false;
-                    ResizeViewport();
+                    ResizeUi();
                 }
             }
         }
@@ -47,11 +47,11 @@ namespace JumpvalleyApp.Display
 
                 if (value)
                 {
-                    HandledWindow.SizeChanged += ResizeViewport;
+                    HandledWindow.SizeChanged += ResizeUi;
                 }
                 else
                 {
-                    HandledWindow.SizeChanged -= ResizeViewport;
+                    HandledWindow.SizeChanged -= ResizeUi;
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace JumpvalleyApp.Display
             initialViewportHeight = ProjectSettings.GetSettingWithOverride(VIEWPORT_HEIGHT_SETTING_PATH).As<int>();
         }
 
-        private void ResizeViewport()
+        private void ResizeUi()
         {
             if (!Enabled)
             {
