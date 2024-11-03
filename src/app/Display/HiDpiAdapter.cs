@@ -22,13 +22,13 @@ namespace JumpvalleyApp.Display
 
                 if (value)
                 {
-                    ResizeUi();
+                    ResizeGui();
                     respondsToWindowResize = true;
                 }
                 else
                 {
                     respondsToWindowResize = false;
-                    ResizeUi();
+                    ResizeGui();
                 }
             }
         }
@@ -42,7 +42,7 @@ namespace JumpvalleyApp.Display
                 if (value > 0)
                 {
                     _baseDpi = value;
-                    ResizeUi();
+                    ResizeGui();
                 }
                 else
                 {
@@ -62,11 +62,11 @@ namespace JumpvalleyApp.Display
 
                 if (value)
                 {
-                    HandledWindow.SizeChanged += ResizeUi;
+                    HandledWindow.SizeChanged += ResizeGui;
                 }
                 else
                 {
-                    HandledWindow.SizeChanged -= ResizeUi;
+                    HandledWindow.SizeChanged -= ResizeGui;
                 }
             }
         }
@@ -82,7 +82,7 @@ namespace JumpvalleyApp.Display
             BaseDpi = baseDpi;
         }
 
-        private void ResizeUi()
+        private void ResizeGui()
         {
             if (Enabled)
             {
