@@ -33,8 +33,8 @@ namespace JumpvalleyApp.Display
             }
         }
 
-        private float _baseDpi;
-        public float BaseDpi
+        private int _baseDpi;
+        public int BaseDpi
         {
             get => _baseDpi;
             set
@@ -75,7 +75,7 @@ namespace JumpvalleyApp.Display
         /// Construct a HiDpiAdapter.
         /// </summary>
         /// <param name="window">The window to handle HiDPI for</param>
-        public HiDpiAdapter(Window window, float baseDpi = 96f)
+        public HiDpiAdapter(Window window, int baseDpi = 96)
         {
             if (window == null) throw new ArgumentNullException(nameof(window), "Attempted to pass a Window that doesn't exist.");
             HandledWindow = window;
@@ -86,11 +86,11 @@ namespace JumpvalleyApp.Display
         {
             if (Enabled)
             {
-                float baseDpi = BaseDpi;
-                float dpi = DisplayServer.ScreenGetDpi();
+                int baseDpi = BaseDpi;
+                int dpi = DisplayServer.ScreenGetDpi();
                 if (dpi > baseDpi)
                 {
-                    HandledWindow.ContentScaleFactor = dpi / baseDpi;
+                    HandledWindow.ContentScaleFactor = ((float)dpi) / baseDpi;
                 }
             }
 
