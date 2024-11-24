@@ -1,12 +1,13 @@
 ﻿using Godot;
-using System;
 
-namespace Jumpvalley.Players.Movement
+using Jumpvalley.Players.Movement;
+
+namespace JumpvalleyApp.Players.Movement
 {
     /// <summary>
     /// Subclass of <see cref="BaseMover"/> that handles character movement via keyboard input.
     /// </summary>
-    public partial class KeyboardMover: BaseMover
+    public partial class KeyboardMover : BaseMover
     {
         private readonly string CHARACTER_MOVE_LEFT = "character_move_left";
         private readonly string CHARACTER_MOVE_RIGHT = "character_move_right";
