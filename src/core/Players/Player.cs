@@ -40,51 +40,45 @@ namespace Jumpvalley.Players
         /// <summary>
         /// The player's current music player
         /// </summary>
-        public MusicZonePlayer CurrentMusicPlayer { get; private set; }
+        public MusicPlayer CurrentMusicPlayer { get; protected set; }
 
         /// <summary>
         /// The player's primary GUI root node
         /// </summary>
-        public Control PrimaryGui { get; private set; }
+        public Control PrimaryGui { get; protected set; }
 
         /// <summary>
         /// The player's current character instance
         /// </summary>
-        public CharacterBody3D Character { get; private set; }
+        public CharacterBody3D Character { get; protected set; }
 
         /// <summary>
         /// The primary mover instance acting on behalf of the player's character
         /// </summary>
-        public BaseMover Mover { get; private set; }
+        public BaseMover Mover { get; protected set; }
 
         /// <summary>
         /// The primary node that handles the player's camera
         /// </summary>
-        public BaseCamera Camera { get; private set; }
+        public BaseCamera Camera { get; protected set; }
 
         /// <summary>
         /// Objects that will get disposed of once the current Player instance gets Dispose()'d.
         /// </summary>
-        public List<IDisposable> Disposables { get; private set; } = new List<IDisposable>();
+        public List<IDisposable> Disposables { get; private set; }
 
         public Player(SceneTree tree, Node rootNode) : base(new OffsetStopwatch(TimeSpan.Zero))
         {
+            Disposables = new List<IDisposable>();
             Tree = tree;
-            RootNode = rootNode;
+            RootNode = rootNode;       
 
-            PrimaryGui = rootNode.GetNode<Control>("PrimaryGui");
-            Character = rootNode.GetNode<CharacterBody3D>("Character");
-
-            CurrentMusicPlayer = new MusicZonePlayer();
-            Disposables.Add(CurrentMusicPlayer);
-
-            Mover = new KeyboardMover();
-            Disposables.Add(Mover);
-
-            Camera = new MouseCamera();
-            Disposables.Add(Camera);
-
-            rootNode.AddChild(CurrentMusicPlayer);
+            // These should be modifiable by classes inheriting from Jumpvalley's core Player class
+            PrimaryGui = null;
+            Character = null;
+            CurrentMusicPlayer = null;
+            Mover = null;
+            Camera = null;
         }
 
         /// <summary>
