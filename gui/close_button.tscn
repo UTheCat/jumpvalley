@@ -10,8 +10,8 @@ corner_radius_bottom_right = 500
 corner_radius_bottom_left = 500
 
 [node name="CloseButton" type="Button"]
-offset_right = 30.0
-offset_bottom = 30.0
+offset_right = 36.0
+offset_bottom = 36.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_8psry")
 
 [node name="TextureRect" type="TextureRect" parent="."]

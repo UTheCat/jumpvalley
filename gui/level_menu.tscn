@@ -12,11 +12,11 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_r8bgc"]
 font = ExtResource("1_thenv")
-font_size = 40
+font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_kiqen"]
 font = ExtResource("1_thenv")
-font_size = 20
+font_size = 24
 
 [node name="LevelMenu" type="Control"]
 layout_mode = 3
@@ -25,9 +25,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
+offset_left = -175.0
 offset_top = -200.0
-offset_right = 150.0
+offset_right = 175.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -48,7 +48,7 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.05
-offset_bottom = 49.0
+offset_bottom = 59.0
 text = "Menu Title"
 label_settings = SubResource("LabelSettings_r8bgc")
 
@@ -59,8 +59,8 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.05
-offset_top = 49.0
-offset_bottom = 74.0
+offset_top = 59.0
+offset_bottom = 89.0
 text = "Menu Subtitle"
 label_settings = SubResource("LabelSettings_kiqen")
 
@@ -70,7 +70,7 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
-offset_top = 80.0
+offset_top = 100.0
 
 [node name="CloseButton" parent="." instance=ExtResource("2_qiqfo")]
 layout_mode = 1
@@ -79,5 +79,5 @@ anchor_left = 0.95
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.05
-offset_left = -30.0
+offset_left = -36.0
 offset_right = 0.0

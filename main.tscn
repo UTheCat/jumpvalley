@@ -48,11 +48,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
+offset_top = 60.0
+offset_bottom = 108.0
 
 [node name="FramerateCounter" parent="PrimaryGui" instance=ExtResource("3_6onu6")]
 visible = false
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -106.0
@@ -68,6 +70,12 @@ layout_mode = 1
 
 [node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
 layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -88.0
+offset_bottom = 0.0
+grow_vertical = 0
 
 [node name="SettingsMenu" parent="PrimaryGui" instance=ExtResource("4_7nvye")]
 visible = false
@@ -81,15 +89,15 @@ offset_right = 338.0
 [node name="MusicPanel" parent="PrimaryGui" instance=ExtResource("3_dfcbn")]
 visible = false
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -250.0
-offset_top = -267.0
-offset_right = 250.0
-offset_bottom = -42.0
+offset_left = -270.0
+offset_top = -317.0
+offset_right = 270.0
+offset_bottom = -52.0
 grow_vertical = 0
 
 [node name="PrimaryLevelMenu" parent="PrimaryGui" instance=ExtResource("6_faadj")]

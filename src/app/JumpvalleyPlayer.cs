@@ -10,11 +10,11 @@ using Jumpvalley.Music;
 using Jumpvalley.Players;
 using Jumpvalley.Players.Movement;
 
+using JumpvalleyApp.Display;
 using JumpvalleyApp.Gui;
 using JumpvalleyApp.Levels;
 using JumpvalleyApp.Settings;
 using JumpvalleyApp.Settings.Display;
-using JumpvalleyApp.Testing;
 using Jumpvalley.Levels.Interactives.Mechanics;
 using Jumpvalley.Tweening;
 
@@ -37,11 +37,30 @@ namespace JumpvalleyApp
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
             settings = new JumpvalleySettings();
             framerateCounter = null;
+
+            Disposables.Add(settings);
         }
 
         public override void Start()
         {
             base.Start();
+
+            // The app's main setting group
+            SettingGroup mainSettingGroup = settings.Group;
+
+            // HiDPI adapter
+            HiDpiAdapter hiDpiAdapter = new HiDpiAdapter(Tree.Root)
+            {
+                // We'll use 2 as the max content scale factor for now.
+                // There might be a better solution that gets implemented in the future.
+                MaxContentScaleFactor = 2f
+            };
+            Disposables.Add(hiDpiAdapter);
+
+            // HiDPI adapter toggle setting
+            mainSettingGroup.GetNode<SettingGroup>("display")?.Add(
+                new HiDpiAdapterToggle(hiDpiAdapter)
+            );
 
             // Handle music that's played in the main scene file
             Node rootNodeMusic = RootNode.GetNode("Music");
@@ -331,7 +350,6 @@ namespace JumpvalleyApp
                 settingsFile.Write();
             }
 
-            settings.Group.Dispose();
             base.Dispose();
         }
 

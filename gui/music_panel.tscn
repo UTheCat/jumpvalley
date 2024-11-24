@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfirwq7r0jq20"]
+[gd_scene load_steps=7 format=3 uid="uid://dfirwq7r0jq20"]
 
 [ext_resource type="Texture2D" uid="uid://cbtq8qw7d17ij" path="res://addons/kenney_prototype_textures/green/texture_10.png" id="1_aac5p"]
 [ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_c6jsr"]
+[ext_resource type="Texture2D" uid="uid://ckibfgp0fh7ck" path="res://gui/music_panel_volume_grabber.svg" id="3_3a134"]
 [ext_resource type="Texture2D" uid="uid://df6f5u3lobv06" path="res://addons/icons/volume_down_48dp.svg" id="3_yrcgy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkvd5"]
@@ -24,8 +25,8 @@ shadow_size = 4
 [node name="MusicPanel" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 500.0
-offset_bottom = 225.0
+offset_right = 540.0
+offset_bottom = 265.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -43,13 +44,13 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vkvd5")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
-anchor_top = 0.5
+anchor_top = 0.55
 anchor_right = 0.2
-anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -52.0
-offset_right = 52.0
-offset_bottom = 52.0
+anchor_bottom = 0.55
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s1d3y")
 
 [node name="Image" type="TextureRect" parent="Thumbnail"]
@@ -74,7 +75,7 @@ offset_left = 16.0
 offset_top = 16.0
 offset_bottom = 51.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 36
 text = "Music"
 
 [node name="SongName" type="Label" parent="."]
@@ -82,10 +83,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
 anchor_right = 1.0
-offset_top = 68.0
-offset_bottom = 93.0
+offset_top = 93.0
+offset_bottom = 123.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 28
 text = "Song Name"
 
 [node name="Artists" type="Label" parent="."]
@@ -93,10 +94,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
 anchor_right = 1.0
-offset_top = 100.0
-offset_bottom = 122.0
+offset_top = 130.0
+offset_bottom = 155.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "Artists"
 
 [node name="Volume" type="Control" parent="."]
@@ -105,34 +106,37 @@ anchor_left = 0.4
 anchor_top = 1.0
 anchor_right = 0.9
 anchor_bottom = 1.0
-offset_top = -82.0
-offset_bottom = -58.0
+offset_top = -84.0
+offset_bottom = -48.0
 
 [node name="Slider" type="HSlider" parent="Volume"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.85
-offset_left = 30.0
-offset_bottom = 24.0
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_left = 42.0
+theme_override_icons/grabber = ExtResource("3_3a134")
+theme_override_icons/grabber_highlight = ExtResource("3_3a134")
+theme_override_icons/grabber_disabled = ExtResource("3_3a134")
 max_value = 1.0
 step = 0.01
 
 [node name="Icon" type="TextureRect" parent="Volume"]
 layout_mode = 1
 anchors_preset = -1
-offset_right = 24.0
-offset_bottom = 24.0
+offset_right = 36.0
+offset_bottom = 36.0
 texture = ExtResource("3_yrcgy")
 expand_mode = 1
 
 [node name="Percentage" type="Label" parent="Volume"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.85
+anchor_left = 0.8
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_fonts/font = ExtResource("1_c6jsr")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 18
 text = "0%"
 horizontal_alignment = 2
 vertical_alignment = 1

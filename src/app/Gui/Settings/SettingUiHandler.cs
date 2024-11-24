@@ -61,19 +61,21 @@ namespace JumpvalleyApp.Gui.Settings
                     {
                         setting.Value = newValue;
                     }
-
-                    toggleButton.Toggled += HandleToggle;
-                    togglePressedDisconnectFunction = () =>
-                    {
-                        toggleButton.Toggled -= HandleToggle;
-                    };
-                    toggleNodeUpdateFunction = () =>
+                    void UpdateToggleButtonDisplay()
                     {
                         if (setting.Value is bool vBool)
                         {
                             toggleButton.SetPressedNoSignal(vBool);
                         }
+                    }
+
+                    UpdateToggleButtonDisplay();
+                    toggleButton.Toggled += HandleToggle;
+                    togglePressedDisconnectFunction = () =>
+                    {
+                        toggleButton.Toggled -= HandleToggle;
                     };
+                    toggleNodeUpdateFunction = UpdateToggleButtonDisplay;
                 }
             }
 

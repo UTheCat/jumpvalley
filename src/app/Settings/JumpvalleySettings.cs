@@ -1,3 +1,4 @@
+using System;
 using JumpvalleyApp.Settings.Display;
 
 namespace JumpvalleyApp.Settings
@@ -5,10 +6,10 @@ namespace JumpvalleyApp.Settings
     /// <summary>
     /// Main list of user settings for Jumpvalley
     /// </summary>
-    public partial class JumpvalleySettings
+    public partial class JumpvalleySettings : IDisposable
     {
-        public SettingGroup Group;
-        public SettingsFile File;
+        public SettingGroup Group { get; private set; }
+        public SettingsFile File { get; private set; }
 
         public JumpvalleySettings()
         {
@@ -20,6 +21,11 @@ namespace JumpvalleyApp.Settings
             Group = group;
 
             File = new SettingsFile();
+        }
+
+        public void Dispose()
+        {
+            Group.Dispose();
         }
     }
 }

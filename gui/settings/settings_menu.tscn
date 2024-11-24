@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2jxb8y2m4xf0"]
 
-[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_4vxkx"]
+[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf" id="1_6doen"]
 [ext_resource type="PackedScene" uid="uid://olrc8iep31yb" path="res://gui/close_button.tscn" id="2_rklti"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5vjn"]
@@ -9,18 +9,18 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_3l671"]
-font = ExtResource("1_4vxkx")
+font = ExtResource("1_6doen")
 font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_bd3vs"]
-font = ExtResource("1_4vxkx")
+font = ExtResource("1_6doen")
 font_size = 34
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 638.0
+offset_right = 644.0
 offset_bottom = -150.0
 grow_vertical = 2
 
@@ -29,7 +29,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -38.0
+offset_right = -44.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_m5vjn")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -64,6 +64,7 @@ layout_mode = 2
 
 [node name="SettingList" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 metadata/setting_category_scene = "res://gui/settings/setting_category.tscn"
 metadata/check_button_setting_scene = "res://gui/settings/check_button_setting.tscn"
 
@@ -72,7 +73,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -30.0
+offset_left = -36.0
 offset_top = 8.0
 offset_right = 0.0
-offset_bottom = 38.0
+offset_bottom = 44.0

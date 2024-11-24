@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8fqbn48544bp"]
 
-[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_gg4se"]
+[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf" id="1_4nx1s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vw2l0"]
-font = ExtResource("1_gg4se")
-font_size = 30
+font = ExtResource("1_4nx1s")
+font_size = 40
 font_color = Color(0.8, 0.8, 0.8, 1)
 
 [node name="SettingCategory" type="Label"]

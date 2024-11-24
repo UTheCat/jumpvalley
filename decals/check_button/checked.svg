@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="42"
-   height="18"
-   viewBox="0 0 42 18"
+   width="84"
+   height="36"
+   viewBox="0 0 84 36"
    version="1.1"
    id="svg1"
    sodipodi:docname="checked.svg"
@@ -25,9 +25,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="24.761905"
-     inkscape:cx="21"
-     inkscape:cy="8.9855769"
+     inkscape:zoom="1.5476191"
+     inkscape:cx="8.7230768"
+     inkscape:cy="21.646154"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -42,27 +42,27 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#f5f5f5;fill-opacity:1;stroke:#f5f5f5;stroke-width:1.7408;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#f5f5f5;fill-opacity:1;stroke:#f5f5f5;stroke-width:3.4816;stroke-dasharray:none;stroke-opacity:1"
        id="rect1"
-       width="40.259197"
-       height="16.259176"
-       x="0.87041301"
-       y="0.87041301"
-       ry="8.1295881" />
+       width="80.518501"
+       height="32.518394"
+       x="1.7408153"
+       y="1.7408153"
+       ry="16.259197" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Toggle">
     <rect
-       style="fill:#3d3d3d;fill-opacity:1;stroke:none;stroke-width:1.857;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#3d3d3d;fill-opacity:1;stroke:none;stroke-width:3.714;stroke-dasharray:none;stroke-opacity:1"
        id="rect3"
-       width="10"
-       height="10"
-       x="28"
-       y="4"
-       rx="5"
-       ry="5" />
+       width="20"
+       height="20"
+       x="56"
+       y="8"
+       rx="10"
+       ry="10" />
   </g>
   <metadata
      id="metadata1">
