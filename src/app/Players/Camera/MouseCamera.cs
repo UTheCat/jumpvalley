@@ -1,16 +1,14 @@
 ﻿using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jumpvalley.Players.Camera
+using Jumpvalley.Players.Camera;
+
+namespace JumpvalleyApp.Players.Camera
 {
     /// <summary>
     /// Handles control of the player's camera via a mouse
     /// </summary>
-    public partial class MouseCamera: BaseCamera, IDisposable
+    public partial class MouseCamera : BaseCamera, IDisposable
     {
         private static readonly string INPUT_CAMERA_PAN = "camera_pan";
         private static readonly string INPUT_CAMERA_ZOOM_IN = "camera_zoom_in";
