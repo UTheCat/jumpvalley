@@ -45,7 +45,16 @@ namespace JumpvalleyApp
             settings = new JumpvalleySettings();
             framerateCounter = null;
 
-            Disposables.Add(settings);
+            Disposables.AddRange(
+                [
+                    settings,
+                    PrimaryGui,
+                    Character,
+                    CurrentMusicPlayer,
+                    Mover,
+                    Camera
+                ]
+            );
         }
 
         public override void Start()
