@@ -35,6 +35,12 @@ namespace JumpvalleyApp
 
         public JumpvalleyPlayer(SceneTree tree, Node rootNode) : base(tree, rootNode)
         {
+            PrimaryGui = rootNode.GetNode("PrimaryGui");
+            Character = rootNode.GetNode<CharacterBody3D>("Character");
+            CurrentMusicPlayer = new MusicZonePlayer();
+            Mover = new KeyboardMover();
+            Camera = new MouseCamera();
+
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
             settings = new JumpvalleySettings();
             framerateCounter = null;
