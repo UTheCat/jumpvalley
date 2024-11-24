@@ -45,7 +45,7 @@ namespace Jumpvalley.Players
         /// <summary>
         /// The player's primary GUI root node
         /// </summary>
-        public Control PrimaryGui { get; protected set; }
+        public Node PrimaryGui { get; protected set; }
 
         /// <summary>
         /// The player's current character instance
