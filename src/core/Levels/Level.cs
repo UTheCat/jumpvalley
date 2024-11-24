@@ -347,7 +347,7 @@ namespace Jumpvalley.Levels
 
             if (player != null)
             {
-                MusicZonePlayer musicPlayer = player.CurrentMusicPlayer;
+                MusicZonePlayer musicPlayer = player.CurrentMusicPlayer as MusicZonePlayer;
                 if (musicPlayer != null)
                 {
                     foreach (MusicZone zone in MusicZones)
