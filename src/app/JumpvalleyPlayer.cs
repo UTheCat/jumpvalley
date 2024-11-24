@@ -5,18 +5,17 @@ using System.Text.Json.Nodes;
 
 using Jumpvalley.Gui;
 using Jumpvalley.Levels;
+using Jumpvalley.Levels.Interactives.Mechanics;
 using Jumpvalley.Logging;
 using Jumpvalley.Music;
 using Jumpvalley.Players;
-using Jumpvalley.Players.Movement;
+using Jumpvalley.Tweening;
 
 using JumpvalleyApp.Display;
 using JumpvalleyApp.Gui;
 using JumpvalleyApp.Levels;
 using JumpvalleyApp.Settings;
 using JumpvalleyApp.Settings.Display;
-using Jumpvalley.Levels.Interactives.Mechanics;
-using Jumpvalley.Tweening;
 
 namespace JumpvalleyApp
 {
