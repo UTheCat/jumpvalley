@@ -195,6 +195,8 @@ namespace JumpvalleyApp
             {
                 framerateCounterToggle.Counter = framerateCounter;
             }
+            
+            Disposables.Add(framerateCounter);
 
             // Settings menu
             Control settingsMenuNode = PrimaryGui.GetNode<Control>("SettingsMenu");
