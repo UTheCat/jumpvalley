@@ -14,6 +14,8 @@ using Jumpvalley.Tweening;
 using JumpvalleyApp.Display;
 using JumpvalleyApp.Gui;
 using JumpvalleyApp.Levels;
+using JumpvalleyApp.Players.Camera;
+using JumpvalleyApp.Players.Movement;
 using JumpvalleyApp.Settings;
 using JumpvalleyApp.Settings.Display;
 
