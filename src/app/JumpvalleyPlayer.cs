@@ -5,18 +5,19 @@ using System.Text.Json.Nodes;
 
 using Jumpvalley.Gui;
 using Jumpvalley.Levels;
+using Jumpvalley.Levels.Interactives.Mechanics;
 using Jumpvalley.Logging;
 using Jumpvalley.Music;
 using Jumpvalley.Players;
-using Jumpvalley.Players.Movement;
+using Jumpvalley.Tweening;
 
 using JumpvalleyApp.Display;
 using JumpvalleyApp.Gui;
 using JumpvalleyApp.Levels;
+using JumpvalleyApp.Players.Camera;
+using JumpvalleyApp.Players.Movement;
 using JumpvalleyApp.Settings;
 using JumpvalleyApp.Settings.Display;
-using Jumpvalley.Levels.Interactives.Mechanics;
-using Jumpvalley.Tweening;
 
 namespace JumpvalleyApp
 {
@@ -34,11 +35,26 @@ namespace JumpvalleyApp
 
         public JumpvalleyPlayer(SceneTree tree, Node rootNode) : base(tree, rootNode)
         {
+            PrimaryGui = rootNode.GetNode("PrimaryGui");
+            Character = rootNode.GetNode<CharacterBody3D>("Character");
+            CurrentMusicPlayer = new MusicZonePlayer();
+            Mover = new KeyboardMover();
+            Camera = new MouseCamera();
+
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
             settings = new JumpvalleySettings();
             framerateCounter = null;
 
-            Disposables.Add(settings);
+            Disposables.AddRange(
+                [
+                    settings,
+                    PrimaryGui,
+                    Character,
+                    CurrentMusicPlayer,
+                    Mover,
+                    Camera
+                ]
+            );
         }
 
         public override void Start()
@@ -67,26 +83,29 @@ namespace JumpvalleyApp
             MusicGroup primaryMusic = new MusicGroup(rootNodeMusic.GetNode("PrimaryMusic"));
             Node primaryMusicZones = rootNodeMusic.GetNode("MusicZones");
 
-            CurrentMusicPlayer.BindedNode = Character;
-            CurrentMusicPlayer.TransitionTime = 3;
-            CurrentMusicPlayer.OverrideTransitionTime = true;
-            CurrentMusicPlayer.VolumeScale = 1;
-            CurrentMusicPlayer.OverrideLocalVolumeScale = true;
-            CurrentMusicPlayer.OverrideSongStreamHandlingMode = true;
+            if (!(CurrentMusicPlayer is MusicZonePlayer)) throw new Exception($"{nameof(CurrentMusicPlayer)} isn't a MusicZonePlayer.");
 
-            CurrentMusicPlayer.AddPlaylist(primaryMusic);
-            CurrentMusicPlayer.PrimaryPlaylist = primaryMusic;
+            MusicZonePlayer musicPlayer = (MusicZonePlayer)CurrentMusicPlayer;
+            musicPlayer.BindedNode = Character;
+            musicPlayer.TransitionTime = 3;
+            musicPlayer.OverrideTransitionTime = true;
+            musicPlayer.VolumeScale = 1;
+            musicPlayer.OverrideLocalVolumeScale = true;
+            musicPlayer.OverrideSongStreamHandlingMode = true;
+
+            musicPlayer.AddPlaylist(primaryMusic);
+            musicPlayer.PrimaryPlaylist = primaryMusic;
 
             Disposables.Add(primaryMusic);
 
             foreach (Node zone in primaryMusicZones.GetChildren())
             {
                 MusicZone musicZone = new MusicZone(zone);
-                CurrentMusicPlayer.Add(musicZone);
+                musicPlayer.Add(musicZone);
                 Disposables.Add(musicZone);
             }
 
-            //CurrentMusicPlayer.IsPlaying = true;
+            //musicPlayer.IsPlaying = true;
 
             // Character bounding box
             OverallBoundingBoxObject characterBoundingBox = new OverallBoundingBoxObject(Clock, Character.GetNode("_InteractiveBoundingBox"));
@@ -148,7 +167,7 @@ namespace JumpvalleyApp
             };
 
             // Bottom bar
-            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), CurrentMusicPlayer)
+            BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), musicPlayer)
             {
                 AnimatedNodes = animatedNodes
             };
@@ -164,7 +183,7 @@ namespace JumpvalleyApp
             // Music panel
             Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");
 
-            MusicPanel musicPanel = new MusicPanel(CurrentMusicPlayer, musicPanelNode, Tree);
+            MusicPanel musicPanel = new MusicPanel(musicPlayer, musicPanelNode, Tree);
             animatedNodes.Add("music_panel", musicPanel);
 
             //bottomBar.PrimaryMusicPanel = musicPanel;
@@ -176,6 +195,8 @@ namespace JumpvalleyApp
             {
                 framerateCounterToggle.Counter = framerateCounter;
             }
+            
+            Disposables.Add(framerateCounter);
 
             // Settings menu
             Control settingsMenuNode = PrimaryGui.GetNode<Control>("SettingsMenu");
@@ -284,8 +305,8 @@ namespace JumpvalleyApp
                     MusicGroup levelPrimaryPlaylist = levelInstance.PrimaryPlaylist;
                     if (levelPrimaryPlaylist != null)
                     {
-                        CurrentMusicPlayer.AddPlaylist(levelPrimaryPlaylist);
-                        CurrentMusicPlayer.PrimaryPlaylist = levelPrimaryPlaylist;
+                        musicPlayer.AddPlaylist(levelPrimaryPlaylist);
+                        musicPlayer.PrimaryPlaylist = levelPrimaryPlaylist;
                     }
 
                     return levelPackage;
@@ -326,7 +347,7 @@ namespace JumpvalleyApp
 
             // Start playing music.
             // This is done after we load the lobby and the initialization level just to keep things smooth.
-            CurrentMusicPlayer.IsPlaying = true;
+            musicPlayer.IsPlaying = true;
 
             // Allow the player's character to move.
             // This is done after we load the lobby and the initialization level so the player's character doesn't fall through the map.

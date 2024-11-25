@@ -347,7 +347,7 @@ namespace Jumpvalley.Levels
 
             if (player != null)
             {
-                MusicZonePlayer musicPlayer = player.CurrentMusicPlayer;
+                MusicZonePlayer musicPlayer = player.CurrentMusicPlayer as MusicZonePlayer;
                 if (musicPlayer != null)
                 {
                     foreach (MusicZone zone in MusicZones)
@@ -423,6 +423,8 @@ namespace Jumpvalley.Levels
         /// </summary>
         public new void Dispose()
         {
+            Checkpoints.Dispose();
+
             foreach (List<Interactive> list in interactiveLists)
             {
                 foreach (InteractiveNode i in list)
@@ -430,6 +432,7 @@ namespace Jumpvalley.Levels
                     i.Dispose();
                 }
             }
+            
             foreach (MusicZone zone in MusicZones)
             {
                 zone.Dispose();

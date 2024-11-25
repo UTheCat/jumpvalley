@@ -2,8 +2,9 @@
 using System;
 
 using Jumpvalley.Players.Camera;
+using Jumpvalley.Players.Movement;
 
-namespace Jumpvalley.Players.Movement
+namespace JumpvalleyApp.Players.Movement
 {
     /// <summary>
     /// For an instance of <see cref="BaseMover"/>, this sets <see cref="BaseMover.IsRotationLocked"/> to true whenever a camera is in first person or when Shift-Lock has been toggled on by the user.
@@ -62,7 +63,7 @@ namespace Jumpvalley.Players.Movement
                 Update();
             }
         }
-        
+
         /// <summary>
         /// The number of meters to shift the camera to the right by whenever rotation lock is enabled
         /// </summary>
@@ -140,7 +141,7 @@ namespace Jumpvalley.Players.Movement
         private void DisconnectZoomOutDistanceChanged()
         {
             if (isZoomOutDistanceChangedConnected)
-            { 
+            {
                 if (_camera != null)
                 {
                     _camera.ZoomOutDistanceChanged -= HandleZoomOutDistanceChanged;

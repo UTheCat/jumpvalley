@@ -8,7 +8,7 @@ namespace JumpvalleyApp.Gui
     /// <summary>
     /// Class that handles the game's framerate counter GUI.
     /// </summary>
-    public partial class FramerateCounter : AnimatedNode
+    public partial class FramerateCounter : AnimatedNode, IDisposable
     {
         private SceneTreeTween opacityTween;
         private Control gui;
@@ -88,6 +88,11 @@ namespace JumpvalleyApp.Gui
                     gui.Modulate = modulate;
                 };
             }
+        }
+
+        public void Dispose()
+        {
+            opacityTween.Dispose();
         }
     }
 }

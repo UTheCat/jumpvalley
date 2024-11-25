@@ -1,4 +1,6 @@
 using Godot;
+using System;
+using System.Collections.Generic;
 
 namespace JumpvalleyApp.Gui
 {
@@ -6,14 +8,18 @@ namespace JumpvalleyApp.Gui
 	/// The primary level menu, the menu that's accessed by pressing the three-dots at the bottom of the user's screen.
 	/// This menu contains options like accessing game settings and exiting the game.
 	/// </summary>
-	public partial class PrimaryLevelMenu : LevelMenu
+	public partial class PrimaryLevelMenu : LevelMenu, IDisposable
 	{
 		private readonly float BUTTON_Y_POS_DIFF = 52f;
+
+		private List<IDisposable> disposables;
 
 		public SettingsMenu CurrentSettingsMenu;
 
 		public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
 		{
+			disposables = new List<IDisposable>();
+
 			if (TitleLabel != null)
 			{
 				TitleLabel.Text = actualNode.Tr("MENU_TITLE");
@@ -40,6 +46,7 @@ namespace JumpvalleyApp.Gui
 				IsVisible = false;
 				CurrentSettingsMenu.IsVisible = true;
 			};
+			disposables.Add(settingsButtonNode);
 
 			// Add the Exit Game button
 			Button exitGameButton = menuButtonResource.Instantiate<Button>();
@@ -54,6 +61,7 @@ namespace JumpvalleyApp.Gui
 			exitGameButtonHandler.BackgroundColor = Color.Color8(255, 100, 89, 255);
 			exitGameButtonHandler.Text = exitGameButton.Tr("EXIT_GAME");
 			exitGameButtonHandler.Icon = GD.Load<CompressedTexture2D>("res://addons/icons/logout_white_48dp.svg");
+			disposables.Add(exitGameButton);
 
 			menuButtonResource.Dispose();
 
@@ -70,6 +78,21 @@ namespace JumpvalleyApp.Gui
 				b.OffsetBottom = b.OffsetTop + buttonYSize;
 				ItemsControl.AddChild(b);
 			}
+		}
+
+		public new void Dispose()
+		{
+			foreach (IDisposable obj in disposables)
+			{
+				if (obj is Node node)
+				{
+					node.QueueFree();
+				}
+
+				obj.Dispose();
+			}
+
+			base.Dispose();
 		}
 	}
 }
