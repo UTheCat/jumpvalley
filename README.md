@@ -4,7 +4,7 @@ Jumpvalley is both an app and a library you can use to test and run 3D platforme
 
 Currently, it's a work in progress. Some basic features (such as being able to switch levels within the app) have yet to be implemented. Though if you want to test it, the app can currently load and run a level that's specified to load when the app starts. Additionally, there are some settings you can configure in the app's settings menu.
 
-Jumpvalley also features a core API in its repository (this one) that allows developers to code levels with. The core API also features some classes you can use to program a 3D platformer app or game with.
+Jumpvalley also features a "core" API in its repository (this one) that allows developers to code levels with. The core API also features some classes you can use to program a 3D platformer app or game with.
 
 **Important:** While it is currently possible to make a platformer level in Jumpvalley with the Godot Editor, backwards-compatibility is subject to being broken while Jumpvalley is still in major version zero (0.x.x). This is because level formatting and behavior hasn't been set in stone yet. If you want to prevent your level from being broken between minor versions, please wait until Jumpvalley has reached major version one (1.0.0).
 
