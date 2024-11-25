@@ -59,8 +59,8 @@ Here are some instructions for working with this project's repository. This assu
 ### Prerequisites
 
 Software you'll need:
-- .NET-Enabled Godot v4.2.2 or later. The latest version of .NET-Enabled Godot 4 is preferred, and can be downloaded from [Godot's official download page](https://godotengine.org/download).
-- An installation of the [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- .NET-Enabled Godot v4.3 or later. The latest version of .NET-Enabled Godot 4 is preferred, and can be downloaded from [Godot's official download page](https://godotengine.org/download).
+- The [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - [Visual Studio Code](https://code.visualstudio.com/) with the [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (if you want to work with the project's source code)
 
 ### Running Godot and this repository's project file
