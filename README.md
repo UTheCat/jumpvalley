@@ -54,7 +54,7 @@ and type this command:
 
 `chmod +x jumpvalley`
 
-This tells Linux to allow running the Jumpvalley executable.
+Assuming you did this correctly, this tells Linux to allow running the Jumpvalley executable.
 
 ## Documentation
 
