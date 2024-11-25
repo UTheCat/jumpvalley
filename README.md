@@ -79,7 +79,7 @@ In order to run the project, there's a play button near the top-right corner of 
 
 ### Debugging with Visual Studio Code
 
-If you're working in Visual Studio Code, Jumpvalley has a launch configuration named `Debug` that you can use to debug Jumpvalley. This will allow you to see the app's console output.
+If you're working in Visual Studio Code, Jumpvalley has a launch configuration named `Debug Jumpvalley` that you can use to debug Jumpvalley. This will allow you to see the app's console output.
 
 Just make sure you have an environment variable named `JUMPVALLEY_GODOT_EXECUTABLE` set to the path to the Godot executable as mentioned in the prerequisites, and you should be able to run the launch configuration.
 

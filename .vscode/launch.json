@@ -3,7 +3,7 @@
     "configurations": [
         {
             "type": "coreclr",
-            "name": "Debug",
+            "name": "Debug Jumpvalley",
             "request": "launch",
             "program": "${env:JUMPVALLEY_GODOT_EXECUTABLE}",
             "args": "--verbose"
