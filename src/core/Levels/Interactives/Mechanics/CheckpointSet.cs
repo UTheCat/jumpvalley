@@ -44,10 +44,6 @@ namespace Jumpvalley.Levels.Interactives.Mechanics
             }
 
             UpdateCheckpointsFromNodePathsList();
-
-            // This is here for GC-related debugging purposes.
-            // Remember to remove before making a pull request for this branch.
-            Name = "checkpoint_set_handler";
         }
 
         private void UpdateCheckpointsFromNodePathsList()

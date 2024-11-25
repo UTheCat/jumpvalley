@@ -423,6 +423,8 @@ namespace Jumpvalley.Levels
         /// </summary>
         public new void Dispose()
         {
+            Checkpoints.Dispose();
+
             foreach (List<Interactive> list in interactiveLists)
             {
                 foreach (InteractiveNode i in list)
@@ -430,6 +432,7 @@ namespace Jumpvalley.Levels
                     i.Dispose();
                 }
             }
+            
             foreach (MusicZone zone in MusicZones)
             {
                 zone.Dispose();
