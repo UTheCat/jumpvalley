@@ -1,28 +1,36 @@
 # Jumpvalley
 
-This is a 3D-platformer made with the [Godot Engine](https://godotengine.org) based on the precision platformers, [Celeste](https://www.celestegame.com/) and [Juke's Towers of Hell](https://www.roblox.com/games/8562822414/Jukes-Towers-of-Hell). Yes, this means you will not need to be connected to the internet while playing an obstacle course that runs on Jumpvalley!
+Jumpvalley is both an app and a library you can use to test and run 3D platformer levels.
 
-Currently, it's a work in progress. Some basic features have yet to be implemented.
+Currently, it's a work in progress. Some basic features (such as being able to switch levels within the app) have yet to be implemented. Though if you want to test it, it is playable.
 
-Though if you want to test it, it is playable. There's currently a small obstacle course you can try out. For the most part, the control scheme is the same as the one in Juke's Towers of Hell (with the main exception being the ability to ladder-boost as done in [Flood Escape 2](https://www.roblox.com/games/738339342/Flood-Escape-2)).
+Jumpvalley also features a core API in its repository (this one) that allows developers to code levels with. The core API also features some classes you can use to program a 3D platformer app or game with.
 
-**Important:** While it is currently possible to make an obstacle course in Jumpvalley with the Godot Editor, backwards-compatibility is subject to being broken while Jumpvalley is still in major version zero (0.x.x). This is because level behavior hasn't been set in stone yet. If you want to prevent your level from being broken between minor versions, please wait until Jumpvalley has reached major version one (1.0.0).
+**Important:** While it is currently possible to make a platformer level in Jumpvalley with the Godot Editor, backwards-compatibility is subject to being broken while Jumpvalley is still in major version zero (0.x.x). This is because level formatting and behavior hasn't been set in stone yet. If you want to prevent your level from being broken between minor versions, please wait until Jumpvalley has reached major version one (1.0.0).
 
 ## Credits
 
-The ```addons``` folder contains assets made by 3rd-parties. They're super useful in this project because not only do I not have the skill, time, and/or resources to make a lot of these assets, but they also allow me to speed up development and testing using resources that the creators of these assets have allowed others to use.
+The ```addons``` folder in this repository's root contains assets made by 3rd-parties. They're super useful in this project because not only do I not have the skill, time, and/or resources to make a lot of these assets, but they also allow me to speed up development and testing using resources that the creators of these assets have allowed others to use.
 
 A list of such assets can be found [here](https://github.com/UTheCat/jumpvalley/blob/main/credits.md).
+
+### Inspirations
+
+Jumpvalley was inspired by several fun platformers that you should check out, including:
+
+- [Celeste](https://www.celestegame.com/)
+- [Flood Escape 2](https://www.roblox.com/games/738339342/Flood-Escape-2)
+- [Juke's Towers of Hell](https://www.roblox.com/games/8562822414/Jukes-Towers-of-Hell)
 
 ## Licensing
 
 This project's source code is licensed under the MIT License. The source code's license can be found [here](https://github.com/UTheCat/jumpvalley/blob/main/LICENSE.md).
 
-Assets under the ```addons``` folder are covered by different licenses (especially since they were made by other individuals).
+Assets under the ```addons``` folder are 3rd-party assets. As such, they are covered by different licenses (especially since they were made by other individuals).
 
-## Running the game
+## Running the app
 
-If you're looking to simply run Jumpvalley, you can find the game precompiled in the [releases](https://github.com/UTheCat/jumpvalley/releases) tab.
+If you're looking to simply run Jumpvalley, you can find the app precompiled in the [releases](https://github.com/UTheCat/jumpvalley/releases) tab.
 
 Jumpvalley currently doesn't have an installer executable. Therefore, downloading the compressed folder corresponding to your device's operating system, and then extracting it, should give you the files needed to run precompiled Jumpvalley.
 
@@ -71,8 +79,8 @@ In order to run the project, there's a play button near the top-right corner of 
 
 ### Debugging with Visual Studio Code
 
-If you're working in Visual Studio Code, Jumpvalley has a launch configuration named `Debug` that you can use to debug Jumpvalley. This will allow you to see the game's console output.
+If you're working in Visual Studio Code, Jumpvalley has a launch configuration named `Debug` that you can use to debug Jumpvalley. This will allow you to see the app's console output.
 
 Just make sure you have an environment variable named `JUMPVALLEY_GODOT_EXECUTABLE` set to the path to the Godot executable as mentioned in the prerequisites, and you should be able to run the launch configuration.
 
-Additionally, if you make any changes to the game's code, you'll have to rebuild the project. This can be done by opening the project in Godot and clicking the hammer icon at the top-right corner of the window. (Note: If you don't see this icon, which should be next to the play button in the Godot window, check to see that you installed .NET properly and that `project.godot` points to the correct C# assembly file.)
+Additionally, if you make any changes to the app's code, you'll have to rebuild the project. This can be done by opening the project in Godot and clicking the hammer icon at the top-right corner of the window. (Note: If you don't see this icon, which should be next to the play button in the Godot window, check to see that you installed .NET properly and that `project.godot` points to the correct C# assembly file.)
