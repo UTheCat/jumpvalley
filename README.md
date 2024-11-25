@@ -12,7 +12,7 @@ Jumpvalley also features a "core" API in its repository (this one) that allows d
 
 The ```addons``` folder in this repository's root contains assets made by 3rd-parties. They're super useful in this project because not only do I not have the skill, time, and/or resources to make a lot of these assets, but they also allow me to speed up development and testing using resources that the creators of these assets have allowed the public to use.
 
-A list of such assets can be found [here](https://github.com/UTheCat/jumpvalley/blob/main/credits.md).
+A list of such assets that are used in this project can be found [here](https://github.com/UTheCat/jumpvalley/blob/main/credits.md).
 
 ### Inspirations
 
