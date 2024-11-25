@@ -73,7 +73,7 @@ Software you'll need:
 
 ### Running Godot and this repository's project file
 
-Open your copy of this repository's ```project.godot``` file in the version of Godot specified in the prerequisites.
+Open your copy of this repository's ```project.godot``` file in the version of Godot specified in the prerequisites above.
 
 In order to run the project, there's a play button near the top-right corner of the window. Click it to run the project.
 
