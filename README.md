@@ -44,9 +44,9 @@ In order to fix this, open up a terminal session, change the working directory t
 
 and type this command:
 
-`chmod a+x jumpvalley`
+`chmod +x jumpvalley`
 
-This tells Linux to allow running the code in the Jumpvalley executable.
+This tells Linux to allow running the Jumpvalley executable.
 
 ## Documentation
 
