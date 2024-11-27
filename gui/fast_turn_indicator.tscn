@@ -5,8 +5,8 @@
 [node name="FastTurnIndicator" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 94.0
-offset_bottom = 94.0
+offset_right = 66.0
+offset_bottom = 66.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
