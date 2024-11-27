@@ -7,10 +7,10 @@ using Jumpvalley.Players.Movement;
 namespace JumpvalleyApp.Players.Movement
 {
     /// <summary>
-    /// For an instance of <see cref="BaseMover"/>, this sets <see cref="BaseMover.IsRotationLocked"/> to true whenever a camera is in first person or when Shift-Lock has been toggled on by the user.
-    /// The <see cref="BaseMover"/>'s <see cref="BaseMover.IsRotationLocked"/> is otherwise set to false.
+    /// For an instance of <see cref="BaseMover"/>, this sets <see cref="BaseMover.IsFastTurnEnabled"/> to true whenever a camera is in first person or when fast-turn has been toggled on by the user.
+    /// The <see cref="BaseMover"/>'s <see cref="BaseMover.IsFastTurnEnabled"/> is otherwise set to false.
     /// </summary>
-    public partial class RotationLockControl : Node, IDisposable
+    public partial class FastTurnControl : Node, IDisposable
     {
         private static readonly string INPUT_MAP_SHIFT_LOCK = "character_shift_lock";
 
@@ -33,7 +33,7 @@ namespace JumpvalleyApp.Players.Movement
 
         /// <summary>
         /// The <see cref="BaseCamera"/> asssociated with this instance of <see cref="BaseMover"/>.
-        /// If the camera's ZoomOutDistance property is set to 0, RotationLock is turned on for <see cref="Mover"/>.
+        /// If the camera's ZoomOutDistance property is set to 0, <see cref="BaseMover.IsFastTurnEnabled"/> is turned on for <see cref="Mover"/>.
         /// </summary>
         public BaseCamera Camera
         {
@@ -49,51 +49,51 @@ namespace JumpvalleyApp.Players.Movement
             }
         }
 
-        private bool _userEnabledShiftLock;
+        private bool _userEnabledFastTurn;
 
         /// <summary>
-        /// Whether or not the user has enabled shift lock themselves.
+        /// Whether or not the user has enabled fast-turn themselves.
         /// </summary>
-        public bool UserEnabledShiftLock
+        public bool UserEnabledFastTurn
         {
-            get => _userEnabledShiftLock;
+            get => _userEnabledFastTurn;
             set
             {
-                _userEnabledShiftLock = value;
+                _userEnabledFastTurn = value;
                 Update();
             }
         }
 
         /// <summary>
-        /// The number of meters to shift the camera to the right by whenever rotation lock is enabled
+        /// The number of meters to shift the camera to the right by whenever fast-turn is enabled
         /// </summary>
-        public float CameraRotationLockOffset = 1f;
+        public float CameraFastTurnOffset = 0f;
 
         /// <summary>
-        /// Creates an instance of <see cref="RotationLockControl"/>
+        /// Creates an instance of <see cref="FastTurnControl"/>
         /// </summary>
         /// <param name="mover">The mover to associate with</param>
         /// <param name="camera">The camera to associate with</param>
-        public RotationLockControl(BaseMover mover, BaseCamera camera)
+        public FastTurnControl(BaseMover mover, BaseCamera camera)
         {
-            UserEnabledShiftLock = false;
+            UserEnabledFastTurn = false;
             Mover = mover;
             Camera = camera;
         }
 
         /// <summary>
-        /// Updates/refreshes the RotationLocked property of <see cref="Mover"/>
+        /// Updates/refreshes the <see cref="BaseMover.IsFastTurnEnabled"/> property of <see cref="Mover"/>
         /// </summary>
         public void Update()
         {
             if (Mover != null && Camera != null)
             {
-                bool isRotationLocked = UserEnabledShiftLock || Camera.ZoomOutDistance <= 0;
-                Mover.IsRotationLocked = isRotationLocked;
+                bool shouldFastTurn = UserEnabledFastTurn || Camera.ZoomOutDistance <= 0;
+                Mover.IsFastTurnEnabled = shouldFastTurn;
 
-                if (isRotationLocked)
+                if (shouldFastTurn)
                 {
-                    Camera.RightOffset = CameraRotationLockOffset;
+                    Camera.RightOffset = CameraFastTurnOffset;
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace JumpvalleyApp.Players.Movement
         {
             if (Input.IsActionJustPressed(INPUT_MAP_SHIFT_LOCK))
             {
-                UserEnabledShiftLock = !UserEnabledShiftLock;
+                UserEnabledFastTurn = !UserEnabledFastTurn;
             }
 
             base._Input(@event);

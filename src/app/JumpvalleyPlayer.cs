@@ -140,9 +140,9 @@ namespace JumpvalleyApp
 
             Mover.Camera = Camera;
 
-            // Set up shift-lock
-            RotationLockControl rotationLockControl = new RotationLockControl(Mover, Camera);
-            RootNode.AddChild(rotationLockControl);
+            // Set up fast-turn
+            FastTurnControl fastTurnControl = new FastTurnControl(Mover, Camera);
+            RootNode.AddChild(fastTurnControl);
 
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
@@ -354,7 +354,7 @@ namespace JumpvalleyApp
             Mover.IsRunning = true;
 
             Disposables.Add(fpsLimiter);
-            Disposables.Add(rotationLockControl);
+            Disposables.Add(fastTurnControl);
             Disposables.Add(bottomBar);
             Disposables.Add(animatedNodes);
 
