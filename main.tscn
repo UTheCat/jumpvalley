@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/app/Program.cs" id="1_r1x4e"]
 [ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
 [ext_resource type="PackedScene" uid="uid://c020hsyxs4rey" path="res://gui/fast_turn_indicator.tscn" id="3_2hjl2"]
-[ext_resource type="PackedScene" uid="uid://c5xcp6s62kfmj" path="res://gui/camera_turn_indication.tscn" id="3_4g04c"]
+[ext_resource type="PackedScene" uid="uid://c5xcp6s62kfmj" path="res://gui/camera_turn_indicator.tscn" id="3_4g04c"]
 [ext_resource type="PackedScene" uid="uid://dsjm5305mt3le" path="res://gui/framerate_counter.tscn" id="3_6onu6"]
 [ext_resource type="PackedScene" uid="uid://w1bxdo35gvho" path="res://gui/background_panel.tscn" id="3_28c11"]
 [ext_resource type="PackedScene" uid="uid://dfirwq7r0jq20" path="res://gui/music_panel.tscn" id="3_dfcbn"]
@@ -68,7 +68,7 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CameraTurnIndication" parent="PrimaryGui" instance=ExtResource("3_4g04c")]
+[node name="CameraTurnIndicator" parent="PrimaryGui" instance=ExtResource("3_4g04c")]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 1
 anchors_preset = 8
