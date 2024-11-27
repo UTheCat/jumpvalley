@@ -5,8 +5,8 @@
 [node name="CameraTurnIndication" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 24.0
-offset_bottom = 24.0
+offset_right = 18.0
+offset_bottom = 18.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
