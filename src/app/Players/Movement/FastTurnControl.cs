@@ -67,7 +67,7 @@ namespace JumpvalleyApp.Players.Movement
         /// <summary>
         /// The number of meters to shift the camera to the right by whenever fast-turn is enabled
         /// </summary>
-        public float CameraFastTurnOffset = 1f;
+        public float CameraFastTurnOffset = 0f;
 
         /// <summary>
         /// Creates an instance of <see cref="FastTurnControl"/>
