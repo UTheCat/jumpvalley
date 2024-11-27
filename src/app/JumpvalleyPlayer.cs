@@ -140,7 +140,7 @@ namespace JumpvalleyApp
 
             Mover.Camera = Camera;
 
-            // Set up shift-lock
+            // Set up fast-turn
             RotationLockControl rotationLockControl = new RotationLockControl(Mover, Camera);
             RootNode.AddChild(rotationLockControl);
 

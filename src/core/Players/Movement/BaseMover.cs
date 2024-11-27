@@ -697,7 +697,7 @@ namespace Jumpvalley.Players.Movement
                 //Rotator.Update(yaw);
                 BodyRotator rotator = Rotator;
 
-                // Only rotate if the rotation is locked (such as when shift lock is enabled) or when the character is moving
+                // Only rotate if the rotation is locked (such as when fast-turn is enabled) or when the character is moving
                 if (rotator != null)
                 {
                     if (IsRotationLocked)
@@ -821,7 +821,7 @@ namespace Jumpvalley.Players.Movement
         {
             BodyRotator rotator = Rotator;
 
-            // Only rotate if the rotation is locked (such as when shift lock is enabled) or when the character is moving
+            // Only rotate if the rotation is locked (such as when fast-turn is enabled) or when the character is moving
             if (rotator != null)
             {
                 if (IsRotationLocked)
