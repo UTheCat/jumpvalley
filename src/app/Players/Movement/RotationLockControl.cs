@@ -7,8 +7,8 @@ using Jumpvalley.Players.Movement;
 namespace JumpvalleyApp.Players.Movement
 {
     /// <summary>
-    /// For an instance of <see cref="BaseMover"/>, this sets <see cref="BaseMover.IsRotationLocked"/> to true whenever a camera is in first person or when fast-turn has been toggled on by the user.
-    /// The <see cref="BaseMover"/>'s <see cref="BaseMover.IsRotationLocked"/> is otherwise set to false.
+    /// For an instance of <see cref="BaseMover"/>, this sets <see cref="BaseMover.IsFastTurnEnabled"/> to true whenever a camera is in first person or when fast-turn has been toggled on by the user.
+    /// The <see cref="BaseMover"/>'s <see cref="BaseMover.IsFastTurnEnabled"/> is otherwise set to false.
     /// </summary>
     public partial class RotationLockControl : Node, IDisposable
     {
@@ -89,7 +89,7 @@ namespace JumpvalleyApp.Players.Movement
             if (Mover != null && Camera != null)
             {
                 bool isRotationLocked = UserEnabledFastTurn || Camera.ZoomOutDistance <= 0;
-                Mover.IsRotationLocked = isRotationLocked;
+                Mover.IsFastTurnEnabled = isRotationLocked;
 
                 if (isRotationLocked)
                 {

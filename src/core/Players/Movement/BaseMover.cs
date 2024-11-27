@@ -185,17 +185,17 @@ namespace Jumpvalley.Players.Movement
         /// </summary>
         public bool IsJumping = false;
 
-        private bool _isRotationLocked = false;
+        private bool _isFastTurnEnabled = false;
 
         /// <summary>
         /// Whether or not the character's yaw is locked to some specified yaw angle
         /// </summary>
-        public bool IsRotationLocked
+        public bool IsFastTurnEnabled
         {
-            get => _isRotationLocked;
+            get => _isFastTurnEnabled;
             set
             {
-                _isRotationLocked = value;
+                _isFastTurnEnabled = value;
 
                 if (Rotator != null)
                 {
@@ -308,7 +308,7 @@ namespace Jumpvalley.Players.Movement
 
                 if (value != null)
                 {
-                    value.TurnsInstantly = IsRotationLocked;
+                    value.TurnsInstantly = IsFastTurnEnabled;
                     value.Speed = Speed;
                     value.Body = Body;
                 }
@@ -700,7 +700,7 @@ namespace Jumpvalley.Players.Movement
                 // Only rotate if the rotation is locked (such as when fast-turn is enabled) or when the character is moving
                 if (rotator != null)
                 {
-                    if (IsRotationLocked)
+                    if (IsFastTurnEnabled)
                     {
                         // Set the angle to the camera's yaw
                         rotator.Yaw = yaw;
@@ -824,7 +824,7 @@ namespace Jumpvalley.Players.Movement
             // Only rotate if the rotation is locked (such as when fast-turn is enabled) or when the character is moving
             if (rotator != null)
             {
-                if (IsRotationLocked)
+                if (IsFastTurnEnabled)
                 {
                     // Set the angle to the camera's yaw
                     rotator.Yaw = GetYaw();
