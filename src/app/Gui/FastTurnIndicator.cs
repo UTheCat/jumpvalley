@@ -9,7 +9,7 @@ namespace JumpvalleyApp.Gui
     /// Indicator that's shown when the user has fast-turn enabled
     /// and hidden otherwise.
     /// </summary>
-    public partial class FastTurnIndicator
+    public partial class FastTurnIndicator : IDisposable
     {
         private BaseMover mover;
         private Control actualControl;
@@ -28,6 +28,11 @@ namespace JumpvalleyApp.Gui
         private void HandleFastTurnToggled(object _o, bool enabled)
         {
             actualControl.Visible = enabled;
+        }
+
+        public void Dispose()
+        {
+            mover.OnFastTurnToggled -= HandleFastTurnToggled;
         }
     }
 }
