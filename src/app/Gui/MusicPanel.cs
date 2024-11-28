@@ -19,7 +19,6 @@ namespace JumpvalleyApp.Gui
 
         private Label songNameLabel;
         private Label artistsLabel;
-        private Label menuTitleLabel;
 
         private HSlider volumeSlider;
         private Label volumePercentage;
@@ -31,7 +30,6 @@ namespace JumpvalleyApp.Gui
 
             songNameLabel = node.GetNode<Label>("SongName");
             artistsLabel = node.GetNode<Label>("Artists");
-            menuTitleLabel = node.GetNode<Label>("MenuTitle");
 
             Node volumeNode = node.GetNode("Volume");
             volumeSlider = volumeNode.GetNode<HSlider>("Slider");

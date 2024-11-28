@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfirwq7r0jq20"]
+[gd_scene load_steps=9 format=3 uid="uid://dfirwq7r0jq20"]
 
-[ext_resource type="Texture2D" uid="uid://cbtq8qw7d17ij" path="res://addons/kenney_prototype_textures/green/texture_10.png" id="1_aac5p"]
+[ext_resource type="Texture2D" uid="uid://boixt28udj8fd" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="1_mdcbe"]
 [ext_resource type="FontFile" uid="uid://cw16kw7wcb0hy" path="res://addons/fonts/nunito/static/Nunito-Bold.ttf" id="2_34a5w"]
 [ext_resource type="Texture2D" uid="uid://ckibfgp0fh7ck" path="res://gui/music_panel_volume_grabber.svg" id="3_3a134"]
 [ext_resource type="Texture2D" uid="uid://df6f5u3lobv06" path="res://addons/icons/volume_down_48dp.svg" id="3_yrcgy"]
 [ext_resource type="FontFile" uid="uid://b6a3cplnxqrgp" path="res://addons/fonts/nunito/static/Nunito-Regular.ttf" id="6_4bacp"]
+[ext_resource type="Texture2D" uid="uid://dwajwt8qmbnv5" path="res://addons/icons/music_note_white_48dp.svg" id="6_345xr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkvd5"]
 bg_color = Color(0.222698, 0.269022, 0.372289, 1)
@@ -65,19 +66,8 @@ offset_right = -2.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_aac5p")
+texture = ExtResource("1_mdcbe")
 expand_mode = 1
-
-[node name="MenuTitle" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_bottom = 51.0
-theme_override_fonts/font = ExtResource("2_34a5w")
-theme_override_font_sizes/font_size = 36
-text = "Music"
 
 [node name="SongName" type="Label" parent="."]
 layout_mode = 1
@@ -141,3 +131,31 @@ theme_override_font_sizes/font_size = 16
 text = "0%"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="MenuTitle" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 16.0
+offset_bottom = 70.0
+
+[node name="Label" type="Label" parent="MenuTitle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_34a5w")
+theme_override_font_sizes/font_size = 36
+text = "Music"
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MenuTitle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 56.0
+texture = ExtResource("6_345xr")
+stretch_mode = 3
