@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bjmgmughcefkf"
-path="res://.godot/imported/ComicNeue-Angular-Bold.ttf-cae5b432f1b7245a6aecd85b361fc5e7.fontdata"
+uid="uid://b6a3cplnxqrgp"
+path="res://.godot/imported/Nunito-Regular.ttf-cde1e05af3b74381dba53cdae8743f5a.fontdata"
 
 [deps]
 
-source_file="res://addons/fonts/ComicNeue-Angular-Bold.ttf"
-dest_files=["res://.godot/imported/ComicNeue-Angular-Bold.ttf-cae5b432f1b7245a6aecd85b361fc5e7.fontdata"]
+source_file="res://addons/fonts/nunito/static/Nunito-Regular.ttf"
+dest_files=["res://.godot/imported/Nunito-Regular.ttf-cde1e05af3b74381dba53cdae8743f5a.fontdata"]
 
 [params]
 

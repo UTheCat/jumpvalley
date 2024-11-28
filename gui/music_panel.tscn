@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfirwq7r0jq20"]
+[gd_scene load_steps=6 format=3 uid="uid://dfirwq7r0jq20"]
 
 [ext_resource type="Texture2D" uid="uid://cbtq8qw7d17ij" path="res://addons/kenney_prototype_textures/green/texture_10.png" id="1_aac5p"]
-[ext_resource type="FontFile" uid="uid://bjmgmughcefkf" path="res://addons/fonts/ComicNeue-Angular-Bold.ttf" id="1_c6jsr"]
 [ext_resource type="Texture2D" uid="uid://ckibfgp0fh7ck" path="res://gui/music_panel_volume_grabber.svg" id="3_3a134"]
 [ext_resource type="Texture2D" uid="uid://df6f5u3lobv06" path="res://addons/icons/volume_down_48dp.svg" id="3_yrcgy"]
 
@@ -74,7 +73,6 @@ anchor_right = 1.0
 offset_left = 16.0
 offset_top = 16.0
 offset_bottom = 51.0
-theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 36
 text = "Music"
 
@@ -85,7 +83,6 @@ anchor_left = 0.4
 anchor_right = 1.0
 offset_top = 93.0
 offset_bottom = 123.0
-theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 28
 text = "Song Name"
 
@@ -96,7 +93,6 @@ anchor_left = 0.4
 anchor_right = 1.0
 offset_top = 130.0
 offset_bottom = 155.0
-theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 20
 text = "Artists"
 
@@ -135,7 +131,6 @@ anchors_preset = -1
 anchor_left = 0.8
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_fonts/font = ExtResource("1_c6jsr")
 theme_override_font_sizes/font_size = 18
 text = "0%"
 horizontal_alignment = 2
