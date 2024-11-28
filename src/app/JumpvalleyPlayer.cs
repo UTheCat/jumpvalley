@@ -213,6 +213,10 @@ namespace JumpvalleyApp
             Disposables.Add(settingsMenu);
             Disposables.Add(settingsMenuNode);
 
+            // Fast turn indicator
+            FastTurnIndicator fastTurnIndicator = new FastTurnIndicator(Mover, PrimaryGui.GetNode<Control>("FastTurnIndicator"));
+            Disposables.Add(fastTurnIndicator);
+
             // Intro panel
             Panel introPanelNode = PrimaryGui.GetNode<Panel>("IntroPanel");
             introPanelNode.Visible = true;

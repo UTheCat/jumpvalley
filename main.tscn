@@ -54,6 +54,7 @@ offset_top = 60.0
 offset_bottom = 108.0
 
 [node name="FastTurnIndicator" parent="PrimaryGui" instance=ExtResource("3_2hjl2")]
+visible = false
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 1
 anchors_preset = -1
