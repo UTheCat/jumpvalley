@@ -889,5 +889,11 @@ namespace Jumpvalley.Players.Movement
         {
             BodyStateChanged?.Invoke(this, new BodyStateChangedArgs(oldState, newState));
         }
+
+        /// <summary>
+        /// Event that's raised when the value of <see cref="IsFastTurnEnabled"/> changes.
+        /// The boolean event argument is the new value of <see cref="IsFastTurnEnabled"/>. 
+        /// </summary>
+        public event EventHandler<bool> OnFastTurnToggled;
     }
 }
