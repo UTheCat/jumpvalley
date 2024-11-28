@@ -73,13 +73,6 @@ namespace JumpvalleyApp.Players.Camera
                 float panningFactor = PanningSensitivity * PanningSpeed * 0.02f;
                 Pitch += -mouseEventRelative.Y * panningFactor;
                 Yaw += -mouseEventRelative.X * panningFactor;
-
-                // Later, keep the cursor in the same position while the camera is being turned
-                // The approach here doesn't work well, and it may be better off programming a "software" mouse cursor.
-                // See more details here:
-                // https://docs.godotengine.org/en/stable/tutorials/inputs/custom_mouse_cursor.html
-                //Vector2I mousePos = DisplayServer.MouseGetPosition();
-                //Input.WarpMouse(lastMousePos);
             }
 
             base._Input(@event);
