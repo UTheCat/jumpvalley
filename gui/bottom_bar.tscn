@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://cumuhpo2oli0n" path="res://styles/bottom_bar/music_btn/normal.tres" id="4_jcyjp"]
 [ext_resource type="StyleBox" uid="uid://bpdvs0jkhu0sa" path="res://styles/bottom_bar/music_btn/hover.tres" id="5_sy6f8"]
 [ext_resource type="Texture2D" uid="uid://c8h6f15b1uggb" path="res://addons/icons/music_note_white_24dp.svg" id="6_t8du5"]
-[ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="7_w3sun"]
+[ext_resource type="FontFile" uid="uid://b35ldnmoo353w" path="res://addons/fonts/overpass/static/Overpass-Bold.ttf" id="7_lp8a6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3t1g3"]
 bg_color = Color(0.45, 0.45, 0.45, 1)
@@ -88,8 +88,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("7_w3sun")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("7_lp8a6")
+theme_override_font_sizes/font_size = 24
 text = "[MUSIC]: getting song info..."
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -2,6 +2,12 @@
 
 Thanks to the creators of the assets listed below for making these beautiful assets used in this project:
 
+## Fonts
+
+- [Nunito by Vernon Adams, Cyreal, and Jacques Le Bailly](https://fonts.google.com/specimen/Nunito)
+- [Overpass by Delve Withrington, Dave Bailey, and Thomas Jockin](https://fonts.google.com/specimen/Overpass)
+- [Roboto Mono by Christian Robertson](https://fonts.google.com/specimen/Roboto+Mono)
+
 ## Decals
 
 - [Kenney Prototype Textures by Kenney](https://godotengine.org/asset-library/asset/780) (Kenney's donation page can be found [here](https://kenney.itch.io/kenney-donation))

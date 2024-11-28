@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://kou88p3rb0fq"]
 
-[ext_resource type="FontFile" uid="uid://d3owg5e1hhnly" path="res://addons/fonts/HWYGOTH.ttf" id="1_qespd"]
+[ext_resource type="FontFile" uid="uid://b35ldnmoo353w" path="res://addons/fonts/overpass/static/Overpass-Bold.ttf" id="1_ekf8g"]
 
 [sub_resource type="Gradient" id="Gradient_dst2d"]
 offsets = PackedFloat32Array(0, 0.75, 1)
@@ -12,14 +12,13 @@ gradient = SubResource("Gradient_dst2d")
 [node name="LevelTimer" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_top = 88.0
 offset_right = 250.0
-offset_bottom = 136.0
+offset_bottom = 48.0
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.4
+anchor_top = 0.3
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -32,10 +31,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.7
 anchor_bottom = 1.0
+offset_bottom = 3.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("1_qespd")
+theme_override_fonts/font = ExtResource("1_ekf8g")
 theme_override_font_sizes/font_size = 38
 text = "0:00"
 horizontal_alignment = 2
@@ -50,7 +50,7 @@ anchor_bottom = 0.9
 theme_override_colors/font_color = Color(0.901961, 0.901961, 0.901961, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("1_qespd")
+theme_override_fonts/font = ExtResource("1_ekf8g")
 theme_override_font_sizes/font_size = 16
 text = ".000
 "
