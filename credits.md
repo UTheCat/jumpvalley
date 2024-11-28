@@ -5,6 +5,7 @@ Thanks to the creators of the assets listed below for making these beautiful ass
 ## Fonts
 
 - [Nunito by Vernon Adams, Cyreal, and Jacques Le Bailly](https://fonts.google.com/specimen/Nunito)
+- [Overpass by Delve Withrington, Dave Bailey, and Thomas Jockin](https://fonts.google.com/specimen/Overpass)
 
 ## Decals
 
