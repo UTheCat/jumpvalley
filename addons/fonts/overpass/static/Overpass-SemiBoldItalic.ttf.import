@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://d3owg5e1hhnly"
-path="res://.godot/imported/HWYGOTH.ttf-c36f134c72d6b6467a4082fccafafa09.fontdata"
+uid="uid://bwdarwa763nw3"
+path="res://.godot/imported/Overpass-SemiBoldItalic.ttf-19d666d8d5bd90ae77becfd2c3778de5.fontdata"
 
 [deps]
 
-source_file="res://addons/fonts/HWYGOTH.ttf"
-dest_files=["res://.godot/imported/HWYGOTH.ttf-c36f134c72d6b6467a4082fccafafa09.fontdata"]
+source_file="res://addons/fonts/overpass/static/Overpass-SemiBoldItalic.ttf"
+dest_files=["res://.godot/imported/Overpass-SemiBoldItalic.ttf-19d666d8d5bd90ae77becfd2c3778de5.fontdata"]
 
 [params]
 
