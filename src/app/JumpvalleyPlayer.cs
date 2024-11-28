@@ -39,7 +39,7 @@ namespace JumpvalleyApp
             Character = rootNode.GetNode<CharacterBody3D>("Character");
             CurrentMusicPlayer = new MusicZonePlayer();
             Mover = new KeyboardMover();
-            Camera = new MouseCamera();
+            Camera = new UserInputCamera();
 
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
             settings = new JumpvalleySettings();
@@ -212,6 +212,14 @@ namespace JumpvalleyApp
 
             Disposables.Add(settingsMenu);
             Disposables.Add(settingsMenuNode);
+
+            // Fast turn indicator
+            FastTurnIndicator fastTurnIndicator = new FastTurnIndicator(Mover, PrimaryGui.GetNode<Control>("FastTurnIndicator"));
+            Disposables.Add(fastTurnIndicator);
+
+            // Camera turn indicator
+            CameraTurnIndicator cameraTurnIndicator = new CameraTurnIndicator(Camera as UserInputCamera, PrimaryGui.GetNode<Control>("CameraTurnIndicator"));
+            Disposables.Add(cameraTurnIndicator);
 
             // Intro panel
             Panel introPanelNode = PrimaryGui.GetNode<Panel>("IntroPanel");

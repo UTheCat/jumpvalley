@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://c020hsyxs4rey"]
+
+[ext_resource type="Texture2D" uid="uid://b14abi4udrtjt" path="res://decals/fast_turn.svg" id="1_j57vu"]
+
+[node name="FastTurnIndicator" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 66.0
+offset_bottom = 66.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_j57vu")

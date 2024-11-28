@@ -188,18 +188,28 @@ namespace Jumpvalley.Players.Movement
         private bool _isFastTurnEnabled = false;
 
         /// <summary>
-        /// Whether or not the character's yaw is locked to some specified yaw angle
+        /// If the value of this property is true, the character's yaw angle will instantly be set
+        /// to a specified "destination" yaw (for example, the current yaw of a <see cref="BaseCamera"/>). Otherwise, while the character is moving,
+        /// the character's yaw will gradually approach the destination yaw until the character's
+        /// yaw and the destination yaw match.
         /// </summary>
         public bool IsFastTurnEnabled
         {
             get => _isFastTurnEnabled;
             set
             {
+                bool valueChanged = value != _isFastTurnEnabled;
+
                 _isFastTurnEnabled = value;
 
                 if (Rotator != null)
                 {
                     Rotator.TurnsInstantly = value;
+                }
+
+                if (valueChanged)
+                {
+                    RaiseOnFastTurnToggled(value);
                 }
             }
         }
@@ -697,7 +707,7 @@ namespace Jumpvalley.Players.Movement
                 //Rotator.Update(yaw);
                 BodyRotator rotator = Rotator;
 
-                // Only rotate if the rotation is locked (such as when fast-turn is enabled) or when the character is moving
+                // Only rotate if the rotation if fast turn is enabled or when the character is moving
                 if (rotator != null)
                 {
                     if (IsFastTurnEnabled)
@@ -821,7 +831,7 @@ namespace Jumpvalley.Players.Movement
         {
             BodyRotator rotator = Rotator;
 
-            // Only rotate if the rotation is locked (such as when fast-turn is enabled) or when the character is moving
+            // Only rotate if the rotation if fast turn is enabled or when the character is moving
             if (rotator != null)
             {
                 if (IsFastTurnEnabled)
@@ -885,6 +895,17 @@ namespace Jumpvalley.Players.Movement
         protected void RaiseBodyStateChangedEvent(BodyState oldState, BodyState newState)
         {
             BodyStateChanged?.Invoke(this, new BodyStateChangedArgs(oldState, newState));
+        }
+
+        /// <summary>
+        /// Event that's raised when the value of <see cref="IsFastTurnEnabled"/> changes.
+        /// The boolean event argument is the new value of <see cref="IsFastTurnEnabled"/>. 
+        /// </summary>
+        public event EventHandler<bool> OnFastTurnToggled;
+
+        protected void RaiseOnFastTurnToggled(bool fastTurnEnabled)
+        {
+            OnFastTurnToggled?.Invoke(this, fastTurnEnabled);
         }
     }
 }
