@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://1o15brlm4qwf"
-path="res://.godot/imported/RobotoMono-Light.ttf-03a748c1c45773d2e96d4081ccddd2ab.fontdata"
+path="res://.godot/imported/RobotoMono-Light.ttf-9f94d3302f191f175b929b72303b7901.fontdata"
 
 [deps]
 
-source_file="res://addons/fonts/Roboto_Mono/static/RobotoMono-Light.ttf"
-dest_files=["res://.godot/imported/RobotoMono-Light.ttf-03a748c1c45773d2e96d4081ccddd2ab.fontdata"]
+source_file="res://addons/fonts/roboto_mono/static/RobotoMono-Light.ttf"
+dest_files=["res://.godot/imported/RobotoMono-Light.ttf-9f94d3302f191f175b929b72303b7901.fontdata"]
 
 [params]
 

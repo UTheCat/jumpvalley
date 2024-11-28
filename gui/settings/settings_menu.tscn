@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2jxb8y2m4xf0"]
 
-[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf" id="1_6doen"]
-[ext_resource type="FontFile" uid="uid://bx4niu1h7e55o" path="res://addons/fonts/Roboto_Mono/static/RobotoMono-Bold.ttf" id="1_iaoms"]
+[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono/RobotoMono-VariableFont_wght.ttf" id="1_6doen"]
+[ext_resource type="FontFile" uid="uid://bx4niu1h7e55o" path="res://addons/fonts/roboto_mono/static/RobotoMono-Bold.ttf" id="1_iaoms"]
 [ext_resource type="PackedScene" uid="uid://olrc8iep31yb" path="res://gui/close_button.tscn" id="2_rklti"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5vjn"]

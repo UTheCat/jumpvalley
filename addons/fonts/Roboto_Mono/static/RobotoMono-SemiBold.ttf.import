@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://b4kmprcgsh80c"
-path="res://.godot/imported/RobotoMono-SemiBold.ttf-c6353b011db6daac0510878ba60ac8e7.fontdata"
+path="res://.godot/imported/RobotoMono-SemiBold.ttf-613e2bbad1dfae71c93d62163d7f33c3.fontdata"
 
 [deps]
 
-source_file="res://addons/fonts/Roboto_Mono/static/RobotoMono-SemiBold.ttf"
-dest_files=["res://.godot/imported/RobotoMono-SemiBold.ttf-c6353b011db6daac0510878ba60ac8e7.fontdata"]
+source_file="res://addons/fonts/roboto_mono/static/RobotoMono-SemiBold.ttf"
+dest_files=["res://.godot/imported/RobotoMono-SemiBold.ttf-613e2bbad1dfae71c93d62163d7f33c3.fontdata"]
 
 [params]
 
