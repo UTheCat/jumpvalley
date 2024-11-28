@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://kou88p3rb0fq"]
+[gd_scene load_steps=4 format=3 uid="uid://kou88p3rb0fq"]
+
+[ext_resource type="FontFile" uid="uid://b35ldnmoo353w" path="res://addons/fonts/overpass/static/Overpass-Bold.ttf" id="1_ekf8g"]
 
 [sub_resource type="Gradient" id="Gradient_dst2d"]
 offsets = PackedFloat32Array(0, 0.75, 1)
@@ -33,6 +35,7 @@ anchor_bottom = 1.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_ekf8g")
 theme_override_font_sizes/font_size = 38
 text = "0:00"
 horizontal_alignment = 2
@@ -47,6 +50,7 @@ anchor_bottom = 0.9
 theme_override_colors/font_color = Color(0.901961, 0.901961, 0.901961, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_ekf8g")
 theme_override_font_sizes/font_size = 16
 text = ".000
 "
