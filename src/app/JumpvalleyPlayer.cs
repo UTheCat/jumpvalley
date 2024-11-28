@@ -217,6 +217,10 @@ namespace JumpvalleyApp
             FastTurnIndicator fastTurnIndicator = new FastTurnIndicator(Mover, PrimaryGui.GetNode<Control>("FastTurnIndicator"));
             Disposables.Add(fastTurnIndicator);
 
+            // Camera turn indicator
+            CameraTurnIndicator cameraTurnIndicator = new CameraTurnIndicator(Camera as UserInputCamera, PrimaryGui.GetNode<Control>("CameraTurnIndicator"));
+            Disposables.Add(cameraTurnIndicator);
+
             // Intro panel
             Panel introPanelNode = PrimaryGui.GetNode<Panel>("IntroPanel");
             introPanelNode.Visible = true;
