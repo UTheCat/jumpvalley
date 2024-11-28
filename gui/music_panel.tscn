@@ -139,12 +139,19 @@ offset_bottom = 70.0
 
 [node name="Label" type="Label" parent="MenuTitle"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_34a5w")
 theme_override_font_sizes/font_size = 36
 text = "Music"
 vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MenuTitle"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 56.0
