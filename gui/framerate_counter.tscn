@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsjm5305mt3le"]
 
-[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono/RobotoMono-VariableFont_wght.ttf" id="1_wes5i"]
+[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono_1/RobotoMono-VariableFont_wght.ttf" id="1_wes5i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8c2d"]
 bg_color = Color(0, 0, 0, 0.501961)

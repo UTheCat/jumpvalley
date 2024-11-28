@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dky074m66u2lu"]
 
-[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono/RobotoMono-VariableFont_wght.ttf" id="1_enenf"]
+[ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono_1/RobotoMono-VariableFont_wght.ttf" id="1_enenf"]
 
 [resource]
 font = ExtResource("1_enenf")

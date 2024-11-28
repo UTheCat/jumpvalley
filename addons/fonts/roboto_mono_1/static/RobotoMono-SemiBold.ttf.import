@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bp6x16lr0qnii"
-path="res://.godot/imported/RobotoMono-ThinItalic.ttf-7d18cf71769ff365ea6291952a6f4241.fontdata"
+uid="uid://b4kmprcgsh80c"
+path="res://.godot/imported/RobotoMono-SemiBold.ttf-e9dca93f179691863edb93568efbf7f5.fontdata"
 
 [deps]
 
-source_file="res://addons/fonts/roboto_mono/static/RobotoMono-ThinItalic.ttf"
-dest_files=["res://.godot/imported/RobotoMono-ThinItalic.ttf-7d18cf71769ff365ea6291952a6f4241.fontdata"]
+source_file="res://addons/fonts/roboto_mono_1/static/RobotoMono-SemiBold.ttf"
+dest_files=["res://.godot/imported/RobotoMono-SemiBold.ttf-e9dca93f179691863edb93568efbf7f5.fontdata"]
 
 [params]
 
