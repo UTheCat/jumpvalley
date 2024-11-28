@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://du6etgmkelt2n"]
+[gd_scene load_steps=5 format=3 uid="uid://du6etgmkelt2n"]
 
+[ext_resource type="FontFile" uid="uid://b6a3cplnxqrgp" path="res://addons/fonts/nunito/static/Nunito-Regular.ttf" id="1_3oj0a"]
 [ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="2_ubqv8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjwbe"]
@@ -15,6 +16,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_wo5hc"]
+font = ExtResource("1_3oj0a")
 font_size = 24
 
 [node name="LevelMenuButton" type="Button"]
