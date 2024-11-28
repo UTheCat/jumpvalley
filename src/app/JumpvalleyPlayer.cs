@@ -355,6 +355,7 @@ namespace JumpvalleyApp
 
             // Start playing music.
             // This is done after we load the lobby and the initialization level just to keep things smooth.
+            if (CurrentMusicPlayer.GetParent() == null) RootNode.AddChild(CurrentMusicPlayer);
             musicPlayer.IsPlaying = true;
 
             // Allow the player's character to move.
