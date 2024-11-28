@@ -8,7 +8,7 @@ namespace JumpvalleyApp.Players.Camera
     /// <summary>
     /// Handles control of the player's camera via a mouse
     /// </summary>
-    public partial class MouseCamera : BaseCamera, IDisposable
+    public partial class UserInputCamera : BaseCamera, IDisposable
     {
         private static readonly string INPUT_CAMERA_PAN = "camera_pan";
         private static readonly string INPUT_CAMERA_ZOOM_IN = "camera_zoom_in";
@@ -31,7 +31,7 @@ namespace JumpvalleyApp.Players.Camera
         /// </summary>
         public float CameraZoomAdjustment = 1;
 
-        public MouseCamera() : base() { }
+        public UserInputCamera() : base() { }
 
         public override void _Input(InputEvent @event)
         {
@@ -92,7 +92,7 @@ namespace JumpvalleyApp.Players.Camera
         /// <br/><br/>
         /// Avoid accessing the <see cref="IsTurningCamera"/> property directly
         /// in an event handler method handling this event. This is because the
-        /// <see cref="MouseCamera"/> might've been disposed by the time
+        /// <see cref="UserInputCamera"/> might've been disposed by the time
         /// the event handler method has been called.
         /// </summary>
         public event EventHandler<bool> IsTurningCameraToggled;

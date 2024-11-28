@@ -39,7 +39,7 @@ namespace JumpvalleyApp
             Character = rootNode.GetNode<CharacterBody3D>("Character");
             CurrentMusicPlayer = new MusicZonePlayer();
             Mover = new KeyboardMover();
-            Camera = new MouseCamera();
+            Camera = new UserInputCamera();
 
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
             settings = new JumpvalleySettings();
