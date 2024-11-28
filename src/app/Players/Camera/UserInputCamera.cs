@@ -24,6 +24,8 @@ namespace JumpvalleyApp.Players.Camera
             {
                 bool valueChanged = value != _isTurningCamera;
                 _isTurningCamera = value;
+
+                if (valueChanged) RaiseIsTurningCameraToggled(value);
             }
         }
 
@@ -38,17 +40,6 @@ namespace JumpvalleyApp.Players.Camera
         {
             if (Input.IsActionJustPressed(INPUT_CAMERA_PAN))
             {
-                /*
-                if (!isTurningCamera)
-                {
-                    isTurningCamera = true;
-
-                    if (@event is InputEventMouse mouseEventInitial)
-                    {
-                        lastMousePos = mouseEventInitial.Position;
-                    }
-                }
-                */
                 IsTurningCamera = true;
                 Input.MouseMode = Input.MouseModeEnum.Captured;
             }
@@ -97,5 +88,10 @@ namespace JumpvalleyApp.Players.Camera
         /// the event handler method has been called.
         /// </summary>
         public event EventHandler<bool> IsTurningCameraToggled;
+
+        protected void RaiseIsTurningCameraToggled(bool isTurning)
+        {
+            IsTurningCameraToggled?.Invoke(this, isTurning);
+        }
     }
 }
