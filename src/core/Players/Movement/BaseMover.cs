@@ -198,11 +198,18 @@ namespace Jumpvalley.Players.Movement
             get => _isFastTurnEnabled;
             set
             {
+                bool valueChanged = value != _isFastTurnEnabled;
+
                 _isFastTurnEnabled = value;
 
                 if (Rotator != null)
                 {
                     Rotator.TurnsInstantly = value;
+                }
+
+                if (valueChanged)
+                {
+                    RaiseOnFastTurnToggled(value);
                 }
             }
         }
@@ -895,5 +902,10 @@ namespace Jumpvalley.Players.Movement
         /// The boolean event argument is the new value of <see cref="IsFastTurnEnabled"/>. 
         /// </summary>
         public event EventHandler<bool> OnFastTurnToggled;
+
+        protected void RaiseOnFastTurnToggled(bool fastTurnEnabled)
+        {
+            OnFastTurnToggled?.Invoke(this, fastTurnEnabled);
+        }
     }
 }
