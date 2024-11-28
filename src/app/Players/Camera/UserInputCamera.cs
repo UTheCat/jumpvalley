@@ -6,7 +6,8 @@ using Jumpvalley.Players.Camera;
 namespace JumpvalleyApp.Players.Camera
 {
     /// <summary>
-    /// Handles control of the player's camera via a mouse
+    /// <see cref="BaseCamera"/> that rotates, zooms in, and zooms out
+    /// when appropriate to do so in response to user input.
     /// </summary>
     public partial class UserInputCamera : BaseCamera, IDisposable
     {
