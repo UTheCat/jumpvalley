@@ -22,12 +22,18 @@ namespace JumpvalleyApp.Gui
             mover = initMover;
             actualControl = initActualControl;
 
+            ToggleIndicatorVisibility(mover.IsFastTurnEnabled);
             mover.OnFastTurnToggled += HandleFastTurnToggled;
+        }
+
+        private void ToggleIndicatorVisibility(bool isVisible)
+        {
+            actualControl.Visible = isVisible;
         }
 
         private void HandleFastTurnToggled(object _o, bool enabled)
         {
-            actualControl.Visible = enabled;
+            ToggleIndicatorVisibility(enabled);
         }
 
         public void Dispose()
