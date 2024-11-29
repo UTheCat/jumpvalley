@@ -370,15 +370,20 @@ namespace JumpvalleyApp
             introPanelFade.Resume();
         }
 
-        public new void Dispose()
+        private void SaveSettings()
         {
-            // Save settings configuration to file
             SettingsFile settingsFile = settings.File;
             if (settingsFile != null)
             {
                 settingsFile.Data = settings.Group.ToJsonObject();
                 settingsFile.Write();
             }
+        }
+
+        public new void Dispose()
+        {
+            // Save settings configuration to file
+            SaveSettings();
 
             base.Dispose();
         }
@@ -389,6 +394,17 @@ namespace JumpvalleyApp
             if (counter != null)
             {
                 counter.CurrentFps = Engine.GetFramesPerSecond();
+            }
+        }
+
+        public override void _Notification(int what)
+        {
+            if (what == NotificationApplicationPaused)
+            {
+                // Settings have to save when NOTIFICATION_APPLICATION_PAUSED
+                // is received in order for them to save on Android and iOS
+                // without the user pressing "Exit App" in the app's menu.
+                SaveSettings();
             }
         }
     }
