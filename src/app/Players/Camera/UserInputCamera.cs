@@ -36,8 +36,11 @@ namespace JumpvalleyApp.Players.Camera
 
         public UserInputCamera() : base() { }
 
-        public override void _UnhandledInput(InputEvent @event)
+        public override void _Input(InputEvent @event)
         {
+            // Camera turning input has to be handled in _Input instead of _UnhandledInput for some reason.
+            // This might be because handling camera turning input in _UnhandledInput breaks if camera
+            // turning is mapped to holding a mouse button.
             if (Input.IsActionJustPressed(INPUT_CAMERA_PAN))
             {
                 IsTurningCamera = true;
@@ -48,14 +51,6 @@ namespace JumpvalleyApp.Players.Camera
                 IsTurningCamera = false;
                 Input.MouseMode = Input.MouseModeEnum.Visible;
             }
-            else if (Input.IsActionPressed(INPUT_CAMERA_ZOOM_IN))
-            {
-                ZoomOutDistance -= CameraZoomAdjustment;
-            }
-            else if (Input.IsActionPressed(INPUT_CAMERA_ZOOM_OUT))
-            {
-                ZoomOutDistance += CameraZoomAdjustment;
-            }
 
             // Turn camera based on mouse input
             if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent)
@@ -65,6 +60,21 @@ namespace JumpvalleyApp.Players.Camera
                 float panningFactor = PanningSensitivity * PanningSpeed * 0.02f;
                 Pitch += -mouseEventRelative.Y * panningFactor;
                 Yaw += -mouseEventRelative.X * panningFactor;
+            }
+
+            base._Input(@event);
+        }
+
+        public override void _UnhandledInput(InputEvent @event)
+        {
+            // Handle input for adjusting the camera's zoom
+            if (Input.IsActionPressed(INPUT_CAMERA_ZOOM_IN))
+            {
+                ZoomOutDistance -= CameraZoomAdjustment;
+            }
+            else if (Input.IsActionPressed(INPUT_CAMERA_ZOOM_OUT))
+            {
+                ZoomOutDistance += CameraZoomAdjustment;
             }
 
             base._UnhandledInput(@event);
