@@ -59,7 +59,7 @@ namespace JumpvalleyApp.Gui
 				tree.Quit();
 			};
 			exitGameButtonHandler.BackgroundColor = Color.Color8(255, 100, 89, 255);
-			exitGameButtonHandler.Text = exitGameButton.Tr("EXIT_GAME");
+			exitGameButtonHandler.Text = exitGameButton.Tr("EXIT_APP");
 			exitGameButtonHandler.Icon = GD.Load<CompressedTexture2D>("res://addons/icons/logout_white_48dp.svg");
 			disposables.Add(exitGameButton);
 
