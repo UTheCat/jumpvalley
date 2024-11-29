@@ -4,7 +4,17 @@ using System.Collections.Generic;
 namespace Jumpvalley.Levels
 {
     /// <summary>
-    /// Difficulty presets taken from difficulty-rating systems already established by various communities
+    /// This class contains some difficulty sets that can be used to label the difficulty of a level.
+    /// <br/><br/>
+    /// Currently, the difficulty sets here have one of these characteristics:
+    /// <list type="bullet">
+    /// <item>
+    /// <description>It's directly from a game or community</description>
+    /// </item>
+    /// <item>
+    /// <description>It's from a game or community, but it's been modified.</description>
+    /// </item>
+    /// </list>
     /// </summary>
     public partial class DifficultyPresets
     {
@@ -16,21 +26,19 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// Jumpvalley's main set of difficulties.
         /// <br/><br/>
-        /// These come from the <see href="https://www.celestegame.com/">Celeste</see> community.
-        /// The numerical difficulty ratings assigned to each difficulty name come from
-        /// the Difficulty Reference Chart in <see href="https://docs.google.com/spreadsheets/d/1KNJ344lsZEmTU9P6eeFInckUbT5dkaWhRcxv_Yy2ZS0">Parrot's Celeste Clears List</see>.
+        /// The names of difficulties in this set come from the <see href="https://www.celestegame.com/">Celeste</see> community.
         /// </summary>
         public readonly static DifficultySet PRIMARY_DIFFICULTIES = new DifficultySet(
             new List<Difficulty>()
             {
-                new Difficulty("Beginner", 0.0, new Color(231f / 255f, 0.41f, 1f)),
-                new Difficulty("Intermediate", 15.0, new Color(198f / 255f, 0.44f, 1f)),
-                new Difficulty("Advanced", 30.0, new Color(140f / 255f, 0.47f, 0.88f)),
-                new Difficulty("Expert", 45.0, new Color(95f / 255f, 0.53f, 1f)),
-                new Difficulty("Grandmaster", 60.0, new Color(51f / 255f, 0.47f, 1f)),
-                new Difficulty("GM+1", 80.0, new Color(36f / 255f, 0.55f, 1f)),
-                new Difficulty("GM+2", 90.0, new Color(8f / 255f, 0.6f, 1f)),
-                new Difficulty("GM+3", 95.0, new Color(332f / 255f, 0.92f, 1f)),
+                new Difficulty("Beginner", 0.0, new Color(90f / 360f, 0.41f, 1f)),
+                new Difficulty("Intermediate", 20.0, new Color(60f / 360f, 0.44f, 1f)),
+                new Difficulty("Advanced", 40.0, new Color(30f / 360f, 0.47f, 0.88f)),
+                new Difficulty("Expert", 60.0, new Color(0f / 360f, 0.53f, 1f)),
+                new Difficulty("Grandmaster", 80.0, new Color(330f / 360f, 0.47f, 1f)),
+                new Difficulty("GM+1", 100.0, new Color(300f / 360f, 0.55f, 1f)),
+                new Difficulty("GM+2", 120.0, new Color(270f / 360f, 0.6f, 1f)),
+                new Difficulty("GM+3", 140.0, new Color(240f / 360f, 0.92f, 1f)),
             }
         );
     }
