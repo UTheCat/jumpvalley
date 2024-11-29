@@ -56,7 +56,7 @@ label_settings = SubResource("LabelSettings_3l671")
 
 [node name="MenuDescription" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-text = "Customize the game"
+text = "Customize the app"
 label_settings = SubResource("LabelSettings_bd3vs")
 
 [node name="Padding" type="Control" parent="ScrollContainer/VBoxContainer"]

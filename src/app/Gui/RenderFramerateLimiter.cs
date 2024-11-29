@@ -4,7 +4,7 @@ using System;
 namespace JumpvalleyApp.Gui
 {
     /// <summary>
-    /// Limits how many times the game screen is rendered within a given time interval
+    /// Limits how many times the app is rendered within a given time interval
     /// <br/>
     /// Currently, the only option is to cap rendering framerate slightly below the rendering refresh rate.
     /// This is to test lowering input delay while maintaining smooth rendering with V-sync and Free-Sync enabled.

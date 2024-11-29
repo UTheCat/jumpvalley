@@ -6,7 +6,7 @@ namespace JumpvalleyApp.Gui
 {
 	/// <summary>
 	/// The primary level menu, the menu that's accessed by pressing the three-dots at the bottom of the user's screen.
-	/// This menu contains options like accessing game settings and exiting the game.
+	/// This menu contains options like accessing app settings and exiting the app.
 	/// </summary>
 	public partial class PrimaryLevelMenu : LevelMenu, IDisposable
 	{
@@ -48,28 +48,28 @@ namespace JumpvalleyApp.Gui
 			};
 			disposables.Add(settingsButtonNode);
 
-			// Add the Exit Game button
-			Button exitGameButton = menuButtonResource.Instantiate<Button>();
-			LevelMenuButton exitGameButtonHandler = new LevelMenuButton(exitGameButton);
-			exitGameButton.Pressed += () =>
+			// Add the Exit App button
+			Button exitAppButton = menuButtonResource.Instantiate<Button>();
+			LevelMenuButton exitAppButtonHandler = new LevelMenuButton(exitAppButton);
+			exitAppButton.Pressed += () =>
 			{
-				// Quit the game in the method specified in the Godot documentation:
+				// Quit the app in the method specified in the Godot documentation:
 				// https://docs.godotengine.org/en/stable/tutorials/inputs/handling_quit_requests.html
 				tree.Root.PropagateNotification((int)Node.NotificationWMCloseRequest);
 				tree.Quit();
 			};
-			exitGameButtonHandler.BackgroundColor = Color.Color8(255, 100, 89, 255);
-			exitGameButtonHandler.Text = exitGameButton.Tr("EXIT_APP");
-			exitGameButtonHandler.Icon = GD.Load<CompressedTexture2D>("res://addons/icons/logout_white_48dp.svg");
-			disposables.Add(exitGameButton);
+			exitAppButtonHandler.BackgroundColor = Color.Color8(255, 100, 89, 255);
+			exitAppButtonHandler.Text = exitAppButton.Tr("EXIT_APP");
+			exitAppButtonHandler.Icon = GD.Load<CompressedTexture2D>("res://addons/icons/logout_white_48dp.svg");
+			disposables.Add(exitAppButton);
 
 			menuButtonResource.Dispose();
 
 			Button[] buttonList = {
 				settingsButton.ActualButton,
-				exitGameButton
+				exitAppButton
 			};
-			float buttonYSize = exitGameButton.Size.Y;
+			float buttonYSize = exitAppButton.Size.Y;
 
 			for (int i = 0; i < buttonList.Length; i++)
 			{

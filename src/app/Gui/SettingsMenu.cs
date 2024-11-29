@@ -147,7 +147,7 @@ namespace JumpvalleyApp.Gui
         }
 
         /// <summary>
-        /// Generates the actual GUI nodes that will display the game's settings
+        /// Generates the actual GUI nodes that will display the app's settings
         /// </summary>
         public void Populate()
         {

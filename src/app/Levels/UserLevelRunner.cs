@@ -8,7 +8,7 @@ using JumpvalleyApp.Gui;
 namespace JumpvalleyApp.Levels
 {
     /// <summary>
-    /// Jumpvalley's primary level runner that's intended to be running on behalf of the user who's playing the game.
+    /// Jumpvalley's primary level runner that's intended to be running on behalf of the user who's running the app.
     /// </summary>
     public partial class UserLevelRunner : LevelRunner, IDisposable
     {

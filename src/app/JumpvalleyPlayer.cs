@@ -113,7 +113,7 @@ namespace JumpvalleyApp
 
             // Set up character movement
             // Some values here are based on Juke's Towers of Hell physics (or somewhere close), except we're working with meters.
-            // In-game gravity can be changed at runtime, so we need to account for that. See:
+            // In-app gravity can be changed at runtime, so we need to account for that. See:
             // https://docs.godotengine.org/en/stable/classes/class_projectsettings.html#class-projectsettings-property-physics-3d-default-gravity
             // for more details.
             Mover.Gravity = PhysicsServer3D.AreaGetParam(RootNode.GetViewport().FindWorld3D().Space, PhysicsServer3D.AreaParameter.Gravity).As<float>();
@@ -323,14 +323,14 @@ namespace JumpvalleyApp
                 return null;
             }
 
-            // Load the initialization lobby (the lobby we want to load in when the game starts)
+            // Load the initialization lobby (the lobby we want to load in when the app starts)
             if (RootNode.HasMeta(INITIALIZATION_LOBBY_META_NAME))
             {
                 string lobbyPath = RootNode.GetMeta(INITIALIZATION_LOBBY_META_NAME).As<string>();
                 StartLevel(lobbyPath, RootNode);
             }
 
-            // Load the initialization level (the level we want to load in when the game starts)
+            // Load the initialization level (the level we want to load in when the app starts)
             string levelsNodeName = "Levels";
             Node levelsNode = RootNode.GetNode(levelsNodeName);
             if (levelsNode != null)
@@ -350,7 +350,7 @@ namespace JumpvalleyApp
             }
             else
             {
-                logger.Print($"Failed to load a level at game initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
+                logger.Print($"Failed to load a level at app initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
             }
 
             // Start playing music.
