@@ -67,7 +67,7 @@ namespace JumpvalleyApp.Players.Camera
                 Yaw += -mouseEventRelative.X * panningFactor;
             }
 
-            base._Input(@event);
+            base._UnhandledInput(@event);
         }
 
         public new void Dispose()
