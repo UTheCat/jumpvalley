@@ -57,7 +57,7 @@ namespace JumpvalleyApp.Players.Camera
                 ZoomOutDistance += CameraZoomAdjustment;
             }
 
-            // Right-click to turn the camera
+            // Turn camera based on mouse input
             if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent)
             {
                 Vector2 mouseEventRelative = mouseEvent.Relative;
