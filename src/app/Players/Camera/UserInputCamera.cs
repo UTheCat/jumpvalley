@@ -34,6 +34,8 @@ namespace JumpvalleyApp.Players.Camera
         /// </summary>
         public float CameraZoomAdjustment = 1;
 
+        private float cameraPanningSpeedMultiplier = 0.02f;
+
         public UserInputCamera() : base() { }
 
         public override void _Input(InputEvent @event)
@@ -57,7 +59,7 @@ namespace JumpvalleyApp.Players.Camera
             {
                 Vector2 mouseEventRelative = mouseEvent.Relative;
 
-                float panningFactor = PanningSensitivity * PanningSpeed * 0.02f;
+                float panningFactor = PanningSensitivity * PanningSpeed * cameraPanningSpeedMultiplier;
                 Pitch += -mouseEventRelative.Y * panningFactor;
                 Yaw += -mouseEventRelative.X * panningFactor;
             }
