@@ -21,7 +21,7 @@ namespace Jumpvalley.Levels
         public LevelPackage CurrentLevelPackage;
 
         /// <summary>
-        /// The level package containing the level that's acting as the game's lobby.
+        /// The level package containing the level that's acting as the app's lobby.
         /// <br/>
         /// <br/>
         /// This is separate from <see cref="CurrentLevel"/> so
@@ -30,7 +30,7 @@ namespace Jumpvalley.Levels
         public LevelPackage Lobby;
 
         /// <summary>
-        /// Creates a new instance of the game's level runner
+        /// Creates a new instance of the app's level runner
         /// </summary>
         /// <param name="player">The player instance to run this level runner under</param>
         public LevelRunner(Player player)

@@ -4,7 +4,7 @@ using System;
 namespace JumpvalleyApp
 {
 	/// <summary>
-	/// Entry point for the game's code
+	/// Entry point for the app's code
 	/// </summary>
 	public partial class Program : Node
 	{
@@ -45,7 +45,7 @@ namespace JumpvalleyApp
 			AddChild(player);
 			player.Start();
 
-			Console.WriteLine("Game has started successfully.");
+			Console.WriteLine("App has started successfully.");
 		}
 
 		// This root node will be removed from the tree once the program exits

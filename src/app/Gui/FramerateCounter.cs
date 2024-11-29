@@ -6,7 +6,7 @@ using Jumpvalley.Tweening;
 namespace JumpvalleyApp.Gui
 {
     /// <summary>
-    /// Class that handles the game's framerate counter GUI.
+    /// Class that handles the app's framerate counter GUI.
     /// </summary>
     public partial class FramerateCounter : AnimatedNode, IDisposable
     {

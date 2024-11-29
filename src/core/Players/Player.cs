@@ -11,13 +11,13 @@ using Jumpvalley.Timing;
 namespace Jumpvalley.Players
 {
     /// <summary>
-    /// This class represents a player who is playing Jumpvalley or some other game that derives from it.
+    /// This class represents a player who is playing Jumpvalley or some other app that derives from it.
     /// This class inherits from the <see cref="Interactive"/> class since it contains some functionality that
-    /// assists with initializing, starting, stopping, and disposing the game components functioning
+    /// assists with initializing, starting, stopping, and disposing the app components functioning
     /// on behalf of the player.
     /// <br/>
     /// <br/>
-    /// This class contains some of the basic components that allow the game to function for the player, such as:
+    /// This class contains some of the basic components that allow the app to function for the player, such as:
     /// <list type="bullet">
     /// <item>Their music player</item>
     /// <item>The Controller instance that allows them to control their character</item>
@@ -28,12 +28,13 @@ namespace Jumpvalley.Players
     public partial class Player : Interactive, IDisposable
     {
         /// <summary>
-        /// The scene tree that the player's game is under.
+        /// The scene tree that the current application instance is running under.
+        /// This <see cref="Player"/> instance should "correspond to" the application instance.
         /// </summary>
         public SceneTree Tree { get; private set; }
 
         /// <summary>
-        /// The root node containing the nodes in the player's game.
+        /// The root node containing the app's components as Godot nodes.
         /// </summary>
         public Node RootNode { get; private set; }
 
