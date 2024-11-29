@@ -4,7 +4,17 @@ using System.Collections.Generic;
 namespace Jumpvalley.Levels
 {
     /// <summary>
-    /// Difficulty presets taken from difficulty-rating systems already established by various communities
+    /// This class contains some difficulty sets that can be used to label the difficulty of a level.
+    /// <br/><br/>
+    /// Currently, the difficulty sets here have one of these characteristics:
+    /// <list type="bullet">
+    /// <item>
+    /// <description>It's directly from a game or community</description>
+    /// </item>
+    /// <item>
+    /// <description>It's from a game or community, but it's been modified.</description>
+    /// </item>
+    /// </list>
     /// </summary>
     public partial class DifficultyPresets
     {
@@ -16,9 +26,7 @@ namespace Jumpvalley.Levels
         /// <summary>
         /// Jumpvalley's main set of difficulties.
         /// <br/><br/>
-        /// These come from the <see href="https://www.celestegame.com/">Celeste</see> community.
-        /// The numerical difficulty ratings assigned to each difficulty name come from
-        /// the Difficulty Reference Chart in <see href="https://docs.google.com/spreadsheets/d/1KNJ344lsZEmTU9P6eeFInckUbT5dkaWhRcxv_Yy2ZS0">Parrot's Celeste Clears List</see>.
+        /// The names of difficulties in this set come from the <see href="https://www.celestegame.com/">Celeste</see> community.
         /// </summary>
         public readonly static DifficultySet PRIMARY_DIFFICULTIES = new DifficultySet(
             new List<Difficulty>()
