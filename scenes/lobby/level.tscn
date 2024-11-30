@@ -663,20 +663,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
 material_override = ExtResource("5_efv4u")
 mesh = SubResource("CylinderMesh_h17i4")
 
-[node name="MovementInstructionsSign" type="Node3D" parent="StaticObjects"]
+[node name="WelcomeSign" type="Node3D" parent="StaticObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, -3)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+[node name="StaticBody3D" type="StaticBody3D" parent="StaticObjects/WelcomeSign"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/StaticBody3D"]
 shape = SubResource("BoxShape3D_fo5i8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/StaticBody3D/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/WelcomeSign/StaticBody3D/CollisionShape3D"]
 material_override = SubResource("StandardMaterial3D_r8tc2")
 mesh = SubResource("BoxMesh_mpxwe")
 skeleton = NodePath("../..")
 
-[node name="Label3D" type="Label3D" parent="StaticObjects/MovementInstructionsSign/StaticBody3D/CollisionShape3D/MeshInstance3D"]
+[node name="Label3D" type="Label3D" parent="StaticObjects/WelcomeSign/StaticBody3D/CollisionShape3D/MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13)
 text = "Welcome! Here's how to move around.
 
@@ -690,64 +690,64 @@ Scroll wheel: Zoom camera in and out"
 font = ExtResource("6_1tuk3")
 font_size = 40
 
-[node name="Box" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+[node name="Box" type="StaticBody3D" parent="StaticObjects/WelcomeSign"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, -0.75, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/Box"]
 shape = SubResource("BoxShape3D_3m4q2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/WelcomeSign/Box"]
 material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_bao3i")
 
-[node name="Box2" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+[node name="Box2" type="StaticBody3D" parent="StaticObjects/WelcomeSign"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, -0.75, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/Box2"]
 shape = SubResource("BoxShape3D_3m4q2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/WelcomeSign/Box2"]
 material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_bao3i")
 
-[node name="Box3" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+[node name="Box3" type="StaticBody3D" parent="StaticObjects/WelcomeSign"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box3"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/Box3"]
 shape = SubResource("BoxShape3D_cr5rr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box3"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/WelcomeSign/Box3"]
 material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_6126w")
 
-[node name="Box4" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+[node name="Box4" type="StaticBody3D" parent="StaticObjects/WelcomeSign"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.625, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box4"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/Box4"]
 shape = SubResource("BoxShape3D_cr5rr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box4"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/WelcomeSign/Box4"]
 material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_6126w")
 
-[node name="Wedge" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+[node name="Wedge" type="StaticBody3D" parent="StaticObjects/WelcomeSign"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, 1.625, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Wedge"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/WelcomeSign/Wedge"]
 material_override = ExtResource("4_xv8fq")
 mesh = SubResource("PrismMesh_335nw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Wedge"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/Wedge"]
 shape = SubResource("ConcavePolygonShape3D_a7o8m")
 
-[node name="Wedge2" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+[node name="Wedge2" type="StaticBody3D" parent="StaticObjects/WelcomeSign"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.125, 1.625, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Wedge2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/WelcomeSign/Wedge2"]
 material_override = ExtResource("4_xv8fq")
 mesh = SubResource("PrismMesh_335nw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Wedge2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/Wedge2"]
 shape = SubResource("ConcavePolygonShape3D_a7o8m")
 
 [node name="Music" type="Node3D" parent="."]
