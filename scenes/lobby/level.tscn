@@ -645,7 +645,7 @@ material_override = ExtResource("5_efv4u")
 mesh = SubResource("CylinderMesh_h17i4")
 
 [node name="MovementInstructionsSign" type="Node3D" parent="StaticObjects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, -5.5)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
 
@@ -670,6 +670,16 @@ Right mouse button: Turn camera
 Scroll wheel: Zoom camera in and out"
 font = ExtResource("6_1tuk3")
 font_size = 40
+
+[node name="Box" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box"]
+shape = SubResource("BoxShape3D_6o25e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box"]
+material_override = ExtResource("4_xv8fq")
+mesh = SubResource("BoxMesh_7r4vw")
 
 [node name="Music" type="Node3D" parent="."]
 
