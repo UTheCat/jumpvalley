@@ -630,7 +630,7 @@ font = ExtResource("6_1tuk3")
 font_size = 40
 
 [node name="ShapeKit" type="Node3D" parent="StaticObjects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1, -12)
 
 [node name="Box" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
 
