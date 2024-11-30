@@ -1,10 +1,11 @@
-[gd_scene load_steps=56 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=57 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
 [ext_resource type="FontFile" uid="uid://b35ldnmoo353w" path="res://addons/fonts/overpass/static/Overpass-Bold.ttf" id="3_7vwr2"]
 [ext_resource type="Texture2D" uid="uid://dcxkj8m3ltdl8" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="3_mqd1l"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="4_2jpqx"]
+[ext_resource type="Texture2D" uid="uid://blk81f3jt4lc7" path="res://scenes/lobby/shape_kit_texture.tres" id="4_xv8fq"]
 [ext_resource type="Material" uid="uid://bm0ukyda3pfcc" path="res://textures/ladder_indicator.tres" id="5_efv4u"]
 [ext_resource type="FontFile" uid="uid://bseob0pnt3rg0" path="res://addons/fonts/overpass/static/Overpass-Regular.ttf" id="6_1tuk3"]
 [ext_resource type="Material" uid="uid://bqukbe1tiexct" path="res://levels/shape_variety/textures/floor1.tres" id="8_elbs4"]
@@ -66,7 +67,7 @@ emission = Color(1, 0.862745, 0.360784, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52fkq"]
 albedo_color = Color(0.505882, 0.490196, 0.521569, 1)
-albedo_texture = ExtResource("2_065hl")
+albedo_texture = ExtResource("4_xv8fq")
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_8pv50"]
