@@ -686,7 +686,9 @@ Hold S: Move backward
 Hold D: Move right
 
 Right mouse button: Turn camera
-Scroll wheel: Zoom camera in and out"
+Scroll wheel: Zoom camera in and out
+
+Shift: Toggle fast-turn"
 font = ExtResource("6_1tuk3")
 font_size = 40
 
