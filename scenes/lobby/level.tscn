@@ -64,6 +64,26 @@ emission = Color(1, 0.862745, 0.360784, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rmlu0"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6o25e"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7r4vw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uiqr0"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0yx5l"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dwm5y"]
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ak1ta"]
+height = 1.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_edrvm"]
+left_to_right = 0.0
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5ll1u"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
 [sub_resource type="BoxMesh" id="BoxMesh_8pv50"]
 size = Vector3(100, 1, 100)
 
@@ -135,26 +155,6 @@ uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_mpxwe"]
 size = Vector3(4, 3, 0.25)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6o25e"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_7r4vw"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_uiqr0"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_0yx5l"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_dwm5y"]
-height = 1.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ak1ta"]
-height = 1.0
-
-[sub_resource type="PrismMesh" id="PrismMesh_edrvm"]
-left_to_right = 0.0
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5ll1u"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [node name="Lobby" type="Node3D"]
 
@@ -312,6 +312,48 @@ material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_rmlu0")
 
 [node name="StaticObjects" type="Node3D" parent="."]
+
+[node name="ShapeKit" type="Node3D" parent="StaticObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1, -12)
+
+[node name="Box" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Box"]
+shape = SubResource("BoxShape3D_6o25e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Box"]
+material_override = ExtResource("4_xv8fq")
+mesh = SubResource("BoxMesh_7r4vw")
+
+[node name="Sphere" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Sphere"]
+shape = SubResource("SphereShape3D_uiqr0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Sphere"]
+material_override = ExtResource("4_xv8fq")
+mesh = SubResource("SphereMesh_0yx5l")
+
+[node name="Cylinder" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Cylinder"]
+shape = SubResource("CylinderShape3D_dwm5y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Cylinder"]
+material_override = ExtResource("4_xv8fq")
+mesh = SubResource("CylinderMesh_ak1ta")
+
+[node name="Wedge" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Wedge"]
+material_override = ExtResource("4_xv8fq")
+mesh = SubResource("PrismMesh_edrvm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Wedge"]
+shape = SubResource("ConcavePolygonShape3D_5ll1u")
 
 [node name="Baseplate" type="MeshInstance3D" parent="StaticObjects"]
 material_override = ExtResource("4_xv8fq")
@@ -628,48 +670,6 @@ Right mouse button: Turn camera
 Scroll wheel: Zoom camera in and out"
 font = ExtResource("6_1tuk3")
 font_size = 40
-
-[node name="ShapeKit" type="Node3D" parent="StaticObjects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1, -12)
-
-[node name="Box" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Box"]
-shape = SubResource("BoxShape3D_6o25e")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Box"]
-material_override = ExtResource("4_xv8fq")
-mesh = SubResource("BoxMesh_7r4vw")
-
-[node name="Sphere" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Sphere"]
-shape = SubResource("SphereShape3D_uiqr0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Sphere"]
-material_override = ExtResource("4_xv8fq")
-mesh = SubResource("SphereMesh_0yx5l")
-
-[node name="Cylinder" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Cylinder"]
-shape = SubResource("CylinderShape3D_dwm5y")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Cylinder"]
-material_override = ExtResource("4_xv8fq")
-mesh = SubResource("CylinderMesh_ak1ta")
-
-[node name="Wedge" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Wedge"]
-material_override = ExtResource("4_xv8fq")
-mesh = SubResource("PrismMesh_edrvm")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Wedge"]
-shape = SubResource("ConcavePolygonShape3D_5ll1u")
 
 [node name="Music" type="Node3D" parent="."]
 
