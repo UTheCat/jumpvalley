@@ -651,7 +651,7 @@ material_override = ExtResource("5_efv4u")
 mesh = SubResource("CylinderMesh_h17i4")
 
 [node name="MovementInstructionsSign" type="Node3D" parent="StaticObjects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, -5.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3.5, -3)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
 
