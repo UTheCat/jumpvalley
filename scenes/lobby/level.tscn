@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=45 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -129,6 +129,10 @@ height = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fo5i8"]
 size = Vector3(1, 1, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8tc2"]
+albedo_texture = ExtResource("2_065hl")
+uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_mpxwe"]
 size = Vector3(1, 1, 0.25)
@@ -578,7 +582,7 @@ material_override = ExtResource("5_efv4u")
 mesh = SubResource("CylinderMesh_h17i4")
 
 [node name="MovementInstructionsSign" type="Node3D" parent="StaticObjects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -9.375)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
 
@@ -586,6 +590,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 shape = SubResource("BoxShape3D_fo5i8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/StaticBody3D/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_r8tc2")
 mesh = SubResource("BoxMesh_mpxwe")
 skeleton = NodePath("../..")
 
