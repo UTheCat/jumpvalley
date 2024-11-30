@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=44 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -126,6 +126,12 @@ radius = 1.0
 top_radius = 1.0
 bottom_radius = 1.0
 height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fo5i8"]
+size = Vector3(1, 1, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mpxwe"]
+size = Vector3(1, 1, 0.25)
 
 [node name="Lobby" type="Node3D"]
 
@@ -570,6 +576,18 @@ mesh = SubResource("CylinderMesh_h17i4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25, 0)
 material_override = ExtResource("5_efv4u")
 mesh = SubResource("CylinderMesh_h17i4")
+
+[node name="MovementInstructionsSign" type="Node3D" parent="StaticObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/StaticBody3D"]
+shape = SubResource("BoxShape3D_fo5i8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_mpxwe")
+skeleton = NodePath("../..")
 
 [node name="Music" type="Node3D" parent="."]
 
