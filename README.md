@@ -60,6 +60,10 @@ Assuming you did this correctly, this tells Linux to allow running the Jumpvalle
 
 Jumpvalley's documentation can be found on its [website](https://uthecat.github.io/jumpvalley-docs/) hosted on GitHub.
 
+## Found a bug in Jumpvalley?
+
+Feel free to open an issue on this repository describing the bug.
+
 ## Working with this repository
 
 Here are some instructions for working with this project's repository. This assumes that you actually want to do things with Jumpvalley's Git repository.
