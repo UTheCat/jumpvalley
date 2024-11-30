@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=59 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -161,6 +161,12 @@ size = Vector3(0.25, 4.5, 0.25)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bao3i"]
 size = Vector3(0.25, 4.5, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cr5rr"]
+size = Vector3(4, 0.25, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6126w"]
+size = Vector3(4, 0.25, 0.25)
 
 [node name="Lobby" type="Node3D"]
 
@@ -686,6 +692,36 @@ shape = SubResource("BoxShape3D_3m4q2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box"]
 material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_bao3i")
+
+[node name="Box2" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.125, -0.75, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box2"]
+shape = SubResource("BoxShape3D_3m4q2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box2"]
+material_override = ExtResource("4_xv8fq")
+mesh = SubResource("BoxMesh_bao3i")
+
+[node name="Box3" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box3"]
+shape = SubResource("BoxShape3D_cr5rr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box3"]
+material_override = ExtResource("4_xv8fq")
+mesh = SubResource("BoxMesh_6126w")
+
+[node name="Box4" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.625, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box4"]
+shape = SubResource("BoxShape3D_cr5rr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box4"]
+material_override = ExtResource("4_xv8fq")
+mesh = SubResource("BoxMesh_6126w")
 
 [node name="Music" type="Node3D" parent="."]
 
