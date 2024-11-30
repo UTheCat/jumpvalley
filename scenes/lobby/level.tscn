@@ -1,13 +1,13 @@
-[gd_scene load_steps=56 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=55 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
 [ext_resource type="FontFile" uid="uid://b35ldnmoo353w" path="res://addons/fonts/overpass/static/Overpass-Bold.ttf" id="3_7vwr2"]
 [ext_resource type="Texture2D" uid="uid://dcxkj8m3ltdl8" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="3_mqd1l"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="4_2jpqx"]
+[ext_resource type="Material" uid="uid://27np65wgewr4" path="res://scenes/lobby/shape_kit_texture.tres" id="4_xv8fq"]
 [ext_resource type="Material" uid="uid://bm0ukyda3pfcc" path="res://textures/ladder_indicator.tres" id="5_efv4u"]
 [ext_resource type="FontFile" uid="uid://bseob0pnt3rg0" path="res://addons/fonts/overpass/static/Overpass-Regular.ttf" id="6_1tuk3"]
-[ext_resource type="Material" uid="uid://bqukbe1tiexct" path="res://levels/shape_variety/textures/floor1.tres" id="8_elbs4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yudit"]
 
@@ -63,11 +63,6 @@ emission_enabled = true
 emission = Color(1, 0.862745, 0.360784, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rmlu0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52fkq"]
-albedo_color = Color(0.505882, 0.490196, 0.521569, 1)
-albedo_texture = ExtResource("2_065hl")
-uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_8pv50"]
 size = Vector3(100, 1, 100)
@@ -313,12 +308,13 @@ mesh = SubResource("BoxMesh_mu0vs")
 
 [node name="SpinningMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_rmlu0")
 
 [node name="StaticObjects" type="Node3D" parent="."]
 
 [node name="Baseplate" type="MeshInstance3D" parent="StaticObjects"]
-material_override = SubResource("StandardMaterial3D_52fkq")
+material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_8pv50")
 skeleton = NodePath("")
 
@@ -642,6 +638,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.25)
 shape = SubResource("BoxShape3D_6o25e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Box"]
+material_override = ExtResource("4_xv8fq")
 mesh = SubResource("BoxMesh_7r4vw")
 
 [node name="Sphere" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
@@ -651,7 +648,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 shape = SubResource("SphereShape3D_uiqr0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Sphere"]
-material_override = ExtResource("8_elbs4")
+material_override = ExtResource("4_xv8fq")
 mesh = SubResource("SphereMesh_0yx5l")
 
 [node name="Cylinder" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
@@ -661,14 +658,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 shape = SubResource("CylinderShape3D_dwm5y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Cylinder"]
-material_override = ExtResource("8_elbs4")
+material_override = ExtResource("4_xv8fq")
 mesh = SubResource("CylinderMesh_ak1ta")
 
 [node name="Wedge" type="StaticBody3D" parent="StaticObjects/ShapeKit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ShapeKit/Wedge"]
-material_override = ExtResource("8_elbs4")
+material_override = ExtResource("4_xv8fq")
 mesh = SubResource("PrismMesh_edrvm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ShapeKit/Wedge"]
