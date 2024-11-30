@@ -12,7 +12,7 @@ namespace JumpvalleyApp.Players.Movement
     /// </summary>
     public partial class FastTurnControl : Node, IDisposable
     {
-        private static readonly string INPUT_MAP_SHIFT_LOCK = "character_shift_lock";
+        private static readonly string INPUT_MAP_FAST_TURN = "character_fast_turn";
 
         private BaseMover _mover;
 
@@ -110,7 +110,7 @@ namespace JumpvalleyApp.Players.Movement
 
         public override void _UnhandledInput(InputEvent @event)
         {
-            if (Input.IsActionJustPressed(INPUT_MAP_SHIFT_LOCK))
+            if (Input.IsActionJustPressed(INPUT_MAP_FAST_TURN))
             {
                 UserEnabledFastTurn = !UserEnabledFastTurn;
             }
