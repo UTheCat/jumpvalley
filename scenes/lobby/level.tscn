@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=57 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -155,6 +155,12 @@ uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_mpxwe"]
 size = Vector3(4, 3, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3m4q2"]
+size = Vector3(0.25, 4.5, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bao3i"]
+size = Vector3(0.25, 4.5, 0.25)
 
 [node name="Lobby" type="Node3D"]
 
@@ -672,14 +678,14 @@ font = ExtResource("6_1tuk3")
 font_size = 40
 
 [node name="Box" type="StaticBody3D" parent="StaticObjects/MovementInstructionsSign"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.125, -0.75, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/MovementInstructionsSign/Box"]
-shape = SubResource("BoxShape3D_6o25e")
+shape = SubResource("BoxShape3D_3m4q2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/MovementInstructionsSign/Box"]
 material_override = ExtResource("4_xv8fq")
-mesh = SubResource("BoxMesh_7r4vw")
+mesh = SubResource("BoxMesh_bao3i")
 
 [node name="Music" type="Node3D" parent="."]
 
