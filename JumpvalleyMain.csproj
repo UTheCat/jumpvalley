@@ -5,9 +5,9 @@
   </PropertyGroup>
   <ItemGroup>
 
-  <!-- Needed for the project to build properly with the solution file in the project's root. -->
-  <Compile Remove="src/**" />
-  <ProjectReference Include="src/app/JumpvalleyApp.csproj" />
+    <!-- Needed for the project to build properly with the solution file in the project's root. -->
+    <Compile Remove="src/**" />
+    <ProjectReference Include="src/app/JumpvalleyApp.csproj" />
 
   </ItemGroup>
 </Project>
