@@ -5,6 +5,10 @@ VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JumpvalleyMain", "JumpvalleyMain.csproj", "{76E0DD36-A436-4EF9-BCF1-D054D8EC2DA5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{131CA328-116C-443B-AB34-7098D5B8120A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JumpvalleyApp", "src/app/JumpvalleyApp.csproj", "{936A9D7F-CDBC-4663-913B-12408CFD77F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,11 +22,20 @@ Global
 		{76E0DD36-A436-4EF9-BCF1-D054D8EC2DA5}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{76E0DD36-A436-4EF9-BCF1-D054D8EC2DA5}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{76E0DD36-A436-4EF9-BCF1-D054D8EC2DA5}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{936A9D7F-CDBC-4663-913B-12408CFD77F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{936A9D7F-CDBC-4663-913B-12408CFD77F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{936A9D7F-CDBC-4663-913B-12408CFD77F4}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{936A9D7F-CDBC-4663-913B-12408CFD77F4}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{936A9D7F-CDBC-4663-913B-12408CFD77F4}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{936A9D7F-CDBC-4663-913B-12408CFD77F4}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B6D248C-7501-4B23-96A3-F633C685F758}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{936A9D7F-CDBC-4663-913B-12408CFD77F4} = {131CA328-116C-443B-AB34-7098D5B8120A}
 	EndGlobalSection
 EndGlobal
