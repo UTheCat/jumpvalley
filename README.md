@@ -19,8 +19,8 @@ A list of such assets that are used in this project can be found [here](https://
 Jumpvalley was inspired by several fun platformers that you should check out, including:
 
 - [Celeste](https://www.celestegame.com/)
+- [Eternal Towers of Hell](https://www.roblox.com/games/8562822414/Eternal-Towers-of-Hell)
 - [Flood Escape 2](https://www.roblox.com/games/738339342/Flood-Escape-2)
-- [Juke's Towers of Hell](https://www.roblox.com/games/8562822414/Jukes-Towers-of-Hell)
 
 ## Licensing
 

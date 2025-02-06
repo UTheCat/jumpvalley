@@ -112,7 +112,7 @@ namespace JumpvalleyApp
             Disposables.Add(characterBoundingBox);
 
             // Set up character movement
-            // Some values here are based on Juke's Towers of Hell physics (or somewhere close), except we're working with meters.
+            // Some values here are based on Eternal Towers of Hell physics (or somewhere close), except we're working with meters.
             // In-app gravity can be changed at runtime, so we need to account for that. See:
             // https://docs.godotengine.org/en/stable/classes/class_projectsettings.html#class-projectsettings-property-physics-3d-default-gravity
             // for more details.
@@ -147,7 +147,7 @@ namespace JumpvalleyApp
             RootNode.AddChild(Mover);
             RootNode.AddChild(Camera);
 
-            // Input with higher accuracy and less lag is preferred in Juke's Towers of Hell fangames,
+            // Input with higher accuracy and less lag is preferred in Eternal Towers of Hell fangames,
             // since very small differences in input can have a large impact on gameplay.
             // This is why it's important to make the input refresh rate independent from display refresh rate.
             Input.UseAccumulatedInput = false;
