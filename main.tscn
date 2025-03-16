@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://c7h44u0l74erl"]
 
-[ext_resource type="Script" path="res://Program.cs" id="1_r1x4e"]
+[ext_resource type="Script" uid="uid://dges00asc14a6" path="res://Program.cs" id="1_r1x4e"]
 [ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
 [ext_resource type="PackedScene" uid="uid://c020hsyxs4rey" path="res://gui/fast_turn_indicator.tscn" id="3_2hjl2"]
 [ext_resource type="PackedScene" uid="uid://c5xcp6s62kfmj" path="res://gui/camera_turn_indicator.tscn" id="3_4g04c"]
