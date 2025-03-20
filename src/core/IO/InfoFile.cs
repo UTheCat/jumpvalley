@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Jumpvalley.IO
+namespace UTheCat.Jumpvalley.Core.IO
 {
     /// <summary>
     /// Reads an Info file, a blob of text that's primarily for defining metadata for a specific object, such as an audio file or a level.

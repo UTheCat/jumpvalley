@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Jumpvalley.Tweening
+namespace UTheCat.Jumpvalley.Core.Tweening
 {
     /// <summary>
     /// <see cref="MethodTween"/> that can bind to the Process step of a Godot scene tree.

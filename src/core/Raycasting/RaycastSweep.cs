@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Jumpvalley.Raycasting
+namespace UTheCat.Jumpvalley.Core.Raycasting
 {
     /// <summary>
     /// Sweeps over a region of 3D space using a series of equally-spaced-out raycasts.

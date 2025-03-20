@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jumpvalley.Timing
+namespace UTheCat.Jumpvalley.Core.Timing
 {
     /// <summary>
     /// For a given number of seconds, this class helps to format that number into the speedrun time format (minutes:seconds.fractional_seconds).

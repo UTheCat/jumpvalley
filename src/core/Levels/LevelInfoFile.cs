@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Jumpvalley.Levels
+namespace UTheCat.Jumpvalley.Core.Levels
 {
     /// <summary>
     /// Reads an info file for a Jumpvalley level

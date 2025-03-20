@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Jumpvalley.Levels
+namespace UTheCat.Jumpvalley.Core.Levels
 {
     /// <summary>
     /// Class that groups multiple difficulties together.

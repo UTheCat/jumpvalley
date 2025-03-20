@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
-using Jumpvalley.Players;
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Players;
+using UTheCat.Jumpvalley.Core.Timing;
 
-namespace Jumpvalley.Levels.Interactives.Mechanics.Teleporters
+namespace UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics.Teleporters
 {
     /// <summary>
     /// Type of teleporter that teleports a node to <see cref="Teleporter.Destination"/>

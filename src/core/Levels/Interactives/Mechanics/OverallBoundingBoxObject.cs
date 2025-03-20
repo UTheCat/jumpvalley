@@ -1,8 +1,8 @@
 using Godot;
 
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Timing;
 
-namespace Jumpvalley.Levels.Interactives.Mechanics
+namespace UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics
 {
     /// <summary>
     /// Interactive that calculates its root node's

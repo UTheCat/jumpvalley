@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Jumpvalley.Levels.Interactives
+namespace UTheCat.Jumpvalley.Core.Levels.Interactives
 {
     /// <summary>
     /// Provides some variables and methods that may assist with the development of interactives.

@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Jumpvalley.Levels.Interactives
+namespace UTheCat.Jumpvalley.Core.Levels.Interactives
 {
     /// <summary>
     /// Event arguments for <see cref="InteractiveNode.NodeMetadataChanged"/>

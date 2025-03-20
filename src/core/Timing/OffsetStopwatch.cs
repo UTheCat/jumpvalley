@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Jumpvalley.Timing
+namespace UTheCat.Jumpvalley.Core.Timing
 {
     /// <summary>
     /// This class extends the <see cref="Stopwatch"/> (in the standard C# library) so that an initial value for elapsed time can be specified.

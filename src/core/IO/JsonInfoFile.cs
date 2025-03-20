@@ -1,6 +1,6 @@
 using System.Text.Json.Nodes;
 
-namespace Jumpvalley.IO
+namespace UTheCat.Jumpvalley.Core.IO
 {
     /// <summary>
     /// Class intended to help with using the data from info files written in JavaScript Object Notation (JSON).

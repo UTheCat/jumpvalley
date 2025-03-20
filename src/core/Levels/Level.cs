@@ -2,17 +2,17 @@
 using System;
 using System.Collections.Generic;
 
-using Jumpvalley.Players;
-using Jumpvalley.Music;
-using Jumpvalley.Levels.Interactives;
-using Jumpvalley.Levels.Interactives.Mechanics;
-using Jumpvalley.Levels.Interactives.Mechanics.Teleporters;
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Players;
+using UTheCat.Jumpvalley.Core.Music;
+using UTheCat.Jumpvalley.Core.Levels.Interactives;
+using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics;
+using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics.Teleporters;
+using UTheCat.Jumpvalley.Core.Timing;
 
-namespace Jumpvalley.Levels
+namespace UTheCat.Jumpvalley.Core.Levels
 {
     /// <summary>
-    /// This class represents a level that's playable in Jumpvalley.
+    /// This class represents a level that's playable in UTheCat.Jumpvalley.Core.
     /// <br/>
     /// Each level contains four primary components: interactives, music, static objects, and start point.
     /// More details can be found on Jumpvalley's wiki article on <see href="https://github.com/UTheCat/jumpvalley/wiki/Level-Layout">Level Layout</see>.

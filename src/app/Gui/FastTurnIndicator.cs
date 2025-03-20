@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-using Jumpvalley.Players.Movement;
+using UTheCat.Jumpvalley.Core.Players.Movement;
 
 namespace JumpvalleyApp.Gui
 {

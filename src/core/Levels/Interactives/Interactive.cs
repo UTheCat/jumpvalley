@@ -1,12 +1,12 @@
 ﻿using Godot;
 using System;
 
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Timing;
 
-namespace Jumpvalley.Levels.Interactives
+namespace UTheCat.Jumpvalley.Core.Levels.Interactives
 {
     /// <summary>
-    /// The base class for all Interactive types in Jumpvalley.
+    /// The base class for all Interactive types in UTheCat.Jumpvalley.Core.
     /// </summary>
     public partial class Interactive : Node, IDisposable
     {

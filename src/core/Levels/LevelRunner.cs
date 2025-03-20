@@ -1,8 +1,8 @@
 ﻿using Godot;
 
-using Jumpvalley.Players;
+using UTheCat.Jumpvalley.Core.Players;
 
-namespace Jumpvalley.Levels
+namespace UTheCat.Jumpvalley.Core.Levels
 {
     /// <summary>
     /// Class responsible for running and stopping levels.

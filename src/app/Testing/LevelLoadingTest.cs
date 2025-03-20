@@ -1,7 +1,7 @@
 ﻿using System;
 using Godot;
-using Jumpvalley.Levels;
-using Jumpvalley.Players;
+using UTheCat.Jumpvalley.Core.Levels;
+using UTheCat.Jumpvalley.Core.Players;
 
 using JumpvalleyApp.Gui;
 

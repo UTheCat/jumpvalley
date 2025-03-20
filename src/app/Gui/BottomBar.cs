@@ -1,7 +1,7 @@
 ﻿using Godot;
-using Jumpvalley.Animation;
-using Jumpvalley.Music;
-using Jumpvalley.Tweening;
+using UTheCat.Jumpvalley.Core.Animation;
+using UTheCat.Jumpvalley.Core.Music;
+using UTheCat.Jumpvalley.Core.Tweening;
 using System;
 
 namespace JumpvalleyApp.Gui

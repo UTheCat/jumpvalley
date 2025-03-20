@@ -2,7 +2,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Godot;
-using Jumpvalley.Logging;
+using UTheCat.Jumpvalley.Core.Logging;
 
 namespace JumpvalleyApp.Settings
 {

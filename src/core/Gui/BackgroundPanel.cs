@@ -1,9 +1,9 @@
 using Godot;
 
-using Jumpvalley.Animation;
-using Jumpvalley.Tweening;
+using UTheCat.Jumpvalley.Core.Animation;
+using UTheCat.Jumpvalley.Core.Tweening;
 
-namespace Jumpvalley.Gui
+namespace UTheCat.Jumpvalley.Core.Gui
 {
     /// <summary>
     /// Handler for the BackgroundPanel,

@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Timers;
 
-namespace Jumpvalley.Tweening
+namespace UTheCat.Jumpvalley.Core.Tweening
 {
     /// <summary>
     /// Class that runs a tween by incrementing steps at a specified time interval.

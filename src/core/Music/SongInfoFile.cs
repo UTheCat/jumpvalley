@@ -1,4 +1,4 @@
-﻿namespace Jumpvalley.Music
+﻿namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Reads the associated "info.txt" file for a song.

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using Jumpvalley.Animation;
-using Jumpvalley.Tweening;
+using UTheCat.Jumpvalley.Core.Animation;
+using UTheCat.Jumpvalley.Core.Tweening;
 
 using JumpvalleyApp.Gui.Settings;
 using JumpvalleyApp.Settings;

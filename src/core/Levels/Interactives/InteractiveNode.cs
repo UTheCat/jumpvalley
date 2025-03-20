@@ -1,9 +1,9 @@
 ﻿using Godot;
 using System;
 
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Timing;
 
-namespace Jumpvalley.Levels.Interactives
+namespace UTheCat.Jumpvalley.Core.Levels.Interactives
 {
     /// <summary>
     /// A subclass of <see cref="Interactive"/> that operates over a Godot node.

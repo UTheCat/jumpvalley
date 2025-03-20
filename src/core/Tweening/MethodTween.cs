@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-namespace Jumpvalley.Tweening
+namespace UTheCat.Jumpvalley.Core.Tweening
 {
     /// <summary>
     /// Provides a way of tweening via Godot using method overrides.

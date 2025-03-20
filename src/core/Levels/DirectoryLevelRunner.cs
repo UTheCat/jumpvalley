@@ -1,6 +1,6 @@
-using Jumpvalley.Players;
+using UTheCat.Jumpvalley.Core.Players;
 
-namespace Jumpvalley.Levels
+namespace UTheCat.Jumpvalley.Core.Levels
 {
     /// <summary>
     /// Subclass of <see cref="LevelRunner"/> that handles running levels located within a directory. 

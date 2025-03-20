@@ -2,9 +2,9 @@
 using System;
 using System.Text.Json.Nodes;
 
-using Jumpvalley.IO;
+using UTheCat.Jumpvalley.Core.IO;
 
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Represents a folder (such as one on the filesystem) that contains a song and its info metadata.

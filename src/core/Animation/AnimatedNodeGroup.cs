@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Jumpvalley.Animation
+namespace UTheCat.Jumpvalley.Core.Animation
 {
     /// <summary>
     /// Class that groups multiple <see cref="AnimatedNode"/>s together so that they can communicate with each other.

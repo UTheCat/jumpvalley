@@ -1,4 +1,4 @@
-namespace Jumpvalley.IO
+namespace UTheCat.Jumpvalley.Core.IO
 {
     /// <summary>
     /// Provides some values and methods for performing operations related to file paths.

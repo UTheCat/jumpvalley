@@ -1,9 +1,9 @@
 ﻿using Godot;
 using System;
 
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Timing;
 
-namespace Jumpvalley.Levels.Interactives.Mechanics
+namespace UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics
 {
     /// <summary>
     /// A basic spinner. A spinner is a rotating platform.

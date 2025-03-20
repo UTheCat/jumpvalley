@@ -1,8 +1,8 @@
 using System.Text.Json.Nodes;
 
-using Jumpvalley.IO;
+using UTheCat.Jumpvalley.Core.IO;
 
-namespace Jumpvalley.Levels
+namespace UTheCat.Jumpvalley.Core.Levels
 {
     /// <summary>
     /// Class containing some info about a level

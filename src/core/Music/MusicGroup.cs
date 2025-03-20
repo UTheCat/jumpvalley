@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Handles a <see cref="Playlist"/> that's in the form of nodes in a scene tree.

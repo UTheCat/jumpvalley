@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace Jumpvalley.Audio
+namespace UTheCat.Jumpvalley.Core.Audio
 {
     /// <summary>
     /// Loads a file that's either imported as a resource (at one point or another) or somewhere on the filesystem.
