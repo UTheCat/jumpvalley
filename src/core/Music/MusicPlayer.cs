@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Plays music that is split into playlists (see <see cref="Playlist"/>)

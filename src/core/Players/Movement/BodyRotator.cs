@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-namespace Jumpvalley.Players.Movement
+namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
     /// <summary>
     /// This class is responsible for turning a 3D body's yaw angle in the direction that it's moving.

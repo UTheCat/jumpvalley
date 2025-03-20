@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Represents a single music zone.

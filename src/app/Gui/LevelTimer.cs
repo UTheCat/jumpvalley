@@ -1,5 +1,5 @@
 ﻿using Godot;
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Timing;
 
 namespace JumpvalleyApp.Gui
 {

@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 
-using Jumpvalley.Levels.Interactives;
-using Jumpvalley.Music;
-using Jumpvalley.Players.Camera;
-using Jumpvalley.Players.Movement;
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Levels.Interactives;
+using UTheCat.Jumpvalley.Core.Music;
+using UTheCat.Jumpvalley.Core.Players.Camera;
+using UTheCat.Jumpvalley.Core.Players.Movement;
+using UTheCat.Jumpvalley.Core.Timing;
 
-namespace Jumpvalley.Players
+namespace UTheCat.Jumpvalley.Core.Players
 {
     /// <summary>
     /// This class represents a player who is playing Jumpvalley or some other app that derives from it.

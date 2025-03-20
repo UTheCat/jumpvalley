@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-using Jumpvalley.Tweening;
+using UTheCat.Jumpvalley.Core.Tweening;
 
 namespace JumpvalleyApp.Testing
 {

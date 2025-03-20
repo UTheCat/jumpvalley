@@ -1,4 +1,4 @@
-﻿namespace Jumpvalley.Players.Movement
+﻿namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
     /// <summary>
     /// Event arguments for <see cref="BaseMover.BodyStateChanged"/>.

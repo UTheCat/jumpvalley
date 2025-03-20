@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Nodes;
 
-using Jumpvalley.Gui;
-using Jumpvalley.Levels;
-using Jumpvalley.Levels.Interactives.Mechanics;
-using Jumpvalley.Logging;
-using Jumpvalley.Music;
-using Jumpvalley.Players;
-using Jumpvalley.Tweening;
+using UTheCat.Jumpvalley.Core.Gui;
+using UTheCat.Jumpvalley.Core.Levels;
+using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics;
+using UTheCat.Jumpvalley.Core.Logging;
+using UTheCat.Jumpvalley.Core.Music;
+using UTheCat.Jumpvalley.Core.Players;
+using UTheCat.Jumpvalley.Core.Tweening;
 
 using JumpvalleyApp.Display;
 using JumpvalleyApp.Gui;

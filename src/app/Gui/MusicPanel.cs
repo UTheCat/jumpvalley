@@ -1,6 +1,6 @@
 using System;
 using Godot;
-using Jumpvalley.Music;
+using UTheCat.Jumpvalley.Core.Music;
 
 namespace JumpvalleyApp.Gui
 {

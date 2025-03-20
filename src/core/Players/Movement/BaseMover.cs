@@ -1,10 +1,10 @@
 ﻿using Godot;
-using Jumpvalley.Logging;
-using Jumpvalley.Players.Camera;
-using Jumpvalley.Raycasting;
+using UTheCat.Jumpvalley.Core.Logging;
+using UTheCat.Jumpvalley.Core.Players.Camera;
+using UTheCat.Jumpvalley.Core.Raycasting;
 using System;
 
-namespace Jumpvalley.Players.Movement
+namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
     /// <summary>
     /// This is the base class that provides a player's character the ability to move in different directions, jump, and climb.

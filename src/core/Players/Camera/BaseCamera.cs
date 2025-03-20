@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jumpvalley.Players.Camera
+namespace UTheCat.Jumpvalley.Core.Players.Camera
 {
     /// <summary>
     /// The base class that handles a 3d camera focusing on a 3d object. It includes support for camera panning and zoom controls.

@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-namespace Jumpvalley.Players.Movement
+namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
     /// <summary>
     /// Allows a character to climb objects. Specifically, these objects are <see cref="PhysicsBody3D"/>s

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Godot;
-using Jumpvalley.Levels.Interactives.Mechanics.Teleporters;
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics.Teleporters;
+using UTheCat.Jumpvalley.Core.Timing;
 
-namespace Jumpvalley.Levels.Interactives.Mechanics
+namespace UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics
 {
     /// <summary>
     /// Interactive that handles checkpoints for a level.

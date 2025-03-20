@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// MusicPlayer that handles the playback of <see cref="Playlist"/>s with music zones in mind.

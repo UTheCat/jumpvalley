@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-namespace Jumpvalley.Animation
+namespace UTheCat.Jumpvalley.Core.Animation
 {
     /// <summary>
     /// This class provides some components to bind to a Godot node,

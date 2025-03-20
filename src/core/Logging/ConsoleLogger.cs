@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace Jumpvalley.Logging
+namespace UTheCat.Jumpvalley.Core.Logging
 {
     /// <summary>
     /// Utility class for printing text output to a console or terminal.

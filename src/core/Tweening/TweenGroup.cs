@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-namespace Jumpvalley.Tweening
+namespace UTheCat.Jumpvalley.Core.Tweening
 {
     /// <summary>
     /// A class capable of overseeing multiple tweens as a "group".

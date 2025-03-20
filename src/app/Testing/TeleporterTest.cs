@@ -1,9 +1,9 @@
 using System;
 using Godot;
-using Jumpvalley.Levels.Interactives;
-using Jumpvalley.Levels.Interactives.Mechanics;
-using Jumpvalley.Levels.Interactives.Mechanics.Teleporters;
-using Jumpvalley.Timing;
+using UTheCat.Jumpvalley.Core.Levels.Interactives;
+using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics;
+using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics.Teleporters;
+using UTheCat.Jumpvalley.Core.Timing;
 
 namespace JumpvalleyApp.Testing
 {

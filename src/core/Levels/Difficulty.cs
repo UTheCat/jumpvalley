@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Jumpvalley.Levels
+namespace UTheCat.Jumpvalley.Core.Levels
 {
     /// <summary>
     /// Represents a difficulty, a set of values that judge how difficult a level is.

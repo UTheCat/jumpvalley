@@ -1,6 +1,6 @@
 using System;
-using Jumpvalley.Animation;
-using Jumpvalley.Gui;
+using UTheCat.Jumpvalley.Core.Animation;
+using UTheCat.Jumpvalley.Core.Gui;
 
 namespace JumpvalleyApp.Gui
 {

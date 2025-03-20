@@ -1,8 +1,8 @@
 using System.Text.Json.Nodes;
 
-using Jumpvalley.IO;
+using UTheCat.Jumpvalley.Core.IO;
 
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Class that holds some metadata about a song file.

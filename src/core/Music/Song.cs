@@ -1,9 +1,9 @@
 using Godot;
 using System.IO;
 
-using Jumpvalley.Audio;
+using UTheCat.Jumpvalley.Core.Audio;
 
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Represents a single song associated with a file, along with some metadata

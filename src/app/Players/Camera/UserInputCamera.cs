@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-using Jumpvalley.Players.Camera;
+using UTheCat.Jumpvalley.Core.Players.Camera;
 
 namespace JumpvalleyApp.Players.Camera
 {

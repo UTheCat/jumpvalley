@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Jumpvalley.Raycasting
+namespace UTheCat.Jumpvalley.Core.Raycasting
 {
     /// <summary>
     /// Class that contains data about the result of a raycast sweep operation

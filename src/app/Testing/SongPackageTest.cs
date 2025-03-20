@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-using Jumpvalley.Music;
+using UTheCat.Jumpvalley.Core.Music;
 
 namespace JumpvalleyApp.Testing
 {

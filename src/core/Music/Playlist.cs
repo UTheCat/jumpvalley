@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-using Jumpvalley.Tweening;
+using UTheCat.Jumpvalley.Core.Tweening;
 
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Represents a musical playlist that can hold multiple Songs

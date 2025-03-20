@@ -1,4 +1,4 @@
-namespace Jumpvalley.Music
+namespace UTheCat.Jumpvalley.Core.Music
 {
     /// <summary>
     /// Event arguments for <see cref="Playlist.SongChanged"/> and <see cref="MusicPlayer.SongChanged"/>

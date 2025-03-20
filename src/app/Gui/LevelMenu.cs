@@ -1,8 +1,8 @@
 ﻿using Godot;
 using System;
 
-using Jumpvalley.Animation;
-using Jumpvalley.Tweening;
+using UTheCat.Jumpvalley.Core.Animation;
+using UTheCat.Jumpvalley.Core.Tweening;
 
 namespace JumpvalleyApp.Gui
 {
