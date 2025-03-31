@@ -32,7 +32,7 @@ namespace UTheCat.Jumpvalley.Core.Levels
         /// <summary>
         /// How difficult the level is.
         /// </summary>
-        public Difficulty LevelDifficulty;
+        public double LevelDifficulty;
 
         /// <summary>
         /// The file path to the scene file that contains the level, including the file name and extension. This path should typically be relative to the level's root folder.
