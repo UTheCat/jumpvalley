@@ -31,6 +31,9 @@ namespace UTheCat.Jumpvalley.Core.Levels
 
         /// <summary>
         /// How difficult the level is.
+        /// <br/><br/>
+        /// As far as <see cref="LevelInfo"/> is concerned, this is just a number.
+        /// It's up to the developer or user to assign meaning to this number.
         /// </summary>
         public double LevelDifficulty;
 
