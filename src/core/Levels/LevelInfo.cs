@@ -49,19 +49,7 @@ namespace UTheCat.Jumpvalley.Core.Levels
             ScenePath = data["scenePath"]?.GetValue<string>();
 
             JsonNode difficultyNode = data["difficulty"];
-            if (difficultyNode == null)
-            {
-                LevelDifficulty = null;
-            }
-            else
-            {
-                // In a level's JSON info file, the difficulty is stored as a number.
-                double difficultyRating = difficultyNode.GetValue<double>();
-
-                // We'll need to retain the exact numerical difficulty when setting LevelDifficulty
-                Difficulty difficulty = DifficultyPresets.PRIMARY_DIFFICULTIES.GetDifficultyByRating(difficultyRating);
-                LevelDifficulty = new Difficulty(difficulty.Name, difficultyRating, difficulty.Color);
-            }
+            LevelDifficulty = (difficultyNode == null) ? 0.0 : difficultyNode.GetValue<double>();
         }
     }
 }
