@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 using UTheCat.Jumpvalley.Core.Levels;
 
@@ -12,7 +13,21 @@ namespace JumpvalleyApp.Testing
         private readonly string TEST_LEVEL_NAME = "A Mess of Parts";
         private readonly string TEST_LEVEL_AUTHOR = "DifficultyColorTester";
 
+        private List<LabelSettings> labelSettingsList = new List<LabelSettings>();
+
         public GridContainer UIGrid { get; private set; }
+
+        private int _textOutlineSize = 0;
+        public int TextOutlineSize
+        {
+            get => _textOutlineSize;
+            set
+            {
+                _textOutlineSize = value;
+
+                foreach (LabelSettings l in labelSettingsList) l.OutlineSize = value;
+            }
+        }
 
         public DifficultyColorTest()
         {
@@ -25,8 +40,11 @@ namespace JumpvalleyApp.Testing
 
                 LabelSettings labelSettings = new LabelSettings();
                 labelSettings.FontColor = d.Color;
+                labelSettings.OutlineColor = new Color(0f, 0f, 0f);
+                labelSettings.OutlineSize = _textOutlineSize;
 
                 label.LabelSettings = labelSettings;
+                labelSettingsList.Add(labelSettings);
                 UIGrid.AddChild(label);
             }
         }
