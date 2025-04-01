@@ -353,12 +353,6 @@ namespace JumpvalleyApp
                 logger.Print($"Failed to load a level at app initialization. The root node of the main scene is missing a node named '{levelsNodeName}'.");
             }
 
-            // Test difficulty colors
-            Testing.DifficultyColorTest difficultyColorTest = new Testing.DifficultyColorTest();
-            difficultyColorTest.TextOutlineSize = 2;
-            Disposables.Add(difficultyColorTest);
-            PrimaryGui.AddChild(difficultyColorTest.UIGrid);
-
             // Start playing music.
             // This is done after we load the lobby and the initialization level just to keep things smooth.
             if (CurrentMusicPlayer.GetParent() == null) RootNode.AddChild(CurrentMusicPlayer);
