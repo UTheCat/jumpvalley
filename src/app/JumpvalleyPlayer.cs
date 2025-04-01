@@ -355,6 +355,7 @@ namespace JumpvalleyApp
 
             // Test difficulty colors
             Testing.DifficultyColorTest difficultyColorTest = new Testing.DifficultyColorTest();
+            difficultyColorTest.TextOutlineSize = 2;
             Disposables.Add(difficultyColorTest);
             PrimaryGui.AddChild(difficultyColorTest.UIGrid);
 
