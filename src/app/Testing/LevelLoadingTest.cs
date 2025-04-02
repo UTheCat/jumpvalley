@@ -86,7 +86,7 @@ namespace JumpvalleyApp.Testing
             RootNodeParent?.AddChild(level.RootNode);
 
             LevelInfo levelInfo = level.Info;
-            Difficulty difficulty = levelInfo.LevelDifficulty;
+            Difficulty difficulty = DifficultyPresets.PRIMARY_DIFFICULTIES.GetDifficultyByRating(levelInfo.LevelDifficulty);
             Console.WriteLine($"Now playing: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");
 
             IsProcessStepConnected = true;

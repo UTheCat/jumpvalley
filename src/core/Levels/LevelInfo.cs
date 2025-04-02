@@ -31,8 +31,11 @@ namespace UTheCat.Jumpvalley.Core.Levels
 
         /// <summary>
         /// How difficult the level is.
+        /// <br/><br/>
+        /// As far as <see cref="LevelInfo"/> is concerned, this is just a number.
+        /// It's up to the developer or user to assign meaning to this number.
         /// </summary>
-        public Difficulty LevelDifficulty;
+        public double LevelDifficulty;
 
         /// <summary>
         /// The file path to the scene file that contains the level, including the file name and extension. This path should typically be relative to the level's root folder.
@@ -49,19 +52,7 @@ namespace UTheCat.Jumpvalley.Core.Levels
             ScenePath = data["scenePath"]?.GetValue<string>();
 
             JsonNode difficultyNode = data["difficulty"];
-            if (difficultyNode == null)
-            {
-                LevelDifficulty = null;
-            }
-            else
-            {
-                // In a level's JSON info file, the difficulty is stored as a number.
-                double difficultyRating = difficultyNode.GetValue<double>();
-
-                // We'll need to retain the exact numerical difficulty when setting LevelDifficulty
-                Difficulty difficulty = DifficultyPresets.PRIMARY_DIFFICULTIES.GetDifficultyByRating(difficultyRating);
-                LevelDifficulty = new Difficulty(difficulty.Name, difficultyRating, difficulty.Color);
-            }
+            LevelDifficulty = (difficultyNode == null) ? 0.0 : difficultyNode.GetValue<double>();
         }
     }
 }
