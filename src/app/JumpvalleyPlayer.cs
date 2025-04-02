@@ -343,7 +343,7 @@ namespace JumpvalleyApp
                     if (levelPackage != null)
                     {
                         LevelInfo levelInfo = levelPackage.Info;
-                        Difficulty difficulty = levelInfo.LevelDifficulty;
+                        Difficulty difficulty = DifficultyPresets.PRIMARY_DIFFICULTIES.GetDifficultyByRating(levelInfo.LevelDifficulty);
                         logger.Print($"Now playing a level: {levelInfo.FullName} by {levelInfo.Creators} [{difficulty.Name} - {difficulty.Rating}]");
                     }
                 }
