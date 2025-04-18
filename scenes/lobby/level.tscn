@@ -754,8 +754,21 @@ mesh = SubResource("PrismMesh_335nw")
 shape = SubResource("ConcavePolygonShape3D_a7o8m")
 
 [node name="WallhopTest" parent="StaticObjects" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 2.5, -43)
 
 [node name="LodgeTest" type="Node3D" parent="StaticObjects"]
+
+[node name="WallhopTest" parent="StaticObjects/LodgeTest" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.5, -42)
+
+[node name="WallhopTest2" parent="StaticObjects/LodgeTest" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.5, -44)
+
+[node name="WallhopTest3" parent="StaticObjects/LodgeTest" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6.5, -44)
+
+[node name="WallhopTest4" parent="StaticObjects/LodgeTest" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6.5, -42)
 
 [node name="Music" type="Node3D" parent="."]
 
