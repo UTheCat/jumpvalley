@@ -447,7 +447,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             }
             else
             {
-                velocity = Body.Velocity;
+                velocity = Body.GetRealVelocity();
             }
 
             velocity.X = moveVector.X * Speed * timingAdjustment;
