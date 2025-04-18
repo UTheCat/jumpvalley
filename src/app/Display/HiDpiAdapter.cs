@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace JumpvalleyApp.Display
+namespace UTheCat.Jumpvalley.App.Display
 {
     /// <summary>
     /// Class responsible for handling cases where a user is running the Jumpvalley app on a HiDPI display,

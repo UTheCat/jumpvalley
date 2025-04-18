@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-using JumpvalleyApp.Players.Camera;
+using UTheCat.Jumpvalley.App.Players.Camera;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Indicator that's shown when the player's camera's rotation

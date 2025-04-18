@@ -1,6 +1,6 @@
-using JumpvalleyApp.Gui;
+using UTheCat.Jumpvalley.App.Gui;
 
-namespace JumpvalleyApp.Settings.Display
+namespace UTheCat.Jumpvalley.App.Settings.Display
 {
     public partial class FramerateCounterToggle : SettingBase
     {

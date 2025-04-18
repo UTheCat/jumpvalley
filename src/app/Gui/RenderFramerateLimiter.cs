@@ -1,7 +1,7 @@
 ﻿using Godot;
 using System;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Limits how many times the app is rendered within a given time interval

@@ -3,7 +3,7 @@ using System;
 
 using UTheCat.Jumpvalley.Core.Music;
 
-namespace JumpvalleyApp.Testing
+namespace UTheCat.Jumpvalley.App.Testing
 {
     /// <summary>
     /// Tests for loading a song via song package

@@ -3,7 +3,7 @@ using System;
 
 using UTheCat.Jumpvalley.Core.Players.Camera;
 
-namespace JumpvalleyApp.Players.Camera
+namespace UTheCat.Jumpvalley.App.Players.Camera
 {
     /// <summary>
     /// <see cref="BaseCamera"/> that rotates, zooms in, and zooms out

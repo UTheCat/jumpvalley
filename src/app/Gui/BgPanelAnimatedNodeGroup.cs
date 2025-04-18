@@ -2,7 +2,7 @@ using System;
 using UTheCat.Jumpvalley.Core.Animation;
 using UTheCat.Jumpvalley.Core.Gui;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Version of <see cref="AnimatedNodeGroup"/> that displays a background panel
