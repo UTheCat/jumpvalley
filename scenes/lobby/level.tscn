@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=62 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://27np65wgewr4" path="res://scenes/lobby/shape_kit_texture.tres" id="4_xv8fq"]
 [ext_resource type="Material" uid="uid://bm0ukyda3pfcc" path="res://textures/ladder_indicator.tres" id="5_efv4u"]
 [ext_resource type="FontFile" uid="uid://bseob0pnt3rg0" path="res://addons/fonts/overpass/static/Overpass-Regular.ttf" id="6_1tuk3"]
+[ext_resource type="PackedScene" uid="uid://de3srdhlm3ku8" path="res://scenes/lobby/wallhop_test.tscn" id="9_0j8si"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yudit"]
 
@@ -751,6 +752,10 @@ mesh = SubResource("PrismMesh_335nw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/Wedge2"]
 shape = SubResource("ConcavePolygonShape3D_a7o8m")
+
+[node name="WallhopTest" parent="StaticObjects" instance=ExtResource("9_0j8si")]
+
+[node name="LodgeTest" type="Node3D" parent="StaticObjects"]
 
 [node name="Music" type="Node3D" parent="."]
 

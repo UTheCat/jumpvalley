@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://de3srdhlm3ku8"]
+
+[ext_resource type="Material" uid="uid://bm0ukyda3pfcc" path="res://textures/ladder_indicator.tres" id="1_6caer"]
+[ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="2_n7801"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_12idq"]
+size = Vector3(8, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0j8si"]
+size = Vector3(8, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_12idq"]
+size = Vector3(8, 2, 1)
+
+[node name="WallhopTest" type="Node3D"]
+
+[node name="Box" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+shape = SubResource("BoxShape3D_12idq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
+material_override = ExtResource("1_6caer")
+mesh = SubResource("BoxMesh_0j8si")
+
+[node name="Box2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2"]
+shape = SubResource("BoxShape3D_12idq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box2"]
+material_override = ExtResource("2_n7801")
+mesh = SubResource("BoxMesh_12idq")
