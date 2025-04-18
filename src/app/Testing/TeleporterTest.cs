@@ -5,7 +5,7 @@ using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics;
 using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics.Teleporters;
 using UTheCat.Jumpvalley.Core.Timing;
 
-namespace JumpvalleyApp.Testing
+namespace UTheCat.Jumpvalley.App.Testing
 {
     /// <summary>
     /// Class that tests the functionality of the <see cref="Teleporter"/> class 

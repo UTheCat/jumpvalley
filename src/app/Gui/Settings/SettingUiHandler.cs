@@ -1,9 +1,9 @@
 using System;
 using Godot;
 
-using JumpvalleyApp.Settings;
+using UTheCat.Jumpvalley.App.Settings;
 
-namespace JumpvalleyApp.Gui.Settings
+namespace UTheCat.Jumpvalley.App.Gui.Settings
 {
     /// <summary>
     /// Class that allows user input to change a setting

@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace JumpvalleyApp.Settings
+namespace UTheCat.Jumpvalley.App.Settings
 {
     /// <summary>
     /// Class that represents one setting (user toggle-able value) in Jumpvalley

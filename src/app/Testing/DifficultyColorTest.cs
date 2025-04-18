@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UTheCat.Jumpvalley.Core.Levels;
 
-namespace JumpvalleyApp.Testing
+namespace UTheCat.Jumpvalley.App.Testing
 {
     /// <summary>
     /// A test that allows a user to see what the difficulty colors of Jumpvalley's primary difficulties would look like.

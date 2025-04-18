@@ -9,7 +9,7 @@
     Needed for the project to build properly with solution file and this CSPROJ in the project's root.
     -->
     <Compile Remove="src/**" />
-    <ProjectReference Include="src/app/JumpvalleyApp.csproj" />
+    <ProjectReference Include="src/app/UTheCat.Jumpvalley.App.csproj" />
 
   </ItemGroup>
 </Project>

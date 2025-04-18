@@ -4,10 +4,10 @@ using Godot;
 using UTheCat.Jumpvalley.Core.Animation;
 using UTheCat.Jumpvalley.Core.Tweening;
 
-using JumpvalleyApp.Gui.Settings;
-using JumpvalleyApp.Settings;
+using UTheCat.Jumpvalley.App.Gui.Settings;
+using UTheCat.Jumpvalley.App.Settings;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Handler for Jumpvalley's settings menu

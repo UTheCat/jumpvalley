@@ -11,15 +11,15 @@ using UTheCat.Jumpvalley.Core.Music;
 using UTheCat.Jumpvalley.Core.Players;
 using UTheCat.Jumpvalley.Core.Tweening;
 
-using JumpvalleyApp.Display;
-using JumpvalleyApp.Gui;
-using JumpvalleyApp.Levels;
-using JumpvalleyApp.Players.Camera;
-using JumpvalleyApp.Players.Movement;
-using JumpvalleyApp.Settings;
-using JumpvalleyApp.Settings.Display;
+using UTheCat.Jumpvalley.App.Display;
+using UTheCat.Jumpvalley.App.Gui;
+using UTheCat.Jumpvalley.App.Levels;
+using UTheCat.Jumpvalley.App.Players.Camera;
+using UTheCat.Jumpvalley.App.Players.Movement;
+using UTheCat.Jumpvalley.App.Settings;
+using UTheCat.Jumpvalley.App.Settings.Display;
 
-namespace JumpvalleyApp
+namespace UTheCat.Jumpvalley.App
 {
     /// <summary>
     /// Full implementation of the Player class specific to Jumpvalley itself

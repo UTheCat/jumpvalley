@@ -1,6 +1,6 @@
 using Godot;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Old refresh rate display code that would display the refresh rate to the user using a single <see cref="Label"/>.

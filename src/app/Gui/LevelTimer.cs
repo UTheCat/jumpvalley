@@ -1,7 +1,7 @@
 ﻿using Godot;
 using UTheCat.Jumpvalley.Core.Timing;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Class that handles the LevelTimer GUI which displays how long a player has been playing a level.

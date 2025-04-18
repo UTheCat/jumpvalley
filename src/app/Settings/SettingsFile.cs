@@ -4,7 +4,7 @@ using System.Text.Json.Nodes;
 using Godot;
 using UTheCat.Jumpvalley.Core.Logging;
 
-namespace JumpvalleyApp.Settings
+namespace UTheCat.Jumpvalley.App.Settings
 {
     /// <summary>
     /// Class responsible for loading and saving to <c>settings.json</c>,

@@ -3,9 +3,9 @@ using Godot;
 using UTheCat.Jumpvalley.Core.Levels;
 using UTheCat.Jumpvalley.Core.Players;
 
-using JumpvalleyApp.Gui;
+using UTheCat.Jumpvalley.App.Gui;
 
-namespace JumpvalleyApp.Testing
+namespace UTheCat.Jumpvalley.App.Testing
 {
     /// <summary>
     /// Testing of the level loading prototype

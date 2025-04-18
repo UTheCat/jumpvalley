@@ -1,4 +1,4 @@
-namespace JumpvalleyApp.Settings.Display
+namespace UTheCat.Jumpvalley.App.Settings.Display
 {
     /// <summary>
     /// Display settings for Jumpvalley

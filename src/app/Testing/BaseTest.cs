@@ -1,4 +1,4 @@
-﻿namespace JumpvalleyApp.Testing
+﻿namespace UTheCat.Jumpvalley.App.Testing
 {
     /// <summary>
     /// Base class for testing Jumpvalley's code

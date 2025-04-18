@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-using JumpvalleyApp;
+using UTheCat.Jumpvalley.App;
 
 namespace JumpvalleyMain
 {

@@ -3,7 +3,7 @@ using System;
 
 using UTheCat.Jumpvalley.Core.Raycasting;
 
-namespace JumpvalleyApp.Testing
+namespace UTheCat.Jumpvalley.App.Testing
 {
     /// <summary>
     /// Test class for making sure the <see cref="RaycastSweep"/> class works properly

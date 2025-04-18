@@ -4,7 +4,7 @@ using System;
 using UTheCat.Jumpvalley.Core.Animation;
 using UTheCat.Jumpvalley.Core.Tweening;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Code for the level menu, a type of menu that's typically displayed only when the player is playing a level.

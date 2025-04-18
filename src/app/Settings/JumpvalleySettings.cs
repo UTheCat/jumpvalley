@@ -1,7 +1,7 @@
 using System;
-using JumpvalleyApp.Settings.Display;
+using UTheCat.Jumpvalley.App.Settings.Display;
 
-namespace JumpvalleyApp.Settings
+namespace UTheCat.Jumpvalley.App.Settings
 {
     /// <summary>
     /// Main list of user settings for Jumpvalley

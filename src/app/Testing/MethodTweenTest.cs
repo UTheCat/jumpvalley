@@ -3,7 +3,7 @@ using System;
 
 using UTheCat.Jumpvalley.Core.Tweening;
 
-namespace JumpvalleyApp.Testing
+namespace UTheCat.Jumpvalley.App.Testing
 {
     /// <summary>
     /// Test class for MethodTween using the IntervalTween subclass
