@@ -10,7 +10,6 @@ size = Vector3(1, 2, 0.5)
 size = Vector3(1, 2, 0.5)
 
 [node name="Character" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
 
 [node name="_InteractiveBoundingBox" type="Node" parent="."]
