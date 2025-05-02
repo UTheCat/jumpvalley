@@ -1,7 +1,5 @@
 ﻿using Godot;
-using UTheCat.Jumpvalley.Core.Logging;
 using UTheCat.Jumpvalley.Core.Players.Camera;
-using UTheCat.Jumpvalley.Core.Raycasting;
 using System;
 using System.Collections.Generic;
 
