@@ -24,7 +24,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         /// <summary>
         /// The current maximum framerate enforced by this <see cref="RenderFramerateLimiter"/>
         /// </summary>
-        public int MaxFps { get; private set; } = 60;
+        public int MaxFps { get; private set; } = 120;
 
         public bool _isRunning = false;
 
@@ -69,7 +69,7 @@ namespace UTheCat.Jumpvalley.App.Gui
                 return;
             }
 
-            int maxFps = (int)Math.Floor((double)refreshRate - MinFpsDifference);
+            int maxFps = (int)Math.Floor((refreshRate - MinFpsDifference) * 2.0);
 
             if (MaxFps == maxFps) return;
 
