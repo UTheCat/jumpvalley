@@ -14,7 +14,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         /// <summary>
         /// The minimum difference between the maximum rendering frames-per-second and the monitor's refresh rate
         /// </summary>
-        public float MinFpsDifference = 0.5f;
+        public float MinFpsDifference = 0f;
 
         /// <summary>
         /// The maximum difference between the maximum rendering frames-per-second and the monitor's refresh rate
