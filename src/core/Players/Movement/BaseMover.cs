@@ -345,7 +345,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// The forces to apply when <see cref="HandlePhysicsStep"/> is called.
         /// The order in which the forces in this list are applied is from the end of the list to the beginning of the list.
-        /// This list is cleared when <see cref="HandlePhysicsStep"/> is called. 
+        /// This list is cleared when <see cref="HandlePhysicsStep"/> is called.
         /// <br/><br/>
         /// Forces are in newtons.
         /// </summary>
