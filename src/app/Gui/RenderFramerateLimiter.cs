@@ -14,7 +14,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         /// <summary>
         /// The minimum difference between the maximum rendering frames-per-second and the monitor's refresh rate
         /// </summary>
-        public float MinFpsDifference = 0.5f;
+        public float MinFpsDifference = 0f;
 
         /// <summary>
         /// The maximum difference between the maximum rendering frames-per-second and the monitor's refresh rate
@@ -24,7 +24,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         /// <summary>
         /// The current maximum framerate enforced by this <see cref="RenderFramerateLimiter"/>
         /// </summary>
-        public int MaxFps { get; private set; } = 60;
+        public int MaxFps { get; private set; } = 120;
 
         public bool _isRunning = false;
 
@@ -64,12 +64,9 @@ namespace UTheCat.Jumpvalley.App.Gui
             float refreshRate = DisplayServer.ScreenGetRefreshRate();
 
             // If ScreenGetRefreshRate fails, it returns -1
-            if (refreshRate < 0)
-            {
-                return;
-            }
+            if (refreshRate < 0) return;
 
-            int maxFps = (int)Math.Floor((double)refreshRate - MinFpsDifference);
+            int maxFps = (int)Math.Round((refreshRate - MinFpsDifference) * 2.0);
 
             if (MaxFps == maxFps) return;
 
