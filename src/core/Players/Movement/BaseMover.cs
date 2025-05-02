@@ -155,19 +155,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// How fast the character can move in meters per second
         /// </summary>
-        public float Speed
-        {
-            get => _speed;
-            set
-            {
-                _speed = value;
-
-                if (Rotator != null)
-                {
-                    Rotator.Speed = value;
-                }
-            }
-        }
+        public float Speed = 5f;
 
         /// <summary>
         /// The current yaw angle of the camera that's currently associated with the character
