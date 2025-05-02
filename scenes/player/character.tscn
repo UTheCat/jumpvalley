@@ -33,6 +33,6 @@ skeleton = NodePath("../..")
 [node name="CameraFocus" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
-[node name="RaycastCollider" type="CollisionShape3D" parent="."]
+[node name="RayCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("SeparationRayShape3D_ntlox")
