@@ -66,7 +66,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             // If ScreenGetRefreshRate fails, it returns -1
             if (refreshRate < 0) return;
 
-            int maxFps = (int)Math.Floor((refreshRate - MinFpsDifference) * 2.0);
+            int maxFps = (int)Math.Round((refreshRate - MinFpsDifference) * 2.0);
 
             if (MaxFps == maxFps) return;
 
