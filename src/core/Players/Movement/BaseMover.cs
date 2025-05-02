@@ -3,6 +3,7 @@ using UTheCat.Jumpvalley.Core.Logging;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 using UTheCat.Jumpvalley.Core.Raycasting;
 using System;
+using System.Collections.Generic;
 
 namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
@@ -342,6 +343,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// Shape-cast used to grab the normal of an object that the player is climbing on
         /// </summary>
         private ShapeCast3D climbingShapeCast;
+
+        /// <summary>
+        /// Queue of 3D forces in Newtons. Forces that are closer to the beginning of the list have greater priority.
+        /// </summary>
+        public List<Vector3> ForceQueue = new List<Vector3>();
 
         //private ConsoleLogger logger;
 
