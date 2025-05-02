@@ -1,4 +1,4 @@
-namespace JumpvalleyApp.Settings
+namespace UTheCat.Jumpvalley.App.Settings
 {
     /// <summary>
     /// Event arguments for <see cref="SettingGroup.SubgroupSettingChanged"/> 

@@ -2,7 +2,7 @@
 
 using UTheCat.Jumpvalley.Core.Players.Movement;
 
-namespace JumpvalleyApp.Players.Movement
+namespace UTheCat.Jumpvalley.App.Players.Movement
 {
     /// <summary>
     /// Subclass of <see cref="BaseMover"/> that handles character movement via keyboard input.

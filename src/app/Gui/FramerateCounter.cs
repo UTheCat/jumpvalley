@@ -3,7 +3,7 @@ using Godot;
 using UTheCat.Jumpvalley.Core.Animation;
 using UTheCat.Jumpvalley.Core.Tweening;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Class that handles the app's framerate counter GUI.

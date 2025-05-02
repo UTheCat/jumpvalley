@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Handler for the level menu buttons, the styled button that appears on a Jumpvalley level menu.

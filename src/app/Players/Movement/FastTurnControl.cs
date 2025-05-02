@@ -4,7 +4,7 @@ using System;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 using UTheCat.Jumpvalley.Core.Players.Movement;
 
-namespace JumpvalleyApp.Players.Movement
+namespace UTheCat.Jumpvalley.App.Players.Movement
 {
     /// <summary>
     /// For an instance of <see cref="BaseMover"/>, this sets <see cref="BaseMover.IsFastTurnEnabled"/> to true whenever a camera is in first person or when fast-turn has been toggled on by the user.

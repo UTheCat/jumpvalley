@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
 	/// <summary>
 	/// The primary level menu, the menu that's accessed by pressing the three-dots at the bottom of the user's screen.

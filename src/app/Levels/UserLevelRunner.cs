@@ -3,9 +3,9 @@ using System;
 using UTheCat.Jumpvalley.Core.Levels;
 using UTheCat.Jumpvalley.Core.Players;
 
-using JumpvalleyApp.Gui;
+using UTheCat.Jumpvalley.App.Gui;
 
-namespace JumpvalleyApp.Levels
+namespace UTheCat.Jumpvalley.App.Levels
 {
     /// <summary>
     /// Jumpvalley's primary level runner that's intended to be running on behalf of the user who's running the app.

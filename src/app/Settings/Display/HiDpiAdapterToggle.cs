@@ -1,7 +1,7 @@
 using System;
-using JumpvalleyApp.Display;
+using UTheCat.Jumpvalley.App.Display;
 
-namespace JumpvalleyApp.Settings.Display
+namespace UTheCat.Jumpvalley.App.Settings.Display
 {
     public partial class HiDpiAdapterToggle : SettingBase
     {

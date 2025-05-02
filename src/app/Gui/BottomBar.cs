@@ -4,7 +4,7 @@ using UTheCat.Jumpvalley.Core.Music;
 using UTheCat.Jumpvalley.Core.Tweening;
 using System;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Class that operates the GUI bar located at the bottom of the user's screen.

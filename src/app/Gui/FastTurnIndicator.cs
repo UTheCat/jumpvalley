@@ -3,7 +3,7 @@ using System;
 
 using UTheCat.Jumpvalley.Core.Players.Movement;
 
-namespace JumpvalleyApp.Gui
+namespace UTheCat.Jumpvalley.App.Gui
 {
     /// <summary>
     /// Indicator that's shown when the user has fast-turn enabled

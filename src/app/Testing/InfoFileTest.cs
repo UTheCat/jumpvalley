@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UTheCat.Jumpvalley.Core.IO;
 
-namespace JumpvalleyApp.Testing
+namespace UTheCat.Jumpvalley.App.Testing
 {
     /// <summary>
     /// Test class for making sure the <see cref="InfoFile"/> class works properly
