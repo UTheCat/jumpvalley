@@ -119,10 +119,11 @@ namespace UTheCat.Jumpvalley.App
             Mover.Gravity = PhysicsServer3D.AreaGetParam(RootNode.GetViewport().FindWorld3D().Space, PhysicsServer3D.AreaParameter.Gravity).As<float>();
             Mover.JumpVelocity = 25f;
             Mover.Speed = 8f;
-            Mover.Acceleration = 180f;
-            Mover.AirAcceleration = 90f;
-            Mover.Deceleration = 180f;
-            Mover.AirDeceleration = 90f;
+            Mover.Acceleration = 360f; //180f;
+            Mover.AirAcceleration = 180f; //90f;
+            Mover.Deceleration = 360f; //180f;
+            Mover.AirDeceleration = 180f; //90f;
+            Mover.Rotator.Speed = 10f;
 
             Mover.Body = Character;
 
