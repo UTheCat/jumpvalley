@@ -343,7 +343,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         private ShapeCast3D climbingShapeCast;
 
         /// <summary>
-        /// Queue of 3D forces in Newtons. Forces that are closer to the beginning of the list have greater priority.
+        /// The forces to apply before the next physics update.
+        /// The order in which the forces in this list are applied is from the end of the list to the beginning of the list.
+        /// <br/><br/>
+        /// Forces are in newtons.
         /// </summary>
         public List<Vector3> ForceQueue = new List<Vector3>();
 
