@@ -350,6 +350,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         public List<Vector3> ForceQueue = new List<Vector3>();
 
+        /// <summary>
+        /// The mass of the character in kilograms.
+        /// </summary>
+        public float Mass = 5f;
+
         //private ConsoleLogger logger;
 
         /// <summary>
