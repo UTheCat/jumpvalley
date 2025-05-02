@@ -64,10 +64,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             float refreshRate = DisplayServer.ScreenGetRefreshRate();
 
             // If ScreenGetRefreshRate fails, it returns -1
-            if (refreshRate < 0)
-            {
-                return;
-            }
+            if (refreshRate < 0) return;
 
             int maxFps = (int)Math.Floor((refreshRate - MinFpsDifference) * 2.0);
 
