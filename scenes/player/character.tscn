@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhraj4ym0cswa"]
+[gd_scene load_steps=7 format=3 uid="uid://bhraj4ym0cswa"]
 
 [ext_resource type="Material" uid="uid://bmtoyp50ewt6w" path="res://scenes/player/torso_texture.tres" id="1_8fnx3"]
 [ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
@@ -9,6 +9,10 @@ size = Vector3(1, 2, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
 size = Vector3(1, 2, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_unmdi"]
+custom_solver_bias = 0.95
+size = Vector3(1, 1.9, 0.5)
 
 [node name="Character" type="CharacterBody3D"]
 metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
@@ -57,3 +61,7 @@ shape = ExtResource("3_unmdi")
 [node name="BottomRayCollider7" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.9, 0.25)
 shape = ExtResource("3_unmdi")
+
+[node name="BoxCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_unmdi")
