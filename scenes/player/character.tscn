@@ -22,7 +22,6 @@ metadata/type = "OverallBoundingBoxObject"
 
 [node name="RootCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_s2be1")
-disabled = true
 
 [node name="Mesh" type="MeshInstance3D" parent="RootCollider"]
 material_override = ExtResource("1_8fnx3")
@@ -37,31 +36,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 [node name="BottomRayCollider1" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.95, 0)
 shape = ExtResource("3_unmdi")
+disabled = true
 
 [node name="BottomRayCollider2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.95, 0.25)
 shape = ExtResource("3_unmdi")
+disabled = true
 
 [node name="BottomRayCollider3" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.95, -0.25)
 shape = ExtResource("3_unmdi")
+disabled = true
 
 [node name="BottomRayCollider4" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.95, -0.25)
 shape = ExtResource("3_unmdi")
+disabled = true
 
 [node name="BottomRayCollider5" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.95, -0.25)
 shape = ExtResource("3_unmdi")
+disabled = true
 
 [node name="BottomRayCollider6" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.95, 0.25)
 shape = ExtResource("3_unmdi")
+disabled = true
 
 [node name="BottomRayCollider7" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.95, 0.25)
 shape = ExtResource("3_unmdi")
+disabled = true
 
 [node name="BoxCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
 shape = SubResource("BoxShape3D_unmdi")
+disabled = true
