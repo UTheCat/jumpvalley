@@ -784,9 +784,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                 // Store the current velocity for the next physics frame to use.
                 //
-                // We store the character's real Y velocity to prevent the character from "building up" downwards velocity
+                // We store the character's real Y velocity if it's close enough to 0 to prevent the character from "building up" downwards velocity
                 // when the character is not moving when IsOnFloor() returns false.
-                LastVelocity = new Vector3(finalVelocity.X, realVelocity.Y, finalVelocity.Z);
+                LastVelocity = new Vector3(
+                    finalVelocity.X,
+                    Mathf.IsZeroApprox(realVelocity.Y) ? 0f : finalVelocity.Y,
+                    finalVelocity.Z
+                    );
 
                 if (IsJumping && realVelocity.Y > 0)
                 {
