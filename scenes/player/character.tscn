@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bhraj4ym0cswa"]
+[gd_scene load_steps=6 format=3 uid="uid://bhraj4ym0cswa"]
 
 [ext_resource type="Material" uid="uid://bmtoyp50ewt6w" path="res://scenes/player/torso_texture.tres" id="1_8fnx3"]
 [ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
@@ -9,10 +9,6 @@ size = Vector3(1, 2, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
 size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_unmdi"]
-custom_solver_bias = 0.95
-size = Vector3(1, 1.95, 0.5)
 
 [node name="Character" type="CharacterBody3D"]
 metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
@@ -34,41 +30,30 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="BottomRayCollider1" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.95, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.9, 0)
 shape = ExtResource("3_unmdi")
 disabled = true
 
 [node name="BottomRayCollider2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.95, 0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.9, 0.26)
 shape = ExtResource("3_unmdi")
-disabled = true
 
 [node name="BottomRayCollider3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.95, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.9, -0.26)
 shape = ExtResource("3_unmdi")
-disabled = true
 
 [node name="BottomRayCollider4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.95, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.51, -0.9, -0.26)
 shape = ExtResource("3_unmdi")
-disabled = true
 
 [node name="BottomRayCollider5" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.95, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51, -0.9, -0.26)
 shape = ExtResource("3_unmdi")
-disabled = true
 
 [node name="BottomRayCollider6" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.95, 0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51, -0.9, 0.26)
 shape = ExtResource("3_unmdi")
-disabled = true
 
 [node name="BottomRayCollider7" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.95, 0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.51, -0.9, 0.26)
 shape = ExtResource("3_unmdi")
-disabled = true
-
-[node name="BoxCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
-shape = SubResource("BoxShape3D_unmdi")
-disabled = true
