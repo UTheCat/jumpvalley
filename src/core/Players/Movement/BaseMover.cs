@@ -780,14 +780,15 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                 //logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
 
-                // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
-                Vector3 actualVelocity = body.GetRealVelocity();
+                Vector3 realVelocity = body.GetRealVelocity();
 
-                // To keep things smooth, we want to store the character velocity for this physics frame
-                // after MoveAndSlide() has modified the velocity
-                LastVelocity = actualVelocity;
+                // Store the current velocity for the next physics frame to use.
+                //
+                // We store the character's real Y velocity to prevent the character from "building up" downwards velocity
+                // when the character is not moving when IsOnFloor() returns false.
+                LastVelocity = new Vector3(finalVelocity.X, realVelocity.Y, finalVelocity.Z);
 
-                if (IsJumping && actualVelocity.Y > 0)
+                if (IsJumping && realVelocity.Y > 0)
                 {
                     // Jumping is placed first in line so that jumping can affect climbing
                     CurrentBodyState = BodyState.Jumping;
@@ -796,15 +797,15 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 {
                     CurrentBodyState = BodyState.Climbing;
                 }
-                else if (IsJumping == false && actualVelocity.Y > 0)
+                else if (IsJumping == false && realVelocity.Y > 0)
                 {
                     CurrentBodyState = BodyState.Rising;
                 }
-                else if (actualVelocity.Y < 0)
+                else if (realVelocity.Y < 0)
                 {
                     CurrentBodyState = BodyState.Falling;
                 }
-                else if ((actualVelocity.X != 0 || actualVelocity.Z != 0) && IsOnFloor())
+                else if ((realVelocity.X != 0 || realVelocity.Z != 0) && IsOnFloor())
                 {
                     if (RightValue != 0 || ForwardValue != 0)
                     {
