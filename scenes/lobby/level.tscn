@@ -198,7 +198,7 @@ metadata/destination_node_path = NodePath("..")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 7.5, -15.5)
-mass = 10.0
+mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_yudit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RigidBody3D"]
@@ -211,7 +211,7 @@ skeleton = NodePath("../..")
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, -22.5)
-mass = 10.0
+mass = 0.5
 physics_material_override = SubResource("PhysicsMaterial_yudit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RigidBody3D2"]
