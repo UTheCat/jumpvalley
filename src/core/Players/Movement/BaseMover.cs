@@ -796,7 +796,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     KinematicCollision3D collision = body.GetSlideCollision(i);
                     if (collision.GetCollider() is RigidBody3D rigidBody)
                     {
-                        rigidBody.ApplyForce(collision.GetNormal() * -(Mass * acceleration * fDelta));
+                        Vector3 collisionNormal = collision.GetNormal();
+                        rigidBody.ApplyForce(collisionNormal * -(Mass * acceleration * fDelta), rigidBody.GlobalPosition - collision.GetPosition() + collisionNormal * collision.GetDepth());
                     }
                 }
 
