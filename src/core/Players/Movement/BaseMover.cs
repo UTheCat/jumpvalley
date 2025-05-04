@@ -791,6 +791,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 LastVelocity = new Vector3(finalVelocity.X, realVelocity.Y, finalVelocity.Z);
 
                 // Push objects we've come into contact with.
+                // Thanks to this forum post for helping me figure out how to implement this:
+                // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision3D collision = body.GetSlideCollision(i);
