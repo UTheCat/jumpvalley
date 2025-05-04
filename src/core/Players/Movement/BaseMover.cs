@@ -790,6 +790,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // when the character is not moving when IsOnFloor() returns false.
                 LastVelocity = new Vector3(finalVelocity.X, realVelocity.Y, finalVelocity.Z);
 
+                // Push objects we've come into contact with.
+                for (int i = 0; i < body.GetSlideCollisionCount(); i++)
+                {
+                    KinematicCollision3D collision = body.GetSlideCollision(i);
+                    if (collision.GetCollider() is RigidBody3D rigidBody)
+                    {
+                        rigidBody.ApplyForce(collision.GetNormal() * -(Mass * acceleration * fDelta));
+                    }
+                }
+
                 if (IsJumping && realVelocity.Y > 0)
                 {
                     // Jumping is placed first in line so that jumping can affect climbing
