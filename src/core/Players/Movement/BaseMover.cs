@@ -343,7 +343,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// The mass of the character in kilograms.
         /// </summary>
-        public float Mass = 50f;
+        public float Mass = 60f;
 
         //private ConsoleLogger logger;
 
