@@ -786,10 +786,12 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                 // Store the current velocity for the next physics frame to use.
                 //
-                // If the character's real Y-velocity after MoveAndSlide is less than the requested velocity after MoveAndSlide,
-                // we use the real Y-velocity.
-                // This is mainly to prevent the character from building up downwards velocity when IsOnFloor() returns false but the character
-                // is not moving downward.
+                // When updating LastVelocity, for the Y value, between real velocity after MoveAndSlide and requested velocity after move and slide,
+                // use whichever one is closest to 0.
+                // This is mainly to *prevent* these two issues:
+                // - Character builds up downwards velocity when IsOnFloor() returns false but the character
+                //   is not moving downward.
+                // - Character suddenly and unexpectedly jolts upward at a high velocity.
                 Vector3 requestedVelocityAfterMove = body.Velocity;
                 LastVelocity = new Vector3(
                     requestedVelocityAfterMove.X,
