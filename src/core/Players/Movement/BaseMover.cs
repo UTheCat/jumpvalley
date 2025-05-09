@@ -692,6 +692,33 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
             return finalVelocity;
         }
+        
+        class RigidBodyPusher
+        {
+            public RigidBody3D Body = null;
+
+            /// <summary>
+            /// Calculated for each physics frame in <see cref="HandlePhysicsStep"/>. 
+            /// </summary>
+            private float currentPhysicsFrameForce = 0.0f;
+
+            /// <summary>
+            /// Position offsets from the origin of <see cref="Body"/> in global coordinates.
+            /// This list is used to average out the position in which we apply force on <see cref="Body"/>. 
+            /// </summary>
+            public List<Vector3> Offsets = new List<Vector3>();
+
+            public Vector3 PushDirection = Vector3.Zero;
+            
+            public void Push()
+            {
+                Vector3 avgPosition = new Vector3();
+                foreach (Vector3 v in Offsets) avgPosition += v;
+                avgPosition /= Offsets.Count;
+
+                Body.ApplyForce(PushDirection * currentPhysicsFrameForce, avgPosition);
+            }
+        }
 
         /// <summary>
         /// Callback to associate with the physics process step in the current scene tree
@@ -802,11 +829,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Push objects we've come into contact with.
                 // Thanks to this forum post for helping me figure out how to implement this:
                 // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
+                RigidBody3D debugLastRigidBody = null;
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision3D collision = body.GetSlideCollision(i);
                     if (collision.GetCollider() is RigidBody3D rigidBody)
                     {
+                        if (debugLastRigidBody == rigidBody) Console.WriteLine($"Collided with RigidBody3D named '{rigidBody.Name}' more than once in the same physics frame.");
+                        debugLastRigidBody = rigidBody;
+
+                        Console.WriteLine($"Number of collisions for this KinematicCollision3D: {collision.GetCollisionCount()}");
                         Vector3 collisionNormal = collision.GetNormal();
                         rigidBody.ApplyForce(collisionNormal * -(Mass * acceleration * fDelta), collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth());
                     }
