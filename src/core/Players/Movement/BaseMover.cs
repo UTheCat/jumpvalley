@@ -700,7 +700,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// <summary>
             /// Calculated for each physics frame in <see cref="HandlePhysicsStep"/>. 
             /// </summary>
-            private float currentPhysicsFrameForce = 0.0f;
+            public static float CurrentPhysicsFrameForce = 0.0f;
 
             /// <summary>
             /// Position offsets from the origin of <see cref="Body"/> in global coordinates.
@@ -716,7 +716,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 foreach (Vector3 v in Offsets) avgPosition += v;
                 avgPosition /= Offsets.Count;
 
-                Body.ApplyForce(PushDirection * currentPhysicsFrameForce, avgPosition);
+                Body.ApplyForce(PushDirection * CurrentPhysicsFrameForce, avgPosition);
             }
         }
 
