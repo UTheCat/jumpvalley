@@ -826,16 +826,17 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Push objects we've come into contact with.
                 // Thanks to this forum post for helping me figure out how to implement this:
                 // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
-                RigidBody3D debugLastRigidBody = null;
+                List<RigidBody3D> collidedRigidBodies = [];
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision3D collision = body.GetSlideCollision(i);
                     if (collision.GetCollider() is RigidBody3D rigidBody)
                     {
-                        if (debugLastRigidBody == rigidBody) Console.WriteLine($"Collided with RigidBody3D named '{rigidBody.Name}' more than once in the same physics frame.");
-                        debugLastRigidBody = rigidBody;
+                        // Ensure the character only pushes the RigidBody3D up to once per physics frame
+                        if (collidedRigidBodies.Contains(rigidBody)) continue;
 
-                        Console.WriteLine($"Number of collisions for this KinematicCollision3D: {collision.GetCollisionCount()}");
+                        collidedRigidBodies.Add(rigidBody);
+
                         Vector3 collisionNormal = collision.GetNormal();
                         rigidBody.ApplyForce(collisionNormal * -(Mass * acceleration * fDelta), collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth());
                     }
