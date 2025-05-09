@@ -698,17 +698,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public RigidBody3D Body = null;
 
             /// <summary>
-            /// Calculated for each physics frame in <see cref="HandlePhysicsStep"/>. 
-            /// </summary>
-            public static float CurrentPhysicsFrameForce = 0.0f;
-
-            /// <summary>
             /// Position offsets from the origin of <see cref="Body"/> in global coordinates.
             /// This list is used to average out the position in which we apply force on <see cref="Body"/>. 
             /// </summary>
             public List<Vector3> Offsets = new List<Vector3>();
 
             public Vector3 PushDirection = Vector3.Zero;
+
+            public float PushForce = 0.0f;
             
             public void Push()
             {
@@ -716,7 +713,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 foreach (Vector3 v in Offsets) avgPosition += v;
                 avgPosition /= Offsets.Count;
 
-                Body.ApplyForce(PushDirection * CurrentPhysicsFrameForce, avgPosition);
+                Body.ApplyForce(PushDirection * PushForce, avgPosition);
             }
         }
 
