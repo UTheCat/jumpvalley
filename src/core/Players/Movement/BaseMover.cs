@@ -861,6 +861,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Do the actual RigidBody3D pushing.
                 foreach (RigidBodyPusher pusher in rigidBodyPushers.Values) pusher.Push();
 
+                // Update current body state.
                 if (IsJumping && realVelocity.Y > 0)
                 {
                     // Jumping is placed first in line so that jumping can affect climbing
