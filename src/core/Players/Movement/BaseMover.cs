@@ -693,27 +693,39 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             return finalVelocity;
         }
         
+        /// <summary>
+        /// This nested class is intended to smooth pushing RigidBody3Ds.
+        /// <br/><br/>
+        /// When Godot thinks the character is colliding with the RigidBody3D at multiple spots in the same physics frame,
+        /// pushing the RigidBody3D in the right direction can be RNG.
+        /// <br/><br/>
+        /// Therefore, this class was made to assist with making a push in a valid position that's as close to
+        /// the rigid body's center of mass as possible.
+        /// </summary>
         class RigidBodyPusher
         {
             public RigidBody3D Body = null;
 
             /// <summary>
-            /// Position offsets from the origin of <see cref="Body"/> in global coordinates.
-            /// This list is used to average out the position in which we apply force on <see cref="Body"/>. 
+            /// Position offset from <see cref="Body"/>'s origin in global coordinates. 
             /// </summary>
-            public List<Vector3> Offsets = new List<Vector3>();
+            private Vector3 positionOffset = Vector3.Zero;
 
             public Vector3 PushDirection = Vector3.Zero;
 
             public float PushForce = 0.0f;
+
+            public void SetPositionOffsetIfCloser(Vector3 offset)
+            {
+                if (Body == null) return;
+
+                Vector3 centerOfMass = Body.CenterOfMass;
+                if ((offset - centerOfMass).Length() < (positionOffset - centerOfMass).Length()) positionOffset = offset;
+            }
             
             public void Push()
             {
-                Vector3 avgPosition = new Vector3();
-                foreach (Vector3 v in Offsets) avgPosition += v;
-                avgPosition /= Offsets.Count;
-
-                Body.ApplyForce(PushDirection * PushForce, avgPosition);
+                Body.ApplyForce(PushDirection * PushForce, positionOffset);
             }
         }
 
