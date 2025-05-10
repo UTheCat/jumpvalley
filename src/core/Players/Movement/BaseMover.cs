@@ -822,7 +822,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     requestedVelocityAfterMove.Z
                     );
 
-                // Push objects we've come into contact with.
+                // Figure out how to push objects we've come into contact with.
                 // Thanks to this forum post for helping me figure out how to implement this:
                 // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
                 Dictionary<RigidBody3D, RigidBodyPusher> rigidBodyPushers = [];
@@ -857,6 +857,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         }
                     }
                 }
+
+                // Do the actual RigidBody3D pushing.
+                foreach (RigidBodyPusher pusher in rigidBodyPushers.Values) pusher.Push();
 
                 if (IsJumping && realVelocity.Y > 0)
                 {
