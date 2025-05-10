@@ -694,12 +694,12 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
         
         /// <summary>
-        /// This nested class is intended to smooth pushing RigidBody3Ds.
+        /// This nested class is intended to "smooth" pushing RigidBody3Ds.
         /// <br/><br/>
         /// When Godot thinks the character is colliding with the RigidBody3D at multiple spots in the same physics frame,
         /// pushing the RigidBody3D in the right direction can be RNG.
         /// <br/><br/>
-        /// Therefore, this class was made to assist with making a push in a valid position that's as close to
+        /// Therefore, this class was made to assist with making a push in a physically valid position that's as close to
         /// the rigid body's center of mass as possible.
         /// </summary>
         class RigidBodyPusher
@@ -709,24 +709,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// <summary>
             /// Position offset from <see cref="Body"/>'s origin in global coordinates. 
             /// </summary>
-            private Vector3 positionOffset = Vector3.Zero;
+            public Vector3 PositionOffset = Vector3.Zero;
 
-            public Vector3 PushDirection = Vector3.Zero;
-
-            public float PushForce = 0.0f;
-
-            public void SetPositionOffsetIfCloser(Vector3 offset)
-            {
-                if (Body == null) return;
-
-                Vector3 centerOfMass = Body.CenterOfMass;
-                if ((offset - centerOfMass).Length() < (positionOffset - centerOfMass).Length()) positionOffset = offset;
-            }
+            public Vector3 PushForce = Vector3.Zero;
             
-            public void Push()
-            {
-                Body.ApplyForce(PushDirection * PushForce, positionOffset);
-            }
+            public void Push() => Body.ApplyForce(PushForce, PositionOffset);
         }
 
         /// <summary>
@@ -838,19 +825,36 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Push objects we've come into contact with.
                 // Thanks to this forum post for helping me figure out how to implement this:
                 // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
-                List<RigidBody3D> collidedRigidBodies = [];
+                Dictionary<RigidBody3D, RigidBodyPusher> rigidBodyPushers = [];
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision3D collision = body.GetSlideCollision(i);
                     if (collision.GetCollider() is RigidBody3D rigidBody)
                     {
-                        // Ensure the character only pushes the RigidBody3D up to once per physics frame
-                        if (collidedRigidBodies.Contains(rigidBody)) continue;
-
-                        collidedRigidBodies.Add(rigidBody);
-
                         Vector3 collisionNormal = collision.GetNormal();
-                        rigidBody.ApplyForce(collisionNormal * -(Mass * acceleration * fDelta), collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth());
+                        Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth();
+
+                        RigidBodyPusher pusher;
+                        if (rigidBodyPushers.TryGetValue(rigidBody, out pusher))
+                        {
+                            Vector3 centerOfMass = rigidBody.CenterOfMass;
+                            if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
+                            {
+                                pusher.PositionOffset = forcePositionOffset;
+                                pusher.PushForce = collisionNormal * -(Mass * acceleration * fDelta);
+                            }
+                        }
+                        else
+                        {
+                            pusher = new RigidBodyPusher
+                            {
+                                Body = rigidBody,
+                                PositionOffset = forcePositionOffset,
+                                PushForce = collisionNormal * -(Mass * acceleration * fDelta)
+                            };
+
+                            rigidBodyPushers.Add(rigidBody, pusher);
+                        }
                     }
                 }
 
