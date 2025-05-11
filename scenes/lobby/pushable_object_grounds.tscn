@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://qsfj4a2nteub"]
+[gd_scene load_steps=12 format=3 uid="uid://qsfj4a2nteub"]
 
 [ext_resource type="Material" uid="uid://b26hmg13p2cwv" path="res://scenes/lobby/pushable_object_grounds_frame_texture.tres" id="1_4q5wd"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="1_f7u6v"]
@@ -28,6 +28,12 @@ radius = 1.0
 top_radius = 1.0
 bottom_radius = 1.0
 height = 16.25
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f7u6v"]
+size = Vector3(2, 15.5, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6omsi"]
+size = Vector3(2, 0.5, 2)
 
 [node name="PushableObjectGrounds" type="Node3D"]
 
@@ -122,4 +128,89 @@ shape = SubResource("CylinderShape3D_6mah4")
 material_override = ExtResource("1_4q5wd")
 mesh = SubResource("CylinderMesh_736bf")
 
-[node name="Ladder" type="Node3D" parent="."]
+[node name="Ladder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 8.5)
+metadata/is_climbable = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder"]
+shape = SubResource("BoxShape3D_f7u6v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="Ladder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
+material_override = SubResource("StandardMaterial3D_6reg5")
+mesh = SubResource("BoxMesh_6omsi")
