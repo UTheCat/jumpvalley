@@ -396,6 +396,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             return false;
         }
 
+        private Vector3 GetUpDirection()
+        {
+            return Body == null ? Vector3.Up : Body.UpDirection;
+        }
+
         /// <summary>
         /// Calculates and returns the move vector that the player wants to move the character in, regardless of whether or not they're currently jumping or climbing.
         /// <br/>
@@ -403,7 +408,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         /// <param name="yaw">The yaw angle that the forward and right values are relative to.</param>
         /// <returns>The calculated move vector</returns>
-        public Vector3 GetMoveVector(float yaw)
+        public Vector3 GetMoveDirection(float yaw)
         {
             // The Rotate() call rotates the MoveVector to the specified yaw angle.
             return new Vector3(RightValue, 0, ForwardValue).Rotated(Vector3.Up, yaw).Normalized();
@@ -427,14 +432,17 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// Gets the target horizontal velocity (velocity along the X and Z axes) that the character is trying to move at for the current physics frame.
         /// <br/><br/>
-        /// This function takes physics framerate and acceleration into account.
+        /// This function takes physics framerate, acceleration, and target move direction into account.
         /// </summary>
+        /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame.</param>
+        /// <param name="acceleration">The time it took to complete the most recent physics frame.</param>
+        /// <param name="yaw">The intended move direction to </param> 
         /// <returns>
         /// The target horizontal velocity as a Vector3. This Vector3 is in global coordinates.
         /// </returns>
-        private Vector3 GetHorizontalVelocity(float physicsFrameDelta, float acceleration)
+        private Vector3 GetHorizontalVelocity(float physicsFrameDelta, float acceleration, float yaw)
         {
-            Vector3 upDirection = Body == null ? Vector3.Up : Body.UpDirection;
+            Vector3 moveDirection = GetMoveDirection(yaw);
 
             return Vector3.Zero;
         }
@@ -455,7 +463,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
             bool isOnFloor = IsOnFloor();
 
-            Vector3 moveVector = GetMoveVector(yaw);
+            Vector3 moveVector = GetMoveDirection(yaw);
             Vector3 velocity;
 
             if (Body == null)
