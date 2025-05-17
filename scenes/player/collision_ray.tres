@@ -1,0 +1,5 @@
+[gd_resource type="SeparationRayShape3D" format=3 uid="uid://iu17a55w1yrj"]
+
+[resource]
+length = 0.1
+slide_on_slope = true
