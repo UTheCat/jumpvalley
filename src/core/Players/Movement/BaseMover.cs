@@ -427,12 +427,12 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// Gets the target horizontal velocity (velocity along the X and Z axes) that the character is trying to move at for the current physics frame.
         /// <br/><br/>
-        /// This function is independent of current physics framerate and acceleration/decceleration.
+        /// This function takes physics framerate and acceleration into account.
         /// </summary>
         /// <returns>
         /// The target horizontal velocity as a Vector3. This Vector3 is in global coordinates.
         /// </returns>
-        public Vector3 GetTargetHorizontalVelocity()
+        private Vector3 GetHorizontalVelocity(float physicsFrameDelta, float acceleration)
         {
             Vector3 upDirection = Body == null ? Vector3.Up : Body.UpDirection;
 
