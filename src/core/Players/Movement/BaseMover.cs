@@ -438,7 +438,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame.</param>
         /// <param name="acceleration">Vector3 specifying current acceleration, with Vector3.</param>
-        /// <param name="yaw">The intended move direction to </param> 
+        /// <param name="yaw">The intended move 'yaw'. For example, this yaw could be the yaw of the player's camera.</param> 
         /// <returns>
         /// The updated horizontal velocity.
         /// </returns>
