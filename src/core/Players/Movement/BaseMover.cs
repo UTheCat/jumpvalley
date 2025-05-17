@@ -347,6 +347,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
         //private ConsoleLogger logger;
 
+        private Vector2 lastHorizontalVelocity = Vector2.Zero;
+
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
         /// </summary>
@@ -430,21 +432,30 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         /// <summary>
-        /// Gets the target horizontal velocity (velocity along the X and Z axes) that the character is trying to move at for the current physics frame.
+        /// Updates horizontal velocity (velocity along the X and Z axes) that the character is trying to move at for the current physics frame.
         /// <br/><br/>
         /// This function takes physics framerate, acceleration, and target move direction into account.
         /// </summary>
         /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame.</param>
-        /// <param name="acceleration">The time it took to complete the most recent physics frame.</param>
+        /// <param name="acceleration">Vector3 specifying current acceleration, with Vector3.</param>
         /// <param name="yaw">The intended move direction to </param> 
         /// <returns>
-        /// The target horizontal velocity as a Vector3. This Vector3 is in global coordinates.
+        /// The updated horizontal velocity.
         /// </returns>
-        private Vector3 GetHorizontalVelocity(float physicsFrameDelta, float acceleration, float yaw)
+        private Vector2 UpdateHorizontalVelocity(float physicsFrameDelta, float acceleration, float yaw)
         {
             Vector3 moveDirection = GetMoveDirection(yaw);
 
-            return Vector3.Zero;
+            // For the goalXZVelocity Vector2, Y-coordinate is the goal velocity's Z coordinate.
+            Vector2 newHorizontalVelocity = ApproachXZVelocity(
+                lastHorizontalVelocity,
+                new Vector2(moveDirection.X, moveDirection.Z),
+                acceleration,
+                physicsFrameDelta
+            );
+            lastHorizontalVelocity = newHorizontalVelocity;
+
+            return newHorizontalVelocity;
         }
 
         /// <summary>
