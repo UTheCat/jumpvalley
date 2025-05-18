@@ -434,15 +434,20 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         /// <summary>
-        /// Updates horizontal velocity (velocity along the X and Z axes) that the character is trying to move at for the current physics frame.
+        /// Updates XZ velocity (velocity along the X and Z axes) that the character is trying to move at for the current physics frame.
+        /// Intended to be called every physics frame.
         /// <br/><br/>
         /// This function takes physics framerate, acceleration, and target move direction into account.
         /// </summary>
         /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame.</param>
-        /// <param name="acceleration">Vector3 specifying current acceleration, with Vector3.</param>
+        /// <param name="acceleration">Acceleration in meters per second squared.
+        /// This controls how fast we approach the XZ velocity.
+        /// This value should also be positive, as negative values will cause the XZ-velocity to advance away from the target XZ-velocity.
+        /// </param>
         /// <param name="yaw">The intended move 'yaw'. For example, this yaw could be the yaw of the player's camera.</param> 
         /// <returns>
-        /// The updated horizontal velocity.
+        /// The updated XZ velocity. The Y-value in the returned Vector2 is the velocity in the Z axis.
+        /// Each component in the returned Vector2 is in meters per second.
         /// </returns>
         private Vector2 UpdateXZVelocity(float physicsFrameDelta, float acceleration, float yaw)
         {
