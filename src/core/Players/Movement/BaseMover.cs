@@ -439,7 +439,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <br/><br/>
         /// This function takes physics framerate, acceleration, and target move direction into account.
         /// </summary>
-        /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame.</param>
+        /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame in seconds.</param>
         /// <param name="acceleration">Acceleration in meters per second squared.
         /// This controls how fast we approach the XZ velocity.
         /// This value should also be positive, as negative values will cause the XZ-velocity to advance away from the target XZ-velocity.
@@ -469,7 +469,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// Updates vertical velocity of the character based on physics framerate and vertical acceleration.
         /// Intended to be called every physics frame.
         /// </summary>
-        /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame.</param>
+        /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame in seconds.</param>
         /// <param name="verticalAcceleration">
         /// Change in vertical velocity in meters per second squared.
         /// Should be negative when trying to simulate gravity.
@@ -479,7 +479,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </returns>
         private float UpdateVerticalVelocity(float physicsFrameDelta, float verticalAcceleration)
         {
-            return 0f;
+            float newVerticalVelocity = lastVerticalVelocity + verticalAcceleration * physicsFrameDelta;
+
+            lastVerticalVelocity = newVerticalVelocity;
+
+            return newVerticalVelocity;
         }
 
         /// <summary>
