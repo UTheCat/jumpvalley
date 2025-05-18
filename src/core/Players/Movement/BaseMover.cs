@@ -347,7 +347,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
         //private ConsoleLogger logger;
 
-        private Vector2 lastHorizontalVelocity = Vector2.Zero;
+        private Vector2 lastXZVelocity = Vector2.Zero;
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -442,20 +442,20 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <returns>
         /// The updated horizontal velocity.
         /// </returns>
-        private Vector2 UpdateHorizontalVelocity(float physicsFrameDelta, float acceleration, float yaw)
+        private Vector2 UpdateXZVelocity(float physicsFrameDelta, float acceleration, float yaw)
         {
             Vector3 moveDirection = GetMoveDirection(yaw);
 
             // For the goalXZVelocity Vector2, Y-coordinate is the goal velocity's Z coordinate.
-            Vector2 newHorizontalVelocity = ApproachXZVelocity(
-                lastHorizontalVelocity,
+            Vector2 newXZVelocity = ApproachXZVelocity(
+                lastXZVelocity,
                 new Vector2(moveDirection.X, moveDirection.Z),
                 acceleration,
                 physicsFrameDelta
             );
-            lastHorizontalVelocity = newHorizontalVelocity;
+            lastXZVelocity = newXZVelocity;
 
-            return newHorizontalVelocity;
+            return newXZVelocity;
         }
 
         /// <summary>
