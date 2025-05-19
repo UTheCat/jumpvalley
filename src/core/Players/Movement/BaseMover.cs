@@ -511,7 +511,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             }
             else
             {
-                velocity = Body.GetRealVelocity();
+                Vector3 requestedVelocity = Body.Velocity;
+                Vector3 realVelocity = Body.GetRealVelocity();
+                velocity = new Vector3(
+                    ClosestToZero(realVelocity.X, requestedVelocity.X),
+                    ClosestToZero(realVelocity.Y, requestedVelocity.Y),
+                    ClosestToZero(realVelocity.Z, requestedVelocity.Z)
+                );
             }
 
             velocity.X = moveVector.X * Speed;// * timingAdjustment;
