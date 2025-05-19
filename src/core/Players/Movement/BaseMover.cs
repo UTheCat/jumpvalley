@@ -887,9 +887,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // - Character suddenly and unexpectedly jolts upward at a high velocity.
                 Vector3 requestedVelocityAfterMove = body.Velocity;
                 LastVelocity = new Vector3(
-                    requestedVelocityAfterMove.X,
+                    ClosestToZero(realVelocity.X, requestedVelocityAfterMove.X),
                     ClosestToZero(realVelocity.Y, requestedVelocityAfterMove.Y),
-                    requestedVelocityAfterMove.Z
+                    ClosestToZero(realVelocity.Z, requestedVelocityAfterMove.Z)
                     );
 
                 // Figure out how to push objects we've come into contact with.
