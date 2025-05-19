@@ -882,7 +882,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Vector3 requestedVelocityAfterMove = body.Velocity;
                 LastVelocity = new Vector3(
                     requestedVelocityAfterMove.X,
-                    Math.Min(realVelocity.Y, requestedVelocityAfterMove.Y),
+                    ClosestToZero(realVelocity.Y, requestedVelocityAfterMove.Y),
                     requestedVelocityAfterMove.Z
                     );
 
