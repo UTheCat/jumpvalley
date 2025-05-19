@@ -754,6 +754,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
             return finalVelocity;
         }
+
+        private static float ClosestToZero(float a, float b) => Math.Abs(a) < Math.Abs(b) ? a : b;
         
         /// <summary>
         /// This nested class is intended to "smooth" pushing RigidBody3Ds.
@@ -774,7 +776,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public Vector3 PositionOffset = Vector3.Zero;
 
             public Vector3 PushForce = Vector3.Zero;
-            
+
             public void Push() => Body.ApplyForce(PushForce, PositionOffset);
         }
 
