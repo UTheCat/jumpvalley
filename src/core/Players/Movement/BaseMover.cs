@@ -494,11 +494,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <returns></returns>
         public Vector3 GetMoveVelocity(float delta, float yaw)
         {
-            int physicsTicksPerSecond = Engine.PhysicsTicksPerSecond;
+            //int physicsTicksPerSecond = Engine.PhysicsTicksPerSecond;
 
             // This is needed because while physics steps should occur at constant time intervals,
             // there are slight variances in the actual time passed between each step.
-            float timingAdjustment = delta * physicsTicksPerSecond;
+            //float timingAdjustment = delta * physicsTicksPerSecond;
 
             bool isOnFloor = IsOnFloor();
 
@@ -514,8 +514,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 velocity = Body.GetRealVelocity();
             }
 
-            velocity.X = moveVector.X * Speed * timingAdjustment;
-            velocity.Z = moveVector.Z * Speed * timingAdjustment;
+            velocity.X = moveVector.X * Speed;// * timingAdjustment;
+            velocity.Z = moveVector.Z * Speed;// * timingAdjustment;
 
             if (IsJumping)
             {
@@ -599,7 +599,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         if (shouldClimbUp)
                         {
-                            climbVelocity = Speed * timingAdjustment;
+                            climbVelocity = Speed;// * timingAdjustment;
                         }
                         else
                         {
@@ -616,7 +616,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 }
                                 else
                                 {
-                                    climbVelocity = -Speed * timingAdjustment;
+                                    climbVelocity = -Speed;// * timingAdjustment;
                                 }
                             }
                         }
