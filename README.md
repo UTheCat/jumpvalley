@@ -42,6 +42,8 @@ While there are precompiled versions of Jumpvalley for Android, Android support 
 
 ### For Linux users
 
+#### Allowing the system to run Jumpvalley
+
 The Jumpvalley executable for the Linux version of Jumpvalley is named `jumpvalley` (with no file extension).
 
 On Linux, the operating system itself controls whether or not a file can be executed, regardless of the file's file extension. Therefore, your copy of the Jumpvalley executable for Linux might not be marked as executable.
@@ -55,6 +57,12 @@ and type this command:
 `chmod +x jumpvalley`
 
 Assuming you did this correctly, this tells Linux to allow running the Jumpvalley executable.
+
+#### Wayland by Default
+
+Jumpvalley uses Wayland by default. If you need the app to run on X11 instead, then in the directory where the Jumpvalley executable is located, run this command:
+
+`./jumpvalley --display-driver x11`
 
 ## Documentation
 
