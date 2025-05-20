@@ -58,7 +58,7 @@ and type this command:
 
 Assuming you did this correctly, this tells Linux to allow running the Jumpvalley executable.
 
-#### Wayland by Default
+#### Wayland and X11
 
 Jumpvalley uses Wayland by default. If you need the app to run on X11 instead, then in the directory where the Jumpvalley executable is located, run this command:
 
