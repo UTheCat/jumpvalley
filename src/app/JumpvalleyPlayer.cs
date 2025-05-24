@@ -123,6 +123,7 @@ namespace UTheCat.Jumpvalley.App
             Mover.AirAcceleration = 90f;
             Mover.Deceleration = 180f;
             Mover.AirDeceleration = 90f;
+            Mover.Rotator.Speed = 12f;
 
             Mover.Body = Character;
 
