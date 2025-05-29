@@ -903,6 +903,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     {
                         Vector3 collisionNormal = collision.GetNormal();
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth();
+                        Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
 
                         RigidBodyPusher pusher;
                         if (rigidBodyPushers.TryGetValue(rigidBody, out pusher))
@@ -911,7 +912,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
                             {
                                 pusher.PositionOffset = forcePositionOffset;
-                                pusher.PushForce = collisionNormal * -(Mass * acceleration * fDelta);
+                                //pusher.PushForce = collisionNormal * -(Mass * acceleration * fDelta);
+                                pusher.PushForce = pushForce;//realVelocity.Normalized() * Mass * acceleration * fDelta;
                             }
                         }
                         else
@@ -920,7 +922,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             {
                                 Body = rigidBody,
                                 PositionOffset = forcePositionOffset,
-                                PushForce = collisionNormal * -(Mass * acceleration * fDelta)
+                                PushForce = pushForce //realVelocity.Normalized() * Mass * acceleration * fDelta
                             };
 
                             rigidBodyPushers.Add(rigidBody, pusher);
