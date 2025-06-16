@@ -5,10 +5,10 @@
 [ext_resource type="Shape3D" uid="uid://iu17a55w1yrj" path="res://scenes/player/collision_ray.tres" id="3_unmdi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
-size = Vector3(1, 1.8, 0.5)
+size = Vector3(1, 1.7, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
-size = Vector3(1, 1.8, 0.5)
+size = Vector3(1, 1.7, 0.5)
 
 [node name="Character" type="CharacterBody3D"]
 floor_max_angle = 1.309
@@ -18,7 +18,7 @@ metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
 metadata/type = "OverallBoundingBoxObject"
 
 [node name="RootCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 shape = SubResource("BoxShape3D_s2be1")
 
 [node name="Mesh" type="MeshInstance3D" parent="RootCollider"]
@@ -32,53 +32,53 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="BottomRayCollider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.8, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.7, 0)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.8, 0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.7, 0.25)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.8, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.7, -0.25)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.8, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.7, -0.25)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider5" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.8, 0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.7, 0.25)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider6" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.8, 0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.7, 0.25)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider7" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.8, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.7, -0.25)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider8" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.8, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.7, -0.25)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider9" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.25, -0.8, -0.25)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.25, -0.7, -0.25)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider10" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.8, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.7, 0)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider11" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.8, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.7, 0)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider12" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.8, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.7, 0)
 shape = ExtResource("3_unmdi")
 
 [node name="BottomRayCollider13" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.25, -0.8, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.25, -0.7, 0)
 shape = ExtResource("3_unmdi")
