@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
-size = Vector3(1, 2, 0.5)
+size = Vector3(1, 1.9, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
-size = Vector3(1, 2, 0.5)
+size = Vector3(1, 1.9, 0.5)
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_ntlox"]
 length = 0.1
@@ -20,6 +20,7 @@ metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
 metadata/type = "OverallBoundingBoxObject"
 
 [node name="RootCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("BoxShape3D_s2be1")
 
 [node name="Mesh" type="MeshInstance3D" parent="RootCollider"]
@@ -37,41 +38,49 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.9, 0.26)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.9, 0.25)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.9, -0.26)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.9, -0.25)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.51, -0.9, -0.26)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.9, -0.25)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider5" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.51, -0.9, 0.26)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.9, 0.25)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider6" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51, -0.9, 0.26)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.9, 0.25)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider7" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51, -0.9, -0.26)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.9, -0.25)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider8" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.9, -0.26)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.9, -0.25)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider9" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.25, -0.9, -0.26)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.25, -0.9, -0.25)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider10" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.51, -0.9, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, -0.9, 0)
 shape = SubResource("SeparationRayShape3D_ntlox")
 
 [node name="BottomRayCollider11" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51, -0.9, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.5, -0.9, 0)
+shape = SubResource("SeparationRayShape3D_ntlox")
+
+[node name="BottomRayCollider12" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.9, 0)
+shape = SubResource("SeparationRayShape3D_ntlox")
+
+[node name="BottomRayCollider13" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.25, -0.9, 0)
 shape = SubResource("SeparationRayShape3D_ntlox")
