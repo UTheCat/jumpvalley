@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://de3srdhlm3ku8" path="res://scenes/lobby/wallhop_test.tscn" id="9_0j8si"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yudit"]
-friction = 0.2
+friction = 0.05
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e5b6p"]
 
