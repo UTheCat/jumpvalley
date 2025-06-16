@@ -903,7 +903,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     {
                         Vector3 collisionNormal = collision.GetNormal();
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth();
-                        Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
+                        //Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
+                        Vector3 pushForce = -collisionNormal * Mass * acceleration * fDelta;
 
                         RigidBodyPusher pusher;
                         if (rigidBodyPushers.TryGetValue(rigidBody, out pusher))
