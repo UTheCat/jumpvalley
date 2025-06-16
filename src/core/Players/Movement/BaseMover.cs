@@ -903,8 +903,17 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     {
                         Vector3 collisionNormal = collision.GetNormal();
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth();
+
+                        // Works, but slightly buggy. Friction really needs to be implemented properly if we want to this calculation for push force.
                         //Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
-                        Vector3 pushForce = -collisionNormal * Mass * acceleration * fDelta;
+
+                        // Also works, but still slightly buggy.
+                        // With this push force calculation, moving balls by standing on one of their sloped positions causes the balls and the character to fly around.
+                        //Vector3 pushForce = -collisionNormal * Mass * acceleration * fDelta;
+
+                        // Seems to work the best so far.
+                        // This one also takes the character's current travel speed into account, making push force a little more realistic.
+                        Vector3 pushForce = -collisionNormal * Mass * acceleration * fDelta * newXZvelocity.Length();
 
                         RigidBodyPusher pusher;
                         if (rigidBodyPushers.TryGetValue(rigidBody, out pusher))
