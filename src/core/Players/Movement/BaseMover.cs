@@ -904,7 +904,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         Vector3 collisionNormal = collision.GetNormal();
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth();
 
-                        // Works, but slightly buggy. Friction really needs to be implemented properly if we want to this calculation for push force.
+                        // Works, but slightly buggy. Friction really needs to be implemented properly if we want to this calculate push force this way.
                         //Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
 
                         // Also works, but still slightly buggy.
@@ -922,8 +922,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
                             {
                                 pusher.PositionOffset = forcePositionOffset;
-                                //pusher.PushForce = collisionNormal * -(Mass * acceleration * fDelta);
-                                pusher.PushForce = pushForce;//realVelocity.Normalized() * Mass * acceleration * fDelta;
+                                pusher.PushForce = pushForce;
                             }
                         }
                         else
@@ -932,7 +931,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             {
                                 Body = rigidBody,
                                 PositionOffset = forcePositionOffset,
-                                PushForce = pushForce //realVelocity.Normalized() * Mass * acceleration * fDelta
+                                PushForce = pushForce
                             };
 
                             rigidBodyPushers.Add(rigidBody, pusher);
