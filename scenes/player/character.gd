@@ -5,7 +5,7 @@ var bottom_ray_collider_columns = 6
 var bottom_ray_collider_rows = 5
 var bottom_ray_colliders_enabled = true
 
-func _init():
+func _ready():
 	# BOTTOM RAY COLLIDERS
 	# These are included for the following purposes
 	# - Allow the character to climb staircase steps without jumping (provided that they aren't too steep)
