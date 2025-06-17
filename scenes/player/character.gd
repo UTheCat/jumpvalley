@@ -25,9 +25,9 @@ func generate_bottom_ray_colliders(bottom_ray_collider_area: MeshInstance3D):
 
 	# This is fine since the collision rays will be a sibling of the MeshInstance3D
 	# containing bottom_ray_collider_area
-	var ray_y_pos = bottom_ray_collider_area.position.y - y_size / 2
-	var start_x_pos = bottom_ray_collider_area.position.x - x_size / 2
-	var start_z_pos = bottom_ray_collider_area.position.z - z_size / 2
+	var ray_y_pos = bottom_ray_collider_area.position.y + y_size / 2
+	var start_x_pos = bottom_ray_collider_area.position.x + x_size / 2
+	var start_z_pos = bottom_ray_collider_area.position.z + z_size / 2
 
 	var ray_shape: SeparationRayShape3D = SeparationRayShape3D.new()
 	ray_shape.length = y_size
