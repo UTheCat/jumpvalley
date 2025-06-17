@@ -15,7 +15,7 @@ transparency = 1
 albedo_color = Color(1, 1, 1, 0.25098)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p42bw"]
-size = Vector3(0.98, 0.3, 0.48)
+size = Vector3(0.99, 0.3, 0.49)
 
 [node name="Character" type="CharacterBody3D"]
 floor_constant_speed = true
