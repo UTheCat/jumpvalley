@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://bmtoyp50ewt6w" path="res://scenes/player/torso_texture.tres" id="1_jhmwb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7bhqx"]
-radius = 0.2
+radius = 0.245
 height = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mx087"]
@@ -23,14 +23,14 @@ text = ":)"
 [node name="CharacterBody" type="Node3D"]
 
 [node name="LeftLeg" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245, -0.5, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="LeftLeg"]
 mesh = SubResource("CapsuleMesh_7bhqx")
 skeleton = NodePath("")
 
 [node name="RightLeg" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.245, -0.5, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="RightLeg"]
 mesh = SubResource("CapsuleMesh_7bhqx")
