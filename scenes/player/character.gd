@@ -34,7 +34,7 @@ func generate_bottom_ray_colliders(bottom_ray_collider_area: MeshInstance3D):
 	ray_shape.slide_on_slope = false # This is the default, but we'll still specify this just in case.
 	
 	for i in range(bottom_ray_collider_columns):
-		for j in range(bottom_ray_collider_columns):
+		for j in range(bottom_ray_collider_rows):
 			var collision_shape: CollisionShape3D = CollisionShape3D.new()
 			collision_shape.shape = ray_shape
 			collision_shape.rotation = Vector3(PI / 2, 0, 0)
