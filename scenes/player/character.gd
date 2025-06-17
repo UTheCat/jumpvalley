@@ -42,7 +42,7 @@ func generate_bottom_ray_colliders(bottom_ray_collider_area: MeshInstance3D):
 			collision_shape.position = Vector3(
 				-start_x_pos + i * x_separation,
 				ray_y_pos,
-				-start_z_pos + i * z_separation
+				-start_z_pos + j * z_separation
 			)
 
 			add_child(collision_shape)
