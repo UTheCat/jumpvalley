@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhraj4ym0cswa"]
+[gd_scene load_steps=8 format=3 uid="uid://bhraj4ym0cswa"]
 
 [ext_resource type="Material" uid="uid://bmtoyp50ewt6w" path="res://scenes/player/torso_texture.tres" id="1_8fnx3"]
 [ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
@@ -9,6 +9,13 @@ size = Vector3(1, 1.7, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
 size = Vector3(1, 1.7, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_unmdi"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.25098)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p42bw"]
+size = Vector3(0.98, 0.3, 0.48)
 
 [node name="Character" type="CharacterBody3D"]
 floor_constant_speed = true
@@ -91,3 +98,8 @@ shape = ExtResource("3_unmdi")
 [node name="BottomRayCollider15" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.7, 0.24)
 shape = ExtResource("3_unmdi")
+
+[node name="BottomRayColliderIndicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
+material_override = SubResource("StandardMaterial3D_unmdi")
+mesh = SubResource("BoxMesh_p42bw")
