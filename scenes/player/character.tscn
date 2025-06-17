@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhraj4ym0cswa"]
+[gd_scene load_steps=9 format=3 uid="uid://bhraj4ym0cswa"]
 
 [ext_resource type="Material" uid="uid://bmtoyp50ewt6w" path="res://scenes/player/torso_texture.tres" id="1_8fnx3"]
+[ext_resource type="Script" uid="uid://4bue45xbqdjy" path="res://scenes/player/character.gd" id="1_p42bw"]
 [ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
 [ext_resource type="Shape3D" uid="uid://iu17a55w1yrj" path="res://scenes/player/collision_ray.tres" id="3_unmdi"]
 
@@ -20,6 +21,7 @@ size = Vector3(0.98, 0.3, 0.48)
 [node name="Character" type="CharacterBody3D"]
 floor_constant_speed = true
 floor_max_angle = 1.309
+script = ExtResource("1_p42bw")
 metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
 
 [node name="_InteractiveBoundingBox" type="Node" parent="."]
@@ -99,7 +101,7 @@ shape = ExtResource("3_unmdi")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.25, -0.7, 0.24)
 shape = ExtResource("3_unmdi")
 
-[node name="BottomRayColliderIndicator" type="MeshInstance3D" parent="."]
+[node name="BottomRayColliderArea" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
 material_override = SubResource("StandardMaterial3D_unmdi")
 mesh = SubResource("BoxMesh_p42bw")
