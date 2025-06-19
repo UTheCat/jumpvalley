@@ -942,7 +942,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 }
 
                 // Do the actual RigidBody3D pushing.
-                foreach (RigidBodyPusher pusher in rigidBodyPushers.Values) pusher.Push();
+                if (rigidBodyPushers.Count > 0) Console.WriteLine("---- ITERATING THROUGH RIGIDBODYPUSHERS ----");
+                foreach (RigidBodyPusher pusher in rigidBodyPushers.Values)
+                {
+                    pusher.Push();
+                    Console.WriteLine($"Pushed {pusher.Body.Name}\n\tPush force: {pusher.PushForce}\n\tBody's current velocity: {pusher.Body.LinearVelocity}\n\tWhere force was applied (relative to body origin): {pusher.PositionOffset}");
+                }
+                if (rigidBodyPushers.Count > 0) Console.WriteLine("--------------------------------------------");
 
                 // Update current body state.
                 // We use the character's real velocity here because it gives a more accurate description of how the character
