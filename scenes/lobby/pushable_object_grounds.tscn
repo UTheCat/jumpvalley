@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://qsfj4a2nteub"]
+[gd_scene load_steps=22 format=3 uid="uid://qsfj4a2nteub"]
 
 [ext_resource type="Material" uid="uid://b26hmg13p2cwv" path="res://scenes/lobby/pushable_object_grounds_frame_texture.tres" id="1_4q5wd"]
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_6omsi"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="1_f7u6v"]
+[ext_resource type="PhysicsMaterial" uid="uid://bn4lmjnb0qv2t" path="res://scenes/lobby/pushable_object_grounds_ball_physics_material.tres" id="3_6reg5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f7u6v"]
 
@@ -70,6 +71,7 @@ size = Vector3(2, 0.5, 2)
 
 [node name="Ball" type="RigidBody3D" parent="PushableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+physics_material_override = ExtResource("3_6reg5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PushableObjects/Ball"]
 shape = SubResource("SphereShape3D_f7u6v")
@@ -81,6 +83,7 @@ mesh = SubResource("SphereMesh_6omsi")
 [node name="Ball2" type="RigidBody3D" parent="PushableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, 0)
 mass = 2.0
+physics_material_override = ExtResource("3_6reg5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PushableObjects/Ball2"]
 shape = SubResource("SphereShape3D_6omsi")
@@ -91,7 +94,8 @@ mesh = SubResource("SphereMesh_6mah4")
 
 [node name="Ball3" type="RigidBody3D" parent="PushableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25, 2, 2.75)
-mass = 3.0
+mass = 200.0
+physics_material_override = ExtResource("3_6reg5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PushableObjects/Ball3"]
 shape = SubResource("SphereShape3D_6reg5")
