@@ -915,7 +915,18 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // This one also takes the character's current travel speed into account, making push force a little more realistic.
                         // This formula also has the same behavior with moving balls as mentioned above, but oh well.
                         // At the end of the day, 3D platformers typically don't have realistic physics anyways.
-                        Vector3 pushForce = -collisionNormal * Mass * acceleration * fDelta * newXZvelocity.Length();
+                        //Vector3 pushForce = -collisionNormal * Mass * acceleration * fDelta * newXZvelocity.Length()
+
+                        // We could also try only using move velocity
+                        // float currentMass = Mass; // To prevent race conditions
+                        // Vector3 pushForce = moveVelocity.Normalized() * currentMass * acceleration * fDelta * new Vector3(
+                        //     moveVelocity.X,
+                        //     Mass,
+                        //     moveVelocity.Z
+                        // ).Length() / new Vector3(Speed, currentMass, 0).Length();
+
+                        // or more accurately
+                        Vector3 pushForce = moveVelocity.Normalized() * Mass * acceleration * fDelta;
 
                         RigidBodyPusher pusher;
                         if (rigidBodyPushers.TryGetValue(rigidBody, out pusher))
