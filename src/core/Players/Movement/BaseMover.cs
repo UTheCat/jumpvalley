@@ -967,6 +967,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             };
 
                             currentFrameRigidBodyPushers.Add(rigidBody, pusher);
+                            rigidBodyPushers.Add(rigidBody, pusher);
                         }
                     }
                 }
