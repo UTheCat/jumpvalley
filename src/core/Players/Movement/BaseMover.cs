@@ -350,6 +350,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         public float Mass = 60f;
 
+        /// <summary>
+        /// The "magnitude" in which the character pushes movable rigid bodies.
+        /// <br/><br/>
+        /// This is basically the same as the physical strength one uses to push an object.
+        /// </summary>
+        public float ForceMultiplier = 5f;
+
         //private ConsoleLogger logger;
 
         private Vector2 lastXZVelocity = Vector2.Zero;
@@ -881,10 +888,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     fDelta
                 );
                 Vector3 finalVelocity = new Vector3(newXZvelocity.X, moveVelocity.Y, newXZvelocity.Y);
-
-                body.Velocity = finalVelocity;
-                body.MoveAndSlide();
-
                 //logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
 
                 Vector3 realVelocity = body.GetRealVelocity();
@@ -904,9 +907,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     requestedVelocityAfterMove.Z
                     );
 
-                // Figure out how to push objects we've come into contact with.
+                // Figure out how to push objects we've come into contact with. This part intentionally comes before the call to MoveAndSlide().
                 // Thanks to this forum post for helping me figure out how to implement this:
                 // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
+                // as well as this code snippet by majikayogames on GitHub
+                // https://gist.github.com/majikayogames/cf013c3091e9a313e322889332eca109
                 Dictionary<RigidBody3D, RigidBodyPusher> currentFrameRigidBodyPushers = [];
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
@@ -951,7 +956,26 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         // Based on some info online as well as the implementation of RigidBody3D.ApplyForce(),
                         // this seems like the best approach
-                        Vector3 pushForce = -collisionNormal * Mass * acceleration;
+
+                        // We only want to push downwards or upwards if the absolute value of the character's vertical velocity
+                        // is greater than the absolute value of the vertical velocity of the object to push.
+                        //collisionNormal.Y *= Math.Max(0f, realVelocity.Y / rigidBody.LinearVelocity.Y);
+
+                        Vector3 pushDirection = -collisionNormal;
+
+                        // The amount in which rigidBody.Velocity has to change by to match pushDirection.
+                        // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
+                        float diffToPushDirection = Math.Max(0f, finalVelocity.Dot(pushDirection) - rigidBody.LinearVelocity.Dot(pushDirection));
+
+                        // If rigidBody has more mass, it should be harder to push.
+                        float massRatio = Mass / rigidBody.Mass;
+
+                        // Allowing the character to push objects from above and below an object has caused some issues,
+                        // so it makes sense to prevent such behavior.
+                        pushDirection.Y = 0f;
+
+                        // Put it together
+                        Vector3 pushForce = pushDirection * diffToPushDirection * massRatio * massRatio * ForceMultiplier;
 
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
@@ -985,6 +1009,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     Console.WriteLine($"Pushed {pusher.Body.Name}\n\tPush force: {pusher.PushForce}\n\tBody's current velocity: {pusher.Body.LinearVelocity}\n\tWhere force was applied (relative to body origin): {pusher.PositionOffset}");
                 }
                 if (currentFrameRigidBodyPushers.Count > 0) Console.WriteLine("--------------------------------------------");
+
+                // Move the character.
+                body.Velocity = finalVelocity;
+                body.MoveAndSlide();
                 
                 // Update ConsecutiveFramesUntouched count for each RigidBodyPusher in the rigidBodyPushers list,
                 // and remove from the list as necessary.
