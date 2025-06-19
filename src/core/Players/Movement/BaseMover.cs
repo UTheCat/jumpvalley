@@ -73,6 +73,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
 
+        /// <summary>
+        /// The number of consecutive frames that a rigid body has to remain untouched in order for its RigidBodyPusher to be removed from <see cref="rigidBodyPushers"/> 
+        /// </summary>
+        private static readonly int RIGID_BODY_MAX_CONSECUTIVE_FRAMES_UNTOUCHED = 1;
+
         private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
@@ -350,6 +355,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         private Vector2 lastXZVelocity = Vector2.Zero;
 
         private float lastVerticalVelocity = 0f;
+
+        private Dictionary<RigidBody3D, RigidBodyPusher> rigidBodyPushers = [];
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -783,6 +790,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
             public Vector3 PushForce = Vector3.Zero;
 
+            /// <summary>
+            /// Number of consecutive physics frames that the character has *not* touched <see cref="Body"/> 
+            /// </summary>
+            public int ConsecutiveFramesUntouched = 0;
+
             public void Push() => Body.ApplyForce(PushForce, PositionOffset);
         }
 
@@ -895,12 +907,20 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Figure out how to push objects we've come into contact with.
                 // Thanks to this forum post for helping me figure out how to implement this:
                 // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
-                Dictionary<RigidBody3D, RigidBodyPusher> rigidBodyPushers = [];
+                Dictionary<RigidBody3D, RigidBodyPusher> currentFrameRigidBodyPushers = [];
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision3D collision = body.GetSlideCollision(i);
                     if (collision.GetCollider() is RigidBody3D rigidBody)
                     {
+                        RigidBodyPusher pusher;
+                        if (rigidBodyPushers.TryGetValue(rigidBody, out pusher))
+                        {
+                            // ConsecutiveFramesUntouched will get set to 0 in an upcoming loop
+                            pusher.ConsecutiveFramesUntouched = -1;
+                            continue;
+                        }
+
                         Vector3 collisionNormal = collision.GetNormal();
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth();
 
@@ -928,8 +948,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // or more accurately
                         Vector3 pushForce = moveVelocity.Normalized() * Mass * acceleration * fDelta;
 
-                        RigidBodyPusher pusher;
-                        if (rigidBodyPushers.TryGetValue(rigidBody, out pusher))
+                        if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
                             Vector3 centerOfMass = rigidBody.CenterOfMass;
                             if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
@@ -947,19 +966,28 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 PushForce = pushForce
                             };
 
-                            rigidBodyPushers.Add(rigidBody, pusher);
+                            currentFrameRigidBodyPushers.Add(rigidBody, pusher);
                         }
                     }
                 }
 
                 // Do the actual RigidBody3D pushing.
                 if (rigidBodyPushers.Count > 0) Console.WriteLine("---- ITERATING THROUGH RIGIDBODYPUSHERS ----");
-                foreach (RigidBodyPusher pusher in rigidBodyPushers.Values)
+                foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
                     pusher.Push();
                     Console.WriteLine($"Pushed {pusher.Body.Name}\n\tPush force: {pusher.PushForce}\n\tBody's current velocity: {pusher.Body.LinearVelocity}\n\tWhere force was applied (relative to body origin): {pusher.PositionOffset}");
                 }
                 if (rigidBodyPushers.Count > 0) Console.WriteLine("--------------------------------------------");
+                
+                // Update ConsecutiveFramesUntouched count for each RigidBodyPusher in the rigidBodyPushers list,
+                // and remove from the list as necessary.
+                foreach (RigidBodyPusher pusher in rigidBodyPushers.Values)
+                {
+                    pusher.ConsecutiveFramesUntouched += 1;
+
+                    if (pusher.ConsecutiveFramesUntouched >= RIGID_BODY_MAX_CONSECUTIVE_FRAMES_UNTOUCHED) rigidBodyPushers.Remove(pusher.Body);
+                }
 
                 // Update current body state.
                 // We use the character's real velocity here because it gives a more accurate description of how the character
