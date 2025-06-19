@@ -348,6 +348,7 @@ namespace UTheCat.Jumpvalley.Core.Music
 
                 DisconnectHandleSongFinished();
 
+                streamPlayer.QueueFree();
                 streamPlayer.Dispose();
                 streamPlayer = null;
             }
