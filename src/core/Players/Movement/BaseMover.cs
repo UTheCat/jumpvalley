@@ -76,7 +76,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// The number of consecutive frames that a rigid body has to remain untouched in order for its RigidBodyPusher to be removed from <see cref="rigidBodyPushers"/> 
         /// </summary>
-        private static readonly int RIGID_BODY_MAX_CONSECUTIVE_FRAMES_UNTOUCHED = 1;
+        private static readonly int RIGID_BODY_MAX_CONSECUTIVE_FRAMES_UNTOUCHED = 0;
 
         private BodyState _currentBodyState = BodyState.Stopped;
 
@@ -946,7 +946,12 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // ).Length() / new Vector3(Speed, currentMass, 0).Length();
 
                         // or more accurately
-                        Vector3 pushForce = moveVelocity.Normalized() * Mass * acceleration * fDelta;
+                        //Vector3 pushForce = moveVelocity.Normalized() * Mass * acceleration * fDelta;
+                        //Console.WriteLine($"normalized move velocity: {moveVelocity.Normalized()}");
+
+                        // Based on some info online as well as the implementation of RigidBody3D.ApplyForce(),
+                        // this seems like the best approach
+                        Vector3 pushForce = -collisionNormal * Mass * acceleration;
 
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
