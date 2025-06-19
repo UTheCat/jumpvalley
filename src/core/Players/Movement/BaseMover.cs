@@ -514,9 +514,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Vector3 requestedVelocity = Body.Velocity;
                 Vector3 realVelocity = Body.GetRealVelocity();
                 velocity = new Vector3(
-                    ClosestToZero(realVelocity.X, requestedVelocity.X),
+                    requestedVelocity.X,
                     ClosestToZero(realVelocity.Y, requestedVelocity.Y),
-                    ClosestToZero(realVelocity.Z, requestedVelocity.Z)
+                    requestedVelocity.Z
                 );
             }
 
@@ -887,9 +887,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // - Character suddenly and unexpectedly jolts upward at a high velocity.
                 Vector3 requestedVelocityAfterMove = body.Velocity;
                 LastVelocity = new Vector3(
-                    ClosestToZero(realVelocity.X, requestedVelocityAfterMove.X),
+                    requestedVelocityAfterMove.X,
                     ClosestToZero(realVelocity.Y, requestedVelocityAfterMove.Y),
-                    ClosestToZero(realVelocity.Z, requestedVelocityAfterMove.Z)
+                    requestedVelocityAfterMove.Z
                     );
 
                 // Figure out how to push objects we've come into contact with.
@@ -945,6 +945,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 foreach (RigidBodyPusher pusher in rigidBodyPushers.Values) pusher.Push();
 
                 // Update current body state.
+                // We use the character's real velocity here because it gives a more accurate description of how the character
+                // is currently moving, especially for vertical movement.
                 if (IsJumping && realVelocity.Y > 0)
                 {
                     // Jumping is placed first in line so that jumping can affect climbing
