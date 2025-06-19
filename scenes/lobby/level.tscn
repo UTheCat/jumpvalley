@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://de3srdhlm3ku8" path="res://scenes/lobby/wallhop_test.tscn" id="9_0j8si"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yudit"]
-friction = 0.1
+friction = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e5b6p"]
 
@@ -200,6 +200,7 @@ metadata/destination_node_path = NodePath("..")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 7.5, -15.5)
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_yudit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RigidBody3D"]
@@ -212,6 +213,7 @@ skeleton = NodePath("../..")
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, -22.5)
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_yudit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RigidBody3D2"]
