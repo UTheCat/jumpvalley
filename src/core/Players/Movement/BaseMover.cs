@@ -975,7 +975,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         pushDirection.Y = 0f;
 
                         // Put it together
-                        Vector3 pushForce = pushDirection * diffToPushDirection * massRatio * massRatio * ForceMultiplier;
+                        Vector3 pushForce = pushDirection * diffToPushDirection * massRatio * ForceMultiplier;
 
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
