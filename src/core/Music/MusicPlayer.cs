@@ -18,7 +18,9 @@ namespace UTheCat.Jumpvalley.Core.Music
         private bool _isPlaying;
 
         /// <summary>
-        /// <see cref="Playlist"/>s currently being handled by this <see cref="MusicPlayer"/>  
+        /// <see cref="Playlist"/>s currently being handled by this <see cref="MusicPlayer"/>. Even though
+        /// <see cref="MusicPlayer"/> handles <see cref="PrimaryPlaylist"/>, <see cref="PrimaryPlaylist"/> isn't inclued
+        /// in this list by default.  
         /// </summary>
         public List<Playlist> Playlists { get; private set; }
 
@@ -70,6 +72,7 @@ namespace UTheCat.Jumpvalley.Core.Music
                 else
                 {
                     //playlist.Stopped += HandlePlaylistStop;
+                    playlist.TransitionTime = TransitionTime;
                     fadingOutPlaylists.Add(playlist);
                     playlist.Stop();
                 }
@@ -122,6 +125,9 @@ namespace UTheCat.Jumpvalley.Core.Music
 
                     _currentPlaylist = value;
 
+                    // if the user of this class requested to override transition time with the corresponding value set in this music player, make sure to do so
+                    if (OverrideTransitionTime) value.TransitionTime = TransitionTime;
+
                     // connect to the new playlist's SongChanged event
                     value.SongChanged += HandlePlaylistSongChange;
 
@@ -148,7 +154,7 @@ namespace UTheCat.Jumpvalley.Core.Music
         }
 
         /// <summary>
-        /// Whether or not the a playlist's volume transition time will get set to <see cref="MusicPlayer.TransitionTime"/> whenever it gets played by this music player.
+        /// Whether or not the a playlist's volume transition time will get set to <see cref="MusicPlayer.TransitionTime"/> whenever it gets played or faded out by this music player.
         /// </summary>
         public bool OverrideTransitionTime = false;
 
@@ -157,15 +163,26 @@ namespace UTheCat.Jumpvalley.Core.Music
         /// </summary>
         public double TransitionTime = 0;
 
+        private bool _overrideLocalVolumeScale = false;
+
         /// <summary>
-        /// Whether or not the a playlist's LocalVolumeScale will get set to <see cref="VolumeScale"/> whenever it gets played by this music player.
+        /// Whether or not <see cref="Playlist.LocalVolumeScale"/> will get set to <see cref="VolumeScale"/> for <see cref="PrimaryPlaylist"/> and playlists in the <see cref="Playlist"/> list.
+        /// Setting this to true automatically causes the playlists' LocalVolumeScale to be set in the aforementioned manner.
         /// </summary>
-        public bool OverrideLocalVolumeScale = false;
+        public bool OverrideLocalVolumeScale
+        {
+            get => _overrideLocalVolumeScale;
+            set
+            {
+                _overrideLocalVolumeScale = value;
+                if (value) PerformLocalVolumeScaleOverride(_volumeScale);
+            }
+        }
 
-        private double _volumeScale;
+        private double _volumeScale = 1;
 
         /// <summary>
-        /// Playlists played by this music player will have their LocalVolumeScale set to the value of this variable whenever <see cref="OverrideLocalVolumeScale"/> is set to true, 
+        /// <see cref="PrimaryPlaylist"/> and playlists in the <see cref="Playlist"/> list will have their LocalVolumeScale set to the value of this variable whenever <see cref="OverrideLocalVolumeScale"/> is set to true, 
         /// </summary>
         public double VolumeScale
         {
@@ -174,19 +191,7 @@ namespace UTheCat.Jumpvalley.Core.Music
             {
                 _volumeScale = value;
 
-                if (OverrideLocalVolumeScale)
-                {
-                    Playlist playlist = CurrentPlaylist;
-                    if (playlist != null)
-                    {
-                        playlist.LocalVolumeScale = value;
-
-                        foreach (Playlist p in fadingOutPlaylists)
-                        {
-                            p.LocalVolumeScale = value;
-                        }
-                    }
-                }
+                if (OverrideLocalVolumeScale) PerformLocalVolumeScaleOverride(value);
             }
         }
 
@@ -237,6 +242,7 @@ namespace UTheCat.Jumpvalley.Core.Music
             set
             {
                 _primaryPlaylist = value;
+                if (value != null) ApplyOverrides(value);
                 RefreshPlayback();
             }
         }
@@ -267,6 +273,16 @@ namespace UTheCat.Jumpvalley.Core.Music
         {
             Playlists = new List<Playlist>();
             ShouldSetPlaylistParent = false;
+        }
+
+        private void PerformLocalVolumeScaleOverride(double vol)
+        {
+            if (PrimaryPlaylist != null) PrimaryPlaylist.LocalVolumeScale = vol;
+
+            foreach (Playlist p in Playlists)
+            {
+                p.LocalVolumeScale = vol;
+            }
         }
 
         /// <summary>
