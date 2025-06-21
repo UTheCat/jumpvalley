@@ -241,7 +241,7 @@ namespace UTheCat.Jumpvalley.Core.Music
             set
             {
                 _primaryPlaylist = value;
-                ApplyOverrides(value);
+                if (value != null) ApplyOverrides(value);
                 RefreshPlayback();
             }
         }
