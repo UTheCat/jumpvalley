@@ -174,6 +174,7 @@ namespace UTheCat.Jumpvalley.Core.Music
             get => _overrideLocalVolumeScale;
             set
             {
+                _overrideLocalVolumeScale = value;
                 if (value) PerformLocalVolumeScaleOverride(_volumeScale);
             }
         }
