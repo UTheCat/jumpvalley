@@ -163,12 +163,22 @@ namespace UTheCat.Jumpvalley.Core.Music
         /// </summary>
         public double TransitionTime = 0;
 
-        /// <summary>
-        /// Whether or not the a playlist's LocalVolumeScale will get set to <see cref="VolumeScale"/> whenever it gets played by this music player.
-        /// </summary>
-        public bool OverrideLocalVolumeScale = false;
+        private bool _overrideLocalVolumeScale = false;
 
-        private double _volumeScale;
+        /// <summary>
+        /// Whether or not <see cref="Playlist.LocalVolumeScale"/> will get set to <see cref="VolumeScale"/> for <see cref="PrimaryPlaylist"/> and playlists in the <see cref="Playlist"/> list.
+        /// Setting this to true automatically causes the playlists' LocalVolumeScale to be set in the aforementioned manner.
+        /// </summary>
+        public bool OverrideLocalVolumeScale
+        {
+            get => _overrideLocalVolumeScale;
+            set
+            {
+                if (value) PerformLocalVolumeScaleOverride(_volumeScale);
+            }
+        }
+
+        private double _volumeScale = 1;
 
         /// <summary>
         /// <see cref="PrimaryPlaylist"/> and playlists in the <see cref="Playlist"/> list will have their LocalVolumeScale set to the value of this variable whenever <see cref="OverrideLocalVolumeScale"/> is set to true, 
@@ -180,15 +190,7 @@ namespace UTheCat.Jumpvalley.Core.Music
             {
                 _volumeScale = value;
 
-                if (OverrideLocalVolumeScale)
-                {
-                    PrimaryPlaylist.LocalVolumeScale = value;
-
-                    foreach (Playlist p in Playlists)
-                    {
-                        p.LocalVolumeScale = value;
-                    }
-                }
+                if (OverrideLocalVolumeScale) PerformLocalVolumeScaleOverride(value);
             }
         }
 
@@ -239,6 +241,7 @@ namespace UTheCat.Jumpvalley.Core.Music
             set
             {
                 _primaryPlaylist = value;
+                ApplyOverrides(value);
                 RefreshPlayback();
             }
         }
@@ -269,6 +272,16 @@ namespace UTheCat.Jumpvalley.Core.Music
         {
             Playlists = new List<Playlist>();
             ShouldSetPlaylistParent = false;
+        }
+
+        private void PerformLocalVolumeScaleOverride(double vol)
+        {
+            if (PrimaryPlaylist != null) PrimaryPlaylist.LocalVolumeScale = vol;
+
+            foreach (Playlist p in Playlists)
+            {
+                p.LocalVolumeScale = vol;
+            }
         }
 
         /// <summary>
