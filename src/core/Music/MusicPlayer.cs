@@ -125,6 +125,9 @@ namespace UTheCat.Jumpvalley.Core.Music
 
                     _currentPlaylist = value;
 
+                    // if the user of this class requested to override transition time with the corresponding value set in this music player, make sure to do so
+                    if (OverrideTransitionTime) value.TransitionTime = TransitionTime;
+
                     // connect to the new playlist's SongChanged event
                     value.SongChanged += HandlePlaylistSongChange;
 
