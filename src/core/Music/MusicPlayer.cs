@@ -72,6 +72,7 @@ namespace UTheCat.Jumpvalley.Core.Music
                 else
                 {
                     //playlist.Stopped += HandlePlaylistStop;
+                    playlist.TransitionTime = TransitionTime;
                     fadingOutPlaylists.Add(playlist);
                     playlist.Stop();
                 }
@@ -150,7 +151,7 @@ namespace UTheCat.Jumpvalley.Core.Music
         }
 
         /// <summary>
-        /// Whether or not the a playlist's volume transition time will get set to <see cref="MusicPlayer.TransitionTime"/> whenever it gets played by this music player.
+        /// Whether or not the a playlist's volume transition time will get set to <see cref="MusicPlayer.TransitionTime"/> whenever it gets played or faded out by this music player.
         /// </summary>
         public bool OverrideTransitionTime = false;
 
@@ -167,7 +168,7 @@ namespace UTheCat.Jumpvalley.Core.Music
         private double _volumeScale;
 
         /// <summary>
-        /// Playlists played by this music player will have their LocalVolumeScale set to the value of this variable whenever <see cref="OverrideLocalVolumeScale"/> is set to true, 
+        /// <see cref="PrimaryPlaylist"/> and playlists in the <see cref="Playlist"/> list will have their LocalVolumeScale set to the value of this variable whenever <see cref="OverrideLocalVolumeScale"/> is set to true, 
         /// </summary>
         public double VolumeScale
         {
@@ -178,15 +179,11 @@ namespace UTheCat.Jumpvalley.Core.Music
 
                 if (OverrideLocalVolumeScale)
                 {
-                    Playlist playlist = CurrentPlaylist;
-                    if (playlist != null)
-                    {
-                        playlist.LocalVolumeScale = value;
+                    PrimaryPlaylist.LocalVolumeScale = value;
 
-                        foreach (Playlist p in fadingOutPlaylists)
-                        {
-                            p.LocalVolumeScale = value;
-                        }
+                    foreach (Playlist p in Playlists)
+                    {
+                        p.LocalVolumeScale = value;
                     }
                 }
             }
