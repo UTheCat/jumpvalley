@@ -18,7 +18,9 @@ namespace UTheCat.Jumpvalley.Core.Music
         private bool _isPlaying;
 
         /// <summary>
-        /// <see cref="Playlist"/>s currently being handled by this <see cref="MusicPlayer"/>  
+        /// <see cref="Playlist"/>s currently being handled by this <see cref="MusicPlayer"/>. Even though
+        /// <see cref="MusicPlayer"/> handles <see cref="PrimaryPlaylist"/>, <see cref="PrimaryPlaylist"/> isn't inclued
+        /// in this list by default.  
         /// </summary>
         public List<Playlist> Playlists { get; private set; }
 
