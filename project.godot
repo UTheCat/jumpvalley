@@ -105,6 +105,8 @@ locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation",
 
 common/physics_ticks_per_second=240
 common/max_physics_steps_per_frame=32
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/areas_detect_static_bodies=true
 3d/default_gravity=98.1
 common/enable_pause_aware_picking=true
 
