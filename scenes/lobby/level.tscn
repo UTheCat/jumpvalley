@@ -268,7 +268,7 @@ shape = SubResource("CylinderShape3D_0o4nm")
 
 [node name="Conveyor" type="StaticBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, -18)
-constant_linear_velocity = Vector3(0, 0, 50)
+constant_linear_velocity = Vector3(0, 0, 70)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Conveyor"]
 material_override = ExtResource("5_efv4u")
