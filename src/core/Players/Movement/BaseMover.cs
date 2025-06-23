@@ -976,7 +976,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         Vector3 pushForce = pushDirection * diffToPushDirection * massRatio * ForceMultiplier;
 
 #if DEBUG_PUSH_FORCE_CALCULATION
-                        Console.WriteLine($"Calculated push force for {rigidBody.Name} to be {pushForce} ({pushForce.Length()} Newtons)\n\tNegative collision normal: {-collisionNormal}\n\tdiffToPushDirection (min of 0): {Mathf.RadToDeg(diffToPushDirection)} degrees\n\tMass ratio: {massRatio}");
+                        Console.WriteLine($"Calculated push force for {rigidBody.Name} to be {pushForce} ({pushForce.Length()} Newtons)\n\tNegative collision normal: {-collisionNormal}\n\tdiffToPushDirection (min of 0): {Mathf.RadToDeg(diffToPushDirection)}\n\tMass ratio: {massRatio}");
 #endif
 
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
