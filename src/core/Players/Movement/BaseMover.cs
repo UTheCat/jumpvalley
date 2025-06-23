@@ -970,10 +970,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // If rigidBody has more mass, it should be harder to push.
                         float massRatio = Mass / rigidBody.Mass;
 
-                        // Allowing the character to push objects from above and below an object has caused some issues,
-                        // so it makes sense to prevent such behavior.
-                        pushDirection.Y = 0f;
-
                         // Put it together
                         Vector3 pushForce = pushDirection * diffToPushDirection * massRatio * ForceMultiplier;
 
