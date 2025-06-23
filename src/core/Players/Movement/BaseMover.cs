@@ -1,5 +1,4 @@
 ﻿#define DEBUG_PUSH_FORCE_CALCULATION
-#define DEBUG_RIGIDBODY3D_PUSHING
 
 using Godot;
 using UTheCat.Jumpvalley.Core.Players.Camera;
@@ -1011,7 +1010,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
                     pusher.Push();
+#if DEBUG_RIGIDBODY3D_PUSHING
                     Console.WriteLine($"Pushed {pusher.Body.Name}\n\tPush force: {pusher.PushForce}\n\tBody's current velocity: {pusher.Body.LinearVelocity}\n\tWhere force was applied (relative to body origin): {pusher.PositionOffset}");
+#endif
                 }
 
 #if DEBUG_RIGIDBODY3D_PUSHING
