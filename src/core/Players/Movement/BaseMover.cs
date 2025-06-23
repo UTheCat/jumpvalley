@@ -1,4 +1,7 @@
-﻿using Godot;
+﻿#define DEBUG_PUSH_FORCE_CALCULATION
+#define DEBUG_RIGIDBODY3D_PUSHING
+
+using Godot;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 using System;
 using System.Collections.Generic;
@@ -776,7 +779,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         private static float ClosestToZero(float a, float b) => Math.Abs(a) < Math.Abs(b) ? a : b;
-        
+
         /// <summary>
         /// This nested class is intended to "smooth" pushing RigidBody3Ds.
         /// <br/><br/>
@@ -973,7 +976,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // Put it together
                         Vector3 pushForce = pushDirection * diffToPushDirection * massRatio * ForceMultiplier;
 
+#if DEBUG_PUSH_FORCE_CALCULATION
                         Console.WriteLine($"Calculated push force for {rigidBody.Name} to be {pushForce} ({pushForce.Length()} Newtons)\n\tNegative collision normal: {-collisionNormal}\n\tdiffToPushDirection (min of 0): {Mathf.RadToDeg(diffToPushDirection)} degrees\n\tMass ratio: {massRatio}");
+#endif
 
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
@@ -1000,18 +1005,23 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 }
 
                 // Do the actual RigidBody3D pushing.
+#if DEBUG_RIGIDBODY3D_PUSHING
                 if (currentFrameRigidBodyPushers.Count > 0) Console.WriteLine("---- ITERATING THROUGH RIGIDBODYPUSHERS ----");
+#endif
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
                     pusher.Push();
                     Console.WriteLine($"Pushed {pusher.Body.Name}\n\tPush force: {pusher.PushForce}\n\tBody's current velocity: {pusher.Body.LinearVelocity}\n\tWhere force was applied (relative to body origin): {pusher.PositionOffset}");
                 }
+
+#if DEBUG_RIGIDBODY3D_PUSHING
                 if (currentFrameRigidBodyPushers.Count > 0) Console.WriteLine("--------------------------------------------");
+#endif
 
                 // Move the character.
                 body.Velocity = finalVelocity;
                 body.MoveAndSlide();
-                
+
                 // Update ConsecutiveFramesUntouched count for each RigidBodyPusher in the rigidBodyPushers list,
                 // and remove from the list as necessary.
                 foreach (RigidBodyPusher pusher in rigidBodyPushers.Values)
