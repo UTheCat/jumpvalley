@@ -71,6 +71,8 @@ size = Vector3(2, 0.5, 2)
 
 [node name="Ball" type="RigidBody3D" parent="PushableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 5
 physics_material_override = ExtResource("3_6reg5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PushableObjects/Ball"]
@@ -82,6 +84,8 @@ mesh = SubResource("SphereMesh_6omsi")
 
 [node name="Ball2" type="RigidBody3D" parent="PushableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, 0)
+collision_layer = 4
+collision_mask = 5
 mass = 2.0
 physics_material_override = ExtResource("3_6reg5")
 
@@ -94,6 +98,8 @@ mesh = SubResource("SphereMesh_6mah4")
 
 [node name="Ball3" type="RigidBody3D" parent="PushableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25, 2, 2.75)
+collision_layer = 4
+collision_mask = 5
 mass = 200.0
 physics_material_override = ExtResource("3_6reg5")
 
