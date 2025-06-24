@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://qsfj4a2nteub"]
+[gd_scene load_steps=25 format=3 uid="uid://qsfj4a2nteub"]
 
 [ext_resource type="Material" uid="uid://b26hmg13p2cwv" path="res://scenes/lobby/pushable_object_grounds_frame_texture.tres" id="1_4q5wd"]
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_6omsi"]
@@ -32,6 +32,18 @@ uv1_triplanar = true
 [sub_resource type="SphereMesh" id="SphereMesh_736bf"]
 radius = 1.5
 height = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s4cn0"]
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_736bf"]
+albedo_color = Color(0.941176, 0.486275, 1, 1)
+albedo_texture = ExtResource("1_f7u6v")
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_tkyj1"]
+radius = 2.0
+height = 4.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6omsi"]
 size = Vector3(16, 1, 16)
@@ -83,10 +95,10 @@ material_override = ExtResource("1_6omsi")
 mesh = SubResource("SphereMesh_6omsi")
 
 [node name="Ball2" type="RigidBody3D" parent="PushableObjects"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, 0)
 collision_layer = 4
 collision_mask = 5
-mass = 2.0
+mass = 4.0
 physics_material_override = ExtResource("3_6reg5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PushableObjects/Ball2"]
@@ -100,7 +112,7 @@ mesh = SubResource("SphereMesh_6mah4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25, 2, 2.75)
 collision_layer = 4
 collision_mask = 5
-mass = 200.0
+mass = 16.0
 physics_material_override = ExtResource("3_6reg5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PushableObjects/Ball3"]
@@ -109,6 +121,20 @@ shape = SubResource("SphereShape3D_6reg5")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PushableObjects/Ball3"]
 material_override = SubResource("StandardMaterial3D_6mah4")
 mesh = SubResource("SphereMesh_736bf")
+
+[node name="Ball4" type="RigidBody3D" parent="PushableObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.504, 2.5, -4.25)
+collision_layer = 4
+collision_mask = 5
+mass = 32.0
+physics_material_override = ExtResource("3_6reg5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PushableObjects/Ball4"]
+shape = SubResource("SphereShape3D_s4cn0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PushableObjects/Ball4"]
+material_override = SubResource("StandardMaterial3D_736bf")
+mesh = SubResource("SphereMesh_tkyj1")
 
 [node name="Frame" type="Node3D" parent="."]
 
