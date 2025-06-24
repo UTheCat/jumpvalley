@@ -13,6 +13,7 @@ albedo_color = Color(0.631373, 0.631373, 0.631373, 0.25098)
 size = Vector3(1, 2, 0.5)
 
 [node name="Character" type="CharacterBody3D"]
+collision_layer = 5
 floor_constant_speed = true
 floor_max_angle = 1.309
 platform_floor_layers = 4294967291
