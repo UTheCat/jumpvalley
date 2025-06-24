@@ -15,6 +15,7 @@ size = Vector3(1, 2, 0.5)
 [node name="Character" type="CharacterBody3D"]
 floor_constant_speed = true
 floor_max_angle = 1.309
+platform_floor_layers = 4294967291
 metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
 
 [node name="_InteractiveBoundingBox" type="Node" parent="."]
