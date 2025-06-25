@@ -804,8 +804,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// </summary>
             public Vector3 ForceApplicationPosition = Vector3.Zero;
 
+            /// <summary>
+            /// Force applied by <see cref="Character"/> on <see cref="Body"/>  
+            /// </summary>
             public Vector3 PushForce = Vector3.Zero;
 
+            /// <summary>
+            /// Force applied by <see cref="Body"/> on <see cref="Character"/>  
+            /// </summary>
             public Vector3 CharacterPushForce = Vector3.Zero;
 
             /// <summary>
@@ -830,7 +836,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                 return new RigidBodyPusherCharacterPushData
                 {
-                    Acceleration = CharacterPushForce / CharacterMass,
+                    Acceleration = CharacterPushForce / Body.Mass,
                     DisplacementFromCenterOfMass = displacementFromCenterOfMass,
                     Torque = displacementFromCenterOfMass.Cross(CharacterPushForce)
                 };
@@ -977,6 +983,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // is travelling towards the character.
                         float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(collisionNormal));
 
+                        Vector3 characterPushForce = rigidBody.ConstantForce;
+
                         // Works, but slightly buggy. Friction really needs to be implemented properly if we want to this calculate push force this way.
                         //Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
 
@@ -1032,6 +1040,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             {
                                 pusher.PositionOffset = forcePositionOffset;
                                 pusher.PushForce = pushForce;
+                                pusher.Character = Body;
+                                pusher.Character = Body;
+                                pusher.CharacterPushForce = pushForce;
+                                pusher.CharacterMass = Mass;
                             }
                         }
                         else
@@ -1040,7 +1052,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             {
                                 Body = rigidBody,
                                 PositionOffset = forcePositionOffset,
-                                PushForce = pushForce
+                                PushForce = pushForce,
+                                Character = Body,
+                                CharacterPushForce = pushForce,
+                                CharacterMass = Mass
                             };
 
                             currentFrameRigidBodyPushers.Add(rigidBody, pusher);
@@ -1049,12 +1064,15 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     }
                 }
 
-                // Do the actual RigidBody3D pushing.
+                // Do the actual character and RigidBody3D pushing.
 #if DEBUG_RIGIDBODY3D_PUSHING
                 if (currentFrameRigidBodyPushers.Count > 0) Console.WriteLine("---- ITERATING THROUGH RIGIDBODYPUSHERS ----");
 #endif
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
+                    RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
+                    finalVelocity += characterPushData.Acceleration;
+
                     pusher.Push();
 #if DEBUG_RIGIDBODY3D_PUSHING
                     Console.WriteLine($"Pushed {pusher.Body.Name}\n\tPush force: {pusher.PushForce}\n\tBody's current velocity: {pusher.Body.LinearVelocity}\n\tWhere force was applied (relative to body origin): {pusher.PositionOffset}");
