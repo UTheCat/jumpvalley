@@ -792,19 +792,44 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         {
             public RigidBody3D Body = null;
 
+            public CharacterBody3D Character = null;
+
             /// <summary>
             /// Position offset from <see cref="Body"/>'s origin in global coordinates. 
             /// </summary>
             public Vector3 PositionOffset = Vector3.Zero;
 
+            /// <summary>
+            /// Where force should be applied to <see cref="Body"/> and <see cref="Character"/> in global coordinates.  
+            /// </summary>
+            public Vector3 ForceApplicationPosition = Vector3.Zero;
+
             public Vector3 PushForce = Vector3.Zero;
+
+            public Vector3 CharacterPushForce = Vector3.Zero;
 
             /// <summary>
             /// Number of consecutive physics frames that the character has *not* touched <see cref="Body"/> 
             /// </summary>
             public int ConsecutiveFramesUntouched = 0;
 
+            public float CharacterMass = 0f;
+
             public void Push() => Body.ApplyForce(PushForce, PositionOffset);
+
+            public void PushCharacter()
+            {
+                // Character push force and torque are calculated from the Wikipedia article on Line of Action
+                // https://en.wikipedia.org/wiki/Line_of_action
+                // 
+                // For the character, we assume that the center of mass is the actual/positional center of the character.
+
+                Vector3 acceleration = CharacterPushForce / CharacterMass;
+                Vector3 displacementFromCenterOfMass = ForceApplicationPosition - Character.GlobalPosition;
+                Vector3 torque = displacementFromCenterOfMass.Cross(CharacterPushForce);
+
+                
+            }
         }
 
         /// <summary>
@@ -921,16 +946,20 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     if (collision.GetCollider() is RigidBody3D rigidBody)
                     {
                         RigidBodyPusher pusher;
-                        if (rigidBodyPushers.TryGetValue(rigidBody, out pusher))
-                        {
-                            // ConsecutiveFramesUntouched will get set to 0 in an upcoming loop
-                            pusher.ConsecutiveFramesUntouched = -1;
-                            continue;
-                        }
 
                         Vector3 collisionNormal = collision.GetNormal();
                         //Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth();
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition;
+
+                        // RigidBody3D attempts to push character
+                        // Needs to come before the code that allows the character to push RigidBody3Ds it comes into contact with.
+                        // This is because this code segment modifies the character's velocity (which is the same velocity the character
+                        // will use to push RigidBody3Ds).
+
+                        // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
+                        // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
+                        // is travelling towards the character.
+                        float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(collisionNormal));
 
                         // Works, but slightly buggy. Friction really needs to be implemented properly if we want to this calculate push force this way.
                         //Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
@@ -969,11 +998,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // The amount in which rigidBody.Velocity has to change by to match pushDirection.
                         // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
                         float diffToPushDirection = Math.Max(0f, finalVelocity.Dot(pushDirection) - rigidBody.LinearVelocity.Dot(pushDirection));
-
-                        // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
-                        // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
-                        // is travelling towards the character.
-                        float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(collisionNormal));
 
                         // If rigidBody has more mass, it should be harder to push.
                         float massRatio = Mass / rigidBody.Mass;
