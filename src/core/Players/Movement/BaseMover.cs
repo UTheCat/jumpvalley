@@ -817,19 +817,35 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
             public void Push() => Body.ApplyForce(PushForce, PositionOffset);
 
-            public void PushCharacter()
+            /// <returns>
+            /// Data that can be used to modify character movement
+            /// </returns>
+            public RigidBodyPusherCharacterPushData GetCharacterPushData()
             {
                 // Character push force and torque are calculated from the Wikipedia article on Line of Action
                 // https://en.wikipedia.org/wiki/Line_of_action
                 // 
                 // For the character, we assume that the center of mass is the actual/positional center of the character.
-
-                Vector3 acceleration = CharacterPushForce / CharacterMass;
                 Vector3 displacementFromCenterOfMass = ForceApplicationPosition - Character.GlobalPosition;
-                Vector3 torque = displacementFromCenterOfMass.Cross(CharacterPushForce);
 
-                
+                return new RigidBodyPusherCharacterPushData
+                {
+                    Acceleration = CharacterPushForce / CharacterMass,
+                    DisplacementFromCenterOfMass = displacementFromCenterOfMass,
+                    Torque = displacementFromCenterOfMass.Cross(CharacterPushForce)
+                };
             }
+        }
+
+        /// <summary>
+        /// Contains a bunch of data that can be used to modify character movement. Such data
+        /// is intended for use in a specific physics frame (such as the current one).
+        /// </summary>
+        class RigidBodyPusherCharacterPushData
+        {
+            public Vector3 Acceleration = Vector3.Zero;
+            public Vector3 DisplacementFromCenterOfMass = Vector3.Zero;
+            public Vector3 Torque = Vector3.Zero;
         }
 
         /// <summary>
