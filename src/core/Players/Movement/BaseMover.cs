@@ -970,6 +970,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
                         float diffToPushDirection = Math.Max(0f, finalVelocity.Dot(pushDirection) - rigidBody.LinearVelocity.Dot(pushDirection));
 
+                        // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
+                        // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
+                        // is travelling towards the character.
+                        float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(collisionNormal));
+
                         // If rigidBody has more mass, it should be harder to push.
                         float massRatio = Mass / rigidBody.Mass;
 
