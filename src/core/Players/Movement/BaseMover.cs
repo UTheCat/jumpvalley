@@ -986,6 +986,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         float reciprocatedMassRatio = rigidBody.Mass / Mass;
 
                         Vector3 characterPushForce = collisionNormal * characterVelocityDiff * reciprocatedMassRatio * ForceMultiplier;
+
+                        // Some rigid bodies absorb force on impact. Account for this.
+                        PhysicsMaterial rigidBodyPhysicsMaterial = rigidBody.PhysicsMaterialOverride;
+                        if (rigidBodyPhysicsMaterial != null) characterPushForce *= 1f - rigidBodyPhysicsMaterial.Bounce;
+
                         // Works, but slightly buggy. Friction really needs to be implemented properly if we want to this calculate push force this way.
                         //Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
 
