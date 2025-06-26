@@ -981,7 +981,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
                         // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
                         // is travelling towards the character.
-                        float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(collisionNormal));
+                        float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(-collisionNormal));
                         Console.WriteLine($"characterVelocityDiff: {characterVelocityDiff}");
                         float reciprocatedMassRatio = rigidBody.Mass / Mass;
 
@@ -1072,8 +1072,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
                     RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
-                    finalVelocity += characterPushData.Acceleration;// * fDelta;
-                    Console.WriteLine($"character extra acceleration {characterPushData.Acceleration * fDelta}");
+                    finalVelocity += characterPushData.Acceleration * 60f;// * fDelta;
+                    Console.WriteLine($"character extra acceleration {characterPushData.Acceleration * 60f}");
 
                     pusher.Push();
 #if DEBUG_RIGIDBODY3D_PUSHING
