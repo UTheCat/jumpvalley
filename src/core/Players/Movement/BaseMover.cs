@@ -350,8 +350,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         public float CharacterPushForceMultiplier = 5f;
 
-        //private ConsoleLogger logger;
-
         private Vector2 lastXZVelocity = Vector2.Zero;
 
         /// <summary>
@@ -610,63 +608,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             }
 
             return yaw;
-        }
-
-        /// <summary>
-        /// Calculates velocity for an axis based on the acceleration as specified in
-        /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>.
-        /// </summary>
-        /// <param name="currentVelocity"></param>
-        /// <param name="goalVelocity">The velocity to eventually achieve</param>
-        /// <param name="timeDelta">Number of seconds since the last physics frame</param>
-        /// <param name="speedUpAcceleration"></param>
-        /// <param name="slowDownAcceleration">This value must be negative in order for slowing down to work properly</param>
-        /// <returns></returns>
-        private static float CalculateVelocity(
-            float currentVelocity,
-            float goalVelocity,
-            float timeDelta,
-            float speedUpAcceleration,
-            float slowDownAcceleration,
-            bool isSpeedingUp
-            )
-        {
-            float acceleration;
-            float newVelocity = 0f;
-
-            if (isSpeedingUp)
-            {
-                acceleration = speedUpAcceleration;
-                if (goalVelocity > currentVelocity)
-                {
-                    newVelocity = Math.Min(goalVelocity, currentVelocity + (acceleration * timeDelta));
-                }
-                else if (goalVelocity < currentVelocity)
-                {
-                    newVelocity = Math.Max(goalVelocity, currentVelocity - (acceleration * timeDelta));
-                }
-                else
-                {
-                    newVelocity = goalVelocity;
-                }
-            }
-            else
-            {
-                // If we're already stopped, you can't slow down any further.
-                if (currentVelocity == 0f) return 0f;
-
-                acceleration = slowDownAcceleration;
-                if (currentVelocity > 0)
-                {
-                    newVelocity = Math.Max(0f, currentVelocity + (acceleration * timeDelta));
-                }
-                else if (currentVelocity < 0)
-                {
-                    newVelocity = Math.Min(0f, currentVelocity - (acceleration * timeDelta));
-                }
-            }
-
-            return newVelocity;
         }
 
         /// <summary>
