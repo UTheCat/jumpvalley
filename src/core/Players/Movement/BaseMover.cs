@@ -1,7 +1,8 @@
 ﻿using Godot;
-using UTheCat.Jumpvalley.Core.Players.Camera;
 using System;
 using System.Collections.Generic;
+
+using UTheCat.Jumpvalley.Core.Players.Camera;
 
 namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
@@ -214,7 +215,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 _isRunning = value;
 
                 SetPhysicsProcess(value);
-                //SetProcess(value);
             }
         }
 
@@ -228,7 +228,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             get => _body;
             set
             {
-                CharacterBody3D oldBody = _body;
                 _body = value;
 
                 BodyRotator rotator = Rotator;
@@ -259,12 +258,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                     if (boxShape != null)
                     {
-                        //float climberHitboxWidth = climber.HitboxWidth;
-                        //float climberHitboxDepth = climber.HitboxDepth;
-
-                        // For simplification
-                        //float xPos = climberHitboxWidth / 2;
-
                         float zPos = -(boxShape.Size.Z / 2) + CLIMBING_SHAPE_CAST_Z_OFFSET;
 
                         BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
@@ -392,8 +385,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             climbingShapeCast.Shape = shapeCastBox;
 
             AddChild(CurrentClimber);
-
-            //logger = new ConsoleLogger(nameof(BaseMover));
         }
 
         /// <summary>
@@ -408,11 +399,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             }
 
             return false;
-        }
-
-        private Vector3 GetUpDirection()
-        {
-            return Body == null ? Vector3.Up : Body.UpDirection;
         }
 
         /// <summary>
@@ -483,12 +469,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <returns></returns>
         public Vector3 GetMoveVelocity(float delta, float yaw)
         {
-            //int physicsTicksPerSecond = Engine.PhysicsTicksPerSecond;
-
-            // This is needed because while physics steps should occur at constant time intervals,
-            // there are slight variances in the actual time passed between each step.
-            //float timingAdjustment = delta * physicsTicksPerSecond;
-
             bool isOnFloor = IsOnFloor();
 
             Vector3 moveVector = GetMoveDirection(yaw);
@@ -509,8 +489,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 );
             }
 
-            velocity.X = moveVector.X * Speed;// * timingAdjustment;
-            velocity.Z = moveVector.Z * Speed;// * timingAdjustment;
+            velocity.X = moveVector.X * Speed;
+            velocity.Z = moveVector.Z * Speed;
 
             if (IsJumping)
             {
@@ -549,7 +529,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     int collisionCount = climbingShapeCast.GetCollisionCount();
                     float shortestDistance = -1f;
                     Vector3 climbingNormal = Vector3.Zero; // Ladder collision normal
-                    //logger.Print($"climbingShapeCast reported {collisionCount} collisions");
                     for (int i = 0; i < collisionCount; i++)
                     {
                         if (Climber.IsClimbable(climbingShapeCast.GetCollider(i)))
@@ -570,31 +549,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     // found a ladder collision normal
                     if (shortestDistance >= 0f)
                     {
-
                         // Get the angles we need to compare normal with move direction,
                         // and do the math as needed according to what was put in the Jumpvalley wiki
                         // for determining whether or not to climb up in the current frame.
-
-                        // This method for calculating angleDiff doesn't work out too well if
-                        // one angle is in the 1st or 4th quadrant and the other angle is in the 2nd or 3rd quadrant.
-                        /*
-                        double ladderCollisionAngle = -Math.Atan(climbingNormal.Z / climbingNormal.X);
-                        double moveAngle = Math.Atan(moveVector.Z / moveVector.X);
-                        double angleDiff = Math.Abs(moveAngle - ladderCollisionAngle);
-                        bool shouldClimbUp = angleDiff <= (Math.PI / 2);
-                        Console.WriteLine($"Climbing normal z-coordinate: {climbingNormal.Z}\nClimbing normal x-coordinate: {climbingNormal.X}\nLadder collision angle (after being negated): {ladderCollisionAngle / Math.PI}pi");
-                        Console.WriteLine($"Move angle: {moveAngle/Math.PI}pi\nAngle difference: {angleDiff/Math.PI}pi\nShould climb up: {shouldClimbUp.ToString()}");
-                        */
-
-                        // Apparently, Godot's Vector3.SignedAngleTo method exists, making this much easier to implement.
                         float angleDiff = climbingNormal.Rotated(Vector3.Up, (float)Math.PI).SignedAngleTo(moveVector, Vector3.Up);
-                        //Console.WriteLine($"Angle difference: {angleDiff/Math.PI}pi");
 
                         bool shouldClimbUp = Math.Abs(angleDiff) <= (0.45 * Math.PI);
 
                         if (shouldClimbUp)
                         {
-                            climbVelocity = Speed;// * timingAdjustment;
+                            climbVelocity = Speed;
                         }
                         else
                         {
@@ -611,7 +575,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 }
                                 else
                                 {
-                                    climbVelocity = -Speed;// * timingAdjustment;
+                                    climbVelocity = -Speed;
                                 }
                             }
                         }
@@ -738,13 +702,12 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             // We know we've shot past the goal velocity if the direction from the current velocity to the goal velocity
             // changed as a result of applying acceleration for this frame.
             Vector2 newXZVelocityDiff = new Vector2(goalVelocity.X, goalVelocity.Y) - new Vector2(finalVelocity.X, finalVelocity.Y);
-            //logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
+
             if (newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
             || Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle()) == false
             )
             {
                 finalVelocity = goalVelocity;
-                //logger.Print("Snapped velocity");
             }
 
             return finalVelocity;
@@ -1058,38 +1021,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         /// <summary>
-        /// Callback to associate with the normal process step in the current scene tree
-        /// </summary>
-        /// <param name="delta"></param>
-        /*
-        public void HandleProcessStep(double delta)
-        {
-            BodyRotator rotator = Rotator;
-
-            // Only rotate if the rotation if fast turn is enabled or when the character is moving
-            if (rotator != null)
-            {
-                if (IsFastTurnEnabled)
-                {
-                    // Set the angle to the camera's yaw
-                    rotator.Yaw = GetYaw();
-                    rotator.Update(delta);
-                }
-                else if (ForwardValue != 0 || RightValue != 0)
-                {
-                    // Thanks to Godot 4.0 .NET thirdperson controller by vaporvee for helping me figure this one out
-                    // The extra radians are added on top of the original camera yaw, since
-                    // the direction of the character should be determined by the yaw corresponding to the move vector
-                    // relative to the camera yaw.
-                    rotator.Yaw = GetYaw() + (float)Math.Atan2(-RightValue, -ForwardValue);
-                    rotator.GradualTurnEnabled = IsJumping || (!IsClimbing);
-                    rotator.Update(delta);
-                }
-            }
-        }
-        */
-
-        /// <summary>
         /// Disposes of this <see cref="BaseMover"/>
         /// </summary>
         public new void Dispose()
@@ -1113,14 +1044,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             HandlePhysicsStep(delta);
             base._PhysicsProcess(delta);
         }
-
-        /*
-        public override void _Process(double delta)
-        {
-            HandleProcessStep(delta);
-            base._Process(delta);
-        }
-        */
 
         /// <summary>
         /// Event that's raised when the character being moved by this <see cref="BaseMover"/> changes.
