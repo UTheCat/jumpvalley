@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2ucpyoistfex"]
+[gd_scene load_steps=9 format=3 uid="uid://d2ucpyoistfex"]
 
 [ext_resource type="Material" uid="uid://c4m68khblbrv5" path="res://levels/shape_variety/textures/floor5.tres" id="1_n763a"]
+[ext_resource type="Script" uid="uid://tbn1r3w0d5w7" path="res://scenes/lobby/fast_rolling_ball_rigid_body.gd" id="2_41y5u"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_5755o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_41y5u"]
@@ -36,6 +37,7 @@ mesh = SubResource("BoxMesh_rbx7a")
 [node name="Ball" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 2.5, 0)
 mass = 526.0
+script = ExtResource("2_41y5u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
 shape = SubResource("SphereShape3D_30uw7")
