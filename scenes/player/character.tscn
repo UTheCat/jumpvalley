@@ -10,7 +10,7 @@ transparency = 1
 albedo_color = Color(0.631373, 0.631373, 0.631373, 0.25098)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
-size = Vector3(1, 2, 0.5)
+size = Vector3(1.005, 2.005, 0.505)
 
 [node name="Character" type="CharacterBody3D"]
 collision_layer = 5
