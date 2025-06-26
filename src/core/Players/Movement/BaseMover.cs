@@ -359,6 +359,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         public float ForceMultiplier = 5f;
 
+        /// <summary>
+        /// Multiplier for the force applied by a <i>colliding</i> rigid body to the character being handled by this <see cref="BaseMover"/>. 
+        /// </summary>
+        public float CharacterPushForceMultiplier = 5f;
+
         //private ConsoleLogger logger;
 
         private Vector2 lastXZVelocity = Vector2.Zero;
@@ -985,7 +990,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         Console.WriteLine($"characterVelocityDiff: {characterVelocityDiff}");
                         float reciprocatedMassRatio = rigidBody.Mass / Mass;
 
-                        Vector3 characterPushForce = collisionNormal * characterVelocityDiff * reciprocatedMassRatio * ForceMultiplier;
+                        Vector3 characterPushForce = collisionNormal * characterVelocityDiff * reciprocatedMassRatio * CharacterPushForceMultiplier;
 
                         // Some rigid bodies absorb force on impact. Account for this.
                         PhysicsMaterial rigidBodyPhysicsMaterial = rigidBody.PhysicsMaterialOverride;
@@ -1077,8 +1082,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
                     RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
-                    finalVelocity += characterPushData.Acceleration * 60f;// * fDelta;
-                    Console.WriteLine($"character extra acceleration {characterPushData.Acceleration * 60f}");
+                    finalVelocity += characterPushData.Acceleration;
+                    Console.WriteLine($"character extra acceleration {characterPushData.Acceleration}");
 
                     pusher.Push();
 #if DEBUG_RIGIDBODY3D_PUSHING
