@@ -945,7 +945,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         Vector3 collisionNormal = collision.GetNormal();
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition;
 
-                        // RigidBody3D attempts to push character
+                        // CALCULATIONS FOR RIGIDBODY3D ATTEMPTS TO PUSH CHARACTER //
 
                         // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
                         // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
@@ -959,9 +959,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         PhysicsMaterial rigidBodyPhysicsMaterial = rigidBody.PhysicsMaterialOverride;
                         if (rigidBodyPhysicsMaterial != null) characterPushForce *= 1f - rigidBodyPhysicsMaterial.Bounce;
 
+                        /////////////////////////////////////////////////////////////
+
+                        // CALCULATIONS FOR CHARACTER ATTEMPTS TO PUSH RIGID BODY 3D //
+
                         Vector3 rigidBodyPushDirection = -collisionNormal;
-                        
-                        // Character attempts to push RigidBody3D
 
                         // The amount in which rigidBody.Velocity has to change by to match pushDirection.
                         // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
@@ -972,6 +974,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         // Put it together
                         Vector3 pushForce = rigidBodyPushDirection * diffToPushDirection * reciprocatedMassRatio * ForceMultiplier;
+
+                        ///////////////////////////////////////////////////////////////
 
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
