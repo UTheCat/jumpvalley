@@ -946,9 +946,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition;
 
                         // RigidBody3D attempts to push character
-                        // Needs to come before the code that allows the character to push RigidBody3Ds it comes into contact with.
-                        // This is because this code segment modifies the character's velocity (which is the same velocity the character
-                        // will use to push RigidBody3Ds).
 
                         // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
                         // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
@@ -983,7 +980,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             {
                                 pusher.PositionOffset = forcePositionOffset;
                                 pusher.PushForce = pushForce;
-                                pusher.Character = Body;
                                 pusher.Character = Body;
                                 pusher.CharacterPushForce = characterPushForce;
                             }
