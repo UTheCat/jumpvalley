@@ -967,13 +967,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         // The amount in which rigidBody.Velocity has to change by to match pushDirection.
                         // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
-                        float diffToPushDirection = Math.Max(0f, finalVelocity.Dot(rigidBodyPushDirection) - rigidBody.LinearVelocity.Dot(rigidBodyPushDirection));
+                        float diffToRigidBodyPushDirection = Math.Max(0f, finalVelocity.Dot(rigidBodyPushDirection) - rigidBody.LinearVelocity.Dot(rigidBodyPushDirection));
 
                         // If rigidBody has more mass, it should be harder to push.
                         float reciprocatedMassRatio = Mass / rigidBody.Mass;
 
                         // Put it together
-                        Vector3 pushForce = rigidBodyPushDirection * diffToPushDirection * reciprocatedMassRatio * ForceMultiplier;
+                        Vector3 rigidBodyPushForce = rigidBodyPushDirection * diffToRigidBodyPushDirection * reciprocatedMassRatio * ForceMultiplier;
 
                         ///////////////////////////////////////////////////////////////
 
@@ -985,7 +985,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
                             {
                                 pusher.PositionOffset = forcePositionOffset;
-                                pusher.PushForce = pushForce;
+                                pusher.PushForce = rigidBodyPushForce;
                                 pusher.Character = Body;
                                 pusher.CharacterPushForce = characterPushForce;
                             }
@@ -996,7 +996,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             {
                                 Body = rigidBody,
                                 PositionOffset = forcePositionOffset,
-                                PushForce = pushForce,
+                                PushForce = rigidBodyPushForce,
                                 Character = Body,
                                 CharacterPushForce = characterPushForce
                             };
