@@ -841,7 +841,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                 return new RigidBodyPusherCharacterPushData
                 {
-                    Acceleration = CharacterPushForce / Body.Mass,
+                    VelocityChange = CharacterPushForce / Body.Mass,
                     DisplacementFromCenterOfMass = displacementFromCenterOfMass,
                     Torque = displacementFromCenterOfMass.Cross(CharacterPushForce)
                 };
@@ -854,7 +854,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         class RigidBodyPusherCharacterPushData
         {
-            public Vector3 Acceleration = Vector3.Zero;
+            public Vector3 VelocityChange = Vector3.Zero;
             public Vector3 DisplacementFromCenterOfMass = Vector3.Zero;
             public Vector3 Torque = Vector3.Zero;
         }
@@ -1082,8 +1082,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
                     RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
-                    finalVelocity += characterPushData.Acceleration;
-                    Console.WriteLine($"character extra acceleration {characterPushData.Acceleration}");
+                    finalVelocity += characterPushData.VelocityChange;
+                    Console.WriteLine($"character extra velocity change {characterPushData.VelocityChange}");
 
                     pusher.Push();
 #if DEBUG_RIGIDBODY3D_PUSHING
