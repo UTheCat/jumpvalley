@@ -1,6 +1,4 @@
-﻿//#define DEBUG_PUSH_FORCE_CALCULATION
-
-using Godot;
+﻿using Godot;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 using System;
 using System.Collections.Generic;
