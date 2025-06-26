@@ -1,4 +1,4 @@
-﻿#define DEBUG_PUSH_FORCE_CALCULATION
+﻿//#define DEBUG_PUSH_FORCE_CALCULATION
 
 using Godot;
 using UTheCat.Jumpvalley.Core.Players.Camera;
@@ -982,10 +982,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
                         // is travelling towards the character.
                         float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(collisionNormal));
+                        Console.WriteLine($"characterVelocityDiff: {characterVelocityDiff}");
                         float reciprocatedMassRatio = rigidBody.Mass / Mass;
 
                         Vector3 characterPushForce = collisionNormal * characterVelocityDiff * reciprocatedMassRatio * ForceMultiplier;
-
                         // Works, but slightly buggy. Friction really needs to be implemented properly if we want to this calculate push force this way.
                         //Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
 
@@ -1043,7 +1043,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 pusher.PushForce = pushForce;
                                 pusher.Character = Body;
                                 pusher.Character = Body;
-                                pusher.CharacterPushForce = pushForce;
+                                pusher.CharacterPushForce = characterPushForce;
                                 pusher.CharacterMass = Mass;
                             }
                         }
@@ -1055,7 +1055,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 PositionOffset = forcePositionOffset,
                                 PushForce = pushForce,
                                 Character = Body,
-                                CharacterPushForce = pushForce,
+                                CharacterPushForce = characterPushForce,
                                 CharacterMass = Mass
                             };
 
@@ -1072,7 +1072,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
                     RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
-                    finalVelocity += characterPushData.Acceleration * fDelta;
+                    finalVelocity += characterPushData.Acceleration;// * fDelta;
+                    Console.WriteLine($"character extra acceleration {characterPushData.Acceleration * fDelta}");
 
                     pusher.Push();
 #if DEBUG_RIGIDBODY3D_PUSHING
