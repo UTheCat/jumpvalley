@@ -807,7 +807,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// <summary>
             /// Where force should be applied to <see cref="Body"/> and <see cref="Character"/> in global coordinates.  
             /// </summary>
-            public Vector3 ForceApplicationPosition = Vector3.Zero;
+            //public Vector3 ForceApplicationPosition = Vector3.Zero;
 
             /// <summary>
             /// Force applied by <see cref="Character"/> on <see cref="Body"/>  
@@ -824,8 +824,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// </summary>
             public int ConsecutiveFramesUntouched = 0;
 
-            public float CharacterMass = 0f;
-
             public void Push() => Body.ApplyForce(PushForce, PositionOffset);
 
             /// <returns>
@@ -837,13 +835,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // https://en.wikipedia.org/wiki/Line_of_action
                 // 
                 // For the character, we assume that the center of mass is the actual/positional center of the character.
-                Vector3 displacementFromCenterOfMass = ForceApplicationPosition - Character.GlobalPosition;
+                //Vector3 displacementFromCenterOfMass = ForceApplicationPosition - Character.GlobalPosition;
 
                 return new RigidBodyPusherCharacterPushData
                 {
                     VelocityChange = CharacterPushForce / Body.Mass,
-                    DisplacementFromCenterOfMass = displacementFromCenterOfMass,
-                    Torque = displacementFromCenterOfMass.Cross(CharacterPushForce)
+                    //DisplacementFromCenterOfMass = displacementFromCenterOfMass,
+                    //Torque = displacementFromCenterOfMass.Cross(CharacterPushForce)
                 };
             }
         }
@@ -855,8 +853,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         class RigidBodyPusherCharacterPushData
         {
             public Vector3 VelocityChange = Vector3.Zero;
-            public Vector3 DisplacementFromCenterOfMass = Vector3.Zero;
-            public Vector3 Torque = Vector3.Zero;
+
+            // Currently not used
+            //public Vector3 DisplacementFromCenterOfMass = Vector3.Zero;
+            //public Vector3 Torque = Vector3.Zero;
         }
 
         /// <summary>
@@ -1054,7 +1054,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 pusher.Character = Body;
                                 pusher.Character = Body;
                                 pusher.CharacterPushForce = characterPushForce;
-                                pusher.CharacterMass = Mass;
                             }
                         }
                         else
@@ -1065,8 +1064,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 PositionOffset = forcePositionOffset,
                                 PushForce = pushForce,
                                 Character = Body,
-                                CharacterPushForce = characterPushForce,
-                                CharacterMass = Mass
+                                CharacterPushForce = characterPushForce
                             };
 
                             currentFrameRigidBodyPushers.Add(rigidBody, pusher);
