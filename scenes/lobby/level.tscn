@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=66 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
@@ -63,6 +63,17 @@ emission = Color(0.419608, 0.356863, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yb2eo"]
 albedo_color = Color(1, 0.862745, 0.360784, 1)
+emission_enabled = true
+emission = Color(1, 0.862745, 0.360784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfv5x"]
+albedo_color = Color(0.196078, 0.658824, 0.321569, 1)
+emission_enabled = true
+emission = Color(0.196078, 0.658824, 0.321569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcnbc"]
+transparency = 1
+albedo_color = Color(1, 0.861333, 0.36, 0.25098)
 emission_enabled = true
 emission = Color(1, 0.862745, 0.360784, 1)
 
@@ -327,6 +338,43 @@ shape = SubResource("BoxShape3D_dv07x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/StartEndTeleporter/Destination/Platform/CollisionShape3D"]
 material_override = SubResource("StandardMaterial3D_yb2eo")
+mesh = SubResource("BoxMesh_mu0vs")
+
+[node name="TeleporterToRollingBall" type="Node3D" parent="Interactives"]
+
+[node name="_Interactive" type="Node" parent="Interactives/TeleporterToRollingBall"]
+metadata/type = "StartEndTeleporter"
+metadata/should_set_rotation = true
+metadata/teleports_on_top = true
+metadata/destination_node_path = NodePath("../Destination")
+metadata/start_node_paths = [NodePath("../StartNodes/Start0")]
+metadata/teleports_player = true
+
+[node name="StartNodes" type="Node3D" parent="Interactives/TeleporterToRollingBall"]
+
+[node name="Start0" type="Area3D" parent="Interactives/TeleporterToRollingBall/StartNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.75, 6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/TeleporterToRollingBall/StartNodes/Start0"]
+shape = SubResource("BoxShape3D_dv07x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/TeleporterToRollingBall/StartNodes/Start0/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_nfv5x")
+mesh = SubResource("BoxMesh_mu0vs")
+
+[node name="Destination" type="Node3D" parent="Interactives/TeleporterToRollingBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 1, 14.5)
+
+[node name="Platform" type="RigidBody3D" parent="Interactives/TeleporterToRollingBall/Destination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/TeleporterToRollingBall/Destination/Platform"]
+shape = SubResource("BoxShape3D_dv07x")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/TeleporterToRollingBall/Destination/Platform/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_tcnbc")
 mesh = SubResource("BoxMesh_mu0vs")
 
 [node name="PushableObjectGrounds" parent="Interactives" instance=ExtResource("4_hnbc4")]
