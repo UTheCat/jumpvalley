@@ -1,16 +1,24 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhraj4ym0cswa"]
 
-[ext_resource type="Material" uid="uid://bmtoyp50ewt6w" path="res://scenes/player/torso_texture.tres" id="1_8fnx3"]
 [ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
 size = Vector3(1, 2, 0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0s6rg"]
+transparency = 1
+albedo_color = Color(0.631373, 0.631373, 0.631373, 0.25098)
+
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
-size = Vector3(1, 2, 0.5)
+size = Vector3(1.005, 2.005, 0.505)
 
 [node name="Character" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 5
+collision_mask = 5
+floor_constant_speed = true
+floor_max_angle = 1.309
+platform_floor_layers = 4294967291
+safe_margin = 0.01
 metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
 
 [node name="_InteractiveBoundingBox" type="Node" parent="."]
@@ -20,7 +28,7 @@ metadata/type = "OverallBoundingBoxObject"
 shape = SubResource("BoxShape3D_s2be1")
 
 [node name="Mesh" type="MeshInstance3D" parent="RootCollider"]
-material_override = ExtResource("1_8fnx3")
+material_override = SubResource("StandardMaterial3D_0s6rg")
 mesh = SubResource("BoxMesh_rl4hs")
 skeleton = NodePath("../..")
 

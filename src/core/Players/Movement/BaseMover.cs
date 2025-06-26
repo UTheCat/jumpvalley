@@ -1,8 +1,8 @@
 ﻿using Godot;
-using UTheCat.Jumpvalley.Core.Logging;
-using UTheCat.Jumpvalley.Core.Players.Camera;
-using UTheCat.Jumpvalley.Core.Raycasting;
 using System;
+using System.Collections.Generic;
+
+using UTheCat.Jumpvalley.Core.Players.Camera;
 
 namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
@@ -156,19 +156,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// How fast the character can move in meters per second
         /// </summary>
-        public float Speed
-        {
-            get => _speed;
-            set
-            {
-                _speed = value;
-
-                if (Rotator != null)
-                {
-                    Rotator.Speed = value;
-                }
-            }
-        }
+        public float Speed = 5f;
 
         /// <summary>
         /// The current yaw angle of the camera that's currently associated with the character
@@ -227,7 +215,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 _isRunning = value;
 
                 SetPhysicsProcess(value);
-                //SetProcess(value);
             }
         }
 
@@ -241,7 +228,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             get => _body;
             set
             {
-                CharacterBody3D oldBody = _body;
                 _body = value;
 
                 BodyRotator rotator = Rotator;
@@ -272,12 +258,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                     if (boxShape != null)
                     {
-                        //float climberHitboxWidth = climber.HitboxWidth;
-                        //float climberHitboxDepth = climber.HitboxDepth;
-
-                        // For simplification
-                        //float xPos = climberHitboxWidth / 2;
-
                         float zPos = -(boxShape.Size.Z / 2) + CLIMBING_SHAPE_CAST_Z_OFFSET;
 
                         BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
@@ -343,7 +323,34 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         private ShapeCast3D climbingShapeCast;
 
-        //private ConsoleLogger logger;
+        /// <summary>
+        /// The forces to apply when <see cref="HandlePhysicsStep"/> is called.
+        /// The order in which the forces in this list are applied is from the end of the list to the beginning of the list.
+        /// <br/><br/>
+        /// Forces are in newtons.
+        /// <br/><br/>
+        /// To be implemented.
+        /// </summary>
+        //public List<Vector3> ForceQueue = new List<Vector3>();
+
+        /// <summary>
+        /// The mass of the character in kilograms.
+        /// </summary>
+        public float Mass = 60f;
+
+        /// <summary>
+        /// The "magnitude" in which the character pushes movable rigid bodies.
+        /// <br/><br/>
+        /// This is basically the same as the physical strength one uses to push an object.
+        /// </summary>
+        public float ForceMultiplier = 5f;
+
+        /// <summary>
+        /// Multiplier for the force applied by a <i>colliding</i> rigid body to the character being handled by this <see cref="BaseMover"/>. 
+        /// </summary>
+        public float CharacterPushForceMultiplier = 5f;
+
+        private Vector2 lastXZVelocity = Vector2.Zero;
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -376,8 +383,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             climbingShapeCast.Shape = shapeCastBox;
 
             AddChild(CurrentClimber);
-
-            //logger = new ConsoleLogger(nameof(BaseMover));
         }
 
         /// <summary>
@@ -401,7 +406,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         /// <param name="yaw">The yaw angle that the forward and right values are relative to.</param>
         /// <returns>The calculated move vector</returns>
-        public Vector3 GetMoveVector(float yaw)
+        public Vector3 GetMoveDirection(float yaw)
         {
             // The Rotate() call rotates the MoveVector to the specified yaw angle.
             return new Vector3(RightValue, 0, ForwardValue).Rotated(Vector3.Up, yaw).Normalized();
@@ -423,6 +428,38 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         /// <summary>
+        /// Updates XZ velocity (velocity along the X and Z axes) that the character is trying to move at for the current physics frame.
+        /// Intended to be called every physics frame.
+        /// <br/><br/>
+        /// This function takes physics framerate, acceleration, and target move direction into account.
+        /// </summary>
+        /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame in seconds.</param>
+        /// <param name="acceleration">Acceleration in meters per second squared.
+        /// This controls how fast we approach the XZ velocity.
+        /// This value should also be positive, as negative values will cause the XZ-velocity to advance away from the target XZ-velocity.
+        /// </param>
+        /// <param name="yaw">The intended move 'yaw'. For example, this yaw could be the yaw of the player's camera.</param> 
+        /// <returns>
+        /// The updated XZ velocity. The Y-value in the returned Vector2 is the velocity in the Z axis.
+        /// Each component in the returned Vector2 is in meters per second.
+        /// </returns>
+        private Vector2 UpdateXZVelocity(float physicsFrameDelta, float acceleration, float yaw)
+        {
+            Vector3 moveDirection = GetMoveDirection(yaw);
+
+            // For the goalXZVelocity Vector2, Y-coordinate is the goal velocity's Z coordinate.
+            Vector2 newXZVelocity = ApproachXZVelocity(
+                lastXZVelocity,
+                new Vector2(moveDirection.X, moveDirection.Z),
+                acceleration,
+                physicsFrameDelta
+            );
+            lastXZVelocity = newXZVelocity;
+
+            return newXZVelocity;
+        }
+
+        /// <summary>
         /// Gets the velocity that the character wants to move at for the current physics frame
         /// </summary>
         /// <param name="delta">The time it took to complete the physics frame in seconds</param>
@@ -430,15 +467,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <returns></returns>
         public Vector3 GetMoveVelocity(float delta, float yaw)
         {
-            int physicsTicksPerSecond = Engine.PhysicsTicksPerSecond;
-
-            // This is needed because while physics steps should occur at constant time intervals,
-            // there are slight variances in the actual time passed between each step.
-            float timingAdjustment = delta * physicsTicksPerSecond;
-
             bool isOnFloor = IsOnFloor();
 
-            Vector3 moveVector = GetMoveVector(yaw);
+            Vector3 moveVector = GetMoveDirection(yaw);
             Vector3 velocity;
 
             if (Body == null)
@@ -447,11 +478,17 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             }
             else
             {
-                velocity = Body.Velocity;
+                Vector3 requestedVelocity = Body.Velocity;
+                Vector3 realVelocity = Body.GetRealVelocity();
+                velocity = new Vector3(
+                    requestedVelocity.X,
+                    ClosestToZero(realVelocity.Y, requestedVelocity.Y),
+                    requestedVelocity.Z
+                );
             }
 
-            velocity.X = moveVector.X * Speed * timingAdjustment;
-            velocity.Z = moveVector.Z * Speed * timingAdjustment;
+            velocity.X = moveVector.X * Speed;
+            velocity.Z = moveVector.Z * Speed;
 
             if (IsJumping)
             {
@@ -490,7 +527,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     int collisionCount = climbingShapeCast.GetCollisionCount();
                     float shortestDistance = -1f;
                     Vector3 climbingNormal = Vector3.Zero; // Ladder collision normal
-                    //logger.Print($"climbingShapeCast reported {collisionCount} collisions");
                     for (int i = 0; i < collisionCount; i++)
                     {
                         if (Climber.IsClimbable(climbingShapeCast.GetCollider(i)))
@@ -511,31 +547,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     // found a ladder collision normal
                     if (shortestDistance >= 0f)
                     {
-
                         // Get the angles we need to compare normal with move direction,
                         // and do the math as needed according to what was put in the Jumpvalley wiki
                         // for determining whether or not to climb up in the current frame.
-
-                        // This method for calculating angleDiff doesn't work out too well if
-                        // one angle is in the 1st or 4th quadrant and the other angle is in the 2nd or 3rd quadrant.
-                        /*
-                        double ladderCollisionAngle = -Math.Atan(climbingNormal.Z / climbingNormal.X);
-                        double moveAngle = Math.Atan(moveVector.Z / moveVector.X);
-                        double angleDiff = Math.Abs(moveAngle - ladderCollisionAngle);
-                        bool shouldClimbUp = angleDiff <= (Math.PI / 2);
-                        Console.WriteLine($"Climbing normal z-coordinate: {climbingNormal.Z}\nClimbing normal x-coordinate: {climbingNormal.X}\nLadder collision angle (after being negated): {ladderCollisionAngle / Math.PI}pi");
-                        Console.WriteLine($"Move angle: {moveAngle/Math.PI}pi\nAngle difference: {angleDiff/Math.PI}pi\nShould climb up: {shouldClimbUp.ToString()}");
-                        */
-
-                        // Apparently, Godot's Vector3.SignedAngleTo method exists, making this much easier to implement.
                         float angleDiff = climbingNormal.Rotated(Vector3.Up, (float)Math.PI).SignedAngleTo(moveVector, Vector3.Up);
-                        //Console.WriteLine($"Angle difference: {angleDiff/Math.PI}pi");
 
                         bool shouldClimbUp = Math.Abs(angleDiff) <= (0.45 * Math.PI);
 
                         if (shouldClimbUp)
                         {
-                            climbVelocity = Speed * timingAdjustment;
+                            climbVelocity = Speed;
                         }
                         else
                         {
@@ -552,7 +573,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 }
                                 else
                                 {
-                                    climbVelocity = -Speed * timingAdjustment;
+                                    climbVelocity = -Speed;
                                 }
                             }
                         }
@@ -590,63 +611,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         /// <summary>
-        /// Calculates velocity for an axis based on the acceleration as specified in
-        /// <see cref="SpeedUpAcceleration"/> and <see cref="SlowDownAcceleration"/>.
-        /// </summary>
-        /// <param name="currentVelocity"></param>
-        /// <param name="goalVelocity">The velocity to eventually achieve</param>
-        /// <param name="timeDelta">Number of seconds since the last physics frame</param>
-        /// <param name="speedUpAcceleration"></param>
-        /// <param name="slowDownAcceleration">This value must be negative in order for slowing down to work properly</param>
-        /// <returns></returns>
-        private static float CalculateVelocity(
-            float currentVelocity,
-            float goalVelocity,
-            float timeDelta,
-            float speedUpAcceleration,
-            float slowDownAcceleration,
-            bool isSpeedingUp
-            )
-        {
-            float acceleration;
-            float newVelocity = 0f;
-
-            if (isSpeedingUp)
-            {
-                acceleration = speedUpAcceleration;
-                if (goalVelocity > currentVelocity)
-                {
-                    newVelocity = Math.Min(goalVelocity, currentVelocity + (acceleration * timeDelta));
-                }
-                else if (goalVelocity < currentVelocity)
-                {
-                    newVelocity = Math.Max(goalVelocity, currentVelocity - (acceleration * timeDelta));
-                }
-                else
-                {
-                    newVelocity = goalVelocity;
-                }
-            }
-            else
-            {
-                // If we're already stopped, you can't slow down any further.
-                if (currentVelocity == 0f) return 0f;
-
-                acceleration = slowDownAcceleration;
-                if (currentVelocity > 0)
-                {
-                    newVelocity = Math.Max(0f, currentVelocity + (acceleration * timeDelta));
-                }
-                else if (currentVelocity < 0)
-                {
-                    newVelocity = Math.Min(0f, currentVelocity - (acceleration * timeDelta));
-                }
-            }
-
-            return newVelocity;
-        }
-
-        /// <summary>
         /// Calculates XZ velocity using Vector2.
         /// x-velocity maps to the Vector2's x-coordinate,
         /// and z-velocity maps to the Vector2's y-coordinate.
@@ -679,16 +643,92 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             // We know we've shot past the goal velocity if the direction from the current velocity to the goal velocity
             // changed as a result of applying acceleration for this frame.
             Vector2 newXZVelocityDiff = new Vector2(goalVelocity.X, goalVelocity.Y) - new Vector2(finalVelocity.X, finalVelocity.Y);
-            //logger.Print($"Velocity angle diff: {newXZVelocityDiff.Normalized().Angle() - direction.Angle()}");
+
             if (newXZVelocityDiff.Length() <= VELOCITY_DIFF_SNAP_THRESHOLD
             || Mathf.IsZeroApprox(newXZVelocityDiff.Normalized().Angle() - direction.Angle()) == false
             )
             {
                 finalVelocity = goalVelocity;
-                //logger.Print("Snapped velocity");
             }
 
             return finalVelocity;
+        }
+
+        private static float ClosestToZero(float a, float b) => Math.Abs(a) < Math.Abs(b) ? a : b;
+
+        /// <summary>
+        /// This nested class is intended to "smooth" pushing RigidBody3Ds.
+        /// <br/><br/>
+        /// When Godot thinks the character is colliding with the RigidBody3D at multiple spots in the same physics frame,
+        /// pushing the RigidBody3D in the right direction can be RNG.
+        /// <br/><br/>
+        /// Therefore, this class was made to assist with making a push in a physically valid position that's as close to
+        /// the rigid body's center of mass as possible.
+        /// </summary>
+        class RigidBodyPusher
+        {
+            public RigidBody3D Body = null;
+
+            public CharacterBody3D Character = null;
+
+            /// <summary>
+            /// Position offset from <see cref="Body"/>'s origin in global coordinates. 
+            /// </summary>
+            public Vector3 PositionOffset = Vector3.Zero;
+
+            /// <summary>
+            /// Where force should be applied to <see cref="Body"/> and <see cref="Character"/> in global coordinates.  
+            /// </summary>
+            //public Vector3 ForceApplicationPosition = Vector3.Zero;
+
+            /// <summary>
+            /// Force applied by <see cref="Character"/> on <see cref="Body"/>  
+            /// </summary>
+            public Vector3 PushForce = Vector3.Zero;
+
+            /// <summary>
+            /// Force applied by <see cref="Body"/> on <see cref="Character"/>  
+            /// </summary>
+            public Vector3 CharacterPushForce = Vector3.Zero;
+
+            /// <summary>
+            /// Number of consecutive physics frames that the character has *not* touched <see cref="Body"/> 
+            /// </summary>
+            public int ConsecutiveFramesUntouched = 0;
+
+            public void Push() => Body.ApplyForce(PushForce, PositionOffset);
+
+            /// <returns>
+            /// Data that can be used to modify character movement
+            /// </returns>
+            public RigidBodyPusherCharacterPushData GetCharacterPushData()
+            {
+                // Character push force and torque are calculated from the Wikipedia article on Line of Action
+                // https://en.wikipedia.org/wiki/Line_of_action
+                // 
+                // For the character, we assume that the center of mass is the actual/positional center of the character.
+                //Vector3 displacementFromCenterOfMass = ForceApplicationPosition - Character.GlobalPosition;
+
+                return new RigidBodyPusherCharacterPushData
+                {
+                    VelocityChange = CharacterPushForce / Body.Mass,
+                    //DisplacementFromCenterOfMass = displacementFromCenterOfMass,
+                    //Torque = displacementFromCenterOfMass.Cross(CharacterPushForce)
+                };
+            }
+        }
+
+        /// <summary>
+        /// Contains a bunch of data that can be used to modify character movement. Such data
+        /// is intended for use in a specific physics frame (such as the current one).
+        /// </summary>
+        class RigidBodyPusherCharacterPushData
+        {
+            public Vector3 VelocityChange = Vector3.Zero;
+
+            // Currently not used
+            //public Vector3 DisplacementFromCenterOfMass = Vector3.Zero;
+            //public Vector3 Torque = Vector3.Zero;
         }
 
         /// <summary>
@@ -774,20 +814,117 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     fDelta
                 );
                 Vector3 finalVelocity = new Vector3(newXZvelocity.X, moveVelocity.Y, newXZvelocity.Y);
+                Vector3 realVelocity = body.GetRealVelocity();
 
+                // Store the current velocity for the next physics frame to use.
+                //
+                // When updating LastVelocity, for the Y value, between real velocity after MoveAndSlide and requested velocity after move and slide,
+                // use whichever one is closest to 0.
+                // This is mainly to *prevent* these two issues:
+                // - Character builds up downwards velocity when IsOnFloor() returns false but the character
+                //   is not moving downward.
+                // - Character suddenly and unexpectedly jolts upward at a high velocity.
+                Vector3 requestedVelocityAfterMove = body.Velocity;
+                LastVelocity = new Vector3(
+                    requestedVelocityAfterMove.X,
+                    ClosestToZero(realVelocity.Y, requestedVelocityAfterMove.Y),
+                    requestedVelocityAfterMove.Z
+                    );
+
+                // Figure out how to push objects we've come into contact with. This part intentionally comes before the call to MoveAndSlide().
+                // Thanks to this forum post for helping me figure out how to implement this:
+                // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
+                // as well as this code snippet by majikayogames on GitHub
+                // https://gist.github.com/majikayogames/cf013c3091e9a313e322889332eca109
+                Dictionary<RigidBody3D, RigidBodyPusher> currentFrameRigidBodyPushers = [];
+                for (int i = 0; i < body.GetSlideCollisionCount(); i++)
+                {
+                    KinematicCollision3D collision = body.GetSlideCollision(i);
+                    if (collision.GetCollider() is RigidBody3D rigidBody)
+                    {
+                        RigidBodyPusher pusher;
+
+                        Vector3 collisionNormal = collision.GetNormal();
+                        Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition;
+
+                        // CALCULATIONS FOR RIGIDBODY3D ATTEMPTS TO PUSH CHARACTER //
+
+                        // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
+                        // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
+                        // is travelling towards the character.
+                        float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(-collisionNormal));
+                        float massRatio = rigidBody.Mass / Mass;
+
+                        Vector3 characterPushForce = collisionNormal * characterVelocityDiff * massRatio * CharacterPushForceMultiplier;
+
+                        // Some rigid bodies absorb force on impact. Account for this.
+                        PhysicsMaterial rigidBodyPhysicsMaterial = rigidBody.PhysicsMaterialOverride;
+                        if (rigidBodyPhysicsMaterial != null) characterPushForce *= 1f - rigidBodyPhysicsMaterial.Bounce;
+
+                        /////////////////////////////////////////////////////////////
+
+                        // CALCULATIONS FOR CHARACTER ATTEMPTS TO PUSH RIGID BODY 3D //
+
+                        Vector3 rigidBodyPushDirection = -collisionNormal;
+
+                        // The amount in which rigidBody.Velocity has to change by to match pushDirection.
+                        // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
+                        float diffToRigidBodyPushDirection = Math.Max(0f, finalVelocity.Dot(rigidBodyPushDirection) - rigidBody.LinearVelocity.Dot(rigidBodyPushDirection));
+
+                        // If rigidBody has more mass, it should be harder to push.
+                        float reciprocatedMassRatio = Mass / rigidBody.Mass;
+
+                        // Put it together
+                        Vector3 rigidBodyPushForce = rigidBodyPushDirection * diffToRigidBodyPushDirection * reciprocatedMassRatio * ForceMultiplier;
+
+                        ///////////////////////////////////////////////////////////////
+
+                        // Ensure that the numbers used for pushing the character and the RigidBody3D
+                        // correspond to the collision point that is closest to the RigidBody3D
+                        if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
+                        {
+                            Vector3 centerOfMass = rigidBody.CenterOfMass;
+                            if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
+                            {
+                                pusher.PositionOffset = forcePositionOffset;
+                                pusher.PushForce = rigidBodyPushForce;
+                                pusher.Character = Body;
+                                pusher.CharacterPushForce = characterPushForce;
+                            }
+                        }
+                        else
+                        {
+                            pusher = new RigidBodyPusher
+                            {
+                                Body = rigidBody,
+                                PositionOffset = forcePositionOffset,
+                                PushForce = rigidBodyPushForce,
+                                Character = Body,
+                                CharacterPushForce = characterPushForce
+                            };
+
+                            currentFrameRigidBodyPushers.Add(rigidBody, pusher);
+                        }
+                    }
+                }
+
+                // Do the actual character and RigidBody3D pushing.
+                foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
+                {
+                    RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
+                    finalVelocity += characterPushData.VelocityChange;
+
+                    pusher.Push();
+                }
+
+                // Move the character.
                 body.Velocity = finalVelocity;
                 body.MoveAndSlide();
 
-                //logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
-
-                // update CurrentBodyState according to the character's actual velocity and the values of IsJumping and IsClimbing
-                Vector3 actualVelocity = body.Velocity; //body.GetRealVelocity();
-
-                // To keep things smooth, we want to store the character velocity for this physics frame
-                // after MoveAndSlide() has modified the velocity
-                LastVelocity = actualVelocity;
-
-                if (IsJumping && actualVelocity.Y > 0)
+                // Update current body state.
+                // We use the character's real velocity here because it gives a more accurate description of how the character
+                // is currently moving, especially for vertical movement.
+                if (IsJumping && realVelocity.Y > 0)
                 {
                     // Jumping is placed first in line so that jumping can affect climbing
                     CurrentBodyState = BodyState.Jumping;
@@ -796,15 +933,15 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 {
                     CurrentBodyState = BodyState.Climbing;
                 }
-                else if (IsJumping == false && actualVelocity.Y > 0)
+                else if (IsJumping == false && realVelocity.Y > 0)
                 {
                     CurrentBodyState = BodyState.Rising;
                 }
-                else if (actualVelocity.Y < 0)
+                else if (realVelocity.Y < 0)
                 {
                     CurrentBodyState = BodyState.Falling;
                 }
-                else if ((actualVelocity.X != 0 || actualVelocity.Z != 0) && IsOnFloor())
+                else if ((realVelocity.X != 0 || realVelocity.Z != 0) && IsOnFloor())
                 {
                     if (RightValue != 0 || ForwardValue != 0)
                     {
@@ -821,38 +958,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 }
             }
         }
-
-        /// <summary>
-        /// Callback to associate with the normal process step in the current scene tree
-        /// </summary>
-        /// <param name="delta"></param>
-        /*
-        public void HandleProcessStep(double delta)
-        {
-            BodyRotator rotator = Rotator;
-
-            // Only rotate if the rotation if fast turn is enabled or when the character is moving
-            if (rotator != null)
-            {
-                if (IsFastTurnEnabled)
-                {
-                    // Set the angle to the camera's yaw
-                    rotator.Yaw = GetYaw();
-                    rotator.Update(delta);
-                }
-                else if (ForwardValue != 0 || RightValue != 0)
-                {
-                    // Thanks to Godot 4.0 .NET thirdperson controller by vaporvee for helping me figure this one out
-                    // The extra radians are added on top of the original camera yaw, since
-                    // the direction of the character should be determined by the yaw corresponding to the move vector
-                    // relative to the camera yaw.
-                    rotator.Yaw = GetYaw() + (float)Math.Atan2(-RightValue, -ForwardValue);
-                    rotator.GradualTurnEnabled = IsJumping || (!IsClimbing);
-                    rotator.Update(delta);
-                }
-            }
-        }
-        */
 
         /// <summary>
         /// Disposes of this <see cref="BaseMover"/>
@@ -878,14 +983,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             HandlePhysicsStep(delta);
             base._PhysicsProcess(delta);
         }
-
-        /*
-        public override void _Process(double delta)
-        {
-            HandleProcessStep(delta);
-            base._Process(delta);
-        }
-        */
 
         /// <summary>
         /// Event that's raised when the character being moved by this <see cref="BaseMover"/> changes.

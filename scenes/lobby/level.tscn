@@ -1,15 +1,19 @@
-[gd_scene load_steps=61 format=3 uid="uid://dqjghdruydyeo"]
+[gd_scene load_steps=66 format=3 uid="uid://dqjghdruydyeo"]
 
 [ext_resource type="Material" uid="uid://bq3d6llinnd1i" path="res://textures/moveable_object_indicator.tres" id="1_x3ong"]
 [ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_065hl"]
 [ext_resource type="FontFile" uid="uid://b35ldnmoo353w" path="res://addons/fonts/overpass/static/Overpass-Bold.ttf" id="3_7vwr2"]
 [ext_resource type="Texture2D" uid="uid://dcxkj8m3ltdl8" path="res://addons/kenney_prototype_textures/dark/texture_03.png" id="3_mqd1l"]
 [ext_resource type="Texture2D" uid="uid://3ycuod8up64p" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="4_2jpqx"]
+[ext_resource type="PackedScene" uid="uid://qsfj4a2nteub" path="res://scenes/lobby/pushable_object_grounds.tscn" id="4_hnbc4"]
 [ext_resource type="Material" uid="uid://27np65wgewr4" path="res://scenes/lobby/shape_kit_texture.tres" id="4_xv8fq"]
 [ext_resource type="Material" uid="uid://bm0ukyda3pfcc" path="res://textures/ladder_indicator.tres" id="5_efv4u"]
+[ext_resource type="PackedScene" uid="uid://d2ucpyoistfex" path="res://scenes/lobby/fast_rolling_ball.tscn" id="5_tcnbc"]
 [ext_resource type="FontFile" uid="uid://bseob0pnt3rg0" path="res://addons/fonts/overpass/static/Overpass-Regular.ttf" id="6_1tuk3"]
+[ext_resource type="PackedScene" uid="uid://de3srdhlm3ku8" path="res://scenes/lobby/wallhop_test.tscn" id="9_0j8si"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yudit"]
+friction = 0.15
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e5b6p"]
 
@@ -59,6 +63,17 @@ emission = Color(0.419608, 0.356863, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yb2eo"]
 albedo_color = Color(1, 0.862745, 0.360784, 1)
+emission_enabled = true
+emission = Color(1, 0.862745, 0.360784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfv5x"]
+albedo_color = Color(0.196078, 0.658824, 0.321569, 1)
+emission_enabled = true
+emission = Color(0.196078, 0.658824, 0.321569, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcnbc"]
+transparency = 1
+albedo_color = Color(1, 0.861333, 0.36, 0.25098)
 emission_enabled = true
 emission = Color(1, 0.862745, 0.360784, 1)
 
@@ -197,7 +212,7 @@ metadata/destination_node_path = NodePath("..")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 7.5, -15.5)
-mass = 0.01
+mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_yudit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RigidBody3D"]
@@ -210,7 +225,7 @@ skeleton = NodePath("../..")
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, -22.5)
-mass = 0.01
+mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_yudit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/RigidBody3D2"]
@@ -265,7 +280,7 @@ shape = SubResource("CylinderShape3D_0o4nm")
 
 [node name="Conveyor" type="StaticBody3D" parent="Interactives"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, -18)
-constant_linear_velocity = Vector3(0, 0, 50)
+constant_linear_velocity = Vector3(0, 0, 70)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/Conveyor"]
 material_override = ExtResource("5_efv4u")
@@ -324,6 +339,49 @@ shape = SubResource("BoxShape3D_dv07x")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/StartEndTeleporter/Destination/Platform/CollisionShape3D"]
 material_override = SubResource("StandardMaterial3D_yb2eo")
 mesh = SubResource("BoxMesh_mu0vs")
+
+[node name="TeleporterToRollingBall" type="Node3D" parent="Interactives"]
+
+[node name="_Interactive" type="Node" parent="Interactives/TeleporterToRollingBall"]
+metadata/type = "StartEndTeleporter"
+metadata/should_set_rotation = true
+metadata/teleports_on_top = true
+metadata/destination_node_path = NodePath("../Destination")
+metadata/start_node_paths = [NodePath("../StartNodes/Start0")]
+metadata/teleports_player = true
+
+[node name="StartNodes" type="Node3D" parent="Interactives/TeleporterToRollingBall"]
+
+[node name="Start0" type="Area3D" parent="Interactives/TeleporterToRollingBall/StartNodes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.75, 6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/TeleporterToRollingBall/StartNodes/Start0"]
+shape = SubResource("BoxShape3D_dv07x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/TeleporterToRollingBall/StartNodes/Start0/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_nfv5x")
+mesh = SubResource("BoxMesh_mu0vs")
+
+[node name="Destination" type="Node3D" parent="Interactives/TeleporterToRollingBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 1, 14.5)
+
+[node name="Platform" type="RigidBody3D" parent="Interactives/TeleporterToRollingBall/Destination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactives/TeleporterToRollingBall/Destination/Platform"]
+shape = SubResource("BoxShape3D_dv07x")
+disabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactives/TeleporterToRollingBall/Destination/Platform/CollisionShape3D"]
+material_override = SubResource("StandardMaterial3D_tcnbc")
+mesh = SubResource("BoxMesh_mu0vs")
+
+[node name="PushableObjectGrounds" parent="Interactives" instance=ExtResource("4_hnbc4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, -16)
+
+[node name="FastRollingBall" parent="Interactives" instance=ExtResource("5_tcnbc")]
+transform = Transform3D(-3.78552e-08, 2.18557e-08, 1, 0.5, 0.866025, 0, -0.866025, 0.5, -4.37114e-08, -44, 25, -40)
 
 [node name="SpinningMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
@@ -751,6 +809,23 @@ mesh = SubResource("PrismMesh_335nw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/WelcomeSign/Wedge2"]
 shape = SubResource("ConcavePolygonShape3D_a7o8m")
+
+[node name="WallhopTest" parent="StaticObjects" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 2.5, -43)
+
+[node name="LodgeTest" type="Node3D" parent="StaticObjects"]
+
+[node name="WallhopTest" parent="StaticObjects/LodgeTest" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.5, -42)
+
+[node name="WallhopTest2" parent="StaticObjects/LodgeTest" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2.5, -44)
+
+[node name="WallhopTest3" parent="StaticObjects/LodgeTest" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6.5, -44)
+
+[node name="WallhopTest4" parent="StaticObjects/LodgeTest" instance=ExtResource("9_0j8si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6.5, -42)
 
 [node name="Music" type="Node3D" parent="."]
 

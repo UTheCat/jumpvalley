@@ -101,10 +101,18 @@ toggle_framerate_visibility={
 
 locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation", "res://strings/primary_level_menu.en.translation", "res://strings/music_panel.en.translation", "res://strings/general.en.translation", "res://strings/settings_menu.en.translation")
 
+[layer_names]
+
+3d_physics/layer_1="primary"
+3d_physics/layer_2="players"
+3d_physics/layer_3="moving_platform_no_move_player"
+
 [physics]
 
 common/physics_ticks_per_second=240
 common/max_physics_steps_per_frame=32
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/areas_detect_static_bodies=true
 3d/default_gravity=98.1
 common/enable_pause_aware_picking=true
 

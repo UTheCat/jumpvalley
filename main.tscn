@@ -143,6 +143,7 @@ visible = false
 layout_mode = 1
 
 [node name="Character" parent="." instance=ExtResource("9_1wvm3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Levels" type="Node3D" parent="."]
 metadata/initialization_level = "res://levels/shape_variety/"
