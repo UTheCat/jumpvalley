@@ -10,7 +10,7 @@ size = Vector3(100, 1, 10)
 size = Vector3(100, 1, 10)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_30uw7"]
-radius = 4.0
+radius = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fxi5"]
 albedo_color = Color(0.5, 0.5, 0.5, 1)
@@ -19,8 +19,8 @@ uv1_triplanar = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_2kmha"]
 material = SubResource("StandardMaterial3D_3fxi5")
-radius = 4.0
-height = 8.0
+radius = 2.0
+height = 4.0
 
 [node name="FastRollingBall" type="Node3D"]
 
@@ -33,12 +33,12 @@ shape = SubResource("BoxShape3D_41y5u")
 material_override = ExtResource("1_n763a")
 mesh = SubResource("BoxMesh_rbx7a")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 4.5, 0)
-mass = 200.0
+[node name="Ball" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 2.5, 0)
+mass = 526.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
 shape = SubResource("SphereShape3D_30uw7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball/CollisionShape3D"]
 mesh = SubResource("SphereMesh_2kmha")
