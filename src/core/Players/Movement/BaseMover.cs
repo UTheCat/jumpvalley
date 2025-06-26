@@ -954,25 +954,27 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
                         // is travelling towards the character.
                         float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(-collisionNormal));
-                        float reciprocatedMassRatio = rigidBody.Mass / Mass;
+                        float massRatio = rigidBody.Mass / Mass;
 
-                        Vector3 characterPushForce = collisionNormal * characterVelocityDiff * reciprocatedMassRatio * CharacterPushForceMultiplier;
+                        Vector3 characterPushForce = collisionNormal * characterVelocityDiff * massRatio * CharacterPushForceMultiplier;
 
                         // Some rigid bodies absorb force on impact. Account for this.
                         PhysicsMaterial rigidBodyPhysicsMaterial = rigidBody.PhysicsMaterialOverride;
                         if (rigidBodyPhysicsMaterial != null) characterPushForce *= 1f - rigidBodyPhysicsMaterial.Bounce;
 
-                        Vector3 pushDirection = -collisionNormal;
+                        Vector3 rigidBodyPushDirection = -collisionNormal;
+                        
+                        // Character attempts to push RigidBody3D
 
                         // The amount in which rigidBody.Velocity has to change by to match pushDirection.
                         // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
-                        float diffToPushDirection = Math.Max(0f, finalVelocity.Dot(pushDirection) - rigidBody.LinearVelocity.Dot(pushDirection));
+                        float diffToPushDirection = Math.Max(0f, finalVelocity.Dot(rigidBodyPushDirection) - rigidBody.LinearVelocity.Dot(rigidBodyPushDirection));
 
                         // If rigidBody has more mass, it should be harder to push.
-                        float massRatio = Mass / rigidBody.Mass;
+                        float reciprocatedMassRatio = Mass / rigidBody.Mass;
 
                         // Put it together
-                        Vector3 pushForce = pushDirection * diffToPushDirection * massRatio * ForceMultiplier;
+                        Vector3 pushForce = rigidBodyPushDirection * diffToPushDirection * reciprocatedMassRatio * ForceMultiplier;
 
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
