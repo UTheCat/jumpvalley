@@ -361,8 +361,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
         private Vector2 lastXZVelocity = Vector2.Zero;
 
-        private float lastVerticalVelocity = 0f;
-
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
         /// </summary>
@@ -475,27 +473,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             lastXZVelocity = newXZVelocity;
 
             return newXZVelocity;
-        }
-
-        /// <summary>
-        /// Updates vertical velocity of the character based on physics framerate and vertical acceleration.
-        /// Intended to be called every physics frame.
-        /// </summary>
-        /// <param name="physicsFrameDelta">The time it took to complete the most recent physics frame in seconds.</param>
-        /// <param name="verticalAcceleration">
-        /// Change in vertical velocity in meters per second squared.
-        /// Should be negative when trying to simulate gravity.
-        /// </param>
-        /// <returns>
-        /// The updated vertical velocity in meters per second.
-        /// </returns>
-        private float UpdateVerticalVelocity(float physicsFrameDelta, float verticalAcceleration)
-        {
-            float newVerticalVelocity = lastVerticalVelocity + verticalAcceleration * physicsFrameDelta;
-
-            lastVerticalVelocity = newVerticalVelocity;
-
-            return newVerticalVelocity;
         }
 
         /// <summary>
