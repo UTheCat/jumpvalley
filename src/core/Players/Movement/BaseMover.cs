@@ -75,11 +75,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
 
-        /// <summary>
-        /// The number of consecutive frames that a rigid body has to remain untouched in order for its RigidBodyPusher to be removed from <see cref="rigidBodyPushers"/> 
-        /// </summary>
-        private static readonly int RIGID_BODY_MAX_CONSECUTIVE_FRAMES_UNTOUCHED = 0;
-
         private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
@@ -369,8 +364,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         private Vector2 lastXZVelocity = Vector2.Zero;
 
         private float lastVerticalVelocity = 0f;
-
-        private Dictionary<RigidBody3D, RigidBodyPusher> rigidBodyPushers = [];
 
         /// <summary>
         /// Constructs a new instance of BaseMover that can be used to handle character movement
@@ -1030,7 +1023,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             };
 
                             currentFrameRigidBodyPushers.Add(rigidBody, pusher);
-                            rigidBodyPushers.Add(rigidBody, pusher);
                         }
                     }
                 }
@@ -1047,15 +1039,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Move the character.
                 body.Velocity = finalVelocity;
                 body.MoveAndSlide();
-
-                // Update ConsecutiveFramesUntouched count for each RigidBodyPusher in the rigidBodyPushers list,
-                // and remove from the list as necessary.
-                foreach (RigidBodyPusher pusher in rigidBodyPushers.Values)
-                {
-                    pusher.ConsecutiveFramesUntouched += 1;
-
-                    if (pusher.ConsecutiveFramesUntouched >= RIGID_BODY_MAX_CONSECUTIVE_FRAMES_UNTOUCHED) rigidBodyPushers.Remove(pusher.Body);
-                }
 
                 // Update current body state.
                 // We use the character's real velocity here because it gives a more accurate description of how the character
