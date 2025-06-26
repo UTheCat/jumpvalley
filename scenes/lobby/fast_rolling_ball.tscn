@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2ucpyoistfex"]
+
+[ext_resource type="Material" uid="uid://c4m68khblbrv5" path="res://levels/shape_variety/textures/floor5.tres" id="1_n763a"]
+[ext_resource type="Texture2D" uid="uid://d0tpyep45doca" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_5755o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41y5u"]
+size = Vector3(100, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rbx7a"]
+size = Vector3(100, 1, 10)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_30uw7"]
+radius = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fxi5"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+albedo_texture = ExtResource("2_5755o")
+uv1_triplanar = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_2kmha"]
+material = SubResource("StandardMaterial3D_3fxi5")
+radius = 4.0
+height = 8.0
+
+[node name="FastRollingBall" type="Node3D"]
+
+[node name="Slope" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope"]
+shape = SubResource("BoxShape3D_41y5u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Slope/CollisionShape3D"]
+material_override = ExtResource("1_n763a")
+mesh = SubResource("BoxMesh_rbx7a")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 4.5, 0)
+mass = 200.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_30uw7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/CollisionShape3D"]
+mesh = SubResource("SphereMesh_2kmha")
