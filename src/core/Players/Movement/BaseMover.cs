@@ -986,7 +986,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
                         // is travelling towards the character.
                         float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(-collisionNormal));
-                        Console.WriteLine($"characterVelocityDiff: {characterVelocityDiff}");
                         float reciprocatedMassRatio = rigidBody.Mass / Mass;
 
                         Vector3 characterPushForce = collisionNormal * characterVelocityDiff * reciprocatedMassRatio * CharacterPushForceMultiplier;
@@ -1006,10 +1005,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         // Put it together
                         Vector3 pushForce = pushDirection * diffToPushDirection * massRatio * ForceMultiplier;
-
-#if DEBUG_PUSH_FORCE_CALCULATION
-                        Console.WriteLine($"Calculated push force for {rigidBody.Name} to be {pushForce} ({pushForce.Length()} Newtons)\n\tNegative collision normal: {-collisionNormal}\n\tdiffToPushDirection (min of 0): {Mathf.RadToDeg(diffToPushDirection)}\n\tMass ratio: {massRatio}");
-#endif
 
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
@@ -1041,24 +1036,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 }
 
                 // Do the actual character and RigidBody3D pushing.
-#if DEBUG_RIGIDBODY3D_PUSHING
-                if (currentFrameRigidBodyPushers.Count > 0) Console.WriteLine("---- ITERATING THROUGH RIGIDBODYPUSHERS ----");
-#endif
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
                     RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
                     finalVelocity += characterPushData.VelocityChange;
-                    Console.WriteLine($"character extra velocity change {characterPushData.VelocityChange}");
 
                     pusher.Push();
-#if DEBUG_RIGIDBODY3D_PUSHING
-                    Console.WriteLine($"Pushed {pusher.Body.Name}\n\tPush force: {pusher.PushForce}\n\tBody's current velocity: {pusher.Body.LinearVelocity}\n\tWhere force was applied (relative to body origin): {pusher.PositionOffset}");
-#endif
                 }
-
-#if DEBUG_RIGIDBODY3D_PUSHING
-                if (currentFrameRigidBodyPushers.Count > 0) Console.WriteLine("--------------------------------------------");
-#endif
 
                 // Move the character.
                 body.Velocity = finalVelocity;
