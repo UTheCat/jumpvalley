@@ -873,8 +873,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     fDelta
                 );
                 Vector3 finalVelocity = new Vector3(newXZvelocity.X, moveVelocity.Y, newXZvelocity.Y);
-                //logger.Print($"Current velocity: {lastVelocity} | Velocity after MoveAndSlide: {body.Velocity}");
-
                 Vector3 realVelocity = body.GetRealVelocity();
 
                 // Store the current velocity for the next physics frame to use.
