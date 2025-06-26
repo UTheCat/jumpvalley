@@ -977,6 +977,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         ///////////////////////////////////////////////////////////////
 
+                        // Ensure that the numbers used for pushing the character and the RigidBody3D
+                        // correspond to the collision point that is closest to the RigidBody3D
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
                             Vector3 centerOfMass = rigidBody.CenterOfMass;
