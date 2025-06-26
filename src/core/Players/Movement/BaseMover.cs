@@ -975,7 +975,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         RigidBodyPusher pusher;
 
                         Vector3 collisionNormal = collision.GetNormal();
-                        //Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition + collisionNormal * collision.GetDepth();
                         Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition;
 
                         // RigidBody3D attempts to push character
@@ -995,38 +994,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // Some rigid bodies absorb force on impact. Account for this.
                         PhysicsMaterial rigidBodyPhysicsMaterial = rigidBody.PhysicsMaterialOverride;
                         if (rigidBodyPhysicsMaterial != null) characterPushForce *= 1f - rigidBodyPhysicsMaterial.Bounce;
-
-                        // Works, but slightly buggy. Friction really needs to be implemented properly if we want to this calculate push force this way.
-                        //Vector3 pushForce = requestedVelocityAfterMove.Normalized() * Mass * acceleration * fDelta;
-
-                        // Also works, but still slightly buggy.
-                        // With this push force calculation, moving balls by standing on one of their sloped positions causes the balls and the character to fly around.
-                        //Vector3 pushForce = -collisionNormal * Mass * acceleration * fDelta;
-
-                        // Seems to work the best so far.
-                        // This one also takes the character's current travel speed into account, making push force a little more realistic.
-                        // This formula also has the same behavior with moving balls as mentioned above, but oh well.
-                        // At the end of the day, 3D platformers typically don't have realistic physics anyways.
-                        //Vector3 pushForce = -collisionNormal * Mass * acceleration * fDelta * newXZvelocity.Length()
-
-                        // We could also try only using move velocity
-                        // float currentMass = Mass; // To prevent race conditions
-                        // Vector3 pushForce = moveVelocity.Normalized() * currentMass * acceleration * fDelta * new Vector3(
-                        //     moveVelocity.X,
-                        //     Mass,
-                        //     moveVelocity.Z
-                        // ).Length() / new Vector3(Speed, currentMass, 0).Length();
-
-                        // or more accurately
-                        //Vector3 pushForce = moveVelocity.Normalized() * Mass * acceleration * fDelta;
-                        //Console.WriteLine($"normalized move velocity: {moveVelocity.Normalized()}");
-
-                        // Based on some info online as well as the implementation of RigidBody3D.ApplyForce(),
-                        // this seems like the best approach
-
-                        // We only want to push downwards or upwards if the absolute value of the character's vertical velocity
-                        // is greater than the absolute value of the vertical velocity of the object to push.
-                        //collisionNormal.Y *= Math.Max(0f, realVelocity.Y / rigidBody.LinearVelocity.Y);
 
                         Vector3 pushDirection = -collisionNormal;
 
