@@ -142,6 +142,7 @@ anchor_right = 1.0
 offset_left = 10.0
 offset_top = 16.0
 offset_bottom = 70.0
+grow_horizontal = 2
 
 [node name="Label" type="Label" parent="MenuTitle"]
 layout_mode = 1
