@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfirwq7r0jq20"]
+[gd_scene load_steps=10 format=3 uid="uid://dfirwq7r0jq20"]
 
 [ext_resource type="Texture2D" uid="uid://boixt28udj8fd" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="1_mdcbe"]
 [ext_resource type="FontFile" uid="uid://cw16kw7wcb0hy" path="res://addons/fonts/nunito/static/Nunito-Bold.ttf" id="2_34a5w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://df6f5u3lobv06" path="res://addons/icons/volume_down_48dp.svg" id="3_yrcgy"]
 [ext_resource type="FontFile" uid="uid://b6a3cplnxqrgp" path="res://addons/fonts/nunito/static/Nunito-Regular.ttf" id="6_4bacp"]
 [ext_resource type="Texture2D" uid="uid://dwajwt8qmbnv5" path="res://addons/icons/music_note_white_48dp.svg" id="6_345xr"]
+[ext_resource type="PackedScene" uid="uid://olrc8iep31yb" path="res://gui/close_button.tscn" id="7_6x42i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vkvd5"]
 bg_color = Color(0.222698, 0.269022, 0.372289, 1)
@@ -76,9 +77,11 @@ anchor_left = 0.4
 anchor_right = 1.0
 offset_top = 93.0
 offset_bottom = 123.0
+grow_vertical = 0
 theme_override_fonts/font = ExtResource("6_4bacp")
-theme_override_font_sizes/font_size = 28
-text = "Song Name"
+theme_override_font_sizes/font_size = 26
+text = "Very Long Song Name Yeah."
+autowrap_mode = 2
 
 [node name="Artists" type="Label" parent="."]
 layout_mode = 1
@@ -134,6 +137,7 @@ vertical_alignment = 1
 
 [node name="MenuTitle" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 10
 anchor_right = 1.0
 offset_left = 10.0
 offset_top = 16.0
@@ -159,3 +163,15 @@ anchor_bottom = 1.0
 offset_right = 56.0
 texture = ExtResource("6_345xr")
 stretch_mode = 3
+
+[node name="CloseButton" parent="." instance=ExtResource("7_6x42i")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -46.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 0
