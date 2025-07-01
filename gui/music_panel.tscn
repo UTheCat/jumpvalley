@@ -74,25 +74,26 @@ expand_mode = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
-anchor_right = 1.0
+anchor_right = 0.95
 offset_top = 93.0
 offset_bottom = 123.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("6_4bacp")
 theme_override_font_sizes/font_size = 26
-text = "Very Long Song Name Yeah."
+text = "Song Name"
 autowrap_mode = 2
 
 [node name="Artists" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
-anchor_right = 1.0
+anchor_right = 0.95
 offset_top = 130.0
 offset_bottom = 155.0
 theme_override_fonts/font = ExtResource("6_4bacp")
 theme_override_font_sizes/font_size = 20
 text = "Artists"
+autowrap_mode = 2
 
 [node name="Volume" type="Control" parent="."]
 layout_mode = 1
@@ -100,8 +101,8 @@ anchor_left = 0.4
 anchor_top = 1.0
 anchor_right = 0.9
 anchor_bottom = 1.0
-offset_top = -84.0
-offset_bottom = -48.0
+offset_top = -70.0
+offset_bottom = -34.0
 
 [node name="Slider" type="HSlider" parent="Volume"]
 layout_mode = 1
