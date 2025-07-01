@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://xn35xb7fekfl"]
+[gd_scene load_steps=15 format=3 uid="uid://xn35xb7fekfl"]
 
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="1_h3ito"]
 [ext_resource type="StyleBox" uid="uid://g0x41qvn7p6p" path="res://styles/bottom_bar/main_menu_btn/hover.tres" id="2_h3ka7"]
@@ -15,12 +15,28 @@ corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 
+[sub_resource type="InputEventKey" id="InputEventKey_qdmc3"]
+device = -1
+keycode = 96
+unicode = 96
+
+[sub_resource type="Shortcut" id="Shortcut_im0ir"]
+events = [SubResource("InputEventKey_qdmc3")]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_564ww"]
 bg_color = Color(0.2652, 0.417293, 0.68, 1)
 corner_radius_top_left = 18
 corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
+
+[sub_resource type="InputEventKey" id="InputEventKey_im0ir"]
+device = -1
+ctrl_pressed = true
+keycode = 77
+
+[sub_resource type="Shortcut" id="Shortcut_07igq"]
+events = [SubResource("InputEventKey_im0ir")]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhyqc"]
 bg_color = Color(0, 0, 0, 0.501961)
@@ -57,6 +73,8 @@ focus_mode = 0
 theme_override_styles/hover = ExtResource("2_h3ka7")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3t1g3")
 theme_override_styles/normal = ExtResource("1_h3ito")
+shortcut = SubResource("Shortcut_im0ir")
+shortcut_in_tooltip = false
 icon = ExtResource("3_ud5tf")
 icon_alignment = 1
 
@@ -67,6 +85,8 @@ focus_mode = 0
 theme_override_styles/hover = ExtResource("5_sy6f8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_564ww")
 theme_override_styles/normal = ExtResource("4_jcyjp")
+shortcut = SubResource("Shortcut_07igq")
+shortcut_in_tooltip = false
 icon = ExtResource("6_t8du5")
 icon_alignment = 1
 
