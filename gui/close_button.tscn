@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://olrc8iep31yb"]
+[gd_scene load_steps=6 format=3 uid="uid://olrc8iep31yb"]
 
 [ext_resource type="Texture2D" uid="uid://xfjrsfu0kh4v" path="res://addons/icons/close_white_48dp.svg" id="1_8fo8b"]
+[ext_resource type="Script" uid="uid://dbogmufc8oc56" path="res://gui/close_button.gd" id="1_gq2pe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8psry"]
 bg_color = Color(0.678431, 0.145098, 0.25098, 1)
@@ -21,6 +22,7 @@ offset_right = 36.0
 offset_bottom = 36.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_8psry")
 shortcut = SubResource("Shortcut_gq2pe")
+script = ExtResource("1_gq2pe")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
