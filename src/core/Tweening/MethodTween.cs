@@ -76,7 +76,7 @@ namespace UTheCat.Jumpvalley.Core.Tweening
         /// <summary>
         /// The speed of the tweening where 1 represents normal speed, 0 represents freezing, and -1 represents backwards at normal speed.
         /// </summary>
-        public float Speed = 1;
+        public double Speed = 1;
 
         /// <summary>
         /// Stopwatch used to keep track of the tweening timestamp
@@ -89,7 +89,7 @@ namespace UTheCat.Jumpvalley.Core.Tweening
         private double lastTimestamp = 0;
 
         private bool _isPlaying = false;
-        private float _currentFraction = 0;
+        private double _currentFraction = 0;
         private double _elapsedTime = 0;
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace UTheCat.Jumpvalley.Core.Tweening
         /// <summary>
         /// The current fraction of the tween that has been completed so far, typically in the range of [0, 1].
         /// </summary>
-        public float CurrentFraction
+        public double CurrentFraction
         {
             get => _currentFraction;
             private set
@@ -150,7 +150,7 @@ namespace UTheCat.Jumpvalley.Core.Tweening
                 else
                 {
                     // get current fraction based on start and end values, along with easing modifiers
-                    CurrentFraction = (float)Tween.InterpolateValue(0f, 1f, value, TransitionTime, TransitionType, EaseType);
+                    CurrentFraction = Tween.InterpolateValue(0.0, 1.0, value, TransitionTime, TransitionType, EaseType).AsDouble();
                 }
             }
         }
@@ -235,14 +235,14 @@ namespace UTheCat.Jumpvalley.Core.Tweening
         /// <summary>
         /// Event that gets raised on each step of the tween until the animation pauses or finishes.
         /// <br/>
-        /// The <see cref="float"/> argument of the event is the current fraction of the tween that has been completed so far, typically in the range of [0, 1].
+        /// The <see cref="double"/> argument of the event is the current fraction of the tween that has been completed so far, typically in the range of [0, 1].
         /// <br/>
         /// <example>
         /// Example usage:
         /// <code>
         /// MethodTween t = new MethodTween();
         /// 
-        /// public void HandleTweenStep(object sender, float frac)
+        /// public void HandleTweenStep(object sender, double frac)
         /// {
         ///     Console.WriteLine($"The current fraction of the tween is {frac}");
         /// }
@@ -254,12 +254,12 @@ namespace UTheCat.Jumpvalley.Core.Tweening
         /// </code>
         /// </example>
         /// </summary>
-        public event EventHandler<float> OnStep;
+        public event EventHandler<double> OnStep;
 
         // Event raising function for OnStep
-        protected void RaiseOnStep(float frac)
+        protected void RaiseOnStep(double frac)
         {
-            EventHandler<float> onStep = OnStep;
+            EventHandler<double> onStep = OnStep;
             if (onStep != null)
             {
                 onStep(this, frac);
