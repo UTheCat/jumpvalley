@@ -78,7 +78,7 @@ namespace UTheCat.Jumpvalley.App.Gui
                     FinalValue = 1.0,
                     Speed = 1f
                 };
-                opacityTween.OnStep += (object _o, float frac) =>
+                opacityTween.OnStep += (object _o, double _frac) =>
                 {
                     float opacity = (float)opacityTween.GetCurrentValue();
                     gui.Visible = opacity > 0;

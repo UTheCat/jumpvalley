@@ -23,7 +23,7 @@ namespace UTheCat.Jumpvalley.App.Testing
             Reset();
             UpdateText();
 
-            tween.OnStep += (object _o, float frac) =>
+            tween.OnStep += (object _o, double _frac) =>
             {
                 //Console.WriteLine($"MethodTween updated fraction: {frac}");
 
