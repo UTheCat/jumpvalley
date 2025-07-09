@@ -62,7 +62,7 @@ namespace UTheCat.Jumpvalley.Core.Gui
             {
                 InitialValue = 0
             };
-            opacityTween.OnStep += (object o, float frac) =>
+            opacityTween.OnStep += (object o, double _frac) =>
             {
                 float opacity = (float)opacityTween.GetCurrentValue();
                 panel.Visible = opacity > 0;

@@ -101,11 +101,11 @@ namespace UTheCat.Jumpvalley.App.Gui
             transparencyTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
             transparencyTween.InitialValue = 0;
             transparencyTween.FinalValue = 1;
-            transparencyTween.OnStep += (object o, float frac) =>
+            transparencyTween.OnStep += (object o, double frac) =>
             {
-                actualNode.Visible = frac > 0;
+                actualNode.Visible = frac > 0.0;
                 Color modulate = actualNode.Modulate;
-                modulate.A = frac;
+                modulate.A = (float)frac;
                 actualNode.Modulate = modulate;
             };
 
@@ -114,7 +114,7 @@ namespace UTheCat.Jumpvalley.App.Gui
                 backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
                 backgroundSizeTween.InitialValue = 40;
                 backgroundSizeTween.FinalValue = 0;
-                backgroundSizeTween.OnStep += (object o, float frac) =>
+                backgroundSizeTween.OnStep += (object o, double _frac) =>
                 {
                     float sizeOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
                     BackgroundControl.OffsetLeft = sizeOffset;

@@ -231,7 +231,7 @@ namespace UTheCat.Jumpvalley.App
                 InitialValue = 1.0,
                 FinalValue = 0.0
             };
-            introPanelFade.OnStep += (object _o, float frac) =>
+            introPanelFade.OnStep += (object _o, double _frac) =>
             {
                 float opacity = (float)introPanelFade.GetCurrentValue();
 

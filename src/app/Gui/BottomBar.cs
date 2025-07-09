@@ -127,7 +127,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             DescriptionOpacityTween.Tree = actualNodeTree;
             DescriptionOpacityTween.InitialValue = 0;
             DescriptionOpacityTween.FinalValue = 1;
-            DescriptionOpacityTween.OnStep += (object o, float frac) =>
+            DescriptionOpacityTween.OnStep += (object o, double _frac) =>
             {
                 float opacity = (float)DescriptionOpacityTween.GetCurrentValue();
 

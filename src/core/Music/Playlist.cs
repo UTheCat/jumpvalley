@@ -306,7 +306,7 @@ namespace UTheCat.Jumpvalley.Core.Music
                         FinalValue = 1
                     };
 
-                    currentTween.OnStep += (object o, float _frac) =>
+                    currentTween.OnStep += (object o, double _frac) =>
                     {
                         SceneTreeTween t = (SceneTreeTween)o;
                         SetLinearVolumeViaTween(t.GetCurrentValue());

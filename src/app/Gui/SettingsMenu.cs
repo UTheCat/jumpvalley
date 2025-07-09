@@ -69,7 +69,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             positionTween = new SceneTreeTween(0.25, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
             positionTween.InitialValue = -1;
             positionTween.FinalValue = 0;
-            positionTween.OnStep += (object o, float frac) =>
+            positionTween.OnStep += (object o, double _frac) =>
             {
                 float pos = (float)positionTween.GetCurrentValue();
                 menu.Visible = pos < 1f;
