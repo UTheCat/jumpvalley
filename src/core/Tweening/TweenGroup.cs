@@ -17,11 +17,6 @@ namespace UTheCat.Jumpvalley.Core.Tweening
     {
         private Dictionary<TKey, Tween> tweens = new Dictionary<TKey, Tween>();
 
-        public TweenGroup()
-        {
-
-        }
-
         public void Add(TKey key, Tween t)
         {
             if (tweens[key] == null)
