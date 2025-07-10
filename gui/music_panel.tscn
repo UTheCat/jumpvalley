@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://boixt28udj8fd" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="1_mdcbe"]
 [ext_resource type="FontFile" uid="uid://cw16kw7wcb0hy" path="res://addons/fonts/nunito/static/Nunito-Bold.ttf" id="2_34a5w"]
-[ext_resource type="Texture2D" uid="uid://ckibfgp0fh7ck" path="res://gui/music_panel_volume_grabber.svg" id="3_3a134"]
+[ext_resource type="Texture2D" uid="uid://ckibfgp0fh7ck" path="res://gui/grabber.svg" id="3_3a134"]
 [ext_resource type="Texture2D" uid="uid://df6f5u3lobv06" path="res://addons/icons/volume_down_48dp.svg" id="3_yrcgy"]
 [ext_resource type="FontFile" uid="uid://b6a3cplnxqrgp" path="res://addons/fonts/nunito/static/Nunito-Regular.ttf" id="6_4bacp"]
 [ext_resource type="Texture2D" uid="uid://dwajwt8qmbnv5" path="res://addons/icons/music_note_white_48dp.svg" id="6_345xr"]
