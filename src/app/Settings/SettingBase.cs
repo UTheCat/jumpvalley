@@ -39,12 +39,12 @@ namespace UTheCat.Jumpvalley.App.Settings
         /// </summary>
         public string ActionMapKey;
 
-        public object _value;
+        private object _value;
 
         /// <summary>
         /// The setting's value
         /// </summary>
-        public object Value
+        public virtual object Value
         {
             get => _value;
             set
