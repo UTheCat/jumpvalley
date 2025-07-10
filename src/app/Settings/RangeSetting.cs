@@ -1,45 +1,30 @@
+using System;
+
 using UTheCat.Jumpvalley.App.Settings;
 
 namespace UTheCat.Jumpvalley.App
 {
     /// <summary>
-    /// Numerical setting which has a minimum and maximum.
+    /// Numerical setting based on a defined minimum and maximum
     /// </summary>
-    public partial class RangeSetting : SettingBase
+    public partial class RangeSetting : SettingBase, IDisposable
     {
-        private double _increment = 0;
-
         /// <summary>
-        /// The setting's value will be rounded to a multiple of this number.
+        /// The Range instance (from the Godot API) that's handling this range setting.
+        /// To ensure consistency, don't directly set this object's Value property.
+        /// Instead, set this <see cref="RangeSetting"/>'s Value property. 
         /// </summary>
-        public double Increment
+        public Godot.Range RangeInstance { get; private set; } = new Godot.Range();
+
+        public override object Value
         {
-            get => _increment;
+            get => base.Value;
             set
             {
-                _increment = value;
-            }
-        }
+                if (!(value is float dValue)) throw new ArgumentException("This setting's value must be a double.");
 
-        private double _minValue = 0;
-
-        public double MinValue
-        {
-            get => _minValue;
-            set
-            {
-                _minValue = value;
-            }
-        }
-
-        private double _maxValue = 0;
-
-        public double MaxValue
-        {
-            get => _maxValue;
-            set
-            {
-                _maxValue = value;
+                RangeInstance.Value = dValue;
+                base.Value = RangeInstance.Value;
             }
         }
     }
