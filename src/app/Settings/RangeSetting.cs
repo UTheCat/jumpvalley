@@ -21,7 +21,7 @@ namespace UTheCat.Jumpvalley.App
             get => base.Value;
             set
             {
-                if (!(value is float dValue)) throw new ArgumentException("This setting's value must be a double.");
+                if (!(value is double dValue)) throw new ArgumentException("This setting's value must be a double.");
 
                 RangeInstance.Value = dValue;
                 base.Value = RangeInstance.Value;
