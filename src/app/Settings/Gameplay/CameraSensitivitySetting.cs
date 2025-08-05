@@ -8,7 +8,7 @@ namespace UTheCat.Jumpvalley.App.Settings.Gameplay
 
         public CameraSensitivitySetting(BaseCamera camera)
         {
-            Value = false;
+            Value = 1.0;
             Id = "camera_sensitivity";
             LocalizationId = "SETTINGS_CAMERA_SENSITIVITY";
             this.camera = camera;
