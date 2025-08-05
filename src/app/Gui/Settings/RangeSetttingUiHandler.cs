@@ -6,17 +6,19 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
     /// <summary>
     /// Handles the user-interface for ranged-based settings in the settings menu
     /// </summary>
-    public partial class RangeSettingUiHandler : IDisposable
+    public partial class RangeSettingUiHandler : SettingUiHandler, IDisposable
     {
         private RangeSetting setting;
         private Slider slider;
         private LineEdit lineEdit;
 
-        public RangeSettingUiHandler(RangeSetting setting, Node rangeSettingUi)
+        public RangeSettingUiHandler(RangeSetting setting, Node rangeSettingUi) : base(setting, rangeSettingUi)
         {
             this.setting = setting;
             slider = rangeSettingUi.GetNode<Slider>("Slider");
             lineEdit = rangeSettingUi.GetNode<LineEdit>("LineEdit");
+
+            setting.RangeInstance.Share(slider);
 
             lineEdit.PlaceholderText = $"{slider.MinValue}-{slider.MaxValue}";
 
@@ -24,7 +26,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
             lineEdit.TextChanged += OnLineEditValueChanged;
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             slider.ValueChanged -= OnSliderValueChanged;
             lineEdit.TextChanged -= OnLineEditValueChanged;
@@ -41,7 +43,11 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
             double newVal;
             if (double.TryParse(sVal, out newVal))
             {
-                slider.Value = newVal;
+                if (!slider.AllowLesser) newVal = Math.Max(slider.MinValue, newVal);
+                if (!slider.AllowGreater) newVal = Math.Min(slider.MaxValue, newVal);
+                slider.SetValueNoSignal(newVal);
+
+                setting.Value = newVal;
             }
         }
     }

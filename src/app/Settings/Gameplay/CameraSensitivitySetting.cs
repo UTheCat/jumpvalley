@@ -11,6 +11,11 @@ namespace UTheCat.Jumpvalley.App.Settings.Gameplay
             Value = 1.0;
             Id = "camera_sensitivity";
             LocalizationId = "SETTINGS_CAMERA_SENSITIVITY";
+
+            RangeInstance.MinValue = 0;
+            RangeInstance.MaxValue = 4;
+            RangeInstance.Step = 0.001;
+
             this.camera = camera;
         }
 
@@ -19,7 +24,10 @@ namespace UTheCat.Jumpvalley.App.Settings.Gameplay
             // Type-checking is performed in RangeSetting.Update()
             base.Update(newValue);
 
-            camera.PanningSensitivity = (float)newValue;
+            if (camera != null && newValue is double dVal)
+            {
+                camera.PanningSensitivity = (float)dVal;
+            }
         }
     }
 }
