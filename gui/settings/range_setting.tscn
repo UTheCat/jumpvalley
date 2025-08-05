@@ -7,6 +7,7 @@
 [node name="RangeSetting" type="Control"]
 custom_minimum_size = Vector2(0, 97)
 layout_mode = 3
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 97.0
 grow_horizontal = 2
