@@ -6,7 +6,7 @@ using UTheCat.Jumpvalley.App.Settings;
 namespace UTheCat.Jumpvalley.App.Gui.Settings
 {
     /// <summary>
-    /// Class that allows user input to change a setting
+    /// Class that allows user input to change an individual setting
     /// </summary>
     public partial class SettingUiHandler : Node, IDisposable
     {
