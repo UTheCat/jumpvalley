@@ -1,8 +1,6 @@
 using UTheCat.Jumpvalley.Core.Players.Camera;
 
-using UTheCat.Jumpvalley.App.Settings.Gameplay;
-
-namespace UTheCat.Jumpvalley.App.Settings.Display
+namespace UTheCat.Jumpvalley.App.Settings.Gameplay
 {
     /// <summary>
     /// Display settings for Jumpvalley
