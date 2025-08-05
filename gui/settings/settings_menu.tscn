@@ -45,6 +45,7 @@ offset_right = -54.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
@@ -68,6 +69,11 @@ layout_mode = 2
 theme_override_constants/separation = 16
 metadata/setting_category_scene = "res://gui/settings/setting_category.tscn"
 metadata/check_button_setting_scene = "res://gui/settings/check_button_setting.tscn"
+metadata/range_setting_scene = "res://gui/settings/range_setting.tscn"
+
+[node name="BottomPadding" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
 
 [node name="CloseButton" parent="." instance=ExtResource("2_rklti")]
 layout_mode = 1
