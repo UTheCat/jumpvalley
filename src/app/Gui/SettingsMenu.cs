@@ -162,10 +162,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         /// <summary>
         /// Generates the actual GUI nodes that will display the app's settings
         /// </summary>
-        public void Populate()
-        {
-            Populate(settings);
-        }
+        public void Populate() => Populate(settings);
 
         public void Dispose()
         {
@@ -174,6 +171,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             positionTween.Dispose();
             categoryScene.Dispose();
             checkButtonSettingScene.Dispose();
+            rangeSettingScene.Dispose();
 
             foreach (SettingUiHandler handler in settingUiHandlers) handler.Dispose();
 

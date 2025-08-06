@@ -27,5 +27,13 @@ namespace UTheCat.Jumpvalley.App
                 base.Value = RangeInstance.Value;
             }
         }
+
+        public override void Update(object newValue)
+        {
+            Console.WriteLine($"RangeSetting Update() called with value {(double)newValue}");
+            RangeInstance.SetValueNoSignal((double)newValue);
+
+            base.Update(newValue);
+        }  
     }
 }
