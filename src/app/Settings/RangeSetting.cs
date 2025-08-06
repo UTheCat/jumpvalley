@@ -36,8 +36,9 @@ namespace UTheCat.Jumpvalley.App
             base.Update(newValue);
         }
 
-        public new void Dispose()
+        public override void Dispose()
         {
+            Console.WriteLine("Dispose Range instance");
             RangeInstance.Unshare();
             RangeInstance.QueueFree();
             RangeInstance.Dispose();

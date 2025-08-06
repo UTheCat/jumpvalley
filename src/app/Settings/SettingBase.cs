@@ -85,7 +85,7 @@ namespace UTheCat.Jumpvalley.App.Settings
             Changed?.Invoke(this, EventArgs.Empty);
         }
 
-        public new void Dispose()
+        public virtual new void Dispose()
         {
             QueueFree();
             base.Dispose();
