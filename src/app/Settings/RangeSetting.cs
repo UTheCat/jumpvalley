@@ -34,6 +34,14 @@ namespace UTheCat.Jumpvalley.App
             RangeInstance.SetValueNoSignal((double)newValue);
 
             base.Update(newValue);
-        }  
+        }
+
+        public new void Dispose()
+        {
+            RangeInstance.Unshare();
+            RangeInstance.QueueFree();
+            RangeInstance.Dispose();
+            base.Dispose();
+        }
     }
 }
