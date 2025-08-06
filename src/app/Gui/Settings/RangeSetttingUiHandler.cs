@@ -14,6 +14,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
         private LineEdit lineEdit;
         private StyleBoxFlat lineEditFocusStyle;
         private Color lineEditFocusStyleOriginalBorderColor;
+        private bool isCurrentTextFieldValueValid = false;
 
         public RangeSettingUiHandler(RangeSetting setting, Node rangeSettingUi) : base(setting, rangeSettingUi)
         {
@@ -29,6 +30,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
             lineEdit.PlaceholderText = $"{slider.MinValue}-{slider.MaxValue}";
 
             slider.ValueChanged += OnSliderValueChanged;
+            lineEdit.FocusExited += OnLineEditFocusLost;
             lineEdit.TextChanged += OnLineEditValueChanged;
         }
 
@@ -36,6 +38,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
         {
             slider.ValueChanged -= OnSliderValueChanged;
             lineEdit.TextChanged -= OnLineEditValueChanged;
+            lineEdit.FocusExited -= OnLineEditFocusLost;
         }
 
         private void OnSliderValueChanged(double val)
@@ -58,6 +61,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
                 && (slider.AllowGreater || !(newVal > slider.MaxValue))
             )
             {
+                isCurrentTextFieldValueValid = true;
                 lineEditFocusStyle.BorderColor = lineEditFocusStyleOriginalBorderColor;
 
                 slider.SetValueNoSignal(newVal);
@@ -66,8 +70,19 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
             }
             else
             {
+                isCurrentTextFieldValueValid = false;
+
                 // Let the user know that input is invalid
                 lineEditFocusStyle.BorderColor = LINE_EDIT_ERR_COLOR;
+            }
+        }
+
+        private void OnLineEditFocusLost()
+        {
+            if (!isCurrentTextFieldValueValid)
+            {
+                lineEdit.Text = slider.Value.ToString();
+                lineEditFocusStyle.BorderColor = lineEditFocusStyleOriginalBorderColor;
             }
         }
     }
