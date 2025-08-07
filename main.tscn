@@ -103,6 +103,7 @@ grow_vertical = 1
 [node name="BackgroundPanel" parent="PrimaryGui" instance=ExtResource("3_28c11")]
 visible = false
 layout_mode = 1
+mouse_filter = 1
 
 [node name="BottomBar" parent="PrimaryGui" instance=ExtResource("2_ecdn2")]
 layout_mode = 1
