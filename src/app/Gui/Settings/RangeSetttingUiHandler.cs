@@ -27,6 +27,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
 
             setting.RangeInstance.Share(slider);
 
+            lineEdit.Text = slider.Value.ToString();
             lineEdit.PlaceholderText = $"{slider.MinValue}-{slider.MaxValue}";
 
             slider.ValueChanged += OnSliderValueChanged;
