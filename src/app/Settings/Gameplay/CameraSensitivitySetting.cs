@@ -24,8 +24,6 @@ namespace UTheCat.Jumpvalley.App.Settings.Gameplay
 
         public override void Update(object newValue)
         {
-            Console.WriteLine($"Camera sensitivity updated. New value: {(double)newValue}");
-
             // Type-checking is performed in RangeSetting.Update()
             base.Update(newValue);
 

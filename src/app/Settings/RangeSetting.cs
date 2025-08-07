@@ -30,7 +30,6 @@ namespace UTheCat.Jumpvalley.App
 
         public override void Update(object newValue)
         {
-            Console.WriteLine($"RangeSetting Update() called with value {(double)newValue}");
             RangeInstance.SetValueNoSignal((double)newValue);
 
             base.Update(newValue);
@@ -38,7 +37,6 @@ namespace UTheCat.Jumpvalley.App
 
         public override void Dispose()
         {
-            Console.WriteLine("Dispose Range instance");
             RangeInstance.Unshare();
             RangeInstance.QueueFree();
             RangeInstance.Dispose();
