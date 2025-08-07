@@ -1,5 +1,6 @@
 using System;
 using UTheCat.Jumpvalley.App.Settings.Display;
+using UTheCat.Jumpvalley.App.Settings.Gameplay;
 
 namespace UTheCat.Jumpvalley.App.Settings
 {
@@ -16,6 +17,7 @@ namespace UTheCat.Jumpvalley.App.Settings
             SettingGroup group = new SettingGroup();
 
             group.AddSettingGroup(new DisplaySettings());
+            group.AddSettingGroup(new GameplaySettings());
             group.ShouldDisplayTitle = false;
 
             Group = group;

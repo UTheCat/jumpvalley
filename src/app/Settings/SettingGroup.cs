@@ -134,6 +134,10 @@ namespace UTheCat.Jumpvalley.App.Settings
                     {
                         setting.Value = value.GetValue<bool>();
                     }
+                    else if (setting is RangeSetting)
+                    {
+                        setting.Value = value.GetValue<double>();
+                    }
                 }
             }
 

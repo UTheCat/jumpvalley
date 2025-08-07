@@ -23,6 +23,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
         private PackedScene categoryScene;
         private PackedScene checkButtonSettingScene;
+        private PackedScene rangeSettingScene;
 
         private SceneTreeTween positionTween;
         //private SceneTreeTween closeButtonTween;
@@ -60,6 +61,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
             categoryScene = LoadSettingNodeScene("setting_category_scene");
             checkButtonSettingScene = LoadSettingNodeScene("check_button_setting_scene");
+            rangeSettingScene = LoadSettingNodeScene("range_setting_scene");
 
             settingUiHandlers = new List<SettingUiHandler>();
 
@@ -111,23 +113,34 @@ namespace UTheCat.Jumpvalley.App.Gui
             foreach (SettingBase setting in settingGroup.SettingList)
             {
                 Control settingNode = null;
+                SettingUiHandler handler = null;
 
                 if (setting.Value is bool)
                 {
                     settingNode = checkButtonSettingScene.Instantiate<Control>();
-                    settingNode.GetNode<Label>("Title").Text = actualNode.Tr(setting.LocalizationId);
+
+                    handler = new SettingUiHandler(setting, settingNode)
+                    {
+                        ActionMapKey = setting.ActionMapKey
+                    };
+                }
+                else if (setting is RangeSetting rangeSetting)
+                {
+                    settingNode = rangeSettingScene.Instantiate<Control>();
+                    RangeSettingUiHandler rangeSettingUiHandler = new RangeSettingUiHandler(rangeSetting, settingNode);
+                    handler = rangeSettingUiHandler;
                 }
 
                 if (settingNode != null)
                 {
+                    settingNode.GetNode<Label>("Title").Text = actualNode.Tr(setting.LocalizationId);
+
                     Vector2 minSize = settingNode.CustomMinimumSize;
                     minSize.X = nodeMinSizeX;
                     settingNode.CustomMinimumSize = minSize;
 
-                    SettingUiHandler handler = new SettingUiHandler(setting, settingNode)
-                    {
-                        ActionMapKey = setting.ActionMapKey
-                    };
+                    handler.ActionMapKey = setting.ActionMapKey;
+
                     settingUiHandlers.Add(handler);
 
                     settingNode.AddChild(handler);
@@ -149,10 +162,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         /// <summary>
         /// Generates the actual GUI nodes that will display the app's settings
         /// </summary>
-        public void Populate()
-        {
-            Populate(settings);
-        }
+        public void Populate() => Populate(settings);
 
         public void Dispose()
         {
@@ -161,11 +171,10 @@ namespace UTheCat.Jumpvalley.App.Gui
             positionTween.Dispose();
             categoryScene.Dispose();
             checkButtonSettingScene.Dispose();
+            rangeSettingScene.Dispose();
 
-            foreach (SettingUiHandler handler in settingUiHandlers)
-            {
-                handler.Dispose();
-            }
+            foreach (SettingUiHandler handler in settingUiHandlers) handler.Dispose();
+
             settingUiHandlers.Clear();
         }
     }

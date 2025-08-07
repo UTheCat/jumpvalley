@@ -18,6 +18,7 @@ using UTheCat.Jumpvalley.App.Players.Camera;
 using UTheCat.Jumpvalley.App.Players.Movement;
 using UTheCat.Jumpvalley.App.Settings;
 using UTheCat.Jumpvalley.App.Settings.Display;
+using UTheCat.Jumpvalley.App.Settings.Gameplay;
 
 namespace UTheCat.Jumpvalley.App
 {
@@ -44,6 +45,10 @@ namespace UTheCat.Jumpvalley.App
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
             settings = new JumpvalleySettings();
             framerateCounter = null;
+
+            GameplaySettings gameplaySettings = settings.Group.GetNode<GameplaySettings>("gameplay");
+            gameplaySettings.PlayerCamera = Camera;
+            gameplaySettings.Initialize();
 
             Disposables.AddRange(
                 [

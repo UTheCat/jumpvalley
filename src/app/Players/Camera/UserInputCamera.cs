@@ -38,11 +38,9 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
 
         public UserInputCamera() : base() { }
 
-        public override void _Input(InputEvent @event)
+        public override void _UnhandledInput(InputEvent @event)
         {
-            // Camera turning input has to be handled in _Input instead of _UnhandledInput for some reason.
-            // This might be because handling camera turning input in _UnhandledInput breaks if camera
-            // turning is mapped to holding a mouse button.
+            // Handle camera turning input
             if (Input.IsActionJustPressed(INPUT_CAMERA_PAN))
             {
                 IsTurningCamera = true;
@@ -65,10 +63,7 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             }
 
             base._Input(@event);
-        }
 
-        public override void _UnhandledInput(InputEvent @event)
-        {
             // Handle input for adjusting the camera's zoom
             if (Input.IsActionPressed(INPUT_CAMERA_ZOOM_IN))
             {

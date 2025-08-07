@@ -6,7 +6,7 @@ namespace UTheCat.Jumpvalley.App.Settings
     /// <summary>
     /// Class that represents one setting (user toggle-able value) in Jumpvalley
     /// </summary>
-    public partial class SettingBase : Node
+    public partial class SettingBase : Node, IDisposable
     {
         private string _id;
 
@@ -39,12 +39,12 @@ namespace UTheCat.Jumpvalley.App.Settings
         /// </summary>
         public string ActionMapKey;
 
-        public object _value;
+        private object _value;
 
         /// <summary>
         /// The setting's value
         /// </summary>
-        public object Value
+        public virtual object Value
         {
             get => _value;
             set
@@ -83,6 +83,12 @@ namespace UTheCat.Jumpvalley.App.Settings
         protected void RaiseChanged()
         {
             Changed?.Invoke(this, EventArgs.Empty);
+        }
+
+        public virtual new void Dispose()
+        {
+            QueueFree();
+            base.Dispose();
         }
     }
 }
