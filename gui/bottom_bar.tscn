@@ -99,6 +99,7 @@ anchor_left = 0.15
 anchor_right = 0.85
 anchor_bottom = 1.0
 offset_bottom = -52.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_nhyqc")
 
 [node name="Label" type="Label" parent="Description"]
