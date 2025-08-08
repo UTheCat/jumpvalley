@@ -423,7 +423,7 @@ namespace UTheCat.Jumpvalley.Core.Levels
         /// </summary>
         public new void Dispose()
         {
-            Checkpoints.Dispose();
+            Checkpoints?.Dispose();
 
             foreach (List<Interactive> list in interactiveLists)
             {
