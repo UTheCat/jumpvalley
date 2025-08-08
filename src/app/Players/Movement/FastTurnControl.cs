@@ -14,6 +14,8 @@ namespace UTheCat.Jumpvalley.App.Players.Movement
     {
         private static readonly string INPUT_MAP_FAST_TURN = "character_fast_turn";
 
+        private bool canToggleFastTurn = true;
+
         private BaseMover _mover;
 
         /// <summary>
@@ -110,8 +112,12 @@ namespace UTheCat.Jumpvalley.App.Players.Movement
 
         public override void _UnhandledInput(InputEvent @event)
         {
-            if (Input.IsActionJustPressed(INPUT_MAP_FAST_TURN))
+            if (!Input.IsActionPressed(INPUT_MAP_FAST_TURN)) canToggleFastTurn = true;
+
+            // In case the press state of INPUT_MAP_FAST_TURN switches immediately after the above line of code executes
+            if (canToggleFastTurn && Input.IsActionPressed(INPUT_MAP_FAST_TURN))
             {
+                canToggleFastTurn = false;
                 UserEnabledFastTurn = !UserEnabledFastTurn;
             }
 
