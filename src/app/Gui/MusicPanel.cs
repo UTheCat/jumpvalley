@@ -83,10 +83,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             volumePercentage.Text = $"{(int)(volumeSlider.Value * 100)}%";
         }
 
-        private void HandleSongChanged(object _o, SongChangedArgs _args)
-        {
-            Update();
-        }
+        private void HandleSongChanged(object _o, SongChangedArgs _args) => Update();
 
         private void HandleVolumeSliderChanged(double newVolume)
         {
@@ -96,6 +93,12 @@ namespace UTheCat.Jumpvalley.App.Gui
                 UpdateVolumePercentageText();
             }
         }
+
+        /// <summary>
+        /// Makes it so that each property of this music panel's volume slider is changed when
+        /// the corresponding property of <paramref name="controllingRange"/> is changed. 
+        /// </summary>
+        public void VolumeSliderUseValuesFromRange(Godot.Range controllingRange) => controllingRange.Share(volumeSlider);
 
         public new void Dispose()
         {
