@@ -91,8 +91,18 @@ namespace UTheCat.Jumpvalley.App.Gui
         {
             if (musicPlayer != null)
             {
-                musicPlayer.VolumeScale = newVolume;
-                UpdateVolumePercentageText();
+                if (musicVolumeSetting == null)
+                {
+                    musicPlayer.VolumeScale = newVolume;
+                    UpdateVolumePercentageText();
+                }
+                else
+                {
+                    // musicVolumeSetting will update the music player's volume for us,
+                    // assuming musicVolumeSetting is handling the same music player
+                    // as this music panel handler.
+                    musicVolumeSetting.Value = newVolume;
+                }
             }
         }
 
