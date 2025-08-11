@@ -28,7 +28,7 @@ namespace UTheCat.Jumpvalley.App.Settings.Audio
         {
             base.Update(newValue);
 
-            if (newValue is double dVal) musicPlayer.VolumeScale = dVal;
+            if (musicPlayer != null && newValue is double dVal) musicPlayer.VolumeScale = dVal;
         }
     }
 }
