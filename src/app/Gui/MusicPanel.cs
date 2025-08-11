@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using UTheCat.Jumpvalley.App.Settings.Audio;
 using UTheCat.Jumpvalley.Core.Music;
 
 namespace UTheCat.Jumpvalley.App.Gui
@@ -22,6 +23,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
         private HSlider volumeSlider;
         private Label volumePercentage;
+        private MusicVolumeControl musicVolumeSetting = null;
 
         public MusicPanel(MusicPlayer musicPlayer, Control node, SceneTree tree) : base(node, tree)
         {
@@ -94,15 +96,41 @@ namespace UTheCat.Jumpvalley.App.Gui
             }
         }
 
+        private void OnExternalVolumeSettingChanged(object _o, EventArgs _e)
+        {
+            if (musicVolumeSetting != null && musicVolumeSetting.Value is double newVolume)
+            {
+                volumeSlider.SetValueNoSignal(newVolume);
+                volumePercentage.Text = $"{(int)(newVolume * 100)}%";
+
+                // We don't need to update musicPlayer.VolumeScale at this point since
+                // musicVolumeSetting has already done that.
+            }
+        }
+
+        public void UnbindMusicVolumeSliderFromSetting()
+        {
+            if (musicVolumeSetting == null) return;
+
+            musicVolumeSetting.Changed -= OnExternalVolumeSettingChanged;
+            musicVolumeSetting = null;
+        }
+
         /// <summary>
-        /// Makes it so that each property of this music panel's volume slider is changed when
-        /// the corresponding property of <paramref name="controllingRange"/> is changed. 
+        /// Binds this music panel's volume slider with a <see cref="MusicVolumeControl"/>. 
         /// </summary>
-        public void VolumeSliderUseValuesFromRange(Godot.Range controllingRange) => controllingRange.Share(volumeSlider);
+        public void BindMusicVolumeSliderWithSetting(MusicVolumeControl volumeSetting)
+        {
+            if (musicVolumeSetting != null) return;
+
+            musicVolumeSetting = volumeSetting;
+            musicVolumeSetting.Changed += OnExternalVolumeSettingChanged;
+        }
 
         public new void Dispose()
         {
             musicPlayer.SongChanged -= HandleSongChanged;
+            UnbindMusicVolumeSliderFromSetting();
 
             base.Dispose();
         }

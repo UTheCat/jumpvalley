@@ -197,7 +197,7 @@ namespace UTheCat.Jumpvalley.App
             Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");
 
             MusicPanel musicPanel = new MusicPanel(musicPlayer, musicPanelNode, Tree);
-            musicPanel.VolumeSliderUseValuesFromRange(settings.Group.GetNode<RangeSetting>("audio/music_volume").RangeInstance);
+            musicPanel.BindMusicVolumeSliderWithSetting(settings.Group.GetNode<MusicVolumeControl>("audio/music_volume"));
             animatedNodes.Add("music_panel", musicPanel);
 
             //bottomBar.PrimaryMusicPanel = musicPanel;
