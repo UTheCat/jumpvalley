@@ -1,4 +1,5 @@
 using System;
+using UTheCat.Jumpvalley.App.Settings.Audio;
 using UTheCat.Jumpvalley.App.Settings.Display;
 using UTheCat.Jumpvalley.App.Settings.Gameplay;
 
@@ -18,6 +19,7 @@ namespace UTheCat.Jumpvalley.App.Settings
 
             group.AddSettingGroup(new DisplaySettings());
             group.AddSettingGroup(new GameplaySettings());
+            group.AddSettingGroup(new AudioSettings());
             group.ShouldDisplayTitle = false;
 
             Group = group;

@@ -19,6 +19,7 @@ using UTheCat.Jumpvalley.App.Players.Movement;
 using UTheCat.Jumpvalley.App.Settings;
 using UTheCat.Jumpvalley.App.Settings.Display;
 using UTheCat.Jumpvalley.App.Settings.Gameplay;
+using UTheCat.Jumpvalley.App.Settings.Audio;
 
 namespace UTheCat.Jumpvalley.App
 {
@@ -46,9 +47,15 @@ namespace UTheCat.Jumpvalley.App
             settings = new JumpvalleySettings();
             framerateCounter = null;
 
-            GameplaySettings gameplaySettings = settings.Group.GetNode<GameplaySettings>("gameplay");
+            SettingGroup settingGroup = settings.Group;
+
+            GameplaySettings gameplaySettings = settingGroup.GetNode<GameplaySettings>("gameplay");
             gameplaySettings.PlayerCamera = Camera;
             gameplaySettings.Initialize();
+
+            AudioSettings audioSettings = settingGroup.GetNode<AudioSettings>("audio");
+            audioSettings.MusicPlayer = CurrentMusicPlayer;
+            audioSettings.Initialize();
 
             Disposables.AddRange(
                 [
