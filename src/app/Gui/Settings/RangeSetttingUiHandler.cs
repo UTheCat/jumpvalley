@@ -29,12 +29,18 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
 
             setting.RangeInstance.Share(slider);
 
-            lineEdit.Text = slider.Value.ToString();
+            lineEdit.Text = GetSettingValueAsString();
             lineEdit.PlaceholderText = $"{slider.MinValue}-{slider.MaxValue}";
 
             slider.ValueChanged += OnSliderValueChanged;
             lineEdit.FocusExited += OnLineEditFocusLost;
             lineEdit.TextChanged += OnLineEditValueChanged;
+        }
+
+        private string GetSettingValueAsString()
+        {
+            string format = setting.NumberFormat;
+            return string.IsNullOrEmpty(format) ? slider.Value.ToString() : slider.Value.ToString(format);
         }
 
         public new void Dispose()
@@ -106,7 +112,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
         {
             if (!isCurrentTextFieldValueValid)
             {
-                lineEdit.Text = slider.Value.ToString();
+                lineEdit.Text = GetSettingValueAsString();
                 lineEditFocusStyle.BorderColor = lineEditFocusStyleOriginalBorderColor;
                 errorMsgLabel.Visible = false;
             }

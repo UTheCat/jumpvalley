@@ -16,6 +16,11 @@ namespace UTheCat.Jumpvalley.App
         /// </summary>
         public Godot.Range RangeInstance { get; private set; } = new Godot.Range();
 
+        /// <summary>
+        /// The C# number format string to use when displaying the value of this RangeSetting to the user.
+        /// </summary>
+        public string NumberFormat = null;
+
         public override object Value
         {
             get => base.Value;
