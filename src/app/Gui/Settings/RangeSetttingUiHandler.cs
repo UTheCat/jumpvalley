@@ -37,10 +37,12 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
             lineEdit.TextChanged += OnLineEditValueChanged;
         }
 
-        private string GetSettingValueAsString()
+        private string GetSettingValueAsString() => GetSettingValueAsString(slider.Value);
+
+        private string GetSettingValueAsString(double val)
         {
             string format = setting.NumberFormat;
-            return string.IsNullOrEmpty(format) ? slider.Value.ToString() : slider.Value.ToString(format);
+            return string.IsNullOrEmpty(format) ? val.ToString() : val.ToString(format);
         }
 
         public new void Dispose()
@@ -52,7 +54,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
 
         private void OnSliderValueChanged(double val)
         {
-            lineEdit.Text = val.ToString();
+            lineEdit.Text = GetSettingValueAsString(val);
             setting.Value = val;
         }
 
