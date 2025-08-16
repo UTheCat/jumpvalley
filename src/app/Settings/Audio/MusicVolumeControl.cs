@@ -20,6 +20,7 @@ namespace UTheCat.Jumpvalley.App.Settings.Audio
             Value = 1.0;
             Id = "music_volume";
             LocalizationId = "SETTINGS_MUSIC_VOLUME";
+            NumberFormat = "0.##";
 
             this.musicPlayer = musicPlayer;
         }

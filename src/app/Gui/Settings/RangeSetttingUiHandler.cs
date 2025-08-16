@@ -14,6 +14,7 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
         private LineEdit lineEdit;
         private StyleBoxFlat lineEditFocusStyle;
         private Color lineEditFocusStyleOriginalBorderColor;
+        private Label errorMsgLabel;
         private bool isCurrentTextFieldValueValid = false;
 
         public RangeSettingUiHandler(RangeSetting setting, Node rangeSettingUi) : base(setting, rangeSettingUi)
@@ -24,15 +25,24 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
             lineEditFocusStyle = lineEdit.GetThemeStylebox("focus") as StyleBoxFlat;
             if (lineEditFocusStyle == null) throw new Exception("StyleBox of RangeSetting LineEdit node has to be a StyleBoxFlat");
             lineEditFocusStyleOriginalBorderColor = lineEditFocusStyle.BorderColor;
+            errorMsgLabel = rangeSettingUi.GetNode<Label>("ErrorMsg");
 
             setting.RangeInstance.Share(slider);
 
-            lineEdit.Text = slider.Value.ToString();
+            lineEdit.Text = GetSettingValueAsString();
             lineEdit.PlaceholderText = $"{slider.MinValue}-{slider.MaxValue}";
 
             slider.ValueChanged += OnSliderValueChanged;
             lineEdit.FocusExited += OnLineEditFocusLost;
             lineEdit.TextChanged += OnLineEditValueChanged;
+        }
+
+        private string GetSettingValueAsString() => GetSettingValueAsString(slider.Value);
+
+        private string GetSettingValueAsString(double val)
+        {
+            string format = setting.NumberFormat;
+            return string.IsNullOrEmpty(format) ? val.ToString() : val.ToString(format);
         }
 
         public new void Dispose()
@@ -44,46 +54,73 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
 
         private void OnSliderValueChanged(double val)
         {
-            lineEdit.Text = val.ToString();
+            lineEdit.Text = GetSettingValueAsString(val);
             setting.Value = val;
+        }
+
+        private void ShowTextInputError(string errorMsgTranslationKey)
+        {
+            isCurrentTextFieldValueValid = false;
+
+            // Let the user know that input is invalid
+            lineEditFocusStyle.BorderColor = LINE_EDIT_ERR_COLOR;
+            errorMsgLabel.Text = errorMsgLabel.Tr(errorMsgTranslationKey);
+            errorMsgLabel.Visible = true;
         }
 
         private void OnLineEditValueChanged(string sVal)
         {
+            if (string.IsNullOrEmpty(sVal))
+            {
+                ShowTextInputError("RANGE_SETTING_TEXT_FIELD_NUMBER_REQUIRED");
+                return;
+            }
+
             double newVal;
 
             // Because of floating-point precision errors, this conditional will have problems when range restriction is requested
-            // and min or max have lots of decimals.
+            // and min or max have too many fractional digits.
             // 
-            // But when min and max are integers (as is the case for now), this should generally be okay.
-            if (
-                double.TryParse(sVal, out newVal)
-                && (slider.AllowLesser || !(newVal < slider.MinValue))
-                && (slider.AllowGreater || !(newVal > slider.MaxValue))
-            )
+            // But when min and max are integers (as is the case for now), the way we compare the entered value against min and max here should generally be okay.
+
+            if (!double.TryParse(sVal, out newVal))
             {
-                isCurrentTextFieldValueValid = true;
-                lineEditFocusStyle.BorderColor = lineEditFocusStyleOriginalBorderColor;
-
-                slider.SetValueNoSignal(newVal);
-
-                setting.Value = newVal;
+                ShowTextInputError("RANGE_SETTING_TEXT_FIELD_VALUE_NOT_A_NUMBER");
+                return;
             }
-            else
+
+            if (!slider.AllowLesser && newVal < slider.MinValue)
             {
-                isCurrentTextFieldValueValid = false;
-
-                // Let the user know that input is invalid
-                lineEditFocusStyle.BorderColor = LINE_EDIT_ERR_COLOR;
+                ShowTextInputError("RANGE_SETTING_TEXT_FIELD_VALUE_TOO_LOW");
+                return;
             }
+
+            if (!slider.AllowGreater && newVal > slider.MaxValue)
+            {
+                ShowTextInputError("RANGE_SETTING_TEXT_FIELD_VALUE_TOO_HIGH");
+                return;
+            }
+
+            isCurrentTextFieldValueValid = true;
+            lineEditFocusStyle.BorderColor = lineEditFocusStyleOriginalBorderColor;
+            errorMsgLabel.Visible = false;
+
+            slider.SetValueNoSignal(newVal);
+
+            setting.Value = newVal;
         }
 
         private void OnLineEditFocusLost()
         {
+            // We need to do this when we lose focus of the text field since Godot's Range object always
+            // rounds its Value to the nearest multiple of the number that its Step property is set to,
+            // even if the Range's Value is manually set.
+            lineEdit.Text = GetSettingValueAsString();
+
             if (!isCurrentTextFieldValueValid)
             {
-                lineEdit.Text = slider.Value.ToString();
                 lineEditFocusStyle.BorderColor = lineEditFocusStyleOriginalBorderColor;
+                errorMsgLabel.Visible = false;
             }
         }
     }

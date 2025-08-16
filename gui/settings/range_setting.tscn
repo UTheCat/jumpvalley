@@ -52,6 +52,28 @@ offset_right = -208.0
 theme_override_icons/grabber = ExtResource("2_kl50x")
 theme_override_icons/grabber_highlight = ExtResource("2_kl50x")
 value = 100.0
+scrollable = false
+
+[node name="ErrorMsg" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -178.0
+offset_top = -80.0
+offset_right = -8.0
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.486275, 0.45098, 1)
+theme_override_fonts/font = ExtResource("3_gdidw")
+theme_override_font_sizes/font_size = 14
+text = "Error message"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 1
