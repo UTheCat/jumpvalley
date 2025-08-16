@@ -82,7 +82,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
         private void UpdateVolumePercentageText()
         {
-            volumePercentage.Text = $"{(int)(volumeSlider.Value * 100)}%";
+            volumePercentage.Text = $"{Math.Round(volumeSlider.Value * 100):F0}%";
         }
 
         private void HandleSongChanged(object _o, SongChangedArgs _args) => Update();
@@ -111,7 +111,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             if (musicVolumeSetting != null && musicVolumeSetting.Value is double newVolume)
             {
                 volumeSlider.SetValueNoSignal(newVolume);
-                volumePercentage.Text = $"{(int)(newVolume * 100)}%";
+                volumePercentage.Text = $"{Math.Round(newVolume * 100):F0}%";
 
                 // We don't need to update musicPlayer.VolumeScale at this point since
                 // musicVolumeSetting has already done that.
