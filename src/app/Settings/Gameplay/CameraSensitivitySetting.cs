@@ -18,7 +18,7 @@ namespace UTheCat.Jumpvalley.App.Settings.Gameplay
             Value = 1.0;
             Id = "camera_sensitivity";
             LocalizationId = "SETTINGS_CAMERA_SENSITIVITY";
-            NumberFormat = "0:###";
+            NumberFormat = "0.###";
 
             this.camera = camera;
         }
