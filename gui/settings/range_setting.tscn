@@ -52,6 +52,7 @@ offset_right = -208.0
 theme_override_icons/grabber = ExtResource("2_kl50x")
 theme_override_icons/grabber_highlight = ExtResource("2_kl50x")
 value = 100.0
+scrollable = false
 
 [node name="ErrorMsg" type="Label" parent="."]
 visible = false
