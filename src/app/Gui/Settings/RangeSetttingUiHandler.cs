@@ -112,9 +112,13 @@ namespace UTheCat.Jumpvalley.App.Gui.Settings
 
         private void OnLineEditFocusLost()
         {
+            // We need to do this when we lose focus of the text field since Godot's Range object always
+            // rounds its Value to the nearest multiple of the number that its Step property is set to,
+            // even if the Range's Value is manually set.
+            lineEdit.Text = GetSettingValueAsString();
+
             if (!isCurrentTextFieldValueValid)
             {
-                lineEdit.Text = GetSettingValueAsString();
                 lineEditFocusStyle.BorderColor = lineEditFocusStyleOriginalBorderColor;
                 errorMsgLabel.Visible = false;
             }
