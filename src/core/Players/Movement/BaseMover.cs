@@ -882,61 +882,124 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         Vector3 kinematicCollisionPos = collision.GetPosition();
                         Vector3 characterBottom = body.ToGlobal(new Vector3(0, characterBottomYPosLocal, 0));
                         Vector3 characterBottomWithOffset = body.ToGlobal(new Vector3(0, characterBottomYPosLocal + stepClimbMaxYBoost, 0));
-
                         PhysicsDirectSpaceState3D spaceState = body.GetWorld3D().DirectSpaceState;
-                        var stepClimbResults = spaceState.IntersectRay(
-                            PhysicsRayQueryParameters3D.Create(
+
+                        PhysicsRayQueryParameters3D climbBoostRayParams = PhysicsRayQueryParameters3D.Create(
                                 new Vector3(kinematicCollisionPos.X, characterBottomWithOffset.Y, kinematicCollisionPos.Z),
                                 new Vector3(kinematicCollisionPos.X, characterBottom.Y, kinematicCollisionPos.Z)
-                                )
-                        );
+                                );
+                        climbBoostRayParams.HitFromInside = true;
 
-                        // stepClimbResults won't be empty if we can get a position this way
-                        Variant collisionPosVariant;
-                        if (stepClimbResults.TryGetValue("position", out collisionPosVariant))
+                        var stepClimbResults = spaceState.IntersectRay(climbBoostRayParams);
+
+                        // stepClimbResults won't be empty if we can get a collision normal this way
+                        Variant vCollisionNormal;
+                        if (stepClimbResults.TryGetValue("normal", out vCollisionNormal))
                         {
-                            Vector3 rayCollisionPos = collisionPosVariant.As<Vector3>();
-                            Vector3 slopeAngleRaycastPositionBase = new Vector3(rayCollisionPos.X, rayCollisionPos.Y - 0.005f, rayCollisionPos.Z);
-
-                            // We'll need a separate raycast for detecting the slope angle of the face of the platform that the character is trying to climb up
-                            // (e.g. if this angle is 90 degrees, the face of the platform would be considered a "wall")
-                            var slopeAngleRaycastResults = spaceState.IntersectRay(
-                                PhysicsRayQueryParameters3D.Create(
-                                    slopeAngleRaycastPositionBase - finalVelocity * 0.1f,
-                                    slopeAngleRaycastPositionBase,
-                                    4294967295,
-                                    [body.GetRid()]
-                                )
-                            );
-
-                            Variant vSlopeNormal;
-                            if (slopeAngleRaycastResults.TryGetValue("normal", out vSlopeNormal))
+                            // Step-climb boost shouldn't be given for wallhops.
+                            // If the step-climb raycast didn't hit from inside, we're safe to say that
+                            // we're not dealing with a wallhop.
+                            if (vCollisionNormal.As<Vector3>() != Vector3.Zero)
                             {
-                                logger.Print($"'Wall' slope angle: {Mathf.RadToDeg(MathF.Acos(vSlopeNormal.As<Vector3>().Y))} degrees");
-
-                                // We only have to give the step-boost if the surface is too steep to just walk on.
-                                if (MathF.Acos(vSlopeNormal.As<Vector3>().Y) > body.FloorMaxAngle)
+                                // stepClimbResults won't be empty if we can get a position this way
+                                Variant collisionPosVariant;
+                                if (stepClimbResults.TryGetValue("position", out collisionPosVariant))
                                 {
-                                    float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
+                                    Vector3 rayCollisionPos = collisionPosVariant.As<Vector3>();
+                                    Vector3 slopeAngleRaycastPositionBase = new Vector3(rayCollisionPos.X, rayCollisionPos.Y - 0.005f, rayCollisionPos.Z);
 
-                                    // We only want to give the step-climb boost once per frame at most
-                                    if (characterYBoost > stepClimbHighestYBoost)
+                                    // We'll need a separate raycast for detecting the slope angle of the face of the platform that the character is trying to climb up
+                                    // (e.g. if this angle is 90 degrees, the face of the platform would be considered a "wall")
+                                    var slopeAngleRaycastResults = spaceState.IntersectRay(
+                                        PhysicsRayQueryParameters3D.Create(
+                                            slopeAngleRaycastPositionBase - finalVelocity * 0.1f,
+                                            slopeAngleRaycastPositionBase,
+                                            4294967295,
+                                            [body.GetRid()]
+                                        )
+                                    );
+
+                                    Variant vSlopeNormal;
+                                    if (slopeAngleRaycastResults.TryGetValue("normal", out vSlopeNormal))
                                     {
-                                        stepClimbHighestYBoost = characterYBoost;
-                                        logger.Print($"Updated step-boost to {stepClimbHighestYBoost} meters");
+                                        logger.Print($"'Wall' slope angle: {Mathf.RadToDeg(MathF.Acos(vSlopeNormal.As<Vector3>().Y))} degrees");
+
+                                        // We only have to give the step-boost if the surface is too steep to just walk on.
+                                        if (MathF.Acos(vSlopeNormal.As<Vector3>().Y) > body.FloorMaxAngle)
+                                        {
+                                            float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
+
+                                            // We only want to give the step-climb boost once per frame at most
+                                            if (characterYBoost > stepClimbHighestYBoost)
+                                            {
+                                                stepClimbHighestYBoost = characterYBoost;
+                                                logger.Print($"Updated step-boost to {stepClimbHighestYBoost} meters");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            logger.Print("Not giving step-boost; slope angle is low enough to be walked on.");
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    logger.Print("Not giving step-boost, slope angle is low enough to be walked on.");
+
+                                    // float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
+
+                                    // // We only want to give the step-climb boost once per frame at most
+                                    // if (characterYBoost > stepClimbHighestYBoost) stepClimbHighestYBoost = characterYBoost;
                                 }
                             }
-
-                            // float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
-
-                            // // We only want to give the step-climb boost once per frame at most
-                            // if (characterYBoost > stepClimbHighestYBoost) stepClimbHighestYBoost = characterYBoost;
+                            else
+                            {
+                                logger.Print("Not giving step-boost. Either character isn't high enough or character came into contact with a wallhop.");
+                            }
                         }
+
+                        // // stepClimbResults won't be empty if we can get a position this way
+                        // Variant collisionPosVariant;
+                        // if (stepClimbResults.TryGetValue("position", out collisionPosVariant))
+                        // {
+                        //     Vector3 rayCollisionPos = collisionPosVariant.As<Vector3>();
+                        //     Vector3 slopeAngleRaycastPositionBase = new Vector3(rayCollisionPos.X, rayCollisionPos.Y - 0.005f, rayCollisionPos.Z);
+
+                        //     // We'll need a separate raycast for detecting the slope angle of the face of the platform that the character is trying to climb up
+                        //     // (e.g. if this angle is 90 degrees, the face of the platform would be considered a "wall")
+                        //     var slopeAngleRaycastResults = spaceState.IntersectRay(
+                        //         PhysicsRayQueryParameters3D.Create(
+                        //             slopeAngleRaycastPositionBase - finalVelocity * 0.1f,
+                        //             slopeAngleRaycastPositionBase,
+                        //             4294967295,
+                        //             [body.GetRid()]
+                        //         )
+                        //     );
+
+                        //     Variant vSlopeNormal;
+                        //     if (slopeAngleRaycastResults.TryGetValue("normal", out vSlopeNormal))
+                        //     {
+                        //         logger.Print($"'Wall' slope angle: {Mathf.RadToDeg(MathF.Acos(vSlopeNormal.As<Vector3>().Y))} degrees");
+
+                        //         // We only have to give the step-boost if the surface is too steep to just walk on.
+                        //         if (MathF.Acos(vSlopeNormal.As<Vector3>().Y) > body.FloorMaxAngle)
+                        //         {
+                        //             float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
+
+                        //             // We only want to give the step-climb boost once per frame at most
+                        //             if (characterYBoost > stepClimbHighestYBoost)
+                        //             {
+                        //                 stepClimbHighestYBoost = characterYBoost;
+                        //                 logger.Print($"Updated step-boost to {stepClimbHighestYBoost} meters");
+                        //             }
+                        //         }
+                        //         else
+                        //         {
+                        //             logger.Print("Not giving step-boost, slope angle is low enough to be walked on.");
+                        //         }
+                        //     }
+
+                        //     // float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
+
+                        //     // // We only want to give the step-climb boost once per frame at most
+                        //     // if (characterYBoost > stepClimbHighestYBoost) stepClimbHighestYBoost = characterYBoost;
+                        // }
 
                         // Raycast hit something if stepClimbResults isn't empty
                         // Variant collisionNormalVariant;
