@@ -58,11 +58,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         /// <summary>
-        /// Character height in meters
-        /// </summary>
-        private static readonly float CHARACTER_HEIGHT = 4;
-
-        /// <summary>
         /// The name of the <see cref="CollisionShape3D"/> that should be primarily in charge of handling a character's collision.
         /// </summary>
         public static readonly string CHARACTER_ROOT_COLLIDER_NAME = "RootCollider";
