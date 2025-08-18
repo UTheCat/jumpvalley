@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 
+using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 
 namespace UTheCat.Jumpvalley.Core.Players.Movement
@@ -55,6 +56,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// </summary>
             Falling = 6
         }
+
+        /// <summary>
+        /// Character height in meters
+        /// </summary>
+        private static readonly float CHARACTER_HEIGHT = 4;
 
         /// <summary>
         /// The name of the <see cref="CollisionShape3D"/> that should be primarily in charge of handling a character's collision.
@@ -172,6 +178,15 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// Whether or not the player is currently jumping
         /// </summary>
         public bool IsJumping = false;
+
+        /// <summary>
+        /// When making contact with a step and travelling towards the step's position, the character
+        /// will automatically climb the step without jumping if the character Y-position boost needed
+        /// to achieve this is within the range of (0, <i>the value of this field</i>].
+        /// <br/><br/>
+        /// This number is in meters.
+        /// </summary>
+        public float AutoClimbStepMaxYBoost = 0.3f;
 
         private bool _isFastTurnEnabled = false;
 
@@ -731,6 +746,17 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             //public Vector3 Torque = Vector3.Zero;
         }
 
+        private float GetCharacterHeight()
+        {
+            CharacterBody3D body = Body;
+
+            if (body == null || !body.HasMeta(OverallBoundingBoxObject.CUSTOM_OVERALL_BOUNDING_BOX_META_NAME)) return 0;
+
+            Aabb boundingBox = body.GetMeta(OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME).As<Aabb>();
+
+            return boundingBox == default ? 0.0f : boundingBox.Size.Y;
+        }
+
         /// <summary>
         /// Callback to associate with the physics process step in the current scene tree
         /// </summary>
@@ -831,6 +857,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     requestedVelocityAfterMove.Z
                     );
 
+                float stepClimbHighestYBoost = 0f;
+
                 // Figure out how to push objects we've come into contact with. This part intentionally comes before the call to MoveAndSlide().
                 // Thanks to this forum post for helping me figure out how to implement this:
                 // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
@@ -840,6 +868,42 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision3D collision = body.GetSlideCollision(i);
+
+                    // See if we can automatically climb a step
+                    //
+                    // In some cases, the player will just barely miss a platform because they almost (but didn't)
+                    // gain enough height (e.g. after a high or long jump).
+                    // When this happens, we want to give the player's character a small upward boost so they can make the jump.
+                    //
+                    // In other cases, the player wants to climb up a short platform (e.g. staircase step) without jumping.
+                    // We want to allow this.
+                    float stepClimbMaxYBoost = AutoClimbStepMaxYBoost;
+                    if (stepClimbMaxYBoost > 0)
+                    {
+                        float characterBottomYPosLocal = -GetCharacterHeight() / 2f;
+                        Vector3 kinematicCollisionPos = collision.GetPosition();
+                        Vector3 characterBottom = body.ToGlobal(new Vector3(0, characterBottomYPosLocal, 0));
+                        Vector3 characterBottomWithOffset = body.ToGlobal(new Vector3(0, characterBottomYPosLocal + stepClimbMaxYBoost, 0));
+
+                        var stepClimbResults = body.GetWorld3D().DirectSpaceState.IntersectRay(
+                            PhysicsRayQueryParameters3D.Create(
+                                new Vector3(kinematicCollisionPos.X, characterBottomWithOffset.Y, kinematicCollisionPos.Z),
+                                new Vector3(kinematicCollisionPos.X, characterBottom.Y, kinematicCollisionPos.Z)
+                                )
+                        );
+
+                        // stepClimbResults won't be empty if we can get a position this way
+                        Variant collisionPosVariant;
+                        if (stepClimbResults.TryGetValue("position", out collisionPosVariant))
+                        {
+                            Vector3 rayCollisionPos = collisionPosVariant.As<Vector3>();
+                            float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
+
+                            // We only want to give the step-climb boost once per frame at most
+                            if (characterYBoost > stepClimbHighestYBoost) stepClimbHighestYBoost = characterYBoost;
+                        }
+                    }
+
                     if (collision.GetCollider() is RigidBody3D rigidBody)
                     {
                         RigidBodyPusher pusher;
@@ -915,6 +979,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     finalVelocity += characterPushData.VelocityChange;
 
                     pusher.Push();
+                }
+
+                // Apply step climb if there is one for this frame
+                if (stepClimbHighestYBoost > 0f)
+                {
+                    Vector3 pos = body.GlobalPosition;
+                    pos.Y += stepClimbHighestYBoost;
+                    body.GlobalPosition = pos;
                 }
 
                 // Move the character.
