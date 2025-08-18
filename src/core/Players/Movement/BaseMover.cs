@@ -895,7 +895,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         if (stepClimbResults.TryGetValue("normal", out collisionNormalVariant))
                         {
                             // We only have to give the step-boost if the surface is too steep to just walk on.
-                            if (Math.Acos(collisionNormalVariant.As<Vector3>().Y) > body.FloorMaxAngle)
+                            if (MathF.Acos(collisionNormalVariant.As<Vector3>().Y) > body.FloorMaxAngle)
                             {
                                 // stepClimbResults won't be empty if we can get a position this way
                                 Variant collisionPosVariant;
