@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 
 using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics;
+using UTheCat.Jumpvalley.Core.Logging;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 
 namespace UTheCat.Jumpvalley.Core.Players.Movement
@@ -74,6 +75,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// will cause the climbing shape-cast to not be able to hit the outer surface of the climbable object.
         /// </summary>
         private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
+
+        private ConsoleLogger logger = new ConsoleLogger(nameof(BaseMover), ConsoleLogger.PrintingApi.Godot);
 
         private BodyState _currentBodyState = BodyState.Stopped;
 
@@ -181,7 +184,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <br/><br/>
         /// This number is in meters.
         /// </summary>
-        public float AutoClimbStepMaxYBoost = 0.3f;
+        public float AutoClimbStepMaxYBoost = 0.6f;
 
         private bool _isFastTurnEnabled = false;
 
@@ -887,15 +890,28 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 )
                         );
 
-                        // stepClimbResults won't be empty if we can get a position this way
-                        Variant collisionPosVariant;
-                        if (stepClimbResults.TryGetValue("position", out collisionPosVariant))
+                        // Raycast hit something if stepClimbResults isn't empty
+                        Variant collisionNormalVariant;
+                        if (stepClimbResults.TryGetValue("normal", out collisionNormalVariant))
                         {
-                            Vector3 rayCollisionPos = collisionPosVariant.As<Vector3>();
-                            float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
+                            // We only have to give the step-boost if the surface is too steep to just walk on.
+                            if (Math.Acos(collisionNormalVariant.As<Vector3>().Y) > body.FloorMaxAngle)
+                            {
+                                // stepClimbResults won't be empty if we can get a position this way
+                                Variant collisionPosVariant;
+                                if (stepClimbResults.TryGetValue("position", out collisionPosVariant))
+                                {
+                                    Vector3 rayCollisionPos = collisionPosVariant.As<Vector3>();
+                                    float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
 
-                            // We only want to give the step-climb boost once per frame at most
-                            if (characterYBoost > stepClimbHighestYBoost) stepClimbHighestYBoost = characterYBoost;
+                                    // We only want to give the step-climb boost once per frame at most
+                                    if (characterYBoost > stepClimbHighestYBoost) stepClimbHighestYBoost = characterYBoost;
+                                }
+                            }
+                            else
+                            {
+                                logger.Print("Not giving step-boost, slope angle is low enough to be walked on.");
+                            }
                         }
                     }
 
