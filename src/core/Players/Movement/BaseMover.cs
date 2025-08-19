@@ -184,7 +184,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <br/><br/>
         /// This number is in meters.
         /// </summary>
-        public float AutoClimbStepMaxYBoost = 0.6f;
+        public float AutoClimbStepMaxYBoost = 6f;
 
         private bool _isFastTurnEnabled = false;
 
@@ -840,21 +840,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Vector3 finalVelocity = new Vector3(newXZvelocity.X, moveVelocity.Y, newXZvelocity.Y);
                 Vector3 realVelocity = body.GetRealVelocity();
 
-                // Store the current velocity for the next physics frame to use.
-                //
-                // When updating LastVelocity, for the Y value, between real velocity after MoveAndSlide and requested velocity after move and slide,
-                // use whichever one is closest to 0.
-                // This is mainly to *prevent* these two issues:
-                // - Character builds up downwards velocity when IsOnFloor() returns false but the character
-                //   is not moving downward.
-                // - Character suddenly and unexpectedly jolts upward at a high velocity.
-                Vector3 requestedVelocityAfterMove = body.Velocity;
-                LastVelocity = new Vector3(
-                    requestedVelocityAfterMove.X,
-                    ClosestToZero(realVelocity.Y, requestedVelocityAfterMove.Y),
-                    requestedVelocityAfterMove.Z
-                    );
-
                 float stepClimbHighestYBoost = 0f;
 
                 // Figure out how to push objects we've come into contact with. This part intentionally comes before the call to MoveAndSlide().
@@ -927,10 +912,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                         // We only have to give the step-boost if the surface is too steep to just walk on.
                                         if (MathF.Acos(vSlopeNormal.As<Vector3>().Y) > body.FloorMaxAngle)
                                         {
-                                            float characterYBoost = characterBottomWithOffset.Y - rayCollisionPos.Y;
+                                            float characterYBoost = rayCollisionPos.Y - characterBottom.Y;// + body.FloorSnapLength;
 
                                             // We only want to give the step-climb boost once per frame at most
-                                            if (characterYBoost > stepClimbHighestYBoost)
+                                            if (characterYBoost > 0f && characterYBoost > stepClimbHighestYBoost)
                                             {
                                                 stepClimbHighestYBoost = characterYBoost;
                                                 logger.Print($"Updated step-boost to {stepClimbHighestYBoost} meters");
@@ -1108,10 +1093,29 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Apply step climb if there is one for this frame
                 if (stepClimbHighestYBoost > 0f)
                 {
+                    // The result of the step climb is that the character is standing on a surface
+                    // whose slope angle is low enough to be considered a "floor"
+                    finalVelocity.Y = MathF.Max(0, finalVelocity.Y);
+
                     Vector3 pos = body.GlobalPosition;
                     pos.Y += stepClimbHighestYBoost;
                     body.GlobalPosition = pos;
                 }
+
+                // Store the current velocity for the next physics frame to use.
+                //
+                // When updating LastVelocity, for the Y value, between real velocity after MoveAndSlide and requested velocity after move and slide,
+                // use whichever one is closest to 0.
+                // This is mainly to *prevent* these two issues:
+                // - Character builds up downwards velocity when IsOnFloor() returns false but the character
+                //   is not moving downward.
+                // - Character suddenly and unexpectedly jolts upward at a high velocity.
+                Vector3 requestedVelocityAfterMove = body.Velocity;
+                LastVelocity = new Vector3(
+                    requestedVelocityAfterMove.X,
+                    ClosestToZero(realVelocity.Y, requestedVelocityAfterMove.Y),
+                    requestedVelocityAfterMove.Z
+                    );
 
                 // Move the character.
                 body.Velocity = finalVelocity;
