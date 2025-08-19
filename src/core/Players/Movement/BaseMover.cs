@@ -1105,7 +1105,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     // whose slope angle is low enough to be considered a "floor"
                     //finalVelocity.Y = MathF.Max(0, finalVelocity.Y);
 
-                    finalVelocity.Y = Math.Max(Math.Min(stepClimbHighestYBoost * Gravity / 2f, JumpVelocity / 2f), finalVelocity.Y);
+                    float jumpVelocity = JumpVelocity;
+
+                    // Give them a small y-velocity boost if needed so they can climb the step without jumping
+                    finalVelocity.Y = Math.Max(Math.Min(stepClimbHighestYBoost * Gravity / 2f, jumpVelocity / 2f), finalVelocity.Y);
+
+                    // The above logic causes the character to sometimes get stuck on ledges when trying to step-climb.
+                    // When this happens, allow the player to jump to escape this.
+                    if (IsJumping) finalVelocity.Y = Math.Max(jumpVelocity, finalVelocity.Y);
 
                     // Vector3 pos = body.GlobalPosition;
                     // pos.Y += stepClimbHighestYBoost;
