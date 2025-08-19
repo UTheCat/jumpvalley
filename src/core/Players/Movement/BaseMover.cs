@@ -187,7 +187,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <br/><br/>
         /// This number is in meters.
         /// </summary>
-        public float AutoClimbStepMaxYBoost = 0.3f;
+        public float AutoClimbStepMaxYBoost = 0.5f;
 
         private bool _isFastTurnEnabled = false;
 
@@ -1103,11 +1103,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 {
                     // The result of the step climb is that the character is standing on a surface
                     // whose slope angle is low enough to be considered a "floor"
-                    finalVelocity.Y = MathF.Max(0, finalVelocity.Y);
+                    //finalVelocity.Y = MathF.Max(0, finalVelocity.Y);
 
-                    Vector3 pos = body.GlobalPosition;
-                    pos.Y += stepClimbHighestYBoost;
-                    body.GlobalPosition = pos;
+                    finalVelocity.Y = Math.Max(Math.Min(stepClimbHighestYBoost * Gravity / 2f, JumpVelocity / 2f), finalVelocity.Y);
+
+                    // Vector3 pos = body.GlobalPosition;
+                    // pos.Y += stepClimbHighestYBoost;
+                    // body.GlobalPosition = pos;
                 }
 
                 // Store the current velocity for the next physics frame to use.
