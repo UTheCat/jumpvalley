@@ -75,6 +75,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
 
+        /// <summary>
+        /// This number is in meters.
+        /// </summary>
+        private static readonly float STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_Y_OFFSET = -0.005f;
+
+        /// <summary>
+        /// This number is in meters.
+        /// </summary>
+        private static readonly float STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_LENGTH = 0.1f;
+
         private BodyState _currentBodyState = BodyState.Stopped;
 
         /// <summary>
@@ -896,13 +906,13 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 if (stepClimbResults.TryGetValue("position", out vStepClimbRayCollisionPos))
                                 {
                                     Vector3 rayCollisionPos = vStepClimbRayCollisionPos.As<Vector3>();
-                                    Vector3 slopeAngleRaycastPositionBase = new Vector3(rayCollisionPos.X, rayCollisionPos.Y - 0.005f, rayCollisionPos.Z);
+                                    Vector3 slopeAngleRaycastPositionBase = new Vector3(rayCollisionPos.X, rayCollisionPos.Y - STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_Y_OFFSET, rayCollisionPos.Z);
 
                                     // We'll need a separate raycast for detecting the slope angle of the face of the platform that the character is trying to climb up
                                     // (e.g. if this angle is 90 degrees, the face of the platform would be considered a "wall")
                                     var slopeAngleRaycastResults = spaceState.IntersectRay(
                                         PhysicsRayQueryParameters3D.Create(
-                                            slopeAngleRaycastPositionBase - finalVelocity * 0.1f,
+                                            slopeAngleRaycastPositionBase - new Vector3(finalVelocity.X, 0, finalVelocity.Z).Normalized() * STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_LENGTH,
                                             slopeAngleRaycastPositionBase,
                                             4294967295,
                                             [body.GetRid()]
