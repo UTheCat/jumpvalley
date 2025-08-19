@@ -180,11 +180,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// When making contact with a step and travelling towards the step's position, the character
         /// will automatically climb the step without jumping if the character Y-position boost needed
-        /// to achieve this is within the range of (0, <i>the value of this field</i>].
+        /// to achieve this is within the range of (0, <i>the value of this field</i>]. This also applies
+        /// if the contact was made midair.
+        /// <br/><br/>
+        /// To avoid potentially unwanted upward boosts, avoid setting this value too high.
         /// <br/><br/>
         /// This number is in meters.
         /// </summary>
-        public float AutoClimbStepMaxYBoost = 6f;
+        public float AutoClimbStepMaxYBoost = 0.3f;
 
         private bool _isFastTurnEnabled = false;
 
