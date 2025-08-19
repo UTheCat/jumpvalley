@@ -4,7 +4,7 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7bhqx"]
 radius = 0.25
-height = 1.0
+height = 1.1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mx087"]
 radius = 0.15
