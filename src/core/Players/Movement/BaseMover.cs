@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 
 using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics;
-using UTheCat.Jumpvalley.Core.Logging;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 
 namespace UTheCat.Jumpvalley.Core.Players.Movement
@@ -75,8 +74,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// will cause the climbing shape-cast to not be able to hit the outer surface of the climbable object.
         /// </summary>
         private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
-
-        private ConsoleLogger logger = new ConsoleLogger(nameof(BaseMover), ConsoleLogger.PrintingApi.Godot);
 
         private BodyState _currentBodyState = BodyState.Stopped;
 
@@ -915,8 +912,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                     Variant vSlopeNormal;
                                     if (slopeAngleRaycastResults.TryGetValue("normal", out vSlopeNormal))
                                     {
-                                        logger.Print($"'Wall' slope angle: {Mathf.RadToDeg(MathF.Acos(vSlopeNormal.As<Vector3>().Y))} degrees");
-
                                         // We only have to give the step-boost if the surface is too steep to just walk on.
                                         if (MathF.Acos(vSlopeNormal.As<Vector3>().Y) > body.FloorMaxAngle)
                                         {
@@ -926,12 +921,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                             if (characterYBoost > 0f && characterYBoost > stepClimbHighestYBoost)
                                             {
                                                 stepClimbHighestYBoost = characterYBoost;
-                                                logger.Print($"Updated step-boost to {stepClimbHighestYBoost} meters");
                                             }
-                                        }
-                                        else
-                                        {
-                                            logger.Print("Not giving step-boost; slope angle is low enough to be walked on.");
                                         }
                                     }
 
@@ -940,10 +930,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                     // // We only want to give the step-climb boost once per frame at most
                                     // if (characterYBoost > stepClimbHighestYBoost) stepClimbHighestYBoost = characterYBoost;
                                 }
-                            }
-                            else
-                            {
-                                logger.Print("Not giving step-boost. This is because the character isn't high enough, the character came into contact with a wallhop, or the surface to step-climb onto is too steep to walk on normally.");
                             }
                         }
 
