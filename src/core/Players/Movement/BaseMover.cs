@@ -906,7 +906,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 if (stepClimbResults.TryGetValue("position", out vStepClimbRayCollisionPos))
                                 {
                                     Vector3 rayCollisionPos = vStepClimbRayCollisionPos.As<Vector3>();
-                                    Vector3 slopeAngleRaycastPositionBase = new Vector3(rayCollisionPos.X, rayCollisionPos.Y - STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_Y_OFFSET, rayCollisionPos.Z);
+                                    Vector3 slopeAngleRaycastPositionBase = new Vector3(rayCollisionPos.X, rayCollisionPos.Y + STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_Y_OFFSET, rayCollisionPos.Z);
 
                                     // We'll need a separate raycast for detecting the slope angle of the face of the platform that the character is trying to climb up
                                     // (e.g. if this angle is 90 degrees, the face of the platform would be considered a "wall")
