@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 
+using UTheCat.Jumpvalley.Core.Levels.Interactives.Mechanics;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 
 namespace UTheCat.Jumpvalley.Core.Players.Movement
@@ -73,6 +74,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// will cause the climbing shape-cast to not be able to hit the outer surface of the climbable object.
         /// </summary>
         private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
+
+        /// <summary>
+        /// This number is in meters.
+        /// </summary>
+        private static readonly float STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_Y_OFFSET = -0.005f;
+
+        /// <summary>
+        /// This number is in meters.
+        /// </summary>
+        private static readonly float STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_LENGTH = 0.1f;
 
         private BodyState _currentBodyState = BodyState.Stopped;
 
@@ -172,6 +183,18 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// Whether or not the player is currently jumping
         /// </summary>
         public bool IsJumping = false;
+
+        /// <summary>
+        /// When making contact with a step and travelling towards the step's position, the character
+        /// will automatically climb the step without jumping if the character Y-position boost needed
+        /// to achieve this is within the range of (0, <i>the value of this field</i>]. This also applies
+        /// if the contact was made midair.
+        /// <br/><br/>
+        /// To avoid potentially unwanted upward boosts, avoid setting this value too high.
+        /// <br/><br/>
+        /// This number is in meters.
+        /// </summary>
+        public float AutoClimbStepMaxYBoost = 0.505f;
 
         private bool _isFastTurnEnabled = false;
 
@@ -731,6 +754,17 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             //public Vector3 Torque = Vector3.Zero;
         }
 
+        private float GetCharacterHeight()
+        {
+            CharacterBody3D body = Body;
+
+            if (body == null || !body.HasMeta(OverallBoundingBoxObject.CUSTOM_OVERALL_BOUNDING_BOX_META_NAME)) return 0;
+
+            Aabb boundingBox = body.GetMeta(OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME).As<Aabb>();
+
+            return boundingBox == default ? 0.0f : boundingBox.Size.Y;
+        }
+
         /// <summary>
         /// Callback to associate with the physics process step in the current scene tree
         /// </summary>
@@ -816,20 +850,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Vector3 finalVelocity = new Vector3(newXZvelocity.X, moveVelocity.Y, newXZvelocity.Y);
                 Vector3 realVelocity = body.GetRealVelocity();
 
-                // Store the current velocity for the next physics frame to use.
-                //
-                // When updating LastVelocity, for the Y value, between real velocity after MoveAndSlide and requested velocity after move and slide,
-                // use whichever one is closest to 0.
-                // This is mainly to *prevent* these two issues:
-                // - Character builds up downwards velocity when IsOnFloor() returns false but the character
-                //   is not moving downward.
-                // - Character suddenly and unexpectedly jolts upward at a high velocity.
-                Vector3 requestedVelocityAfterMove = body.Velocity;
-                LastVelocity = new Vector3(
-                    requestedVelocityAfterMove.X,
-                    ClosestToZero(realVelocity.Y, requestedVelocityAfterMove.Y),
-                    requestedVelocityAfterMove.Z
-                    );
+                float stepClimbHighestYBoost = 0f;
 
                 // Figure out how to push objects we've come into contact with. This part intentionally comes before the call to MoveAndSlide().
                 // Thanks to this forum post for helping me figure out how to implement this:
@@ -840,12 +861,90 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision3D collision = body.GetSlideCollision(i);
-                    if (collision.GetCollider() is RigidBody3D rigidBody)
+                    GodotObject collider = collision.GetCollider();
+                    Vector3 kinematicCollisionPos = collision.GetPosition();
+
+                    // See if we can automatically climb a step
+                    //
+                    // In some cases, the player will just barely miss a platform because they almost (but didn't)
+                    // gain enough height (e.g. after a high or long jump).
+                    // When this happens, we want to give the player's character a small upward boost so they can make the jump.
+                    //
+                    // In other cases, the player wants to climb up a short platform (e.g. staircase step) without jumping.
+                    // We want to allow this.
+                    float stepClimbMaxYBoost = AutoClimbStepMaxYBoost;
+                    if (stepClimbMaxYBoost > 0 && collider is PhysicsBody3D)
+                    {
+                        float characterBottomYPosLocal = -GetCharacterHeight() / 2f;
+                        Vector3 characterBottom = body.ToGlobal(new Vector3(0, characterBottomYPosLocal, 0));
+                        Vector3 characterBottomWithOffset = body.ToGlobal(new Vector3(0, characterBottomYPosLocal + stepClimbMaxYBoost, 0));
+                        PhysicsDirectSpaceState3D spaceState = body.GetWorld3D().DirectSpaceState;
+
+                        PhysicsRayQueryParameters3D climbBoostRayParams = PhysicsRayQueryParameters3D.Create(
+                                new Vector3(kinematicCollisionPos.X, characterBottomWithOffset.Y, kinematicCollisionPos.Z),
+                                new Vector3(kinematicCollisionPos.X, characterBottom.Y, kinematicCollisionPos.Z)
+                                );
+                        climbBoostRayParams.HitFromInside = true;
+
+                        var stepClimbResults = spaceState.IntersectRay(climbBoostRayParams);
+
+                        // stepClimbResults won't be empty if we can get a collision normal this way
+                        Variant vCollisionNormal;
+                        if (stepClimbResults.TryGetValue("normal", out vCollisionNormal))
+                        {
+                            // Step-climb boost shouldn't be given for wallhops.
+                            // If the step-climb raycast didn't hit from inside, we're safe to say that
+                            // we're not dealing with a wallhop.
+                            //
+                            // Additionally, this collisionNormal lets us figure out if the surface to step-climb *onto*
+                            // has a slope angle that's low enough to walk on normally.
+                            Vector3 collisionNormalToStepOnto = vCollisionNormal.As<Vector3>();
+                            if (collisionNormalToStepOnto != Vector3.Zero && !(MathF.Acos(collisionNormalToStepOnto.Y) > body.FloorMaxAngle))
+                            {
+                                // stepClimbResults won't be empty if we can get a position this way
+                                Variant vStepClimbRayCollisionPos;
+                                if (stepClimbResults.TryGetValue("position", out vStepClimbRayCollisionPos))
+                                {
+                                    Vector3 rayCollisionPos = vStepClimbRayCollisionPos.As<Vector3>();
+                                    Vector3 slopeAngleRaycastPositionBase = new Vector3(rayCollisionPos.X, rayCollisionPos.Y + STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_Y_OFFSET, rayCollisionPos.Z);
+
+                                    // We'll need a separate raycast for detecting the slope angle of the face of the platform that the character is trying to climb up
+                                    // (e.g. if this angle is 90 degrees, the face of the platform would be considered a "wall")
+                                    var slopeAngleRaycastResults = spaceState.IntersectRay(
+                                        PhysicsRayQueryParameters3D.Create(
+                                            slopeAngleRaycastPositionBase - new Vector3(finalVelocity.X, 0, finalVelocity.Z).Normalized() * STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_LENGTH,
+                                            slopeAngleRaycastPositionBase,
+                                            4294967295,
+                                            [body.GetRid()]
+                                        )
+                                    );
+
+                                    Variant vSlopeNormal;
+                                    if (slopeAngleRaycastResults.TryGetValue("normal", out vSlopeNormal))
+                                    {
+                                        // We only have to give the step-boost if the surface is too steep to just walk on.
+                                        if (MathF.Acos(vSlopeNormal.As<Vector3>().Y) > body.FloorMaxAngle)
+                                        {
+                                            float characterYBoost = rayCollisionPos.Y - characterBottom.Y;
+
+                                            // We only want to give the step-climb boost once per frame at most
+                                            if (characterYBoost > 0f && characterYBoost > stepClimbHighestYBoost)
+                                            {
+                                                stepClimbHighestYBoost = characterYBoost;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (collider is RigidBody3D rigidBody)
                     {
                         RigidBodyPusher pusher;
 
                         Vector3 collisionNormal = collision.GetNormal();
-                        Vector3 forcePositionOffset = collision.GetPosition() - rigidBody.GlobalPosition;
+                        Vector3 forcePositionOffset = kinematicCollisionPos - rigidBody.GlobalPosition;
 
                         // CALCULATIONS FOR RIGIDBODY3D ATTEMPTS TO PUSH CHARACTER //
 
@@ -916,6 +1015,37 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                     pusher.Push();
                 }
+
+                // Apply step climb if there is one for this frame
+                //
+                // The result of the step climb should be that the character is standing on a surface
+                // whose slope angle is low enough to be considered a "floor"
+                if (stepClimbHighestYBoost > 0f)
+                {
+                    float jumpVelocity = JumpVelocity;
+
+                    // Give them a small y-velocity boost if needed so they can climb the step without jumping
+                    finalVelocity.Y = Math.Max(Math.Min(stepClimbHighestYBoost * Gravity / 2f, jumpVelocity / 2f), finalVelocity.Y);
+
+                    // The above logic causes the character to sometimes get stuck on ledges when trying to step-climb.
+                    // When this happens, allow the player to jump to escape this.
+                    if (IsJumping) finalVelocity.Y = Math.Max(jumpVelocity, finalVelocity.Y);
+                }
+
+                // Store the current velocity for the next physics frame to use.
+                //
+                // When updating LastVelocity, for the Y value, between real velocity after MoveAndSlide and requested velocity after move and slide,
+                // use whichever one is closest to 0.
+                // This is mainly to *prevent* these two issues:
+                // - Character builds up downwards velocity when IsOnFloor() returns false but the character
+                //   is not moving downward.
+                // - Character suddenly and unexpectedly jolts upward at a high velocity.
+                Vector3 requestedVelocityAfterMove = body.Velocity;
+                LastVelocity = new Vector3(
+                    requestedVelocityAfterMove.X,
+                    ClosestToZero(realVelocity.Y, requestedVelocityAfterMove.Y),
+                    requestedVelocityAfterMove.Z
+                    );
 
                 // Move the character.
                 body.Velocity = finalVelocity;
