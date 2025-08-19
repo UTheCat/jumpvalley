@@ -187,7 +187,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <br/><br/>
         /// This number is in meters.
         /// </summary>
-        public float AutoClimbStepMaxYBoost = 0.5f;
+        public float AutoClimbStepMaxYBoost = 0.505f;
 
         private bool _isFastTurnEnabled = false;
 
