@@ -851,6 +851,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
                     KinematicCollision3D collision = body.GetSlideCollision(i);
+                    GodotObject collider = collision.GetCollider();
 
                     // See if we can automatically climb a step
                     //
@@ -861,7 +862,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     // In other cases, the player wants to climb up a short platform (e.g. staircase step) without jumping.
                     // We want to allow this.
                     float stepClimbMaxYBoost = AutoClimbStepMaxYBoost;
-                    if (stepClimbMaxYBoost > 0)
+                    if (stepClimbMaxYBoost > 0 && collider is PhysicsBody3D)
                     {
                         float characterBottomYPosLocal = -GetCharacterHeight() / 2f;
                         Vector3 kinematicCollisionPos = collision.GetPosition();
@@ -884,7 +885,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             // Step-climb boost shouldn't be given for wallhops.
                             // If the step-climb raycast didn't hit from inside, we're safe to say that
                             // we're not dealing with a wallhop.
-                            if (vCollisionNormal.As<Vector3>() != Vector3.Zero)
+                            //
+                            // Additionally, this collisionNormal lets us figure out if the surface to step-climb *onto*
+                            // has a slope angle that's low enough to walk on normally.
+                            Vector3 collisionNormalToStepOnto = vCollisionNormal.As<Vector3>();
+                            if (collisionNormalToStepOnto != Vector3.Zero && !(MathF.Acos(collisionNormalToStepOnto.Y) > body.FloorMaxAngle))
                             {
                                 // stepClimbResults won't be empty if we can get a position this way
                                 Variant collisionPosVariant;
@@ -935,7 +940,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             }
                             else
                             {
-                                logger.Print("Not giving step-boost. Either character isn't high enough or character came into contact with a wallhop.");
+                                logger.Print("Not giving step-boost. This is because the character isn't high enough, the character came into contact with a wallhop, or the surface to step-climb onto is too steep to walk on normally.");
                             }
                         }
 
@@ -1013,7 +1018,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // }
                     }
 
-                    if (collision.GetCollider() is RigidBody3D rigidBody)
+                    if (collider is RigidBody3D rigidBody)
                     {
                         RigidBodyPusher pusher;
 
