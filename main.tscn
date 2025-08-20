@@ -145,6 +145,15 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="CameraTurnOverlay" type="Control" parent="PrimaryGui"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Character" parent="." instance=ExtResource("9_1wvm3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 

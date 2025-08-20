@@ -34,10 +34,34 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
         /// </summary>
         public float CameraZoomAdjustment = 1;
 
+        /// <summary>
+        /// Reference to a <see cref="Control"/> that's intended to absorb mouse input as a means of preventing unwanted mouse cursor
+        /// hovering behavior from happening while the user is turning the camera. This <see cref="Control"/> should always cover the
+        /// entire app window and be invisible, even when the <see cref="Control"/>'s Visible property is set to <c>true</c>.
+        /// <br/><br/>
+        /// To absorb the mouse input, this <see cref="Control"/> has to be in a position within the current <see cref="SceneTree"/>
+        /// such that the <see cref="Control"/> has high input priority. Additionally, when this <see cref="UserInputCamera"/> instance
+        /// gets instantiated, the <see cref="Control"/> should have its Visible property set to false.  
+        /// </summary>
+        public Control CameraTurnInvisibleOverlay = null;
+
         private float cameraPanningSpeedMultiplier = 0.02f;
         private Vector2I originalCursorPos = Vector2I.Zero;
 
         public UserInputCamera() : base() { }
+
+        public override void _Input(InputEvent @event)
+        {
+            Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+            if (cameraTurnOverlay != null && cameraTurnOverlay.Visible)
+            {
+                if (!Input.IsActionPressed(INPUT_CAMERA_PAN)) StopCameraTurn();
+
+                if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent) MouseTurnCamera(mouseEvent);
+            }
+
+            base._Input(@event);
+        }
 
         public override void _UnhandledInput(InputEvent @event)
         {
@@ -59,23 +83,11 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             }
             else
             {
-                if (IsTurningCamera)
-                {
-                    IsTurningCamera = false;
-                    Input.MouseMode = Input.MouseModeEnum.Visible;
-                    DisplayServer.WarpMouse(originalCursorPos);
-                }
+                StopCameraTurn();
             }
 
             // Turn camera based on mouse input
-            if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent)
-            {
-                Vector2 mouseEventRelative = mouseEvent.Relative;
-
-                float panningFactor = PanningSensitivity * PanningSpeed * cameraPanningSpeedMultiplier;
-                Pitch += -mouseEventRelative.Y * panningFactor;
-                Yaw += -mouseEventRelative.X * panningFactor;
-            }
+            if (IsTurningCamera && CameraTurnInvisibleOverlay == null && @event is InputEventMouseMotion mouseEvent) MouseTurnCamera(mouseEvent);
 
             base._Input(@event);
 
@@ -90,6 +102,27 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             }
 
             base._UnhandledInput(@event);
+        }
+
+        private void StopCameraTurn()
+        {
+            if (IsTurningCamera)
+            {
+                IsTurningCamera = false;
+                Input.MouseMode = Input.MouseModeEnum.Visible;
+                DisplayServer.WarpMouse(originalCursorPos);
+
+                CameraTurnInvisibleOverlay.Visible = false;
+            }
+        }
+
+        private void MouseTurnCamera(InputEventMouseMotion mouseEvent)
+        {
+            Vector2 mouseEventRelative = mouseEvent.Relative;
+
+            float panningFactor = PanningSensitivity * PanningSpeed * cameraPanningSpeedMultiplier;
+            Pitch += -mouseEventRelative.Y * panningFactor;
+            Yaw += -mouseEventRelative.X * panningFactor;
         }
 
         public new void Dispose()
