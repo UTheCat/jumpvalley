@@ -53,12 +53,14 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
 
         public override void _Input(InputEvent @event)
         {
-            Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
-            if (cameraTurnOverlay != null && cameraTurnOverlay.Visible)
-            {
-                if (!Input.IsActionPressed(INPUT_CAMERA_PAN)) StopCameraTurn();
+            // This is outside the conditional checking for CameraTurnInvisibleOverlay
+            // as a failsafe.
+            if (!Input.IsActionPressed(INPUT_CAMERA_PAN)) StopCameraTurn();
 
-                if (IsTurningCamera && canTurnCameraInUnderscoreInput && @event is InputEventMouseMotion mouseEvent) MouseTurnCamera(mouseEvent);
+            if (IsTurningCamera && canTurnCameraInUnderscoreInput && @event is InputEventMouseMotion mouseEvent)
+            {
+                Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+                if (cameraTurnOverlay != null && cameraTurnOverlay.Visible) MouseTurnCamera(mouseEvent);
             }
 
             base._Input(@event);
@@ -66,8 +68,6 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
 
         public override void _UnhandledInput(InputEvent @event)
         {
-
-
             // Handle camera turning input
             if (Input.IsActionPressed(INPUT_CAMERA_PAN))
             {
@@ -99,7 +99,6 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
                 // as a means of preventing a race condition
                 MouseTurnCamera(mouseEvent);
 
-                //if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = true;
                 canTurnCameraInUnderscoreInput = true;
             }
 
@@ -144,7 +143,7 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
         public new void Dispose()
         {
             SetProcessInput(false);
-            IsTurningCamera = false;
+            StopCameraTurn();
 
             base.Dispose();
         }
