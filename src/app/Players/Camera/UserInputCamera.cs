@@ -60,7 +60,10 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             if (IsTurningCamera && canTurnCameraInUnderscoreInput && @event is InputEventMouseMotion mouseEvent)
             {
                 Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
-                if (cameraTurnOverlay != null && cameraTurnOverlay.Visible) MouseTurnCamera(mouseEvent);
+                if (cameraTurnOverlay != null && cameraTurnOverlay.Visible)
+                {
+                    MouseTurnCamera(mouseEvent);
+                }
             }
 
             base._Input(@event);
@@ -68,6 +71,8 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
 
         public override void _UnhandledInput(InputEvent @event)
         {
+            Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+
             // Handle camera turning input
             if (Input.IsActionPressed(INPUT_CAMERA_PAN))
             {
@@ -81,7 +86,6 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
                     // before moving the cursor to the center of the window for camera turning.
                     originalCursorPos = DisplayServer.MouseGetPosition() - DisplayServer.WindowGetPosition();
 
-                    Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
                     if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = true;
 
                     Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -97,9 +101,18 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             {
                 // Should come before we set canTurnCameraInUnderscoreInput to true
                 // as a means of preventing a race condition
-                MouseTurnCamera(mouseEvent);
-
-                canTurnCameraInUnderscoreInput = true;
+                if (cameraTurnOverlay == null)
+                {
+                    canTurnCameraInUnderscoreInput = false;
+                    MouseTurnCamera(mouseEvent);
+                }
+                {
+                    if (!canTurnCameraInUnderscoreInput)
+                    {
+                        canTurnCameraInUnderscoreInput = true;
+                        MouseTurnCamera(mouseEvent);
+                    }
+                }
             }
 
             base._Input(@event);
