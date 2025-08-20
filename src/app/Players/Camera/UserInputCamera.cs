@@ -41,15 +41,21 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
         public override void _UnhandledInput(InputEvent @event)
         {
             // Handle camera turning input
-            if (Input.IsActionJustPressed(INPUT_CAMERA_PAN))
+            if (Input.IsActionPressed(INPUT_CAMERA_PAN))
             {
-                IsTurningCamera = true;
-                Input.MouseMode = Input.MouseModeEnum.Captured;
+                if (!IsTurningCamera)
+                {
+                    IsTurningCamera = true;
+                    Input.MouseMode = Input.MouseModeEnum.Captured;
+                }
             }
-            else if (Input.IsActionJustReleased(INPUT_CAMERA_PAN))
+            else
             {
-                IsTurningCamera = false;
-                Input.MouseMode = Input.MouseModeEnum.Visible;
+                if (IsTurningCamera)
+                {
+                    IsTurningCamera = false;
+                    Input.MouseMode = Input.MouseModeEnum.Visible;
+                }
             }
 
             // Turn camera based on mouse input
