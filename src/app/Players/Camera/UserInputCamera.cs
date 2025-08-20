@@ -47,6 +47,7 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
 
         private float cameraPanningSpeedMultiplier = 0.02f;
         private Vector2I originalCursorPos = Vector2I.Zero;
+        private bool canTurnCameraInUnderscoreInput = false;
 
         public UserInputCamera() : base() { }
 
@@ -57,7 +58,7 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             {
                 if (!Input.IsActionPressed(INPUT_CAMERA_PAN)) StopCameraTurn();
 
-                if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent) MouseTurnCamera(mouseEvent);
+                if (IsTurningCamera && canTurnCameraInUnderscoreInput && @event is InputEventMouseMotion mouseEvent) MouseTurnCamera(mouseEvent);
             }
 
             base._Input(@event);
@@ -65,6 +66,8 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
 
         public override void _UnhandledInput(InputEvent @event)
         {
+
+
             // Handle camera turning input
             if (Input.IsActionPressed(INPUT_CAMERA_PAN))
             {
@@ -78,6 +81,9 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
                     // before moving the cursor to the center of the window for camera turning.
                     originalCursorPos = DisplayServer.MouseGetPosition() - DisplayServer.WindowGetPosition();
 
+                    Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+                    if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = true;
+
                     Input.MouseMode = Input.MouseModeEnum.Captured;
                 }
             }
@@ -89,13 +95,12 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             // Turn camera based on mouse input
             if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent)
             {
-                Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
-
-                // Should come before we set cameraTurnOverlay.Visible to true
+                // Should come before we set canTurnCameraInUnderscoreInput to true
                 // as a means of preventing a race condition
                 MouseTurnCamera(mouseEvent);
 
-                if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = true;
+                //if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = true;
+                canTurnCameraInUnderscoreInput = true;
             }
 
             base._Input(@event);
@@ -118,6 +123,7 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             if (IsTurningCamera)
             {
                 IsTurningCamera = false;
+                canTurnCameraInUnderscoreInput = false;
                 Input.MouseMode = Input.MouseModeEnum.Visible;
                 DisplayServer.WarpMouse(originalCursorPos);
 
