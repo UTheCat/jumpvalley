@@ -41,8 +41,6 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
 
         public override void _UnhandledInput(InputEvent @event)
         {
-            InputEventMouseMotion mouseEvent = @event as InputEventMouseMotion;
-
             // Handle camera turning input
             if (Input.IsActionPressed(INPUT_CAMERA_PAN))
             {
@@ -70,7 +68,7 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             }
 
             // Turn camera based on mouse input
-            if (IsTurningCamera && mouseEvent != null)
+            if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent)
             {
                 Vector2 mouseEventRelative = mouseEvent.Relative;
 
