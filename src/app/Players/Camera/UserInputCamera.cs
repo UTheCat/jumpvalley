@@ -35,17 +35,27 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
         public float CameraZoomAdjustment = 1;
 
         private float cameraPanningSpeedMultiplier = 0.02f;
+        private Vector2I originalCursorPos = Vector2I.Zero;
 
         public UserInputCamera() : base() { }
 
         public override void _UnhandledInput(InputEvent @event)
         {
+            InputEventMouseMotion mouseEvent = @event as InputEventMouseMotion;
+
             // Handle camera turning input
             if (Input.IsActionPressed(INPUT_CAMERA_PAN))
             {
                 if (!IsTurningCamera)
                 {
                     IsTurningCamera = true;
+
+                    // MouseGetPosition() gets cursor position in screen coordinates.
+                    // However, we want to store the mouse position relative to the position of the client area (the app window).
+                    // This also needs to come before we set mouse mode to "Captured" so we can retrieve the mouse position
+                    // before moving the cursor to the center of the window for camera turning.
+                    originalCursorPos = DisplayServer.MouseGetPosition() - DisplayServer.WindowGetPosition();
+
                     Input.MouseMode = Input.MouseModeEnum.Captured;
                 }
             }
@@ -55,11 +65,12 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
                 {
                     IsTurningCamera = false;
                     Input.MouseMode = Input.MouseModeEnum.Visible;
+                    DisplayServer.WarpMouse(originalCursorPos);
                 }
             }
 
             // Turn camera based on mouse input
-            if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent)
+            if (IsTurningCamera && mouseEvent != null)
             {
                 Vector2 mouseEventRelative = mouseEvent.Relative;
 
