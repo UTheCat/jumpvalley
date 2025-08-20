@@ -34,32 +34,72 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
         /// </summary>
         public float CameraZoomAdjustment = 1;
 
+        /// <summary>
+        /// Reference to a <see cref="Control"/> that's intended to absorb mouse input as a means of preventing unwanted mouse cursor
+        /// hovering behavior from happening while the user is turning the camera. This <see cref="Control"/> should always cover the
+        /// entire app window and be invisible, even when the <see cref="Control"/>'s Visible property is set to <c>true</c>.
+        /// <br/><br/>
+        /// To absorb the mouse input, this <see cref="Control"/> has to be in a position within the current <see cref="SceneTree"/>
+        /// such that the <see cref="Control"/> has high input priority. Additionally, when this <see cref="UserInputCamera"/> instance
+        /// gets instantiated, the <see cref="Control"/> should have its Visible property set to false.  
+        /// </summary>
+        public Control CameraTurnInvisibleOverlay = null;
+
         private float cameraPanningSpeedMultiplier = 0.02f;
+        private Vector2I originalCursorPos = Vector2I.Zero;
+        private bool canTurnCameraInUnderscoreInput = false;
 
         public UserInputCamera() : base() { }
+
+        public override void _Input(InputEvent @event)
+        {
+            // This is outside the conditional checking for CameraTurnInvisibleOverlay
+            // as a failsafe.
+            if (!Input.IsActionPressed(INPUT_CAMERA_PAN)) StopCameraTurn();
+
+            if (IsTurningCamera && canTurnCameraInUnderscoreInput && @event is InputEventMouseMotion mouseEvent)
+            {
+                Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+                if (cameraTurnOverlay != null && cameraTurnOverlay.Visible) MouseTurnCamera(mouseEvent);
+            }
+
+            base._Input(@event);
+        }
 
         public override void _UnhandledInput(InputEvent @event)
         {
             // Handle camera turning input
-            if (Input.IsActionJustPressed(INPUT_CAMERA_PAN))
+            if (Input.IsActionPressed(INPUT_CAMERA_PAN))
             {
-                IsTurningCamera = true;
-                Input.MouseMode = Input.MouseModeEnum.Captured;
+                if (!IsTurningCamera)
+                {
+                    IsTurningCamera = true;
+
+                    // MouseGetPosition() gets cursor position in screen coordinates.
+                    // However, we want to store the mouse position relative to the position of the client area (the app window).
+                    // This also needs to come before we set mouse mode to "Captured" so we can retrieve the mouse position
+                    // before moving the cursor to the center of the window for camera turning.
+                    originalCursorPos = DisplayServer.MouseGetPosition() - DisplayServer.WindowGetPosition();
+
+                    Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+                    if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = true;
+
+                    Input.MouseMode = Input.MouseModeEnum.Captured;
+                }
             }
-            else if (Input.IsActionJustReleased(INPUT_CAMERA_PAN))
+            else
             {
-                IsTurningCamera = false;
-                Input.MouseMode = Input.MouseModeEnum.Visible;
+                StopCameraTurn();
             }
 
             // Turn camera based on mouse input
             if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent)
             {
-                Vector2 mouseEventRelative = mouseEvent.Relative;
+                // Should come before we set canTurnCameraInUnderscoreInput to true
+                // as a means of preventing a race condition
+                MouseTurnCamera(mouseEvent);
 
-                float panningFactor = PanningSensitivity * PanningSpeed * cameraPanningSpeedMultiplier;
-                Pitch += -mouseEventRelative.Y * panningFactor;
-                Yaw += -mouseEventRelative.X * panningFactor;
+                canTurnCameraInUnderscoreInput = true;
             }
 
             base._Input(@event);
@@ -77,10 +117,33 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             base._UnhandledInput(@event);
         }
 
+        private void StopCameraTurn()
+        {
+            if (IsTurningCamera)
+            {
+                IsTurningCamera = false;
+                canTurnCameraInUnderscoreInput = false;
+                Input.MouseMode = Input.MouseModeEnum.Visible;
+                DisplayServer.WarpMouse(originalCursorPos);
+
+                Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+                if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = false;
+            }
+        }
+
+        private void MouseTurnCamera(InputEventMouseMotion mouseEvent)
+        {
+            Vector2 mouseEventRelative = mouseEvent.Relative;
+
+            float panningFactor = PanningSensitivity * PanningSpeed * cameraPanningSpeedMultiplier;
+            Pitch += -mouseEventRelative.Y * panningFactor;
+            Yaw += -mouseEventRelative.X * panningFactor;
+        }
+
         public new void Dispose()
         {
             SetProcessInput(false);
-            IsTurningCamera = false;
+            StopCameraTurn();
 
             base.Dispose();
         }
