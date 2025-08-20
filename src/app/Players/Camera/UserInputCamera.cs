@@ -87,7 +87,16 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
             }
 
             // Turn camera based on mouse input
-            if (IsTurningCamera && CameraTurnInvisibleOverlay == null && @event is InputEventMouseMotion mouseEvent) MouseTurnCamera(mouseEvent);
+            if (IsTurningCamera && @event is InputEventMouseMotion mouseEvent)
+            {
+                Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+
+                // Should come before we set cameraTurnOverlay.Visible to true
+                // as a means of preventing a race condition
+                MouseTurnCamera(mouseEvent);
+
+                if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = true;
+            }
 
             base._Input(@event);
 
@@ -112,7 +121,8 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
                 Input.MouseMode = Input.MouseModeEnum.Visible;
                 DisplayServer.WarpMouse(originalCursorPos);
 
-                CameraTurnInvisibleOverlay.Visible = false;
+                Control cameraTurnOverlay = CameraTurnInvisibleOverlay;
+                if (cameraTurnOverlay != null) cameraTurnOverlay.Visible = false;
             }
         }
 
