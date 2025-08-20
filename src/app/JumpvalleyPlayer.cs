@@ -41,7 +41,10 @@ namespace UTheCat.Jumpvalley.App
             Character = rootNode.GetNode<CharacterBody3D>("Character");
             CurrentMusicPlayer = new MusicZonePlayer();
             Mover = new KeyboardMover();
-            Camera = new UserInputCamera();
+
+            UserInputCamera camera = new UserInputCamera();
+            camera.CameraTurnInvisibleOverlay = PrimaryGui.GetNode<Control>("CameraTurnOverlay");
+            Camera = camera;
 
             logger = new ConsoleLogger(nameof(JumpvalleyPlayer));
             settings = new JumpvalleySettings();
