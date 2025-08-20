@@ -63,7 +63,6 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
                 if (cameraTurnOverlay != null && cameraTurnOverlay.Visible)
                 {
                     MouseTurnCamera(mouseEvent);
-                    GD.Print("Turning camera from _Input.");
                 }
             }
 
@@ -106,14 +105,12 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
                 {
                     canTurnCameraInUnderscoreInput = false;
                     MouseTurnCamera(mouseEvent);
-                    GD.Print("Turning camera from _UnhandledInput.");
                 }
                 {
                     if (!canTurnCameraInUnderscoreInput)
                     {
                         canTurnCameraInUnderscoreInput = true;
                         MouseTurnCamera(mouseEvent);
-                        GD.Print("Turning camera from _UnhandledInput.");
                     }
                 }
             }
@@ -137,7 +134,6 @@ namespace UTheCat.Jumpvalley.App.Players.Camera
         {
             if (IsTurningCamera)
             {
-                GD.Print("stop turning camera");
                 IsTurningCamera = false;
                 canTurnCameraInUnderscoreInput = false;
                 Input.MouseMode = Input.MouseModeEnum.Visible;
