@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvpjlkyxxhu4y"
-path="res://.godot/imported/fast_turn.svg-f9891700dd44293b36ddcd289cd1affc.ctex"
+uid="uid://b14abi4udrtjt"
+path="res://.godot/imported/first_person.svg-4c63e63bc93d733598cd541f1ce29d66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://decals/fast_turn.svg"
-dest_files=["res://.godot/imported/fast_turn.svg-f9891700dd44293b36ddcd289cd1affc.ctex"]
+source_file="res://decals/first_person.svg"
+dest_files=["res://.godot/imported/first_person.svg-4c63e63bc93d733598cd541f1ce29d66.ctex"]
 
 [params]
 
