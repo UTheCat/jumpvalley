@@ -10,12 +10,12 @@ namespace UTheCat.Jumpvalley.App.Gui
     /// is responding to user input
     /// and hidden otherwise.
     /// </summary>
-    public partial class CameraTurnIndicator : IDisposable
+    public partial class CameraModeIndicator : IDisposable
     {
         private UserInputCamera userInputCamera;
         private Control actualControl;
 
-        public CameraTurnIndicator(UserInputCamera camera, Control initActualControl)
+        public CameraModeIndicator(UserInputCamera camera, Control initActualControl)
         {
             if (camera == null) throw new ArgumentNullException(nameof(camera), $"Attempted to pass a {nameof(UserInputCamera)} that doesn't exist.");
             if (initActualControl == null) throw new ArgumentNullException(nameof(initActualControl), $"Attempted to pass a {nameof(Control)} that doesn't exist.");
