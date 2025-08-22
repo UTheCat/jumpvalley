@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c020hsyxs4rey"]
 
-[ext_resource type="Texture2D" uid="uid://b14abi4udrtjt" path="res://decals/fast_turn.svg" id="1_j57vu"]
+[ext_resource type="Texture2D" uid="uid://bvpjlkyxxhu4y" path="res://decals/fast_turn.svg" id="1_j57vu"]
 
 [node name="FastTurnIndicator" type="Control"]
 layout_mode = 3

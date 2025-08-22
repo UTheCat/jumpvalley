@@ -2,13 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://ct3er6iaq0dpt" path="res://decals/camera_turn.svg" id="1_2npli"]
 
-[node name="CameraTurnIndicator" type="Control"]
+[node name="CameraModeIndicator" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 18.0
 offset_bottom = 18.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="ModeTexture" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
