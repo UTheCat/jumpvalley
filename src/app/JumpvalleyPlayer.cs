@@ -231,7 +231,7 @@ namespace UTheCat.Jumpvalley.App
             Disposables.Add(settingsMenuNode);
 
             // Fast turn indicator
-            FastTurnIndicator fastTurnIndicator = new FastTurnIndicator(Mover, PrimaryGui.GetNode<Control>("FastTurnIndicator"));
+            FastTurnIndicator fastTurnIndicator = new FastTurnIndicator(fastTurnControl, PrimaryGui.GetNode<Control>("FastTurnIndicator"));
             Disposables.Add(fastTurnIndicator);
 
             // Camera mode indicator
