@@ -63,6 +63,7 @@ namespace UTheCat.Jumpvalley.App.Players.Movement
             {
                 _userEnabledFastTurn = value;
                 Update();
+                RaiseUserToggledFastTurn(value);
             }
         }
 
@@ -155,5 +156,17 @@ namespace UTheCat.Jumpvalley.App.Players.Movement
                 isZoomOutDistanceChangedConnected = false;
             }
         }
+
+        /// <summary>
+        /// Event raised when the user <i>explicitly</i> toggles fast turn
+        /// (e.g. by pressing the corresponding button).
+        /// Will also be raised when <see cref="UserEnabledFastTurn"/> is manually set. 
+        /// <br/><br/>
+        /// The boolean event argument is true if the user just enabled fast turn and false
+        /// if the user just disabled fast turn.
+        /// </summary>
+        public event EventHandler<bool> UserToggledFastTurn;
+
+        protected void RaiseUserToggledFastTurn(bool isFastTurnEnabledByUser) => UserToggledFastTurn?.Invoke(this, isFastTurnEnabledByUser);
     }
 }
