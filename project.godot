@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Jumpvalley"
-config/version="0.5.0"
+config/version="0.6.0"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.4", "C#")
 run/max_fps=60
