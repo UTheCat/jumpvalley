@@ -31,6 +31,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             cameraTurnFirstPersonDecal = ResourceLoader.Load<CompressedTexture2D>("res://decals/camera_turn_first_person.svg");
 
             ToggleIndicatorVisibility(userInputCamera.IsTurningCamera);
+            HandleZoomOutDistanceChanged(null, userInputCamera.ZoomOutDistance);
             userInputCamera.IsTurningCameraToggled += HandleIsTurningCameraToggled;
             userInputCamera.ZoomOutDistanceChanged += HandleZoomOutDistanceChanged;
         }
