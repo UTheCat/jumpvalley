@@ -36,13 +36,15 @@ If you're looking to simply run Jumpvalley, you can find the app precompiled in 
 
 Jumpvalley currently doesn't have an installer executable. Therefore, downloading the compressed folder corresponding to your device's operating system, and then extracting it, should give you the files needed to run precompiled Jumpvalley.
 
-### For Android users
+### Jumpvalley for Android
 
-While there are precompiled versions of Jumpvalley for Android, Android support is currently *experimental* for these reasons:
+To test its functionality on mobile platforms, Jumpvalley can be run on Android. While there are precompiled versions of Jumpvalley for Android, Android support is currently *experimental* for these reasons:
 - Currently, exporting an app with C# code to an Android APK on Godot 4 is itself an experimental feature
 - Currently, you'll need to connect a keyboard and mouse to your Android device in order to move your character and camera.
 
-### For Linux users
+### Jumpvalley for Linux
+
+The releases tab contains Jumpvalley precompiled for Linux systems. As of version 0.6.0, Jumpvalley for Linux is shipped in `.tar.xz` archives.
 
 The Jumpvalley executable for the Linux version of Jumpvalley is named `jumpvalley` (with no file extension).
 
@@ -67,6 +69,10 @@ Jumpvalley uses X11/XWayland by default. If you'd like the app to run on Wayland
 `./jumpvalley --display-driver wayland`
 
 The above command assumes that the Jumpvalley executable kept its original name, `jumpvalley`.
+
+### Jumpvalley for Windows
+
+Running Jumpvalley on Windows is simple. Extract the `.zip` file containing the Windows version of Jumpvalley, open the resulting folder, and run `jumpvalley.exe` contained inside the folder.
 
 ## Documentation
 
