@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=14 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" uid="uid://dges00asc14a6" path="res://Program.cs" id="1_r1x4e"]
 [ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
+[ext_resource type="Environment" uid="uid://bm0ftje0uafc0" path="res://default_level_env.tres" id="2_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://c020hsyxs4rey" path="res://gui/fast_turn_indicator.tscn" id="3_2hjl2"]
 [ext_resource type="PackedScene" uid="uid://c5xcp6s62kfmj" path="res://gui/camera_mode_indicator.tscn" id="3_4g04c"]
 [ext_resource type="PackedScene" uid="uid://dsjm5305mt3le" path="res://gui/framerate_counter.tscn" id="3_6onu6"]
@@ -13,25 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/character.tscn" id="9_1wvm3"]
 [ext_resource type="PackedScene" uid="uid://dp4l7rtotuyq5" path="res://gui/intro_panel.tscn" id="9_e2o57"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_glpat"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_ucdiq"]
-sky_material = SubResource("ProceduralSkyMaterial_glpat")
-
-[sub_resource type="Environment" id="Environment_0mmb7"]
-background_mode = 2
-sky = SubResource("Sky_ucdiq")
-tonemap_mode = 2
-glow_enabled = true
-
 [node name="Main" type="Node3D"]
 script = ExtResource("1_r1x4e")
 metadata/initialization_lobby = "res://scenes/lobby/"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_0mmb7")
+environment = ExtResource("2_ycdy4")
 
 [node name="DefaultDirectionalLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
