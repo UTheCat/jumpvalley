@@ -38,19 +38,19 @@ Jumpvalley currently doesn't have an installer executable. Therefore, downloadin
 
 ### For Android users
 
-While there are precompiled versions of Jumpvalley for Android, Android support is *experimental* for these reasons:
+While there are precompiled versions of Jumpvalley for Android, Android support is currently *experimental* for these reasons:
 - Currently, exporting an app with C# code to an Android APK on Godot 4 is itself an experimental feature
 - Currently, you'll need to connect a keyboard and mouse to your Android device in order to move your character and camera.
 
 ### For Linux users
 
-#### Allowing the system to run Jumpvalley
-
 The Jumpvalley executable for the Linux version of Jumpvalley is named `jumpvalley` (with no file extension).
 
-On Linux, the operating system itself controls whether or not a file can be executed, regardless of the file's file extension. Therefore, your copy of the Jumpvalley executable for Linux might not be marked as executable.
+#### Allowing the system to run Jumpvalley
 
-In order to fix this, open up a terminal session, change the working directory to the directory containing the Jumpvalley executable like this:
+In later versions of Jumpvalley, the executable should already have the necessary permissions to run after you've extracted the archive that it's contained in.
+
+In case the Jumpvalley executable doesn't run, you might need to grant the needed permissions for the executable to run. To do this, open the Linux terminal, change the working directory to the directory containing the Jumpvalley executable like this:
 
 `cd [path to the directory with the Jumpvalley executable]`
 
@@ -58,13 +58,15 @@ and type this command:
 
 `chmod +x jumpvalley`
 
-Assuming you did this correctly, this tells Linux to allow running the Jumpvalley executable.
+The above command should tell Linux to allow running the Jumpvalley executable.
 
 #### Wayland and X11
 
-Jumpvalley uses X11/XWayland by default. If you want the app to run on Wayland instead, then in the directory where the Jumpvalley executable is located, run this command:
+Jumpvalley uses X11/XWayland by default. If you'd like the app to run on Wayland instead, then in the directory where the Jumpvalley executable is located, run this command:
 
 `./jumpvalley --display-driver wayland`
+
+The above command assumes that the Jumpvalley executable kept its original name, `jumpvalley`.
 
 ## Documentation
 
