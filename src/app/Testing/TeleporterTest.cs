@@ -13,13 +13,11 @@ namespace UTheCat.Jumpvalley.App.Testing
     public partial class TeleporterTest : IDisposable
     {
         private Node3D nodeToTeleport;
-        private Node3D destination;
         private Teleporter teleporter;
 
         public TeleporterTest(Node3D nodeToTeleport, Node3D destination)
         {
             this.nodeToTeleport = nodeToTeleport;
-            this.destination = destination;
 
             nodeToTeleport.SetMeta(
                 OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME,

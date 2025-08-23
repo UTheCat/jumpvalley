@@ -3,6 +3,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)'!='DEBUG'">
+      <Compile Remove="Testing/**" />
+    </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../core/UTheCat.Jumpvalley.Core.csproj" />
   </ItemGroup>
