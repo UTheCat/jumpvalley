@@ -35,4 +35,4 @@ skeleton = NodePath("../..")
 [node name="CharacterBody" parent="." instance=ExtResource("2_3ohbj")]
 
 [node name="CameraFocus" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.775, 0)
