@@ -12,9 +12,9 @@ Jumpvalley also features a "core" API in its repository (this one) that level de
 
 ## Credits
 
-The ```addons``` folder in this repository's root contains assets made by 3rd-parties. They're super useful in this project because not only do I not have the skill, time, and/or resources to make a lot of these assets, but they also allow me to speed up development and testing using resources that the creators of these assets have allowed the public to use.
+### 3rd-party asset usage
 
-A list of such assets that are used in this project can be found [here](https://github.com/UTheCat/jumpvalley/blob/main/credits.md).
+The `addons` folder in this repository's root contains 3rd-party assets (meaning the assets were made by other individuals). These beautiful assets used by this project are listed in [CREDITS.md in this repository's root](CREDITS.md).
 
 ### Inspirations
 
@@ -26,7 +26,7 @@ Jumpvalley was inspired by several fun platformers that you should check out, in
 
 ## Licensing
 
-This project's source code is licensed under the MIT License. The source code's license can be found [here](https://github.com/UTheCat/jumpvalley/blob/main/LICENSE.md).
+This project's source code is licensed under the [MIT License](https://choosealicense.com/licenses/mit/). The source code's license can be found in [LICENSE.md in the repository's root](LICENSE.md).
 
 Assets under the ```addons``` folder are 3rd-party assets. As such, they are covered by different licenses (especially since they were made by other individuals).
 
