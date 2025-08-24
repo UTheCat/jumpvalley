@@ -1,6 +1,6 @@
 # Asset credits
 
-Thanks to the creators of the assets listed below for making these beautiful assets used in this project:
+Jumpvalley makes use of 3rd-party, free to use assets. Huge thanks to their creators for allowing these assets to be used by anyone! The assets' name and creators are listed below.
 
 ## Fonts
 
@@ -20,7 +20,7 @@ Thanks to the creators of the assets listed below for making these beautiful ass
 
 ## Music
 
-Songs listed here are listed in the format `artist - song name`. These are the songs made by 3rd-parties that are used in this project:
+Songs listed here are listed in the format `artist - song name`.
 
 - [Pahgawk - Shivers](https://www.newgrounds.com/audio/listen/1215548)
 - [KORAII - The Trail](https://www.newgrounds.com/audio/listen/1139009)
