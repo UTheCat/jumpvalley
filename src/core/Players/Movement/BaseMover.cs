@@ -873,7 +873,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     // In other cases, the player wants to climb up a short platform (e.g. staircase step) without jumping.
                     // We want to allow this.
                     float stepClimbMaxYBoost = AutoClimbStepMaxYBoost;
-                    if (stepClimbMaxYBoost > 0 && collider is PhysicsBody3D)
+                    if (
+                        stepClimbMaxYBoost > 0
+                        && collider is PhysicsBody3D physicsBodyCollider
+                        && (!IsClimbing || CurrentClimber == null || physicsBodyCollider != CurrentClimber.CurrentlyClimbedObject)
+                        )
                     {
                         float characterBottomYPosLocal = -GetCharacterHeight() / 2f;
                         Vector3 characterBottom = body.ToGlobal(new Vector3(0, characterBottomYPosLocal, 0));
