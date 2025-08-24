@@ -82,7 +82,7 @@ Jumpvalley's documentation can be found on its [website](https://uthecat.github.
 
 ## Found a bug in Jumpvalley?
 
-Feel free to open an issue on this repository describing the bug.
+Feel free to [open an issue on this repository](https://github.com/UTheCat/jumpvalley/issues/new) describing the bug.
 
 ## Working with this repository
 
