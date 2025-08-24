@@ -1,4 +1,3 @@
-using System;
 using UTheCat.Jumpvalley.Core.Players.Camera;
 
 namespace UTheCat.Jumpvalley.App.Settings.Gameplay

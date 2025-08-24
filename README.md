@@ -32,25 +32,27 @@ Assets under the ```addons``` folder are 3rd-party assets. As such, they are cov
 
 ## Running the app
 
-If you're looking to simply run Jumpvalley, you can find the app precompiled in the [releases](https://github.com/UTheCat/jumpvalley/releases) tab.
+If you're looking to simply run Jumpvalley, you can find the app precompiled in the [releases](https://github.com/UTheCat/jumpvalley/releases) page.
 
 Jumpvalley currently doesn't have an installer executable. Therefore, downloading the compressed folder corresponding to your device's operating system, and then extracting it, should give you the files needed to run precompiled Jumpvalley.
 
 ### Jumpvalley for Android
 
-To test its functionality on mobile platforms, Jumpvalley can be run on Android. While there are precompiled versions of Jumpvalley for Android, Android support is currently *experimental* for these reasons:
+To test its functionality on mobile platforms, Jumpvalley can be run on Android. To do this, download and install the Jumpvalley APK from the releases page, and run the app.
+
+While there are precompiled versions of Jumpvalley for Android, Android support is currently *experimental* for these reasons:
 - Currently, exporting an app with C# code to an Android APK on Godot 4 is itself an experimental feature
 - Currently, you'll need to connect a keyboard and mouse to your Android device in order to move your character and camera.
 
 ### Jumpvalley for Linux
 
-The releases tab contains Jumpvalley precompiled for Linux systems. As of version 0.6.0, Jumpvalley for Linux is shipped in `.tar.xz` archives.
+The releases page contains Jumpvalley precompiled for Linux systems. As of version 0.6.0, Jumpvalley for Linux is shipped in `.tar.xz` archives.
 
-The Jumpvalley executable for the Linux version of Jumpvalley is named `jumpvalley` (with no file extension).
+To run Jumpvalley on Linux, extract the archive, open the resulting folder, and run the executable file named `jumpvalley` (with no file extension) contained inside. This executable is the Jumpvalley executable.
 
 #### Allowing the system to run Jumpvalley
 
-In later versions of Jumpvalley, the executable should already have the necessary permissions to run after you've extracted the archive that it's contained in.
+In more recent builds of Jumpvalley, the executable should already have the necessary permissions to run after you've extracted the archive that it's contained in.
 
 In case the Jumpvalley executable doesn't run, you might need to grant the needed permissions for the executable to run. To do this, open the Linux terminal, change the working directory to the directory containing the Jumpvalley executable like this:
 
