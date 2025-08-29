@@ -695,6 +695,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public CharacterBody3D Character = null;
 
             /// <summary>
+            /// <see cref="Character"/>'s mover. 
+            /// </summary>
+            public BaseMover Mover = null;
+
+            /// <summary>
+            /// List of global-space coordinates that Body and Character are touching during the current physics frame
+            /// </summary>
+            public List<Vector3> CollisionPoints = [];
+
+            /// <summary>
             /// Position offset from <see cref="Body"/>'s origin in global coordinates. 
             /// </summary>
             public Vector3 PositionOffset = Vector3.Zero;
@@ -719,7 +729,43 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// </summary>
             public int ConsecutiveFramesUntouched = 0;
 
-            public void Push() => Body.ApplyForce(PushForce, PositionOffset);
+            private Vector3 GetAvgCollisionPoint()
+            {
+                if (CollisionPoints.Count == 0) return Vector3.Zero;
+                if (CollisionPoints.Count == 1) return CollisionPoints[0];
+
+                Vector3 total = Vector3.Zero;
+                foreach (Vector3 c in CollisionPoints)
+                {
+                    total += c;
+                }
+
+                return total / CollisionPoints.Count;
+            }
+            
+            /// <summary>
+            /// Pushes <see cref="Body"/>. 
+            /// </summary>
+            /// <param name="characterCurrentVelocity"></param>
+            /// <param name="characterTargetVelocity"></param>
+            public void Push(Vector3 characterCurrentVelocity, Vector3 characterTargetVelocity)
+            {
+                if (characterCurrentVelocity == Vector3.Zero && characterTargetVelocity == Vector3.Zero) return;
+
+                //Vector3 avgCollisionPoint = GetAvgCollisionPoint();
+                Vector3 charVelocity = (characterCurrentVelocity.Length() > characterTargetVelocity.Length()) ? characterCurrentVelocity : characterTargetVelocity;
+
+                Vector3 pushDirection = charVelocity.Normalized();
+                float forceMultiplier = charVelocity.Dot(pushDirection) - Body.LinearVelocity.Dot(pushDirection);
+
+                // If character doesn't have enough velocity to overcome rigid body velocity
+                // or if we know for sure that force application is physically impossible, stop.
+                if (forceMultiplier <= 0) return;
+
+                forceMultiplier *= Mover.ForceMultiplier * Mover.Mass / Body.Mass;
+
+                Body.ApplyForce(pushDirection * forceMultiplier, GetAvgCollisionPoint() - Body.GlobalPosition);
+            }
 
             /// <returns>
             /// Data that can be used to modify character movement
@@ -989,7 +1035,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             Vector3 centerOfMass = rigidBody.CenterOfMass;
                             if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
                             {
-                                pusher.PositionOffset = forcePositionOffset;
+                                //pusher.PositionOffset = forcePositionOffset;
+                                pusher.CollisionPoints.Add(kinematicCollisionPos);
                                 pusher.PushForce = rigidBodyPushForce;
                                 pusher.Character = Body;
                                 pusher.CharacterPushForce = characterPushForce;
@@ -1000,11 +1047,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             pusher = new RigidBodyPusher
                             {
                                 Body = rigidBody,
-                                PositionOffset = forcePositionOffset,
+                                //PositionOffset = forcePositionOffset,
                                 PushForce = rigidBodyPushForce,
                                 Character = Body,
-                                CharacterPushForce = characterPushForce
+                                CharacterPushForce = characterPushForce,
+                                Mover = this
                             };
+
+                            pusher.CollisionPoints.Add(kinematicCollisionPos);
 
                             currentFrameRigidBodyPushers.Add(rigidBody, pusher);
                         }
@@ -1017,7 +1067,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
                     finalVelocity += characterPushData.VelocityChange;
 
-                    pusher.Push();
+                    pusher.Push(finalVelocity, moveVelocity);
                 }
 
                 // Apply step climb if there is one for this frame
