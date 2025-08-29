@@ -10,7 +10,7 @@ transparency = 1
 albedo_color = Color(0.631373, 0.631373, 0.631373, 0.25098)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
-size = Vector3(1.05, 2.1, 0.55)
+size = Vector3(1, 2, 0.5)
 
 [node name="Character" type="CharacterBody3D"]
 collision_layer = 5
@@ -34,4 +34,4 @@ skeleton = NodePath("../..")
 [node name="CharacterBody" parent="." instance=ExtResource("2_3ohbj")]
 
 [node name="CameraFocus" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.775, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
