@@ -703,7 +703,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// List of global-space coordinates that Body and Character are touching during the current physics frame
             /// </summary>
             public List<Vector3> CollisionPoints = [];
-            
+
             /// <summary>
             /// The closest distance between the center of the character and
             /// the point at which <see cref="Body"/> and <see cref="Character"/> collided.
@@ -711,24 +711,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public float CharCenterToCollisionPosSmallestDist = 0f;
 
             /// <summary>
-            /// Where force should be applied to <see cref="Body"/> and <see cref="Character"/> in global coordinates.  
-            /// </summary>
-            //public Vector3 ForceApplicationPosition = Vector3.Zero;
-
-            /// <summary>
-            /// Force applied by <see cref="Character"/> on <see cref="Body"/>  
-            /// </summary>
-            //public Vector3 PushForce = Vector3.Zero;
-
-            /// <summary>
             /// Force applied by <see cref="Body"/> on <see cref="Character"/>  
             /// </summary>
             public Vector3 CharacterPushForce = Vector3.Zero;
-
-            /// <summary>
-            /// Number of consecutive physics frames that the character has *not* touched <see cref="Body"/> 
-            /// </summary>
-            public int ConsecutiveFramesUntouched = 0;
 
             private Vector3 GetAvgCollisionPoint()
             {
@@ -753,7 +738,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             {
                 if (characterCurrentVelocity == Vector3.Zero && characterTargetVelocity == Vector3.Zero) return;
 
-                //Vector3 avgCollisionPoint = GetAvgCollisionPoint();
                 Vector3 charVelocity = (characterCurrentVelocity.Length() > characterTargetVelocity.Length()) ? characterCurrentVelocity : characterTargetVelocity;
 
                 Vector3 pushDirection = charVelocity.Normalized();
@@ -773,17 +757,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// </returns>
             public RigidBodyPusherCharacterPushData GetCharacterPushData()
             {
-                // Character push force and torque are calculated from the Wikipedia article on Line of Action
-                // https://en.wikipedia.org/wiki/Line_of_action
-                // 
-                // For the character, we assume that the center of mass is the actual/positional center of the character.
-                //Vector3 displacementFromCenterOfMass = ForceApplicationPosition - Character.GlobalPosition;
-
                 return new RigidBodyPusherCharacterPushData
                 {
                     VelocityChange = CharacterPushForce / Body.Mass,
-                    //DisplacementFromCenterOfMass = displacementFromCenterOfMass,
-                    //Torque = displacementFromCenterOfMass.Cross(CharacterPushForce)
                 };
             }
         }
@@ -995,7 +971,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         RigidBodyPusher pusher;
 
                         Vector3 collisionNormal = collision.GetNormal();
-                        Vector3 forcePositionOffset = kinematicCollisionPos - rigidBody.GlobalPosition;
 
                         // CALCULATIONS FOR RIGIDBODY3D ATTEMPTS TO PUSH CHARACTER //
 
@@ -1013,22 +988,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         /////////////////////////////////////////////////////////////
 
-                        // CALCULATIONS FOR CHARACTER ATTEMPTS TO PUSH RIGID BODY 3D //
-
-                        //Vector3 rigidBodyPushDirection = -collisionNormal;
-
-                        // The amount in which rigidBody.Velocity has to change by to match pushDirection.
-                        // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
-                        //float diffToRigidBodyPushDirection = Math.Max(0f, finalVelocity.Dot(rigidBodyPushDirection) - rigidBody.LinearVelocity.Dot(rigidBodyPushDirection));
-
-                        // If rigidBody has more mass, it should be harder to push.
-                        //float reciprocatedMassRatio = Mass / rigidBody.Mass;
-
-                        // Put it together
-                        //Vector3 rigidBodyPushForce = rigidBodyPushDirection * diffToRigidBodyPushDirection * reciprocatedMassRatio * ForceMultiplier;
-
-                        ///////////////////////////////////////////////////////////////
-
                         Vector3 collisionPosCharacterPosDiff = kinematicCollisionPos - body.GlobalPosition;
 
                         // Remember, we only want to add force once per RigidBody3D per physics frame
@@ -1036,8 +995,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
                             pusher.CollisionPoints.Add(kinematicCollisionPos);
-
-                            //Vector3 centerOfMass = rigidBody.CenterOfMass;
+                            
                             float collisionPosToCharacterPosDistance = collisionPosCharacterPosDiff.Length();
                             if (collisionPosToCharacterPosDistance < pusher.CharCenterToCollisionPosSmallestDist)
                             {
