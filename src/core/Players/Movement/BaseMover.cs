@@ -705,9 +705,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public List<Vector3> CollisionPoints = [];
 
             /// <summary>
-            /// Position offset from <see cref="Body"/>'s origin in global coordinates. 
+            /// Closest position offset from <see cref="Body"/>'s center of mass in global coordinates in which <see cref="Body"/> touched <see cref="Character"/>. 
             /// </summary>
-            public Vector3 PositionOffset = Vector3.Zero;
+            public Vector3 ClosestPositionOffset = Vector3.Zero;
 
             /// <summary>
             /// Where force should be applied to <see cref="Body"/> and <see cref="Character"/> in global coordinates.  
@@ -717,7 +717,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// <summary>
             /// Force applied by <see cref="Character"/> on <see cref="Body"/>  
             /// </summary>
-            public Vector3 PushForce = Vector3.Zero;
+            //public Vector3 PushForce = Vector3.Zero;
 
             /// <summary>
             /// Force applied by <see cref="Body"/> on <see cref="Character"/>  
@@ -1014,17 +1014,17 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         // CALCULATIONS FOR CHARACTER ATTEMPTS TO PUSH RIGID BODY 3D //
 
-                        Vector3 rigidBodyPushDirection = -collisionNormal;
+                        //Vector3 rigidBodyPushDirection = -collisionNormal;
 
                         // The amount in which rigidBody.Velocity has to change by to match pushDirection.
                         // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
-                        float diffToRigidBodyPushDirection = Math.Max(0f, finalVelocity.Dot(rigidBodyPushDirection) - rigidBody.LinearVelocity.Dot(rigidBodyPushDirection));
+                        //float diffToRigidBodyPushDirection = Math.Max(0f, finalVelocity.Dot(rigidBodyPushDirection) - rigidBody.LinearVelocity.Dot(rigidBodyPushDirection));
 
                         // If rigidBody has more mass, it should be harder to push.
-                        float reciprocatedMassRatio = Mass / rigidBody.Mass;
+                        //float reciprocatedMassRatio = Mass / rigidBody.Mass;
 
                         // Put it together
-                        Vector3 rigidBodyPushForce = rigidBodyPushDirection * diffToRigidBodyPushDirection * reciprocatedMassRatio * ForceMultiplier;
+                        //Vector3 rigidBodyPushForce = rigidBodyPushDirection * diffToRigidBodyPushDirection * reciprocatedMassRatio * ForceMultiplier;
 
                         ///////////////////////////////////////////////////////////////
 
@@ -1032,13 +1032,19 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         // correspond to the collision point that is closest to the RigidBody3D
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
+                            pusher.CollisionPoints.Add(kinematicCollisionPos);
+
                             Vector3 centerOfMass = rigidBody.CenterOfMass;
-                            if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
+                            if ((forcePositionOffset - centerOfMass).Length() < (pusher.ClosestPositionOffset - centerOfMass).Length())
                             {
-                                //pusher.PositionOffset = forcePositionOffset;
-                                pusher.CollisionPoints.Add(kinematicCollisionPos);
-                                pusher.PushForce = rigidBodyPushForce;
-                                pusher.Character = Body;
+                                // Character to be pushed by RigidBody3D shouldn't change while we're scanning
+                                // for more collision points between the character and the RigidBody3D, and so,
+                                // we don't need to "update" push info in this regard.
+                                //
+                                // However, using a different collision point could potentially mean that the character was hit by the RigidBody3D
+                                // at a different collision normal, and so, we still want to update character push force when we've found a collision point
+                                // closer to the colliding RigidBody3D's center of mass.
+                                pusher.ClosestPositionOffset = forcePositionOffset;
                                 pusher.CharacterPushForce = characterPushForce;
                             }
                         }
@@ -1047,8 +1053,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                             pusher = new RigidBodyPusher
                             {
                                 Body = rigidBody,
-                                //PositionOffset = forcePositionOffset,
-                                PushForce = rigidBodyPushForce,
+                                ClosestPositionOffset = forcePositionOffset,
                                 Character = Body,
                                 CharacterPushForce = characterPushForce,
                                 Mover = this
