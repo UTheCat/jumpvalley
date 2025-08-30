@@ -701,8 +701,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// </summary>
             private static readonly float GET_CHAR_VELOCITY_CHANGE_RAY_END_OFFSET = 0.5f;
 
+            /// <summary>
+            /// The colliding rigid body.
+            /// </summary>
             public RigidBody3D RigidBody = null;
 
+            /// <summary>
+            /// The colliding character.
+            /// </summary>
             public CharacterBody3D Character = null;
 
             /// <summary>
