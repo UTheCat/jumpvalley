@@ -362,7 +362,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         public float Mass = 60f;
 
         /// <summary>
-        /// The "magnitude" in which the character pushes movable rigid bodies.
+        /// Multiplier for the force in which the character uses to push movable rigid bodies.
         /// <br/><br/>
         /// This is basically the same as the physical strength one uses to push an object.
         /// </summary>
@@ -371,7 +371,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// Multiplier for the force applied by a <i>colliding</i> rigid body to the character being handled by this <see cref="BaseMover"/>. 
         /// </summary>
-        public float CharacterPushForceMultiplier = 5f;
+        public float CharacterPushForceMultiplier = 1f;
 
         private Vector2 lastXZVelocity = Vector2.Zero;
 
@@ -680,78 +680,169 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         private static float ClosestToZero(float a, float b) => Math.Abs(a) < Math.Abs(b) ? a : b;
 
         /// <summary>
-        /// This nested class is intended to "smooth" pushing RigidBody3Ds.
+        /// Internal class for assisting <see cref="BaseMover"/> in figuring out how to apply force on rigid bodies
+        /// that the mover's character has come into contact with.
         /// <br/><br/>
-        /// When Godot thinks the character is colliding with the RigidBody3D at multiple spots in the same physics frame,
-        /// pushing the RigidBody3D in the right direction can be RNG.
+        /// Additionally, this class helps <see cref="BaseMover"/> figure out how its character's velocity should change when a rigid body
+        /// hits the character.
         /// <br/><br/>
-        /// Therefore, this class was made to assist with making a push in a physically valid position that's as close to
-        /// the rigid body's center of mass as possible.
+        /// For performance reasons, this class considers any contact between the rigid body and the character as an opportunity for
+        /// force to be applied on both the rigid body and the character at the same time. 
         /// </summary>
         class RigidBodyPusher
         {
-            public RigidBody3D Body = null;
+            /// <summary>
+            /// Distance into the colliding rigid body normal that the <see cref="GetCharacterVelocityChange"/> raycast starts at
+            /// </summary>
+            private static readonly float GET_CHAR_VELOCITY_CHANGE_RAY_START_INSET = 0.5f;
 
+            /// <summary>
+            /// Distance away from the colliding rigid body normal that the <see cref="GetCharacterVelocityChange"/> raycast ends at
+            /// </summary>
+            private static readonly float GET_CHAR_VELOCITY_CHANGE_RAY_END_OFFSET = 0.5f;
+
+            /// <summary>
+            /// The colliding rigid body.
+            /// </summary>
+            public RigidBody3D RigidBody = null;
+
+            /// <summary>
+            /// The colliding character.
+            /// </summary>
             public CharacterBody3D Character = null;
 
             /// <summary>
-            /// Position offset from <see cref="Body"/>'s origin in global coordinates. 
+            /// <see cref="Character"/>'s mover. 
             /// </summary>
-            public Vector3 PositionOffset = Vector3.Zero;
+            public BaseMover Mover = null;
 
             /// <summary>
-            /// Where force should be applied to <see cref="Body"/> and <see cref="Character"/> in global coordinates.  
+            /// List of global-space coordinates that Body and Character are touching during the current physics frame
             /// </summary>
-            //public Vector3 ForceApplicationPosition = Vector3.Zero;
+            public List<Vector3> CollisionPoints = [];
 
             /// <summary>
-            /// Force applied by <see cref="Character"/> on <see cref="Body"/>  
+            /// The closest distance between the center of the character and
+            /// the point at which <see cref="RigidBody"/> and <see cref="Character"/> collided.
             /// </summary>
-            public Vector3 PushForce = Vector3.Zero;
+            public float CharCenterToCollisionPosSmallestDist = 0f;
 
             /// <summary>
-            /// Force applied by <see cref="Body"/> on <see cref="Character"/>  
+            /// The closest distance between <see cref="RigidBody3D"/>'s center of mass and
+            /// the point at which <see cref="RigidBody"/> and <see cref="Character"/> collided.
             /// </summary>
-            public Vector3 CharacterPushForce = Vector3.Zero;
+            public float RigidBodyCenterOfMassToCollisionPosSmallestDist = 0f;
 
             /// <summary>
-            /// Number of consecutive physics frames that the character has *not* touched <see cref="Body"/> 
+            /// Collision normal to use when figuring out how to apply force to the character.
+            /// This collision normal is the normal of the <i>rigid body</i>, not the character, in which <see cref="RigidBody"/>
+            /// and <see cref="Character"/> touched.  
             /// </summary>
-            public int ConsecutiveFramesUntouched = 0;
+            public Vector3 CharacterPushCollisionNormal = Vector3.Zero;
 
-            public void Push() => Body.ApplyForce(PushForce, PositionOffset);
+            /// <summary>
+            /// The collision normal that's closest to <see cref="RigidBody"/>'s center of mass. 
+            /// </summary>
+            public Vector3 RigidBodyCollisionNormal = Vector3.Zero;
 
-            /// <returns>
-            /// Data that can be used to modify character movement
-            /// </returns>
-            public RigidBodyPusherCharacterPushData GetCharacterPushData()
+            private Vector3 GetAvgCollisionPoint()
             {
-                // Character push force and torque are calculated from the Wikipedia article on Line of Action
-                // https://en.wikipedia.org/wiki/Line_of_action
-                // 
-                // For the character, we assume that the center of mass is the actual/positional center of the character.
-                //Vector3 displacementFromCenterOfMass = ForceApplicationPosition - Character.GlobalPosition;
+                if (CollisionPoints.Count == 0) return Vector3.Zero;
+                if (CollisionPoints.Count == 1) return CollisionPoints[0];
 
-                return new RigidBodyPusherCharacterPushData
+                Vector3 total = Vector3.Zero;
+                foreach (Vector3 c in CollisionPoints)
                 {
-                    VelocityChange = CharacterPushForce / Body.Mass,
-                    //DisplacementFromCenterOfMass = displacementFromCenterOfMass,
-                    //Torque = displacementFromCenterOfMass.Cross(CharacterPushForce)
-                };
+                    total += c;
+                }
+
+                return total / CollisionPoints.Count;
             }
-        }
 
-        /// <summary>
-        /// Contains a bunch of data that can be used to modify character movement. Such data
-        /// is intended for use in a specific physics frame (such as the current one).
-        /// </summary>
-        class RigidBodyPusherCharacterPushData
-        {
-            public Vector3 VelocityChange = Vector3.Zero;
+            /// <summary>
+            /// Pushes <see cref="RigidBody"/>. 
+            /// </summary>
+            /// <param name="characterCurrentVelocity">The current (or next) velocity of the character</param>
+            /// <param name="characterTargetVelocity">
+            /// The target velocity of the character (whose X and Z components are largely affected by
+            /// <see cref="RightValue"/> and <see cref="ForwardValue"/>)
+            /// </param>
+            public void PushRigidBody(Vector3 characterCurrentVelocity, Vector3 characterTargetVelocity)
+            {
+                if (characterCurrentVelocity == Vector3.Zero && characterTargetVelocity == Vector3.Zero) return;
 
-            // Currently not used
-            //public Vector3 DisplacementFromCenterOfMass = Vector3.Zero;
-            //public Vector3 Torque = Vector3.Zero;
+                Vector3 charVelocity = (characterCurrentVelocity.Length() > characterTargetVelocity.Length()) ? characterCurrentVelocity : characterTargetVelocity;
+
+                Vector3 pushDirection = charVelocity.Normalized();
+
+                // Calculating force multiplier this way is useful because the dot product of two perpendicular vectors is 0.
+                // If the dot product of charVelocity and negativeRigidBodyCollisionNormal are greater than 0, we can at least say that to some degree,
+                // charVelocity and negativeRigidBodyCollisionNormal aren't travelling in opposite or perpendicular directions.
+                // 
+                // This calculation has also been optimized by taking into account the fact that adding two vectors that are going the opposite direction
+                // will cause the two vectors to "cancel each other out".
+                float forceMultiplier = charVelocity.Dot(-RigidBodyCollisionNormal) + RigidBody.LinearVelocity.Dot(RigidBodyCollisionNormal);
+
+                // If character doesn't have enough velocity to overcome rigid body velocity
+                // or if we know for sure that force application is physically impossible, stop.
+                if (forceMultiplier <= 0) return;
+
+                forceMultiplier *= Mover.ForceMultiplier * Mover.Mass / RigidBody.Mass;
+
+                RigidBody.ApplyForce(pushDirection * forceMultiplier, GetAvgCollisionPoint() - RigidBody.GlobalPosition);
+            }
+
+            /// <summary>
+            /// Returns the change in velocity corresponding to the force being applied to <see cref="Character"/> 
+            /// </summary>
+            /// <param name="characterCurrentVelocity">The current (or next) velocity of the character</param>
+            public Vector3 GetCharacterVelocityChange(Vector3 characterCurrentVelocity)
+            {
+                Vector3 rigidBodyVelocity = RigidBody.LinearVelocity;
+
+                if (rigidBodyVelocity == Vector3.Zero) return Vector3.Zero;
+
+                // Use a raycast to determine the collision normal of the character that was touched by the rigid body, using
+                // CharacterPushCollisionNormal as a fallback.
+                Vector3 avgCollisionPoint = GetAvgCollisionPoint();
+                Vector3 negativeCharacterCollisionNormal = CharacterPushCollisionNormal;
+                PhysicsRayQueryParameters3D charCollisionNormalRayQueryParams = PhysicsRayQueryParameters3D.Create(
+                    avgCollisionPoint - CharacterPushCollisionNormal * GET_CHAR_VELOCITY_CHANGE_RAY_START_INSET,
+                    avgCollisionPoint + CharacterPushCollisionNormal * GET_CHAR_VELOCITY_CHANGE_RAY_END_OFFSET
+                );
+                charCollisionNormalRayQueryParams.Exclude.Add(RigidBody.GetRid());
+                charCollisionNormalRayQueryParams.HitFromInside = false;
+
+                var raycastResult = Character.GetWorld3D().DirectSpaceState.IntersectRay(charCollisionNormalRayQueryParams);
+                Variant vRaycastCollider;
+                if (raycastResult.TryGetValue("collider", out vRaycastCollider))
+                {
+                    GodotObject oCollider = vRaycastCollider.AsGodotObject();
+                    if (oCollider != null && oCollider is CharacterBody3D cBody && cBody == Character)
+                    {
+                        Variant vCollisionNormal;
+                        if (raycastResult.TryGetValue("normal", out vCollisionNormal)) negativeCharacterCollisionNormal = -vCollisionNormal.As<Vector3>();
+                    }
+                }
+
+                // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
+                float rigidBodyVelocityCharVelocityDiff = rigidBodyVelocity.Dot(negativeCharacterCollisionNormal) - characterCurrentVelocity.Dot(negativeCharacterCollisionNormal);
+
+                // If we know for sure that applying the force would be physically impossible, don't apply the force.
+                if (rigidBodyVelocityCharVelocityDiff <= 0) return Vector3.Zero;
+
+                // Objects heavier than the character should be able to push the character with greater force.
+                float massRatio = RigidBody.Mass / Mover.Mass;
+
+                Vector3 characterPushForce = rigidBodyVelocity.Normalized() * rigidBodyVelocityCharVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
+
+                // Some rigid bodies absorb force on impact. Account for this.
+                PhysicsMaterial rigidBodyPhysicsMaterial = RigidBody.PhysicsMaterialOverride;
+                if (rigidBodyPhysicsMaterial != null) characterPushForce *= 1f - rigidBodyPhysicsMaterial.Bounce;
+
+                // We already divided by the mass of the character to get acceleration from force, there's no need to do it again
+                return characterPushForce;
+            }
         }
 
         private float GetCharacterHeight()
@@ -810,7 +901,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Vector2 goalXZVelocity = new Vector2(moveVelocity.X, moveVelocity.Z);
 
                 // Determine which value of acceleration to use
-                float acceleration = 0f;
+                float acceleration;
                 bool isTryingToMove = IsTryingToMove();
                 bool hasExceededMaxSpeed = lastXZVelocity.Length() > Speed;
                 bool canMoveFaster = isTryingToMove && hasExceededMaxSpeed == false;
@@ -852,11 +943,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                 float stepClimbHighestYBoost = 0f;
 
-                // Figure out how to push objects we've come into contact with. This part intentionally comes before the call to MoveAndSlide().
-                // Thanks to this forum post for helping me figure out how to implement this:
-                // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
-                // as well as this code snippet by majikayogames on GitHub
-                // https://gist.github.com/majikayogames/cf013c3091e9a313e322889332eca109
+                // Handle collisions.
+                // For performance reasons, we handle the step-climb boost, as well as rigid-body and character pushing,
+                // in the same iteration within this loop.
                 Dictionary<RigidBody3D, RigidBodyPusher> currentFrameRigidBodyPushers = [];
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
@@ -864,7 +953,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     GodotObject collider = collision.GetCollider();
                     Vector3 kinematicCollisionPos = collision.GetPosition();
 
-                    // See if we can automatically climb a step
+                    // See if we can automatically climb a step (perform a "step-climb boost")
                     //
                     // In some cases, the player will just barely miss a platform because they almost (but didn't)
                     // gain enough height (e.g. after a high or long jump).
@@ -948,76 +1037,64 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         RigidBodyPusher pusher;
 
                         Vector3 collisionNormal = collision.GetNormal();
-                        Vector3 forcePositionOffset = kinematicCollisionPos - rigidBody.GlobalPosition;
+                        Vector3 collisionPosCharacterPosDiff = kinematicCollisionPos - body.GlobalPosition;
+                        Vector3 rigidBodyCenterOfMass = rigidBody.CenterOfMass;
 
-                        // CALCULATIONS FOR RIGIDBODY3D ATTEMPTS TO PUSH CHARACTER //
-
-                        // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
-                        // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
-                        // is travelling towards the character.
-                        float characterVelocityDiff = Math.Max(0f, rigidBody.LinearVelocity.Dot(collisionNormal) - finalVelocity.Dot(-collisionNormal));
-                        float massRatio = rigidBody.Mass / Mass;
-
-                        Vector3 characterPushForce = collisionNormal * characterVelocityDiff * massRatio * CharacterPushForceMultiplier;
-
-                        // Some rigid bodies absorb force on impact. Account for this.
-                        PhysicsMaterial rigidBodyPhysicsMaterial = rigidBody.PhysicsMaterialOverride;
-                        if (rigidBodyPhysicsMaterial != null) characterPushForce *= 1f - rigidBodyPhysicsMaterial.Bounce;
-
-                        /////////////////////////////////////////////////////////////
-
-                        // CALCULATIONS FOR CHARACTER ATTEMPTS TO PUSH RIGID BODY 3D //
-
-                        Vector3 rigidBodyPushDirection = -collisionNormal;
-
-                        // The amount in which rigidBody.Velocity has to change by to match pushDirection.
-                        // This number has a minimum of 0 to ensure that the character only pushes objects that it's travelling towards.
-                        float diffToRigidBodyPushDirection = Math.Max(0f, finalVelocity.Dot(rigidBodyPushDirection) - rigidBody.LinearVelocity.Dot(rigidBodyPushDirection));
-
-                        // If rigidBody has more mass, it should be harder to push.
-                        float reciprocatedMassRatio = Mass / rigidBody.Mass;
-
-                        // Put it together
-                        Vector3 rigidBodyPushForce = rigidBodyPushDirection * diffToRigidBodyPushDirection * reciprocatedMassRatio * ForceMultiplier;
-
-                        ///////////////////////////////////////////////////////////////
-
-                        // Ensure that the numbers used for pushing the character and the RigidBody3D
-                        // correspond to the collision point that is closest to the RigidBody3D
+                        // Remember, we only want to add force once per RigidBody3D per physics frame
+                        // Likewise, each RigidBody3D can only apply force to the character once per physics frame.
                         if (currentFrameRigidBodyPushers.TryGetValue(rigidBody, out pusher))
                         {
-                            Vector3 centerOfMass = rigidBody.CenterOfMass;
-                            if ((forcePositionOffset - centerOfMass).Length() < (pusher.PositionOffset - centerOfMass).Length())
+                            pusher.CollisionPoints.Add(kinematicCollisionPos);
+
+                            float collisionPosToCharacterPosDistance = collisionPosCharacterPosDiff.Length();
+                            if (collisionPosToCharacterPosDistance < pusher.CharCenterToCollisionPosSmallestDist)
                             {
-                                pusher.PositionOffset = forcePositionOffset;
-                                pusher.PushForce = rigidBodyPushForce;
-                                pusher.Character = Body;
-                                pusher.CharacterPushForce = characterPushForce;
+                                // Character to be pushed by RigidBody3D shouldn't change while we're scanning
+                                // for more collision points between the character and the RigidBody3D, and so,
+                                // we don't need to "update" push info in this regard.
+                                //
+                                // However, using a different collision point could potentially mean that the character was hit by the RigidBody3D
+                                // at a different collision normal, and so, we still want to update character push force when we've found a collision point
+                                // closer to the center of the character.
+                                pusher.CharCenterToCollisionPosSmallestDist = collisionPosToCharacterPosDistance;
+                                pusher.CharacterPushCollisionNormal = collisionNormal;
+                            }
+
+                            // To assist with RigidBodyPusher force calculations (for character pushing rigid body),
+                            // store the collision normal closest to the rigid body's center of mass
+                            float centerOfMassToCollisionPosDiff = (kinematicCollisionPos - rigidBodyCenterOfMass).Length();
+                            if (centerOfMassToCollisionPosDiff < pusher.RigidBodyCenterOfMassToCollisionPosSmallestDist)
+                            {
+                                pusher.CharCenterToCollisionPosSmallestDist = centerOfMassToCollisionPosDiff;
+                                pusher.RigidBodyCollisionNormal = collisionNormal;
                             }
                         }
                         else
                         {
                             pusher = new RigidBodyPusher
                             {
-                                Body = rigidBody,
-                                PositionOffset = forcePositionOffset,
-                                PushForce = rigidBodyPushForce,
+                                RigidBody = rigidBody,
+                                RigidBodyCollisionNormal = collisionNormal,
+                                RigidBodyCenterOfMassToCollisionPosSmallestDist = (kinematicCollisionPos - rigidBodyCenterOfMass).Length(),
+                                CharCenterToCollisionPosSmallestDist = collisionPosCharacterPosDiff.Length(),
                                 Character = Body,
-                                CharacterPushForce = characterPushForce
+                                CharacterPushCollisionNormal = collisionNormal,
+                                Mover = this
                             };
+
+                            pusher.CollisionPoints.Add(kinematicCollisionPos);
 
                             currentFrameRigidBodyPushers.Add(rigidBody, pusher);
                         }
                     }
                 }
 
-                // Do the actual character and RigidBody3D pushing.
+                // Do the RigidBody3D pushing and modify the "next" character velocity
+                // to simulate force being applied by the touching rigid bodies on the character.
                 foreach (RigidBodyPusher pusher in currentFrameRigidBodyPushers.Values)
                 {
-                    RigidBodyPusherCharacterPushData characterPushData = pusher.GetCharacterPushData();
-                    finalVelocity += characterPushData.VelocityChange;
-
-                    pusher.Push();
+                    finalVelocity += pusher.GetCharacterVelocityChange(finalVelocity);
+                    pusher.PushRigidBody(finalVelocity, moveVelocity);
                 }
 
                 // Apply step climb if there is one for this frame

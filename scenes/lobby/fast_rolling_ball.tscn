@@ -36,7 +36,7 @@ mesh = SubResource("BoxMesh_rbx7a")
 
 [node name="Ball" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 2.5, 0)
-mass = 526.0
+mass = 206.0
 script = ExtResource("2_41y5u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
