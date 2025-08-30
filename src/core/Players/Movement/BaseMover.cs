@@ -691,7 +691,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         class RigidBodyPusher
         {
-            public RigidBody3D Body = null;
+            public RigidBody3D RigidBody = null;
 
             public CharacterBody3D Character = null;
 
@@ -707,18 +707,18 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
             /// <summary>
             /// The closest distance between the center of the character and
-            /// the point at which <see cref="Body"/> and <see cref="Character"/> collided.
+            /// the point at which <see cref="RigidBody"/> and <see cref="Character"/> collided.
             /// </summary>
             public float CharCenterToCollisionPosSmallestDist = 0f;
 
             /// <summary>
-            /// Force applied by <see cref="Body"/> on <see cref="Character"/>  
+            /// Force applied by <see cref="RigidBody"/> on <see cref="Character"/>  
             /// </summary>
             //public Vector3 CharacterPushForce = Vector3.Zero;
 
             /// <summary>
             /// Collision normal to use when figuring out how to apply force to the character.
-            /// This collision normal is the normal on the rigid body in which <see cref="Body"/>
+            /// This collision normal is the normal on the rigid body in which <see cref="RigidBody"/>
             /// and <see cref="Character"/> touched.  
             /// </summary>
             public Vector3 CollisionNormal = Vector3.Zero;
@@ -738,7 +738,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             }
 
             /// <summary>
-            /// Pushes <see cref="Body"/>. 
+            /// Pushes <see cref="RigidBody"/>. 
             /// </summary>
             /// <param name="characterCurrentVelocity"></param>
             /// <param name="characterTargetVelocity"></param>
@@ -749,15 +749,15 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Vector3 charVelocity = (characterCurrentVelocity.Length() > characterTargetVelocity.Length()) ? characterCurrentVelocity : characterTargetVelocity;
 
                 Vector3 pushDirection = charVelocity.Normalized();
-                float forceMultiplier = charVelocity.Dot(pushDirection) - Body.LinearVelocity.Dot(pushDirection);
+                float forceMultiplier = charVelocity.Dot(pushDirection) - RigidBody.LinearVelocity.Dot(pushDirection);
 
                 // If character doesn't have enough velocity to overcome rigid body velocity
                 // or if we know for sure that force application is physically impossible, stop.
                 if (forceMultiplier <= 0) return;
 
-                forceMultiplier *= Mover.ForceMultiplier * Mover.Mass / Body.Mass;
+                forceMultiplier *= Mover.ForceMultiplier * Mover.Mass / RigidBody.Mass;
 
-                Body.ApplyForce(pushDirection * forceMultiplier, GetAvgCollisionPoint() - Body.GlobalPosition);
+                RigidBody.ApplyForce(pushDirection * forceMultiplier, GetAvgCollisionPoint() - RigidBody.GlobalPosition);
             }
 
             /// <summary>
@@ -768,18 +768,18 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public Vector3 GetCharacterVelocityChange(Vector3 characterCurrentVelocity)
             {
                 // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
-                float charVelocityRigidBodyVelocityDiff = Body.LinearVelocity.Dot(CollisionNormal) - characterCurrentVelocity.Dot(-CollisionNormal);
+                float charVelocityRigidBodyVelocityDiff = RigidBody.LinearVelocity.Dot(CollisionNormal) - characterCurrentVelocity.Dot(-CollisionNormal);
 
                 // If we know for sure that applying the force would be physically impossible, don't apply the force.
                 if (charVelocityRigidBodyVelocityDiff <= 0) return Vector3.Zero;
 
                 // Objects heavier than the character should be able to push the character with greater force.
-                float massRatio = Body.Mass / Mover.Mass;
+                float massRatio = RigidBody.Mass / Mover.Mass;
 
                 Vector3 characterPushForce = CollisionNormal * charVelocityRigidBodyVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
 
                 // Some rigid bodies absorb force on impact. Account for this.
-                PhysicsMaterial rigidBodyPhysicsMaterial = Body.PhysicsMaterialOverride;
+                PhysicsMaterial rigidBodyPhysicsMaterial = RigidBody.PhysicsMaterialOverride;
                 if (rigidBodyPhysicsMaterial != null) characterPushForce *= 1f - rigidBodyPhysicsMaterial.Bounce;
 
                 // We already divided by the mass of the character to get acceleration from force, there's no need to do it again
@@ -1005,7 +1005,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                         {
                             pusher = new RigidBodyPusher
                             {
-                                Body = rigidBody,
+                                RigidBody = rigidBody,
                                 CharCenterToCollisionPosSmallestDist = collisionPosCharacterPosDiff.Length(),
                                 Character = Body,
                                 CollisionNormal = collisionNormal,
