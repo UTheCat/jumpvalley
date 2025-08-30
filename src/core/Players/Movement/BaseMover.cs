@@ -362,7 +362,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         public float Mass = 60f;
 
         /// <summary>
-        /// The "magnitude" in which the character pushes movable rigid bodies.
+        /// Multiplier for the force in which the character uses to push movable rigid bodies.
         /// <br/><br/>
         /// This is basically the same as the physical strength one uses to push an object.
         /// </summary>
@@ -371,7 +371,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// <summary>
         /// Multiplier for the force applied by a <i>colliding</i> rigid body to the character being handled by this <see cref="BaseMover"/>. 
         /// </summary>
-        public float CharacterPushForceMultiplier = 5f;
+        public float CharacterPushForceMultiplier = 1f;
 
         private Vector2 lastXZVelocity = Vector2.Zero;
 
