@@ -768,14 +768,15 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public Vector3 GetCharacterVelocityChange(Vector3 characterCurrentVelocity)
             {
                 // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
-                // This number also has a minimum of 0 to ensure that the rigid body only pushes the character when the rigid body
-                // is travelling towards the character.
-                float characterVelocityDiff = Math.Max(0f, Body.LinearVelocity.Dot(CollisionNormal) - characterCurrentVelocity.Dot(-CollisionNormal));
+                float charVelocityRigidBodyVelocityDiff = Body.LinearVelocity.Dot(CollisionNormal) - characterCurrentVelocity.Dot(-CollisionNormal);
+
+                // If applying the force would be physically impossible, don't apply the force.
+                if (charVelocityRigidBodyVelocityDiff <= 0) return Vector3.Zero;
 
                 // Objects heavier than the character should be able to push the character with greater force.
                 float massRatio = Body.Mass / Mover.Mass;
 
-                Vector3 characterPushForce = CollisionNormal * characterVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
+                Vector3 characterPushForce = CollisionNormal * charVelocityRigidBodyVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
 
                 // Some rigid bodies absorb force on impact. Account for this.
                 PhysicsMaterial rigidBodyPhysicsMaterial = Body.PhysicsMaterialOverride;
