@@ -712,6 +712,12 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public float CharCenterToCollisionPosSmallestDist = 0f;
 
             /// <summary>
+            /// The closest distance between <see cref="RigidBody3D"/>'s center of mass and
+            /// the point at which <see cref="RigidBody"/> and <see cref="Character"/> collided.
+            /// </summary>
+            public float RigidBodyCenterOfMassToCollisionPosSmallestDist = 0f;
+
+            /// <summary>
             /// Force applied by <see cref="RigidBody"/> on <see cref="Character"/>  
             /// </summary>
             //public Vector3 CharacterPushForce = Vector3.Zero;
@@ -722,6 +728,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// and <see cref="Character"/> touched.  
             /// </summary>
             public Vector3 CollisionNormal = Vector3.Zero;
+
+            /// <summary>
+            /// The collision normal that's closest to <see cref="RigidBody"/>'s center of mass. 
+            /// </summary>
+            public Vector3 RigidBodyCollisionNormal = Vector3.Zero;
 
             private Vector3 GetAvgCollisionPoint()
             {
@@ -749,7 +760,12 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Vector3 charVelocity = (characterCurrentVelocity.Length() > characterTargetVelocity.Length()) ? characterCurrentVelocity : characterTargetVelocity;
 
                 Vector3 pushDirection = charVelocity.Normalized();
-                float forceMultiplier = charVelocity.Dot(pushDirection) - RigidBody.LinearVelocity.Dot(pushDirection);
+
+                // Calculating force multiplier this way is useful because the dot product of two perpendicular vectors is 0.
+                // If the dot product of charVelocity and negativeRigidBodyCollisionNormal are greater than 0, we can at least say that to some degree,
+                // charVelocity and negativeRigidBodyCollisionNormal aren't travelling in opposite or perpendicular directions.
+                Vector3 negativeRigidBodyCollisionNormal = -RigidBodyCollisionNormal;
+                float forceMultiplier = charVelocity.Dot(negativeRigidBodyCollisionNormal) - RigidBody.LinearVelocity.Dot(negativeRigidBodyCollisionNormal);
 
                 // If character doesn't have enough velocity to overcome rigid body velocity
                 // or if we know for sure that force application is physically impossible, stop.
@@ -980,6 +996,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                         Vector3 collisionNormal = collision.GetNormal();
                         Vector3 collisionPosCharacterPosDiff = kinematicCollisionPos - body.GlobalPosition;
+                        Vector3 rigidBodyCenterOfMass = rigidBody.CenterOfMass;
 
                         // Remember, we only want to add force once per RigidBody3D per physics frame
                         // Likewise, each RigidBody3D can only apply force to the character once per physics frame.
@@ -1000,12 +1017,23 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 pusher.CharCenterToCollisionPosSmallestDist = collisionPosToCharacterPosDistance;
                                 pusher.CollisionNormal = collisionNormal;
                             }
+
+                            // To assist with RigidBodyPusher force calculations (for character pushing rigid body),
+                            // store the collision normal closest to the rigid body's center of mass
+                            float centerOfMassToCollisionPosDiff = (kinematicCollisionPos - rigidBodyCenterOfMass).Length();
+                            if (centerOfMassToCollisionPosDiff < pusher.RigidBodyCenterOfMassToCollisionPosSmallestDist)
+                            {
+                                pusher.CharCenterToCollisionPosSmallestDist = centerOfMassToCollisionPosDiff;
+                                pusher.RigidBodyCollisionNormal = collisionNormal;
+                            }
                         }
                         else
                         {
                             pusher = new RigidBodyPusher
                             {
                                 RigidBody = rigidBody,
+                                RigidBodyCollisionNormal = collisionNormal,
+                                RigidBodyCenterOfMassToCollisionPosSmallestDist = (kinematicCollisionPos - rigidBodyCenterOfMass).Length(),
                                 CharCenterToCollisionPosSmallestDist = collisionPosCharacterPosDiff.Length(),
                                 Character = Body,
                                 CollisionNormal = collisionNormal,
