@@ -762,8 +762,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Calculating force multiplier this way is useful because the dot product of two perpendicular vectors is 0.
                 // If the dot product of charVelocity and negativeRigidBodyCollisionNormal are greater than 0, we can at least say that to some degree,
                 // charVelocity and negativeRigidBodyCollisionNormal aren't travelling in opposite or perpendicular directions.
-                Vector3 negativeRigidBodyCollisionNormal = -RigidBodyCollisionNormal;
-                float forceMultiplier = charVelocity.Dot(negativeRigidBodyCollisionNormal) - RigidBody.LinearVelocity.Dot(negativeRigidBodyCollisionNormal);
+                // 
+                // This calculation has also been optimized by taking into account the fact that adding two vectors that are going the opposite direction
+                // will cause the two vectors to "cancel each other out".
+                float forceMultiplier = charVelocity.Dot(-RigidBodyCollisionNormal) + RigidBody.LinearVelocity.Dot(RigidBodyCollisionNormal);
 
                 // If character doesn't have enough velocity to overcome rigid body velocity
                 // or if we know for sure that force application is physically impossible, stop.
