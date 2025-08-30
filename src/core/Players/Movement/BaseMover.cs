@@ -691,6 +691,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// </summary>
         class RigidBodyPusher
         {
+            /// <summary>
+            /// Distance into the colliding rigid body normal that the <see cref="GetCharacterVelocityChange"/> raycast starts at
+            /// </summary>
+            private static readonly float GET_CHAR_VELOCITY_CHANGE_RAY_START_INSET = 0.5f;
+
+            /// <summary>
+            /// Distance away from the colliding rigid body normal that the <see cref="GetCharacterVelocityChange"/> raycast ends at
+            /// </summary>
+            private static readonly float GET_CHAR_VELOCITY_CHANGE_RAY_END_OFFSET = 0.5f;
+
             public RigidBody3D RigidBody = null;
 
             public CharacterBody3D Character = null;
@@ -791,8 +801,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Vector3 avgCollisionPoint = GetAvgCollisionPoint();
                 Vector3 negativeCharacterCollisionNormal = CharacterPushCollisionNormal;
                 PhysicsRayQueryParameters3D charCollisionNormalRayQueryParams = PhysicsRayQueryParameters3D.Create(
-                    avgCollisionPoint - CharacterPushCollisionNormal * 0.5f,
-                    avgCollisionPoint + CharacterPushCollisionNormal * 0.5f
+                    avgCollisionPoint - CharacterPushCollisionNormal * GET_CHAR_VELOCITY_CHANGE_RAY_START_INSET,
+                    avgCollisionPoint + CharacterPushCollisionNormal * GET_CHAR_VELOCITY_CHANGE_RAY_END_OFFSET
                 );
                 charCollisionNormalRayQueryParams.Exclude.Add(RigidBody.GetRid());
                 charCollisionNormalRayQueryParams.HitFromInside = false;
