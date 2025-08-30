@@ -770,7 +770,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
                 float charVelocityRigidBodyVelocityDiff = Body.LinearVelocity.Dot(CollisionNormal) - characterCurrentVelocity.Dot(-CollisionNormal);
 
-                // If applying the force would be physically impossible, don't apply the force.
+                // If we know for sure that applying the force would be physically impossible, don't apply the force.
                 if (charVelocityRigidBodyVelocityDiff <= 0) return Vector3.Zero;
 
                 // Objects heavier than the character should be able to push the character with greater force.
