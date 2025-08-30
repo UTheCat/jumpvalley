@@ -795,8 +795,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 Variant vRaycastCollider;
                 if (raycastResult.TryGetValue("collider", out vRaycastCollider))
                 {
-                    CharacterBody3D cBody = vRaycastCollider.As<CharacterBody3D>();
-                    if (cBody != null && Character == cBody)
+                    GodotObject oCollider = vRaycastCollider.AsGodotObject();
+                    if (oCollider != null && oCollider is CharacterBody3D cBody && cBody == Character)
                     {
                         Variant vCollisionNormal;
                         if (raycastResult.TryGetValue("normal", out vCollisionNormal)) negativeCharacterCollisionNormal = -vCollisionNormal.As<Vector3>();
@@ -804,15 +804,15 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 }
 
                 // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
-                float charVelocityRigidBodyVelocityDiff = RigidBody.LinearVelocity.Dot(negativeCharacterCollisionNormal) - characterCurrentVelocity.Dot(negativeCharacterCollisionNormal);
+                float rigidBodyVelocityCharVelocityDiff = RigidBody.LinearVelocity.Dot(negativeCharacterCollisionNormal) - characterCurrentVelocity.Dot(negativeCharacterCollisionNormal);
 
                 // If we know for sure that applying the force would be physically impossible, don't apply the force.
-                if (charVelocityRigidBodyVelocityDiff <= 0) return Vector3.Zero;
+                if (rigidBodyVelocityCharVelocityDiff <= 0) return Vector3.Zero;
 
                 // Objects heavier than the character should be able to push the character with greater force.
                 float massRatio = RigidBody.Mass / Mover.Mass;
 
-                Vector3 characterPushForce = CharacterPushCollisionNormal * charVelocityRigidBodyVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
+                Vector3 characterPushForce = CharacterPushCollisionNormal * rigidBodyVelocityCharVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
 
                 // Some rigid bodies absorb force on impact. Account for this.
                 PhysicsMaterial rigidBodyPhysicsMaterial = RigidBody.PhysicsMaterialOverride;
