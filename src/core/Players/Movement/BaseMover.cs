@@ -718,13 +718,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             public float RigidBodyCenterOfMassToCollisionPosSmallestDist = 0f;
 
             /// <summary>
-            /// Force applied by <see cref="RigidBody"/> on <see cref="Character"/>  
-            /// </summary>
-            //public Vector3 CharacterPushForce = Vector3.Zero;
-
-            /// <summary>
             /// Collision normal to use when figuring out how to apply force to the character.
-            /// This collision normal is the normal on the <i>rigid body</i>, not the character, in which <see cref="RigidBody"/>
+            /// This collision normal is the normal of the <i>rigid body</i>, not the character, in which <see cref="RigidBody"/>
             /// and <see cref="Character"/> touched.  
             /// </summary>
             public Vector3 CharacterPushCollisionNormal = Vector3.Zero;
@@ -751,8 +746,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// <summary>
             /// Pushes <see cref="RigidBody"/>. 
             /// </summary>
-            /// <param name="characterCurrentVelocity"></param>
-            /// <param name="characterTargetVelocity"></param>
+            /// <param name="characterCurrentVelocity">The current (or next) velocity of the character</param>
+            /// <param name="characterTargetVelocity">
+            /// The target velocity of the character (whose X and Z components are largely affected by
+            /// <see cref="RightValue"/> and <see cref="ForwardValue"/>)
+            /// </param>
             public void PushRigidBody(Vector3 characterCurrentVelocity, Vector3 characterTargetVelocity)
             {
                 if (characterCurrentVelocity == Vector3.Zero && characterTargetVelocity == Vector3.Zero) return;
@@ -779,8 +777,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// <summary>
             /// Returns the change in velocity corresponding to the force being applied to <see cref="Character"/> 
             /// </summary>
-            /// <param name="characterCurrentVelocity"></param>
-            /// <param name="characterTargetVelocity"></param>
+            /// <param name="characterCurrentVelocity">The current (or next) velocity of the character</param>
             public Vector3 GetCharacterVelocityChange(Vector3 characterCurrentVelocity)
             {
                 // Use a raycast to determine the collision normal of the character that was touched by the rigid body, using
@@ -801,7 +798,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     CharacterBody3D cBody = vRaycastCollider.As<CharacterBody3D>();
                     if (cBody != null && Character == cBody)
                     {
-                        GD.Print("GetCharacterVelocityChange raycast hit the character.");
                         Variant vCollisionNormal;
                         if (raycastResult.TryGetValue("normal", out vCollisionNormal)) negativeCharacterCollisionNormal = -vCollisionNormal.As<Vector3>();
                     }
