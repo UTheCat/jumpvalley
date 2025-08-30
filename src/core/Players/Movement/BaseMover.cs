@@ -724,10 +724,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
             /// <summary>
             /// Collision normal to use when figuring out how to apply force to the character.
-            /// This collision normal is the normal on the rigid body in which <see cref="RigidBody"/>
+            /// This collision normal is the normal on the <i>rigid body</i>, not the character, in which <see cref="RigidBody"/>
             /// and <see cref="Character"/> touched.  
             /// </summary>
-            public Vector3 CollisionNormal = Vector3.Zero;
+            public Vector3 CharacterPushCollisionNormal = Vector3.Zero;
 
             /// <summary>
             /// The collision normal that's closest to <see cref="RigidBody"/>'s center of mass. 
@@ -783,8 +783,32 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// <param name="characterTargetVelocity"></param>
             public Vector3 GetCharacterVelocityChange(Vector3 characterCurrentVelocity)
             {
+                // Use a raycast to determine the collision normal of the character that was touched by the rigid body, using
+                // CharacterPushCollisionNormal as a fallback.
+                Vector3 avgCollisionPoint = GetAvgCollisionPoint();
+                Vector3 negativeCharacterCollisionNormal = CharacterPushCollisionNormal;
+                PhysicsRayQueryParameters3D charCollisionNormalRayQueryParams = PhysicsRayQueryParameters3D.Create(
+                    avgCollisionPoint - CharacterPushCollisionNormal * 0.5f,
+                    avgCollisionPoint + CharacterPushCollisionNormal * 0.5f
+                );
+                charCollisionNormalRayQueryParams.Exclude.Add(RigidBody.GetRid());
+                charCollisionNormalRayQueryParams.HitFromInside = false;
+
+                var raycastResult = Character.GetWorld3D().DirectSpaceState.IntersectRay(charCollisionNormalRayQueryParams);
+                Variant vRaycastCollider;
+                if (raycastResult.TryGetValue("collider", out vRaycastCollider))
+                {
+                    CharacterBody3D cBody = vRaycastCollider.As<CharacterBody3D>();
+                    if (cBody != null && Character == cBody)
+                    {
+                        GD.Print("GetCharacterVelocityChange raycast hit the character.");
+                        Variant vCollisionNormal;
+                        if (raycastResult.TryGetValue("normal", out vCollisionNormal)) negativeCharacterCollisionNormal = -vCollisionNormal.As<Vector3>();
+                    }
+                }
+
                 // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
-                float charVelocityRigidBodyVelocityDiff = RigidBody.LinearVelocity.Dot(CollisionNormal) - characterCurrentVelocity.Dot(-CollisionNormal);
+                float charVelocityRigidBodyVelocityDiff = RigidBody.LinearVelocity.Dot(negativeCharacterCollisionNormal) - characterCurrentVelocity.Dot(negativeCharacterCollisionNormal);
 
                 // If we know for sure that applying the force would be physically impossible, don't apply the force.
                 if (charVelocityRigidBodyVelocityDiff <= 0) return Vector3.Zero;
@@ -792,7 +816,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Objects heavier than the character should be able to push the character with greater force.
                 float massRatio = RigidBody.Mass / Mover.Mass;
 
-                Vector3 characterPushForce = CollisionNormal * charVelocityRigidBodyVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
+                Vector3 characterPushForce = CharacterPushCollisionNormal * charVelocityRigidBodyVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
 
                 // Some rigid bodies absorb force on impact. Account for this.
                 PhysicsMaterial rigidBodyPhysicsMaterial = RigidBody.PhysicsMaterialOverride;
@@ -1015,7 +1039,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 // at a different collision normal, and so, we still want to update character push force when we've found a collision point
                                 // closer to the center of the character.
                                 pusher.CharCenterToCollisionPosSmallestDist = collisionPosToCharacterPosDistance;
-                                pusher.CollisionNormal = collisionNormal;
+                                pusher.CharacterPushCollisionNormal = collisionNormal;
                             }
 
                             // To assist with RigidBodyPusher force calculations (for character pushing rigid body),
@@ -1036,7 +1060,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                                 RigidBodyCenterOfMassToCollisionPosSmallestDist = (kinematicCollisionPos - rigidBodyCenterOfMass).Length(),
                                 CharCenterToCollisionPosSmallestDist = collisionPosCharacterPosDiff.Length(),
                                 Character = Body,
-                                CollisionNormal = collisionNormal,
+                                CharacterPushCollisionNormal = collisionNormal,
                                 Mover = this
                             };
 
