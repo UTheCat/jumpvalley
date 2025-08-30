@@ -884,11 +884,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
                 float stepClimbHighestYBoost = 0f;
 
-                // Figure out how to push objects we've come into contact with. This part intentionally comes before the call to MoveAndSlide().
-                // Thanks to this forum post for helping me figure out how to implement this:
-                // https://forum.godotengine.org/t/how-to-fix-movable-box-physics/75853
-                // as well as this code snippet by majikayogames on GitHub
-                // https://gist.github.com/majikayogames/cf013c3091e9a313e322889332eca109
+                // Handle collisions.
+                // For performance reasons, we handle the step-climb boost, as well as rigid-body and character pushing,
+                // in the same iteration within this loop.
                 Dictionary<RigidBody3D, RigidBodyPusher> currentFrameRigidBodyPushers = [];
                 for (int i = 0; i < body.GetSlideCollisionCount(); i++)
                 {
@@ -896,7 +894,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     GodotObject collider = collision.GetCollider();
                     Vector3 kinematicCollisionPos = collision.GetPosition();
 
-                    // See if we can automatically climb a step
+                    // See if we can automatically climb a step (perform a "step-climb boost")
                     //
                     // In some cases, the player will just barely miss a platform because they almost (but didn't)
                     // gain enough height (e.g. after a high or long jump).
