@@ -780,6 +780,10 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             /// <param name="characterCurrentVelocity">The current (or next) velocity of the character</param>
             public Vector3 GetCharacterVelocityChange(Vector3 characterCurrentVelocity)
             {
+                Vector3 rigidBodyVelocity = RigidBody.LinearVelocity;
+
+                if (rigidBodyVelocity == Vector3.Zero) return Vector3.Zero;
+
                 // Use a raycast to determine the collision normal of the character that was touched by the rigid body, using
                 // CharacterPushCollisionNormal as a fallback.
                 Vector3 avgCollisionPoint = GetAvgCollisionPoint();
@@ -804,7 +808,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 }
 
                 // The amount in which finalVelocity (character velocity) has to change to match rigidBody.Velocity.
-                float rigidBodyVelocityCharVelocityDiff = RigidBody.LinearVelocity.Dot(negativeCharacterCollisionNormal) - characterCurrentVelocity.Dot(negativeCharacterCollisionNormal);
+                float rigidBodyVelocityCharVelocityDiff = rigidBodyVelocity.Dot(negativeCharacterCollisionNormal) - characterCurrentVelocity.Dot(negativeCharacterCollisionNormal);
 
                 // If we know for sure that applying the force would be physically impossible, don't apply the force.
                 if (rigidBodyVelocityCharVelocityDiff <= 0) return Vector3.Zero;
@@ -812,7 +816,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // Objects heavier than the character should be able to push the character with greater force.
                 float massRatio = RigidBody.Mass / Mover.Mass;
 
-                Vector3 characterPushForce = CharacterPushCollisionNormal * rigidBodyVelocityCharVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
+                Vector3 characterPushForce = rigidBodyVelocity.Normalized() * rigidBodyVelocityCharVelocityDiff * massRatio * Mover.CharacterPushForceMultiplier;
 
                 // Some rigid bodies absorb force on impact. Account for this.
                 PhysicsMaterial rigidBodyPhysicsMaterial = RigidBody.PhysicsMaterialOverride;
