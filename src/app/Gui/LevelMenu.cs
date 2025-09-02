@@ -103,7 +103,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             Vector2 nodeSize = actualNode.Size;
             widthHeightRatio = nodeSize.X / nodeSize.Y;
 
-            transparencyTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
+            transparencyTween = new SceneTreeTween(0.2, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
             transparencyTween.InitialValue = 0;
             transparencyTween.FinalValue = 1;
             transparencyTween.OnStep += (object o, double frac) =>
@@ -116,7 +116,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
             if (BackgroundControl != null)
             {
-                backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
+                backgroundSizeTween = new SceneTreeTween(0.4, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
 
                 // While tween is running, the height of BackgroundControl is set to
                 // its original height - backgroundSizeTween.GetCurrentValue() * 0.5.
