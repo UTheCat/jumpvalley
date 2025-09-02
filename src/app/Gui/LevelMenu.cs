@@ -13,10 +13,14 @@ namespace UTheCat.Jumpvalley.App.Gui
     {
         private static readonly float MENU_HIDE_ANIM_HEIGHT_REDUCTION = 40f;
 
+        // Both of these durations are in seconds
+        private static readonly double OPACITY_ANIM_DURATION = 0.2;
+        private static readonly double SIZE_ANIM_DURATION = 0.4;
+
         /// <summary>
-        /// Tween handling the transparency of the menu's items, including its background panel
+        /// Tween handling the opacity of the menu's items, including its background panel
         /// </summary>
-        private SceneTreeTween transparencyTween;
+        private SceneTreeTween opacityTween;
 
         /// <summary>
         /// Tween handling the appearance of the menu's background panel
@@ -61,7 +65,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
                 if (value)
                 {
-                    transparencyTween.Speed = 1;
+                    opacityTween.Speed = 1;
 
                     if (backgroundSizeTween != null)
                     {
@@ -70,7 +74,7 @@ namespace UTheCat.Jumpvalley.App.Gui
                 }
                 else
                 {
-                    transparencyTween.Speed = -1;
+                    opacityTween.Speed = -1;
 
                     if (backgroundSizeTween != null)
                     {
@@ -78,7 +82,7 @@ namespace UTheCat.Jumpvalley.App.Gui
                     }
                 }
 
-                transparencyTween.Resume();
+                opacityTween.Resume();
                 if (backgroundSizeTween != null)
                 {
                     backgroundSizeTween.Resume();
@@ -105,10 +109,10 @@ namespace UTheCat.Jumpvalley.App.Gui
             Vector2 nodeSize = actualNode.Size;
             widthHeightRatio = nodeSize.X / nodeSize.Y;
 
-            transparencyTween = new SceneTreeTween(0.2, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
-            transparencyTween.InitialValue = 0;
-            transparencyTween.FinalValue = 1;
-            transparencyTween.OnStep += (object o, double frac) =>
+            opacityTween = new SceneTreeTween(OPACITY_ANIM_DURATION, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
+            opacityTween.InitialValue = 0;
+            opacityTween.FinalValue = 1;
+            opacityTween.OnStep += (object o, double frac) =>
             {
                 actualNode.Visible = frac > 0.0;
                 Color modulate = actualNode.Modulate;
@@ -118,7 +122,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
             if (BackgroundControl != null)
             {
-                backgroundSizeTween = new SceneTreeTween(0.4, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
+                backgroundSizeTween = new SceneTreeTween(SIZE_ANIM_DURATION, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
 
                 // While tween is running, the height of BackgroundControl is set to
                 // its original height - backgroundSizeTween.GetCurrentValue() * 0.5.
@@ -149,7 +153,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         {
             CloseButton.Pressed -= OnCloseButtonPressed;
 
-            transparencyTween.Dispose();
+            opacityTween.Dispose();
             backgroundSizeTween.Dispose();
         }
 
