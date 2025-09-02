@@ -11,7 +11,7 @@ namespace UTheCat.Jumpvalley.App.Gui
     /// </summary>
     public partial class LevelMenu : AnimatedNode, IDisposable
     {
-        private static readonly float MENU_HIDDEN_HEIGHT_REDUCTION = 40f;
+        private static readonly float MENU_HIDE_ANIM_HEIGHT_REDUCTION = 40f;
 
         /// <summary>
         /// Tween handling the transparency of the menu's items, including its background panel
@@ -124,7 +124,7 @@ namespace UTheCat.Jumpvalley.App.Gui
                 // its original height - backgroundSizeTween.GetCurrentValue() * 0.5.
                 // The width of BackgroundControl is adjusted accordingly with whatever
                 // widthHeightRatio is calculated to be.
-                backgroundSizeTween.InitialValue = MENU_HIDDEN_HEIGHT_REDUCTION;
+                backgroundSizeTween.InitialValue = MENU_HIDE_ANIM_HEIGHT_REDUCTION;
                 backgroundSizeTween.FinalValue = 0.0;
                 backgroundSizeTween.OnStep += (object o, double _frac) =>
                 {
