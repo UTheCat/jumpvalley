@@ -9,7 +9,7 @@ namespace UTheCat.Jumpvalley.App.Gui
     /// <summary>
     /// Code for the level menu, a type of menu that's typically displayed only when the player is playing a level.
     /// </summary>
-    public partial class LevelMenu: AnimatedNode, IDisposable
+    public partial class LevelMenu : AnimatedNode, IDisposable
     {
         /// <summary>
         /// Tween handling the transparency of the menu's items, including its background panel
@@ -84,19 +84,24 @@ namespace UTheCat.Jumpvalley.App.Gui
             }
         }
 
+        private float widthHeightRatio;
+
         /// <summary>
         /// Constructs a new instance of the level menu handler.
         /// </summary>
         /// <param name="actualNode">The root node of the level menu</param>
         /// <param name="tree">The scene tree that the level menu is in</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public LevelMenu(Control actualNode, SceneTree tree): base(actualNode)
+        public LevelMenu(Control actualNode, SceneTree tree) : base(actualNode)
         {
             BackgroundControl = actualNode.GetNodeOrNull<Control>("Background");
             TitleLabel = actualNode.GetNodeOrNull<Label>("Title");
             SubtitleLabel = actualNode.GetNodeOrNull<Label>("Subtitle");
             ItemsControl = actualNode.GetNodeOrNull<Control>("Items");
             CloseButton = actualNode.GetNodeOrNull<Button>("CloseButton");
+
+            Vector2 nodeSize = actualNode.Size;
+            widthHeightRatio = nodeSize.X / nodeSize.Y;
 
             transparencyTween = new SceneTreeTween(0.25, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
             transparencyTween.InitialValue = 0;
@@ -112,28 +117,26 @@ namespace UTheCat.Jumpvalley.App.Gui
             if (BackgroundControl != null)
             {
                 backgroundSizeTween = new SceneTreeTween(0.5, Tween.TransitionType.Quad, Tween.EaseType.Out, tree);
-                backgroundSizeTween.InitialValue = 40;
-                backgroundSizeTween.FinalValue = 0;
+
+                // While tween is running, the height of BackgroundControl is set to
+                // its original height - backgroundSizeTween.GetCurrentValue() * 0.5.
+                // The width of BackgroundControl is adjusted accordingly with whatever
+                // widthHeightRatio is calculated to be.
+                backgroundSizeTween.InitialValue = 40.0;
+                backgroundSizeTween.FinalValue = 0.0;
                 backgroundSizeTween.OnStep += (object o, double _frac) =>
                 {
-                    float sizeOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
-                    BackgroundControl.OffsetLeft = sizeOffset;
-                    BackgroundControl.OffsetRight = -sizeOffset;
-                    BackgroundControl.OffsetTop = sizeOffset;
-                    BackgroundControl.OffsetBottom = -sizeOffset;
+                    float heightOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
+                    float widthOffset = heightOffset * widthHeightRatio;
+
+                    BackgroundControl.OffsetLeft = widthOffset;
+                    BackgroundControl.OffsetRight = -widthOffset;
+                    BackgroundControl.OffsetTop = heightOffset;
+                    BackgroundControl.OffsetBottom = -heightOffset;
                 };
             }
 
-            if (CloseButton != null)
-            {
-                CloseButton.Pressed += () =>
-                {
-                    if (IsVisible)
-                    {
-                        IsVisible = false;
-                    }
-                };
-            }
+            if (CloseButton != null) CloseButton.Pressed += OnCloseButtonPressed;
 
             actualNode.Visible = false;
 
@@ -142,8 +145,15 @@ namespace UTheCat.Jumpvalley.App.Gui
 
         public void Dispose()
         {
+            CloseButton.Pressed -= OnCloseButtonPressed;
+
             transparencyTween.Dispose();
             backgroundSizeTween.Dispose();
+        }
+
+        private void OnCloseButtonPressed()
+        {
+            if (IsVisible) IsVisible = false;
         }
     }
 }
