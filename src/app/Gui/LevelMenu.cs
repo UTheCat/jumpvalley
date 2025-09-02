@@ -11,7 +11,7 @@ namespace UTheCat.Jumpvalley.App.Gui
     /// </summary>
     public partial class LevelMenu : AnimatedNode, IDisposable
     {
-        private static readonly float MENU_HIDDEN_HEIGHT_REDUCTION = 30f;
+        private static readonly float MENU_HIDDEN_HEIGHT_REDUCTION = 40f;
 
         /// <summary>
         /// Tween handling the transparency of the menu's items, including its background panel
