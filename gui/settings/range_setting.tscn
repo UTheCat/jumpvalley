@@ -30,6 +30,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 97.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
