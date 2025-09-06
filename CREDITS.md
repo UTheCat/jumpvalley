@@ -32,3 +32,7 @@ Jumpvalley makes use of 3rd-party, free to use assets. Huge thanks to their crea
 ## Character model
 
 - The current "default" Jumpvalley character is a loose recreation of the dummy character from ["Godot 4.0 .NET thirdperson controller" by vaporvee](https://github.com/vaporvee/gd-net-thirdpersoncontroller)
+
+## Addons with source code
+
+- Jumpvalley uses a slightly modified version of ["SmoothScroll" v1.3 by Fabian Keßler (SpyrexDE)](https://github.com/SpyrexDE/SmoothScroll/tree/godot-4)

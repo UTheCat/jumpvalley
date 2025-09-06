@@ -66,11 +66,13 @@ The above command should tell Linux to allow running the Jumpvalley executable.
 
 #### Wayland and X11
 
-Jumpvalley uses X11/XWayland by default. If you'd like the app to run on Wayland instead, then in the directory where the Jumpvalley executable is located, run this command:
+Jumpvalley uses Wayland by default. If you'd like the app to run on X11 instead, then in the directory where the Jumpvalley executable is located, run this command:
 
-`./jumpvalley --display-driver wayland`
+`./jumpvalley --display-driver x11`
 
 The above command assumes that the Jumpvalley executable kept its original name, `jumpvalley`.
+
+Additionally, if your current desktop environment is running on X11, Jumpvalley should automatically use X11 as well.
 
 ### Jumpvalley for Windows
 

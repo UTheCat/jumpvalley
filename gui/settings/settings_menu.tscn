@@ -1,13 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2jxb8y2m4xf0"]
+[gd_scene load_steps=11 format=3 uid="uid://d2jxb8y2m4xf0"]
 
 [ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono/RobotoMono-VariableFont_wght.ttf" id="1_6doen"]
 [ext_resource type="FontFile" uid="uid://bx4niu1h7e55o" path="res://addons/fonts/roboto_mono/static/RobotoMono-Bold.ttf" id="1_iaoms"]
+[ext_resource type="Script" uid="uid://bgqglerkcylxx" path="res://addons/SmoothScroll/SmoothScrollContainer.gd" id="1_t8tfy"]
 [ext_resource type="PackedScene" uid="uid://olrc8iep31yb" path="res://gui/close_button.tscn" id="2_rklti"]
+[ext_resource type="Script" uid="uid://dlagxcnf11lr4" path="res://addons/SmoothScroll/scroll_damper/cubic_scroll_damper.gd" id="3_242g4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5vjn"]
 bg_color = Color(0.019326, 0.0696585, 0.113778, 1)
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="Resource" id="Resource_r7k3e"]
+script = ExtResource("3_242g4")
+friction = 4.0
+rebound_strength = 7.0
+metadata/_custom_type_script = "uid://dlagxcnf11lr4"
+
+[sub_resource type="Resource" id="Resource_27wgo"]
+script = ExtResource("3_242g4")
+friction = 4.0
+rebound_strength = 7.0
+metadata/_custom_type_script = "uid://dlagxcnf11lr4"
 
 [sub_resource type="LabelSettings" id="LabelSettings_3l671"]
 font = ExtResource("1_iaoms")
@@ -46,6 +60,11 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
+script = ExtResource("1_t8tfy")
+wheel_scroll_damper = SubResource("Resource_r7k3e")
+dragging_scroll_damper = SubResource("Resource_27wgo")
+drag_with_mouse = false
+allow_horizontal_scroll = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
@@ -63,6 +82,7 @@ label_settings = SubResource("LabelSettings_bd3vs")
 [node name="Padding" type="Control" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="SettingList" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -74,6 +94,7 @@ metadata/range_setting_scene = "res://gui/settings/range_setting.tscn"
 [node name="BottomPadding" type="Control" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CloseButton" parent="." instance=ExtResource("2_rklti")]
 layout_mode = 1
