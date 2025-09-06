@@ -23,11 +23,6 @@ var drag_with_mouse := true
 ## Allow dragging with touch or not
 @export
 var drag_with_touch := true
-## If a drag input comes from touchscreen input, the amount that the content container actually scrolls
-## is multiplied by this value.
-## This is intended to fix unwanted over-scrolling behavior.
-@export
-var touch_drag_scroll_intensity_scale := 1.0
 
 @export_group("Container")
 ## Below this value, snap content to boundary
@@ -276,13 +271,9 @@ func _gui_input(event: InputEvent) -> void:
 			or (event is InputEventMouseMotion and drag_with_mouse):
 		if content_dragging:
 			if should_scroll_horizontal():
-				var movement_accumulation_x = event.relative.x
-				if (is_touchscreen_drag): movement_accumulation_x *= touch_drag_scroll_intensity_scale
-				drag_temp_data[0] += movement_accumulation_x
+				drag_temp_data[0] += event.relative.x
 			if should_scroll_vertical():
-				var movement_accumulation_y = event.relative.y
-				if (is_touchscreen_drag): movement_accumulation_y *= touch_drag_scroll_intensity_scale
-				drag_temp_data[1] += movement_accumulation_y
+				drag_temp_data[1] += event.relative.y
 			remove_all_children_focus(self)
 			handle_content_dragging()
 	
