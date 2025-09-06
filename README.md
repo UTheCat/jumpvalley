@@ -72,7 +72,7 @@ Jumpvalley uses Wayland by default. If you'd like the app to run on X11 instead,
 
 The above command assumes that the Jumpvalley executable kept its original name, `jumpvalley`.
 
-If your current desktop environment is running on X11, Jumpvalley will use X11 as well.
+Additionally, if your current desktop environment is running on X11, Jumpvalley should automatically use X11 as well.
 
 ### Jumpvalley for Windows
 
