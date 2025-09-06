@@ -81,6 +81,7 @@ label_settings = SubResource("LabelSettings_bd3vs")
 [node name="Padding" type="Control" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="SettingList" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -92,6 +93,7 @@ metadata/range_setting_scene = "res://gui/settings/range_setting.tscn"
 [node name="BottomPadding" type="Control" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CloseButton" parent="." instance=ExtResource("2_rklti")]
 layout_mode = 1
