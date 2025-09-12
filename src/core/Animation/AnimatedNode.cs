@@ -7,7 +7,7 @@ namespace UTheCat.Jumpvalley.Core.Animation
     /// This class provides some components to bind to a Godot node,
     /// mainly to assist with writing animation code for the node.
     /// </summary>
-    public partial class AnimatedNode
+    public partial class AnimatedNode : Node
     {
         /// <summary>
         /// The node to be animated
