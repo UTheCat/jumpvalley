@@ -20,6 +20,7 @@ font = ExtResource("1_3oj0a")
 font_size = 24
 
 [node name="LevelMenuButton" type="Button"]
+custom_minimum_size = Vector2(0, 44)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 44.0
