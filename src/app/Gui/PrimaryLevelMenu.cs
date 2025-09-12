@@ -11,10 +11,25 @@ namespace UTheCat.Jumpvalley.App.Gui
 	public partial class PrimaryLevelMenu : LevelMenu, IDisposable
 	{
 		private readonly float BUTTON_Y_POS_DIFF = 52f;
+		private readonly string KEYBIND_OPEN_MENU_META_NAME = "keybind_open_menu";
 
 		private List<IDisposable> disposables;
 
+		/// <summary>
+		/// Keyboard shortcut for opening the PrimaryLevelMenu specified in the metadata of the PrimaryLevelMenu's root node
+		/// </summary>
+		private InputEventKey keybindOpenMenu;
+
 		public SettingsMenu CurrentSettingsMenu;
+
+		/// <summary>
+		/// If not null, keybind_open_menu (e.g. `Esc` key) will open the menu only if
+		/// the value of this <see cref="BgPanelAnimatedNodeGroup"/>'s ShouldBeVisible property
+		/// is set to false.
+		/// <br/><br/>
+		/// This is intended to prevent keyboard shortcut conflicts. 
+		/// </summary>
+		public BgPanelAnimatedNodeGroup BgPanelNodeGroup = null;
 
 		public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
 		{
@@ -94,5 +109,10 @@ namespace UTheCat.Jumpvalley.App.Gui
 
 			base.Dispose();
 		}
+
+        public override void _Input(InputEvent @event)
+        {
+            base._Input(@event);
+        }
 	}
 }

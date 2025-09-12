@@ -16,6 +16,8 @@ namespace UTheCat.Jumpvalley.App.Gui
         /// </summary>
         public BackgroundPanel BgPanel { get; private set; }
 
+        public bool ShouldBeVisible { get; private set; } = false;
+
         public BgPanelAnimatedNodeGroup(BackgroundPanel bgPanel)
         {
             BgPanel = bgPanel;
@@ -27,6 +29,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         private void UpdateBgPanelVisibility()
         {
             bool shouldBeVisible = CurrentlyVisibleNode != null;
+            ShouldBeVisible = shouldBeVisible;
 
             if (shouldBeVisible != BgPanel.IsVisible)
             {
