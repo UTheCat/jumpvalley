@@ -125,7 +125,9 @@ namespace UTheCat.Jumpvalley.App.Gui
 			BgPanelAnimatedNodeGroup bgpNodeGroup = BgPanelNodeGroup;
 			if ((bgpNodeGroup == null || !bgpNodeGroup.ShouldBeVisible)
 				&& @event is InputEventKey keyInput
-				&& keyInput.Keycode == keybindOpenMenu.Keycode)
+				&& keyInput.Keycode == keybindOpenMenu.Keycode
+				&& keyInput.IsPressed()
+				)
 			{
 				IsVisible = true;
 				return;
