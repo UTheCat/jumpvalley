@@ -90,7 +90,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             }
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             opacityTween.Dispose();
         }

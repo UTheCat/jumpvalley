@@ -149,7 +149,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             IsVisible = false;
         }
 
-        public void Dispose()
+        public new void Dispose()
         {
             CloseButton.Pressed -= OnCloseButtonPressed;
 

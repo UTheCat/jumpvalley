@@ -164,7 +164,7 @@ namespace UTheCat.Jumpvalley.App.Gui
         /// </summary>
         public void Populate() => Populate(settings);
 
-        public void Dispose()
+        public new void Dispose()
         {
             closeButton.Pressed -= HandleCloseButtonPressed;
 
