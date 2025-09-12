@@ -192,9 +192,12 @@ namespace UTheCat.Jumpvalley.App
             Control primaryLevelMenuNode = PrimaryGui.GetNode<Control>("PrimaryLevelMenu");
             PrimaryLevelMenu primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
             animatedNodes.Add("primary_level_menu", primaryLevelMenu);
+            primaryLevelMenu.BgPanelNodeGroup = animatedNodes;
 
             Disposables.Add(primaryLevelMenu);
             Disposables.Add(primaryLevelMenuNode);
+
+            RootNode.AddChild(primaryLevelMenu);
 
             // Music panel
             Control musicPanelNode = PrimaryGui.GetNode<Control>("MusicPanel");

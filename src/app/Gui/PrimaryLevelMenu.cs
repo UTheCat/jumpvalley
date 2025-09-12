@@ -11,10 +11,27 @@ namespace UTheCat.Jumpvalley.App.Gui
 	public partial class PrimaryLevelMenu : LevelMenu, IDisposable
 	{
 		private readonly float BUTTON_Y_POS_DIFF = 52f;
+		private readonly string KEYBIND_OPEN_MENU_META_NAME = "keybind_open_menu";
 
 		private List<IDisposable> disposables;
 
+		/// <summary>
+		/// Keyboard shortcut for opening the PrimaryLevelMenu specified in the metadata of the PrimaryLevelMenu's root node.
+		/// <br/><br/>
+		/// Set this to null to indicate that this keybinding shouldn't be made (or to terminate the keybind).
+		/// </summary>
+		private InputEventKey keybindOpenMenu;
+
 		public SettingsMenu CurrentSettingsMenu;
+
+		/// <summary>
+		/// If not null, keybind_open_menu (e.g. `Esc` key) will open the menu only if
+		/// the value of this <see cref="BgPanelAnimatedNodeGroup"/>'s ShouldBeVisible property
+		/// is set to false.
+		/// <br/><br/>
+		/// This is intended to prevent keyboard shortcut conflicts. 
+		/// </summary>
+		public BgPanelAnimatedNodeGroup BgPanelNodeGroup = null;
 
 		public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
 		{
@@ -78,10 +95,18 @@ namespace UTheCat.Jumpvalley.App.Gui
 				b.OffsetBottom = b.OffsetTop + buttonYSize;
 				ItemsControl.AddChild(b);
 			}
+
+			if (actualNode.HasMeta(KEYBIND_OPEN_MENU_META_NAME))
+			{
+				InputEventKey keybind = actualNode.GetMeta(KEYBIND_OPEN_MENU_META_NAME).As<InputEventKey>();
+				if (keybind != null) keybindOpenMenu = keybind;
+			}
 		}
 
 		public new void Dispose()
 		{
+			keybindOpenMenu = null;
+
 			foreach (IDisposable obj in disposables)
 			{
 				if (obj is Node node)
@@ -94,5 +119,21 @@ namespace UTheCat.Jumpvalley.App.Gui
 
 			base.Dispose();
 		}
+
+        public override void _Input(InputEvent @event)
+        {
+			BgPanelAnimatedNodeGroup bgpNodeGroup = BgPanelNodeGroup;
+			if ((bgpNodeGroup == null || !bgpNodeGroup.ShouldBeVisible)
+				&& @event is InputEventKey keyInput
+				&& keyInput.Keycode == keybindOpenMenu.Keycode
+				&& keyInput.IsPressed()
+				)
+			{
+				IsVisible = true;
+				return;
+			}
+
+            base._Input(@event);
+        }
 	}
 }
