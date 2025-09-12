@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7h44u0l74erl"]
+[gd_scene load_steps=15 format=3 uid="uid://c7h44u0l74erl"]
 
 [ext_resource type="Script" uid="uid://dges00asc14a6" path="res://Program.cs" id="1_r1x4e"]
 [ext_resource type="PackedScene" uid="uid://xn35xb7fekfl" path="res://gui/bottom_bar.tscn" id="2_ecdn2"]
@@ -13,6 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://kou88p3rb0fq" path="res://gui/level_timer.tscn" id="9_1cbro"]
 [ext_resource type="PackedScene" uid="uid://bhraj4ym0cswa" path="res://scenes/player/character.tscn" id="9_1wvm3"]
 [ext_resource type="PackedScene" uid="uid://dp4l7rtotuyq5" path="res://gui/intro_panel.tscn" id="9_e2o57"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ycdy4"]
+device = -1
+keycode = 4194305
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_r1x4e")
@@ -128,6 +132,7 @@ grow_vertical = 0
 [node name="PrimaryLevelMenu" parent="PrimaryGui" instance=ExtResource("6_faadj")]
 visible = false
 layout_mode = 1
+metadata/keybind_open_menu = SubResource("InputEventKey_ycdy4")
 
 [node name="IntroPanel" parent="PrimaryGui" instance=ExtResource("9_e2o57")]
 visible = false
