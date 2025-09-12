@@ -16,7 +16,9 @@ namespace UTheCat.Jumpvalley.App.Gui
 		private List<IDisposable> disposables;
 
 		/// <summary>
-		/// Keyboard shortcut for opening the PrimaryLevelMenu specified in the metadata of the PrimaryLevelMenu's root node
+		/// Keyboard shortcut for opening the PrimaryLevelMenu specified in the metadata of the PrimaryLevelMenu's root node.
+		/// <br/><br/>
+		/// Set this to null to indicate that this keybinding shouldn't be made (or to terminate the keybind).
 		/// </summary>
 		private InputEventKey keybindOpenMenu;
 
@@ -93,10 +95,18 @@ namespace UTheCat.Jumpvalley.App.Gui
 				b.OffsetBottom = b.OffsetTop + buttonYSize;
 				ItemsControl.AddChild(b);
 			}
+
+			if (actualNode.HasMeta(KEYBIND_OPEN_MENU_META_NAME))
+			{
+				InputEventKey keybind = actualNode.GetMeta(KEYBIND_OPEN_MENU_META_NAME).As<InputEventKey>();
+				if (keybind != null) keybindOpenMenu = keybind;
+			}
 		}
 
 		public new void Dispose()
 		{
+			keybindOpenMenu = null;
+
 			foreach (IDisposable obj in disposables)
 			{
 				if (obj is Node node)
@@ -112,6 +122,15 @@ namespace UTheCat.Jumpvalley.App.Gui
 
         public override void _Input(InputEvent @event)
         {
+			BgPanelAnimatedNodeGroup bgpNodeGroup = BgPanelNodeGroup;
+			if ((bgpNodeGroup == null || !bgpNodeGroup.ShouldBeVisible)
+				&& @event is InputEventKey keyInput
+				&& keyInput.Keycode == keybindOpenMenu.Keycode)
+			{
+				IsVisible = true;
+				return;
+			}
+
             base._Input(@event);
         }
 	}
