@@ -48,6 +48,20 @@ namespace UTheCat.Jumpvalley.App.Gui
         public Control ItemsControl { get; private set; }
 
         /// <summary>
+        /// The scroll container (which is a child of <see cref="ItemsControl"/>)
+        /// that spans the entire size of <see cref="ItemsControl"/>.
+        /// </summary>
+        public ScrollContainer ItemsScrollContainer { get; private set; }
+
+        /// <summary>
+        /// Node which is a child of <see cref="ItemsScrollContainer"/>.
+        /// <br/><br/>
+        /// If the ability to scroll through the level menu's items is desired,
+        /// the level menu's items should be placed in this container.
+        /// </summary>
+        public BoxContainer ScrollableItemsBoxContainer { get; private set; }
+
+        /// <summary>
         /// The button that closes the menu when pressed
         /// </summary>
         public Button CloseButton { get; private set; }
@@ -103,8 +117,11 @@ namespace UTheCat.Jumpvalley.App.Gui
             BackgroundControl = actualNode.GetNodeOrNull<Control>("Background");
             TitleLabel = actualNode.GetNodeOrNull<Label>("Title");
             SubtitleLabel = actualNode.GetNodeOrNull<Label>("Subtitle");
-            ItemsControl = actualNode.GetNodeOrNull<Control>("Items");
             CloseButton = actualNode.GetNodeOrNull<Button>("CloseButton");
+
+            ItemsControl = actualNode.GetNodeOrNull<Control>("Items");
+            ItemsScrollContainer = ItemsControl?.GetNodeOrNull<ScrollContainer>("ScrollContainer");
+            ScrollableItemsBoxContainer = ItemsScrollContainer?.GetNodeOrNull<BoxContainer>("BoxContainer");
 
             Vector2 nodeSize = actualNode.Size;
             widthHeightRatio = nodeSize.X / nodeSize.Y;
