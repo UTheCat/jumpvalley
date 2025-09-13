@@ -142,6 +142,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
             Vector2 nodeSize = actualNode.Size;
 
+            originalHeight = nodeSize.Y;
             originalOffsetTop = actualNode.OffsetTop;
             originalOffsetBottom = actualNode.OffsetBottom;
 
