@@ -47,6 +47,9 @@ namespace UTheCat.Jumpvalley.App.Gui
 		{
 			disposables = new List<IDisposable>();
 
+			ScrollContainer scrollContainer = ItemsScrollContainer;
+			if (scrollContainer != null) scrollContainer.HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled;
+
 			if (TitleLabel != null)
 			{
 				TitleLabel.Text = actualNode.Tr("MENU_TITLE");
