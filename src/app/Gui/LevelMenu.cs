@@ -28,6 +28,23 @@ namespace UTheCat.Jumpvalley.App.Gui
         private SceneTreeTween backgroundSizeTween;
 
         /// <summary>
+        /// Current size of the level menu
+        /// </summary>
+        private Vector2 currentSize = Vector2.Zero;
+
+        /// <summary>
+        /// Size of the actual level menu when this level menu handler was instantiated
+        /// </summary>
+        private Vector2 originalSize = Vector2.Zero;
+
+        /// <summary>
+        /// Height of the actual level menu when this level menu handler was instantiated
+        /// </summary>
+        private float originalHeight = 0f;
+
+        private int lastWindowHeight = 0;
+
+        /// <summary>
         /// The Godot control displaying the menu's background
         /// </summary>
         public Control BackgroundControl { get; private set; }
@@ -124,6 +141,8 @@ namespace UTheCat.Jumpvalley.App.Gui
             ScrollableItemsBoxContainer = ItemsScrollContainer?.GetNodeOrNull<BoxContainer>("BoxContainer");
 
             Vector2 nodeSize = actualNode.Size;
+            originalSize = nodeSize;
+            originalHeight = nodeSize.Y;
             widthHeightRatio = nodeSize.X / nodeSize.Y;
 
             opacityTween = new SceneTreeTween(OPACITY_ANIM_DURATION, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
@@ -149,13 +168,7 @@ namespace UTheCat.Jumpvalley.App.Gui
                 backgroundSizeTween.FinalValue = 0.0;
                 backgroundSizeTween.OnStep += (object o, double _frac) =>
                 {
-                    float heightOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
-                    float widthOffset = heightOffset * widthHeightRatio;
-
-                    BackgroundControl.OffsetLeft = widthOffset;
-                    BackgroundControl.OffsetRight = -widthOffset;
-                    BackgroundControl.OffsetTop = heightOffset;
-                    BackgroundControl.OffsetBottom = -heightOffset;
+                    SetMenuSizeOffset((float)backgroundSizeTween.GetCurrentValue() - GetHeightReductionDueToWindowHeight());
                 };
             }
 
@@ -177,6 +190,44 @@ namespace UTheCat.Jumpvalley.App.Gui
         private void OnCloseButtonPressed()
         {
             if (IsVisible) IsVisible = false;
+        }
+
+        /// <summary>
+        /// Returns a vector whose X component is the width reduction of the level menu due to window size
+        /// and whose Y component is the height reduction of the level menu due to window size.
+        /// </summary>
+        private float GetHeightReductionDueToWindowHeight(float windowHeight)
+        {
+            return windowHeight < originalHeight ? originalHeight - windowHeight : 0f;
+        }
+
+        private float GetHeightReductionDueToWindowHeight()
+        {
+            return GetHeightReductionDueToWindowHeight(DisplayServer.WindowGetSize().Y);
+        }
+
+        private void SetMenuSizeOffset(float heightOffset)
+        {
+            heightOffset *= 0.5f;
+            float widthOffset = heightOffset * widthHeightRatio;
+
+            BackgroundControl.OffsetLeft = widthOffset;
+            BackgroundControl.OffsetRight = -widthOffset;
+            BackgroundControl.OffsetTop = heightOffset;
+            BackgroundControl.OffsetBottom = -heightOffset;
+        }
+
+        public override void _Process(double delta)
+        {
+            Vector2I windowSize = DisplayServer.WindowGetSize();
+            int height = windowSize.Y;
+
+            if (lastWindowHeight == 0 || height != lastWindowHeight)
+            {
+                lastWindowHeight = height;
+
+                if (!backgroundSizeTween.IsPlaying) SetMenuSizeOffset((float)backgroundSizeTween.GetCurrentValue() - GetHeightReductionDueToWindowHeight(height));
+            }
         }
     }
 }
