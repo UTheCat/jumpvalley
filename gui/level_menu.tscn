@@ -91,6 +91,7 @@ dragging_scroll_damper = SubResource("Resource_4y8uo")
 drag_with_mouse = false
 
 [node name="BoxContainer" type="BoxContainer" parent="Items/ScrollContainer"]
+custom_minimum_size = Vector2(315, 0)
 layout_mode = 2
 theme_override_constants/separation = 8
 vertical = true

@@ -20,6 +20,7 @@ events = [SubResource("InputEventKey_n54he")]
 [node name="CloseButton" type="Button"]
 offset_right = 36.0
 offset_bottom = 36.0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_8psry")
 shortcut = SubResource("Shortcut_gq2pe")
 script = ExtResource("1_gq2pe")

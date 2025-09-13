@@ -72,7 +72,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 			{
 				// Quit the app in the method specified in the Godot documentation:
 				// https://docs.godotengine.org/en/stable/tutorials/inputs/handling_quit_requests.html
-				tree.Root.PropagateNotification((int)Node.NotificationWMCloseRequest);
+				tree.Root.PropagateNotification((int)NotificationWMCloseRequest);
 				tree.Quit();
 			};
 			exitAppButtonHandler.BackgroundColor = Color.Color8(255, 100, 89, 255);
@@ -86,15 +86,17 @@ namespace UTheCat.Jumpvalley.App.Gui
 				settingsButton.ActualButton,
 				exitAppButton
 			};
-			float buttonYSize = exitAppButton.Size.Y;
+			foreach (Button b in buttonList) ScrollableItemsBoxContainer.AddChild(b);
 
-			for (int i = 0; i < buttonList.Length; i++)
-			{
-				Button b = buttonList[i];
-				b.OffsetTop = BUTTON_Y_POS_DIFF * i;
-				b.OffsetBottom = b.OffsetTop + buttonYSize;
-				ItemsControl.AddChild(b);
-			}
+			// float buttonYSize = exitAppButton.Size.Y;
+
+			// for (int i = 0; i < buttonList.Length; i++)
+			// {
+			// 	Button b = buttonList[i];
+			// 	b.OffsetTop = BUTTON_Y_POS_DIFF * i;
+			// 	b.OffsetBottom = b.OffsetTop + buttonYSize;
+			// 	ItemsControl.AddChild(b);
+			// }
 
 			if (actualNode.HasMeta(KEYBIND_OPEN_MENU_META_NAME))
 			{
