@@ -28,6 +28,13 @@ namespace UTheCat.Jumpvalley.App.Gui
         private SceneTreeTween backgroundSizeTween;
 
         /// <summary>
+        /// Height of the actual level menu when this level menu handler was instantiated
+        /// </summary>
+        private float originalHeight = 0f;
+
+        private int lastWindowHeight = 0;
+
+        /// <summary>
         /// The Godot control displaying the menu's background
         /// </summary>
         public Control BackgroundControl { get; private set; }
@@ -48,9 +55,28 @@ namespace UTheCat.Jumpvalley.App.Gui
         public Control ItemsControl { get; private set; }
 
         /// <summary>
+        /// The scroll container (which is a child of <see cref="ItemsControl"/>)
+        /// that spans the entire size of <see cref="ItemsControl"/>.
+        /// </summary>
+        public ScrollContainer ItemsScrollContainer { get; private set; }
+
+        /// <summary>
+        /// Node which is a child of <see cref="ItemsScrollContainer"/>.
+        /// <br/><br/>
+        /// If the ability to scroll through the level menu's items is desired,
+        /// the level menu's items should be placed in this container.
+        /// </summary>
+        public BoxContainer ScrollableItemsBoxContainer { get; private set; }
+
+        /// <summary>
         /// The button that closes the menu when pressed
         /// </summary>
         public Button CloseButton { get; private set; }
+
+        /// <summary>
+        /// Whether or not the level menu should adjust its height to fit inside the app's window
+        /// </summary>
+        public bool AdaptHeightToWindowSize = false;
 
         /// <summary>
         /// Whether or not the level menu should be visible.
@@ -91,6 +117,9 @@ namespace UTheCat.Jumpvalley.App.Gui
         }
 
         private float widthHeightRatio;
+        private Control menuRootNode;
+        private float originalOffsetTop;
+        private float originalOffsetBottom;
 
         /// <summary>
         /// Constructs a new instance of the level menu handler.
@@ -103,10 +132,20 @@ namespace UTheCat.Jumpvalley.App.Gui
             BackgroundControl = actualNode.GetNodeOrNull<Control>("Background");
             TitleLabel = actualNode.GetNodeOrNull<Label>("Title");
             SubtitleLabel = actualNode.GetNodeOrNull<Label>("Subtitle");
-            ItemsControl = actualNode.GetNodeOrNull<Control>("Items");
             CloseButton = actualNode.GetNodeOrNull<Button>("CloseButton");
 
+            ItemsControl = actualNode.GetNodeOrNull<Control>("Items");
+            ItemsScrollContainer = ItemsControl?.GetNodeOrNull<ScrollContainer>("ScrollContainer");
+            ScrollableItemsBoxContainer = ItemsScrollContainer?.GetNodeOrNull<BoxContainer>("BoxContainer");
+
+            menuRootNode = actualNode;
+
             Vector2 nodeSize = actualNode.Size;
+
+            originalHeight = nodeSize.Y;
+            originalOffsetTop = actualNode.OffsetTop;
+            originalOffsetBottom = actualNode.OffsetBottom;
+
             widthHeightRatio = nodeSize.X / nodeSize.Y;
 
             opacityTween = new SceneTreeTween(OPACITY_ANIM_DURATION, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
@@ -132,7 +171,7 @@ namespace UTheCat.Jumpvalley.App.Gui
                 backgroundSizeTween.FinalValue = 0.0;
                 backgroundSizeTween.OnStep += (object o, double _frac) =>
                 {
-                    float heightOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5);
+                    float heightOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5f);
                     float widthOffset = heightOffset * widthHeightRatio;
 
                     BackgroundControl.OffsetLeft = widthOffset;
@@ -160,6 +199,34 @@ namespace UTheCat.Jumpvalley.App.Gui
         private void OnCloseButtonPressed()
         {
             if (IsVisible) IsVisible = false;
+        }
+
+        /// <summary>
+        /// Returns a vector whose X component is the width reduction of the level menu due to window size
+        /// and whose Y component is the height reduction of the level menu due to window size.
+        /// </summary>
+        private float GetHeightReductionDueToWindowHeight(float windowHeight)
+        {
+            return windowHeight < originalHeight ? originalHeight - windowHeight : 0f;
+        }
+
+        public override void _Process(double delta)
+        {
+            Vector2I windowSize = DisplayServer.WindowGetSize();
+            int height = windowSize.Y;
+
+            if (height != lastWindowHeight)
+            {
+                lastWindowHeight = height;
+                float heightReduction = GetHeightReductionDueToWindowHeight(height);
+                float halfHeightReduction = (heightReduction > 0) ? heightReduction * 0.5f : 0f;
+
+                if (AdaptHeightToWindowSize)
+                {
+                    menuRootNode.OffsetTop = originalOffsetTop + halfHeightReduction;
+                    menuRootNode.OffsetBottom = originalOffsetBottom - halfHeightReduction;
+                }
+            }
         }
     }
 }

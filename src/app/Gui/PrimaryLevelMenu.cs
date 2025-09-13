@@ -10,8 +10,25 @@ namespace UTheCat.Jumpvalley.App.Gui
 	/// </summary>
 	public partial class PrimaryLevelMenu : LevelMenu, IDisposable
 	{
-		private readonly float BUTTON_Y_POS_DIFF = 52f;
-		private readonly string KEYBIND_OPEN_MENU_META_NAME = "keybind_open_menu";
+		private static readonly string KEYBIND_OPEN_MENU_META_NAME = "keybind_open_menu";
+
+		/// <summary>
+		/// Keyboard shortcuts for the menu's options (other than the close button).
+		/// <br/><br/>
+		/// Higher index means the keyboard shortcut is used for a menu option that's
+		/// lower in the option list displayed to the user.
+		/// </summary>
+		private static readonly Key[] MENU_OPTION_KEYBINDS = [
+			Key.Key1,
+			Key.Key2,
+			Key.Key3,
+			Key.Key4,
+			Key.Key5,
+			Key.Key6,
+			Key.Key7,
+			Key.Key8,
+			Key.Key9
+		];
 
 		private List<IDisposable> disposables;
 
@@ -36,6 +53,9 @@ namespace UTheCat.Jumpvalley.App.Gui
 		public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
 		{
 			disposables = new List<IDisposable>();
+
+			ScrollContainer scrollContainer = ItemsScrollContainer;
+			if (scrollContainer != null) scrollContainer.HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled;
 
 			if (TitleLabel != null)
 			{
@@ -72,7 +92,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 			{
 				// Quit the app in the method specified in the Godot documentation:
 				// https://docs.godotengine.org/en/stable/tutorials/inputs/handling_quit_requests.html
-				tree.Root.PropagateNotification((int)Node.NotificationWMCloseRequest);
+				tree.Root.PropagateNotification((int)NotificationWMCloseRequest);
 				tree.Quit();
 			};
 			exitAppButtonHandler.BackgroundColor = Color.Color8(255, 100, 89, 255);
@@ -86,15 +106,31 @@ namespace UTheCat.Jumpvalley.App.Gui
 				settingsButton.ActualButton,
 				exitAppButton
 			};
-			float buttonYSize = exitAppButton.Size.Y;
-
 			for (int i = 0; i < buttonList.Length; i++)
 			{
 				Button b = buttonList[i];
-				b.OffsetTop = BUTTON_Y_POS_DIFF * i;
-				b.OffsetBottom = b.OffsetTop + buttonYSize;
-				ItemsControl.AddChild(b);
+				if (i < MENU_OPTION_KEYBINDS.Length)
+				{
+					InputEventKey key = new InputEventKey();
+					key.Keycode = MENU_OPTION_KEYBINDS[i];
+
+					Shortcut shortcut = new Shortcut();
+					shortcut.Events.Add(key);
+					b.Shortcut = shortcut;
+				}
+
+				ScrollableItemsBoxContainer.AddChild(b);
 			}
+
+			// float buttonYSize = exitAppButton.Size.Y;
+
+			// for (int i = 0; i < buttonList.Length; i++)
+			// {
+			// 	Button b = buttonList[i];
+			// 	b.OffsetTop = BUTTON_Y_POS_DIFF * i;
+			// 	b.OffsetBottom = b.OffsetTop + buttonYSize;
+			// 	ItemsControl.AddChild(b);
+			// }
 
 			if (actualNode.HasMeta(KEYBIND_OPEN_MENU_META_NAME))
 			{
@@ -120,8 +156,8 @@ namespace UTheCat.Jumpvalley.App.Gui
 			base.Dispose();
 		}
 
-        public override void _Input(InputEvent @event)
-        {
+		public override void _Input(InputEvent @event)
+		{
 			BgPanelAnimatedNodeGroup bgpNodeGroup = BgPanelNodeGroup;
 			if ((bgpNodeGroup == null || !bgpNodeGroup.ShouldBeVisible)
 				&& @event is InputEventKey keyInput
@@ -133,7 +169,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 				return;
 			}
 
-            base._Input(@event);
-        }
+			base._Input(@event);
+		}
 	}
 }
