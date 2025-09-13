@@ -11,6 +11,13 @@ namespace UTheCat.Jumpvalley.App.Gui
 	public partial class PrimaryLevelMenu : LevelMenu, IDisposable
 	{
 		private static readonly string KEYBIND_OPEN_MENU_META_NAME = "keybind_open_menu";
+
+		/// <summary>
+		/// Keyboard shortcuts for the menu's options (other than the close button).
+		/// <br/><br/>
+		/// Higher index means the keyboard shortcut is used for a menu option that's
+		/// lower in the option list displayed to the user.
+		/// </summary>
 		private static readonly Key[] MENU_OPTION_KEYBINDS = [
 			Key.Key1,
 			Key.Key2,

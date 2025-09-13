@@ -28,16 +28,6 @@ namespace UTheCat.Jumpvalley.App.Gui
         private SceneTreeTween backgroundSizeTween;
 
         /// <summary>
-        /// Current size of the level menu
-        /// </summary>
-        private Vector2 currentSize = Vector2.Zero;
-
-        /// <summary>
-        /// Size of the actual level menu when this level menu handler was instantiated
-        /// </summary>
-        private Vector2 originalSize = Vector2.Zero;
-
-        /// <summary>
         /// Height of the actual level menu when this level menu handler was instantiated
         /// </summary>
         private float originalHeight = 0f;
@@ -128,11 +118,8 @@ namespace UTheCat.Jumpvalley.App.Gui
 
         private float widthHeightRatio;
         private Control menuRootNode;
-        private float originalOffsetLeft;
-        private float originalOffsetRight;
         private float originalOffsetTop;
         private float originalOffsetBottom;
-        private float originalYPos;
 
         /// <summary>
         /// Constructs a new instance of the level menu handler.
@@ -154,11 +141,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             menuRootNode = actualNode;
 
             Vector2 nodeSize = actualNode.Size;
-            originalSize = nodeSize;
-            originalHeight = nodeSize.Y;
 
-            originalOffsetLeft = actualNode.OffsetLeft;
-            originalOffsetRight = actualNode.OffsetRight;
             originalOffsetTop = actualNode.OffsetTop;
             originalOffsetBottom = actualNode.OffsetBottom;
 
@@ -226,11 +209,6 @@ namespace UTheCat.Jumpvalley.App.Gui
             return windowHeight < originalHeight ? originalHeight - windowHeight : 0f;
         }
 
-        private float GetHeightReductionDueToWindowHeight()
-        {
-            return GetHeightReductionDueToWindowHeight(DisplayServer.WindowGetSize().Y);
-        }
-
         public override void _Process(double delta)
         {
             Vector2I windowSize = DisplayServer.WindowGetSize();
@@ -240,10 +218,7 @@ namespace UTheCat.Jumpvalley.App.Gui
             {
                 lastWindowHeight = height;
                 float heightReduction = GetHeightReductionDueToWindowHeight(height);
-                //Vector2 rootNodeSize = menuRootNode.Size;
-                //menuRootNode.Size = new Vector2(rootNodeSize.X, originalHeight - heightReduction);
                 float halfHeightReduction = (heightReduction > 0) ? heightReduction * 0.5f : 0f;
-                //float halfWidthReduction = halfHeightReduction * widthHeightRatio;
 
                 if (AdaptHeightToWindowSize)
                 {
