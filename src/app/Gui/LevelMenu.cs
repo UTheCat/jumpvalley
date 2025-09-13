@@ -84,6 +84,11 @@ namespace UTheCat.Jumpvalley.App.Gui
         public Button CloseButton { get; private set; }
 
         /// <summary>
+        /// Whether or not the level menu should adjust its height to fit inside the app's window
+        /// </summary>
+        public bool AdaptHeightToWindowSize = false;
+
+        /// <summary>
         /// Whether or not the level menu should be visible.
         /// Toggling this property will run the animation for showing/hiding the menu.
         /// </summary>
@@ -122,6 +127,12 @@ namespace UTheCat.Jumpvalley.App.Gui
         }
 
         private float widthHeightRatio;
+        private Control menuRootNode;
+        private float originalOffsetLeft;
+        private float originalOffsetRight;
+        private float originalOffsetTop;
+        private float originalOffsetBottom;
+        private float originalYPos;
 
         /// <summary>
         /// Constructs a new instance of the level menu handler.
@@ -140,9 +151,17 @@ namespace UTheCat.Jumpvalley.App.Gui
             ItemsScrollContainer = ItemsControl?.GetNodeOrNull<ScrollContainer>("ScrollContainer");
             ScrollableItemsBoxContainer = ItemsScrollContainer?.GetNodeOrNull<BoxContainer>("BoxContainer");
 
+            menuRootNode = actualNode;
+
             Vector2 nodeSize = actualNode.Size;
             originalSize = nodeSize;
             originalHeight = nodeSize.Y;
+
+            originalOffsetLeft = actualNode.OffsetLeft;
+            originalOffsetRight = actualNode.OffsetRight;
+            originalOffsetTop = actualNode.OffsetTop;
+            originalOffsetBottom = actualNode.OffsetBottom;
+
             widthHeightRatio = nodeSize.X / nodeSize.Y;
 
             opacityTween = new SceneTreeTween(OPACITY_ANIM_DURATION, Tween.TransitionType.Linear, Tween.EaseType.Out, tree);
@@ -168,7 +187,13 @@ namespace UTheCat.Jumpvalley.App.Gui
                 backgroundSizeTween.FinalValue = 0.0;
                 backgroundSizeTween.OnStep += (object o, double _frac) =>
                 {
-                    SetMenuSizeOffset((float)backgroundSizeTween.GetCurrentValue() - GetHeightReductionDueToWindowHeight());
+                    float heightOffset = (float)(backgroundSizeTween.GetCurrentValue() * 0.5f);
+                    float widthOffset = heightOffset * widthHeightRatio;
+
+                    BackgroundControl.OffsetLeft = widthOffset;
+                    BackgroundControl.OffsetRight = -widthOffset;
+                    BackgroundControl.OffsetTop = heightOffset;
+                    BackgroundControl.OffsetBottom = -heightOffset;
                 };
             }
 
@@ -206,27 +231,25 @@ namespace UTheCat.Jumpvalley.App.Gui
             return GetHeightReductionDueToWindowHeight(DisplayServer.WindowGetSize().Y);
         }
 
-        private void SetMenuSizeOffset(float heightOffset)
-        {
-            heightOffset *= 0.5f;
-            float widthOffset = heightOffset * widthHeightRatio;
-
-            BackgroundControl.OffsetLeft = widthOffset;
-            BackgroundControl.OffsetRight = -widthOffset;
-            BackgroundControl.OffsetTop = heightOffset;
-            BackgroundControl.OffsetBottom = -heightOffset;
-        }
-
         public override void _Process(double delta)
         {
             Vector2I windowSize = DisplayServer.WindowGetSize();
             int height = windowSize.Y;
 
-            if (lastWindowHeight == 0 || height != lastWindowHeight)
+            if (height != lastWindowHeight)
             {
                 lastWindowHeight = height;
+                float heightReduction = GetHeightReductionDueToWindowHeight(height);
+                //Vector2 rootNodeSize = menuRootNode.Size;
+                //menuRootNode.Size = new Vector2(rootNodeSize.X, originalHeight - heightReduction);
+                float halfHeightReduction = (heightReduction > 0) ? heightReduction * 0.5f : 0f;
+                //float halfWidthReduction = halfHeightReduction * widthHeightRatio;
 
-                if (!backgroundSizeTween.IsPlaying) SetMenuSizeOffset((float)backgroundSizeTween.GetCurrentValue() - GetHeightReductionDueToWindowHeight(height));
+                if (AdaptHeightToWindowSize)
+                {
+                    menuRootNode.OffsetTop = originalOffsetTop + halfHeightReduction;
+                    menuRootNode.OffsetBottom = originalOffsetBottom - halfHeightReduction;
+                }
             }
         }
     }

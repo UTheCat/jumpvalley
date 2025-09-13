@@ -193,6 +193,7 @@ namespace UTheCat.Jumpvalley.App
             PrimaryLevelMenu primaryLevelMenu = new PrimaryLevelMenu(primaryLevelMenuNode, Tree);
             animatedNodes.Add("primary_level_menu", primaryLevelMenu);
             primaryLevelMenu.BgPanelNodeGroup = animatedNodes;
+            primaryLevelMenu.AdaptHeightToWindowSize = true;
 
             Disposables.Add(primaryLevelMenu);
             Disposables.Add(primaryLevelMenuNode);
