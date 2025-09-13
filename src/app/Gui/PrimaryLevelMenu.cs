@@ -10,8 +10,18 @@ namespace UTheCat.Jumpvalley.App.Gui
 	/// </summary>
 	public partial class PrimaryLevelMenu : LevelMenu, IDisposable
 	{
-		private readonly float BUTTON_Y_POS_DIFF = 52f;
-		private readonly string KEYBIND_OPEN_MENU_META_NAME = "keybind_open_menu";
+		private static readonly string KEYBIND_OPEN_MENU_META_NAME = "keybind_open_menu";
+		private static readonly Key[] MENU_OPTION_KEYBINDS = [
+			Key.Key1,
+			Key.Key2,
+			Key.Key3,
+			Key.Key4,
+			Key.Key5,
+			Key.Key6,
+			Key.Key7,
+			Key.Key8,
+			Key.Key9
+		];
 
 		private List<IDisposable> disposables;
 
@@ -86,7 +96,21 @@ namespace UTheCat.Jumpvalley.App.Gui
 				settingsButton.ActualButton,
 				exitAppButton
 			};
-			foreach (Button b in buttonList) ScrollableItemsBoxContainer.AddChild(b);
+			for (int i = 0; i < buttonList.Length; i++)
+			{
+				Button b = buttonList[i];
+				if (i < MENU_OPTION_KEYBINDS.Length)
+				{
+					InputEventKey key = new InputEventKey();
+					key.Keycode = MENU_OPTION_KEYBINDS[i];
+
+					Shortcut shortcut = new Shortcut();
+					shortcut.Events.Add(key);
+					b.Shortcut = shortcut;
+				}
+
+				ScrollableItemsBoxContainer.AddChild(b);
+			}
 
 			// float buttonYSize = exitAppButton.Size.Y;
 
@@ -122,8 +146,8 @@ namespace UTheCat.Jumpvalley.App.Gui
 			base.Dispose();
 		}
 
-        public override void _Input(InputEvent @event)
-        {
+		public override void _Input(InputEvent @event)
+		{
 			BgPanelAnimatedNodeGroup bgpNodeGroup = BgPanelNodeGroup;
 			if ((bgpNodeGroup == null || !bgpNodeGroup.ShouldBeVisible)
 				&& @event is InputEventKey keyInput
@@ -135,7 +159,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 				return;
 			}
 
-            base._Input(@event);
-        }
+			base._Input(@event);
+		}
 	}
 }
