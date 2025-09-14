@@ -182,6 +182,9 @@ namespace UTheCat.Jumpvalley.App
                 CanOnlyShowOneNode = true
             };
 
+            Disposables.Add(animatedNodes);
+            Disposables.Add(bgPanel);
+
             // Bottom bar
             BottomBar bottomBar = new BottomBar(PrimaryGui.GetNode("BottomBar"), musicPlayer)
             {
@@ -206,6 +209,7 @@ namespace UTheCat.Jumpvalley.App
             MusicPanel musicPanel = new MusicPanel(musicPlayer, musicPanelNode, Tree);
             musicPanel.BindMusicVolumeSliderWithSetting(settings.Group.GetNode<MusicVolumeControl>("audio/music_volume"));
             animatedNodes.Add("music_panel", musicPanel);
+            Disposables.Add(musicPanel);
 
             //bottomBar.PrimaryMusicPanel = musicPanel;
 

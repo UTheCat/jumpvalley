@@ -194,6 +194,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
             opacityTween.Dispose();
             backgroundSizeTween.Dispose();
+            base.Dispose();
         }
 
         private void OnCloseButtonPressed()
