@@ -7,7 +7,7 @@ namespace UTheCat.Jumpvalley.Core.Animation
     /// This class provides some components to bind to a Godot node,
     /// mainly to assist with writing animation code for the node.
     /// </summary>
-    public partial class AnimatedNode : Node
+    public partial class AnimatedNode : Node, IDisposable
     {
         /// <summary>
         /// The node to be animated
@@ -51,5 +51,13 @@ namespace UTheCat.Jumpvalley.Core.Animation
         {
             VisibilityChanged?.Invoke(this, isVisible);
         }
+
+        /// <summary>
+        /// Disposes of this <see cref="AnimatedNode"/>.
+        /// <br/><br/>
+        /// To assist with garbage collection, this method will automatically call
+        /// the <see cref="AnimatedNode"/>'s QueueFree method.
+        /// </summary>
+        public new void Dispose() => QueueFree();
     }
 }

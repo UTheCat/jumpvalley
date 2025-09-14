@@ -176,6 +176,8 @@ namespace UTheCat.Jumpvalley.App.Gui
             foreach (SettingUiHandler handler in settingUiHandlers) handler.Dispose();
 
             settingUiHandlers.Clear();
+
+            base.Dispose();
         }
     }
 }
