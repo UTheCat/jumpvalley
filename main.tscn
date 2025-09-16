@@ -43,6 +43,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="LevelTimer" parent="PrimaryGui" instance=ExtResource("9_1cbro")]
+layout_mode = 0
 offset_top = 60.0
 offset_bottom = 108.0
 mouse_filter = 1

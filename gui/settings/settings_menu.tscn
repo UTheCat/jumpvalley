@@ -13,14 +13,10 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="Resource" id="Resource_r7k3e"]
 script = ExtResource("3_242g4")
-friction = 4.0
-rebound_strength = 7.0
 metadata/_custom_type_script = "uid://dlagxcnf11lr4"
 
 [sub_resource type="Resource" id="Resource_27wgo"]
 script = ExtResource("3_242g4")
-friction = 4.0
-rebound_strength = 7.0
 metadata/_custom_type_script = "uid://dlagxcnf11lr4"
 
 [sub_resource type="LabelSettings" id="LabelSettings_3l671"]

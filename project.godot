@@ -13,7 +13,7 @@ config_version=5
 config/name="Jumpvalley"
 config/version="0.6.0"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.4", "C#")
+config/features=PackedStringArray("4.5", "C#")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
@@ -117,8 +117,8 @@ locale/translations=PackedStringArray("res://strings/bottom_bar.en.translation",
 common/physics_ticks_per_second=240
 common/max_physics_steps_per_frame=32
 3d/physics_engine="Jolt Physics"
-jolt_physics_3d/simulation/areas_detect_static_bodies=true
 3d/default_gravity=98.1
+jolt_physics_3d/simulation/areas_detect_static_bodies=true
 common/enable_pause_aware_picking=true
 
 [rendering]

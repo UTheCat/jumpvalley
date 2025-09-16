@@ -3,28 +3,13 @@
 [ext_resource type="FontFile" uid="uid://b6a3cplnxqrgp" path="res://addons/fonts/nunito/static/Nunito-Regular.ttf" id="1_3oj0a"]
 [ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="2_ubqv8"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbqry"]
-content_margin_left = 3.0
-content_margin_top = 3.0
-content_margin_right = 3.0
-content_margin_bottom = 3.0
-draw_center = false
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1hga"]
-bg_color = Color(0.4, 0.4, 0.4, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjwbe"]
+bg_color = Color(0.5, 0.5, 0.5, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -42,12 +27,27 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjwbe"]
-bg_color = Color(0.5, 0.5, 0.5, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1hga"]
+bg_color = Color(0.4, 0.4, 0.4, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbqry"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -66,10 +66,10 @@ offset_bottom = 44.0
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
-theme_override_styles/focus = SubResource("StyleBoxFlat_fbqry")
-theme_override_styles/hover = SubResource("StyleBoxFlat_c1hga")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8xhrg")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jjwbe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8xhrg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c1hga")
+theme_override_styles/focus = SubResource("StyleBoxFlat_fbqry")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
