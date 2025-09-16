@@ -4,6 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://ckibfgp0fh7ck" path="res://gui/grabber.svg" id="2_kl50x"]
 [ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono/RobotoMono-VariableFont_wght.ttf" id="3_gdidw"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdidw"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxwja"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 draw_center = false
@@ -11,13 +18,6 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdidw"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -90,8 +90,8 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_gdidw")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxFlat_qxwja")
 theme_override_styles/normal = SubResource("StyleBoxFlat_gdidw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qxwja")
 placeholder_text = "min-max"
 alignment = 1
 emoji_menu_enabled = false

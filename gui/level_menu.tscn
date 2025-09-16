@@ -22,14 +22,10 @@ font_size = 24
 
 [sub_resource type="Resource" id="Resource_my8hv"]
 script = ExtResource("3_3gqnh")
-friction = 4.0
-rebound_strength = 7.0
 metadata/_custom_type_script = "uid://dlagxcnf11lr4"
 
 [sub_resource type="Resource" id="Resource_4y8uo"]
 script = ExtResource("3_3gqnh")
-friction = 4.0
-rebound_strength = 7.0
 metadata/_custom_type_script = "uid://dlagxcnf11lr4"
 
 [node name="LevelMenu" type="Control"]
