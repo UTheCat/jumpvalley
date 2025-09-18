@@ -351,16 +351,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         private ShapeCast3D climbingShapeCast;
 
         /// <summary>
-        /// The forces to apply when <see cref="HandlePhysicsStep"/> is called.
-        /// The order in which the forces in this list are applied is from the end of the list to the beginning of the list.
-        /// <br/><br/>
-        /// Forces are in newtons.
-        /// <br/><br/>
-        /// To be implemented.
-        /// </summary>
-        //public List<Vector3> ForceQueue = new List<Vector3>();
-
-        /// <summary>
         /// The mass of the character in kilograms.
         /// </summary>
         public float Mass = 60f;
@@ -1200,7 +1190,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         /// <summary>
-        /// Event that's raised when the character being moved by this <see cref="BaseMover"/> changes.
+        /// Event that's raised when the character's current movement state changes.
         /// </summary>
         public event EventHandler<BodyStateChangedArgs> BodyStateChanged;
 
