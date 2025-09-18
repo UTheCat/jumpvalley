@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://du6etgmkelt2n"]
+[gd_scene load_steps=9 format=3 uid="uid://du6etgmkelt2n"]
 
 [ext_resource type="FontFile" uid="uid://b6a3cplnxqrgp" path="res://addons/fonts/nunito/static/Nunito-Regular.ttf" id="1_3oj0a"]
+[ext_resource type="Script" uid="uid://c5o1d2nfvl3w1" path="res://gui/level_menu_button.gd" id="1_c1hga"]
 [ext_resource type="Texture2D" uid="uid://ciuwq1360hfy5" path="res://addons/icons/more_horiz_white_24dp.svg" id="2_ubqv8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjwbe"]
@@ -70,6 +71,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_jjwbe")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8xhrg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_c1hga")
 theme_override_styles/focus = SubResource("StyleBoxFlat_fbqry")
+script = ExtResource("1_c1hga")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
