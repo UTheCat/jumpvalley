@@ -14,7 +14,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
     public partial class BaseMover : Node, IDisposable
     {
         /// <summary>
-        /// The current movement state of the character associated with the mover
+        /// Enumerators describing the status of the character's current movement
         /// </summary>
         public enum BodyState
         {
