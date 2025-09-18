@@ -31,6 +31,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 		];
 
 		private List<IDisposable> disposables;
+		private List<Button> menuButtons = new List<Button>();
 
 		/// <summary>
 		/// Keyboard shortcut for opening the PrimaryLevelMenu specified in the metadata of the PrimaryLevelMenu's root node.
@@ -49,6 +50,16 @@ namespace UTheCat.Jumpvalley.App.Gui
 		/// This is intended to prevent keyboard shortcut conflicts. 
 		/// </summary>
 		public BgPanelAnimatedNodeGroup BgPanelNodeGroup = null;
+
+        public override bool IsVisible
+		{
+			get => base.IsVisible;
+			set
+			{
+				SetButtonsDisabled(!value);
+				base.IsVisible = value;
+			}
+		}
 
 		public PrimaryLevelMenu(Control actualNode, SceneTree tree) : base(actualNode, tree)
 		{
@@ -84,6 +95,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 				CurrentSettingsMenu.IsVisible = true;
 			};
 			disposables.Add(settingsButtonNode);
+			menuButtons.Add(settingsButtonNode);
 
 			// Add the Exit App button
 			Button exitAppButton = menuButtonResource.Instantiate<Button>();
@@ -99,16 +111,13 @@ namespace UTheCat.Jumpvalley.App.Gui
 			exitAppButtonHandler.Text = exitAppButton.Tr("EXIT_APP");
 			exitAppButtonHandler.Icon = GD.Load<CompressedTexture2D>("res://addons/icons/logout_white_48dp.svg");
 			disposables.Add(exitAppButton);
+			menuButtons.Add(exitAppButton);
 
 			menuButtonResource.Dispose();
 
-			Button[] buttonList = {
-				settingsButton.ActualButton,
-				exitAppButton
-			};
-			for (int i = 0; i < buttonList.Length; i++)
+			for (int i = 0; i < menuButtons.Count; i++)
 			{
-				Button b = buttonList[i];
+				Button b = menuButtons[i];
 				if (i < MENU_OPTION_KEYBINDS.Length)
 				{
 					InputEventKey key = new InputEventKey();
@@ -137,6 +146,13 @@ namespace UTheCat.Jumpvalley.App.Gui
 				InputEventKey keybind = actualNode.GetMeta(KEYBIND_OPEN_MENU_META_NAME).As<InputEventKey>();
 				if (keybind != null) keybindOpenMenu = keybind;
 			}
+
+			// No need to call SetButtonsDisabled as it's already called when base constructor runs (which sets IsVisible to false)
+		}
+
+		private void SetButtonsDisabled(bool shouldDisable)
+		{
+			foreach (Button b in menuButtons) b.Disabled = shouldDisable;
 		}
 
 		public new void Dispose()
