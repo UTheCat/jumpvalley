@@ -57,6 +57,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
         /// <summary>
         /// The name of the <see cref="CollisionShape3D"/> that should be primarily in charge of handling a character's collision.
+        /// <br/><br/>
+        /// For best results, the shape of the <see cref="CollisionShape3D"/> object should be a box.
         /// </summary>
         public static readonly string CHARACTER_ROOT_COLLIDER_NAME = "RootCollider";
 
