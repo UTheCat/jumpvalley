@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="Jumpvalley"
-config/version="0.6.0"
+config/description="An app and library that can be used to test and run 3D platformer levels!"
+config/version="0.7.0"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.5", "C#")
 run/max_fps=60
