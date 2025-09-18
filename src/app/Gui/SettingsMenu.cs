@@ -156,7 +156,7 @@ namespace UTheCat.Jumpvalley.App.Gui
 
         private void HandleCloseButtonPressed()
         {
-            IsVisible = false;
+            if (IsVisible) IsVisible = false;
         }
 
         /// <summary>
