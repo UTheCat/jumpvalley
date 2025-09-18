@@ -142,16 +142,6 @@ namespace UTheCat.Jumpvalley.App.Gui
 				ScrollableItemsBoxContainer.AddChild(b);
 			}
 
-			// float buttonYSize = exitAppButton.Size.Y;
-
-			// for (int i = 0; i < buttonList.Length; i++)
-			// {
-			// 	Button b = buttonList[i];
-			// 	b.OffsetTop = BUTTON_Y_POS_DIFF * i;
-			// 	b.OffsetBottom = b.OffsetTop + buttonYSize;
-			// 	ItemsControl.AddChild(b);
-			// }
-
 			if (actualNode.HasMeta(KEYBIND_OPEN_MENU_META_NAME))
 			{
 				InputEventKey keybind = actualNode.GetMeta(KEYBIND_OPEN_MENU_META_NAME).As<InputEventKey>();
