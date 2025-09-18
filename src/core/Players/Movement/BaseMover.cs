@@ -8,10 +8,8 @@ using UTheCat.Jumpvalley.Core.Players.Camera;
 namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
     /// <summary>
-    /// This is the base class that provides a player's character the ability to move in different directions, jump, and climb.
-    /// It serves mainly as a controller interface for developers to build on.
-    /// <br/>
-    /// The design of this takes lots of inspiration from Roblox's PlayerModule.
+    /// This is the base class that provides a player's character the ability to move in various directions, jump, and climb.
+    /// Movement logic, designed for 3D precision platforming, is provided by this class out of the box.
     /// </summary>
     public partial class BaseMover : Node, IDisposable
     {
