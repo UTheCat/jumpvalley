@@ -105,15 +105,19 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
         /// <summary>
         /// Scalar in which the character wishes to go forward in the range of [-1, 1].
-        /// <br/>
+        /// <br/><br/>
         /// A value less than 0 indicates that the character wants to go backwards while a value greater than 0 indicates that the character wants to go forwards.
+        /// <br/><br/>
+        /// Specifically, this number indicates the scale at which the player wants to move forward relative to the player's current movement direction.
         /// </summary>
         public float ForwardValue = 0;
 
         /// <summary>
         /// Scalar in which the character wishes to go right in the range of [-1, 1].
-        /// <br/>
+        /// <br/><br/>
         /// A value less than 0 indicates that the character wants to go left while a value greater than 0 indicates that the character wants to go right.
+        /// <br/><br/>
+        /// Specifically, this number indicates the scale at which the player wants to move right relative to the player's current movement direction.
         /// </summary>
         public float RightValue = 0;
 
