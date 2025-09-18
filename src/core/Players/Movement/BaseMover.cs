@@ -8,15 +8,13 @@ using UTheCat.Jumpvalley.Core.Players.Camera;
 namespace UTheCat.Jumpvalley.Core.Players.Movement
 {
     /// <summary>
-    /// This is the base class that provides a player's character the ability to move in different directions, jump, and climb.
-    /// It serves mainly as a controller interface for developers to build on.
-    /// <br/>
-    /// The design of this takes lots of inspiration from Roblox's PlayerModule.
+    /// This is the base class that provides a player's character the ability to move in various directions, jump, and climb.
+    /// Movement logic, designed for 3D precision platforming, is provided by this class out of the box.
     /// </summary>
     public partial class BaseMover : Node, IDisposable
     {
         /// <summary>
-        /// The current movement state of the character associated with the mover
+        /// Enumerators describing the status of the character's current movement
         /// </summary>
         public enum BodyState
         {
@@ -59,6 +57,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
         /// <summary>
         /// The name of the <see cref="CollisionShape3D"/> that should be primarily in charge of handling a character's collision.
+        /// <br/><br/>
+        /// For best results, the shape of the <see cref="CollisionShape3D"/> object should be a box.
         /// </summary>
         public static readonly string CHARACTER_ROOT_COLLIDER_NAME = "RootCollider";
 
@@ -105,15 +105,19 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
         /// <summary>
         /// Scalar in which the character wishes to go forward in the range of [-1, 1].
-        /// <br/>
+        /// <br/><br/>
         /// A value less than 0 indicates that the character wants to go backwards while a value greater than 0 indicates that the character wants to go forwards.
+        /// <br/><br/>
+        /// Specifically, this number indicates the scale at which the player wants to move forward relative to the player's current movement direction.
         /// </summary>
         public float ForwardValue = 0;
 
         /// <summary>
         /// Scalar in which the character wishes to go right in the range of [-1, 1].
-        /// <br/>
+        /// <br/><br/>
         /// A value less than 0 indicates that the character wants to go left while a value greater than 0 indicates that the character wants to go right.
+        /// <br/><br/>
+        /// Specifically, this number indicates the scale at which the player wants to move right relative to the player's current movement direction.
         /// </summary>
         public float RightValue = 0;
 
@@ -345,16 +349,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// Shape-cast used to grab the normal of an object that the player is climbing on
         /// </summary>
         private ShapeCast3D climbingShapeCast;
-
-        /// <summary>
-        /// The forces to apply when <see cref="HandlePhysicsStep"/> is called.
-        /// The order in which the forces in this list are applied is from the end of the list to the beginning of the list.
-        /// <br/><br/>
-        /// Forces are in newtons.
-        /// <br/><br/>
-        /// To be implemented.
-        /// </summary>
-        //public List<Vector3> ForceQueue = new List<Vector3>();
 
         /// <summary>
         /// The mass of the character in kilograms.
@@ -1196,7 +1190,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         }
 
         /// <summary>
-        /// Event that's raised when the character being moved by this <see cref="BaseMover"/> changes.
+        /// Event that's raised when the character's current movement state changes.
         /// </summary>
         public event EventHandler<BodyStateChangedArgs> BodyStateChanged;
 
