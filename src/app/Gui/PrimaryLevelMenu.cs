@@ -51,15 +51,13 @@ namespace UTheCat.Jumpvalley.App.Gui
 		/// </summary>
 		public BgPanelAnimatedNodeGroup BgPanelNodeGroup = null;
 
-        public override bool IsVisible
+		public override bool IsVisible
 		{
 			get => base.IsVisible;
 			set
 			{
-				if (value)
-				{
-					foreach (Button b in menuButtons) b.Disabled = false;
-				}
+				if (value) foreach (Button b in menuButtons) b.Disabled = false;
+
 				base.IsVisible = value;
 			}
 		}
@@ -135,6 +133,12 @@ namespace UTheCat.Jumpvalley.App.Gui
 					b.Shortcut = shortcut;
 				}
 
+				// We're only disabling the buttons to prevent them from playing shortcut feedback
+				// if the button is pressed while the menu is being hidden.
+				// Therefore, we should be fine with hiding the fact that the buttons could get disabled
+				// from the end user.
+				b.AddThemeStyleboxOverride("disabled", b.GetThemeStylebox("normal"));
+
 				ScrollableItemsBoxContainer.AddChild(b);
 			}
 
@@ -157,11 +161,16 @@ namespace UTheCat.Jumpvalley.App.Gui
 			// No need to call SetButtonsDisabled as it's already called when base constructor runs (which sets IsVisible to false)
 		}
 
+		/// <summary>
+		/// Disables every button except for <paramref name="bStayEnabled"/>.
+		/// <br/><br/>
+		/// Use this to prevent shortcut feedback for menu buttons that are selected while menu is being hidden.
+		/// </summary>
 		private void DisableButtonsExceptFor(Button bStayEnabled)
 		{
 			foreach (Button b in menuButtons)
 			{
-				if (b != bStayEnabled) b.Disabled = false;
+				if (b != bStayEnabled) b.Disabled = true;
 			}
 		}
 
