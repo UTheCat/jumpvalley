@@ -100,7 +100,7 @@ Thank you for your interest in the Jumpvalley project! Here's some info on what 
 
 Software you'll need:
 - .NET-Enabled Godot v4.5 or later. The latest version of .NET-Enabled Godot 4 is preferred, and can be downloaded from [Godot's official download page](https://godotengine.org/download).
-- The [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- The [.NET 9 SDK](https://dotnet.microsoft.com/download)
 - [Visual Studio Code](https://code.visualstudio.com/) with the [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) (if you want to work with the project's source code)
 
 ### Level development using Jumpvalley and Godot
