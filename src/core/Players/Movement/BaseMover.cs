@@ -287,52 +287,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     rotator.Body = value;
                 }
 
-                if (climber != null)
-                {
-                    CollisionShape3D hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
-                    climber.Hitbox = hitbox;
-
-                    Shape3D shape = hitbox.Shape;
-                    float zPos;
-                    float height;
-                    float additionalZSize = 0;
-                    if (shape is BoxShape3D box)
-                    {
-                        zPos = -box.Size.Z * 0.5f;
-                        height = box.Size.Y * 0.5f;
-                    }
-                    else if (shape is CapsuleShape3D capsule)
-                    {
-                        zPos = -capsule.Radius * 0.5f;
-                        height = capsule.Height * 0.5f;
-                        additionalZSize = capsule.Radius;
-                    }
-                    else
-                    {
-                        Aabb charAabb = GetCharacterAabb();
-                        zPos = -charAabb.Size.Z * 0.5f;
-                        height = charAabb.Size.Y * 0.5f;
-                    }
-
-                    BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
-                    if (shapeCastBox != null)
-                    {
-                        float hitboxDepth = CurrentClimber.HitboxDepth;
-
-                        // Set the actual height of the climbing shape cast to be slightly higher
-                        // than the calculated height to prevent the character from getting stuck
-                        // while climbing when at the very top or bottom of a ladder.
-                        Vector3 size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth + additionalZSize);
-                        size.Y = height + CLIMBING_SHAPE_CAST_HEIGHT_OFFSET;
-                        zPos -= 0.5f * (hitboxDepth - additionalZSize);
-                        shapeCastBox.Size = size;
-
-                        climbingShapeCast.TargetPosition = new Vector3(0f, 0f, -size.Z);
-                        climbingShapeCast.Position = new Vector3(0, -height * 0.5f, zPos + CLIMBING_SHAPE_CAST_Z_OFFSET);
-
-                        value.AddChild(climbingShapeCast);
-                    }
-                }
+                UpdateClimbingShapeCastProperties(value);
+                value.AddChild(climbingShapeCast);
             }
         }
 
@@ -506,6 +462,59 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             return newXZVelocity;
         }
 
+        private void UpdateClimbingShapeCastProperties(CharacterBody3D character)
+        {
+            if (character == null) return;
+            
+            Climber climber = CurrentClimber;
+            if (climber != null)
+            {
+                CollisionShape3D hitbox = character.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
+                climber.Hitbox = hitbox;
+
+                Shape3D shape = hitbox.Shape;
+                float zPos;
+                float height;
+                float additionalZSize = 0;
+                if (shape is BoxShape3D box)
+                {
+                    zPos = -box.Size.Z * 0.5f;
+                    height = box.Size.Y * 0.5f;
+                }
+                else if (shape is CapsuleShape3D capsule)
+                {
+                    zPos = -capsule.Radius * 0.5f;
+                    height = capsule.Height * 0.5f;
+                    additionalZSize = capsule.Radius;
+                }
+                else
+                {
+                    Aabb charAabb = GetCharacterAabb();
+                    zPos = -charAabb.Size.Z * 0.5f;
+                    height = charAabb.Size.Y * 0.5f;
+                }
+
+                BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
+                if (shapeCastBox != null)
+                {
+                    float hitboxDepth = CurrentClimber.HitboxDepth;
+
+                    // Set the actual height of the climbing shape cast to be slightly higher
+                    // than the calculated height to prevent the character from getting stuck
+                    // while climbing when at the very top or bottom of a ladder.
+                    Vector3 size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth + additionalZSize);
+                    size.Y = height + CLIMBING_SHAPE_CAST_HEIGHT_OFFSET;
+                    zPos -= 0.5f * (hitboxDepth - additionalZSize);
+                    shapeCastBox.Size = size;
+
+                    climbingShapeCast.TargetPosition = new Vector3(0f, 0f, -size.Z);
+                    climbingShapeCast.Position = new Vector3(0, -height * 0.5f, zPos + CLIMBING_SHAPE_CAST_Z_OFFSET);
+                }
+            }
+        }
+
+        private void UpdateClimbingShapeCastProperties() => UpdateClimbingShapeCastProperties(Body);
+
         /// <summary>
         /// Gets the velocity that the character wants to move at for the current physics frame
         /// </summary>
@@ -564,6 +573,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 else
                 {
                     // Update climbing shape-cast's state
+                    UpdateClimbingShapeCastProperties();
                     climbingShapeCast.ForceShapecastUpdate();
 
                     // Determine the 3d object's normal that we're climbing on
