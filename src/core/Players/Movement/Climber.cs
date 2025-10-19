@@ -21,7 +21,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         /// 
         /// This value is only used if <see cref="UseCustomPosition"/> is set to false.
         /// </summary>
-        private static readonly float CLIMBING_AREA3D_Z_OFFSET = 0.005f;
+        public static readonly float CLIMBING_AREA3D_Z_OFFSET = 0.005f;
 
         /// <summary>
         /// The <see cref="Area3D"/> that allows the character to climb when a climbable PhysicsBody3D is intersecting with it
@@ -115,16 +115,16 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         public Vector3 CustomPosition = Vector3.Zero;
 
         /// <summary>
-        /// If true, <see cref="Area"/>'s height will be set to <see cref="CustomHeight"/>.
+        /// If true, <see cref="Area"/>'s height will be set to <see cref="CustomSize"/>.
         /// <br/><br/>
         /// Otherwise, <see cref="Area"/>'s height will be calculated based on the dimensions of <see cref="Hitbox"/>.   
         /// </summary>
-        public bool UseCustomHeight = false;
+        public bool UseCustomSize = false;
 
         /// <summary>
-        /// Custom height of <see cref="Area"/> 
+        /// Custom height of <see cref="Area"/>.
         /// </summary>
-        public float CustomHeight = 0f;
+        public Vector3 CustomSize = Vector3.Zero;
 
         /// <summary>
         /// Creates a new instance of <see cref="Climber"/>
@@ -189,8 +189,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 }
             }
 
-            zPos -= areaBox.Size.Z * 0.5f + CLIMBING_AREA3D_Z_OFFSET;
-            areaBox.Size = new Vector3(HitboxWidth, UseCustomHeight ? CustomHeight : height, HitboxDepth);
+            float hitboxDepth = HitboxDepth;
+            zPos -= hitboxDepth * 0.5f + CLIMBING_AREA3D_Z_OFFSET;
+            areaBox.Size = UseCustomSize ? CustomSize : new Vector3(HitboxWidth, height, hitboxDepth);
             Area.Position = UseCustomPosition ? CustomPosition : new Vector3(0, -height * 0.5f, zPos);
         }
 
