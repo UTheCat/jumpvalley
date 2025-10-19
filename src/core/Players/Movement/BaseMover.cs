@@ -76,6 +76,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         private static readonly float CLIMBING_SHAPE_CAST_Z_OFFSET = 0.005f;
 
         /// <summary>
+        /// Height of the climbing shape-cast should be around half the height of the character's collision hitbox.
+        /// However, this variable's value (in meters) is added to the shape-cast's height (in addition to the calculated half-height
+        /// of the character's collision hitbox to prevent the character from getting stuck while climbing when at
+        /// the very top or bottom of a ladder.
+        /// </summary>
+        private static readonly float CLIMBING_SHAPE_CAST_HEIGHT_OFFSET = 1f;
+
+        /// <summary>
         /// This number is in meters.
         /// </summary>
         private static readonly float STEP_CLIMB_BOOST_WALL_SLOPE_ANGLE_RAYCAST_Y_OFFSET = -0.005f;
@@ -249,6 +257,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
         /// <summary>
         /// The <see cref="CharacterBody3D"/> that this BaseMover is binded to.
+        /// Many of BaseMover's current functions work best when the value of this property
+        /// is set to an actual <see cref="CharacterBody3D"/> in the Godot scene tree, instead of
+        /// being set to null. 
         /// </summary>
         public CharacterBody3D Body
         {
@@ -276,33 +287,8 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     rotator.Body = value;
                 }
 
-                if (climber != null)
-                {
-                    CollisionShape3D hitbox = value.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
-                    climber.Hitbox = hitbox;
-
-                    BoxShape3D boxShape = hitbox.Shape as BoxShape3D;
-
-                    if (boxShape != null)
-                    {
-                        float zPos = -(boxShape.Size.Z / 2) + CLIMBING_SHAPE_CAST_Z_OFFSET;
-
-                        BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
-                        if (shapeCastBox != null)
-                        {
-                            // Height of the climbing shape-cast should be half the height of the character.
-                            // 1 additional meter is added to the shape-cast's height to prevent the character from
-                            // getting stuck while climbing when at the very top or bottom of a ladder
-                            Vector3 size = shapeCastBox.Size;
-                            size.Y = (boxShape.Size.Y * 0.5f) + 1f;
-                            shapeCastBox.Size = size;
-
-                            climbingShapeCast.Position = new Vector3(0, -boxShape.Size.Y * 0.25f, zPos);
-
-                            value.AddChild(climbingShapeCast);
-                        }
-                    }
-                }
+                UpdateClimbingShapeCastProperties(value);
+                value.AddChild(climbingShapeCast);
             }
         }
 
@@ -475,6 +461,63 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
 
             return newXZVelocity;
         }
+
+        private void UpdateClimbingShapeCastProperties(CharacterBody3D character)
+        {
+            if (character == null) return;
+
+            Climber climber = CurrentClimber;
+            if (climber != null)
+            {
+                CollisionShape3D hitbox = character.GetNode<CollisionShape3D>(CHARACTER_ROOT_COLLIDER_NAME);
+                climber.Hitbox = hitbox;
+
+                Shape3D shape = hitbox.Shape;
+                float zPos;
+                float height;
+                float additionalZSize = 0;
+                if (shape is BoxShape3D box)
+                {
+                    zPos = -box.Size.Z * 0.5f;
+                    height = box.Size.Y * 0.5f;
+                }
+                else if (shape is CapsuleShape3D capsule)
+                {
+                    zPos = -capsule.Radius * 0.5f;
+                    height = capsule.Height * 0.5f;
+                    additionalZSize = capsule.Radius;
+                }
+                else
+                {
+                    Aabb charAabb = GetCharacterAabb();
+                    zPos = -charAabb.Size.Z * 0.5f;
+                    height = charAabb.Size.Y * 0.5f;
+                }
+
+                BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
+                if (shapeCastBox != null)
+                {
+                    float hitboxDepth = CurrentClimber.HitboxDepth;
+
+                    // Set the actual height of the climbing shape cast to be slightly higher
+                    // than the calculated height to prevent the character from getting stuck
+                    // while climbing when at the very top or bottom of a ladder.
+                    Vector3 size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth + additionalZSize);
+                    size.Y = height + CLIMBING_SHAPE_CAST_HEIGHT_OFFSET;
+                    zPos -= 0.5f * (hitboxDepth - additionalZSize);
+                    shapeCastBox.Size = size;
+
+                    climbingShapeCast.TargetPosition = new Vector3(0f, 0f, -size.Z);
+                    climbingShapeCast.Position = new Vector3(0, -height * 0.5f, zPos + CLIMBING_SHAPE_CAST_Z_OFFSET);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Updates the properties of BaseMover's climbing shape cast to reflect potential
+        /// changes to the sizing and positioning of the character's primary collision hitbox.
+        /// </summary>
+        public void UpdateClimbingShapeCastProperties() => UpdateClimbingShapeCastProperties(Body);
 
         /// <summary>
         /// Gets the velocity that the character wants to move at for the current physics frame
@@ -837,6 +880,14 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 // We already divided by the mass of the character to get acceleration from force, there's no need to do it again
                 return characterPushForce;
             }
+        }
+
+        private Aabb GetCharacterAabb()
+        {
+            CharacterBody3D body = Body;
+
+            if (body == null || !body.HasMeta(OverallBoundingBoxObject.CUSTOM_OVERALL_BOUNDING_BOX_META_NAME)) return new Aabb();
+            return body.GetMeta(OverallBoundingBoxObject.OVERALL_BOUNDING_BOX_META_NAME).As<Aabb>();
         }
 
         private float GetCharacterHeight()
