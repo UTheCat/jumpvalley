@@ -465,7 +465,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
         private void UpdateClimbingShapeCastProperties(CharacterBody3D character)
         {
             if (character == null) return;
-            
+
             Climber climber = CurrentClimber;
             if (climber != null)
             {
@@ -513,7 +513,11 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
             }
         }
 
-        private void UpdateClimbingShapeCastProperties() => UpdateClimbingShapeCastProperties(Body);
+        /// <summary>
+        /// Updates the properties of BaseMover's climbing shape cast to reflect potential
+        /// changes to the sizing and positioning of the character's primary collision hitbox.
+        /// </summary>
+        public void UpdateClimbingShapeCastProperties() => UpdateClimbingShapeCastProperties(Body);
 
         /// <summary>
         /// Gets the velocity that the character wants to move at for the current physics frame
@@ -573,7 +577,6 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                 else
                 {
                     // Update climbing shape-cast's state
-                    UpdateClimbingShapeCastProperties();
                     climbingShapeCast.ForceShapecastUpdate();
 
                     // Determine the 3d object's normal that we're climbing on
