@@ -295,6 +295,7 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     Shape3D shape = hitbox.Shape;
                     float zPos;
                     float height;
+                    float additionalZSize = 0;
                     if (shape is BoxShape3D box)
                     {
                         zPos = -box.Size.Z * 0.5f;
@@ -302,8 +303,9 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     }
                     else if (shape is CapsuleShape3D capsule)
                     {
-                        zPos = -capsule.Radius;
+                        zPos = -capsule.Radius * 0.5f;
                         height = capsule.Height * 0.5f;
+                        additionalZSize = capsule.Radius;
                     }
                     else
                     {
@@ -315,13 +317,17 @@ namespace UTheCat.Jumpvalley.Core.Players.Movement
                     BoxShape3D shapeCastBox = climbingShapeCast.Shape as BoxShape3D;
                     if (shapeCastBox != null)
                     {
+                        float hitboxDepth = CurrentClimber.HitboxDepth;
+
                         // Set the actual height of the climbing shape cast to be slightly higher
                         // than the calculated height to prevent the character from getting stuck
                         // while climbing when at the very top or bottom of a ladder.
-                        Vector3 size = shapeCastBox.Size;
+                        Vector3 size = new Vector3(CurrentClimber.HitboxWidth, 0f, hitboxDepth + additionalZSize);
                         size.Y = height + CLIMBING_SHAPE_CAST_HEIGHT_OFFSET;
+                        zPos -= 0.5f * (hitboxDepth - additionalZSize);
                         shapeCastBox.Size = size;
 
+                        climbingShapeCast.TargetPosition = new Vector3(0f, 0f, -size.Z);
                         climbingShapeCast.Position = new Vector3(0, -height * 0.5f, zPos + CLIMBING_SHAPE_CAST_Z_OFFSET);
 
                         value.AddChild(climbingShapeCast);
