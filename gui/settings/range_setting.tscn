@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono/RobotoMono-VariableFont_wght.ttf" id="3_gdidw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdidw"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0.6)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8

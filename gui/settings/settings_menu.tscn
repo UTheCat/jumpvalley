@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dlagxcnf11lr4" path="res://addons/SmoothScroll/scroll_damper/cubic_scroll_damper.gd" id="3_242g4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5vjn"]
-bg_color = Color(0.019326, 0.0696585, 0.113778, 1)
+bg_color = Color(0.14117648, 0.11764706, 0.3019608, 1)
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
@@ -44,7 +44,7 @@ offset_right = -44.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_m5vjn")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-modulate = Color(0.612613, 0.776085, 0.915092, 1)
+modulate = Color(0.6862745, 0.7529412, 0.9137255, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -64,6 +64,11 @@ allow_horizontal_scroll = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
+
+[node name="TopPadding" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+mouse_filter = 2
 
 [node name="MenuTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
