@@ -2,8 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_s2be1"]
-size = Vector3(1, 2, 0.5)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0s6rg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0s6rg"]
 transparency = 1
@@ -24,7 +23,7 @@ metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
 metadata/type = "OverallBoundingBoxObject"
 
 [node name="RootCollider" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_s2be1")
+shape = SubResource("CapsuleShape3D_0s6rg")
 
 [node name="Mesh" type="MeshInstance3D" parent="RootCollider"]
 material_override = SubResource("StandardMaterial3D_0s6rg")
