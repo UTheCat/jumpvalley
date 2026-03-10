@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2ucpyoistfex"]
+[gd_scene format=3 uid="uid://d2ucpyoistfex"]
 
 [ext_resource type="Material" uid="uid://c4m68khblbrv5" path="res://levels/shape_variety/textures/floor5.tres" id="1_n763a"]
 [ext_resource type="Script" uid="uid://tbn1r3w0d5w7" path="res://scenes/lobby/fast_rolling_ball_rigid_body.gd" id="2_41y5u"]
@@ -23,24 +23,24 @@ material = SubResource("StandardMaterial3D_3fxi5")
 radius = 2.0
 height = 4.0
 
-[node name="FastRollingBall" type="Node3D"]
+[node name="FastRollingBall" type="Node3D" unique_id=1099630152]
 
-[node name="Slope" type="StaticBody3D" parent="."]
+[node name="Slope" type="StaticBody3D" parent="." unique_id=1740207248]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope" unique_id=894400525]
 shape = SubResource("BoxShape3D_41y5u")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Slope/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Slope/CollisionShape3D" unique_id=1415555013]
 material_override = ExtResource("1_n763a")
 mesh = SubResource("BoxMesh_rbx7a")
 
-[node name="Ball" type="RigidBody3D" parent="."]
+[node name="Ball" type="RigidBody3D" parent="." unique_id=1555304217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 2.5, 0)
 mass = 206.0
 script = ExtResource("2_41y5u")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=1702857688]
 shape = SubResource("SphereShape3D_30uw7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball/CollisionShape3D" unique_id=73518291]
 mesh = SubResource("SphereMesh_2kmha")

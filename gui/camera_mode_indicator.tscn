@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5xcp6s62kfmj"]
+[gd_scene format=3 uid="uid://c5xcp6s62kfmj"]
 
 [ext_resource type="Texture2D" uid="uid://ct3er6iaq0dpt" path="res://decals/camera_turn.svg" id="1_2npli"]
 
-[node name="CameraModeIndicator" type="Control"]
+[node name="CameraModeIndicator" type="Control" unique_id=720059323]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 18.0
 offset_bottom = 18.0
 
-[node name="ModeTexture" type="TextureRect" parent="."]
+[node name="ModeTexture" type="TextureRect" parent="." unique_id=848842458]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

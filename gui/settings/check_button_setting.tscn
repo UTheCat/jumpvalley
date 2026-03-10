@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://4x6cwtsb3vjf"]
+[gd_scene format=3 uid="uid://4x6cwtsb3vjf"]
 
 [ext_resource type="LabelSettings" uid="uid://dky074m66u2lu" path="res://gui/settings/setting_name.tres" id="1_t2fq7"]
 [ext_resource type="Texture2D" uid="uid://3vkgmbupak5p" path="res://decals/check_button/checked.svg" id="2_404nc"]
 [ext_resource type="Texture2D" uid="uid://iio4otu47iqm" path="res://decals/check_button/unchecked.svg" id="2_qwgp7"]
 
-[node name="CheckButtonSetting" type="Control"]
+[node name="CheckButtonSetting" type="Control" unique_id=324672440]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 3
 anchors_preset = 10
@@ -13,7 +13,7 @@ offset_bottom = 50.0
 grow_horizontal = 2
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=1655274900]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -23,7 +23,7 @@ text = "bool setting name"
 label_settings = ExtResource("1_t2fq7")
 vertical_alignment = 1
 
-[node name="ToggleNode" type="CheckButton" parent="."]
+[node name="ToggleNode" type="CheckButton" parent="." unique_id=1629903631]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfirwq7r0jq20"]
+[gd_scene format=3 uid="uid://dfirwq7r0jq20"]
 
 [ext_resource type="Texture2D" uid="uid://boixt28udj8fd" path="res://addons/kenney_prototype_textures/green/texture_09.png" id="1_mdcbe"]
 [ext_resource type="FontFile" uid="uid://cw16kw7wcb0hy" path="res://addons/fonts/nunito/static/Nunito-Bold.ttf" id="2_34a5w"]
@@ -25,7 +25,7 @@ border_color = Color(1, 1, 1, 1)
 shadow_color = Color(1, 1, 1, 0.6)
 shadow_size = 4
 
-[node name="MusicPanel" type="Control"]
+[node name="MusicPanel" type="Control" unique_id=1678933200]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 540.0
@@ -33,7 +33,7 @@ offset_bottom = 265.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="." unique_id=1216095581]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -43,7 +43,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vkvd5")
 
-[node name="Thumbnail" type="Panel" parent="."]
+[node name="Thumbnail" type="Panel" parent="." unique_id=2109163219]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
@@ -56,7 +56,7 @@ offset_right = 60.0
 offset_bottom = 60.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s1d3y")
 
-[node name="Image" type="TextureRect" parent="Thumbnail"]
+[node name="Image" type="TextureRect" parent="Thumbnail" unique_id=1442814121]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -70,7 +70,7 @@ grow_vertical = 2
 texture = ExtResource("1_mdcbe")
 expand_mode = 1
 
-[node name="SongName" type="Label" parent="."]
+[node name="SongName" type="Label" parent="." unique_id=177022531]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
@@ -83,7 +83,7 @@ theme_override_font_sizes/font_size = 26
 text = "Song Name"
 autowrap_mode = 2
 
-[node name="Artists" type="Label" parent="."]
+[node name="Artists" type="Label" parent="." unique_id=1835951750]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
@@ -95,7 +95,7 @@ theme_override_font_sizes/font_size = 20
 text = "Artists"
 autowrap_mode = 2
 
-[node name="Volume" type="Control" parent="."]
+[node name="Volume" type="Control" parent="." unique_id=350224744]
 layout_mode = 1
 anchor_left = 0.4
 anchor_top = 1.0
@@ -104,7 +104,7 @@ anchor_bottom = 1.0
 offset_top = -70.0
 offset_bottom = -34.0
 
-[node name="Slider" type="HSlider" parent="Volume"]
+[node name="Slider" type="HSlider" parent="Volume" unique_id=1703734142]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.8
@@ -116,7 +116,7 @@ theme_override_icons/grabber_disabled = ExtResource("3_3a134")
 max_value = 1.0
 step = 0.01
 
-[node name="Icon" type="TextureRect" parent="Volume"]
+[node name="Icon" type="TextureRect" parent="Volume" unique_id=1843948870]
 layout_mode = 1
 anchors_preset = -1
 offset_right = 36.0
@@ -124,7 +124,7 @@ offset_bottom = 36.0
 texture = ExtResource("3_yrcgy")
 expand_mode = 1
 
-[node name="Percentage" type="Label" parent="Volume"]
+[node name="Percentage" type="Label" parent="Volume" unique_id=1336665234]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.8
@@ -136,7 +136,7 @@ text = "0%"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MenuTitle" type="Control" parent="."]
+[node name="MenuTitle" type="Control" parent="." unique_id=1590558250]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -145,7 +145,7 @@ offset_top = 16.0
 offset_bottom = 70.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="MenuTitle"]
+[node name="Label" type="Label" parent="MenuTitle" unique_id=343263675]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -158,7 +158,7 @@ theme_override_font_sizes/font_size = 36
 text = "Music"
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MenuTitle"]
+[node name="Icon" type="TextureRect" parent="MenuTitle" unique_id=1071085055]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 1.0
@@ -166,7 +166,7 @@ offset_right = 56.0
 texture = ExtResource("6_345xr")
 stretch_mode = 3
 
-[node name="CloseButton" parent="." instance=ExtResource("7_6x42i")]
+[node name="CloseButton" parent="." unique_id=1118650304 instance=ExtResource("7_6x42i")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0

@@ -15,3 +15,5 @@ dest_files=["res://strings/primary_level_menu.en.translation"]
 
 compress=true
 delimiter=0
+unescape_keys=false
+unescape_translations=true

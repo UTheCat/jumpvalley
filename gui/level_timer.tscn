@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://kou88p3rb0fq"]
+[gd_scene format=3 uid="uid://kou88p3rb0fq"]
 
 [ext_resource type="FontFile" uid="uid://b35ldnmoo353w" path="res://addons/fonts/overpass/static/Overpass-Bold.ttf" id="1_ekf8g"]
 
@@ -9,13 +9,13 @@ colors = PackedColorArray(0, 0, 0, 0.501961, 0, 0, 0, 0.501961, 0, 0, 0, 0)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_x5mnx"]
 gradient = SubResource("Gradient_dst2d")
 
-[node name="LevelTimer" type="Control"]
+[node name="LevelTimer" type="Control" unique_id=330153073]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 250.0
 offset_bottom = 48.0
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=447671437]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.3
@@ -26,7 +26,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture1D_x5mnx")
 expand_mode = 1
 
-[node name="TimerText" type="Label" parent="."]
+[node name="TimerText" type="Label" parent="." unique_id=606489939]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.7
@@ -41,7 +41,7 @@ text = "0:00"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="TimerTextMs" type="Label" parent="."]
+[node name="TimerTextMs" type="Label" parent="." unique_id=747384027]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.71

@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://w1bxdo35gvho"]
+[gd_scene format=3 uid="uid://w1bxdo35gvho"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4dju"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="BackgroundPanel" type="Panel"]
+[node name="BackgroundPanel" type="Panel" unique_id=1846528780]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

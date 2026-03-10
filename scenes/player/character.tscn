@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhraj4ym0cswa"]
+[gd_scene format=3 uid="uid://bhraj4ym0cswa"]
 
 [ext_resource type="PackedScene" uid="uid://dx0npmluqx167" path="res://scenes/player/character_body.tscn" id="2_3ohbj"]
 
@@ -11,7 +11,7 @@ albedo_color = Color(0.631373, 0.631373, 0.631373, 0.25098)
 [sub_resource type="BoxMesh" id="BoxMesh_rl4hs"]
 size = Vector3(1, 2, 0.5)
 
-[node name="Character" type="CharacterBody3D"]
+[node name="Character" type="CharacterBody3D" unique_id=1086262403]
 collision_layer = 5
 collision_mask = 5
 floor_constant_speed = true
@@ -19,18 +19,18 @@ floor_max_angle = 1.309
 platform_floor_layers = 4294967291
 metadata/custom_overall_bounding_box = AABB(-0.5, -1, -0.25, 1, 2, 0.5)
 
-[node name="_InteractiveBoundingBox" type="Node" parent="."]
+[node name="_InteractiveBoundingBox" type="Node" parent="." unique_id=2005643712]
 metadata/type = "OverallBoundingBoxObject"
 
-[node name="RootCollider" type="CollisionShape3D" parent="."]
+[node name="RootCollider" type="CollisionShape3D" parent="." unique_id=585843867]
 shape = SubResource("CapsuleShape3D_0s6rg")
 
-[node name="Mesh" type="MeshInstance3D" parent="RootCollider"]
+[node name="Mesh" type="MeshInstance3D" parent="RootCollider" unique_id=1379342250]
 material_override = SubResource("StandardMaterial3D_0s6rg")
 mesh = SubResource("BoxMesh_rl4hs")
 skeleton = NodePath("../..")
 
-[node name="CharacterBody" parent="." instance=ExtResource("2_3ohbj")]
+[node name="CharacterBody" parent="." unique_id=1561920041 instance=ExtResource("2_3ohbj")]
 
-[node name="CameraFocus" type="Node3D" parent="."]
+[node name="CameraFocus" type="Node3D" parent="." unique_id=1465984451]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
