@@ -120,3 +120,13 @@ If you're working in Visual Studio Code, Jumpvalley has a launch configuration n
 Just make sure you have an environment variable named `JUMPVALLEY_GODOT_EXECUTABLE` set to the path to the Godot executable as mentioned in the prerequisites, and you should be able to run the launch configuration.
 
 Additionally, if you make any changes to the app's code (particularly, the C# code), you'll have to rebuild the project. This can be done by opening the project in Godot and clicking the hammer icon at the top-right corner of the window. (Note: If you don't see this icon, which should be next to the play button in the Godot window, check to see that you installed .NET properly and that `project.godot` points to the correct C# assembly file.)
+
+### Using the Jumpvalley Core API in your own project
+
+The Jumpvalley Core API was designed with the goal that the API could be used for projects other than the Jumpvalley app. While the API should work for external projects, the Jumpvalley Core API has **not** been tested for projects other than the Jumpvalley app (found in this repository). Additionally, the Jumpvalley Core API is currently **not** considered stable.
+
+However, if you would still like to include the Jumpvalley Core API as a third-party library in your own project:
+1. Copy the `src/core` directory under this repository's root into your own project's directory or repository.
+    - You may need to create another directory within your project (to paste the `src/core` directory into) if there are directory-naming conflicts.
+2. If necessary, rename the newly copied folder to distinguish the Jumpvalley Core API from the rest of your project.
+3. Update the relevant `*.csproj` files to recognize the Jumpvalley Core API so that the API can be used in your C# code.
