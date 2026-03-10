@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://olrc8iep31yb"]
+[gd_scene format=3 uid="uid://olrc8iep31yb"]
 
 [ext_resource type="Texture2D" uid="uid://xfjrsfu0kh4v" path="res://addons/icons/close_white_48dp.svg" id="1_8fo8b"]
 [ext_resource type="Script" uid="uid://dbogmufc8oc56" path="res://gui/close_button.gd" id="1_gq2pe"]
@@ -17,7 +17,7 @@ keycode = 4194305
 [sub_resource type="Shortcut" id="Shortcut_gq2pe"]
 events = [SubResource("InputEventKey_n54he")]
 
-[node name="CloseButton" type="Button"]
+[node name="CloseButton" type="Button" unique_id=1452586775]
 offset_right = 36.0
 offset_bottom = 36.0
 focus_mode = 0
@@ -25,7 +25,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_8psry")
 shortcut = SubResource("Shortcut_gq2pe")
 script = ExtResource("1_gq2pe")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=38855633]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1

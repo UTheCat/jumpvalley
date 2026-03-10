@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xn35xb7fekfl"]
+[gd_scene format=3 uid="uid://xn35xb7fekfl"]
 
 [ext_resource type="StyleBox" uid="uid://dp7p1icnpuw8n" path="res://styles/bottom_bar/main_menu_btn/normal.tres" id="1_h3ito"]
 [ext_resource type="StyleBox" uid="uid://g0x41qvn7p6p" path="res://styles/bottom_bar/main_menu_btn/hover.tres" id="2_h3ka7"]
@@ -37,7 +37,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="BottomBar" type="Control"]
+[node name="BottomBar" type="Control" unique_id=2123954197]
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
@@ -46,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Buttons" type="HBoxContainer" parent="."]
+[node name="Buttons" type="HBoxContainer" parent="." unique_id=682654062]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -59,7 +59,7 @@ offset_right = 80.0
 offset_bottom = -8.0
 theme_override_constants/separation = 10
 
-[node name="Menu" type="Button" parent="Buttons"]
+[node name="Menu" type="Button" parent="Buttons" unique_id=1925622771]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -70,7 +70,7 @@ shortcut_in_tooltip = false
 icon = ExtResource("3_ud5tf")
 icon_alignment = 1
 
-[node name="Music" type="Button" parent="Buttons"]
+[node name="Music" type="Button" parent="Buttons" unique_id=1148261457]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -83,7 +83,7 @@ shortcut_in_tooltip = false
 icon = ExtResource("6_t8du5")
 icon_alignment = 1
 
-[node name="Description" type="Panel" parent="."]
+[node name="Description" type="Panel" parent="." unique_id=1301746653]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -94,7 +94,7 @@ offset_bottom = -52.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_nhyqc")
 
-[node name="Label" type="Label" parent="Description"]
+[node name="Label" type="Label" parent="Description" unique_id=1810114819]
 auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 15

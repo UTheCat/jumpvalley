@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://c020hsyxs4rey"]
+[gd_scene format=3 uid="uid://c020hsyxs4rey"]
 
 [ext_resource type="Texture2D" uid="uid://bvpjlkyxxhu4y" path="res://decals/fast_turn.svg" id="1_j57vu"]
 
-[node name="FastTurnIndicator" type="Control"]
+[node name="FastTurnIndicator" type="Control" unique_id=778816522]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 66.0
 offset_bottom = 66.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=630543058]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

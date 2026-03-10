@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8fqbn48544bp"]
+[gd_scene format=3 uid="uid://c8fqbn48544bp"]
 
 [ext_resource type="FontFile" uid="uid://b68m6cvvsd1mh" path="res://addons/fonts/roboto_mono/RobotoMono-VariableFont_wght.ttf" id="1_4nx1s"]
 
@@ -7,7 +7,7 @@ font = ExtResource("1_4nx1s")
 font_size = 40
 font_color = Color(0.8, 0.8, 0.8, 1)
 
-[node name="SettingCategory" type="Label"]
+[node name="SettingCategory" type="Label" unique_id=2062248983]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 38.0

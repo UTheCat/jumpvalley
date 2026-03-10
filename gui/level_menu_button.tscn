@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://du6etgmkelt2n"]
+[gd_scene format=3 uid="uid://du6etgmkelt2n"]
 
 [ext_resource type="FontFile" uid="uid://b6a3cplnxqrgp" path="res://addons/fonts/nunito/static/Nunito-Regular.ttf" id="1_3oj0a"]
 [ext_resource type="Script" uid="uid://c5o1d2nfvl3w1" path="res://gui/level_menu_button.gd" id="1_c1hga"]
@@ -59,7 +59,7 @@ corner_radius_bottom_left = 10
 font = ExtResource("1_3oj0a")
 font_size = 24
 
-[node name="LevelMenuButton" type="Button"]
+[node name="LevelMenuButton" type="Button" unique_id=1481712410]
 custom_minimum_size = Vector2(0, 44)
 anchors_preset = 10
 anchor_right = 1.0
@@ -73,7 +73,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_c1hga")
 theme_override_styles/focus = SubResource("StyleBoxFlat_fbqry")
 script = ExtResource("1_c1hga")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=2022451266]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -85,7 +85,7 @@ text = "Button"
 label_settings = SubResource("LabelSettings_wo5hc")
 vertical_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="Icon" type="TextureRect" parent="." unique_id=2133969869]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
