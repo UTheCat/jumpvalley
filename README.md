@@ -121,7 +121,7 @@ Just make sure you have an environment variable named `JUMPVALLEY_GODOT_EXECUTAB
 
 Additionally, if you make any changes to the app's code (particularly, the C# code), you'll have to rebuild the project. This can be done by opening the project in Godot and clicking the hammer icon at the top-right corner of the window. (Note: If you don't see this icon, which should be next to the play button in the Godot window, check to see that you installed .NET properly and that `project.godot` points to the correct C# assembly file.)
 
-### Using the Jumpvalley Core API in your own project
+## Using the Jumpvalley Core API in your own project
 
 The Jumpvalley Core API was designed with the goal that the API could be used for projects other than the Jumpvalley app. While the API should work for external projects, the Jumpvalley Core API has **not** been tested for projects other than the Jumpvalley app (found in this repository). Additionally, the Jumpvalley Core API is currently **not** considered stable.
 
