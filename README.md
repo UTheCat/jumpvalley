@@ -38,47 +38,62 @@ Jumpvalley currently doesn't have an installer executable. Therefore, downloadin
 
 ### Jumpvalley for Android
 
-To test its functionality on mobile platforms, Jumpvalley can be run on Android. To do this, download and install the Jumpvalley APK from the releases page, and run the app.
+To download and run Jumpvalley on Android:
+1. Download the Jumpvalley APK file from the [releases](https://github.com/UTheCat/jumpvalley/releases) page
+2. Follow the relevant instructions for your Android device to install the Jumpvalley APK file
+3. Run the app
 
-While there are precompiled versions of Jumpvalley for Android, Android support is currently *experimental* for these reasons:
-- Exporting an app with C# code to an Android APK on Godot 4.6 is itself an experimental feature.
+**Important:** Android support is currently *experimental* for these reasons:
+
 - Currently, you'll need to connect a keyboard and mouse to your Android device in order to move your character and camera.
+- Exporting an app with C# code to an Android APK on Godot 4.6 is itself an experimental feature.
 
 ### Jumpvalley for Linux
 
-The releases page contains Jumpvalley precompiled for Linux systems. As of version 0.6.0, Jumpvalley for Linux is shipped in `.tar.xz` archives.
+To download and run Jumpvalley on Linux:
 
-To run Jumpvalley on Linux, extract the archive, open the resulting folder, and run the executable file named `jumpvalley` (with no file extension) contained inside. This executable is the Jumpvalley executable.
+1. Download the Linux `.tar.xz` or `.zip` archive containing Jumpvalley on the [releases](https://github.com/UTheCat/jumpvalley/releases) page.
+    - Versions 0.6.0 and above are packaged in `.tar.xz` archives
+    - Versions before 0.6.0 are packaged in `.zip` archives.
+2. Extract the archive, and open the resulting folder
+3. Run the executable file named `jumpvalley` (with no file extension) contained inside. This is the Jumpvalley executable.
 
 #### Allowing the system to run Jumpvalley
 
-In more recent builds of Jumpvalley, the executable should already have the necessary permissions to run after you've extracted the archive that it's contained in.
+On Linux systems, executable files must be granted permission to run code.
 
-In case the Jumpvalley executable doesn't run, you might need to grant the needed permissions for the executable to run. To do this, open the Linux terminal, change the working directory to the directory containing the Jumpvalley executable like this:
+This should be handled automatically for Jumpvalley version 0.6.0 and above because these versions of Jumpvalley are packaged in `.tar.xz` archives.
 
-`cd [path to the directory with the Jumpvalley executable]`
+If the Jumpvalley executable fails to run, follow these instructions to grant code execution privileges to the Jumpvalley executable:
 
-and type this command:
+1. Open a terminal session in the folder where the Jumpvalley executable is located. This can be done with the following command:
 
-`chmod +x jumpvalley`
+`cd [path to folder with Jumpvalley executable]`
 
-The above command should tell Linux to allow running the Jumpvalley executable.
+2. Grant code execution privileges to the Jumpvalley executable using this command:
+
+`chmod +x ./jumpvalley`
+
+- This command assumes that the Jumpvalley executable kept its original name, `jumpvalley`.
 
 #### Wayland and X11
 
 Jumpvalley uses Wayland by default to take advantage of newer technologies implemented in popular Linux desktop environments (such as GNOME and KDE).
 
-Jumpvalley can also run on XWayland or X11 instead, which may help fix compatiblity issues. To do this, open a terminal session in the directory where the Jumpvalley executable is located, and run this command:
+Jumpvalley can also run on XWayland or X11 instead, which may help fix compatiblity issues. To do this, open a terminal session in the folder where the Jumpvalley executable is located, and run this command:
 
 `./jumpvalley --display-driver x11`
 
-The above command assumes that the Jumpvalley executable kept its original name, `jumpvalley`.
+This assumes that the Jumpvalley executable kept its original name, `jumpvalley`.
 
 Additionally, if your current desktop environment is running on X11, Jumpvalley should automatically use X11 as well.
 
 ### Jumpvalley for Windows
 
-Running Jumpvalley on Windows is simple. Extract the `.zip` file containing the Windows version of Jumpvalley, open the resulting folder, and run `jumpvalley.exe` contained inside the folder.
+To download and run Jumpvalley on Windows:
+1. Download the Windows zip archive containing Jumpvalley on the [releases](https://github.com/UTheCat/jumpvalley/releases) page.
+2. Extract the `.zip` file containing the Windows version of Jumpvalley, and open the resulting folder
+3. Run `jumpvalley.exe` contained inside the folder.
 
 ## Documentation
 
@@ -92,11 +107,12 @@ Feel free to [open an issue on this repository](https://github.com/UTheCat/jumpv
 
 Thank you for your interest in the Jumpvalley project! Here's some info on what you could do with a copy of the Jumpvalley repository on your system, the software you'll need for working with the repository, and how to play-test the repository.
 
-### With the repository, you could
+### Some things you could do with the repository
 
-- experiment with making a 3D platformer level using Jumpvalley and Godot (please note that the behavior of Jumpvalley is still subject to change; levels may break across updates until Jumpvalley has reached at least version 1.0.0).
-- contribute to the Jumpvalley project
-- make something else with the code entirely; the choice is yours!
+- Experiment with making a 3D platformer level using Jumpvalley and Godot (please note that the behavior of Jumpvalley is still subject to change; levels may break across updates until Jumpvalley has reached at least version 1.0.0).
+- Contribute to the Jumpvalley project.
+- Use Jumpvalley's code to make your own separate app or game.
+    - If you would like to use Jumpvalley's Core API in your project as-is, please see the *"Using the Jumpvalley Core API in your own project"* section at the bottom of this README.
 
 ### Prerequisites
 
