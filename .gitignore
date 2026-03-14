@@ -12,8 +12,12 @@ export_presets.cfg
 data_*/
 
 # Build directory
-build
-bin
+build/
+bin/
+
+# Android build files
+android/build/
+android/.build_version
 
 # Visual Studio
 .vs
